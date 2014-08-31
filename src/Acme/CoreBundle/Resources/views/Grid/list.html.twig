@@ -1,0 +1,65 @@
+
+{% stylesheets 'bundles/acmecore/css/style.less' filter='cssrewrite' combine=true %}
+    <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+{% endstylesheets %}
+{% javascripts '@jquery_ui_js' '@nestedsortable_js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <h2>Список страниц</h2>
+        </div>
+        {% if (params.route_create is defined) %}
+            <div class="pull-right">
+                <a class="btn btn-primary" href="{{ path(params.route_create) }}">
+                    {{ 'views.index.createnew'|trans({}, 'crud') }} Страницу
+                </a>
+            </div>
+        {% endif %}
+    </div>
+    {% if (params.filter is defined) %}
+        <div class="row">
+
+            <div class="col-xs-3">
+                <select class="form-control" onchange="window.location = $(this).find('option:selected').attr('data-href');">
+                    {% for value in params.filter.list %}
+                        <option {{ (value.id == params.filter.current ? 'selected' : '') }} value="{{ value.id }}" data-href="{{ path(params.filter.route,  {type : value.id}) }}">{{ value.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    {% endif %}
+    <hr />
+    <ol class="header">
+        <li>
+            <div class="inner t-row">
+                {% for value in header %}
+                    <div class="t-span{{ (loop.index == 1) ? ' first' : '' }}">{{ value }}</div>
+                {% endfor %}
+            </div>
+        </li>
+    </ol>
+    {% include 'AcmeCoreBundle:Grid:_ol.html.twig' with {'entities' : entities, index : 1} %}
+    {% if(pagerHtml is defined) %}
+        <div class="col-xs-12">
+            {{ pagerHtml|raw }}
+        </div>
+    {% endif %}
+</div>
+<script type="text/javascript">
+    var csrfToken = "{{ token}}";
+    {% if (params.tree is defined) %}
+        (function(){
+            $(document).ready(function(){
+                var treeBeautifier = function(){
+                    $('.t-span.first').each(function(){
+                        var level = $(this).parents('ol').length;
+                        $(this).css({width:(300 - (level*25))+'px'})
+                    });
+                };
+                treeBeautifier();
+            });
+        })();
+    {% endif %}
+</script>

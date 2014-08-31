@@ -1,0 +1,15 @@
+{{ "{% extends 'AcmeAdminBundle:Layouts:main.html.twig' %}
+{% block body %}
+    {% include 'AcmeCoreBundle:Crud:form.html.twig' with{
+    title:'Форма редактирования',
+    leftMenu : [
+    {url:path('admin."}}{{ name }}{{ ".index'),name:'views.recordactions.backtothelist'|trans({}, 'crud')},
+    {url:path('admin." }}{{ name }}{{ ".add'),name:'views.new.creation'|trans({}, 'crud')}
+    ]
+    }
+    %}
+
+
+
+
+{% endblock %}"}}

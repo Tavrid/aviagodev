@@ -1,0 +1,25 @@
+Acme\AdminBundle\Entity\Page:
+    type: entity
+    table: page
+    repositoryClass: Acme\AdminBundle\Repository\PageRepository
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 100
+        text:
+            type: text
+            nullable: true
+        is_show:
+            type: boolean
+            nullable: true
+        page:
+            type: text
+            nullable: true
+    oneToMany:
+        menu:
+            targetEntity: Menu
+            mappedBy: page

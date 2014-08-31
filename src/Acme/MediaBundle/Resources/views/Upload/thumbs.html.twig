@@ -1,0 +1,32 @@
+
+    <div data-target="#{{uploader.entity.name}}" class="thumbnail-close">
+        <i class="icon-adn avatar {{(uploader.entity.avatar) ? 'active':''  }}" title="Сделать главной" data-url="{{path('media_avatar',{id:uploader.entity.id,'type' : type})}}"></i>
+        <i title="удалить" class="icon-trash icon-large delete_link close-img" data-url="{{path('media_delete',{id:uploader.getEntity().getId,'type' : type})}}"></i>
+        <a data-id="{{ uploader.entity.id }}" href="{{uploader.getFile('800_600')}}" class="fancybox">
+            <img src="{{uploader.getFile('120_120')}}" style="width: auto; height: auto;">
+        </a>
+    </div>
+    <div id="{{ uploader.entity.id }}-etalon" style="display: none">
+        <div class="panel panel-default" style="margin-bottom: 0;margin-top: 20px">
+            <div class="panel-body">
+                <div class="col-xs-6">
+                    ID: <span style="color: #0064cd">{{ uploader.entity.id }}</span>
+                    Name: <span style="color: #0064cd">{{ uploader.entity.originName }}</span>
+                    Extension: <span style="color: #0064cd">{{ uploader.entity.extension }}</span>
+                    Size: <span style="color: #0064cd">{{ uploader.entity.size }} KB</span>
+                </div>
+
+                {#<div class="col-xs-6">#}
+                    {#<form action="{{ path('acme_media_source_desc',{'id' : uploader.entity.id}) }}" method="POST">#}
+                        {#<div class="input-group">#}
+                            {#<input placeholder="Подпись" type="text" name="description" class="form-control">#}
+                            {#<input type="hidden" name="_token" value="{{ csrf_token('form') }}" />#}
+                            {#<span class="input-group-btn">#}
+                                {#<button class="btn btn-primary" type="button">Сохранить</button>#}
+                            {#</span>#}
+                        {#</div>#}
+                    {#</form>#}
+                {#</div>#}
+            </div>
+        </div>
+    </div>

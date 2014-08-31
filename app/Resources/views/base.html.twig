@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang='ru'>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}UMÜT БЛАГОТВОРИТЕЛЬНАЯ ОРГАНИЗАЦИЯ{% endblock %}</title>
+
+    {#<link href="{{ asset('Resources/front/css/bjqs.css') }}" rel="stylesheet">#}
+    {#<link href="{{ asset('Resources/front/css/style.css') }}" rel="stylesheet">#}
+    {% stylesheets '@base_css' filter='cssrewrite'  combine=true %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen"/>
+    {% endstylesheets %}
+
+</head>
+
+<body>
+{% javascripts '@jquery' '@base_js' combine=true %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+{% block body %}{% endblock %}
+
+
+</body>
+</html>

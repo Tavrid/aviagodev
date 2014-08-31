@@ -1,0 +1,30 @@
+Acme\AdminBundle\Entity\Menu:
+    type: entity
+    table: menu
+    repositoryClass: Acme\AdminBundle\Repository\MenuRepository
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 100
+        is_show:
+            type: boolean
+            nullable: true
+        position:
+            type: integer
+            nullable: false
+            length: 10
+    manyToOne:
+        page:
+            targetEntity: Acme\AdminBundle\Entity\Page
+            inversedBy: menu
+        parent:
+            targetEntity: Menu
+            inversedBy: children
+    oneToMany:
+        children:
+            targetEntity: Menu
+            mappedBy: parent

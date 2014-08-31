@@ -1,0 +1,24 @@
+<?php
+
+
+namespace {{ namespace }};
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+
+class {{ class_name }} extends AbstractType {
+
+    public function buildForm(FormBuilderInterface $builder, array $options) {
+        $builder
+            {% for field in fields  %}
+                ->add('{{ field }}')
+            {% endfor %}
+            ;
+
+    }
+
+    public function getName() {
+        return '{{ class_name }}';
+    }
+
+} 

@@ -1,0 +1,96 @@
+
+    <div class="container">
+
+        <div class="row">
+            <h2>{{ title }}</h2>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-xs-3">
+            {% if leftMenu is defined %}
+                <div id="scroller">
+                    <div class="row">
+                        <ul class="nav nav-pills nav-stacked">
+                            {% for menu in leftMenu %}
+                                <li>
+                                    <a href="{{ menu.url }}">
+                                        {% if (menu.icon is defined) %}
+                                            <i class="{{ menu.icon }}"></i>
+                                        {% endif %}
+                                        {{ menu.name }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+                    <div style="margin-top:20px ">
+
+                        <button form="{{ formId|default('main-form') }}" type="submit" class="btn btn-primary">{{ 'views.new.create'|trans({}, 'crud') }}</button>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function(){
+                        var offset = $('#scroller').offset();
+                        $(window).scroll(function(){
+                            if($(window).scrollTop()>offset.top){
+                                $('#scroller').css('position', 'fixed');
+                                $('#scroller').css('top', 5);
+                            } else {
+                                $('#scroller').css('position', '');
+                            }
+                        });
+
+                    })
+                </script>
+            {% endif %}
+        </div>
+        <div class="col-xs-8">
+            <form  action="{{ form_action|default('') }}" method="post" {{ form_enctype(form) }} id="{{ formId|default('main-form') }}">
+                {{ form_row(form) }}
+
+            </form>
+            {% if(service is defined and service) %}
+                {% if(entity is defined and entity.id) %}
+                    {{ render(controller('AcmeMediaBundle:Upload:index',{'type' : service.getType(),'id' : entity.id})) }}
+                {% else %}
+                    {{ render(controller('AcmeMediaBundle:Upload:index',{'type' : service.getType()})) }}
+                {% endif %}
+            {% endif %}
+            <div>
+                <p>
+                    <button type="submit" form="{{ formId|default('main-form') }}" class="btn btn-primary">{{ buttonLabel|default('views.new.create'|trans({}, 'crud')) }}</button>
+
+                </p>
+            </div>
+        </div>
+    </div>
+    <div style="margin-bottom: 25px;"></div>
+
+    <style>
+        /*.form-group{*/
+            /*background-color: #F9F9F9;*/
+            /*border: 1px solid #CCCCCC;*/
+            /*margin-bottom: 20px;*/
+            /*min-height: 20px;*/
+            /*padding: 20px;*/
+        /*}*/
+        .delete-block{
+            border-bottom: 1px solid #CCCCCC;
+            margin-top: 20px;
+            padding-bottom: 10px;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            setTimeout(function(){
+                if($('.has-error').length > 0){
+                    $('html, body').animate({
+                        scrollTop: $('.has-error:first').offset().top
+                    }, 600);
+                    $('.has-error:first').find('input,textarea').trigger('focus');
+                }
+            },300);
+        });
+    </script>

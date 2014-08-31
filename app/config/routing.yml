@@ -1,0 +1,37 @@
+acme_social:
+    resource: "@AcmeSocialBundle/Resources/config/routing.yml"
+    prefix:   /
+
+bundles_default:
+    resource: "@BundlesDefaultBundle/Resources/config/routing.yml"
+    prefix:   /
+
+acme_core:
+    resource: "@AcmeCoreBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
+  
+acme_media:
+    resource: "@AcmeMediaBundle/Resources/config/routing.yml"
+    prefix:   /media
+acme_admin:
+    resource: "@AcmeAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+acme_user:
+    resource: "@AcmeUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+AcmeAdminBundle_Extra:
+    resource: .
+    type: extra
+    prefix:   /admin
+#
+#_imagine:
+#    resource: .
+#    type:     imagine
+    
+    
+
+    
+  
+

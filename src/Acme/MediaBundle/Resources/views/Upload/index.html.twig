@@ -1,0 +1,57 @@
+{% stylesheets
+        "bundles/acmemedia/js/jquery-upload/css/jquery.fileupload-ui.css"
+        'bundles/acmemedia/css/style.less'
+        output="web/css/media/upload_ui.css" filter='cssrewrite' combine=true%}
+    <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+{% endstylesheets %}
+{% javascripts 
+    "bundles/acmemedia/js/jquery-upload/vendor/jquery.ui.widget.js"
+    "bundles/acmemedia/js/jquery-upload/jquery.iframe-transport.js"
+    "bundles/acmemedia/js/jquery-upload/jquery.fileupload.js"
+    'bundles/acmemedia/js/common.js'
+    output="web/js/media/jquery-upload.js"
+  %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+<div class="form-group">
+    <form id="fileupload" action="" method="POST" enctype="multipart/form-data" data-url="{{path('media_upload',{'id':id, 'type':type})}}">
+
+        <div class="fileupload-buttonbar">
+            <div style="margin-bottom: 10px;">
+                <span class="btn btn-success fileinput-button">
+                    <i class="icon-plus icon-white"></i>
+                    <span>Добавить файлы...</span>
+                    <input type="file" name="files[]" multiple="">
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <ul id="files" class="thumbnails">
+                {%if uploaders%}
+                    {%for uploader in uploaders%}
+                        <li class="load-box">
+                            {% include 'AcmeMediaBundle:Upload:thumbs.html.twig' with {'uploader': uploader, 'type':type} %}
+                        </li>
+                    {%endfor%}
+                {%endif%}
+            </ul>
+        </div>
+    </form>
+</div>
+<style>
+    ul.thumbnails li{
+        float: left;
+        margin: 0 12px 12px 0;
+        list-style: none;
+    }
+</style>
+<script>
+    $( 'body' ).on( "mouseenter mouseleave",'.thumbnail-close img', function(e,i){
+
+        if(e.type == 'mouseenter'){
+            $(this).popover('show')
+        } else {
+            $(this).popover('hide')
+        }
+    } );
+</script>

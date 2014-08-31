@@ -1,0 +1,63 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: root
+ * Date: 27.03.14
+ * Time: 10:40
+ */
+
+namespace Acme\AdminBundle\Entity;
+use Acme\CoreBundle\Entity\AbstractEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+use Acme\CoreBundle\Validator\Multifield;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Doctrine\Common\Collections\ArrayCollection;
+
+class Page extends  AbstractEntity{
+
+    /**
+     * @var integer
+     */
+    protected  $id;
+    /**
+     * @var string
+     */
+    protected $name;
+    /**
+     * @var string
+
+     *
+     */
+    protected $text;
+
+    /**
+     * @var string
+
+     *
+     */
+    protected $page;
+    /**
+     * @var ArrayCollection
+     */
+    protected $media;
+
+    /**
+     * @var ArrayCollection
+     */
+    protected $menu;
+    /**
+     * @var boolean
+     */
+    protected $isShow;
+
+
+    public function __toString(){
+        return $this->getName();
+    }
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('name', new Assert\NotBlank());
+
+    }
+
+}

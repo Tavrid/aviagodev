@@ -1,0 +1,38 @@
+views:
+    layout:
+        bannersadmin: Administrator
+    index:
+        filters: Фильтры
+        filter: Фильтр
+        reset: Сбросить
+        list: %entity% список
+        actions: Действия
+        createnew: Создать
+        pagprev: '&larr; Предыдущая'
+        pagnext: 'Следующая &rarr;'
+    actions:
+        show: показать
+        edit: редактировать
+    recordactions:
+        backtothelist: Вернуться назад к списку
+        edit: Редактировать
+        delete: Удалить
+        confirm: Удалить эту запись?
+    new:
+        creation: Создать новую запись
+        create: Сохранить
+    edit:
+        edit: Редактировать %entity%
+        editbutton: Редактировать
+    show:
+        show: Показать %entity%
+flash:
+    create:
+        success: Успешно добавленно.
+        error: Ошибка добавления.
+    update:
+        success: Успешно обновленно.
+        error: Ошибка обновления.
+    delete:
+        success: Успешно удалено.
+        error: Ошибка удаления.

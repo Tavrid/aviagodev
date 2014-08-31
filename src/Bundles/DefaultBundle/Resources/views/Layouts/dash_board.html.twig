@@ -1,0 +1,75 @@
+<div class="dash-board">
+    <div class="main-container">
+        <div class="row">
+            <div class="col-xs-3">
+                <div class="timer-container info-box ">
+                    <div id="timer"></div>
+                </div>
+            </div>
+            <div class="col-xs-9">
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                Задачи
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Задача 1</a></li>
+                                <li><a href="#">Задача 2</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                Проекты
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Dropdown link</a></li>
+                                <li><a href="#">Dropdown link</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+
+    .dash-board{
+        background-color: #ecf0f1;
+        min-height: 100px;
+        margin-top: -20px;
+        padding-top: 20px;
+    }
+    #timer {
+        float: left;
+        width: 90px;
+        font-size: 20px;
+        color:#206D93;
+        margin: 0 auto;
+    }
+    .timer-container{
+        background-color: #ffffff;
+        width: 110px;
+        min-height: 50px !important;
+    }
+
+</style>
+<script type="text/javascript">
+    var timer = 0;
+    var hour = 0;
+    var minute = 0;
+    var second = 0;
+    window.setInterval(function(){
+        ++timer;
+        hour   = Math.floor(timer / 3600);
+        minute = Math.floor((timer - hour * 3600) / 60);
+        second = timer - hour * 3600 - minute * 60;
+        if (hour < 10) hour = '0' + hour;
+        if (minute < 10) minute = '0' + minute;
+        if (second < 10) second = '0' + second;
+        $('#timer').html(hour + ':' + minute + ':' + second);
+    }, 1000);
+</script>

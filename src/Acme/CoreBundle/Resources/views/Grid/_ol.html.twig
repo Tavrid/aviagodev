@@ -1,0 +1,41 @@
+<ol class="{{ (index == 1)?'sortable':'' }}">
+    {% for entity in entities %}
+        <li value="{{ entity.id }}">
+            <div class="inner t-row">
+                {%  for name, param in columns  %}
+                    {% if param.filter is defined %}
+                        <div class="t-span{{ (loop.index == 1) ? ' first':'' }}">
+                            {% include 'AcmeCoreBundle:Grid:_'~param.filter~'.html.twig' with {'param' : param, 'value' : attribute(entity,name), 'id' : entity.id} %}
+                        </div>
+                    {% else %}
+                        <div class="t-span{{ (loop.index == 1) ? ' first':'' }}" title="{{ attribute(entity,name) }}">{{ attribute(entity,name) }}</div>
+                    {% endif %}
+                {% endfor  %}
+                <div class="t-span actions">
+                    {#{% if actions.view is defined %}#}
+                        {#{% set rParams = { 'id': entity.id } %}#}
+                        {#<a href="{{ path(actions.view, rParams) }}" title="{{ 'views.actions.show'|trans({}, 'crud') }}">#}
+                            {#<i class="icon-eye-open"></i>#}
+                        {#</a>#}
+                    {#{% endif %}#}
+                    {% if actions.edit is defined %}
+                        {% set rParams = { 'id': entity.id } %}
+                        <a href="{{ path(actions.edit, rParams) }}" title="{{ 'views.actions.edit'|trans({}, 'crud') }}">
+                            <i class="icon-pencil" ></i>
+                        </a>
+                    {% endif %}
+                    {% if actions.remove is defined %}
+                        <a class="alink_remove" href="{{ path(actions.remove, { 'id': entity.id }) }}" title="удалить">
+                            <i class="icon-trash"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% if entity.children is defined %}
+                {% if (entity.children != null) %}
+                    {% include 'AcmeCoreBundle:Grid:_ol.html.twig' with {'entities' : entity.children, 'index' : index + 1} %}
+                {% endif %}
+            {% endif %}
+        </li>
+    {% endfor %}
+</ol>

@@ -1,0 +1,68 @@
+
+{% extends 'AcmeAdminBundle:Layouts:main.html.twig' %}
+{% block body %}
+
+<script src="https://raw.githubusercontent.com/mjsarfatti/nestedSortable/master/jquery.mjs.nestedSortable.js"></script>
+    {% macro el(data) %}
+        <ol class="sortable" id="nsetedsortable">
+
+            {% for value in data %}
+                <li data-id="{{ value.id }}">
+                    <div class="item">{{ value.name }}</div>
+                    {% if(value.children is not empty) %}
+                        {{ _self.el(value.children) }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ol>
+    {% endmacro %}
+
+    <h1>Список Элементов меню</h1>
+    <a class="btn btn-success pull-right" href="{{ url('admin.menu.add') }}">Добавить</a>
+    {{ bootstrapTable(data,params) |raw}}
+    <div id="position">
+        {{ _self.el(data) }}
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $.fancybox({
+                content : $('#position'),
+                closeBtn : false
+            });
+            $('#nsetedsortable').nestedSortable({ opacity: 0.5,
+                stop: function(e,ui){
+                    setTimeout(function(){
+                        var position = $(ui.item).index() + 1;
+                        var id = $(ui.item).attr('data-id');
+                        var parent = $(ui.item).parents('li').attr('data-id');
+
+                        id.replace(/[^0-9]/i,'');
+                        $.post('{{ path('admin.menu.changeposition') }}',{
+                            newPosition : position,
+                            id: id,
+                            parent: (parent == undefined) ? null : parent
+                        })
+                    },100);
+                }
+
+            });
+        });
+    </script>
+    <style>
+        #position{
+            width: 768px;
+            padding: 20px;
+            padding-left: 0;
+        }
+        .sortable li{
+            list-style: none outside;
+        }
+        .sortable div.item{
+            padding: 5px;
+            border: 1px solid #c5c5c5;
+            cursor: move;
+            margin-top: 2px;
+        }
+    </style>
+{% endblock %}

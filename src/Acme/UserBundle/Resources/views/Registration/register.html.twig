@@ -1,0 +1,28 @@
+{% extends 'AcmeUserBundle::layout.html.twig' %}
+{%block beauty%}beauty-background{% endblock %}
+{% block fos_user_content %}
+    <div class="login-form">
+        <h1>Регистрация</h1>
+        <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST">
+            {{ form_widget(form) }}
+            <div>
+                <input type="submit" class="btn btn-success" value="{{ 'registration.submit'|trans }}" />
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            (function(){
+                var self = $('.login-form');
+                if(self.length > 0){
+                    var css = {};
+                    css['left'] = ($(window).width() - $(self).width()) / 2;
+                    css['top'] = ($(window).height() - $(self).height()) / 3;
+                    css['position'] = 'absolute';
+                    self.css(css);
+                }
+            })();
+        });
+    </script>
+{% endblock fos_user_content %}
+

@@ -1,0 +1,10 @@
+
+{% extends 'AcmeAdminBundle:Layouts:main.html.twig' %}
+
+{% block body %}
+    {% include 'AcmeCoreBundle:Crud:form.html.twig' with{
+        title:'Форма Добавления',
+        leftMenu : [{url:path('admin.gallery.index'),name:'views.recordactions.backtothelist'|trans({}, 'crud')}]
+        }
+    %}
+{% endblock %}

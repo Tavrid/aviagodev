@@ -1,0 +1,57 @@
+services:
+    user.registration.listener:
+        class: Acme\UserBundle\EventListener\SecurityListener
+        arguments: [@user.user_manager,@service_container]
+        tags:
+            - { name: kernel.event_listener, method: onSecurityInteractiveLogin, event: security.interactive_login }
+
+
+    user.user_manager:
+        class: Acme\UserBundle\Model\UserManager
+        arguments:
+              - @security.encoder_factory
+              - @fos_user.util.username_canonicalizer
+              - @fos_user.util.email_canonicalizer
+              - @fos_user.entity_manager
+              - %fos_user.model.user.class%
+
+    user.email_confirm.listener:
+        class: Acme\UserBundle\EventListener\EmailConfirmationListener
+        arguments:
+            - @fos_user.mailer
+            - @fos_user.util.token_generator
+            - @router
+            - @session
+        tags:
+            - {name: kernel.event_subscriber}
+
+    acme_user.registration.form.type:
+            class: Acme\UserBundle\Form\Type\RegistrationFormType
+            arguments: [%fos_user.model.user.class%,@service_container]
+            tags:
+                - { name: form.type, alias: Registration }
+
+    facebook.api.manager:
+        class: Facebook
+        arguments:
+              config:
+                  appId: 1391898314425501
+                  secret: 55c37c9ad8d775263b7342e22657af51
+                  cookie: true
+
+    facebook.manager:
+        class: Acme\UserBundle\Model\Facebook
+        arguments:
+            - @facebook.api.manager
+
+    user.user_provider:
+        class: Acme\UserBundle\Security\Authentication\Provider\UserProvider
+        arguments: [@fos_user.user_manager]
+
+    facebook.security.authentication.provider:
+        class: Acme\UserBundle\Security\Authentication\Provider\FacebookProvider
+        arguments: [""]
+
+    facebook.security.authentication.listener:
+        class: Acme\UserBundle\Security\Firewall\FacebookListener
+        arguments: [@security.context, @security.authentication.manager, @facebook.manager,@service_container]

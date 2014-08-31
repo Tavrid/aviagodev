@@ -1,0 +1,330 @@
+<?php
+
+namespace Acme\MediaBundle\Entity;
+
+use Acme\CoreBundle\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM;
+use Acme\MediaBundle\Model\UploaderEntityInterface;
+
+
+//use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * GoodsItems
+ *
+ * @ORM\Table(name="media")
+ * @ORM\Entity
+ */
+class Media extends AbstractEntity implements UploaderEntityInterface {
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="`id`", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="`type`", type="string",length=10, nullable=true)
+     * 
+     */
+    private $type;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="`name`", type="string", length=300, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="`mime_type`", type="string", length=300, nullable=false)
+     */
+    private $mimeType;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="`size`", type="string", length=300, nullable=false)
+     */
+    private $size;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="`dimensions`", type="string", length=300, nullable=false)
+     */
+    private $dimensions;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="`extension`", type="string", length=10, nullable=false)
+     */
+    private $extension;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="`path`", type="string", length=300, nullable=false)
+     */
+    private $path;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="`avatar`", type="boolean", nullable=true)
+     */
+    private $avatar = false;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="\Acme\AdminBundle\Entity\Page", inversedBy="media")
+     */
+    private $page;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="\Acme\AdminBundle\Entity\Slider", inversedBy="media")
+     */
+    private $slider;
+    /**
+     * @ORM\ManyToOne(targetEntity="\Acme\AdminBundle\Entity\Gallery", inversedBy="media")
+     */
+    private $gallery;
+
+
+    public function __toString() {
+        return $this->getName();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Media
+     */
+    public function setName($name) {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName() {
+        return $this->name;
+    }
+
+    /**
+     * Set avatar
+     *
+     * @param string $avatar
+     * @return Media
+     */
+    public function setAvatar($avatar) {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * Get avatar
+     *
+     * @return string
+     */
+    public function getAvatar() {
+        return $this->avatar;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Media
+     */
+    public function setPath($path) {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath() {
+        return $this->path;
+    }
+
+    /**
+     * Set mimeType
+     *
+     * @param string $mimeType
+     * @return Media
+     */
+    public function setMimeType($mimeType) {
+        $this->mimeType = $mimeType;
+
+        return $this;
+    }
+
+    /**
+     * Get mimeType
+     *
+     * @return string 
+     */
+    public function getMimeType() {
+        return $this->mimeType;
+    }
+
+    /**
+     * Set size
+     *
+     * @param string $size
+     * @return Media
+     */
+    public function setSize($size) {
+        $this->size = $size;
+
+        return $this;
+    }
+
+    /**
+     * Get size
+     *
+     * @return string 
+     */
+    public function getSize() {
+        return number_format($this->size / 1024);
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return Media
+     */
+    public function setType($type) {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string 
+     */
+    public function getType() {
+        return $this->type;
+    }
+
+    /**
+     * Set dimensions
+     *
+     * @param string $dimensions
+     * @return Media
+     */
+    public function setDimensions($dimensions) {
+        $this->dimensions = $dimensions;
+
+        return $this;
+    }
+
+    /**
+     * Get dimensions
+     *
+     * @return string 
+     */
+    public function getDimensions() {
+        return $this->dimensions;
+    }
+
+    /**
+     * Set extension
+     *
+     * @param string $extension
+     * @return Media
+     */
+    public function setExtension($extension) {
+        $this->extension = $extension;
+
+        return $this;
+    }
+
+    /**
+     * Get extension
+     *
+     * @return string 
+     */
+    public function getExtension() {
+        return $this->extension;
+    }
+
+
+
+    /**
+     * Set project
+     *
+     * @param \Acme\AdminBundle\Entity\Page $page
+     * @return Media
+     */
+    public function setPage(\Acme\AdminBundle\Entity\Page $page = null)
+    {
+        $this->page = $page;
+
+        return $this;
+    }
+
+    /**
+     * Get project
+     *
+     * @return \Acme\AdminBundle\Entity\Page
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
+     * Set slider
+     *
+     * @param \Acme\AdminBundle\Entity\Slider $slider
+     * @return Media
+     */
+    public function setSlider(\Acme\AdminBundle\Entity\Slider $slider = null)
+    {
+        $this->slider = $slider;
+
+        return $this;
+    }
+
+    /**
+     * Get slider
+     *
+     * @return \Acme\AdminBundle\Entity\Slider 
+     */
+    public function getSlider()
+    {
+        return $this->slider;
+    }
+}

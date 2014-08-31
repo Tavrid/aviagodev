@@ -1,0 +1,16 @@
+{% extends 'AcmeAdminBundle::Layouts/main.html.twig' %}
+{% block body %}
+    <div class="col-md-9">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Как вы хотите использовать аккаунт на <a href="">facebook</a>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <a href="{{ path('user.security.facebook.login') }}" class="pull-left">Привязать к существующему акканту</a>
+                <a href="{{ path('fos_user_registration_register',{provider:'facebook'}) }}" class="pull-right">Создать новый аккаунт</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

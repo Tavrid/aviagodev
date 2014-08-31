@@ -1,0 +1,36 @@
+php{% extends "BundlesDefaultBundle:Layouts:main.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets '@owl_css' filter='cssrewrite' combine=true %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+{% endblock %}
+{% block js %}
+    {{ parent() }}
+    {% javascripts '@owl_js' combine=true%}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block body %}
+    <div id="owl-example" class="owl-carousel">
+        {% for entity in entities %}
+            {% if(entity.media|length > 0) %}
+                <div>
+                    <img style="width: 100%;" src="{{ uploader.getFile('1200_550',entity.media[0]) }}"/>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <script>
+        $(document).ready(function() {
+
+            $("#owl-example").owlCarousel({
+                autoPlay : true,
+                items : 1,
+                responsive: false
+            });
+
+        });
+    </script>
+{% endblock %}

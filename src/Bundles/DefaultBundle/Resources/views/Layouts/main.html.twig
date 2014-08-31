@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}CMF{% endblock %}</title>
+        <link rel="icon" type="image/png" href="{{ asset('logo.png') }}" />
+        {% block stylesheets %}
+            {% stylesheets '@default_bootstrap_css' filter='cssrewrite' combine=true %}
+                <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+            {% endstylesheets %}
+        {% endblock %}
+        {#<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />#}
+        {% block js %}
+            {#<script type="text/javascript" src="{{ asset('/bundles/acmeadmin/ckeditor/ckeditor.js') }}"></script>#}
+            {#<script type="text/javascript" src="{{ asset('/bundles/acmeadmin/AjexFileManager/ajex.js') }}"></script>#}
+            {% javascripts '@jquery' '@default_bootstrap_js' combine=true%}
+                <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="wrap">
+            <div class="wrap-inner">
+                {#{% block navbar %}#}
+                    {#{{  include('BundlesDefaultBundle::Layouts/navbar.html.twig') }}#}
+                {#{%endblock%}#}
+                {#{{  include('BundlesDefaultBundle::Layouts/dash_board.html.twig') }}#}
+                <div class="container">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </div>
+        <style>
+            .main-container{
+                width: 980px;
+                margin: 0 auto;
+            }
+        </style>
+
+    </body>
+</html>

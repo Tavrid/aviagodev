@@ -1,0 +1,225 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: root
+ * Date: 27.03.14
+ * Time: 10:40
+ */
+
+namespace Acme\AdminBundle\Entity;
+use Acme\CoreBundle\Entity\AbstractEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+use Acme\CoreBundle\Validator\Multifield;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Doctrine\Common\Collections\ArrayCollection;
+
+class Project extends  AbstractEntity{
+
+    /**
+     * @var integer
+     */
+    protected  $id;
+    /**
+     * @var string
+     */
+    protected $name;
+    /**
+     * @var string
+
+     *
+     */
+    protected $text;
+
+    /**
+     * @var string
+
+     *
+     */
+    protected $page;
+    /**
+     * @var ArrayCollection
+     */
+    protected $media;
+
+    /**
+     * @var ArrayCollection
+     */
+    protected $task;
+    /**
+     * @var boolean
+     */
+    protected $isShow;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->media = new ArrayCollection();
+    }
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('name', new Assert\NotBlank());
+        $metadata->addPropertyConstraint('text', new Multifield(
+            array(
+                'fields' =>array(
+                    'sub_multi_field',
+                        'fields' => array(
+                            'name' => array('field',new Assert\NotBlank()),
+                            'text' => array('field',new Assert\NotBlank()),
+                        )
+                    )
+                )
+        ));
+        $metadata->addPropertyConstraint('page',new Multifield(
+            array(
+                'fields' => array(
+                    'foo' => array('field',new Assert\NotBlank())
+                )
+            )
+        ));
+    }
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Project
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set text
+     *
+     * @param string $text
+     * @return Project
+     */
+    public function setText($text)
+    {
+        $this->text = json_encode($text);
+
+        return $this;
+    }
+
+    /**
+     * Get text
+     *
+     * @return string
+     */
+    public function getText()
+    {
+        return json_decode($this->text,true);
+    }
+
+    /**
+     * Set page
+     *
+     * @param string $page
+     * @return Project
+     */
+    public function setPage($page)
+    {
+        $this->page = json_encode($page);
+
+        return $this;
+    }
+
+    /**
+     * Get page
+     *
+     * @return string
+     */
+    public function getPage()
+    {
+        return json_decode($this->page,true);
+    }
+
+
+
+
+    /**
+     * Add media
+     *
+     * @param \Acme\MediaBundle\Entity\Media $media
+     * @return Project
+     */
+    public function addMedia(\Acme\MediaBundle\Entity\Media $media)
+    {
+        $this->media[] = $media;
+
+        return $this;
+    }
+
+    /**
+     * Remove media
+     *
+     * @param \Acme\MediaBundle\Entity\Media $media
+     */
+    public function removeMedia(\Acme\MediaBundle\Entity\Media $media)
+    {
+        $this->media->removeElement($media);
+    }
+
+    /**
+     * Get media
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMedia()
+    {
+        return $this->media;
+    }
+    /**
+     * @var boolean
+     */
+    private $is_show;
+
+
+    /**
+     * Set is_show
+     *
+     * @param boolean $isShow
+     * @return Project
+     */
+    public function setIsShow($isShow)
+    {
+        $this->is_show = $isShow;
+
+        return $this;
+    }
+
+    /**
+     * Get is_show
+     *
+     * @return boolean 
+     */
+    public function getIsShow()
+    {
+        return $this->is_show;
+    }
+}

@@ -1,0 +1,52 @@
+parameters:
+    media.model.upload.class: Acme\MediaBundle\Model\Uploader
+    media.upload.entity.class: Acme\AdminBundle\Entity\Media
+    media.upload.default.puth: %kernel.root_dir%/../web/files
+    media.upload.default.route: acme_media_image
+
+
+services:
+    uploader.configuration.service:
+        class : Acme\MediaBundle\Model\Configuration
+        arguments:
+            defaultParams:
+                  entity: %media.upload.entity.class%
+                  path: %media.upload.default.puth%
+                  route: %media.upload.default.route%
+                  count: 20
+                  min_dimension : 100_100
+                  dimensions :
+                    resize : [ 800_600, 50_50]
+                    crop : [234_180,165_165,100_100,120_120]
+
+    uploader.service.container :
+        class : 'Acme\MediaBundle\Model\ServiceContainer'
+        arguments:
+          - services :
+              slider : @admin.slider.uploader
+              gallery : @admin.gallery.uploader
+
+    admin.slider.uploader :
+          class: %media.model.upload.class%
+          arguments:
+              - @service_container
+              - @admin.slider.manager
+              - params:
+                    type : slider
+                    dimensions :
+                      resize : [ 800_600, 50_50]
+                      crop : [234_180,1200_550,165_165,100_100,120_120]
+
+    admin.gallery.uploader :
+          class: %media.model.upload.class%
+          arguments:
+              - @service_container
+              - @admin.gallery.manager
+              - params:
+                    type : gallery
+                    dimensions :
+                      resize : [ 800_600, 50_50]
+                      crop : [120_120]
+
+
+

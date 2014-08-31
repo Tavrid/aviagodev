@@ -1,0 +1,233 @@
+<?php
+
+namespace Acme\CoreBundle\Entity;
+
+use Acme\CoreBundle\Entity\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\Validator\Constraints as Assert;
+
+use Doctrine\ORM\Event\PreUpdateEventArgs;
+use Doctrine\ORM\Event\LifecycleEventArgs;
+use Acme\CoreBundle\Model\Position;
+use Doctrine\ORM\Query\Expr;
+
+
+/**
+ * Content
+ *
+ * @ORM\Table(name="content")
+ * @ORM\Entity
+ */
+class Content extends AbstractEntity {
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="`id`", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Bundles\MenuBundle\Entity\MenuType")
+     */
+    private $type;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="`name`", type="string", length=100, nullable=false)
+     * @Assert\NotBlank()
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="`tag`", type="string", length=100, nullable=false)
+     * @Assert\NotBlank()
+     */
+    private $tag;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="`uploader`", type="string", length=100, nullable=false)
+     * @Assert\NotBlank()
+     */
+    private $uploader;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="`show`", type="boolean", nullable=false)
+     */
+    private $show = false;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="`uri`", type="string", nullable=true)
+     * @Assert\NotBlank()
+     */
+    private $uri;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="`alias`", type="string", nullable=true)
+     */
+    private $alias;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="`page`", type="text", nullable=true)
+
+     *
+     */
+    private $page;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Acme\CoreBundle\Entity\Content", mappedBy="parent")
+     *
+     */
+    private $children;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Acme\CoreBundle\Entity\Content", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Acme\MediaBundle\Entity\Media", mappedBy="content")
+     */
+    private $media;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="`position`", type="integer", nullable=false)
+     */
+    private $position = 1;
+
+
+
+
+    function __toString(){
+        return $this->getTitle();
+    }
+    public function preUpdate(PreUpdateEventArgs $args) {
+        $changes = $args -> getEntityChangeSet();
+        if (isset($changes['parent']) || isset($changes['position']) || isset($changes['type'])) {
+            $positionObj = new Position($args -> getEntityManager(),$this);
+            $position = (isset($changes['position'][0])) ? $changes['position'][0] : $this -> getPosition();
+            if (isset($changes['type'])) {
+                if(!empty($this->children[0])){
+                    throw new Exception('Item has children!');
+                }
+                $parent = isset($changes['parent']) ? $changes['parent'][0] : $this->getParent();
+                if($parent){
+                    $positionObj->setAdditionalConditions(array(
+                        array('andWhere', array('u.parent = '.$parent->getId())),
+                        array('andWhere', array('u.type = :type')),
+                        array('setParameter',array('type',$changes['type'][0]))
+                    ));
+                } else {
+                    $expr = new Expr();
+                    $positionObj->setAdditionalConditions(array(
+                        array('andWhere',array($expr->isNull('u.parent'))),
+                        array('andWhere', array('u.type = :type')),
+                        array('setParameter',array('type',$changes['type'][0]))
+                    ));
+                }
+                $positionObj -> removePosition($position);
+                $position = -111;
+                $this->setParent(null);
+                $this->setPosition(1);
+                $positionObj->updatePositionCurrentEntity(1);
+            } else if (isset($changes['parent'])) {
+                if($changes['parent'][0]){
+                    $positionObj->setAdditionalConditions(array(
+                        array('andWhere' ,array('u.parent = '.$changes['parent'][0]->getId())),
+                        array('andWhere', array('u.type = :type')),
+                        array('setParameter',array('type',$this->getType()->getId()))
+                    ));
+                } else {
+                    $expr = new Expr();
+                    $positionObj->setAdditionalConditions(array(
+                        array('andWhere', array($expr->isNull('u.parent'))),
+                        array('andWhere', array('u.type = :type')),
+                        array('setParameter',array('type',$this->getType()->getId()))
+                    ));
+                }
+                $positionObj -> removePosition($position);
+                $position = -111;
+            }
+            $parent = $this->getParent();
+            if($parent){
+                $positionObj->setAdditionalConditions(array(
+                    array('andWhere', array('u.parent = '.$parent->getId())),
+                    array('andWhere', array('u.type = :type')),
+                    array('setParameter',array('type',$this->getType()->getId()))
+                ));
+            } else {
+                $expr = new Expr();
+                $positionObj->setAdditionalConditions(array(
+                    array('andWhere',array($expr->isNull('u.parent'))),
+                    array('andWhere', array('u.type = :type')),
+                    array('setParameter',array('type',$this->getType()->getId()))
+                ));
+            }
+            $toPosition = $this -> getPosition();
+            $positionObj -> insertPosition($position, $toPosition);
+        }
+
+    }
+
+    public function postPersist(LifecycleEventArgs $args) {
+        $positionObj = new Position($args -> getEntityManager(),$this);
+        $parent = $this->getParent();
+        if($parent){
+            $positionObj->setAdditionalConditions(array(
+                array('andWhere', array('u.parent = '.$parent->getId())),
+                array('andWhere', array('u.type = :type')),
+                array('setParameter',array('type',$this->getType()->getId()))
+            ));
+        } else {
+            $expr = new Expr();
+            $positionObj->setAdditionalConditions(array(
+                array('andWhere',array($expr->isNull('u.parent'))),
+                array('andWhere', array('u.type = :type')),
+                array('setParameter',array('type',$this->getType()->getId()))
+            ));
+        }
+        $positionObj -> insertPosition(-156, 1);
+    }
+
+    public function postRemove(LifecycleEventArgs $args) {
+        $positionObj = new Position($args -> getEntityManager(),$this);
+        $parent = $this->getParent();
+        if($parent){
+            $positionObj->setAdditionalConditions(array(
+                array('andWhere' , array('u.parent = '.$parent->getId())),
+                array('andWhere', array('u.type = :type')),
+                array('setParameter',array('type',$this->getType()->getId()))
+            ));
+        } else {
+            $expr = new Expr();
+            $positionObj->setAdditionalConditions(array(
+                array('andWhere', array($expr->isNull('u.parent'))),
+                array('andWhere', array('u.type = :type')),
+                array('setParameter',array('type',$this->getType()->getId()))
+            ));
+        }
+        $positionObj -> removePosition($this -> getPosition());
+    }
+
+
+
+}

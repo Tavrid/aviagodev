@@ -1,0 +1,7 @@
+
+{% extends 'AcmeAdminBundle:Layouts:main.html.twig' %}
+{% block body %}
+    <h1>Список пользователей</h1>
+    <a class="btn btn-success pull-right" href="{{ url('admin.page.add') }}">Добавить</a>
+{{ bootstrapTable(data,params) |raw}}
+{% endblock %}

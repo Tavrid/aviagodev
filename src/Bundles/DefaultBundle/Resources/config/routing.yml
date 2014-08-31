@@ -1,0 +1,18 @@
+bundles_default_homepage:
+    pattern:  /
+    defaults: { _controller: BundlesDefaultBundle:Default:index }
+bundles_default_test:
+    pattern:  /test
+    defaults: { _controller: BundlesDefaultBundle:Default:index }
+
+default.default.team.route:
+    pattern:  /team
+    defaults: { _controller: BundlesDefaultBundle:Default:team }
+
+default.task.route:
+    pattern:  /task
+    defaults: { _controller: BundlesDefaultBundle:Default:task }
+default.task.route:
+    pattern:  /api/wsse
+    defaults: { _controller: BundlesDefaultBundle:Default:task }
+

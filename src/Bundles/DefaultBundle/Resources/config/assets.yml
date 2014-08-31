@@ -1,0 +1,11 @@
+assetic:
+    assets :
+        owl_js:
+            inputs:
+                - bundles/bundlesdefault/lib/owl/owl-carousel/owl.carousel.js
+            output: js/assets/owl.js
+        owl_css:
+            inputs:
+                - bundles/bundlesdefault/lib/owl/owl-carousel/owl.carousel.css
+                - bundles/bundlesdefault/lib/owl/owl-carousel/owl.theme.css
+            output: js/assets/owl.css

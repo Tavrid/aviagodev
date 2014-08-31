@@ -1,0 +1,9 @@
+
+{% if value %}
+    {%  set class = 'icon-ok-sign' %}
+    {%  set value = 0 %}
+{% else %}
+    {% set class = 'icon-minus-sign'  %}
+    {%  set value = 1 %}
+{% endif %}
+<i class="{{ class }} alink_mark" data-href="{{ param.link is defined ? path(param.link,{'id':id, 'mark' : param.mark}) : '' }}" mark="{{  param.mark is defined ?  param.mark : '' }}" value="{{ value }}" title="Кликнуть для изменения" style="cursor: pointer"></i>

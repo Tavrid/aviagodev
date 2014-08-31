@@ -1,0 +1,22 @@
+media_upload:
+    pattern:  /upload/{type}/{id}
+    defaults: { _controller: AcmeMediaBundle:Upload:index , id : -777 }
+media_avatar:
+    pattern:  /source/avatar/{type}/{id}
+    defaults: { _controller: AcmeMediaBundle:Source:index }
+    requirements:
+            id:  \d+
+media_delete:
+    pattern:  /upload/delete/{type}/{id}
+    defaults: { _controller: AcmeMediaBundle:Upload:delete, _format: json }
+
+acme_media_image:
+    pattern:  /files/{type}/{name}.{extension}
+    defaults: { _controller: AcmeMediaBundle:Image:index }
+
+acme_media_source_desc:
+    pattern:  /files/description/{id}
+    defaults: { _controller: AcmeMediaBundle:Image:desc }
+    requirements:
+          method: POST
+          id:  \d+

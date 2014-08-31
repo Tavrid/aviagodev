@@ -1,0 +1,69 @@
+assetic:
+  assets :
+    jquery:
+        inputs:
+            - %kernel.root_dir%/../vendor/jquery/jquery/jquery-2.0.2.min.js
+        output: web/js/jquery.js
+
+    jquery_ui_js:
+        inputs:
+            - %kernel.root_dir%/../vendor/jquery/jquery-ui/jquery-ui.min.js
+        output: web/js/jquery-ui.js
+
+    fancybox_js:
+        inputs :
+#            - @AcmeAdminBundle/Resources/public/test.js
+            - @AcmeAdminBundle/Resources/public/fancybox/lib/jquery.mousewheel-3.0.6.pack.js
+            - @AcmeAdminBundle/Resources/public/fancybox/source/jquery.fancybox.pack.js
+        output: web/js/fancybox.js
+
+    fancybox:
+        inputs:
+#            - bundles/acmeadmin/fancybox/source/jquery.fancybox.css
+            - @AcmeAdminBundle/Resources/public/fancybox/source/jquery.fancybox.css
+        output: web/css/fancybox.css
+
+    ck_editor_js:
+            inputs :
+                - @AcmeAdminBundle/Resources/public/ckeditor/ckeditor.js
+            output: web/js/ckeditor.js
+
+    tree_css:
+        inputs:
+            - "@AcmeAdminBundle/Resources/public/tree/css/jQuery.Tree.css"
+        output: web/css/tree.css
+    tree_js:
+        inputs:
+            - "@AcmeAdminBundle/Resources/public/tree/jQuery.Tree.js"
+        output: web/js/tree.js
+
+
+
+    default_bootstrap_css:
+        inputs:
+            -   bundles/bundlesdefault/lib/bootstrap/less/bootstrap.less
+            -   bundles/bundlesdefault/lib/awesome/css/font-awesome.min.css
+        output: web/css/tmain.css
+    default_bootstrap_js:
+        inputs:
+            - @AcmeAdminBundle/Resources/public/test.js
+            - bundles/bundlesdefault/lib/bootstrap/js/tooltip.js
+            - bundles/bundlesdefault/lib/bootstrap/js/dropdown.js
+            - bundles/bundlesdefault/lib/bootstrap/js/affix.js
+            - bundles/bundlesdefault/lib/bootstrap/js/alert.js
+            - bundles/bundlesdefault/lib/bootstrap/js/button.js
+            - bundles/bundlesdefault/lib/bootstrap/js/carousel.js
+            - bundles/bundlesdefault/lib/bootstrap/js/collapse.js
+            - bundles/bundlesdefault/lib/bootstrap/js/modal.js
+            - bundles/bundlesdefault/lib/bootstrap/js/popover.js
+            - bundles/bundlesdefault/lib/bootstrap/js/scrollspy.js
+            - bundles/bundlesdefault/lib/bootstrap/js/tab.js
+            - bundles/bundlesdefault/lib/bootstrap/js/transition.js
+            - bundles/bundlesdefault/lib/ajaxForm/ajaxForm.js
+        output: web/js/defaultbootstrap.js
+
+
+    nestedsortable_js:
+        inputs:
+            - "bundles/acmecore/js/jquery.nestedsortablewidget.js"
+        output: web/js/nestedsortaable.js

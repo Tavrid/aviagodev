@@ -1,0 +1,41 @@
+parameters:
+#    acme_core.example.class: Acme\CoreBundle\Example
+
+services:
+    entity.listener:
+        class: Acme\CoreBundle\EventListener\EntityListener
+        tags:
+            - { name: doctrine.event_listener, event: preUpdate, method: preUpdate }
+            - { name: doctrine.event_listener, event: prePersist, method: prePersist}
+            - { name: doctrine.event_listener, event: postPersist, method: postPersist}
+            - { name: doctrine.event_listener, event: postRemove, method: postRemove}
+    core.routing_loader:
+        class: Acme\CoreBundle\Routing\DbLoader
+        arguments:
+            - @service_container
+        tags:
+            - { name: routing.loader }
+    multifield.form.type:
+        class: Acme\CoreBundle\Form\Extension\Multifield
+        arguments:
+            - @validator.mapping.class_metadata_factory
+        tags:
+            - { name: form.type, alias: multi_field }
+    sub_multi_field.form.type:
+            class: Acme\CoreBundle\Form\Extension\SubMultifield
+            arguments:
+                - @validator.mapping.class_metadata_factory
+            tags:
+                - { name: form.type, alias: sub_multi_field }
+
+    acme.twig.acme_extension:
+        class: Acme\CoreBundle\Twig\Awesome
+        arguments:
+            - "@service_container"
+        tags:
+            - { name: twig.extension }
+
+    assetic.filter.main_cssrewirte:
+        class: Acme\CoreBundle\Model\CssRewriteFilter
+        tags:
+            - { name: assetic.filter, alias: main_cssrewirte}

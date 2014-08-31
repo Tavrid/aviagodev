@@ -1,0 +1,24 @@
+Acme\AdminBundle\Entity\Slider:
+    type: entity
+    table: slider
+    repositoryClass: Acme\AdminBundle\Repository\SliderRepository
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 100
+        text:
+            type: text
+            nullable: true
+        is_show:
+            type: boolean
+            nullable: true
+        position:
+            type: integer
+    oneToMany:
+        media:
+            targetEntity: Media
+            mappedBy: slider
