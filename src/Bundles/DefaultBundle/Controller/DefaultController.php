@@ -18,10 +18,7 @@ class DefaultController extends Controller
 //        $query->setQuery('Гон');
 //        $output = $api->getCityRequestor()->execute($query);
 //
-        return $this->render('BundlesDefaultBundle:Default:index.html.twig',array(
-            'uploader' => $this->get('admin.slider.uploader'),
-            'entities' => $entities
-        ));
+        return $this->render('BundlesDefaultBundle:Default:index.html.twig');
     }
 
     public function teamAction()
