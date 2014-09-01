@@ -11,10 +11,10 @@ namespace Bundles\ApiBundle\Api\Request;
 use Lsw\ApiCallerBundle\Caller\ApiCallerInterface;
 use Bundles\ApiBundle\Api\ApiCall;
 use Bundles\ApiBundle\Api\Query\QueryAbstract;
-use Bundles\ApiBundle\Api\Response\ApiResponse;
+use Bundles\ApiBundle\Api\Response\CityResponse;
 
 
-class ApiRequest implements Request{
+class CityRequest implements Request{
     /**
      * @var string
      */
@@ -33,7 +33,7 @@ class ApiRequest implements Request{
      */
     public function execute(QueryAbstract $query)
     {
-        $response = new ApiResponse();
+        $response = new CityResponse();
         $data = $this->apiCaller->call(new ApiCall($query->getApiUrl(),json_encode($query->buildParams($this->apiKey))));
         $response->setResponseData($data);
         return $response;

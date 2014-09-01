@@ -9,7 +9,7 @@
 namespace Bundles\ApiBundle\Api\Response;
 
 
-class ApiResponse extends Response {
+class CityResponse extends Response {
 
 
 

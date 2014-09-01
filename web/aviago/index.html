@@ -1,0 +1,530 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta charset="UTF-8">
+<link href="css/main.css" rel="stylesheet" type="text/css">
+<!--<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>-->
+<link rel="stylesheet" href="css/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="js/functions.php?id=flights&amp;lng=ru"></script>
+<script type="text/javascript" src="js/jquery.fancybox.pack.js?v=2.1.5"></script>
+<script type="text/javascript">
+var sel = "flights";
+var selected,pageTracker;
+var specialsLoaded = false;
+var searchFormLoaded = false;
+var searchResLoaded = false;
+var flightDetLoaded = false;
+var isDirectSearch = false;
+var doOnLoad = null;
+var sfMonthNum = 2;
+function login_display(theName, id){
+	hide("registerLine");
+	hide("loginPlace");
+	inline("loginInfo");
+	$("#loginInfo").html('Пользователь: <a href="?id=user_account&amp;ua_page=profile&amp;user_id='+id+'&amp;in_index_page=true" title="Детали пользователя"><span id="userName">'+Utf8.decode(theName)+'<'+'/'+'a>&nbsp;|&nbsp;<a href="?id=user_account&amp;ua_page=orders&amp;user_id='+id+'" title="Мои брони">Мои брони<'+'/'+'a> | <a href="?action=logout" title="Выйти">Выйти<'+'/'+'a><'+'/'+'span>');
+}
+</script>
+</head>
+<body>
+<div style="width:960px;margin: 0 auto;" align="center">    
+	<div style="clear:both">
+    	<div style="float:left; width:640px;" align="left">
+  			<div style="background: no-repeat url(images/sf_bg.png); height:329px; margin-left:3px;">
+    			<div style="clear:both;">
+      				<div style="float:left; width: 161px; top:2px; height:50px; position:relative;" align="center" class="tab">  
+      					<h1><a href="">Авиабилеты</a></h1> 
+      				</div>
+      				<div style="float:left; width: 161px; top:2px; height:50px; position:relative;" align="center" class="tab">
+      					<a href="http://www.booking.com/index.html?aid=320568" target="_blank" rel="nofollow">Гостиницы</a>
+      				</div>
+      				<div style="float:left; width: 161px; top:2px; height:50px; position:relative;" align="center" class="tab">
+      					<a href="http://aviago.com.ua/прокат-авто/">Прокат авто</a>
+      				</div>
+    			</div>
+    			<div style="clear:both; width:597px; padding:6px 16px;"> 
+    			<script type="text/javascript">
+				//////////////////////////////////////////////////////////////////////////////
+				//Cities autofill
+				var foundCities = 0;
+				var citiesArr = new Array();
+				var showList = false;
+				var hideCities = true;
+				var fname = "";
+
+				function selectCity(n,id){
+					el(fname).value = citiesArr[n];
+					hide('citiesList'+id+'Frame');
+				}
+
+				function showCitiesList(e, field, id, limit){
+					if(window.event) var keynum = event.keyCode;
+					else if(e.which) var keynum = e.which;
+					keychar = String.fromCharCode(keynum);
+					var elm = el('citiesList'+id+'Frame');
+					var fld = el(field);
+					fname = field;
+					var v = fld.value;
+					if(v.length < 3){
+						elm.style.display = "none";
+						return;
+					}
+					var pos = $("#"+jqEsc(field)).position();
+					$(elm).css({left:pos.left,top:(pos.top+$(fld).outerHeight()+3)});
+					if(keynum == 8) var val = v;//.substr(0,v.length-1); //Backspace
+					else if(keynum != 40 && keynum != 38 && keynum != 13) var val = v;
+					
+					var func = function(data){
+						eval(data);
+						if(showList){			
+							var n = -1;
+							donthide = true;
+							document.onkeydown = function(e){
+								if(window.event) keynum = event.keyCode;
+								else if(e.which) keynum = e.which;				
+								switch(keynum){
+									//Down key
+									case 40:
+										if(n<(foundCities-1)){ changeColor(n,n+1,id); n++;}
+										else { changeColor(n,0,id);n = 0;	}
+									break;
+									//Up key
+									case 38:
+										if(n>-1){changeColor(n,n-1,id);n--;} 
+										if(n == -1){changeColor(n,foundCities-1,id);n = foundCities-1;}
+									break;
+									//Enter key
+									case 13:
+										if(n == -1) n = 0;
+										selectCity(n,id,fname);
+										elm.style.display = "none";
+									break;
+									//Esc key
+									case 27:
+										elm.style.display = "none";
+										document.onkeydown = null;
+										return;
+									break;
+								}
+							};			
+						} else {
+							document.onkeydown = null;
+							elm.style.display = "none";
+						}
+					};
+					if(keynum != 40 && keynum != 38 && keynum != 13) {
+						$.post(urlStart+"includes/cities_autofill.php","query="+val+"&id="+id+"&lng="+lng+"&limit="+limit,func);		
+					}
+				}
+
+
+				function changeColor(oldId,newId,id){
+					var e = window['citiesList'+id+'Frame'].document.getElementById('cityItem'+oldId);
+					if(e){
+						e.className = "";
+						window['citiesList'+id+'Frame'].document.getElementById('cityItemLink'+oldId).className = "";
+					}
+					e = window['citiesList'+id+'Frame'].document.getElementById('cityItem'+newId);
+					if(e) {
+						e.className = "selectedInList";	
+						window['citiesList'+id+'Frame'].document.getElementById('cityItemLink'+newId).className = "selectedInList";
+					}
+				}
+
+				function hideCitiesList(id){
+					if(hideCities) $("#citiesList"+id+"Frame").hide();
+				}
+
+				function jqEsc(str){
+					str = str.replace('[','\\[');
+				    str = str.replace(']','\\]');
+					return str;
+				}
+				</script>
+				<div id="cityChecker" style="position:relative;"></div>
+				<div style="height:10px; clear:both;"></div>
+				<form id="flightSearchForm" autocomplete="off" name="searchForm" method="post" action="search.php">
+  					<div>
+    					<div align="center">
+      						<input onclick="changeJourney(this.value,'flightSearchForm','inbound','multi')" type="radio" name="journey" id="journey-rt" checked="checked" value="roundTrip">
+      						<label for="journey-rt">в обе стороны</label>
+      						<input onclick="changeJourney(this.value,'flightSearchForm','inbound','multi')" type="radio" name="journey" id="journey-ow" value="oneway">
+      						<label for="journey-ow">в одну сторону</label>
+      						<input onclick="changeJourney(this.value,'flightSearchForm','inbound','multi')" type="radio" name="journey" id="journey-mu" value="multi">
+      						<label for="journey-mu">возвращение из/в другие аэропорты</label>
+    					</div>
+    					<div style="height:10px;"></div>
+    					<div style="height:88px;"> 
+							<div style="height:32px; clear:both;">
+	  							<div style="float:left; width:65px;" align="right" class="lbl">из: </div>
+	  							<div style="float:left;">	
+	  								<div style="display:inline;">
+										<div style="width:220px;" class="inputWrap">
+		      								<div style="float:left;">
+		        								<input class="inpWbtn faint_input" id="iata[1]" name="iata[1]" type="text" value="введите город" onfocus="if(this.value=='введите город') this.value=''; $(this).removeClass('faint_input');" onkeyup="showCitiesList(event,'iata[1]',1,'');" onblur="hideCitiesList('1',''); if(this.value == '') {this.value='введите город'; $(this).addClass('faint_input');}" title="Введите название города или нажмите на значёк с глобусом" style="width:198px;" onclick="this.select();">
+		      								</div>
+		      								<div class="input_icon">
+		      									<img onclick="openw('https://aviago.com.ua/cities.php?id=1&amp;lng=ru&amp;fname=iata%5B1%5D','','width=610,height=700');" src="https://files.avia.lt/images/cities-list.png" border="0" alt="Список всех аэропортов" title="Список всех аэропортов" height="18" width="18">
+		      								</div>
+	    								</div>
+										<iframe id="citiesList1Frame" name="citiesList1Frame" style="visibility:hidden; width:220px;position:absolute;z-index:101;height:100%; left:0px; top:0px;" scrolling="no" frameborder="0" src="https://aviago.com.ua/includes/cities_list_frame.php" class="autofill"></iframe>
+									</div>
+								</div>
+	  							<div style="float:left; width:65px;" align="right" class="lbl">в: </div>
+	  							<div style="float:left;">	
+	  								<div style="display:inline;">
+										<div style="width:220px;" class="inputWrap">
+	      									<div style="float:left;">
+	        									<input class="inpWbtn faint_input" id="iata[2]" name="iata[2]" type="text" value="введите город" onfocus="if(this.value=='введите город') this.value=''; $(this).removeClass('faint_input');" onkeyup="showCitiesList(event,'iata[2]',2,'');" onblur="hideCitiesList('2',''); if(this.value == '') {this.value='введите город'; $(this).addClass('faint_input');}" title="Введите название города или нажмите на значёк с глобусом" style="width:198px;" onclick="this.select();">
+	      									</div>
+	      									<div class="input_icon">
+	      										<img onclick="openw('https://aviago.com.ua/cities.php?id=2&amp;lng=ru&amp;fname=iata%5B2%5D','','width=610,height=700');" src="https://files.avia.lt/images/cities-list.png" border="0" alt="Список всех аэропортов" title="Список всех аэропортов" height="18" width="18">
+	      									</div>
+	    								</div>
+										<iframe id="citiesList2Frame" name="citiesList2Frame" style="visibility:hidden; width:220px;position:absolute;z-index:102;height:100%; left:0px; top:0px;" scrolling="no" frameborder="0" src="https://aviago.com.ua/includes/cities_list_frame.php" class="autofill"></iframe>
+									</div>
+		 						</div>
+							</div>
+							<div id="multi" style="height:32px; display:none;clear:both;">
+  								<div style="float:left; width:65px;" align="right" class="lbl">из (2):</div>
+  								<div style="float:left;">	
+  									<div style="display:inline;">
+										<div style="width:220px;" class="inputWrap">
+      										<div style="float:left;">
+        										<input class="inpWbtn faint_input" id="iata[3]" name="iata[3]" type="text" value="введите город" onfocus="if(this.value=='введите город') this.value=''; $(this).removeClass('faint_input');" onkeyup="showCitiesList(event,'iata[3]',3,'');" onblur="hideCitiesList('3',''); if(this.value == '') {this.value='введите город'; $(this).addClass('faint_input');}" title="Введите название города или нажмите на значёк с глобусом" style="width:198px;" onclick="this.select();">
+      										</div>
+      										<div class="input_icon">
+      											<img onclick="openw('https://aviago.com.ua/cities.php?id=3&amp;lng=ru&amp;fname=iata%5B3%5D','','width=610,height=700');" src="https://files.avia.lt/images/cities-list.png" border="0" alt="Список всех аэропортов" title="Список всех аэропортов" height="18" width="18">
+      										</div>
+    									</div>
+										<iframe id="citiesList3Frame" name="citiesList3Frame" style="visibility:hidden; width:220px;position:absolute;z-index:103;height:100%; left:0px; top:0px;" scrolling="no" frameborder="0" src="https://aviago.com.ua/includes/cities_list_frame.php" class="autofill"></iframe>
+									</div>
+								</div>
+  								<div style="float:left; width:65px;" align="right" class="lbl">в (2):</div>
+  								<div style="float:left;">	
+  									<div style="display:inline;">
+										<div style="width:220px;" class="inputWrap">
+      										<div style="float:left;">
+        										<input class="inpWbtn faint_input" id="iata[4]" name="iata[4]" type="text" value="введите город" onfocus="if(this.value=='введите город') this.value=''; $(this).removeClass('faint_input');" onkeyup="showCitiesList(event,'iata[4]',4,'');" onblur="hideCitiesList('4',''); if(this.value == '') {this.value='введите город'; $(this).addClass('faint_input');}" title="Введите название города или нажмите на значёк с глобусом" style="width:198px;" onclick="this.select();">
+      										</div>
+      										<div class="input_icon">
+      											<img onclick="openw('https://aviago.com.ua/cities.php?id=4&amp;lng=ru&amp;fname=iata%5B4%5D','','width=610,height=700');" src="https://files.avia.lt/images/cities-list.png" border="0" alt="Список всех аэропортов" title="Список всех аэропортов" height="18" width="18">
+      										</div>
+    									</div>
+										<iframe id="citiesList4Frame" name="citiesList4Frame" style="visibility:hidden; width:220px;position:absolute;z-index:104;height:100%; left:0px; top:0px;" scrolling="no" frameborder="0" src="https://aviago.com.ua/includes/cities_list_frame.php" class="autofill"></iframe>
+									</div>
+								</div>
+							</div>
+							<div>
+  								<div style="float:left;">
+    								<div style="float:left; width:65px;" align="right" class="lbl">туда: </div>    
+										<div style="width:220px;" class="inputWrap">
+      										<div style="float:left;">
+        										<input style="width:198px; border:none;" class="inpWbtn" type="text" size="10" id="depDate" onupdate="if(el('arrDate').value=='' || el('arrDate').value=='укажите дату') showCal(el('arrDate'));" title="Календарь" placeholder="укажите дату">
+        										<input type="hidden" id="depDateVal" name="depDate" value=""/>
+     										</div>
+	      									<div class="input_icon"> 
+	      										<img src="https://files.avia.lt/images/calendar.png" id="depDateImg" alt="Календарь" title="Календарь" height="18" width="18"> 
+	      									</div>
+    									</div>
+  								</div>
+  								<div id="inbound" style="float:left;">
+    								<div style="float:left; width:65px;" align="right" class="lbl">назад: </div>
+    									<div style=" width:220px;" class="inputWrap">
+      										<div style="float:left;">
+        										<input style="width:198px;" class="inpWbtn" type="text" size="10" id="arrDate" name="arrDate" title="Календарь" placeholder="укажите дату">
+       	 										<input type="hidden" id="arrDateVal" name="arrDate" value=""/>
+      										</div>
+	      									<div class="input_icon"> 
+	      										<img src="https://files.avia.lt/images/calendar.png" id="arrDateImg" alt="Календарь" title="Календарь" height="18" width="18"> 
+	      									</div>
+    									</div>
+  									</div>
+  									<div style="clear:both;"></div>
+								</div>
+							<script type="text/javascript">
+							$("#depDate,#arrDate").focus(function(){
+								showCal(this);
+							}).blur(function(){
+								if(this.value=="") {
+									this.value="укажите дату"; $(this).addClass("faint_input");
+								}
+							});
+							$("#depDateImg,#arrDateImg").click(function(){
+								showCal(this);
+							});
+							function getDt(str){
+								return new Date(str.substr(6,4), str.substr(3,2), str.substr(0,2));
+							}
+							</script>
+							</div>
+    						<div align="right">
+     	 						<div class="white_border" style="display: inline-block; margin:10px 0; padding:5px 10px;">
+	          						<div style="float:left;">
+	          							<input type="checkbox" name="flexible" id="flexible" checked="checked">
+	          							<label for="flexible">лучшая цена &plusmn;3 дня</label>
+	          						</div>
+		  							<div style="float:left; padding-left:12px;">
+		  								<input type="checkbox" name="direct" id="direct">
+		  								<label for="direct_only">только прямые рейсы</label>
+		  							</div>
+		  							<div style="clear:both;"></div>
+      							</div>
+      						<div>
+        					<div style="float:left;">
+        						<div align="right" style="height:22px; clear:both;">
+            						<div style="float:left; width:110px;" align="right" class="lbl2">взрослые (с 12):</div>
+            						<select name="adults" id="adults" onChange="checkInfantsNr()"><option value="0" selected="selected">0</option><option value="1" selected="selected">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>
+            					</div>
+          						<div align="right" style="height:22px; clear:both;">
+            						<div style="float:left; width:110px;" align="right" class="lbl2">дети (2-11):</div>
+            						<select name="children" id="children" onChange="checkInfantsNr()"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select>          
+            					</div>
+          						<div align="right" style="height:22px; clear:both;">
+            						<div style="float:left; width:110px;" align="right" class="lbl2">младенцы (до 2):</div>
+           		 					<select name="infants" id="infants"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option></select>          
+           		 				</div>
+           		 			</div>
+        					<div style="float:left;">
+          						<div align="right" style="height:22px; clear:both;">
+           	 						<div style="float:left; width:115px;" align="right" class="lbl2">класс:</div>
+            						<select name="cabin" style="font-size:12px; width:152px;">
+              							<option value="none">любой</option>
+              							<option value="C">бизнес / 1 класс</option>
+            						</select>
+          						</div>
+          						<div align="right" style="height:22px; clear:both;">
+            						<div style="float:left; width:115px;" align="right" class="lbl2">авиакомпания:</div>
+            						<select name="airline" style="font-size:12px; width:152px;">
+              							<option value="all">любая</option>
+            							<option value="NH">ANA All Nippon Airways (NH)</option><option value="TZ">ATA Airlines Inc (TZ)</option><option value="JP">Adria Airways (JP)</option><option value="A3">Aegean Aviation (A3)</option><option value="RE">Aer Arann (RE)</option><option value="EI">Aerlingus (EI)</option><option value="EE">Aero Airlines (EE)</option><option value="SU">Aeroflot (SU)</option><option value="AR">Aerolineas Argentinas (AR)</option><option value="2K">Aerolineas Galapagos (2K)</option><option value="N2">Aerolineas Internacional (N2)</option><option value="VW">Aeromar (VW)</option><option value="AM">Aeromexico (AM)</option><option value="VH">Aeropostal (VH)</option><option value="5L">Aerosur (5L)</option><option value="VV">Aerosvit Airlines (VV)</option><option value="8U">Afriqiyah Airways (8U)</option><option value="AH">Air Algerie (AH)</option><option value="A6">Air Alps Aviation (A6)</option><option value="5C">Air Astana (5C)</option><option value="KC">Air Astana (KC)</option><option value="UU">Air Austral (UU)</option><option value="AB">Air Berlin (AB)</option><option value="JA">Air Bosna (JA)</option><option value="BP">Air Botswana Corp (BP)</option><option value="2J">Air Burkina (2J)</option><option value="AC">Air Canada (AC)</option><option value="CA">Air China (CA)</option><option value="EN">Air Dolomiti (EN)</option><option value="UX">Air Europa (UX)</option><option value="AF">Air France (AF)</option><option value="VU">Air Ivoire (VU)</option><option value="JM">Air Jamaica (JM)</option><option value="LT">Air Lituanica (LT)</option><option value="LK">Air Luxor (LK)</option><option value="L8">Air Luxor GB (L8)</option><option value="C2">Air Luxor STP (C2)</option><option value="NX">Air Macau (NX)</option><option value="MD">Air Madagascar (MD)</option><option value="QM">Air Malawi (QM)</option><option value="KM">Air Malta (KM)</option><option value="MK">Air Mauritius (MK)</option><option value="9U">Air Moldova (9U)</option><option value="SW">Air Namibia (SW)</option><option value="NZ">Air New Zealand (NZ)</option><option value="PX">Air Niugini (PX)</option><option value="AP">Air One (AP)</option><option value="FJ">Air Pacific (FJ)</option><option value="A7">Air Plus Comet (A7)</option><option value="HM">Air Seychelles (HM)</option><option value="TN">Air Tahiti Nui (TN)</option><option value="TC">Air Tanzania (TC)</option><option value="U7">Air Uganda (U7)</option><option value="NF">Air Vanuatu (NF)</option><option value="QC">Air Zaire (QC)</option><option value="BT">AirBaltic (BT)</option><option value="2L">Airblue (2L)</option><option value="SB">Aircalin (SB)</option><option value="A5">Airlinair (A5)</option><option value="AS">Alaska Airlines (AS)</option><option value="AZ">Alitalia (AZ)</option><option value="AA">American Airlines (AA)</option><option value="WK">American Falcon (WK)</option><option value="IZ">Arkia (IZ)</option><option value="U8">Armavia (U8)</option><option value="R7">Aserca (R7)</option><option value="OZ">Asiana Airlines (OZ)</option><option value="7B">Atlant-Soyuz (7B)</option><option value="RC">Atlantic Airways (RC)</option><option value="TD">Atlantis European Airways (TD)</option><option value="KK">Atlasjet Airlines (KK)</option><option value="OS">Austrian Airlines (OS)</option><option value="6A">Aviacsa (6A)</option><option value="AV">Avianca (AV)</option><option value="GU">Aviateca (GU)</option><option value="J2">Azerbaijan Airlines (J2)</option><option value="BD">BMI British Midland (BD)</option><option value="UP">Bahamasair (UP)</option><option value="PG">Bangkok Airways (PG)</option><option value="4T">Belair Airlines (4T)</option><option value="B2">Belavia (B2)</option><option value="J8">Berjaya Air (J8)</option><option value="B4">Bhoja Airlines Ltd (B4)</option><option value="BG">Biman Bangladesh Airline (BG)</option><option value="NT">Binter Canarias (NT)</option><option value="KF">Blue1 (KF)</option><option value="WW">Bmibaby (WW)</option><option value="9H">Bonair Exel (9H)</option><option value="BA">British Airways (BA)</option><option value="SN">Brussels Airlines (SN)</option><option value="FB">Bulgaria Air (FB)</option><option value="XK">CCM (XK)</option><option value="W2">Canadian Western Airlines (W2)</option><option value="9K">Cape Air (9K)</option><option value="BW">Caribbean Airways (BW)</option><option value="8B">Caribbean Star Airlines (8B)</option><option value="V3">Carpatair (V3)</option><option value="CX">Cathay Pacific (CX)</option><option value="KX">Cayman Airways Ltd (KX)</option><option value="9M">Central Mountain Air (9M)</option><option value="CI">China Airlines (CI)</option><option value="MU">China Eastern Airlines (MU)</option><option value="CZ">China Southern Airlines (CZ)</option><option value="QI">Cimber Air (QI)</option><option value="C9">Cirrus Airlines (C9)</option><option value="DE">Condor (DE)</option><option value="CO">Continental Airlines (CO)</option><option value="V0">Conviasa (V0)</option><option value="CM">Copa Air (CM)</option><option value="SS">Corsair (SS)</option><option value="OR">Crimea Air (OR)</option><option value="OU">Croatia Airlines (OU)</option><option value="CU">Cubana de Aviaciуn (CU)</option><option value="CY">Cyprus Airways (CY)</option><option value="OK">Czech Airlines (OK)</option><option value="DI">DBA (DI)</option><option value="H8">Dalavia (H8)</option><option value="DX">Danish Air Transport (DX)</option><option value="0D">Darwin Airline (0D)</option><option value="DL">Delta Air Lines (DL)</option><option value="9B">Deutsche Bahn AG (9B)</option><option value="Z6">Dnieproavia (Z6)</option><option value="E3">Domodedovo Airlines (E3)</option><option value="7D">Donbassaero (7D)</option><option value="KA">Dragonair (KA)</option><option value="YR">Eagle Canyon Airlines (YR)</option><option value="T3">Eastern Airways (T3)</option><option value="MS">Egyptair (MS)</option><option value="LY">El Al Israel Airlines (LY)</option><option value="EK">Emirates (EK)</option><option value="OV">Estonian Air (OV)</option><option value="ET">Ethiopian Airlines (ET)</option><option value="EY">Etihad Airways (EY)</option><option value="K2">EuroLOT (K2)</option><option value="9F">Eurostar (9F)</option><option value="BR">Eva Air (BR)</option><option value="AY">Finnair (AY)</option><option value="FC">Finncomm (FC)</option><option value="BE">FlyBE (BE)</option><option value="F7">Flybaboo (F7)</option><option value="F9">Frontier Airlines (F9)</option><option value="Z5">GMG Airlines (Z5)</option><option value="GA">Garuda Indonesia (GA)</option><option value="A9">Georgian Airways (A9)</option><option value="4U">Germanwings (4U)</option><option value="G3">Gol Airlines (G3)</option><option value="DC">Golden Air (DC)</option><option value="GF">Gulf Air (GF)</option><option value="GY">Guyana Airways (GY)</option><option value="HR">Hahn Air (HR)</option><option value="HU">Hainan Airlines (HU)</option><option value="4R">Hamburg International (4R)</option><option value="HA">Hawaiian Airlines (HA)</option><option value="YO">Heli Air Monaco (YO)</option><option value="EO">Hewa Bora Airways (EO)</option><option value="HX">Hong Kong Airlines (HX)</option><option value="UO">Hong Kong Express Airways (UO)</option><option value="IB">Iberia (IB)</option><option value="FI">Icelandair (FI)</option><option value="IK">Imair Airline (IK)</option><option value="D6">Inter Air (D6)</option><option value="ID">Interlink Airlines (ID)</option><option value="3L">Intersky Luftfahrt (3L)</option><option value="IO">IrAero (IO)</option><option value="IR">Iran Air (IR)</option><option value="6H">Israir Airlines (6H)</option><option value="GI">Itek Air (GI)</option><option value="D9">JSC Donavia (D9)</option><option value="5N">JSC Nordavia (5N)</option><option value="JO">Jalways (JO)</option><option value="JL">Japan Airlines (JL)</option><option value="JU">Jat Airways (JU)</option><option value="9W">Jet Airways (9W)</option><option value="S2">Jet Lite (S2)</option><option value="LS">Jet2.Com (LS)</option><option value="8J">Jet4you.Com (8J)</option><option value="B6">Jetblue Airways (B6)</option><option value="J0">Jetlink Express (J0)</option><option value="JQ">Jetstar Airways (JQ)</option><option value="3B">Job Air (3B)</option><option value="KL">KLM Royal Dutch Airlines (KL)</option><option value="KV">Kavminvodyavia Airlines (KV)</option><option value="KD">Kendell Airlines (KD)</option><option value="KQ">Kenya Airways (KQ)</option><option value="IT">Kingfisher Airlines (IT)</option><option value="7K">Kogalymavia (7K)</option><option value="KE">Korean Air (KE)</option><option value="KU">Kuwait Airways (KU)</option><option value="TM">LAM Mozambique (TM)</option><option value="LA">LAN Airlines (LA)</option><option value="LO">LOT Polish Airlines (LO)</option><option value="LR">Lacsa (LR)</option><option value="4M">Lanargentina (4M)</option><option value="XL">Lanecuador Aerolane SA (XL)</option><option value="LP">Lanperu (LP)</option><option value="QV">Lao Aviation (QV)</option><option value="LI">Liat (LI)</option><option value="LN">Libyan Airlines (LN)</option><option value="LH">Lufthansa (LH)</option><option value="CL">Lufthasa CityLine (CL)</option><option value="LG">Luxair (LG)</option><option value="W5">Mahan Airlines (W5)</option><option value="MH">Malaysia Airlines (MH)</option><option value="TF">Malmo Aviation (TF)</option><option value="MA">Malév Hungarian Airlines (MA)</option><option value="AE">Mandarin Airlines (AE)</option><option value="MP">Martinair Holland (MP)</option><option value="YD">Mauritania Airways (YD)</option><option value="MW">Maya Airways (MW)</option><option value="IG">Meridiana (IG)</option><option value="MX">Mexicana de Aviacion (MX)</option><option value="OM">Miat-Mongolian Airlines (OM)</option><option value="ME">Middle East Airlines (ME)</option><option value="YX">Midwest Airlines (YX)</option><option value="2M">Moldavian Airlines (2M)</option><option value="ZB">Monarch Airlines (ZB)</option><option value="YM">Montenegro Airlines (YM)</option><option value="M9">Motor-Sich JSC (M9)</option><option value="8M">Myanmar Airways Int'l (8M)</option><option value="P9">NAS Air (P9)</option><option value="AI">Nacil Air India (AI)</option><option value="IC">Nacil Indian Airline (IC)</option><option value="RA">Nepal Airlines (RA)</option><option value="2N">Nextjet (2N)</option><option value="HG">Niki (HG)</option><option value="Y7">NordStar (Y7)</option><option value="NW">Northwest Airlines (NW)</option><option value="5K">Odessa Airlines (5K)</option><option value="OL">Olt Ostfriesische Lufttr (OL)</option><option value="OA">Olympic Airlines (OA)</option><option value="WY">Oman Air (WY)</option><option value="LW">Pacific Wings (LW)</option><option value="PC">Pegasus Airlines (PC)</option><option value="7V">Pelican Air (7V)</option><option value="9G">Perm Airlines (9G)</option><option value="PR">Philippine Airlines (PR)</option><option value="PU">Pluna (PU)</option><option value="YQ">Polet Airlines (YQ)</option><option value="NI">Portugalia (NI)</option><option value="PW">Precision Air (PW)</option><option value="QF">Qantas	Airways (QF)</option><option value="QR">Qatar Airways (QR)</option><option value="AT">Royal Air Maroc (AT)</option><option value="BI">Royal Brunei (BI)</option><option value="RJ">Royal Jordanian Airline (RJ)</option><option value="WR">Royal Tongan Airlines (WR)</option><option value="7R">Rusline (7R)</option><option value="FV">Russian Airlines (FV)</option><option value="WB">Rwandair Express (WB)</option><option value="S7">S7 Airlines (S7)</option><option value="HZ">SAT Airlines (HZ)</option><option value="4Q">Safi Airways (4Q)</option><option value="Q3">Sandaun Air Services (Q3)</option><option value="S3">Santa Barbara Airlines (S3)</option><option value="SP">Sata Air Acores (SP)</option><option value="S4">Sata International (S4)</option><option value="SV">Saudi Arabian Airlines (SV)</option><option value="SK">Scandinavian Airlines (SK)</option><option value="DV">Scat Air (DV)</option><option value="K5">Seaport/Wings Of Alaska (K5)</option><option value="UG">Sevenair (UG)</option><option value="D2">Severstal Aircompany (D2)</option><option value="SC">Shandong Airlines (SC)</option><option value="FM">Shanghai Airlines (FM)</option><option value="ZH">Shenzhen Airlines (ZH)</option><option value="3U">Sichuan Airlines (3U)</option><option value="FT">Siem Reap Airways Intl (FT)</option><option value="MI">Silkair (MI)</option><option value="SQ">Singapore Airlines (SQ)</option><option value="7J">Skagway Air Services (7J)</option><option value="H2">Sky Airline (H2)</option><option value="NE">Skyeurope Airlines (NE)</option><option value="XR">Skywest Airlines (XR)</option><option value="LL">Small Planet (LL)</option><option value="QS">Smart Wings (QS)</option><option value="I5">Sn Air Mali (I5)</option><option value="MM">Soc Aero de Medellin (MM)</option><option value="IE">Solomon Airlines (IE)</option><option value="4J">Somon Air (4J)</option><option value="SA">South African Airways (SA)</option><option value="YG">South Airlines (YG)</option><option value="JK">Spanair (JK)</option><option value="UL">Srilankan Airlines (UL)</option><option value="1T">Start (1T)</option><option value="SY">Sun Country (SY)</option><option value="XQ">Sun Express (XQ)</option><option value="PY">Surinam Airways (PY)</option><option value="LX">Swiss (LX)</option><option value="7E">Sylt Air (7E)</option><option value="RB">Syrian Arab Airlines (RB)</option><option value="VR">TACV Cabo Verde Airlines (VR)</option><option value="JJ">TAM Airlines (JJ)</option><option value="TP">TAP Air (TP)</option><option value="DT">Taag (DT)</option><option value="TA">Taca Intl Airlines (TA)</option><option value="PZ">Tam Mercosur (PZ)</option><option value="RO">Tarom (RO)</option><option value="U9">Tatarstan Air (U9)</option><option value="TG">Thai Airways Intl (TG)</option><option value="MT">Thomas Cook Airlines (MT)</option><option value="TW">Trans World Airlines (TW)</option><option value="UN">Transaero Airlines (UN)</option><option value="GE">Transasia Airways (GE)</option><option value="HV">Transavia Airlines (HV)</option><option value="X3">Tuifly (X3)</option><option value="TU">Tunisair (TU)</option><option value="TK">Turkish Airlines (TK)</option><option value="VO">Tyrolean Airways (VO)</option><option value="US">US Airways (US)</option><option value="PS">Ukraine International Airlines (PS)</option><option value="B7">Uni Airways (B7)</option><option value="UA">United Airlines (UA)</option><option value="U6">Ural Airlines (U6)</option><option value="UT">Utair Aviation (UT)</option><option value="QU">Utair Ukraine (QU)</option><option value="HY">Uzbekistan Airways (HY)</option><option value="VA">V Australia (VA)</option><option value="NN">VIM Airlines (NN)</option><option value="VG">VLM Airlines (VG)</option><option value="VN">Vietnam Airlines (VN)</option><option value="VS">Virgin Atlantic (VS)</option><option value="DJ">Virgin Blue (DJ)</option><option value="VK">Virgin Nigeria (VK)</option><option value="XF">Vladivostok Air (XF)</option><option value="VE">Volareweb.com (VE)</option><option value="VY">Vueling (VY)</option><option value="KW">Wataniya Airways (KW)</option><option value="2W">Welcome Air (2W)</option><option value="WS">Westjet (WS)</option><option value="WF">Wideroe (WF)</option><option value="7W">Wind Rose Aviation (7W)</option><option value="WM">Windward Island Airways (WM)</option><option value="MF">Xiamen Airlines (MF)</option><option value="SE">Xl Airways France (SE)</option><option value="R3">Yakutia Air Company (R3)</option><option value="YC">Yamal Airlines (YC)</option><option value="IY">Yemenia Yemen Airways (IY)</option><option value="ZJ">Zambezi Airlines (ZJ)</option>            
+            						</select>
+          						</div>
+          						<input type="hidden" name="currency" value="EUR">
+        					</div>
+        					<div align="right" style="position:relative; float:right; top:-10px; right:-10px;">
+          						<div class="button" onclick="doFlightSearch('flightSearchForm');">Искать</div>
+        					</div>
+        					<div style="clear:both;"></div>
+      					</div>
+    				</div>
+    				<input type="hidden" name="search" value="true">	
+  				</div>
+			</form>
+<script type="text/javascript">
+function loadPrevSearches(){
+	loadContent("includes/get_prev_searches.php?lng=ru","prevSearches","prevSearches");}
+function pasteSearchParams(journey, dest1, dest2, dest3, dest4, out, ret, ADT, CHD, INF, cabin, airline, curr, doSubmit, flex){
+	setRadio2("flightSearchForm","journey",journey);
+	changeJourney(journey,"flightSearchForm","inbound","multi");
+	var frm = el("flightSearchForm");
+	var k = (journey == "multi") ? 4 : 2;
+	for(var i=1;i<=k;i++){
+		var city = frm["iata["+i+"]"];
+		eval("var val = dest"+i);
+		city.value = val;
+		$("#iata\\["+i+"\\]").removeClass("faint_input");
+	}
+	if(out.length){
+		$("#depDateVal").val(out[0]);
+		$("#depDate").val(out[1]);
+		$("#depDate").removeClass("faint_input");
+	}
+	if(ret.length){
+		$("#arrDateVal").val(ret[0]);
+		$("#arrDate").val(ret[1]);
+		$("#arrDate").removeClass("faint_input");
+	}
+	if(ADT>=0) frm.adults.value = ADT;
+	if(CHD>=0) frm.children.value = CHD;
+	if(INF>=0) frm.infants.value = INF;
+	if(cabin) frm.cabin.value = cabin;
+	if(airline) frm.airline.value = airline;	
+	if(curr) frm.currency.value = curr;
+	frm.flexible.checked = flex ? true : false;
+	if(doSubmit) doFlightSearch("flightSearchForm");
+}
+</script>
+	</div>
+</div>
+<div style="clear:both; position:relative; z-index:4;">
+	<div style="float:left; position:relative;">
+    	<div id="prevSearches" style="clear:both; width:639px;" align="left"></div>
+      	<div style="width:640px; position:relative;" id="secondPage">
+      		<div class="tabs">
+			  	<ul>
+			    	<li><a target="specials"><div style="width:280px;" class="tab">Дешевые авиабилеты</div></a></li>
+			    	<li><a target="popular_cities"><div style="width:279px;" class="tab">Популярные города</div></a></li>
+			  	</ul>
+  			<div>
+    		<div id="specials" style="height:145px;">       
+    			<div style="background:transparent url(images/spec_big_bg.png) no-repeat; width:635px; height:32px; position:relative; left:-10px;">
+	        		<div style="float:left; padding-left:14px; width:266px;">
+	          			<div style="float:left; line-height:32px;">
+	          				<a href="дешевые-авиабилеты-Киев–Стокгольм/" title="Киев-Стокгольм">Киев-Стокгольм</a>
+	          			</div>
+	          			<div style="float:right; font-size:18px; line-height:32px;" align="right">1315 грн.</div>
+	        		</div>
+        			<div style="float:right; padding-right:34px; width:264px;">
+          				<div style="float:left; line-height:32px;">
+          					<a href="дешевые-авиабилеты-Киев–Осло/" title="Киев-Осло">Киев-Осло</a>
+          				</div>
+          				<div style="float:right; font-size:18px; line-height:32px;" align="right">1838 грн.</div>
+        			</div>
+      			</div>
+      			<div style="width:600px; padding-left:4px; height:100px;">         
+      				<div class="spec" style="padding-top: 12px;">
+          				<div style="float:left; width: 186px;" align="left"> 
+          					<div style="float:left;" align="left">
+          						<div class="indexSpecPairs">
+									<a href="дешевые-авиабилеты-Киев–Милан/" title="Киев-Милан">Киев-Милан</a>
+								</div>
+								<div class="indexSpecPairsPrice" align="right">1873 грн.</div>
+							</div>
+							<div style="float:left;" align="left">
+								<div class="indexSpecPairs">
+									<a href="дешевые-авиабилеты-Киев–Харьков/" title="Киев-Харьков">Киев-Харьков</a>
+								</div>
+								<div class="indexSpecPairsPrice" align="right">1985 грн.</div>
+							</div>
+							<div style="float:left;" align="left">
+								<div class="indexSpecPairs">
+									<a href="дешевые-авиабилеты-Днепропетровск–Москва/" title="Днепропетровск-Москва">Днепропетровск-&#8230;</a>
+								</div>
+								<div class="indexSpecPairsPrice" align="right">2193 грн.</div>
+							</div>
+						</div>
+						<div class="indexSpecPairsDivider">
+							<div style="float:left;" align="left">
+								<div class="indexSpecPairs">
+									<a href="дешевые-авиабилеты-Харьков–Стамбул/" title="Харьков-Стамбул">Харьков-Стамбул</a>
+								</div>
+								<div class="indexSpecPairsPrice" align="right">2447 грн.</div>
+							</div>
+							<div style="float:left;" align="left">
+								<div class="indexSpecPairs">
+									<a href="дешевые-авиабилеты-Киев–Таллинн/" title="Киев-Таллинн">Киев-Таллинн</a>
+								</div>
+								<div class="indexSpecPairsPrice" align="right">2528 грн.</div>
+							</div>
+							<div style="float:left;" align="left">
+								<div class="indexSpecPairs">
+									<a href="дешевые-авиабилеты-Киев–Мюнхен/" title="Киев-Мюнхен">Киев-Мюнхен</a>
+								</div>
+								<div class="indexSpecPairsPrice" align="right">2680 грн.</div>
+							</div>
+						</div>
+						<div class="indexSpecPairsDivider">
+							<div style="float:left;" align="left">
+								<div class="indexSpecPairs">
+									<a href="дешевые-авиабилеты-Киев–Ницца/" title="Киев-Ницца">Киев-Ницца</a>
+								</div>
+								<div class="indexSpecPairsPrice" align="right">2838 грн.</div>
+							</div>
+							<div style="float:left;" align="left">
+								<div class="indexSpecPairs">
+									<a href="дешевые-авиабилеты-Киев–Копенгаген/" title="Киев-Копенгаген">Киев-Копенгаген</a>
+								</div>
+								<div class="indexSpecPairsPrice" align="right">2868 грн.</div>
+							</div>
+							<div style="float:left;" align="left">
+								<div class="indexSpecPairs">
+									<a href="дешевые-авиабилеты-Днепропетровск–Тбилиси/" title="Днепропетровск-Тбилиси">Днепропетровск-&#8230;</a>
+								</div>
+								<div class="indexSpecPairsPrice" align="right">2944 грн.</div>
+							</div>
+						</div>
+        			</div>
+        			<div style="height:2px; clear:both;"></div>
+        			<div class="dline"></div>
+        			<div align="right" class="blue_arrow">
+        				<a href="дешевые-авиабилеты/" title="Больше информации" style="font-size:12px;">Больше дешевых полетов...</a>
+        			</div>
+      			</div>
+    		</div>
+    		<div id="popular_cities" align="left" style="padding:8px;"><table border="0" width="100%" cellpadding="0" cellspacing="0"><tr><td valign="top" width="33%"><div style="width:90px; float:left;" class="smaller"><a href="https://aviago.com.ua/авиабилеты-Амстердам/" title="">Амстердам</a></div><div style="width:90px; float:left;"><span class="smaller">от</span> <span>2609 грн.</span></div><div style="clear:both;"></div><div style="width:90px; float:left;" class="smaller"><a href="https://aviago.com.ua/авиабилеты-Афины/" title="">Афины</a></div><div style="width:90px; float:left;"><span class="smaller">от</span> <span>2071 грн.</span></div><div style="clear:both;"></div><div style="width:90px; float:left;" class="smaller"><a href="https://aviago.com.ua/авиабилеты-Бангкок/" title="">Бангкок</a></div><div style="width:90px; float:left;"><span class="smaller">от</span> <span>7503 грн.</span></div><div style="clear:both;"></div><div style="width:90px; float:left;" class="smaller"><a href="https://aviago.com.ua/авиабилеты-Барселона/" title="">Барселона</a></div><div style="width:90px; float:left;"><span class="smaller">от</span> <span>1401 грн.</span></div><div style="clear:both;"></div><div style="width:90px; float:left;" class="smaller"><a href="https://aviago.com.ua/авиабилеты-Дублин/" title="">Дублин</a></div><div style="width:90px; float:left;"><span class="smaller">от</span> <span>4320 грн.</span></div><div style="clear:both;"></div><div style="width:90px; float:left;" class="smaller"><a href="https://aviago.com.ua/авиабилеты-Копенгаген/" title="">Копенгаген</a></div><div style="width:90px; float:left;"><span class="smaller">от</span> <span>2868 грн.</span></div><div style="clear:both;"></div></td><td valign="top" width="33%"style="border-left:1px dashed #c0c0c0; padding-left:8px;"><div style="width:90px; float:left;" class="smaller"><a href="https://aviago.com.ua/авиабилеты-Ларнака/" title="">Ларнака</a></div><div style="width:90px; float:left;"><span class="smaller">от</span> <span>1858 грн.</span></div><div style="clear:both;"></div><div style="width:90px; float:left;" class="smaller"><a href="https://aviago.com.ua/авиабилеты-Лондон/" title="">Лондон</a></div><div style="width:90px; float:left;"><span class="smaller">от</span> <span>1883 грн.</span></div><div style="clear:both;"></div><div style="width:90px; float:left;" class="smaller"><a href="https://aviago.com.ua/авиабилеты-Милан/" title="">Милан</a></div><div style="width:90px; float:left;"><span class="smaller">от</span> <span>1873 грн.</span></div><div style="clear:both;"></div><div style="width:90px; float:left;" class="smaller"><a href="https://aviago.com.ua/авиабилеты-Москва/" title="">Москва</a></div><div style="width:90px; float:left;"><span class="smaller">от</span> <span>1025 грн.</span></div><div style="clear:both;"></div><div style="width:90px; float:left;" class="smaller"><a href="https://aviago.com.ua/авиабилеты-Нью-Йорк/" title="">Нью-Йорк</a></div><div style="width:90px; float:left;"><span class="smaller">от</span> <span>5950 грн.</span></div><div style="clear:both;"></div><div style="width:90px; float:left;" class="smaller"><a href="https://aviago.com.ua/авиабилеты-Осло/" title="">Осло</a></div><div style="width:90px; float:left;"><span class="smaller">от</span> <span>1178 грн.</span></div><div style="clear:both;"></div></td><td valign="top" width="33%"style="border-left:1px dashed #c0c0c0; padding-left:8px;"><div style="width:90px; float:left;" class="smaller"><a href="https://aviago.com.ua/авиабилеты-Париж/" title="">Париж</a></div><div style="width:90px; float:left;"><span class="smaller">от</span> <span>1487 грн.</span></div><div style="clear:both;"></div><div style="width:90px; float:left;" class="smaller"><a href="https://aviago.com.ua/авиабилеты-Рим/" title="">Рим</a></div><div style="width:90px; float:left;"><span class="smaller">от</span> <span>2371 грн.</span></div><div style="clear:both;"></div><div style="width:90px; float:left;" class="smaller"><a href="https://aviago.com.ua/авиабилеты-Стамбул/" title="">Стамбул</a></div><div style="width:90px; float:left;"><span class="smaller">от</span> <span>1229 грн.</span></div><div style="clear:both;"></div><div style="width:90px; float:left;" class="smaller"><a href="https://aviago.com.ua/авиабилеты-Тель-Авив/" title="">Тель-Авив</a></div><div style="width:90px; float:left;"><span class="smaller">от</span> <span>1340 грн.</span></div><div style="clear:both;"></div><div style="width:90px; float:left;" class="smaller"><a href="https://aviago.com.ua/авиабилеты-Франкфурт-на-Майне/" title="">Франкфурт-&#8230;</a></div><div style="width:90px; float:left;"><span class="smaller">от</span> <span>1792 грн.</span></div><div style="clear:both;"></div><div style="width:90px; float:left;" class="smaller"><a href="https://aviago.com.ua/авиабилеты-Чикаго/" title="">Чикаго</a></div><div style="width:90px; float:left;"><span class="smaller">от</span> <span>10849 грн.</span></div><div style="clear:both;"></div></td><td valign="top" width="33%"></td></tr></table></div>
+  		</div>
+	</div>
+</div>
+</div>
+</div>
+</div>
+<div style="float:left; position:relative; padding-top:42px; margin-left:4px; z-index:14;">
+	<div class="blue_block" style="height:254px; width:282px; margin-top:0px; padding-right:0px;"> 
+		<div style="position:absolute; top: 112px;">
+  			<div class="white_block" style="width:230px;">
+				<div style="font-size:12px; margin-bottom:2px; font-weight:bold;">Сейчас на сайте находят</div>
+				<div style="padding:4px;" class="roundborder">
+					<div style="overflow:hidden; height:28px;">
+						<div id="csSlider" style="position:relative; text-align:left; font-size:11px;">Вильнюс–Барселона, <span class="orange">1934 грн.</span><br>Вильнюс–Сантандер, <span class="orange">2356 грн.</span><br>Минск–Анталия, <span class="orange">8102 грн.</span><br>
+						</div>
+					</div>
+				</div>
+			</div>
+<script type="text/javascript">
+var dest = new Array("Вильнюс–Барселона, <span class=\"orange\">1934 грн.</span>","Вильнюс–Сантандер, <span class=\"orange\">2356 грн.</span>","Минск–Анталия, <span class=\"orange\">8102 грн.</span>","Москва–Мюнхен, <span class=\"orange\">7752 грн.</span>","Вильнюс–Осло, <span class=\"orange\">1411 грн.</span>","Днепропетровск–Москва, <span class=\"orange\">1995 грн.</span>","Будапешт–Барселона, <span class=\"orange\">3503 грн.</span>","Симферополь–Москва, <span class=\"orange\">2569 грн.</span>","Симферополь–Стамбул, <span class=\"orange\">5082 грн.</span>","Москва–Эйндховен, <span class=\"orange\">7559 грн.</span>","Омск–Адлер, <span class=\"orange\">4259 грн.</span>","Днепропетровск–Москва, <span class=\"orange\">3320 грн.</span>","Киев–Барселона, <span class=\"orange\">4828 грн.</span>","Москва–Карловы-Вары, <span class=\"orange\">6721 грн.</span>","Вильнюс–Рим, <span class=\"orange\">7260 грн.</span>","Краснодар–Астана, <span class=\"orange\">12194 грн.</span>","Петропавловск-Ка&#8230;–Владивосток, <span class=\"orange\">12666 грн.</span>","Шимкент–Минск, <span class=\"orange\">3909 грн.</span>","Анталия–Киев, <span class=\"orange\">3660 грн.</span>","Симферополь–Пхукет, <span class=\"orange\">14189 грн.</span>","Астана–Москва, <span class=\"orange\">4625 грн.</span>","Вильнюс–Осло, <span class=\"orange\">1112 грн.</span>","Ростов–Салоники, <span class=\"orange\">5929 грн.</span>","Лиссабон–Кишинев, <span class=\"orange\">4863 грн.</span>","Тель-Авив–Милан, <span class=\"orange\">1939 грн.</span>","Баку–Берлин, <span class=\"orange\">6031 грн.</span>","Киев–Дортмунд, <span class=\"orange\">5777 грн.</span>","Одесса–Неаполь, <span class=\"orange\">37608 грн.</span>","Киев–Йоханнесбург, <span class=\"orange\">39938 грн.</span>","Варшава–Торонто, <span class=\"orange\">11067 грн.</span>","Стамбул–Симферополь, <span class=\"orange\">3082 грн.</span>","Симферополь–Берлин, <span class=\"orange\">4234 грн.</span>","Анкона–Лондон, <span class=\"orange\">13986 грн.</span>","Стамбул–Берлин, <span class=\"orange\">2711 грн.</span>","Ростов–Симферополь, <span class=\"orange\">6021 грн.</span>","Ивано-Франковск–Милан, <span class=\"orange\">3955 грн.</span>","Лиссабон–Кишинев, <span class=\"orange\">6046 грн.</span>","Минск–Берлин, <span class=\"orange\">2548 грн.</span>","Марсель–Варшава, <span class=\"orange\">2218 грн.</span>","Анкона–Лондон, <span class=\"orange\">1264 грн.</span>","Одесса–Неаполь, <span class=\"orange\">10768 грн.</span>","Минск–Нижний Новгород, <span class=\"orange\">4610 грн.</span>","Минск–Мадрид, <span class=\"orange\">9559 грн.</span>","Ростов–Симферополь, <span class=\"orange\">2391 грн.</span>","Киев–Цюрих, <span class=\"orange\">6138 грн.</span>","Минск–Белград, <span class=\"orange\">4457 грн.</span>","Анкона–Лондон, <span class=\"orange\">2224 грн.</span>","Киев–Коломбо, <span class=\"orange\">9930 грн.</span>","Лиссабон–Кишинев, <span class=\"orange\">5625 грн.</span>","Тбилиси–Харьков, <span class=\"orange\">48197 грн.</span>","Дюссельдорф–Киев, <span class=\"orange\">3031 грн.</span>","Киев–Тель-Авив, <span class=\"orange\">2696 грн.</span>","Одесса–Неаполь, <span class=\"orange\">27525 грн.</span>","Шимкент–Минск, <span class=\"orange\">4955 грн.</span>","Вильнюс–Берлин, <span class=\"orange\">4945 грн.</span>","Киев–Амстердам, <span class=\"orange\">4604 грн.</span>","Иркутск–Ташкент, <span class=\"orange\">9646 грн.</span>","Ереван–Москва, <span class=\"orange\">3797 грн.</span>","Берлин–Минск, <span class=\"orange\">3447 грн.</span>","Анапа–Самара, <span class=\"orange\">3259 грн.</span>","Киев–Адлер, <span class=\"orange\">3158 грн.</span>","Киев–Мюнхен, <span class=\"orange\">5254 грн.</span>","Киев–Бухарест, <span class=\"orange\">7234 грн.</span>","Лондон–Нью-Йорк, <span class=\"orange\">31409 грн.</span>","Душанбе–Москва, <span class=\"orange\">9757 грн.</span>","Киев–Ханой, <span class=\"orange\">9326 грн.</span>","Рим–Лондон, <span class=\"orange\">3021 грн.</span>","Москва–Тбилиси, <span class=\"orange\">2305 грн.</span>","Варшава–Париж, <span class=\"orange\">1051 грн.</span>","Вильнюс–Париж, <span class=\"orange\">1188 грн.</span>","Симферополь–Москва, <span class=\"orange\">3427 грн.</span>","Минск–Карловы-Вары, <span class=\"orange\">9392 грн.</span>","Киев–Таллинн, <span class=\"orange\">2528 грн.</span>","Минск–Амстердам, <span class=\"orange\">4234 грн.</span>","Одесса–Дублин, <span class=\"orange\">16733 грн.</span>","Киев–Прага, <span class=\"orange\">3594 грн.</span>","Лиссабон–Киев, <span class=\"orange\">3168 грн.</span>","Одесса–Марсель, <span class=\"orange\">6386 грн.</span>","Калининград–Усть-Каменогорск, <span class=\"orange\">6006 грн.</span>","Киев–Афины, <span class=\"orange\">4940 грн.</span>","Киев–Вена, <span class=\"orange\">3615 грн.</span>","Барселона–Кишинев, <span class=\"orange\">3401 грн.</span>","Вильнюс–Милан, <span class=\"orange\">2523 грн.</span>","Минск–Краснодар, <span class=\"orange\">4513 грн.</span>","Москва–Бишкек, <span class=\"orange\">3376 грн.</span>","Астана–Минск, <span class=\"orange\">5432 грн.</span>","Минск–Сургут, <span class=\"orange\">7138 грн.</span>","Варшава–Днепропетровск, <span class=\"orange\">4701 грн.</span>","Киев–Афины, <span class=\"orange\">8371 грн.</span>","Вильнюс–Болонья, <span class=\"orange\">1168 грн.</span>","Таллинн–Токио, <span class=\"orange\">10727 грн.</span>","Ростов–Хабаровск, <span class=\"orange\">9651 грн.</span>","Вильнюс–Рим, <span class=\"orange\">1635 грн.</span>","Астана–Мадрид, <span class=\"orange\">9838 грн.</span>","Милан–Лиссабон, <span class=\"orange\">1102 грн.</span>","Одесса–Скопье, <span class=\"orange\">4980 грн.</span>","Лиссабон–Киев, <span class=\"orange\">4782 грн.</span>","Анталия–Кишинев, <span class=\"orange\">14331 грн.</span>","Киев–Шанхай, <span class=\"orange\">6539 грн.</span>","Вильнюс–Порту, <span class=\"orange\">2823 грн.</span>");
+var i = 0;
+function showSearches(){
+	$("#csSlider").animate({top: "-=13"},400,function(){
+		$("#csSlider").html(dest[i]+"<br>"+dest[i+1]+"<br>"+dest[i+2]).css("top",0);
+	});
+	i++;
+	if(i == 99) i = 0;
+}
+(function loop() {
+	var rand = Math.round(Math.random()*4000)+100;
+	setTimeout(function(){
+		showSearches();
+		loop();
+	}, rand);
+}());
+</script>
+</div>
+<div style="position:absolute; background-image:url(images/all_buys.png); top:8px; left:126px; width:216px; height:148px;">
+	<div style="padding-top:42px;">
+    	<div style="font-size:11px; line-height:100%; color:white;">Нашими услугами <br>воспользовались уже</div>
+    	<div style="font-size:28px; line-height:100%; color:white; font-weight:bold;">163 683</div>
+    	<div style="font-size:12px; line-height:100%; color:white;">пассажиров</div>
+  	</div>
+</div>
+<div style="height:118px;"></div>
+<div style="padding-top:36px;">
+    <div style="float:left;">
+        <div style="float:left;"><img src="images/icons/time_help_skype.png" width="28" height="72" alt=""></div>
+        <div style="float:left; width:102px;" align="left">
+          	<div class="lbl" style="height:24px;"><a href="JavaScript:ajaxDialog('popups/open_hours.php?lng=ru',600);" title="Время работы">Время работы</a></div>
+          	<div class="lbl" style="height:24px;"><a href="help/" onclick="openw('help/','','width=900,height=540,scrollbars,resizable'); return false;" title="Помощь">Помощь</a></div>
+          	<div class="lbl" style="height:24px;"><a href="skype:avia.lt?chat" title="Свяжитесь">Свяжитесь</a></div>
+        </div>
+    </div>
+    <div align="right" style="position:relative; top:-4px; left:0px; float:left;">
+        <div style="background-image:url(images/btn2.png); width:150px; height:87px;" align="center">
+          	<div style="padding-top:22px;"><a href="payonline/" style="color:#FFFFFF;  font-size:18px; font-weight:bold; text-decoration:none; line-height:20px;">Оплатить<br>
+            бронь</a> </div>
+        </div>
+    </div>
+</div>
+</div>
+    
+    
+<script type="text/javascript">
+$(document).ready(function(e) {
+	$(".dialog").fancybox();
+	$(".ajaxDialog").fancybox({type:"ajax",titleShow:false,helpers:{title:null}});
+	try {
+		//fixbtn();
+		whiteBlock();
+		wrapSelect();
+		$(".textfill").textfill({maxFontPixels: 100});
+	} catch(e) {log(e)}
+	try{loadPrevSearches();}catch(e){}});	
+try{ 
+		var pageTracker = _gat._getTracker("UA-2757289-7");
+		pageTracker._trackPageview();
+	} catch(err) {}
+
+	
+$(".tabs").makeTabs();
+</script>
+</body>
+</html>

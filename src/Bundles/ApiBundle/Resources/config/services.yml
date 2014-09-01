@@ -3,5 +3,5 @@ parameters:
 
 services:
     avia.api.manager:
-        class: Bundles\ApiBundle\Api\Request\ApiRequest
+        class: Bundles\ApiBundle\Api\Api
         arguments: ["C330CA8C-DCDF-4CA8-A5E0-F5E4E1612440", @api_caller]
