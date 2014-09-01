@@ -3,9 +3,9 @@
 namespace Bundles\DefaultBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Bundles\DefaultBundle\Model\ApiCall;
 
-use Bundles\DefaultBundle\Api\AviaCityByQuery;
+
+use Bundles\ApiBundle\Api\Query\AviaCityByQuery;
 
 class DefaultController extends Controller
 {
@@ -14,11 +14,9 @@ class DefaultController extends Controller
     {
 
         $entities = $this->get('admin.slider.manager')->getSliders();
-        $query = new AviaCityByQuery('C330CA8C-DCDF-4CA8-A5E0-F5E4E1612440');
-        
-        $output = $this->get('api_caller')->call(
-            new ApiCall('http://ws.demo.webservices.aero/',json_encode($query->buildParams(['query' => 'Барс'])))
-        );
+        $query = new AviaCityByQuery();
+        $query->setQuery('Гон');
+        $output = $this->get('avia.api.manager')->execute($query);
         echo '<pre>';
         print_r($output);
         exit;

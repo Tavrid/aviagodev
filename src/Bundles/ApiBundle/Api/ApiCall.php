@@ -6,7 +6,7 @@
  * Time: 23:52
  */
 
-namespace Bundles\DefaultBundle\Model;
+namespace Bundles\ApiBundle\Api;
 use Lsw\ApiCallerBundle\Call\HttpPostJson;
 
 class ApiCall  extends HttpPostJson{

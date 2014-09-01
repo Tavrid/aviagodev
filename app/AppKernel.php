@@ -30,6 +30,7 @@ class AppKernel extends Kernel {
             new Stb\Bootstrap\StbBootstrapBundle(),
             new Acme\SocialBundle\AcmeSocialBundle(),
             new Lsw\ApiCallerBundle\LswApiCallerBundle(),
+            new Bundles\ApiBundle\BundlesApiBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

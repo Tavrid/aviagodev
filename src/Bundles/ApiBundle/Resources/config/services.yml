@@ -1,0 +1,7 @@
+parameters:
+#    bundles_api.example.class: Bundles\ApiBundle\Example
+
+services:
+    avia.api.manager:
+        class: Bundles\ApiBundle\Api\Request\ApiRequest
+        arguments: ["C330CA8C-DCDF-4CA8-A5E0-F5E4E1612440", @api_caller]

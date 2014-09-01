@@ -6,15 +6,35 @@
  * Time: 19:35
  */
 
-namespace Bundles\DefaultBundle\Api;
+namespace Bundles\ApiBundle\Api\Query;
 
 
 class AviaCityByQuery extends QueryAbstract {
 
+    protected $query;
+
+    /**
+     * @param mixed $query
+     * @return $this
+     */
+    public function setQuery($query)
+    {
+        $this->query = $query;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
     /**
      * @inheritdoc
      */
-    public function buildParams($params)
+    public function buildParams($key)
     {
         $paramsR = [
             'jsonrpc' => '2.0',
@@ -24,11 +44,11 @@ class AviaCityByQuery extends QueryAbstract {
                 [
                     'Type' => 'Site',
                     'System' => 'Agent',
-                    'Key' => $this->apiKey,
+                    'Key' => $key,
                     'UserIP' => '127.0.0.1',
                     'UserUUID' => ''
                 ],
-                $params['query'],
+                $this->getQuery(),
                 [
                     'Return' => '',
                     'Language' => 'RU'
@@ -37,5 +57,9 @@ class AviaCityByQuery extends QueryAbstract {
         ];
         return $paramsR;
 
+    }
+
+    public function getApiUrl(){
+        return 'http://ws.demo.webservices.aero/';
     }
 }
