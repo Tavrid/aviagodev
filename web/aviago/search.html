@@ -42,320 +42,193 @@ function login_display(theName, id){
 </head>
 <body>
 <div align="center">
-  <div style="width:960px; position:relative;">
-    <div>
-      <div style="height:70px; float:left; margin-top:10px;" align="left"><a href="/"><img src="https://files.avia.lt/images/logos/aviagoua.gif" border="0" alt="AviaGO.com.ua"></a></div>
-      <div style="float:right; padding: 36px 20px 0 0; position:relative; width:430px; z-index:22;" align="right"> <div id="loginInfo" style="display:none" class="smaller"></div>
-<div id="registerLine" style="display:inline;">
-  <div class="smaller" id="loginLinks"> <a href="JavaScript:ajaxDialog('registration.php?lng=ru');" class="toplinks"> Регистрация </a> | <a id="loginLink" href="JavaScript:showNonModal('loginPlace');" class="toplinks" style="position:relative;"> Войти</a> </div>
-</div>
-<div style="position:relative; left:150px;" align="right">
-  <div style="position:absolute; margin:0; display:none;" align="left" id="loginPlace" class="white_block2">
-    <div style="float:right;"><img src="https://files.avia.lt/images/close.gif" alt="Закрыть" title="Закрыть" onclick="hideNonModal('loginPlace');" style="cursor:pointer;"></div>
-    <h2>Вход</h2>
-        <!-- THE ERROR MESSAGES -->
-    <div id="messages" class="errorbox smaller" style="clear:both; margin-bottom:6px;" align="left"></div>
-    <div id="formContainer" style="clear:both;">
-      <form id="loginForm" name="loginForm" method="post" action="includes/login_func.php" onsubmit="return false;" onkeypress="if(enter_pressed(event)) doFPLogin();">
-        <table  border="0" cellpadding="2" cellspacing="0">
-          <tr>
-            <td align="right" nowrap="nowrap">эл. почта:</td>
-            <td><input id="loginEmail" type="text" name="email" size="20" maxlength="50" style="width:140px;"></td>
-          </tr>
-          <tr>
-            <td align="right" nowrap="nowrap">пароль:</td>
-            <td><input id="loginPassword" type="password" name="pass" size="20" maxlength="50" style="width:140px;"></td>
-          </tr>
-		  <tr><td></td><td><a href="JavaScript:openw('https://aviago.com.ua/popups/pass_reminder.php?lng=ru','','width=450,height=220,resizable,scrollbars')" class="smaller">забыли пароль?</a></td></tr>
-          <tr>
-            <td colspan="2" class="smaller"><input type="checkbox" id="rememberLogin" name="rememberLogin" value="1">
-              <label for="rememberLogin">Запомнить меня на этом компьютере</label></td>
-          </tr>
-          <tr>
-            <td colspan="2" align="right"><div class="btn2">
-<div align="left">
-<div align="left"><a href="JavaScript:void(1);" onClick="doFPLogin();" class="button2Txt" title="Войти">Войти</a></div></div></div>
-	</td>
-          </tr>
-        </table>
-        <input type="hidden" name="lng" value="ru">
-      </form>
-    </div>
-     </div>
-</div>
-<script type="text/javascript">
-function doFPLogin(){
-	$.post("includes/login_func.php",$("#loginForm").serialize(),func);
-}
-</script>
-		<div align="right" class="smaller">Тел.: +380 (044) 383-49-32		<a href="mailto:info@aviago.com.ua" title="Связаться по эл. почте"><img src="images/icons/envelope_aqua.gif" align="top" title="Связаться по эл. почте" alt="Связаться по эл. почте"></a></div>
-		</div>
-    </div>
-    <div style="clear:both"><script type="text/javascript">
-var typeOfFlight = "oneway";
-var journey = typeOfFlight;
-var fromPrices;
-var passPrices = new Object;
-var srPrices = new Object();
-var currRate = 0.28962001853568;
-var specPrice = 0;
-var specPassPrice = 0;
-var priceHolders = new Array();
-var pricesTableLoaded = false;
-var otherDestLoaded = true;
-var offersLoaded = false;
-var cheapestPrice = false;
-function noOffers(){
-	hideDialog("wait");
-	$("#nooffersFound").show();
-}
-var minPrice = false;
-var waavoStatus = 0;
-var epowerStatus = 0;
-$(document).ready(
-function(){
-	fixbtn();
-	showWait();
-		$("#pricesTableDiv").show();
-	loadContent("https://aviago.com.ua/includes/sr/table.php?lng=ru&session=sl6z5x4q289uy44hb8md6qo5r0xkxo0k46il4kdv","prices_table","prices_table");
-		
-				$.post("//avia.lt/includes/sr/get_offers.php","&is_avia=true&provider=epower&id2=search_results&adults=1&currency=EUR&flexible=on&session=sl6z5x4q289uy44hb8md6qo5r0xkxo0k46il4kdv&iata%5B1%5D=SIP&iata%5B2%5D=MIL&depDate=2014-09-01&journey=oneway&id=flights&office_id=lt&avia_session_lt=em3lluofvrk1blwkkfrlilfs&num=1",function(data){
-			$.post("https://aviago.com.ua/includes/sr/catch_offers.php","&session=sl6z5x4q289uy44hb8md6qo5r0xkxo0k46il4kdv&provider=epower&data="+data,function(data){eval(data);});
-		});
-			$.post("//aviago.ru/includes/sr/get_offers.php","&provider=waavo&id2=search_results&adults=1&currency=EUR&flexible=on&session=sl6z5x4q289uy44hb8md6qo5r0xkxo0k46il4kdv&iata%5B1%5D=SIP&iata%5B2%5D=MIL&depDate=2014-09-01&journey=oneway&id=flights&office_id=lt&avia_session_lt=em3lluofvrk1blwkkfrlilfs",function(data){
-			$.post("https://aviago.com.ua/includes/sr/catch_offers.php","&session=sl6z5x4q289uy44hb8md6qo5r0xkxo0k46il4kdv&provider=waavo&data="+data,function(data){eval(data);});
-		});
-		});
-function checkf(){
-	if(waavoStatus != 0 || epowerStatus != 0){
-		if(waavoStatus == 1 && epowerStatus == 1){
-			hideDialog("wait");
-			$("#nooffersFound").show();
-		} else if(waavoStatus == 2 || epowerStatus == 2){
-			loadResults(waavoStatus != 0 && epowerStatus != 0);
-		}
-	}
-}
-function loadResults(last){
-	var url = "includes/sr/offers.php?id2=search_results&adults=1&currency=EUR&flexible=on&session=sl6z5x4q289uy44hb8md6qo5r0xkxo0k46il4kdv&iata%5B1%5D=SIP&iata%5B2%5D=MIL&depDate=2014-09-01&journey=oneway&id=flights&office_id=lt&avia_session_lt=em3lluofvrk1blwkkfrlilfs";
-	if(last) url += '&last=true';
-	loadContent(url,"searchResults","searchResults");
-}
-</script><div style="clear:both;">
-  <div style="float:left; width:235px;">
-    <div style="clear:both;">
-      <div style="float:left; background:url(images/tab/small/flight.gif); width: 76px; height:50px; position:relative; left:3px; top:2px; z-index:11;" align="center" class="tab"><a href=""><img src="spacer.gif" width="50" height="30" align=""></a></div>
-      <div style="float:left; background:url(images/tab/small/hotel_uns.gif) bottom; width: 76px; height:50px; position:relative; left:-3px; top:2px;" align="center" class="tab"><a href="http://www.booking.com/index.html?aid=320568" target="_blank"><img src="spacer.gif" width="50" height="30" align=""></a></div>
-    </div>
-    <div class="blue_block" style="clear:both; position:relative; top:-9px;"><script type="text/javascript">
-//////////////////////////////////////////////////////////////////////////////
-//Cities autofill
-var foundCities = 0;
-var citiesArr = new Array();
-var showList = false;
-var hideCities = true;
-var fname = "";
+  	<div style="width:960px; position:relative;">
 
-function selectCity(n,id){
-	el(fname).value = citiesArr[n];
-	hide('citiesList'+id+'Frame');
-}
+<div style="clear:both">
+	<div style="clear:both;">
+  		<div style="float:left; width:235px;">
+    		<div style="clear:both;">
+      			<div style="float:left; background:url(images/tab/small/flight.gif); width: 76px; height:50px; position:relative; left:3px; top:2px; z-index:11;" align="center" class="tab">
+      				<a href="">
+      					<img src="spacer.gif" width="50" height="30" align="">
+      				</a>
+      			</div>
+      			<div style="float:left; background:url(images/tab/small/hotel_uns.gif) bottom; width: 76px; height:50px; position:relative; left:-3px; top:2px;" align="center" class="tab">
+      				<a href="http://www.booking.com/index.html?aid=320568" target="_blank">
+      					<img src="spacer.gif" width="50" height="30" align="">
+      				</a>
+      			</div>
+    		</div>
+    		<div class="blue_block" style="clear:both; position:relative; top:-9px;">
+    			<div id="cityChecker" style="position:relative;"></div>
+				<div id="searchFormSmallDiv" align="left" style="clear:both;">
+  					<form id="flightSearchForm" name="flightSearchForm" autocomplete="off" method="post" action="search.php" onsubmit="return false;">
+    					<div class="smallFormPart">Тип рейса:</div>
+    					<div style="clear:both;">      
+	  						<div>
+	  							<input onclick="changeJourney(this.value,'sideFlightSearchForm','inboundSmall','multiSmall')" type="radio" name="journey" id="journey-rt"  value="roundTrip">
+      							<label for="journey-rt" class="smaller">в обе стороны</label>
+      						</div>
+	      					<div>
+	      						<input onclick="changeJourney(this.value,'sideFlightSearchForm','inboundSmall','multiSmall')" type="radio" name="journey" id="journey-ow"  checked="checked" value="oneway">
+      							<label for="journey-ow" class="smaller">в одну сторону</label>
+      						</div>
+      						<div>
+      							<input onclick="changeJourney(this.value,'sideFlightSearchForm','inboundSmall','multiSmall')" type="radio" name="journey" id="journey-mu"  value="multi">
+      							<label for="journey-mu" class="smaller">возвращение из/в другие аэропорты</label>
+      						</div>
+    					</div>
+    					<div>
+      						<div class="smallFormPart">из:</div>
+      						<div style="clear:both;">	
+      							<div style="display:inline;">
+									<div style="width:180px;" class="inputWrap">
+      									<div style="float:left;">
+        									<input class="inpWbtn " id="iata[1]" name="iata[1]" type="text" value="Симферополь (SIP)" onfocus="if(this.value=='введите город') this.value=''; $(this).removeClass('faint_input');" onkeyup="showCitiesList(event,'iata[1]',1,'');" onblur="hideCitiesList('1',''); if(this.value == '') {this.value='введите город'; $(this).addClass('faint_input');}" title="Введите название города или нажмите на значёк с глобусом" style="width:158px;" onclick="this.select();">
+        								</div>
+      									<div class="input_icon">
+     								 		<img onclick="openw('https://aviago.com.ua/cities.php?id=1&amp;lng=ru&amp;fname=iata%5B1%5D','','width=610,height=700');" src="https://files.avia.lt/images/cities-list.png" border="0" alt="Список всех аэропортов" title="Список всех аэропортов" height="18" width="18">
+     								 	</div>
+    								</div>	
+									<iframe id="citiesList1Frame" name="citiesList1Frame" style="visibility:hidden; width:180px;position:absolute;z-index:101;height:100%; left:0px; top:0px;" scrolling="no" frameborder="0" src="https://aviago.com.ua/includes/cities_list_frame.php" class="autofill"></iframe>
+								</div>
+							</div>
+							<div class="smallFormPart">в:</div>
+							<div style="clear:both;">	
+								<div style="display:inline;">
+									<div style="width:180px;" class="inputWrap">
+      									<div style="float:left;">
+        									<input class="inpWbtn " id="iata[2]" name="iata[2]" type="text" value="Милан (MIL)" onfocus="if(this.value=='введите город') this.value=''; $(this).removeClass('faint_input');" onkeyup="showCitiesList(event,'iata[2]',2,'');" onblur="hideCitiesList('2',''); if(this.value == '') {this.value='введите город'; $(this).addClass('faint_input');}" title="Введите название города или нажмите на значёк с глобусом" style="width:158px;" onclick="this.select();">
+      									</div>
+      									<div class="input_icon">
+      										<img onclick="openw('https://aviago.com.ua/cities.php?id=2&amp;lng=ru&amp;fname=iata%5B2%5D','','width=610,height=700');" src="https://files.avia.lt/images/cities-list.png" border="0" alt="Список всех аэропортов" title="Список всех аэропортов" height="18" width="18">
+      									</div>
+    								</div>
+									<iframe id="citiesList2Frame" name="citiesList2Frame" style="visibility:hidden; width:180px;position:absolute;z-index:102;height:100%; left:0px; top:0px;" scrolling="no" frameborder="0" src="https://aviago.com.ua/includes/cities_list_frame.php" class="autofill"></iframe>
+								</div>
+							</div>
+    					</div>
+    					<div id="multiSmall" style="display:none;">
+      						<div class="smallFormPart">из-2:</div>
+      						<div style="clear:both;">	
+      							<div style="display:inline;">
+									<div style="width:180px;" class="inputWrap">
+     	 								<div style="float:left;">
+        									<input class="inpWbtn " id="iata[3]" name="iata[3]" type="text" value=" ()" onfocus="if(this.value=='введите город') this.value=''; $(this).removeClass('faint_input');" onkeyup="showCitiesList(event,'iata[3]',3,'');" onblur="hideCitiesList('3',''); if(this.value == '') {this.value='введите город'; $(this).addClass('faint_input');}" title="Введите название города или нажмите на значёк с глобусом" style="width:158px;" onclick="this.select();">
+      									</div>
+      									<div class="input_icon">
+      										<img onclick="openw('https://aviago.com.ua/cities.php?id=3&amp;lng=ru&amp;fname=iata%5B3%5D','','width=610,height=700');" src="https://files.avia.lt/images/cities-list.png" border="0" alt="Список всех аэропортов" title="Список всех аэропортов" height="18" width="18">
+      									</div>
+    								</div>
+									<iframe id="citiesList3Frame" name="citiesList3Frame" style="visibility:hidden; width:180px;position:absolute;z-index:103;height:100%; left:0px; top:0px;" scrolling="no" frameborder="0" src="https://aviago.com.ua/includes/cities_list_frame.php" class="autofill"></iframe>
+								</div>
+							</div>
+      						<div class="smallFormPart">в-2:</div>
+      						<div style="clear:both;">	
+      							<div style="display:inline;">
+									<div style="width:180px;" class="inputWrap">
+      									<div style="float:left;">
+        									<input class="inpWbtn " id="iata[4]" name="iata[4]" type="text" value=" ()" onfocus="if(this.value=='введите город') this.value=''; $(this).removeClass('faint_input');" onkeyup="showCitiesList(event,'iata[4]',4,'');" onblur="hideCitiesList('4',''); if(this.value == '') {this.value='введите город'; $(this).addClass('faint_input');}" title="Введите название города или нажмите на значёк с глобусом" style="width:158px;" onclick="this.select();">
+      									</div>
+      									<div class="input_icon">
+      										<img onclick="openw('https://aviago.com.ua/cities.php?id=4&amp;lng=ru&amp;fname=iata%5B4%5D','','width=610,height=700');" src="https://files.avia.lt/images/cities-list.png" border="0" alt="Список всех аэропортов" title="Список всех аэропортов" height="18" width="18">
+      									</div>
+    								</div>
+									<iframe id="citiesList4Frame" name="citiesList4Frame" style="visibility:hidden; width:180px;position:absolute;z-index:104;height:100%; left:0px; top:0px;" scrolling="no" frameborder="0" src="https://aviago.com.ua/includes/cities_list_frame.php" class="autofill"></iframe>
+								</div>
+							</div>
+    					</div>
+    					<div style="clear:both;">
+      						<div class="smallFormPart">туда:</div>
+      						<div style="clear:both;">         
+      							<div class="inputWrap" style="width:180px;">
+          							<div style="float:left;">
+            							<input class="inpWbtn" type="text" size="10" id="depDate" title="Календарь" value="1.9.2014" style="width:158px;"/>
+            							<input type="hidden" id="depDateVal" name="depDate" value="2014-09-01" />
+	          						</div>
+									<div class="input_icon">
+         	 							<img src="images/calendar.png" id="depDateImg" alt="Календарь" title="Календарь" height="18">
+         	 						</div>
+        						</div>
+      						</div>
+    					</div>
+    					<div id="inboundSmall" style="display:none; clear:both;">
+      						<div class="smallFormPart">назад:</div>
+      						<div style="clear:both;">         
+      							<div class="inputWrap" style="width:180px;">
+          							<div style="float:left;">
+										<input class="inpWbtn" type="text" size="10" id="arrDate" title="Календарь" value="укажите дату" style="width:158px;"/>
+                						<input type="hidden" id="arrDateVal" name="arrDate" value="2014-09-01" />
+          							</div>
+          							<div class="input_icon">
+          								<img src="images/calendar.png" id="arrDateImg" alt="Календарь" title="Календарь" height="18">
+          							</div>
+        						</div>
+      						</div>
+    					</div>
+    					<div style="clear:both; padding-top:8px; padding-right:4px;">       
+    						<div class="smallFormPart">
+        						<div style="float:left;">взрослые (>11):</div>
+        							<div style="float:right;" align="right">
+	        							<select name="adults" id="adults" onChange="checkInfantsNr('sideFlightSearchForm')">
+		        							<option value="0">0</option>
+		        							<option value="1" selected="selected">1</option>
+		        							<option value="2">2</option>
+		        							<option value="3">3</option>
+		        							<option value="4">4</option>
+		        							<option value="5">5</option>
+		        							<option value="6">6</option>
+		        							<option value="7">7</option>
+		        							<option value="8">8</option>
+		        							<option value="9">9</option>
+	        							</select>
+	        						</div>
+      							</div>
+      							<div class="smallFormPart">
+        							<div style="float:left;">дети (2-11):</div>
+							        <div style="float:right;" align="right">
+							        	<select name="children" id="children" onChange="checkInfantsNr('sideFlightSearchForm')">
+							        		<option value="0" selected="selected">0</option>
+									        <option value="1">1</option>
+									        <option value="2">2</option>
+									        <option value="3">3</option>
+									        <option value="4">4</option>
+									        <option value="5">5</option>
+									        <option value="6">6</option>
+									        <option value="7">7</option>
+									        <option value="8">8</option>
+									        <option value="9">9</option>
+							        	</select>
+							        </div>
+      							</div>
+      							<div class="smallFormPart">
+        							<div style="float:left;">младенцы (< 2):</div>
+        							<div style="float:right;" align="right">
+        								<select name="infants" id="infants">
+        									<option value="0" selected="selected">0</option>
+									        <option value="1">1</option>
+									        <option value="2">2</option>
+        								</select>
+        							</div>
+      							</div>
+    						</div>
+   	 						<div style="clear:both; height:8px;"></div>
+    						<div class="smallFormPart">
+      							<input type="checkbox" name="flexible" id="flexible" checked="checked">
+      							<label for="flexible">лучшая цена &plusmn;3 дня</label>
+    						</div>
+							<div class="smallFormPart">
+      							<input type="checkbox" name="direct" id="direct">
+								<label for="direct_only">только прямые рейсы</label>
+    						</div>
+    						<center>
+      							<div class="button" onclick="doFlightSearch('sideFlightSearchForm');" style="font-size:16px;">Обновить<br>поиск</div>
+    						</center>
+    						<input type="hidden" name="currency" value="EUR">
+    						<input type="hidden" name="search" value="true">
+      					</form>
+					</div>
 
-function showCitiesList(e, field, id, limit){
-	if(window.event) var keynum = event.keyCode;
-	else if(e.which) var keynum = e.which;
-	keychar = String.fromCharCode(keynum);
-	var elm = el('citiesList'+id+'Frame');
-	var fld = el(field);
-	fname = field;
-	var v = fld.value;
-	if(v.length < 3){
-		elm.style.display = "none";
-		return;
-	}
-	var pos = $("#"+jqEsc(field)).position();
-	$(elm).css({left:pos.left,top:(pos.top+$(fld).outerHeight()+3)});
-	if(keynum == 8) var val = v;//.substr(0,v.length-1); //Backspace
-	else if(keynum != 40 && keynum != 38 && keynum != 13) var val = v;
-	
-	var func = function(data){
-		eval(data);
-		if(showList){			
-			var n = -1;
-			donthide = true;
-			document.onkeydown = function(e){
-				if(window.event) keynum = event.keyCode;
-				else if(e.which) keynum = e.which;				
-				switch(keynum){
-					//Down key
-					case 40:
-						if(n<(foundCities-1)){ changeColor(n,n+1,id); n++;}
-						else { changeColor(n,0,id);n = 0;	}
-					break;
-					//Up key
-					case 38:
-						if(n>-1){changeColor(n,n-1,id);n--;} 
-						if(n == -1){changeColor(n,foundCities-1,id);n = foundCities-1;}
-					break;
-					//Enter key
-					case 13:
-						if(n == -1) n = 0;
-						selectCity(n,id,fname);
-						elm.style.display = "none";
-					break;
-					//Esc key
-					case 27:
-						elm.style.display = "none";
-						document.onkeydown = null;
-						return;
-					break;
-				}
-			};			
-		} else {
-			document.onkeydown = null;
-			elm.style.display = "none";
-		}
-	};
-	if(keynum != 40 && keynum != 38 && keynum != 13) {
-		$.post(urlStart+"includes/cities_autofill.php","query="+val+"&id="+id+"&lng="+lng+"&limit="+limit,func);		
-	}
-}
-
-
-function changeColor(oldId,newId,id){
-	var e = window['citiesList'+id+'Frame'].document.getElementById('cityItem'+oldId);
-	if(e){
-		e.className = "";
-		window['citiesList'+id+'Frame'].document.getElementById('cityItemLink'+oldId).className = "";
-	}
-	e = window['citiesList'+id+'Frame'].document.getElementById('cityItem'+newId);
-	if(e) {
-		e.className = "selectedInList";	
-		window['citiesList'+id+'Frame'].document.getElementById('cityItemLink'+newId).className = "selectedInList";
-	}
-}
-
-function hideCitiesList(id){
-	if(hideCities) $("#citiesList"+id+"Frame").hide();
-}
-
-function jqEsc(str){
-	str = str.replace('[','\\[');
-    str = str.replace(']','\\]');
-	return str;
-}
-</script><div id="cityChecker" style="position:relative;"></div>
-<div id="searchFormSmallDiv" align="left" style="clear:both;">
-  <form id="flightSearchForm" name="flightSearchForm" autocomplete="off" method="post" action="search.php" onsubmit="return false;">
-    <div class="smallFormPart">Тип рейса:</div>
-    <div style="clear:both;">      
-	  <div><input onclick="changeJourney(this.value,'sideFlightSearchForm','inboundSmall','multiSmall')" type="radio" name="journey" id="journey-rt"  value="roundTrip">
-      <label for="journey-rt" class="smaller">в обе стороны</label></div>
-      <div><input onclick="changeJourney(this.value,'sideFlightSearchForm','inboundSmall','multiSmall')" type="radio" name="journey" id="journey-ow"  checked="checked" value="oneway">
-      <label for="journey-ow" class="smaller">в одну сторону</label></div>
-      <div><input onclick="changeJourney(this.value,'sideFlightSearchForm','inboundSmall','multiSmall')" type="radio" name="journey" id="journey-mu"  value="multi">
-      <label for="journey-mu" class="smaller">возвращение из/в другие аэропорты</label></div>
-    </div>
-    <div>
-      <div class="smallFormPart">из:</div>
-      <div style="clear:both;">	<div style="display:inline;">
-		<div style="width:180px;" class="inputWrap">
-      <div style="float:left;">
-        <input class="inpWbtn " id="iata[1]" name="iata[1]" type="text" value="Симферополь (SIP)" onfocus="if(this.value=='введите город') this.value=''; $(this).removeClass('faint_input');" onkeyup="showCitiesList(event,'iata[1]',1,'');" onblur="hideCitiesList('1',''); if(this.value == '') {this.value='введите город'; $(this).addClass('faint_input');}" title="Введите название города или нажмите на значёк с глобусом" style="width:158px;" onclick="this.select();">
-      </div>
-      <div class="input_icon"><img onclick="openw('https://aviago.com.ua/cities.php?id=1&amp;lng=ru&amp;fname=iata%5B1%5D','','width=610,height=700');" src="https://files.avia.lt/images/cities-list.png" border="0" alt="Список всех аэропортов" title="Список всех аэропортов" height="18" width="18"></div>
-    </div>
-	<iframe id="citiesList1Frame" name="citiesList1Frame" style="visibility:hidden; width:180px;position:absolute;z-index:101;height:100%; left:0px; top:0px;" scrolling="no" frameborder="0" src="https://aviago.com.ua/includes/cities_list_frame.php" class="autofill"></iframe>
-		</div>
-	</div>
-      <div class="smallFormPart">в:</div>
-      <div style="clear:both;">	<div style="display:inline;">
-		<div style="width:180px;" class="inputWrap">
-      <div style="float:left;">
-        <input class="inpWbtn " id="iata[2]" name="iata[2]" type="text" value="Милан (MIL)" onfocus="if(this.value=='введите город') this.value=''; $(this).removeClass('faint_input');" onkeyup="showCitiesList(event,'iata[2]',2,'');" onblur="hideCitiesList('2',''); if(this.value == '') {this.value='введите город'; $(this).addClass('faint_input');}" title="Введите название города или нажмите на значёк с глобусом" style="width:158px;" onclick="this.select();">
-      </div>
-      <div class="input_icon"><img onclick="openw('https://aviago.com.ua/cities.php?id=2&amp;lng=ru&amp;fname=iata%5B2%5D','','width=610,height=700');" src="https://files.avia.lt/images/cities-list.png" border="0" alt="Список всех аэропортов" title="Список всех аэропортов" height="18" width="18"></div>
-    </div>
-	<iframe id="citiesList2Frame" name="citiesList2Frame" style="visibility:hidden; width:180px;position:absolute;z-index:102;height:100%; left:0px; top:0px;" scrolling="no" frameborder="0" src="https://aviago.com.ua/includes/cities_list_frame.php" class="autofill"></iframe>
-		</div>
-	</div>
-    </div>
-    <div id="multiSmall" style="display:none;">
-      <div class="smallFormPart">из-2:</div>
-      <div style="clear:both;">	<div style="display:inline;">
-		<div style="width:180px;" class="inputWrap">
-      <div style="float:left;">
-        <input class="inpWbtn " id="iata[3]" name="iata[3]" type="text" value=" ()" onfocus="if(this.value=='введите город') this.value=''; $(this).removeClass('faint_input');" onkeyup="showCitiesList(event,'iata[3]',3,'');" onblur="hideCitiesList('3',''); if(this.value == '') {this.value='введите город'; $(this).addClass('faint_input');}" title="Введите название города или нажмите на значёк с глобусом" style="width:158px;" onclick="this.select();">
-      </div>
-      <div class="input_icon"><img onclick="openw('https://aviago.com.ua/cities.php?id=3&amp;lng=ru&amp;fname=iata%5B3%5D','','width=610,height=700');" src="https://files.avia.lt/images/cities-list.png" border="0" alt="Список всех аэропортов" title="Список всех аэропортов" height="18" width="18"></div>
-    </div>
-	<iframe id="citiesList3Frame" name="citiesList3Frame" style="visibility:hidden; width:180px;position:absolute;z-index:103;height:100%; left:0px; top:0px;" scrolling="no" frameborder="0" src="https://aviago.com.ua/includes/cities_list_frame.php" class="autofill"></iframe>
-		</div>
-	</div>
-      <div class="smallFormPart">в-2:</div>
-      <div style="clear:both;">	<div style="display:inline;">
-		<div style="width:180px;" class="inputWrap">
-      <div style="float:left;">
-        <input class="inpWbtn " id="iata[4]" name="iata[4]" type="text" value=" ()" onfocus="if(this.value=='введите город') this.value=''; $(this).removeClass('faint_input');" onkeyup="showCitiesList(event,'iata[4]',4,'');" onblur="hideCitiesList('4',''); if(this.value == '') {this.value='введите город'; $(this).addClass('faint_input');}" title="Введите название города или нажмите на значёк с глобусом" style="width:158px;" onclick="this.select();">
-      </div>
-      <div class="input_icon"><img onclick="openw('https://aviago.com.ua/cities.php?id=4&amp;lng=ru&amp;fname=iata%5B4%5D','','width=610,height=700');" src="https://files.avia.lt/images/cities-list.png" border="0" alt="Список всех аэропортов" title="Список всех аэропортов" height="18" width="18"></div>
-    </div>
-	<iframe id="citiesList4Frame" name="citiesList4Frame" style="visibility:hidden; width:180px;position:absolute;z-index:104;height:100%; left:0px; top:0px;" scrolling="no" frameborder="0" src="https://aviago.com.ua/includes/cities_list_frame.php" class="autofill"></iframe>
-		</div>
-	</div>
-    </div>
-    <div style="clear:both;">
-      <div class="smallFormPart">туда:</div>
-      <div style="clear:both;">         <div class="inputWrap" style="width:180px;">
-          <div style="float:left;">
-            <input class="inpWbtn" type="text" size="10" id="depDate" title="Календарь" value="1.9.2014" style="width:158px;"/>
-            <input type="hidden" id="depDateVal" name="depDate" value="2014-09-01" />
-          </div>
-          <div class="input_icon"><img src="images/calendar.png" id="depDateImg" alt="Календарь" title="Календарь" height="18"></div>
-        </div>
-      </div>
-    </div>
-    <div id="inboundSmall" style="display:none; clear:both;">
-      <div class="smallFormPart">назад:</div>
-      <div style="clear:both;">         <div class="inputWrap" style="width:180px;">
-          <div style="float:left;">
-				<input class="inpWbtn" type="text" size="10" id="arrDate" title="Календарь" value="укажите дату" style="width:158px;"/>
-                <input type="hidden" id="arrDateVal" name="arrDate" value="2014-09-01" />
-          </div>
-          <div class="input_icon"><img src="images/calendar.png" id="arrDateImg" alt="Календарь" title="Календарь" height="18"></div>
-        </div>
-      </div>
-    </div>
-    <div style="clear:both; padding-top:8px; padding-right:4px;">       <div class="smallFormPart">
-        <div style="float:left;">взрослые (>11):</div>
-        <div style="float:right;" align="right"><select name="adults" id="adults" onChange="checkInfantsNr('sideFlightSearchForm')"><option value="0">0</option><option value="1" selected="selected">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select></div>
-      </div>
-      <div class="smallFormPart">
-        <div style="float:left;">дети (2-11):</div>
-        <div style="float:right;" align="right"><select name="children" id="children" onChange="checkInfantsNr('sideFlightSearchForm')"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select></div>
-      </div>
-      <div class="smallFormPart">
-        <div style="float:left;">младенцы (<2):</div>
-        <div style="float:right;" align="right"><select name="infants" id="infants"><option value="0" selected="selected">0</option><option value="1">1</option><option value="2">2</option></select></div>
-      </div>
-    </div>
-    <div style="clear:both; height:8px;"></div>
-    <div class="smallFormPart">
-      <input type="checkbox" name="flexible" id="flexible" checked="checked">
-      <label for="flexible">лучшая цена &plusmn;3 дня</label>
-    </div>
-	<div class="smallFormPart">
-      <input type="checkbox" name="direct" id="direct">
-		<label for="direct_only">только прямые рейсы</label>
-    </div>
-    <center>
-      <div class="button" onclick="doFlightSearch('sideFlightSearchForm');" style="font-size:16px;">Обновить<br>поиск</div>
-    </center>
-    <input type="hidden" name="currency" value="EUR">
-    <input type="hidden" name="search" value="true">
-	
-      </form>
-</div>
 <script type="text/javascript">
 checkInfantsNr("sideFlightSearchForm");
 //setRadio("journey","oneway");
@@ -365,120 +238,696 @@ $("#depDate,#arrDate,#depDateImg,#arrDateImg")
 	showCal(this);
 });
 </script>
+				</div>
+    			<div id="SRFilter" style="clear:both; display:none;" align="left"></div>
+  			</div>
+  			<div style="float:left; width:720px;"> 
+  				<div style="padding: 12px 0 0 10px;" id="progress">
+  					<div style="clear:both;">
+  						<div style="float:left;; line-height:20px;">
+  							<a href="index.php">Поиск рейсов</a>
+  						</div>
+  						<div style="background: transparent url(https://files.avia.lt/images/breadcrumb_w.png); float:left; width:24px; height:21px;"></div>
+  						<div style="float:left;; line-height:20px;">
+  							<span style="color:#ff801e; font-weight:bold;">Результаты поиска</span>
+  						</div>
+  						<div style="background: transparent url(https://files.avia.lt/images/breadcrumb_w.png); float:left; width:24px; height:21px;"></div>
+  						<div style="float:left;; line-height:20px;">Детали заказа</div>
+  						<div style="background: transparent url(https://files.avia.lt/images/breadcrumb_w.png); float:left; width:24px; height:21px;"></div>
+  						<div style="float:left;; line-height:20px;">Подтверждение</div>
+  					</div>
+  					<div style="clear:both;height:8px;"></div>
+  				</div>
+				<div>
+  					<div class="blue_block" style="float:left; width:452px; margin-top:0px;" align="left">
+    					<div style="vertical-align:middle; display:table-cell; height:46px;">
+      						<div>
+      							<span class="big" style="overflow:hidden;">Симферополь</span> (SIP)
+      							<span class="big"> – </span>
+      							<span class="big" style="overflow:hidden;">Милан</span> (MIL) 
+      						</div>
+		  					<div> вылет: 
+		  						<span class="big">1.9.2014</span> 
+		  					</div>
+    					</div>
+  					</div>
+  					<div class="blue_block" style="float:left; width:180px; margin-top:0px;">
+    					<div style=" vertical-align:middle; display:table-cell; height:46px;">
+      						<div align="center" style="clear:both;">
+        						<div style="float:left;">
+        							<img src="https://files.avia.lt/images/icons/sm_phone.png">
+        						</div>
+        						<div style="float:left; font-size:14px; line-height:22px; color:#0074bc;">+380 (044) 383-49-32</div>
+      						</div>
+      						<div align="center" style="clear:both;"> 
+      							<a href="JavaScript:ajaxDialog('popups/open_hours.php?lng=ru',600);" title="Время работы">
+      								<img src="https://files.avia.lt/images/icons/work_hours.png" alt="Время работы">
+      							</a>
+       							<a href="https://aviago.com.ua/help/" onclick="JavaScript:openw('https://aviago.com.ua/help//','','width=780,height=520,scrollbars,resizable'); return false;" title="Помощь">
+       								<img src="https://files.avia.lt/images/icons/help.png">
+       							</a>
+       							<a href="skype:avia.lt?chat" title="Свяжитесь">
+       								<img src="https://files.avia.lt/images/icons/skype.png">
+       							</a>
+       						</div>
+						</div>
+  					</div>
+				</div>
+    			<div style="clear:both;"></div>
+        		<div id="noSpecialPriceFound" class="redborder" style="margin-top:14px; display:none;" align="center">
+        			<span class="red">К сожалению, свободных мест на рейсы с указаной ценой (0 евро) уже нет.</span>
+        		</div>
+				<div id="searchProgress"></div>
+        		<div id="otherDestDiv" style="margin-bottom:12px; padding:8px; display:none;" class="white_block_orange" align="left">
+      				<div>
+        				<div id="otherDestTitle" style="float:left; width:658px;" align="left">
+          					<h1>Альтернативный маршрут</h1>
+        				</div>
+        				<div style="float:left;" align="right">
+        					<a href="JavaScript:hide('otherDestDiv');" title="Закрыть">
+       	 						<img src="https://files.avia.lt/images/close.gif" alt="Закрыть">
+       	 					</a>
+        				</div>
+      				</div>
+      				<div id="otherDest" style="clear:both;" align="left">
+      					<img src="https://files.avia.lt/images/loading.gif">
+      				</div>
+    			</div>
+    			<div id="nooffersFound" style="display:none; margin-top:18px;" class="redborder">Предложений нет. Попробуйте поменять один или несколько параметров поиска.</div>
+    			<div id="pricesTableDiv" class="white_block" style="margin-bottom: 12px; display: block;">
+					<div>
+						<div style="float:left;">
+							<h2 style="margin-bottom:0; padding-bottom:0;">
+								<span>
+									<a onclick="openClose('prices_table','Лучшие цены в пределах +/- 3 дней', 'Лучшие цены в пределах +/- 3 дней',$(this),'','');" href="JavaScript:void(0);">
+										<span>Лучшие цены в пределах +/- 3 дней</span>
+									</a>
+								</span>
+							</h2>
+						</div>
+						<div style="float:right;">
+							<span>
+								<a onclick="openClose('prices_table','показать', 'спрятать',$(this),'','');" href="JavaScript:void(0);">
+									<span>спрятать</span>
+								</a>
+								<a onclick="openClose('prices_table','показать', 'спрятать',$(this),'','');" href="JavaScript:void(0);">
+									<img style="vertical-align:-7px;" src="https://files.avia.lt/images/down.png">
+								</a>
+							</span>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div id="prices_table" align="left" style="margin-bottom: 10px; clear: both;">
+						<table class="priceTable" width="100%" align="center" cellspacing="0" cellpadding="0" border="0">
+							<tbody>
+								<tr>
+									<td style="background-color:#FFFFFF;"></td>
+									<td align="center" style="height:23px;" colspan="7">
+										<img src="https://files.avia.lt/images/arrowleft.png">
+										<span style="vertical-align:15%;">
+											<strong>Назад</strong>
+										</span>
+										<img src="https://files.avia.lt/images/arrowright.png">
+									</td>
+								</tr>
+								<tr>
+									<td align="center">
+										<span style="vertical-align:25%;">
+											<strong>Туда</strong>
+										</span>
+										<img src="https://files.avia.lt/images/arrowdown.png">
+									</td>
+									<td nowrap="">
+										<div id="colHead_2014-09-02" class="priceTableHead">вт, 2014-09-02</div>
+									</td>
+									<td nowrap="">
+										<div id="colHead_2014-09-03" class="priceTableHead">ср, 2014-09-03</div>
+									</td>
+									<td nowrap="">
+										<div id="colHead_2014-09-04" class="priceTableHead">чт, 2014-09-04</div>
+									</td>
+									<td nowrap="">
+										<div id="colHead_2014-09-05" class="priceTableHead">пт, 2014-09-05</div>
+									</td>
+									<td nowrap="">
+										<div id="colHead_2014-09-06" class="priceTableHead weekend">сб, 2014-09-06</div>
+									</td>
+									<td nowrap="">
+										<div id="colHead_2014-09-07" class="priceTableHead weekend">вс, 2014-09-07</div>
+									</td>
+								</tr>
+								<tr>
+									<td nowrap="">
+										<div id="rowHead_2014-09-02" class="priceTableHead">вт, 2014-09-02</div>
+									</td>
+									<td>
+										<div id="td_2014-09-02_2014-09-02" class="priceTableCell" onmouseout="unMarkHeads('2014-09-02','2014-09-02');" onmouseover="markHeads('2014-09-02','2014-09-02');">
+											<span id="price_2014-09-02_2014-09-02"></span>
+											<span id="ajaxLink_2014-09-02_2014-09-02" style="display:inline">
+												<a title="Найти лучшую цену (0 дн.)" href="JavaScript:getCheapestPrice('2014-09-02','2014-09-02');">
+													<img align="absmiddle" style="margin-top:10px;" alt="Найти лучшую цену" src="https://files.avia.lt/images/search.gif">
+												</a>
+											</span>
+										</div>
+									</td>
+									<td>
+										<div id="td_2014-09-02_2014-09-03" class="priceTableCell" onmouseout="unMarkHeads('2014-09-02','2014-09-03');" onmouseover="markHeads('2014-09-02','2014-09-03');">
+											<span id="price_2014-09-02_2014-09-03"></span>
+											<span id="ajaxLink_2014-09-02_2014-09-03" style="display:inline">
+												<a title="Найти лучшую цену (1 дн.)" href="JavaScript:getCheapestPrice('2014-09-02','2014-09-03');">
+													<img align="absmiddle" style="margin-top:10px;" alt="Найти лучшую цену" src="https://files.avia.lt/images/search.gif">	
+												</a>
+											</span>
+										</div>
+									</td>
+									<td>
+										<div id="td_2014-09-02_2014-09-04" class="priceTableCell priceTableChippestPrice" onmouseout="unMarkHeads('2014-09-02','2014-09-04');" onmouseover="markHeads('2014-09-02','2014-09-04');">
+											<span id="price_2014-09-02_2014-09-04">
+												<span id="value_2014-09-02_2014-09-04" class="priceTablePrice priceInCurr" initval="0">1928</span>
+												<span id="SRpriceCurr_2014-09-02_2014-09-04" class="priceTableCurr currDisp">EUR</span>
+											</span>
+										</div>
+									</td>
+									<td>
+									<div id="td_2014-09-02_2014-09-05" class="priceTableCell" onmouseout="unMarkHeads('2014-09-02','2014-09-05');" onmouseover="markHeads('2014-09-02','2014-09-05');">
+										<span id="price_2014-09-02_2014-09-05"></span>
+										<span id="ajaxLink_2014-09-02_2014-09-05" style="display:inline">
+											<a title="Найти лучшую цену (3 дн.)" href="JavaScript:getCheapestPrice('2014-09-02','2014-09-05');">
+												<img align="absmiddle" style="margin-top:10px;" alt="Найти лучшую цену" src="https://files.avia.lt/images/search.gif">
+											</a>
+										</span>
+									</div>
+								</td>
+								<td>
+									<div id="td_2014-09-02_2014-09-06" class="priceTableCell" onmouseout="unMarkHeads('2014-09-02','2014-09-06');" onmouseover="markHeads('2014-09-02','2014-09-06');">
+										<span id="price_2014-09-02_2014-09-06"></span>
+										<span id="ajaxLink_2014-09-02_2014-09-06" style="display:inline">
+											<a title="Найти лучшую цену (4 дн.)" href="JavaScript:getCheapestPrice('2014-09-02','2014-09-06');">
+												<img align="absmiddle" style="margin-top:10px;" alt="Найти лучшую цену" src="https://files.avia.lt/images/search.gif">
+											</a>
+										</span>
+									</div>
+								</td>
+								<td>
+									<div id="td_2014-09-02_2014-09-07" class="priceTableCell" onmouseout="unMarkHeads('2014-09-02','2014-09-07');" onmouseover="markHeads('2014-09-02','2014-09-07');">
+										<span id="price_2014-09-02_2014-09-07"></span>
+										<span id="ajaxLink_2014-09-02_2014-09-07" style="display:inline">
+											<a title="Найти лучшую цену (5 дн.)" href="JavaScript:getCheapestPrice('2014-09-02','2014-09-07');">
+												<img align="absmiddle" style="margin-top:10px;" alt="Найти лучшую цену" src="https://files.avia.lt/images/search.gif">
+											</a>
+										</span>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td nowrap="">
+									<div id="rowHead_2014-09-03" class="priceTableHead">ср, 2014-09-03</div>
+								</td>
+								<td>
+									<div id="td_2014-09-03_2014-09-02" class="priceTableCell" onmouseout="unMarkHeads('2014-09-03','2014-09-02');" onmouseover="markHeads('2014-09-03','2014-09-02');"> - </div>
+								</td>
+								<td>
+									<div id="td_2014-09-03_2014-09-03" class="priceTableCell" onmouseout="unMarkHeads('2014-09-03','2014-09-03');" onmouseover="markHeads('2014-09-03','2014-09-03');">
+										<span id="price_2014-09-03_2014-09-03"></span>
+										<span id="ajaxLink_2014-09-03_2014-09-03" style="display:inline">
+											<a title="Найти лучшую цену (0 дн.)" href="JavaScript:getCheapestPrice('2014-09-03','2014-09-03');">
+												<img align="absmiddle" style="margin-top:10px;" alt="Найти лучшую цену" src="https://files.avia.lt/images/search.gif">
+											</a>
+										</span>
+									</div>
+								</td>
+								<td>
+									<div id="td_2014-09-03_2014-09-04" class="priceTableCell" onmouseout="unMarkHeads('2014-09-03','2014-09-04');" onmouseover="markHeads('2014-09-03','2014-09-04');">
+										<span id="price_2014-09-03_2014-09-04"></span>
+										<span id="ajaxLink_2014-09-03_2014-09-04" style="display:inline">
+											<a title="Найти лучшую цену (1 дн.)" href="JavaScript:getCheapestPrice('2014-09-03','2014-09-04');">
+												<img align="absmiddle" style="margin-top:10px;" alt="Найти лучшую цену" src="https://files.avia.lt/images/search.gif">
+											</a>
+										</span>
+									</div>
+								</td>
+								<td>
+									<div id="td_2014-09-03_2014-09-05" class="priceTableCell" onmouseout="unMarkHeads('2014-09-03','2014-09-05');" onmouseover="markHeads('2014-09-03','2014-09-05');">
+										<span id="price_2014-09-03_2014-09-05"></span>
+										<span id="ajaxLink_2014-09-03_2014-09-05" style="display:inline">
+											<a title="Найти лучшую цену (2 дн.)" href="JavaScript:getCheapestPrice('2014-09-03','2014-09-05');">
+												<img align="absmiddle" style="margin-top:10px;" alt="Найти лучшую цену" src="https://files.avia.lt/images/search.gif">
+											</a>
+										</span>
+									</div>
+								</td>
+								<td>
+									<div id="td_2014-09-03_2014-09-06" class="priceTableCell" onmouseout="unMarkHeads('2014-09-03','2014-09-06');" onmouseover="markHeads('2014-09-03','2014-09-06');">
+										<span id="price_2014-09-03_2014-09-06"></span>
+										<span id="ajaxLink_2014-09-03_2014-09-06" style="display:inline">
+											<a title="Найти лучшую цену (3 дн.)" href="JavaScript:getCheapestPrice('2014-09-03','2014-09-06');">
+												<img align="absmiddle" style="margin-top:10px;" alt="Найти лучшую цену" src="https://files.avia.lt/images/search.gif">
+											</a>
+										</span>
+									</div>
+								</td>
+								<td>
+									<div id="td_2014-09-03_2014-09-07" class="priceTableCell" onmouseout="unMarkHeads('2014-09-03','2014-09-07');" onmouseover="markHeads('2014-09-03','2014-09-07');">
+										<span id="price_2014-09-03_2014-09-07"></span>
+										<span id="ajaxLink_2014-09-03_2014-09-07" style="display:inline">
+											<a title="Найти лучшую цену (4 дн.)" href="JavaScript:getCheapestPrice('2014-09-03','2014-09-07');">
+												<img align="absmiddle" style="margin-top:10px;" alt="Найти лучшую цену" src="https://files.avia.lt/images/search.gif">
+											</a>
+										</span>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td nowrap="">
+									<div id="rowHead_2014-09-04" class="priceTableHead">чт, 2014-09-04</div>
+								</td>
+								<td>
+									<div id="td_2014-09-04_2014-09-02" class="priceTableCell" onmouseout="unMarkHeads('2014-09-04','2014-09-02');" onmouseover="markHeads('2014-09-04','2014-09-02');"> - </div>
+								</td>
+								<td>
+									<div id="td_2014-09-04_2014-09-03" class="priceTableCell" onmouseout="unMarkHeads('2014-09-04','2014-09-03');" onmouseover="markHeads('2014-09-04','2014-09-03');"> - </div>
+								</td>
+								<td>
+									<div id="td_2014-09-04_2014-09-04" class="priceTableCell" onmouseout="unMarkHeads('2014-09-04','2014-09-04');" onmouseover="markHeads('2014-09-04','2014-09-04');">
+										<span id="price_2014-09-04_2014-09-04"></span>
+										<span id="ajaxLink_2014-09-04_2014-09-04" style="display:inline">
+											<a title="Найти лучшую цену (0 дн.)" href="JavaScript:getCheapestPrice('2014-09-04','2014-09-04');">
+												<img align="absmiddle" style="margin-top:10px;" alt="Найти лучшую цену" src="https://files.avia.lt/images/search.gif">
+											</a>
+										</span>
+									</div>
+								</td>
+								<td>
+									<div id="td_2014-09-04_2014-09-05" class="priceTableCell" onmouseout="unMarkHeads('2014-09-04','2014-09-05');" onmouseover="markHeads('2014-09-04','2014-09-05');">
+										<span id="price_2014-09-04_2014-09-05"></span>
+										<span id="ajaxLink_2014-09-04_2014-09-05" style="display:inline">
+											<a title="Найти лучшую цену (1 дн.)" href="JavaScript:getCheapestPrice('2014-09-04','2014-09-05');">
+												<img align="absmiddle" style="margin-top:10px;" alt="Найти лучшую цену" src="https://files.avia.lt/images/search.gif">
+											</a>
+										</span>
+									</div>
+								</td>
+								<td>
+									<div id="td_2014-09-04_2014-09-06" class="priceTableCell" onmouseout="unMarkHeads('2014-09-04','2014-09-06');" onmouseover="markHeads('2014-09-04','2014-09-06');">
+										<span id="price_2014-09-04_2014-09-06"></span>
+										<span id="ajaxLink_2014-09-04_2014-09-06" style="display:inline">
+											<a title="Найти лучшую цену (2 дн.)" href="JavaScript:getCheapestPrice('2014-09-04','2014-09-06');">
+												<img align="absmiddle" style="margin-top:10px;" alt="Найти лучшую цену" src="https://files.avia.lt/images/search.gif">
+											</a>
+										</span>
+									</div>
+								</td>
+								<td>
+									<div id="td_2014-09-04_2014-09-07" class="priceTableCell" onmouseout="unMarkHeads('2014-09-04','2014-09-07');" onmouseover="markHeads('2014-09-04','2014-09-07');">
+										<span id="price_2014-09-04_2014-09-07"></span>
+										<span id="ajaxLink_2014-09-04_2014-09-07" style="display:inline">
+											<a title="Найти лучшую цену (3 дн.)" href="JavaScript:getCheapestPrice('2014-09-04','2014-09-07');">
+												<img align="absmiddle" style="margin-top:10px;" alt="Найти лучшую цену" src="https://files.avia.lt/images/search.gif">
+											</a>
+										</span>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td nowrap="">
+									<div id="rowHead_2014-09-05" class="priceTableHead">пт, 2014-09-05</div>
+								</td>
+								<td>
+									<div id="td_2014-09-05_2014-09-02" class="priceTableCell" onmouseout="unMarkHeads('2014-09-05','2014-09-02');" onmouseover="markHeads('2014-09-05','2014-09-02');" style="height:33px;"> - </div>
+								</td>
+								<td>
+									<div id="td_2014-09-05_2014-09-03" class="priceTableCell" onmouseout="unMarkHeads('2014-09-05','2014-09-03');" onmouseover="markHeads('2014-09-05','2014-09-03');" style="height:33px;"> - </div>
+								</td>
+								<td>
+									<div id="td_2014-09-05_2014-09-04" class="priceTableCell" onmouseout="unMarkHeads('2014-09-05','2014-09-04');" onmouseover="markHeads('2014-09-05','2014-09-04');" style="height:33px;"> - </div>
+								</td>
+								<td>
+									<div id="td_2014-09-05_2014-09-05" class="priceTableCell" onmouseout="unMarkHeads('2014-09-05','2014-09-05');" onmouseover="markHeads('2014-09-05','2014-09-05');" style="height:33px;">
+										<span id="price_2014-09-05_2014-09-05"></span>
+										<span id="ajaxLink_2014-09-05_2014-09-05" style="display:inline">
+											<a title="Найти лучшую цену (0 дн.)" href="JavaScript:getCheapestPrice('2014-09-05','2014-09-05');">
+												<img align="absmiddle" style="margin-top:10px;" alt="Найти лучшую цену" src="https://files.avia.lt/images/search.gif">
+											</a>
+										</span>
+									</div>
+								</td>
+								<td>
+									<div id="td_2014-09-05_2014-09-06" class="priceTableCell" onmouseout="unMarkHeads('2014-09-05','2014-09-06');" onmouseover="markHeads('2014-09-05','2014-09-06');" style="height:33px;">
+										<span id="price_2014-09-05_2014-09-06"></span>
+										<span id="ajaxLink_2014-09-05_2014-09-06" style="display:inline">
+											<a title="Найти лучшую цену (1 дн.)" href="JavaScript:getCheapestPrice('2014-09-05','2014-09-06');">
+												<img align="absmiddle" style="margin-top:10px;" alt="Найти лучшую цену" src="https://files.avia.lt/images/search.gif">
+											</a>
+										</span>
+									</div>
+								</td>
+								<td>
+									<div id="td_2014-09-05_2014-09-07" class="priceTableCell" onmouseout="unMarkHeads('2014-09-05','2014-09-07');" onmouseover="markHeads('2014-09-05','2014-09-07');" style="height:33px;">
+										<span id="price_2014-09-05_2014-09-07"></span>
+										<span id="ajaxLink_2014-09-05_2014-09-07" style="display:inline">
+											<a title="Найти лучшую цену (2 дн.)" href="JavaScript:getCheapestPrice('2014-09-05','2014-09-07');">
+												<img align="absmiddle" style="margin-top:10px;" alt="Найти лучшую цену" src="https://files.avia.lt/images/search.gif">
+											</a>
+										</span>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<p align="left" style="font-size:12px">
+						<span style="width:16px;height:8px;background-color:#ff801e"></span>– наименьшие цены.<br>
+						Цены указаны для 1 чел. с налогами/сборами.
+					</p>
+				</div>
+			</div>
+        	<div id="searchResults" align="left">     	
+				<div id="searchResList">
+					<form id="mainform_kfmsys57ojw7tk42iht4i8hcbfsnsr" style="margin-bottom:16px;" action="flight_details/?session=754jbpiha2zncc2j36zds1zqexkjmlbbnuzkjwyk" method="post" name="mainform_kfmsys57ojw7tk42iht4i8hcbfsnsr">
+						<div class="white_block" style="padding:10px 16px 4px 16px;">
+							<div>
+								<div class="offerPriceDiv">
+									<div style="float:left; width:350px;">
+										<div class="offerPrice">1928
+											<span style="font-size:20px"> евро</span>
+											<div class="smaller">(<span style="font-weight:bold">33 795</span>грн.)</div>
+										</div>
+										<div style="float:left; padding-top:18px;">
+											<span class="smaller">1 чел. с налогами/сборами</span>
+										</div>
+									</div>
+									<div class="priceTxt" style="padding-top:13px;">
+										<div>
+											<span>
+												<a onclick="openClose('more_kfmsys57ojw7tk42iht4i8hcbfsnsr','общая сумма в деталях', 'общая сумма в деталях',$(this),'','');" href="JavaScript:void(0);">
+													<span>общая сумма в деталях</span>
+												</a>
+												<a onclick="openClose('more_kfmsys57ojw7tk42iht4i8hcbfsnsr','общая сумма в деталях', 'общая сумма в деталях',$(this),'','');" href="JavaScript:void(0);">
+													<img style="vertical-align:-7px;" src="https://files.avia.lt/images/next.png">
+												</a>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div style="clear:both; position:relative;">
+									<div id="more_kfmsys57ojw7tk42iht4i8hcbfsnsr" style="display:none; position:relative; padding-top:8px">
+										<div class="roundborder passengersPricesTable smaller">
+											<table width="100%" cellspacing="0" cellpadding="2" border="0" style="position:relative;">
+												<tbody>
+													<tr>
+														<th align="center">
+															<strong>пассажир</strong>
+														</th>
+														<th align="center">
+															<strong>Тариф</strong>
+														</th>
+														<th align="center">
+															<strong>Сборы</strong>
+														</th>
+														<th align="center">
+															<strong>Всего для пассажира</strong>
+														</th>
+													</tr>
+													<tr>
+														<td height="1" colspan="4">
+															<div style="border-top:1px solid #DDDDDD;height:1px;"></div>
+														</td>
+													</tr>
+													<tr>
+														<td align="center">
+															<strong>Пассажир №: 1</strong>(взрослый)
+														</td>
+														<td id="passPr1-0-kfmsys57ojw7tk42iht4i8hcbfsnsr" align="center">
+															<span class="priceInCurr" initval="6578">1905</span>
+															<span class="currDisp">EUR</span>
+														</td>
+														<td align="center">
+															<span class="priceInCurr">
+															<span class="priceInCurr" initval="79">23</span>
+															<span class="currDisp">EUR</span>(<em>0</em>)</span>
+														</td>
+														<td id="passPr3-0-kfmsys57ojw7tk42iht4i8hcbfsnsr" align="center">
+															<strong>
+																<span class="priceInCurr" initval="6657">1928</span>
+																<span class="currDisp">EUR</span>
+															</strong>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div style="clear:both;"></div>
+							<div style="margin-top:4px;">
+								<table width="100%" cellspacing="0" cellpadding="0" border="0">
+									<tbody>
+										<tr>
+											<td align="center">
+												<div align="center" style="margin-bottom:6px;">
+													<img align="absmiddle" src="https://files.avia.lt/images/plane.gif">
+													Туда: 2.9.2014
+												</div>
+												<div id="segmentkfmsys57ojw7tk42iht4i8hcbfsnsr_kfmsys57ojw7tk42iht4i8hcbfsnsr-0-0" class="roundborder segment segmentSelected sugmentMulti" onclick="setFlightOption('out','kfmsys57ojw7tk42iht4i8hcbfsnsr-0-0','kfmsys57ojw7tk42iht4i8hcbfsnsr');" style="cursor:pointer;">
+													<div style="padding:0 8px 0 8px;">
+														<table width="100%" cellspacing="0" cellpadding="0" border="0">
+															<tbody>
+																<tr>
+																	<td width="24" align="center">
+																		<input type="radio" checked="checked" value="kfmsys57ojw7tk42iht4i8hcbfsnsr-0-0" name="out">
+																	</td>
+																	<td class="dline_vert" width="96" valign="middle" align="center">
+																		<div>
+																			<img vspace="3" hspace="2" align="absmiddle" border="0" title="Aeroflot" alt="Aeroflot" src="https://files.avia.lt/images/airlines/SU.png">
+																		</div>
+																		<div class="small">6864 / 6115 / 1800</div>
+																		<div align="center" style="font-size:11px;">
+																			только
+																			<strong style="color:#dd360a;">3 места</strong>
+																		</div>
+																	</td>
+																	<td class="dline_vert" width="280" valign="top" align="left">
+																		<div style="padding-left:8px; width:123px; float:left;">
+																			<div class="offerTime">21:30</div>
+																			<div class="small">отбытие</div>
+																			<div class="offerCity">Симферополь</div>
+																			<div class="small"></div>
+																		</div>
+																		<div align="left" style="padding-left:6px; width:123px; float:left;">
+																			<div class="offerTime">15:55					<strong>
+																					<span class="red smaller">(+1 д.)</span>
+																				</strong>
+																			</div>
+																			<div class="small">прибытие</div>
+																			<div class="offerCity">Киев</div>
+																			<div class="small">Borispol</div>
+																		</div>
+																	</td>
+																	<td class="dline_vert" width="176" valign="top" align="left" style="padding-left:6px;">
+																		<div class="offerTime"> 18 ч 25 мин</div>
+																		<div class="small">Продолжительность</div>
+																		<div class="small" style="margin-top:4px;">
+																		<div class="small">2 пересадки:</div>
+																		<div class="small">
+																			<strong>Saint Petersburg</strong>
+																			, между рейсами: 5 ч</div>
+																		<div class="small">
+																			<strong>Москва</strong>
+																			, между рейсами: 7 ч 40 мин</div>
+																		</div>
+																	</td>
+																	<td class="small" style="padding-left:6px;">
+																		Включен регистрируемый багаж:
+																		<br>
+																		<strong>1 X 23 кг/чел.</strong>
+																		<a title="Информация о багаже предварительная. Точная информация будет предоставлена в электронном билете." href="javascript:void(0);">
+																			<img border="0" alt="Информация о багаже предварительная. Точная информация будет предоставлена в электронном билете." src="images/qm.png">
+																		</a>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+												<div id="segmentkfmsys57ojw7tk42iht4i8hcbfsnsr_kfmsys57ojw7tk42iht4i8hcbfsnsr-0-1" class="roundborder segment sugmentMulti" onclick="setFlightOption('out','kfmsys57ojw7tk42iht4i8hcbfsnsr-0-1','kfmsys57ojw7tk42iht4i8hcbfsnsr');" style="cursor:pointer;">
+													<div style="padding:0 8px 0 8px;">
+														<table width="100%" cellspacing="0" cellpadding="0" border="0">
+															<tbody>
+																<tr>
+																	<td width="24" align="center">
+																		<input type="radio" value="kfmsys57ojw7tk42iht4i8hcbfsnsr-0-1" name="out">
+																	</td>
+																	<td class="dline_vert" width="96" valign="middle" align="center">
+																		<div>
+																			<img vspace="3" hspace="2" align="absmiddle" border="0" title="Aeroflot" alt="Aeroflot" src="https://files.avia.lt/images/airlines/SU.png">
+																		</div>
+																		<div class="small">6864 / 6117 / 1800</div>
+																		<div align="center" style="font-size:11px;">только
+																			<strong style="color:#dd360a;">3 места</strong>
+																		</div>
+																	</td>
+																	<td class="dline_vert" width="280" valign="top" align="left">
+																		<div style="padding-left:8px; width:123px; float:left;">
+																			<div class="offerTime">21:30</div>
+																			<div class="small">отбытие</div>
+																			<div class="offerCity">Симферополь</div>
+																			<div class="small"></div>
+																		</div>
+																		<div align="left" style="padding-left:6px; width:123px; float:left;">
+																			<div class="offerTime">15:55
+																				<strong>
+																					<span class="red smaller">(+1 д.)</span>
+																				</strong>
+																			</div>
+																			<div class="small">прибытие</div>
+																			<div class="offerCity">Киев</div>
+																			<div class="small">Borispol</div>
+																		</div>
+																	</td>
+																	<td class="dline_vert" width="176" valign="top" align="left" style="padding-left:6px;">
+																		<div class="offerTime"> 18 ч 25 мин</div>
+																		<div class="small">Продолжительность</div>
+																		<div class="small" style="margin-top:4px;">
+																		<div class="small">2 пересадки:</div>
+																		<div class="small">
+																			<strong>Saint Petersburg</strong>
+																			, между рейсами: 5 ч 25 мин</div>
+																		<div class="small">
+																			<strong>Москва</strong>
+																			, между рейсами: 7 ч 20 мин</div>
+																		</div>
+																	</td>
+																	<td class="small" style="padding-left:6px;">
+																	Включен регистрируемый багаж:
+																		<br><strong>1 X 23 кг/чел.</strong>
+																		<a title="Информация о багаже предварительная. Точная информация будет предоставлена в электронном билете." href="javascript:void(0);">
+																			<img border="0" alt="Информация о багаже предварительная. Точная информация будет предоставлена в электронном билете." src="images/qm.png">
+																		</a>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div style="height:8px; clear:both;"></div>
+								<table width="100%" cellspacing="0" cellpadding="0" border="0">
+									<tbody>
+										<tr>
+											<td align="center">
+												<div align="center" style="margin-bottom:6px;">
+													<img align="absmiddle" src="https://files.avia.lt/images/plane2.gif">Назад: 4.9.2014
+												</div>
+												<div id="segmentkfmsys57ojw7tk42iht4i8hcbfsnsr_kfmsys57ojw7tk42iht4i8hcbfsnsr-1-0" class="roundborder segment segmentSelected">
+													<div style="padding:0 8px 0 8px;">
+														<table width="100%" cellspacing="0" cellpadding="0" border="0">
+															<tbody>
+																<tr>
+																	<td width="24" align="center">
+																		<input type="radio" checked="checked" disabled="disabled" name="retCheckBox">
+																		<input type="hidden" value="kfmsys57ojw7tk42iht4i8hcbfsnsr-1-0" name="ret">
+																	</td>
+																	<td class="dline_vert" width="96" valign="middle" align="center">
+																		<div>
+																			<img vspace="3" hspace="2" align="absmiddle" border="0" title="Aeroflot" alt="Aeroflot" src="https://files.avia.lt/images/airlines/SU.png">
+																		</div>
+																		<div class="small">6842 / 6863</div>
+																		<div align="center" style="font-size:11px;">только<strong style="color:#dd360a;">7 мест</strong>
+																		</div>
+																	</td>
+																	<td class="dline_vert" width="280" valign="top" align="left">
+																		<div style="padding-left:8px; width:123px; float:left;">
+																			<div class="offerTime">11:05</div>
+																			<div class="small">отбытие</div>
+																			<div class="offerCity">Киев</div>
+																			<div class="small">Borispol</div>
+																		</div>
+																		<div align="left" style="padding-left:6px; width:123px; float:left;">
+																			<div class="offerTime"> 20:40</div>
+																			<div class="small">прибытие</div>
+																			<div class="offerCity">Симферополь</div>
+																			<div class="small"></div>
+																		</div>
+																	</td>
+																	<td class="dline_vert" width="176" valign="top" align="left" style="padding-left:6px;">	
+																		<div class="offerTime"> 9 ч 35 мин</div>
+																		<div class="small">Продолжительность</div>
+																		<div class="small" style="margin-top:4px;">
+																			<div class="small">1 Пересадка:</div>
+																			<div class="small">
+																				<strong>Saint Petersburg</strong>; между рейсами: 3 ч
+																			</div>
+																		</div>
+																	</td>
+																	<td class="small" style="padding-left:6px;">Включен регистрируемый багаж:<br>
+																		<strong>1 X 23 кг/чел.</strong>
+																		<a title="Информация о багаже предварительная. Точная информация будет предоставлена в электронном билете." href="javascript:void(0);">
+																			<img border="0" alt="Информация о багаже предварительная. Точная информация будет предоставлена в электронном билете." src="images/qm.png">
+																		</a>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div>
+								<div class="payBefore">
+									Оплата –
+									<span class="red">
+										<strong>во время бронирования</strong>
+									</span>
+								</div>
+								<div style="float:right;position:relative; right:-14px;">
+									<div class="shareButton">Поделиться
+										<div align="center">
+											<div class="emailShareForm" style="position:relative;"></div>
+												<a title="Поделиться на Twitter" onclick="JavaScript:shareOffer(0,'https://aviago.com.ua/search_results/SIP-IEV/2014-09-02--2014-09-04/?adults=1&cabin=none&airline=all&currency=EUR&flexible=on&session=f31irlon4njmdn5c75v02xurbb2j5b4jo7nejf');" href="JavaScript:void(1);">
+													<img src="images/share/twitter.gif">
+												</a>
+												<a title="Поделиться на Facebook" onclick="JavaScript:shareOffer(1,'https://aviago.com.ua/search_results/SIP-IEV/2014-09-02--2014-09-04/?adults=1&cabin=none&airline=all&currency=EUR&flexible=on&session=f31irlon4njmdn5c75v02xurbb2j5b4jo7nejf');" href="JavaScript:void(1);">	
+													<img src="images/share/facebook.gif">
+												</a>
+												<a title="Поделиться через эл. почту" onclick="JavaScript:shareOffer(2,'https://aviago.com.ua/search_results/SIP-IEV/2014-09-02--2014-09-04/?adults=1&cabin=none&airline=all&currency=EUR&flexible=on&session=f31irlon4njmdn5c75v02xurbb2j5b4jo7nejf',this);" href="JavaScript:void(1);">
+													<img src="images/share/email.gif">
+												</a>
+											</div>
+										</div>
+										<div style="float:left;">
+											<div class="button" style="font-size:18px;" onclick="submitGroupedForm('kfmsys57ojw7tk42iht4i8hcbfsnsr');">Выбрать</div>
+										</div>
+									</div>
+									<div style="clear:both;"></div>
+								</div>
+							</div>
+							<input type="hidden" value="kfmsys57ojw7tk42iht4i8hcbfsnsr" name="fare_id">
+							<input type="hidden" value="2014-09-02, 19:00" name="ltt">
+						</form>
+					</div>        
+				</div>
+			</div>
+		</div>
+		<div id="sessionIsOver" style="position:absolute; visibility:hidden;" class="white_block">Увы, после продолжительного ожидания окончилась рабочая сессия. Просим <a href="/">начать заново</a>.
+		</div>
+	</div>
 </div>
-    <div id="SRFilter" style="clear:both; display:none;" align="left"></div>
-  </div>
-  <div style="float:left; width:720px;"> <div style="padding: 12px 0 0 10px;" id="progress"><div style="clear:both;"><div style="float:left;; line-height:20px;"><a href="index.php">Поиск рейсов</a></div><div style="background: transparent url(https://files.avia.lt/images/breadcrumb_w.png); float:left; width:24px; height:21px;"></div><div style="float:left;; line-height:20px;"><span style="color:#ff801e; font-weight:bold;">Результаты поиска</span></div><div style="background: transparent url(https://files.avia.lt/images/breadcrumb_w.png); float:left; width:24px; height:21px;"></div><div style="float:left;; line-height:20px;">Детали заказа</div><div style="background: transparent url(https://files.avia.lt/images/breadcrumb_w.png); float:left; width:24px; height:21px;"></div><div style="float:left;; line-height:20px;">Подтверждение</div></div><div style="clear:both;height:8px;"></div></div>
-<div>
-  <div class="blue_block" style="float:left; width:452px; margin-top:0px;" align="left">
-    <div style="vertical-align:middle; display:table-cell; height:46px;">
-      <div><span class="big" style="overflow:hidden;">Симферополь</span> (SIP)<span class="big"> – </span><span class="big" style="overflow:hidden;">Милан</span> (MIL) </div>
-		  <div> вылет: <span class="big">1.9.2014</span> </div>
-    </div>
-  </div>
-  <div class="blue_block" style="float:left; width:180px; margin-top:0px;">
-    <div style=" vertical-align:middle; display:table-cell; height:46px;">
-      <div align="center" style="clear:both;">
-        <div style="float:left;"><img src="https://files.avia.lt/images/icons/sm_phone.png"></div>
-        <div style="float:left; font-size:14px; line-height:22px; color:#0074bc;">+380 (044) 383-49-32</div>
-      </div>
-      <div align="center" style="clear:both;"> <a href="JavaScript:ajaxDialog('popups/open_hours.php?lng=ru',600);" title="Время работы"><img src="https://files.avia.lt/images/icons/work_hours.png" alt="Время работы"></a> <a href="https://aviago.com.ua/help/" onclick="JavaScript:openw('https://aviago.com.ua/help//','','width=780,height=520,scrollbars,resizable'); return false;" title="Помощь"><img src="https://files.avia.lt/images/icons/help.png"></a> <a href="skype:avia.lt?chat" title="Свяжитесь"><img src="https://files.avia.lt/images/icons/skype.png"></a></div>
-    </div>
-  </div>
-</div>
-    <div style="clear:both;"></div>
-        <div id="noSpecialPriceFound" class="redborder" style="margin-top:14px; display:none;" align="center"><span class="red">К сожалению, свободных мест на рейсы с указаной ценой (0 евро) уже нет.</span></div>
-    <div id="searchProgress"></div>
-        <div id="otherDestDiv" style="margin-bottom:12px; padding:8px; display:none;" class="white_block_orange" align="left">
-      <div>
-        <div id="otherDestTitle" style="float:left; width:658px;" align="left">
-          <h1>Альтернативный маршрут</h1>
-        </div>
-        <div style="float:left;" align="right"><a href="JavaScript:hide('otherDestDiv');" title="Закрыть"><img src="https://files.avia.lt/images/close.gif" alt="Закрыть"></a></div>
-      </div>
-      <div id="otherDest" style="clear:both;" align="left"><img src="https://files.avia.lt/images/loading.gif"></div>
-    </div>
-    <div id="nooffersFound" style="display:none; margin-top:18px;" class="redborder">Предложений нет. Попробуйте поменять один или несколько параметров поиска.</div>
-    <div style="margin-bottom:12px;" id="pricesTableDiv" class="white_block">
-      <div>
-        <div style="float:left;">
-          <h2 style="margin-bottom:0; padding-bottom:0;"><span><a href="JavaScript:void(0);" onClick="openClose('prices_table','Лучшие цены в пределах +/- 3 дней', 'Лучшие цены в пределах +/- 3 дней',$(this),'','');"><span>Лучшие цены в пределах +/- 3 дней</span></a></h2>
-        </div>
-        <div style="float:right;"> <span><a href="JavaScript:void(0);" onClick="openClose('prices_table','показать', 'спрятать',$(this),'','');"><span>спрятать</span></a><a href="JavaScript:void(0);" onClick="openClose('prices_table','показать', 'спрятать',$(this),'','');"><img src="https://files.avia.lt/images/down.png" style="vertical-align:-7px;"></a></span></div>
-        <div style="clear:both;"></div>
-      </div>
-      <div id="prices_table" style="margin-bottom:10px; clear:both;" align="left"></div>
-    </div>
-        <div id="searchResults" align="left"></div>
-	 </div>
-</div>
-<div id="sessionIsOver" style="position:absolute; visibility:hidden;" class="white_block">Увы, после продолжительного ожидания окончилась рабочая сессия. Просим <a href="/">начать заново</a>.</div></div>
-    <div style="padding-top:14px; padding-bottom: 12px; clear:both; position:relative; z-index:38;"><div id="nav" align="justify" style="width:936px;">
-  <ul>
-    <li><a class="infoline"  href="about/">О нас</a></li>
-<li><a class="infoline"  href="discounts/">Скидки</a></li>
-<li><a class="infoline"  target="_blank" href="https://www.checkmytrip.com/cmt/apf/cmtng/index?LANGUAGE=RU&amp;SITE=NCMTNCMT" rel="nofollow">Проверить бронь</a></li>
-<li><a class="infoline"  target="_blank" href="http://www.worldtimezone.com" rel="nofollow">Временные зоны</a></li>
-<li><a class="infoline"  href="http://www.gismeteo.ru" rel="nofollow">Погода</a></li>
-  </ul>
-<span class="stretcher"></span>
-</div></div>
-    <div class="hr" style="width:940px;"></div>
-    <div class="slinks" style="padding:0 12px 0 12px; position:relative; width:940px;" align="left"><table border="0" width="100%" cellpadding="2" cellspacing="0"><tr><td valign="top" width="17%"><p><a href="https://aviago.com.ua/авиабилеты-Аликанте/" title="Рейсы в Аликанте">Рейсы в Аликанте</a></p><p><a href="https://aviago.com.ua/авиабилеты-Бейрут/" title="Рейсы в Бейрут">Рейсы в Бейрут</a></p><p><a href="https://aviago.com.ua/авиабилеты-Берген/" title="Рейсы в Берген">Рейсы в Берген</a></p><p><a href="https://aviago.com.ua/авиабилеты-Бирмингем/" title="Рейсы в Бирмингем">Рейсы в Бирмингем</a></p><p><a href="https://aviago.com.ua/авиабилеты-Бристоль/" title="Рейсы в Бристоль">Рейсы в Бристоль</a></p><p><a href="https://aviago.com.ua/авиабилеты-Брюссель/" title="Рейсы в Брюссель">Рейсы в Брюссель</a></p></td><td valign="top" width="17%"><p><a href="https://aviago.com.ua/авиабилеты-Буэнос-Айрес/" title="Рейсы в Буэнос-Айрес">Рейсы в Буэнос-Айрес</a></p><p><a href="https://aviago.com.ua/авиабилеты-Вена/" title="Рейсы в Вену">Рейсы в Вену</a></p><p><a href="https://aviago.com.ua/авиабилеты-Гётеборг/" title="Рейсы в Гётеборг">Рейсы в Гётеборг</a></p><p><a href="https://aviago.com.ua/авиабилеты-Киев/" title="Рейсы в Киев">Рейсы в Киев</a></p><p><a href="https://aviago.com.ua/авиабилеты-Киев/" title="Рейсы в Киев">Рейсы в Киев</a></p><p><a href="https://aviago.com.ua/авиабилеты-Корк/" title="Рейсы в Корк">Рейсы в Корк</a></p></td><td valign="top" width="17%"><p><a href="https://aviago.com.ua/авиабилеты-Ливерпуль/" title="Рейсы в Ливерпуль">Рейсы в Ливерпуль</a></p><p><a href="https://aviago.com.ua/авиабилеты-Лиссабон/" title="Рейсы в Лиссабон">Рейсы в Лиссабон</a></p><p><a href="https://aviago.com.ua/авиабилеты-Мадрид/" title="Рейсы в Мадрид">Рейсы в Мадрид</a></p><p><a href="https://aviago.com.ua/авиабилеты-Малага/" title="Рейсы в Малагу">Рейсы в Малагу</a></p><p><a href="https://aviago.com.ua/авиабилеты-Мюнхен/" title="Рейсы в Мюнхен">Рейсы в Мюнхен</a></p><p><a href="https://aviago.com.ua/авиабилеты-Ницца/" title="Рейсы в Ниццу">Рейсы в Ниццу</a></p></td><td valign="top" width="17%"><p><a href="https://aviago.com.ua/авиабилеты-Нью-Дели/" title="Рейсы в Нью-Дели">Рейсы в Нью-Дели</a></p><p><a href="https://aviago.com.ua/авиабилеты-Пекин/" title="Рейсы в Пекин">Рейсы в Пекин</a></p><p><a href="https://aviago.com.ua/авиабилеты-Прага/" title="Рейсы в Прагу">Рейсы в Прагу</a></p><p><a href="https://aviago.com.ua/авиабилеты-Рио-де-Жанейро/" title="Рейсы в Рио-де-Жанейро">Рейсы в Рио-де-Жанейро</a></p><p><a href="https://aviago.com.ua/авиабилеты-Санкт-Петербург/" title="Рейсы в Санкт-Петербург">Рейсы в Санкт-Петербург</a></p><p><a href="https://aviago.com.ua/авиабилеты-Сидней/" title="Рейсы в Сидней">Рейсы в Сидней</a></p></td><td valign="top" width="17%"><p><a href="https://aviago.com.ua/авиабилеты-Ставангер/" title="Рейсы в Ставангера">Рейсы в Ставангера</a></p><p><a href="https://aviago.com.ua/авиабилеты-Стокгольм/" title="Рейсы в Стокгольм">Рейсы в Стокгольм</a></p><p><a href="https://aviago.com.ua/авиабилеты-Таллинн/" title="Рейсы в Таллинн">Рейсы в Таллинн</a></p><p><a href="https://aviago.com.ua/авиабилеты-Токио/" title="Рейсы в Токио">Рейсы в Токио</a></p><p><a href="https://aviago.com.ua/авиабилеты-Торонто/" title="Рейсы в Торонто">Рейсы в Торонто</a></p><p><a href="https://aviago.com.ua/авиабилеты-Цюрих/" title="Рейсы в Цюрих">Рейсы в Цюрих</a></p></td><td valign="top" width="17%"><p><a href="https://aviago.com.ua/авиабилеты-Эдинбург/" title="Рейсы в Эдинбург">Рейсы в Эдинбург</a></p></td></tr></table></div>
-    <div class="hr" style="width:940px;"></div>
-    <div style="padding:12px; padding-top:2px; width:940px; position:relative;"><div style="clear:both; position:relative;">
-  <div align="left" class="copyright" style="padding-top:10px; text-align:left;"> © 2009 AviaGO.com.ua  | <a href="/все-рейсы/">Все полеты</a> | <a href="авиакомпании/">Все авиакомпании</a> | <a id="contactsLink" href="JavaScript:showNonModal('contacts');">Контакты</a> | 
-	<a href="https://aviago.ru/search_results/SIP-MIL/2014-09-01/?adults=1&currency=EUR&flexible=on&session=sl6z5x4q289uy44hb8md6qo5r0xkxo0k46il4kdv" target="_blank" title="Авиабилеты, дешевые полеты, Россия">Авиабилеты в России</a> | 
-	<a href="https://aviago.by/search_results/SIP-MIL/2014-09-01/?adults=1&currency=EUR&flexible=on&session=sl6z5x4q289uy44hb8md6qo5r0xkxo0k46il4kdv" target="_blank" title="Авиабилеты, дешевые полеты, Беларусь">Авиабилеты в Белорусии</a> |
-	        <a href="https://booking.avia.lt/" target="_blank" title="Internet hotels booking system">Internet hotels booking system</a> |
-        	  <a href="http://avia.lt/" target="_blank" title="Авиабилеты, дешевые полеты, Литва">Pigūs skrydžiai</a>
-	      <div style="position:relative; left:250px; top:-150px; width:300px;"><div id="contacts" align="left" class="white_block2" style="width:310px; position:absolute; display:none;">
-  <div style="float:right;"><a href="JavaScript:void(0);" onclick="hideNonModal('contacts');" title="Закрыть"><img src="https://files.avia.lt/images/close.gif" alt="Закрыть" align="middle"></a></div>
-  <div class="hOne">AviaGO.com.ua контакты</div>
-  <strong>Адрес</strong>: Украина, Крым, г. Симферополь, ул. Горького, 30, офис 7<br>
-  <strong>Телефон</strong>:<blockquote>Киев (+38 044) 392-74-08<br>Симферополь (+38 0652) 790-290<br>Львов (+38 032) 229-58-63</blockquote><br>
-  <strong>Эл. почта</strong>: <a style="font-size:inherit;" href="mailto:info@aviago.com.ua">info@aviago.com.ua</a> <br>
-  </div></div>
-  </div>
-  
-  <div align="left" style="text-align:left;">
-  <a href="http://www.iata.org" target="_blank" title="Аккредитованный член IATA"><img src="../images/iata_accredited_agent.png" title="Аккредитованный член IATA" alt="Аккредитованный член IATA"></a>
-  </div>
-  
-  <div style="clear:both;"></div>
 </div>
 </div>
-  </div>
-</div>
-<div style="position:absolute; visibility:hidden; left:0; top:0;" id="wait" class="white_block">
-  <div align="center" style="padding:12px;">
-    <div><img id="aviaLogo" src="https://files.avia.lt/images/logos/aviagoua.gif" alt="AviaGO.com.ua"></div>
-    <div style="padding:12px;">Пожалуйста, подождите...</div>
-    <div style="padding:12px;"><img id="waitBar" src="https://files.avia.lt/images/progress_bar.gif" alt="Пожалуйста, подождите..."></div>
-  </div>
-</div>
+
 <script type="text/javascript">
 preloadImages("https://files.avia.lt/images/logos/aviagoua.gif","https://files.avia.lt/images/progress_bar.gif");
 </script>
 <div id="cover" style="width:100%; height:560px; position: absolute;
 top: 0; left: 0; background-color: white; opacity:.50; filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50); visibility:hidden;"></div>
-<script type="text/javascript">
-$(document).ready(function(e) {
-	$(".dialog").fancybox();
-	$(".ajaxDialog").fancybox({type:"ajax",titleShow:false,helpers:{title:null}});
-	try {
-		//fixbtn();
-		whiteBlock();
-		wrapSelect();
-		$(".textfill").textfill({maxFontPixels: 100});
-	} catch(e) {log(e)}
-	});	
-try{ 
-		var pageTracker = _gat._getTracker("UA-2757289-7");
-		pageTracker._trackPageview();
-	} catch(err) {}
 
-	
+<script type="text/javascript">
 $(".tabs").makeTabs();
 </script>
 </body>

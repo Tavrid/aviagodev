@@ -22,23 +22,6 @@
 <script type="text/javascript" src="javascript/functions.php?id=flights&amp;lng=ru"></script>
 <script type="text/javascript" src="javascript/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 <script type="text/javascript" src="https://ssl.google-analytics.com/ga.js"></script>
-<script type="text/javascript">
-var sel = "flights";
-var selected,pageTracker;
-var specialsLoaded = false;
-var searchFormLoaded = false;
-var searchResLoaded = false;
-var flightDetLoaded = false;
-var isDirectSearch = false;
-var doOnLoad = null;
-var sfMonthNum = 2;
-function login_display(theName, id){
-	hide("registerLine");
-	hide("loginPlace");
-	inline("loginInfo");
-	$("#loginInfo").html('Пользователь: <a href="?id=user_account&amp;ua_page=profile&amp;user_id='+id+'&amp;in_index_page=true" title="Детали пользователя"><span id="userName">'+Utf8.decode(theName)+'<'+'/'+'a>&nbsp;|&nbsp;<a href="?id=user_account&amp;ua_page=orders&amp;user_id='+id+'" title="Мои брони">Мои брони<'+'/'+'a> | <a href="?action=logout" title="Выйти">Выйти<'+'/'+'a><'+'/'+'span>');
-}
-</script>
 </head>
 <body>
 	<div align="center">
@@ -50,10 +33,11 @@ function login_display(theName, id){
       						<a href=""><img src="spacer.gif" width="50" height="30" align=""></a>
       					</div>
       					<div style="float:left; background:url(images/tab/small/hotel_uns.gif) bottom; width: 76px; height:50px; position:relative; left:-3px; top:2px;" align="center" class="tab">
-      						<a href="http://www.booking.com/index.html?aid=320568" target="_blank"><img src="spacer.gif" width="50" height="30" align=""></a>
+      						<a href="" target="_blank"><img src="spacer.gif" width="50" height="30" align=""></a>
       					</div>
     				</div>
-    				<div class="blue_block" style="clear:both; position:relative; top:-9px; padding:8px;"> <style>
+    				<div class="blue_block" style="clear:both; position:relative; top:-9px; padding:8px;"> 
+            <style>
 .OrderSummary{
 	clear:both;
 	padding:6px;
@@ -112,11 +96,11 @@ function login_display(theName, id){
     		<div style="padding: 12px 0 0 10px;" id="progress">
     			<div style="clear:both;">
     				<div style="float:left;; line-height:20px;">
-    					<a href="index.php">Поиск рейсов</a>
+    					<a href="">Поиск рейсов</a>
     				</div>
     				<div style="background: transparent url(https://files.avia.lt/images/breadcrumb_w.png); float:left; width:24px; height:21px;"></div>
     				<div style="float:left;; line-height:20px;">
-    					<a href="JavaScript:history.back(-1);">Результаты поиска</a>
+    					<a href="">Результаты поиска</a>
     				</div>
     				<div style="background: transparent url(https://files.avia.lt/images/breadcrumb_w.png); float:left; width:24px; height:21px;"></div>
     				<div style="float:left;; line-height:20px;">
@@ -143,13 +127,13 @@ function login_display(theName, id){
         				<div style="float:left; font-size:14px; line-height:22px; color:#0074bc;">+380 (044) 383-49-32</div>
       				</div>
       				<div align="center" style="clear:both;"> 
-      					<a href="JavaScript:ajaxDialog('popups/open_hours.php?lng=ru',600);" title="Время работы">
+      					<a href="" title="Время работы">
       						<img src="https://files.avia.lt/images/icons/work_hours.png" alt="Время работы">
       					</a> 
-      					<a href="https://aviago.com.ua/help/" onclick="JavaScript:openw('https://aviago.com.ua/help//','','width=780,height=520,scrollbars,resizable'); return false;" title="Помощь">
+      					<a href="" title="Помощь">
       						<img src="https://files.avia.lt/images/icons/help.png">
       					</a> 
-      					<a href="skype:avia.lt?chat" title="Свяжитесь">
+      					<a href="" title="Свяжитесь">
       						<img src="https://files.avia.lt/images/icons/skype.png">
       					</a>
       				</div>
@@ -158,7 +142,8 @@ function login_display(theName, id){
 		</div>
  	</div>
     <div style="clear:both;"></div>
-    <div id="content" align="left">       <style>
+    <div id="content" align="left">       
+    <style>
 .segmentLine{
 	text-align:center;
 	padding:8px;
@@ -167,7 +152,7 @@ function login_display(theName, id){
 	padding:8px 0 8px 0;
 }
 </style>
-    <form id="flightForm" name="flightForm" action="booking.php" method="post" onsubmit="return false;">
+    <form id="flightForm" name="flightForm" action="" method="post" onsubmit="return false;">
         <div class="tabs">
           	<ul>
             	<li><a target="fare_rules">Правила тарифа</a></li>
@@ -179,7 +164,7 @@ function login_display(theName, id){
 					<div class="dline"></div>
 					<div>Если в вашем билете несколько рейсов, при неявке на один из них авиакомпания имеет право отменить бронь на оставшиеся рейсы.</div>
 					<div class="smaller">
-						<a href="https://aviago.com.ua/fare_rules.php?&session=sl6z5x4q289uy44hb8md6qo5r0xkxo0k46il4kdv&fare_id=d09nd9u3rzscz6mkzgbu8rp1k82maz&price=4085" target="_blank">Все правила тарифа на (англ. яз.)</a>
+						<a href="" target="_blank">Все правила тарифа на (англ. яз.)</a>
 					</div>
  				</div>
             	<div id="itinerary"> <div>
@@ -296,37 +281,7 @@ function login_display(theName, id){
  	</div>
     </div>
 </div>
-                <div style="z-index:60; position:relative;"><script type="text/javascript">
-var is_us = false;
-
-function hideSavedPax(){
-	$(".userSavedPax").html("");
-}
-function getSavedUserPax() {
-	$("#l").load("includes/fd/pd/get_saved_pax.php?session=sl6z5x4q289uy44hb8md6qo5r0xkxo0k46il4kdv");
-}
-
-var freq_fl_2_value;
-var freq_fl_3_value;
-function showMoreFF(inf, i){
-	openClose('freq_fl'+inf+i, 'еще','закрыть','w');
-	var ff2 = flightForm[inf+'freq_fl_2_value_'+i];
-	var ff3 = flightForm[inf+'freq_fl_3_value_'+i];	
-	if(el('more_freq_fl'+inf+i).style.display == 'none'){
-		//Need to rest FF2 and FF3 values to empty string
-		//So that Frequent Flyer programs wouldn't be set in Symphony
-		//If user filled them in bu then pressed "Less Frequent Fleyer programs"
-		freq_fl_2_value = ff2.value;
-		ff2.value = '';
-		freq_fl_3_value = ff3.value;
-		ff3.value = '';
-	} else {
-		//Restoring entered values in case user changes their mind once again...
-		if(freq_fl_2_value != undefined) ff2.value = freq_fl_2_value;
-		if(freq_fl_3_value != undefined) ff3.value = freq_fl_3_value;
-	}
-}
-</script>
+                <div style="z-index:60; position:relative;">
 
 <input type="hidden" name="is_us" value="false">
 <div id="l"></div>
@@ -365,7 +320,234 @@ function showMoreFF(inf, i){
                 		<div class="formLine">
 							<label>телефон:</label>
 								<select name="country_ph_code" id="country_ph_code" style="width:60px;">
-  									<option value="+61">+61 – Австралия</option><option value="+43">+43 – Австрия</option><option value="+994">+994 – Азербайджан</option><option value="+355">+355 – Албания</option><option value="+213">+213 – Алжир</option><option value="+1-340">+1-340 – Американские Виргинские острова</option><option value="+1-684">+1-684 – Американское Самоа</option><option value="+1-264">+1-264 – Ангилья</option><option value="+244">+244 – Ангола</option><option value="+376">+376 – Андорра</option><option value="+1-268">+1-268 – Антигуа и Барбуда</option><option value="+54">+54 – Аргентина</option><option value="+374">+374 – Армения</option><option value="+297">+297 – Аруба</option><option value="+93">+93 – Афганистан</option><option value="+1-242">+1-242 – Багамские Острова</option><option value="+880">+880 – Бангладеш</option><option value="+1-246">+1-246 – Барбадос</option><option value="+973">+973 – Бахрейн</option><option value="+375">+375 – Беларусь</option><option value="+501">+501 – Белиз</option><option value="+32">+32 – Бельгия</option><option value="+229">+229 – Бенин</option><option value="+1-441">+1-441 – Бермуды</option><option value="+359">+359 – Болгария</option><option value="+591">+591 – Боливия</option><option value="+387">+387 – Босния и Герцеговина</option><option value="+267">+267 – Ботсвана</option><option value="+55">+55 – Бразилия</option><option value="+246">+246 – Британская территория в Индийском океане</option><option value="+1-284">+1-284 – Британские Виргинские Острова</option><option value="+673">+673 – Бруней</option><option value="+226">+226 – Буркина Фасо</option><option value="+257">+257 – Бурунди</option><option value="+975">+975 – Бутан</option><option value="+678">+678 – Вануату</option><option value="+379">+379 – Ватикан</option><option value="+44">+44 – Великобритания</option><option value="+36">+36 – Венгрия</option><option value="+58">+58 – Венесуэла</option><option value="+670">+670 – Восточный Тимор</option><option value="+84">+84 – Вьетнам</option><option value="+241">+241 – Габон</option><option value="+509">+509 – Гаити</option><option value="+592">+592 – Гайана</option><option value="+220">+220 – Гамбия</option><option value="+233">+233 – Гана</option><option value="+590">+590 – Гваделупа</option><option value="+502">+502 – Гватемала</option><option value="+224">+224 – Гвинея</option><option value="+245">+245 – Гвинея-Биссау</option><option value="+49">+49 – Германия</option><option value="+350">+350 – Гибралтар</option><option value="+504">+504 – Гондурас</option><option value="+852">+852 – Гонконг</option><option value="+1-473">+1-473 – Гренада</option><option value="+299">+299 – Гренландия</option><option value="+30">+30 – Греция</option><option value="+995">+995 – Грузия</option><option value="+1-671">+1-671 – Гуам</option><option value="+45">+45 – Дания</option><option value="+253">+253 – Джибути</option><option value="+1-767">+1-767 – Доминика</option><option value="+1-809">+1-809 – Доминиканская Республика</option><option value="+20">+20 – Египет</option><option value="+260">+260 – Замбия</option><option value="+212">+212 – Западная Сахара</option><option value="+263">+263 – Зимбабве</option><option value="+972">+972 – Израиль</option><option value="+91">+91 – Индия</option><option value="+62">+62 – Индонезия</option><option value="+962">+962 – Иордания</option><option value="+964">+964 – Ирак</option><option value="+98">+98 – Иран</option><option value="+353">+353 – Ирландия</option><option value="+354">+354 – Исландия</option><option value="+34">+34 – Испания</option><option value="+39">+39 – Италия</option><option value="+967">+967 – Йемен</option><option value="+238">+238 – Кабо-Верде</option><option value="+7">+7 – Казахстан</option><option value="+1-345">+1-345 – Каймановы острова</option><option value="+855">+855 – Камбоджа</option><option value="+237">+237 – Камерун</option><option value="+1">+1 – Канада</option><option value="+974">+974 – Катар</option><option value="+254">+254 – Кения</option><option value="+357">+357 – Кипр</option><option value="+996">+996 – Киргизстан</option><option value="+686">+686 – Кирибати</option><option value="+86">+86 – Китай</option><option value="+57">+57 – Колумбия</option><option value="+269">+269 – Коморские острова</option><option value="+242">+242 – Конго</option><option value="+243">+243 – Конго, Демократическая Республика</option><option value="+506">+506 – Коста Рика</option><option value="+225">+225 – Кот Д'ивуар</option><option value="+53">+53 – Куба</option><option value="+965">+965 – Кувейт</option><option value="+856">+856 – Лаос</option><option value="+371">+371 – Латвия</option><option value="+266">+266 – Лесото</option><option value="+231">+231 – Либерия</option><option value="+961">+961 – Ливан</option><option value="+218">+218 – Ливия</option><option value="+370">+370 – Литва</option><option value="+423">+423 – Лихтенштейн</option><option value="+352">+352 – Люксембург</option><option value="+230">+230 – Маврикий</option><option value="+222">+222 – Мавритания</option><option value="+261">+261 – Мадагаскар</option><option value="+262">+262 – Майотта</option><option value="+853">+853 – Макао</option><option value="+389">+389 – Македония</option><option value="+265">+265 – Малави</option><option value="+60">+60 – Малазия</option><option value="+223">+223 – Мали</option><option value="+960">+960 – Мальдивы</option><option value="+356">+356 – Мальта</option><option value="+212">+212 – Марокко</option><option value="+596">+596 – Мартиника</option><option value="+692">+692 – Маршалловы Острова</option><option value="+52">+52 – Мексика</option><option value="+258">+258 – Мозамбик</option><option value="+373">+373 – Молдова</option><option value="+377">+377 – Монако</option><option value="+976">+976 – Монголия</option><option value="+1-664">+1-664 – Монтсеррат</option><option value="+95">+95 – Мьянмар</option><option value="+264">+264 – Намибия</option><option value="+674">+674 – Науру</option><option value="+977">+977 – Непал</option><option value="+227">+227 – Нигер</option><option value="+234">+234 – Нигерия</option><option value="+599">+599 – Нидерландские Антильские острова</option><option value="+31">+31 – Нидерланды</option><option value="+505">+505 – Никарагуа</option><option value="+683">+683 – Ниуэ</option><option value="+64">+64 – Новая Зеландия</option><option value="+687">+687 – Новая Каледония</option><option value="+47">+47 – Норвегия</option><option value="+971">+971 – Объединенные Арабские Эмираты</option><option value="+968">+968 – Оман</option><option value="+672">+672 – Остров Норфолк</option><option value="+290">+290 – Остров Святой Елены</option><option value="+682">+682 – Острова Кука</option><option value="+681">+681 – Острова Уоллис и Футуна</option><option value="+92">+92 – Пакистан</option><option value="+680">+680 – Палау</option><option value="+970">+970 – Палестина</option><option value="+507">+507 – Панама</option><option value="+675">+675 – Папуа Новая Гвинея</option><option value="+595">+595 – Парагвай</option><option value="+51">+51 – Перу</option><option value="+48">+48 – Польша</option><option value="+351">+351 – Португалия</option><option value="+1-787">+1-787 – Пуэрто-Рико</option><option value="+7">+7 – Россия</option><option value="+250">+250 – Руанда</option><option value="+40">+40 – Румыния</option><option value="+503">+503 – Сальвадор</option><option value="+685">+685 – Самоа</option><option value="+378">+378 – Сан-Марино</option><option value="+239">+239 – Сан-Томе и Принсипи</option><option value="+966">+966 – Саудовская Аравия</option><option value="+268">+268 – Свазиленд</option><option value="+850">+850 – Северная Корея</option><option value="+1-670">+1-670 – Северные Марианские острова</option><option value="+248">+248 – Сейшелы</option><option value="+221">+221 – Сенегал</option><option value="+1-784">+1-784 – Сент-Винсент и Гренадины</option><option value="+1-869">+1-869 – Сент-Китс и Невис</option><option value="+1-758">+1-758 – Сент-Люсия</option><option value="+381">+381 – Сербия и Черногория</option><option value="+65">+65 – Сингапур</option><option value="+963">+963 – Сирия</option><option value="+421">+421 – Словакия</option><option value="+386">+386 – Словения</option><option value="+677">+677 – Соломоновы Острова</option><option value="+252">+252 – Сомали</option><option value="+249">+249 – Судан</option><option value="+597">+597 – Суринам</option><option value="+1">+1 – США</option><option value="+232">+232 – Сьерра-Леоне</option><option value="+992">+992 – Таджикистан</option><option value="+886">+886 – Тайвань</option><option value="+66">+66 – Тайланд</option><option value="+255">+255 – Танзания</option><option value="+1-649">+1-649 – Тёркс и Кайкос</option><option value="+228">+228 – Того</option><option value="+690">+690 – Токелау</option><option value="+676">+676 – Тонго</option><option value="+1-868">+1-868 – Тринидад и Тобаго</option><option value="+688">+688 – Тувалу</option><option value="+216">+216 – Тунис</option><option value="+993">+993 – Туркменистан</option><option value="+90">+90 – Турция</option><option value="+256">+256 – Уганда</option><option value="+998">+998 – Узбекистан</option><option value="+380" selected="selected">+380 – Украина</option><option value="+598">+598 – Уругвай</option><option value="+298">+298 – Фарерские острова</option><option value="+691">+691 – Федеративные Штаты Микронезии</option><option value="+679">+679 – Фиджи</option><option value="+63">+63 – Филиппины</option><option value="+358">+358 – Финляндия</option><option value="+500">+500 – Фолклендские (Мальвинские) острова</option><option value="+33">+33 – Франция</option><option value="+594">+594 – Французская Гвинея</option><option value="+689">+689 – Французская Полинезия</option><option value="+385">+385 – Хорватия</option><option value="+236">+236 – Центральноафриканская Республика</option><option value="+235">+235 – Чад</option><option value="+420">+420 – Чешская Республика</option><option value="+56">+56 – Чили</option><option value="+41">+41 – Швейцария</option><option value="+46">+46 – Швеция</option><option value="+94">+94 – Шри Ланка</option><option value="+593">+593 – Эквадор</option><option value="+240">+240 – Экваториальная Гвинея</option><option value="+291">+291 – Эритрея</option><option value="+372">+372 – Эстония</option><option value="+251">+251 – Эфиопия</option><option value="+82">+82 – Южная Корея</option><option value="+27">+27 – Южноафриканская Республика</option><option value="+1-876">+1-876 – Ямайка</option><option value="+81">+81 – Япония</option></select>
+  									<option value="+61">+61 – Австралия</option>          
+                    <option value="+43">+43 – Австрия</option>
+                    <option value="+994">+994 – Азербайджан</option>
+                    <option value="+355">+355 – Албания</option>
+                    <option value="+213">+213 – Алжир</option>
+                    <option value="+1-340">+1-340 – Американские Виргинские острова</option>
+                    <option value="+1-684">+1-684 – Американское Самоа</option>
+                    <option value="+1-264">+1-264 – Ангилья</option>
+                    <option value="+244">+244 – Ангола</option>
+                    <option value="+376">+376 – Андорра</option>
+                    <option value="+1-268">+1-268 – Антигуа и Барбуда</option>
+                    <option value="+54">+54 – Аргентина</option>
+                    <option value="+374">+374 – Армения</option>
+                    <option value="+297">+297 – Аруба</option>
+                    <option value="+93">+93 – Афганистан</option>
+                    <option value="+1-242">+1-242 – Багамские Острова</option>
+                    <option value="+880">+880 – Бангладеш</option>
+                    <option value="+1-246">+1-246 – Барбадос</option>
+                    <option value="+973">+973 – Бахрейн</option>
+                    <option value="+375">+375 – Беларусь</option>
+                    <option value="+501">+501 – Белиз</option>
+                    <option value="+32">+32 – Бельгия</option>
+                    <option value="+229">+229 – Бенин</option>
+                    <option value="+1-441">+1-441 – Бермуды</option>
+                    <option value="+359">+359 – Болгария</option>
+                    <option value="+591">+591 – Боливия</option>
+                    <option value="+387">+387 – Босния и Герцеговина</option>
+                    <option value="+267">+267 – Ботсвана</option>
+                    <option value="+55">+55 – Бразилия</option>
+                    <option value="+246">+246 – Британская территория в Индийском океане</option>
+                    <option value="+1-284">+1-284 – Британские Виргинские Острова</option>
+                    <option value="+673">+673 – Бруней</option>
+                    <option value="+226">+226 – Буркина Фасо</option>
+                    <option value="+257">+257 – Бурунди</option>
+                    <option value="+975">+975 – Бутан</option>
+                    <option value="+678">+678 – Вануату</option>
+                    <option value="+379">+379 – Ватикан</option>
+                    <option value="+44">+44 – Великобритания</option>
+                    <option value="+36">+36 – Венгрия</option>
+                    <option value="+58">+58 – Венесуэла</option>
+                    <option value="+670">+670 – Восточный Тимор</option>
+                    <option value="+84">+84 – Вьетнам</option>
+                    <option value="+241">+241 – Габон</option>
+                    <option value="+509">+509 – Гаити</option>
+                    <option value="+592">+592 – Гайана</option>
+                    <option value="+220">+220 – Гамбия</option>
+                    <option value="+233">+233 – Гана</option>
+                    <option value="+590">+590 – Гваделупа</option>
+                    <option value="+502">+502 – Гватемала</option>
+                    <option value="+224">+224 – Гвинея</option>
+                    <option value="+245">+245 – Гвинея-Биссау</option>
+                    <option value="+49">+49 – Германия</option>
+                    <option value="+350">+350 – Гибралтар</option>
+                    <option value="+504">+504 – Гондурас</option>
+                    <option value="+852">+852 – Гонконг</option>
+                    <option value="+1-473">+1-473 – Гренада</option>
+                    <option value="+299">+299 – Гренландия</option>
+                    <option value="+30">+30 – Греция</option>
+                    <option value="+995">+995 – Грузия</option>
+                    <option value="+1-671">+1-671 – Гуам</option>
+                    <option value="+45">+45 – Дания</option>
+                    <option value="+253">+253 – Джибути</option>
+                    <option value="+1-767">+1-767 – Доминика</option>
+                    <option value="+1-809">+1-809 – Доминиканская Республика</option>
+                    <option value="+20">+20 – Египет</option>
+                    <option value="+260">+260 – Замбия</option>
+                    <option value="+212">+212 – Западная Сахара</option>
+                    <option value="+263">+263 – Зимбабве</option>
+                    <option value="+972">+972 – Израиль</option>
+                    <option value="+91">+91 – Индия</option>
+                    <option value="+62">+62 – Индонезия</option>
+                    <option value="+962">+962 – Иордания</option>
+                    <option value="+964">+964 – Ирак</option>
+                    <option value="+98">+98 – Иран</option>
+                    <option value="+353">+353 – Ирландия</option>
+                    <option value="+354">+354 – Исландия</option>
+                    <option value="+34">+34 – Испания</option>
+                    <option value="+39">+39 – Италия</option>
+                    <option value="+967">+967 – Йемен</option>
+                    <option value="+238">+238 – Кабо-Верде</option>
+                    <option value="+7">+7 – Казахстан</option>
+                    <option value="+1-345">+1-345 – Каймановы острова</option>
+                    <option value="+855">+855 – Камбоджа</option>
+                    <option value="+237">+237 – Камерун</option>
+                    <option value="+1">+1 – Канада</option>
+                    <option value="+974">+974 – Катар</option>
+                    <option value="+254">+254 – Кения</option>
+                    <option value="+357">+357 – Кипр</option>
+                    <option value="+996">+996 – Киргизстан</option>
+                    <option value="+686">+686 – Кирибати</option>
+                    <option value="+86">+86 – Китай</option>
+                    <option value="+57">+57 – Колумбия</option>
+                    <option value="+269">+269 – Коморские острова</option>
+                    <option value="+242">+242 – Конго</option>
+                    <option value="+243">+243 – Конго, Демократическая Республика</option>
+                    <option value="+506">+506 – Коста Рика</option>
+                    <option value="+225">+225 – Кот Д'ивуар</option>
+                    <option value="+53">+53 – Куба</option>
+                    <option value="+965">+965 – Кувейт</option>
+                    <option value="+856">+856 – Лаос</option>
+                    <option value="+371">+371 – Латвия</option>
+                    <option value="+266">+266 – Лесото</option>
+                    <option value="+231">+231 – Либерия</option>
+                    <option value="+961">+961 – Ливан</option>
+                    <option value="+218">+218 – Ливия</option>
+                    <option value="+370">+370 – Литва</option>
+                    <option value="+423">+423 – Лихтенштейн</option>
+                    <option value="+352">+352 – Люксембург</option>
+                    <option value="+230">+230 – Маврикий</option>
+                    <option value="+222">+222 – Мавритания</option>
+                    <option value="+261">+261 – Мадагаскар</option>
+                    <option value="+262">+262 – Майотта</option>
+                    <option value="+853">+853 – Макао</option>
+                    <option value="+389">+389 – Македония</option>
+                    <option value="+265">+265 – Малави</option>
+                    <option value="+60">+60 – Малазия</option>
+                    <option value="+223">+223 – Мали</option>
+                    <option value="+960">+960 – Мальдивы</option>
+                    <option value="+356">+356 – Мальта</option>
+                    <option value="+212">+212 – Марокко</option>
+                    <option value="+596">+596 – Мартиника</option>
+                    <option value="+692">+692 – Маршалловы Острова</option>
+                    <option value="+52">+52 – Мексика</option>
+                    <option value="+258">+258 – Мозамбик</option>
+                    <option value="+373">+373 – Молдова</option>
+                    <option value="+377">+377 – Монако</option>
+                    <option value="+976">+976 – Монголия</option>
+                    <option value="+1-664">+1-664 – Монтсеррат</option>
+                    <option value="+95">+95 – Мьянмар</option>
+                    <option value="+264">+264 – Намибия</option>
+                    <option value="+674">+674 – Науру</option>
+                    <option value="+977">+977 – Непал</option>
+                    <option value="+227">+227 – Нигер</option>
+                    <option value="+234">+234 – Нигерия</option>
+                    <option value="+599">+599 – Нидерландские Антильские острова</option>
+                    <option value="+31">+31 – Нидерланды</option>
+                    <option value="+505">+505 – Никарагуа</option>
+                    <option value="+683">+683 – Ниуэ</option>
+                    <option value="+64">+64 – Новая Зеландия</option>
+                    <option value="+687">+687 – Новая Каледония</option>
+                    <option value="+47">+47 – Норвегия</option>
+                    <option value="+971">+971 – Объединенные Арабские Эмираты</option>
+                    <option value="+968">+968 – Оман</option>
+                    <option value="+672">+672 – Остров Норфолк</option>
+                    <option value="+290">+290 – Остров Святой Елены</option>
+                    <option value="+682">+682 – Острова Кука</option>
+                    <option value="+681">+681 – Острова Уоллис и Футуна</option>
+                    <option value="+92">+92 – Пакистан</option>
+                    <option value="+680">+680 – Палау</option>
+                    <option value="+970">+970 – Палестина</option>
+                    <option value="+507">+507 – Панама</option>
+                    <option value="+675">+675 – Папуа Новая Гвинея</option>
+                    <option value="+595">+595 – Парагвай</option>
+                    <option value="+51">+51 – Перу</option>
+                    <option value="+48">+48 – Польша</option>
+                    <option value="+351">+351 – Португалия</option>
+                    <option value="+1-787">+1-787 – Пуэрто-Рико</option>
+                    <option value="+7">+7 – Россия</option>
+                    <option value="+250">+250 – Руанда</option>
+                    <option value="+40">+40 – Румыния</option>
+                    <option value="+503">+503 – Сальвадор</option>
+                    <option value="+685">+685 – Самоа</option>
+                    <option value="+378">+378 – Сан-Марино</option>
+                    <option value="+239">+239 – Сан-Томе и Принсипи</option>
+                    <option value="+966">+966 – Саудовская Аравия</option>
+                    <option value="+268">+268 – Свазиленд</option>
+                    <option value="+850">+850 – Северная Корея</option>
+                    <option value="+1-670">+1-670 – Северные Марианские острова</option>
+                    <option value="+248">+248 – Сейшелы</option>
+                    <option value="+221">+221 – Сенегал</option>
+                    <option value="+1-784">+1-784 – Сент-Винсент и Гренадины</option>
+                    <option value="+1-869">+1-869 – Сент-Китс и Невис</option>
+                    <option value="+1-758">+1-758 – Сент-Люсия</option>
+                    <option value="+381">+381 – Сербия и Черногория</option>
+                    <option value="+65">+65 – Сингапур</option>
+                    <option value="+963">+963 – Сирия</option>
+                    <option value="+421">+421 – Словакия</option>
+                    <option value="+386">+386 – Словения</option>
+                    <option value="+677">+677 – Соломоновы Острова</option>
+                    <option value="+252">+252 – Сомали</option>
+                    <option value="+249">+249 – Судан</option>
+                    <option value="+597">+597 – Суринам</option>
+                    <option value="+1">+1 – США</option>
+                    <option value="+232">+232 – Сьерра-Леоне</option>
+                    <option value="+992">+992 – Таджикистан</option>
+                    <option value="+886">+886 – Тайвань</option>
+                    <option value="+66">+66 – Тайланд</option>
+                    <option value="+255">+255 – Танзания</option>
+                    <option value="+1-649">+1-649 – Тёркс и Кайкос</option>
+                    <option value="+228">+228 – Того</option>
+                    <option value="+690">+690 – Токелау</option>
+                    <option value="+676">+676 – Тонго</option>
+                    <option value="+1-868">+1-868 – Тринидад и Тобаго</option>
+                    <option value="+688">+688 – Тувалу</option>
+                    <option value="+216">+216 – Тунис</option>
+                    <option value="+993">+993 – Туркменистан</option>
+                    <option value="+90">+90 – Турция</option>
+                    <option value="+256">+256 – Уганда</option>
+                    <option value="+998">+998 – Узбекистан</option>
+                    <option value="+380" selected="selected">+380 – Украина</option>
+                    <option value="+598">+598 – Уругвай</option>
+                    <option value="+298">+298 – Фарерские острова</option>
+                    <option value="+691">+691 – Федеративные Штаты Микронезии</option>
+                    <option value="+679">+679 – Фиджи</option>
+                    <option value="+63">+63 – Филиппины</option>
+                    <option value="+358">+358 – Финляндия</option>
+                    <option value="+500">+500 – Фолклендские (Мальвинские) острова</option>
+                    <option value="+33">+33 – Франция</option>
+                    <option value="+594">+594 – Французская Гвинея</option>
+                    <option value="+689">+689 – Французская Полинезия</option>
+                    <option value="+385">+385 – Хорватия</option>
+                    <option value="+236">+236 – Центральноафриканская Республика</option>
+                    <option value="+235">+235 – Чад</option>
+                    <option value="+420">+420 – Чешская Республика</option>
+                    <option value="+56">+56 – Чили</option>
+                    <option value="+41">+41 – Швейцария</option>
+                    <option value="+46">+46 – Швеция</option>
+                    <option value="+94">+94 – Шри Ланка</option>
+                    <option value="+593">+593 – Эквадор</option>
+                    <option value="+240">+240 – Экваториальная Гвинея</option>
+                    <option value="+291">+291 – Эритрея</option>
+                    <option value="+372">+372 – Эстония</option>
+                    <option value="+251">+251 – Эфиопия</option>
+                    <option value="+82">+82 – Южная Корея</option>
+                    <option value="+27">+27 – Южноафриканская Республика</option>
+                    <option value="+1-876">+1-876 – Ямайка</option>
+                    <option value="+81">+81 – Япония</option>
+                    </select>
 -
 									<input name="phone1" type="text" id="phone1" size="16" style="width:130px" value="">
 							</div>
@@ -382,51 +564,416 @@ function showMoreFF(inf, i){
 							<label>дата рождения:</label>
 							<select class="passSel" name="day0" id="day0">
 								<option value=""></option>
+
 								<option value="1" > 1 </option>
+
 							  	<option value="2" > 2 </option>
+
 							  	<option value="3" > 3 </option>
+
 							  	<option value="4" > 4 </option>
+
 							  	<option value="5" > 5 </option>
+
 							  	<option value="6" > 6 </option>
+
 							  	<option value="7" > 7 </option>
+
 							  	<option value="8" > 8 </option>
+
 							  	<option value="9" > 9 </option>
+
 							  	<option value="10" > 10 </option>
+
 							  	<option value="11" > 11 </option>
+
 							  	<option value="12" > 12 </option>
+
 							  	<option value="13" > 13 </option>
+
 							  	<option value="14" > 14 </option>
+
 							  	<option value="15" > 15 </option>
+
 							  	<option value="16" > 16 </option>
+
 							  	<option value="17" > 17 </option>
+
 							  	<option value="18" > 18 </option>
+
 							  	<option value="19" > 19 </option>
+
 							  	<option value="20" > 20 </option>
+
 							  	<option value="21" > 21 </option>
+
 							  	<option value="22" > 22 </option>
+
 							  	<option value="23" > 23 </option>
+
 							  	<option value="24" > 24 </option>
+
 							  	<option value="25" > 25 </option>
+
 							  	<option value="26" > 26 </option>
+
 							  	<option value="27" > 27 </option>
+
 							  	<option value="28" > 28 </option>
+
 							  	<option value="29" > 29 </option>
+
 							  	<option value="30" > 30 </option>
+
 							  	<option value="31" > 31 </option>
+
   							</select>
 							<select class="passSel" name="month0" id="month0">
 								<option value=""></option>
-								<option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option>
+
+								<option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+
 							</select>
 							<select class="passSel" name="year0" id="year0">
 								<option value=""></option>
-								<option value="2002">2002</option><option value="2001">2001</option><option value="2000">2000</option><option value="1999">1999</option><option value="1998">1998</option><option value="1997">1997</option><option value="1996">1996</option><option value="1995">1995</option><option value="1994">1994</option><option value="1993">1993</option><option value="1992">1992</option><option value="1991">1991</option><option value="1990">1990</option><option value="1989">1989</option><option value="1988">1988</option><option value="1987">1987</option><option value="1986">1986</option><option value="1985">1985</option><option value="1984">1984</option><option value="1983">1983</option><option value="1982">1982</option><option value="1981">1981</option><option value="1980">1980</option><option value="1979">1979</option><option value="1978">1978</option><option value="1977">1977</option><option value="1976">1976</option><option value="1975">1975</option><option value="1974">1974</option><option value="1973">1973</option><option value="1972">1972</option><option value="1971">1971</option><option value="1970">1970</option><option value="1969">1969</option><option value="1968">1968</option><option value="1967">1967</option><option value="1966">1966</option><option value="1965">1965</option><option value="1964">1964</option><option value="1963">1963</option><option value="1962">1962</option><option value="1961">1961</option><option value="1960">1960</option><option value="1959">1959</option><option value="1958">1958</option><option value="1957">1957</option><option value="1956">1956</option><option value="1955">1955</option><option value="1954">1954</option><option value="1953">1953</option><option value="1952">1952</option><option value="1951">1951</option><option value="1950">1950</option><option value="1949">1949</option><option value="1948">1948</option><option value="1947">1947</option><option value="1946">1946</option><option value="1945">1945</option><option value="1944">1944</option><option value="1943">1943</option><option value="1942">1942</option><option value="1941">1941</option><option value="1940">1940</option><option value="1939">1939</option><option value="1938">1938</option><option value="1937">1937</option><option value="1936">1936</option><option value="1935">1935</option><option value="1934">1934</option><option value="1933">1933</option><option value="1932">1932</option><option value="1931">1931</option><option value="1930">1930</option><option value="1929">1929</option><option value="1928">1928</option><option value="1927">1927</option><option value="1926">1926</option><option value="1925">1925</option><option value="1924">1924</option><option value="1923">1923</option><option value="1922">1922</option><option value="1921">1921</option><option value="1920">1920</option><option value="1919">1919</option><option value="1918">1918</option><option value="1917">1917</option><option value="1916">1916</option><option value="1915">1915</option><option value="1914">1914</option>
+
+								<option value="2002">2002</option>
+                <option value="2001">2001</option>
+                <option value="2000">2000</option>
+                <option value="1999">1999</option>
+                <option value="1998">1998</option>
+                <option value="1997">1997</option>
+                <option value="1996">1996</option>
+                <option value="1995">1995</option>
+                <option value="1994">1994</option>
+                <option value="1993">1993</option>
+                <option value="1992">1992</option>
+                <option value="1991">1991</option>
+                <option value="1990">1990</option>
+                <option value="1989">1989</option>
+                <option value="1988">1988</option>
+                <option value="1987">1987</option>
+                <option value="1986">1986</option>
+                <option value="1985">1985</option>
+                <option value="1984">1984</option>
+                <option value="1983">1983</option>
+                <option value="1982">1982</option>
+                <option value="1981">1981</option>
+                <option value="1980">1980</option>
+                <option value="1979">1979</option>
+                <option value="1978">1978</option>
+                <option value="1977">1977</option>
+                <option value="1976">1976</option>
+                <option value="1975">1975</option>
+                <option value="1974">1974</option>
+                <option value="1973">1973</option>
+                <option value="1972">1972</option>
+                <option value="1971">1971</option>
+                <option value="1970">1970</option>
+                <option value="1969">1969</option>
+                <option value="1968">1968</option>
+                <option value="1967">1967</option>
+                <option value="1966">1966</option>
+                <option value="1965">1965</option>
+                <option value="1964">1964</option>
+                <option value="1963">1963</option>
+                <option value="1962">1962</option>
+                <option value="1961">1961</option>
+                <option value="1960">1960</option>
+                <option value="1959">1959</option>
+                <option value="1958">1958</option>
+                <option value="1957">1957</option>
+                <option value="1956">1956</option>
+                <option value="1955">1955</option>
+                <option value="1954">1954</option>
+                <option value="1953">1953</option>
+                <option value="1952">1952</option>
+                <option value="1951">1951</option>
+                <option value="1950">1950</option>
+                <option value="1949">1949</option>
+                <option value="1948">1948</option>
+                <option value="1947">1947</option>
+                <option value="1946">1946</option>
+                <option value="1945">1945</option>
+                <option value="1944">1944</option>
+                <option value="1943">1943</option>
+                <option value="1942">1942</option>
+                <option value="1941">1941</option>
+                <option value="1940">1940</option>
+                <option value="1939">1939</option>
+                <option value="1938">1938</option>
+                <option value="1937">1937</option>
+                <option value="1936">1936</option>
+                <option value="1935">1935</option>
+                <option value="1934">1934</option>
+                <option value="1933">1933</option>
+                <option value="1932">1932</option>
+                <option value="1931">1931</option>
+                <option value="1930">1930</option>
+                <option value="1929">1929</option>
+                <option value="1928">1928</option>
+                <option value="1927">1927</option>
+                <option value="1926">1926</option>
+                <option value="1925">1925</option>
+                <option value="1924">1924</option>
+                <option value="1923">1923</option>
+                <option value="1922">1922</option>
+                <option value="1921">1921</option>
+                <option value="1920">1920</option>
+                <option value="1919">1919</option>
+                <option value="1918">1918</option>
+                <option value="1917">1917</option>
+                <option value="1916">1916</option>
+                <option value="1915">1915</option>
+                <option value="1914">1914</option>
+
 							</select>
 						</div>
 						<div class="formLine">
   							<label>гражданство:</label>
   							<select name="citizenship0" style="width:196px;">
-								<option value="AU">Австралия</option><option value="AT">Австрия</option><option value="AZ">Азербайджан</option><option value="AL">Албания</option><option value="DZ">Алжир</option><option value="VI">Американские Виргинские острова</option><option value="AS">Американское Самоа</option><option value="AI">Ангилья</option><option value="AO">Ангола</option><option value="AD">Андорра</option><option value="AQ">Антарктика</option><option value="AG">Антигуа и Барбуда</option><option value="AR">Аргентина</option><option value="AM">Армения</option><option value="AW">Аруба</option><option value="AF">Афганистан</option><option value="BS">Багамские Острова</option><option value="BD">Бангладеш</option><option value="BB">Барбадос</option><option value="BH">Бахрейн</option><option value="BY">Беларусь</option><option value="BZ">Белиз</option><option value="BE">Бельгия</option><option value="BJ">Бенин</option><option value="BM">Бермуды</option><option value="BG">Болгария</option><option value="BO">Боливия</option><option value="BA">Босния и Герцеговина</option><option value="BW">Ботсвана</option><option value="BR">Бразилия</option><option value="IO">Британская территория в Индийском океане</option><option value="VG">Британские Виргинские Острова</option><option value="BN">Бруней</option><option value="BF">Буркина Фасо</option><option value="BI">Бурунди</option><option value="BT">Бутан</option><option value="VU">Вануату</option><option value="VA">Ватикан</option><option value="GB">Великобритания</option><option value="HU">Венгрия</option><option value="VE">Венесуэла</option><option value="TL">Восточный Тимор</option><option value="VN">Вьетнам</option><option value="GA">Габон</option><option value="HT">Гаити</option><option value="GY">Гайана</option><option value="GM">Гамбия</option><option value="GH">Гана</option><option value="GP">Гваделупа</option><option value="GT">Гватемала</option><option value="GN">Гвинея</option><option value="GW">Гвинея-Биссау</option><option value="DE">Германия</option><option value="GI">Гибралтар</option><option value="HN">Гондурас</option><option value="HK">Гонконг</option><option value="GD">Гренада</option><option value="GL">Гренландия</option><option value="GR">Греция</option><option value="GE">Грузия</option><option value="GU">Гуам</option><option value="DK">Дания</option><option value="DJ">Джибути</option><option value="DM">Доминика</option><option value="DO">Доминиканская Республика</option><option value="EG">Египет</option><option value="ZM">Замбия</option><option value="EH">Западная Сахара</option><option value="ZW">Зимбабве</option><option value="IL">Израиль</option><option value="IN">Индия</option><option value="ID">Индонезия</option><option value="JO">Иордания</option><option value="IQ">Ирак</option><option value="IR">Иран</option><option value="IE">Ирландия</option><option value="IS">Исландия</option><option value="ES">Испания</option><option value="IT">Италия</option><option value="YE">Йемен</option><option value="CV">Кабо-Верде</option><option value="KZ">Казахстан</option><option value="KY">Каймановы острова</option><option value="KH">Камбоджа</option><option value="CM">Камерун</option><option value="CA">Канада</option><option value="QA">Катар</option><option value="KE">Кения</option><option value="CY">Кипр</option><option value="KG">Киргизстан</option><option value="KI">Кирибати</option><option value="CN">Китай</option><option value="CO">Колумбия</option><option value="KM">Коморские острова</option><option value="CG">Конго</option><option value="CD">Конго, Демократическая Республика</option><option value="CR">Коста Рика</option><option value="CI">Кот Д'ивуар</option><option value="CU">Куба</option><option value="KW">Кувейт</option><option value="LA">Лаос</option><option value="LV">Латвия</option><option value="LS">Лесото</option><option value="LR">Либерия</option><option value="LB">Ливан</option><option value="LY">Ливия</option><option value="LT">Литва</option><option value="LI">Лихтенштейн</option><option value="LU">Люксембург</option><option value="MU">Маврикий</option><option value="MR">Мавритания</option><option value="MG">Мадагаскар</option><option value="YT">Майотта</option><option value="MO">Макао</option><option value="MK">Македония</option><option value="MW">Малави</option><option value="MY">Малазия</option><option value="ML">Мали</option><option value="MV">Мальдивы</option><option value="MT">Мальта</option><option value="MA">Марокко</option><option value="MQ">Мартиника</option><option value="MH">Маршалловы Острова</option><option value="MX">Мексика</option><option value="MZ">Мозамбик</option><option value="MD">Молдова</option><option value="MC">Монако</option><option value="MN">Монголия</option><option value="MS">Монтсеррат</option><option value="MM">Мьянмар</option><option value="NA">Намибия</option><option value="NR">Науру</option><option value="NP">Непал</option><option value="NE">Нигер</option><option value="NG">Нигерия</option><option value="AN">Нидерландские Антильские острова</option><option value="NL">Нидерланды</option><option value="NI">Никарагуа</option><option value="NU">Ниуэ</option><option value="NZ">Новая Зеландия</option><option value="NC">Новая Каледония</option><option value="NO">Норвегия</option><option value="AE">Объединенные Арабские Эмираты</option><option value="OM">Оман</option><option value="NF">Остров Норфолк</option><option value="SH">Остров Святой Елены</option><option value="CK">Острова Кука</option><option value="PN">Острова Питкерна</option><option value="WF">Острова Уоллис и Футуна</option><option value="PK">Пакистан</option><option value="PW">Палау</option><option value="PS">Палестина</option><option value="PA">Панама</option><option value="PG">Папуа Новая Гвинея</option><option value="PY">Парагвай</option><option value="PE">Перу</option><option value="PL">Польша</option><option value="PT">Португалия</option><option value="PR">Пуэрто-Рико</option><option value="RE">Реюньон</option><option value="RU">Россия</option><option value="RW">Руанда</option><option value="RO">Румыния</option><option value="SV">Сальвадор</option><option value="WS">Самоа</option><option value="SM">Сан-Марино</option><option value="ST">Сан-Томе и Принсипи</option><option value="SA">Саудовская Аравия</option><option value="SZ">Свазиленд</option><option value="KP">Северная Корея</option><option value="MP">Северные Марианские острова</option><option value="SC">Сейшелы</option><option value="SN">Сенегал</option><option value="VC">Сент-Винсент и Гренадины</option><option value="KN">Сент-Китс и Невис</option><option value="LC">Сент-Люсия</option><option value="RS">Сербия и Черногория</option><option value="SG">Сингапур</option><option value="SY">Сирия</option><option value="SK">Словакия</option><option value="SI">Словения</option><option value="SB">Соломоновы Острова</option><option value="SO">Сомали</option><option value="SD">Судан</option><option value="SR">Суринам</option><option value="US">США</option><option value="SL">Сьерра-Леоне</option><option value="TJ">Таджикистан</option><option value="TW">Тайвань</option><option value="TH">Тайланд</option><option value="TZ">Танзания</option><option value="TC">Тёркс и Кайкос</option><option value="TG">Того</option><option value="TK">Токелау</option><option value="TO">Тонго</option><option value="TT">Тринидад и Тобаго</option><option value="TV">Тувалу</option><option value="TN">Тунис</option><option value="TM">Туркменистан</option><option value="TR">Турция</option><option value="UG">Уганда</option><option value="UZ">Узбекистан</option><option value="UA" selected="selected">Украина</option><option value="UY">Уругвай</option><option value="FO">Фарерские острова</option><option value="FM">Федеративные Штаты Микронезии</option><option value="FJ">Фиджи</option><option value="PH">Филиппины</option><option value="FI">Финляндия</option><option value="FK">Фолклендские (Мальвинские) острова</option><option value="FR">Франция</option><option value="GF">Французская Гвинея</option><option value="PF">Французская Полинезия</option><option value="HR">Хорватия</option><option value="CF">Центральноафриканская Республика</option><option value="TD">Чад</option><option value="CZ">Чешская Республика</option><option value="CL">Чили</option><option value="CH">Швейцария</option><option value="SE">Швеция</option><option value="LK">Шри Ланка</option><option value="EC">Эквадор</option><option value="GQ">Экваториальная Гвинея</option><option value="ER">Эритрея</option><option value="EE">Эстония</option><option value="ET">Эфиопия</option><option value="KR">Южная Корея</option><option value="ZA">Южноафриканская Республика</option><option value="JM">Ямайка</option><option value="JP">Япония</option>  
+								<option value="AU">Австралия</option>
+                <option value="AT">Австрия</option>
+                <option value="AZ">Азербайджан</option>
+                <option value="AL">Албания</option>
+                <option value="DZ">Алжир</option>
+                <option value="VI">Американские Виргинские острова</option>
+                <option value="AS">Американское Самоа</option>
+                <option value="AI">Ангилья</option>
+                <option value="AO">Ангола</option>
+                <option value="AD">Андорра</option>
+                <option value="AQ">Антарктика</option>
+                <option value="AG">Антигуа и Барбуда</option>
+                <option value="AR">Аргентина</option>
+                <option value="AM">Армения</option>
+                <option value="AW">Аруба</option>
+                <option value="AF">Афганистан</option>
+                <option value="BS">Багамские Острова</option>
+                <option value="BD">Бангладеш</option>
+                <option value="BB">Барбадос</option>
+                <option value="BH">Бахрейн</option>
+                <option value="BY">Беларусь</option>
+                <option value="BZ">Белиз</option>
+                <option value="BE">Бельгия</option>
+                <option value="BJ">Бенин</option>
+                <option value="BM">Бермуды</option>
+                <option value="BG">Болгария</option>
+                <option value="BO">Боливия</option>
+                <option value="BA">Босния и Герцеговина</option>
+                <option value="BW">Ботсвана</option>
+                <option value="BR">Бразилия</option>
+                <option value="IO">Британская территория в Индийском океане</option>
+                <option value="VG">Британские Виргинские Острова</option>
+                <option value="BN">Бруней</option>
+                <option value="BF">Буркина Фасо</option>
+                <option value="BI">Бурунди</option>
+                <option value="BT">Бутан</option>
+                <option value="VU">Вануату</option>
+                <option value="VA">Ватикан</option>
+                <option value="GB">Великобритания</option>
+                <option value="HU">Венгрия</option>
+                <option value="VE">Венесуэла</option>
+                <option value="TL">Восточный Тимор</option>
+                <option value="VN">Вьетнам</option>
+                <option value="GA">Габон</option>
+                <option value="HT">Гаити</option>
+                <option value="GY">Гайана</option>
+                <option value="GM">Гамбия</option>
+                <option value="GH">Гана</option>
+                <option value="GP">Гваделупа</option>
+                <option value="GT">Гватемала</option>
+                <option value="GN">Гвинея</option>
+                <option value="GW">Гвинея-Биссау</option>
+                <option value="DE">Германия</option>
+                <option value="GI">Гибралтар</option>
+                <option value="HN">Гондурас</option>
+                <option value="HK">Гонконг</option>
+                <option value="GD">Гренада</option>
+                <option value="GL">Гренландия</option>
+                <option value="GR">Греция</option>
+                <option value="GE">Грузия</option>
+                <option value="GU">Гуам</option>
+                <option value="DK">Дания</option>
+                <option value="DJ">Джибути</option>
+                <option value="DM">Доминика</option>
+                <option value="DO">Доминиканская Республика</option>
+                <option value="EG">Египет</option>
+                <option value="ZM">Замбия</option>
+                <option value="EH">Западная Сахара</option>
+                <option value="ZW">Зимбабве</option>
+                <option value="IL">Израиль</option>
+                <option value="IN">Индия</option>
+                <option value="ID">Индонезия</option>
+                <option value="JO">Иордания</option>
+                <option value="IQ">Ирак</option>
+                <option value="IR">Иран</option>
+                <option value="IE">Ирландия</option>
+                <option value="IS">Исландия</option>
+                <option value="ES">Испания</option>
+                <option value="IT">Италия</option>
+                <option value="YE">Йемен</option>
+                <option value="CV">Кабо-Верде</option>
+                <option value="KZ">Казахстан</option>
+                <option value="KY">Каймановы острова</option>
+                <option value="KH">Камбоджа</option>
+                <option value="CM">Камерун</option>
+                <option value="CA">Канада</option>
+                <option value="QA">Катар</option>
+                <option value="KE">Кения</option>
+                <option value="CY">Кипр</option>
+                <option value="KG">Киргизстан</option>
+                <option value="KI">Кирибати</option>
+                <option value="CN">Китай</option>
+                <option value="CO">Колумбия</option>
+                <option value="KM">Коморские острова</option>
+                <option value="CG">Конго</option>
+                <option value="CD">Конго, Демократическая Республика</option>
+                <option value="CR">Коста Рика</option>
+                <option value="CI">Кот Д'ивуар</option>
+                <option value="CU">Куба</option>
+                <option value="KW">Кувейт</option>
+                <option value="LA">Лаос</option>
+                <option value="LV">Латвия</option>
+                <option value="LS">Лесото</option>
+                <option value="LR">Либерия</option>
+                <option value="LB">Ливан</option>
+                <option value="LY">Ливия</option>
+                <option value="LT">Литва</option>
+                <option value="LI">Лихтенштейн</option>
+                <option value="LU">Люксембург</option>
+                <option value="MU">Маврикий</option>
+                <option value="MR">Мавритания</option>
+                <option value="MG">Мадагаскар</option>
+                <option value="YT">Майотта</option>
+                <option value="MO">Макао</option>
+                <option value="MK">Македония</option>
+                <option value="MW">Малави</option>
+                <option value="MY">Малазия</option>
+                <option value="ML">Мали</option>
+                <option value="MV">Мальдивы</option>
+                <option value="MT">Мальта</option>
+                <option value="MA">Марокко</option>
+                <option value="MQ">Мартиника</option>
+                <option value="MH">Маршалловы Острова</option>
+                <option value="MX">Мексика</option>
+                <option value="MZ">Мозамбик</option>
+                <option value="MD">Молдова</option>
+                <option value="MC">Монако</option>
+                <option value="MN">Монголия</option>
+                <option value="MS">Монтсеррат</option>
+                <option value="MM">Мьянмар</option>
+                <option value="NA">Намибия</option>
+                <option value="NR">Науру</option>
+                <option value="NP">Непал</option>
+                <option value="NE">Нигер</option>
+                <option value="NG">Нигерия</option>
+                <option value="AN">Нидерландские Антильские острова</option>
+                <option value="NL">Нидерланды</option>
+                <option value="NI">Никарагуа</option>
+                <option value="NU">Ниуэ</option>
+                <option value="NZ">Новая Зеландия</option>
+                <option value="NC">Новая Каледония</option>
+                <option value="NO">Норвегия</option>
+                <option value="AE">Объединенные Арабские Эмираты</option>
+                <option value="OM">Оман</option>
+                <option value="NF">Остров Норфолк</option>
+                <option value="SH">Остров Святой Елены</option>
+                <option value="CK">Острова Кука</option>
+                <option value="PN">Острова Питкерна</option>
+                <option value="WF">Острова Уоллис и Футуна</option>
+                <option value="PK">Пакистан</option>
+                <option value="PW">Палау</option>
+                <option value="PS">Палестина</option>
+                <option value="PA">Панама</option>
+                <option value="PG">Папуа Новая Гвинея</option>
+                <option value="PY">Парагвай</option>
+                <option value="PE">Перу</option>
+                <option value="PL">Польша</option>
+                <option value="PT">Португалия</option>
+                <option value="PR">Пуэрто-Рико</option>
+                <option value="RE">Реюньон</option>
+                <option value="RU">Россия</option>
+                <option value="RW">Руанда</option>
+                <option value="RO">Румыния</option>
+                <option value="SV">Сальвадор</option>
+                <option value="WS">Самоа</option>
+                <option value="SM">Сан-Марино</option>
+                <option value="ST">Сан-Томе и Принсипи</option>
+                <option value="SA">Саудовская Аравия</option>
+                <option value="SZ">Свазиленд</option>
+                <option value="KP">Северная Корея</option>
+                <option value="MP">Северные Марианские острова</option>
+                <option value="SC">Сейшелы</option>
+                <option value="SN">Сенегал</option>
+                <option value="VC">Сент-Винсент и Гренадины</option>
+                <option value="KN">Сент-Китс и Невис</option>
+                <option value="LC">Сент-Люсия</option>
+                <option value="RS">Сербия и Черногория</option>
+                <option value="SG">Сингапур</option>
+                <option value="SY">Сирия</option>
+                <option value="SK">Словакия</option>
+                <option value="SI">Словения</option>
+                <option value="SB">Соломоновы Острова</option>
+                <option value="SO">Сомали</option>
+                <option value="SD">Судан</option>
+                <option value="SR">Суринам</option>
+                <option value="US">США</option>
+                <option value="SL">Сьерра-Леоне</option>
+                <option value="TJ">Таджикистан</option>
+                <option value="TW">Тайвань</option>
+                <option value="TH">Тайланд</option>
+                <option value="TZ">Танзания</option>
+                <option value="TC">Тёркс и Кайкос</option>
+                <option value="TG">Того</option>
+                <option value="TK">Токелау</option>
+                <option value="TO">Тонго</option>
+                <option value="TT">Тринидад и Тобаго</option>
+                <option value="TV">Тувалу</option>
+                <option value="TN">Тунис</option>
+                <option value="TM">Туркменистан</option>
+                <option value="TR">Турция</option>
+                <option value="UG">Уганда</option>
+                <option value="UZ">Узбекистан</option>
+                <option value="UA" selected="selected">Украина</option>
+                <option value="UY">Уругвай</option>
+                <option value="FO">Фарерские острова</option>
+                <option value="FM">Федеративные Штаты Микронезии</option>
+                <option value="FJ">Фиджи</option>
+                <option value="PH">Филиппины</option>
+                <option value="FI">Финляндия</option>
+                <option value="FK">Фолклендские (Мальвинские) острова</option>
+                <option value="FR">Франция</option>
+                <option value="GF">Французская Гвинея</option>
+                <option value="PF">Французская Полинезия</option>
+                <option value="HR">Хорватия</option>
+                <option value="CF">Центральноафриканская Республика</option>
+                <option value="TD">Чад</option>
+                <option value="CZ">Чешская Республика</option>
+                <option value="CL">Чили</option>
+                <option value="CH">Швейцария</option>
+                <option value="SE">Швеция</option>
+                <option value="LK">Шри Ланка</option>
+                <option value="EC">Эквадор</option>
+                <option value="GQ">Экваториальная Гвинея</option>
+                <option value="ER">Эритрея</option>
+                <option value="EE">Эстония</option>
+                <option value="ET">Эфиопия</option>
+                <option value="KR">Южная Корея</option>
+                <option value="ZA">Южноафриканская Республика</option>
+                <option value="JM">Ямайка</option>
+                <option value="JP">Япония</option>
+
 							</select>
 						</div>
 						<div class="formLine">
@@ -437,94 +984,446 @@ function showMoreFF(inf, i){
   							<label>паспорт действ. до:</label>
  		 					<select class="passSel" name="passport_exp_day0" id="passport_exp_day0">
 						  		<option value=""></option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-								<option value="7">7</option>
-								<option value="8">8</option>
-								<option value="9">9</option>
-								<option value="10">10</option>
-								<option value="11">11</option>
-								<option value="12">12</option>
-								<option value="13">13</option>
-								<option value="14">14</option>
-								<option value="15">15</option>
-								<option value="16">16</option>
-								<option value="17">17</option>
-								<option value="18">18</option>
-								<option value="19">19</option>
-								<option value="20">20</option>
-								<option value="21">21</option>
-								<option value="22">22</option>
-								<option value="23">23</option>
-								<option value="24">24</option>
-								<option value="25">25</option>
-								<option value="26">26</option>
-								<option value="27">27</option>
-								<option value="28">28</option>
-								<option value="29">29</option>
-								<option value="30">30</option>
-								<option value="31">31</option>
+  								<option value="1">1</option>
+  								<option value="2">2</option>
+  								<option value="3">3</option>
+  								<option value="4">4</option>
+  								<option value="5">5</option>
+  								<option value="6">6</option>
+  								<option value="7">7</option>
+  								<option value="8">8</option>
+  								<option value="9">9</option>
+  								<option value="10">10</option>
+  								<option value="11">11</option>
+  								<option value="12">12</option>
+  								<option value="13">13</option>
+  								<option value="14">14</option>
+  								<option value="15">15</option>
+  								<option value="16">16</option>
+  								<option value="17">17</option>
+  								<option value="18">18</option>
+  								<option value="19">19</option>
+  								<option value="20">20</option>
+  								<option value="21">21</option>
+  								<option value="22">22</option>
+  								<option value="23">23</option>
+  								<option value="24">24</option>
+  								<option value="25">25</option>
+  								<option value="26">26</option>
+  								<option value="27">27</option>
+  								<option value="28">28</option>
+  								<option value="29">29</option>
+  								<option value="30">30</option>
+  								<option value="31">31</option>
 	  						</select>
   							<select class="passSel" name="passport_exp_month0" id="passport_exp_month0">
   								<option value=""></option>
-								<option value="1"> 1 </option>
-								<option value="2"> 2 </option>
-								<option value="3"> 3 </option>
-								<option value="4"> 4 </option>
-								<option value="5"> 5 </option>
-								<option value="6"> 6 </option>
-								<option value="7"> 7 </option>
-								<option value="8"> 8 </option>
-								<option value="9"> 9 </option>
-								<option value="10"> 10 </option>
-								<option value="11"> 11 </option>
-								<option value="12"> 12 </option>
+  								<option value="1"> 1 </option>
+  								<option value="2"> 2 </option>
+  								<option value="3"> 3 </option>
+  								<option value="4"> 4 </option>
+  								<option value="5"> 5 </option>
+  								<option value="6"> 6 </option>
+  								<option value="7"> 7 </option>
+  								<option value="8"> 8 </option>
+  								<option value="9"> 9 </option>
+  								<option value="10"> 10 </option>
+  								<option value="11"> 11 </option>
+  								<option value="12"> 12 </option>
 	  						</select>
   							<select class="passSel" name="passport_exp_year0" id="passport_exp_year0">
   								<option value=""></option>
-								<option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option><option value="2030">2030</option><option value="2031">2031</option><option value="2032">2032</option><option value="2033">2033</option><option value="2034">2034</option><option value="2035">2035</option><option value="2036">2036</option><option value="2037">2037</option><option value="2038">2038</option><option value="2039">2039</option><option value="2040">2040</option><option value="2041">2041</option><option value="2042">2042</option><option value="2043">2043</option><option value="2044">2044</option><option value="2045">2045</option><option value="2046">2046</option><option value="2047">2047</option><option value="2048">2048</option><option value="2049">2049</option><option value="2050">2050</option><option value="2051">2051</option><option value="2052">2052</option><option value="2053">2053</option><option value="2054">2054</option><option value="2055">2055</option><option value="2056">2056</option><option value="2057">2057</option><option value="2058">2058</option><option value="2059">2059</option><option value="2060">2060</option><option value="2061">2061</option><option value="2062">2062</option><option value="2063">2063</option><option value="2064">2064</option><option value="2065">2065</option><option value="2066">2066</option><option value="2067">2067</option><option value="2068">2068</option><option value="2069">2069</option><option value="2070">2070</option><option value="2071">2071</option><option value="2072">2072</option><option value="2073">2073</option><option value="2074">2074</option><option value="2075">2075</option><option value="2076">2076</option><option value="2077">2077</option><option value="2078">2078</option><option value="2079">2079</option><option value="2080">2080</option><option value="2081">2081</option><option value="2082">2082</option><option value="2083">2083</option><option value="2084">2084</option><option value="2085">2085</option><option value="2086">2086</option><option value="2087">2087</option><option value="2088">2088</option><option value="2089">2089</option><option value="2090">2090</option><option value="2091">2091</option><option value="2092">2092</option><option value="2093">2093</option><option value="2094">2094</option><option value="2095">2095</option><option value="2096">2096</option><option value="2097">2097</option><option value="2098">2098</option><option value="2099">2099</option><option value="2100">2100</option><option value="2101">2101</option><option value="2102">2102</option><option value="2103">2103</option><option value="2104">2104</option>  </select>
+  								<option value="2014">2014</option>
+                  <option value="2015">2015</option>
+                  <option value="2016">2016</option>
+                  <option value="2017">2017</option>
+                  <option value="2018">2018</option>
+                  <option value="2019">2019</option>
+                  <option value="2020">2020</option>
+                  <option value="2021">2021</option>
+                  <option value="2022">2022</option>
+                  <option value="2023">2023</option>
+                  <option value="2024">2024</option>
+                  <option value="2025">2025</option>
+                  <option value="2026">2026</option>
+                  <option value="2027">2027</option>
+                  <option value="2028">2028</option>
+                  <option value="2029">2029</option>
+                  <option value="2030">2030</option>
+                  <option value="2031">2031</option>
+                  <option value="2032">2032</option>
+                  <option value="2033">2033</option>
+                  <option value="2034">2034</option>
+                  <option value="2035">2035</option>
+                  <option value="2036">2036</option>
+                  <option value="2037">2037</option>
+                  <option value="2038">2038</option>
+                  <option value="2039">2039</option>
+                  <option value="2040">2040</option>
+                  <option value="2041">2041</option>
+                  <option value="2042">2042</option>
+                  <option value="2043">2043</option>
+                  <option value="2044">2044</option>
+                  <option value="2045">2045</option>
+                  <option value="2046">2046</option>
+                  <option value="2047">2047</option>
+                  <option value="2048">2048</option>
+                  <option value="2049">2049</option>
+                  <option value="2050">2050</option>
+                  <option value="2051">2051</option>
+                  <option value="2052">2052</option>
+                  <option value="2053">2053</option>
+                  <option value="2054">2054</option>
+                  <option value="2055">2055</option>
+                  <option value="2056">2056</option>
+                  <option value="2057">2057</option>
+                  <option value="2058">2058</option>
+                  <option value="2059">2059</option>
+                  <option value="2060">2060</option>
+                  <option value="2061">2061</option>
+                  <option value="2062">2062</option>
+                  <option value="2063">2063</option>
+                  <option value="2064">2064</option>
+                  <option value="2065">2065</option>
+                  <option value="2066">2066</option>
+                  <option value="2067">2067</option>
+                  <option value="2068">2068</option>
+                  <option value="2069">2069</option>
+                  <option value="2070">2070</option>
+                  <option value="2071">2071</option>
+                  <option value="2072">2072</option>
+                  <option value="2073">2073</option>
+                  <option value="2074">2074</option>
+                  <option value="2075">2075</option>
+                  <option value="2076">2076</option>
+                  <option value="2077">2077</option>
+                  <option value="2078">2078</option>
+                  <option value="2079">2079</option>
+                  <option value="2080">2080</option>
+                  <option value="2081">2081</option>
+                  <option value="2082">2082</option>
+                  <option value="2083">2083</option>
+                  <option value="2084">2084</option>
+                  <option value="2085">2085</option>
+                  <option value="2086">2086</option>
+                  <option value="2087">2087</option>
+                  <option value="2088">2088</option>
+                  <option value="2089">2089</option>
+                  <option value="2090">2090</option>
+                  <option value="2091">2091</option>
+                  <option value="2092">2092</option>
+                  <option value="2093">2093</option>
+                  <option value="2094">2094</option>
+                  <option value="2095">2095</option>
+                  <option value="2096">2096</option>
+                  <option value="2097">2097</option>
+                  <option value="2098">2098</option>
+                  <option value="2099">2099</option>
+                  <option value="2100">2100</option>
+                  <option value="2101">2101</option>
+                  <option value="2102">2102</option>
+                  <option value="2103">2103</option>
+                  <option value="2104">2104</option>
+                  </select>
 							</div>
 							<div style="clear:both;">
 			 	 				<label>страна, выдавшая пассп.:</label>
 			  					<select name="passport_issuing_country0" id="passport_issuing_country0" style="width:196px;">
-									<option value="AU">Австралия</option><option value="AT">Австрия</option><option value="AZ">Азербайджан</option><option value="AL">Албания</option><option value="DZ">Алжир</option><option value="VI">Американские Виргинские острова</option><option value="AS">Американское Самоа</option><option value="AI">Ангилья</option><option value="AO">Ангола</option><option value="AD">Андорра</option><option value="AQ">Антарктика</option><option value="AG">Антигуа и Барбуда</option><option value="AR">Аргентина</option><option value="AM">Армения</option><option value="AW">Аруба</option><option value="AF">Афганистан</option><option value="BS">Багамские Острова</option><option value="BD">Бангладеш</option><option value="BB">Барбадос</option><option value="BH">Бахрейн</option><option value="BY">Беларусь</option><option value="BZ">Белиз</option><option value="BE">Бельгия</option><option value="BJ">Бенин</option><option value="BM">Бермуды</option><option value="BG">Болгария</option><option value="BO">Боливия</option><option value="BA">Босния и Герцеговина</option><option value="BW">Ботсвана</option><option value="BR">Бразилия</option><option value="IO">Британская территория в Индийском океане</option><option value="VG">Британские Виргинские Острова</option><option value="BN">Бруней</option><option value="BF">Буркина Фасо</option><option value="BI">Бурунди</option><option value="BT">Бутан</option><option value="VU">Вануату</option><option value="VA">Ватикан</option><option value="GB">Великобритания</option><option value="HU">Венгрия</option><option value="VE">Венесуэла</option><option value="TL">Восточный Тимор</option><option value="VN">Вьетнам</option><option value="GA">Габон</option><option value="HT">Гаити</option><option value="GY">Гайана</option><option value="GM">Гамбия</option><option value="GH">Гана</option><option value="GP">Гваделупа</option><option value="GT">Гватемала</option><option value="GN">Гвинея</option><option value="GW">Гвинея-Биссау</option><option value="DE">Германия</option><option value="GI">Гибралтар</option><option value="HN">Гондурас</option><option value="HK">Гонконг</option><option value="GD">Гренада</option><option value="GL">Гренландия</option><option value="GR">Греция</option><option value="GE">Грузия</option><option value="GU">Гуам</option><option value="DK">Дания</option><option value="DJ">Джибути</option><option value="DM">Доминика</option><option value="DO">Доминиканская Республика</option><option value="EG">Египет</option><option value="ZM">Замбия</option><option value="EH">Западная Сахара</option><option value="ZW">Зимбабве</option><option value="IL">Израиль</option><option value="IN">Индия</option><option value="ID">Индонезия</option><option value="JO">Иордания</option><option value="IQ">Ирак</option><option value="IR">Иран</option><option value="IE">Ирландия</option><option value="IS">Исландия</option><option value="ES">Испания</option><option value="IT">Италия</option><option value="YE">Йемен</option><option value="CV">Кабо-Верде</option><option value="KZ">Казахстан</option><option value="KY">Каймановы острова</option><option value="KH">Камбоджа</option><option value="CM">Камерун</option><option value="CA">Канада</option><option value="QA">Катар</option><option value="KE">Кения</option><option value="CY">Кипр</option><option value="KG">Киргизстан</option><option value="KI">Кирибати</option><option value="CN">Китай</option><option value="CO">Колумбия</option><option value="KM">Коморские острова</option><option value="CG">Конго</option><option value="CD">Конго, Демократическая Республика</option><option value="CR">Коста Рика</option><option value="CI">Кот Д'ивуар</option><option value="CU">Куба</option><option value="KW">Кувейт</option><option value="LA">Лаос</option><option value="LV">Латвия</option><option value="LS">Лесото</option><option value="LR">Либерия</option><option value="LB">Ливан</option><option value="LY">Ливия</option><option value="LT">Литва</option><option value="LI">Лихтенштейн</option><option value="LU">Люксембург</option><option value="MU">Маврикий</option><option value="MR">Мавритания</option><option value="MG">Мадагаскар</option><option value="YT">Майотта</option><option value="MO">Макао</option><option value="MK">Македония</option><option value="MW">Малави</option><option value="MY">Малазия</option><option value="ML">Мали</option><option value="MV">Мальдивы</option><option value="MT">Мальта</option><option value="MA">Марокко</option><option value="MQ">Мартиника</option><option value="MH">Маршалловы Острова</option><option value="MX">Мексика</option><option value="MZ">Мозамбик</option><option value="MD">Молдова</option><option value="MC">Монако</option><option value="MN">Монголия</option><option value="MS">Монтсеррат</option><option value="MM">Мьянмар</option><option value="NA">Намибия</option><option value="NR">Науру</option><option value="NP">Непал</option><option value="NE">Нигер</option><option value="NG">Нигерия</option><option value="AN">Нидерландские Антильские острова</option><option value="NL">Нидерланды</option><option value="NI">Никарагуа</option><option value="NU">Ниуэ</option><option value="NZ">Новая Зеландия</option><option value="NC">Новая Каледония</option><option value="NO">Норвегия</option><option value="AE">Объединенные Арабские Эмираты</option><option value="OM">Оман</option><option value="NF">Остров Норфолк</option><option value="SH">Остров Святой Елены</option><option value="CK">Острова Кука</option><option value="PN">Острова Питкерна</option><option value="WF">Острова Уоллис и Футуна</option><option value="PK">Пакистан</option><option value="PW">Палау</option><option value="PS">Палестина</option><option value="PA">Панама</option><option value="PG">Папуа Новая Гвинея</option><option value="PY">Парагвай</option><option value="PE">Перу</option><option value="PL">Польша</option><option value="PT">Португалия</option><option value="PR">Пуэрто-Рико</option><option value="RE">Реюньон</option><option value="RU">Россия</option><option value="RW">Руанда</option><option value="RO">Румыния</option><option value="SV">Сальвадор</option><option value="WS">Самоа</option><option value="SM">Сан-Марино</option><option value="ST">Сан-Томе и Принсипи</option><option value="SA">Саудовская Аравия</option><option value="SZ">Свазиленд</option><option value="KP">Северная Корея</option><option value="MP">Северные Марианские острова</option><option value="SC">Сейшелы</option><option value="SN">Сенегал</option><option value="VC">Сент-Винсент и Гренадины</option><option value="KN">Сент-Китс и Невис</option><option value="LC">Сент-Люсия</option><option value="RS">Сербия и Черногория</option><option value="SG">Сингапур</option><option value="SY">Сирия</option><option value="SK">Словакия</option><option value="SI">Словения</option><option value="SB">Соломоновы Острова</option><option value="SO">Сомали</option><option value="SD">Судан</option><option value="SR">Суринам</option><option value="US">США</option><option value="SL">Сьерра-Леоне</option><option value="TJ">Таджикистан</option><option value="TW">Тайвань</option><option value="TH">Тайланд</option><option value="TZ">Танзания</option><option value="TC">Тёркс и Кайкос</option><option value="TG">Того</option><option value="TK">Токелау</option><option value="TO">Тонго</option><option value="TT">Тринидад и Тобаго</option><option value="TV">Тувалу</option><option value="TN">Тунис</option><option value="TM">Туркменистан</option><option value="TR">Турция</option><option value="UG">Уганда</option><option value="UZ">Узбекистан</option><option value="UA" selected="selected">Украина</option><option value="UY">Уругвай</option><option value="FO">Фарерские острова</option><option value="FM">Федеративные Штаты Микронезии</option><option value="FJ">Фиджи</option><option value="PH">Филиппины</option><option value="FI">Финляндия</option><option value="FK">Фолклендские (Мальвинские) острова</option><option value="FR">Франция</option><option value="GF">Французская Гвинея</option><option value="PF">Французская Полинезия</option><option value="HR">Хорватия</option><option value="CF">Центральноафриканская Республика</option><option value="TD">Чад</option><option value="CZ">Чешская Республика</option><option value="CL">Чили</option><option value="CH">Швейцария</option><option value="SE">Швеция</option><option value="LK">Шри Ланка</option><option value="EC">Эквадор</option><option value="GQ">Экваториальная Гвинея</option><option value="ER">Эритрея</option><option value="EE">Эстония</option><option value="ET">Эфиопия</option><option value="KR">Южная Корея</option><option value="ZA">Южноафриканская Республика</option><option value="JM">Ямайка</option><option value="JP">Япония</option>			  
+									<option value="AU">Австралия</option>
+                  <option value="AT">Австрия</option>
+                  <option value="AZ">Азербайджан</option>
+                  <option value="AL">Албания</option>
+                  <option value="DZ">Алжир</option>
+                  <option value="VI">Американские Виргинские острова</option>
+                  <option value="AS">Американское Самоа</option>
+                  <option value="AI">Ангилья</option>
+                  <option value="AO">Ангола</option>
+                  <option value="AD">Андорра</option>
+                  <option value="AQ">Антарктика</option>
+                  <option value="AG">Антигуа и Барбуда</option>
+                  <option value="AR">Аргентина</option>
+                  <option value="AM">Армения</option>
+                  <option value="AW">Аруба</option>
+                  <option value="AF">Афганистан</option>
+                  <option value="BS">Багамские Острова</option>
+                  <option value="BD">Бангладеш</option>
+                  <option value="BB">Барбадос</option>
+                  <option value="BH">Бахрейн</option>
+                  <option value="BY">Беларусь</option>
+                  <option value="BZ">Белиз</option>
+                  <option value="BE">Бельгия</option>
+                  <option value="BJ">Бенин</option>
+                  <option value="BM">Бермуды</option>
+                  <option value="BG">Болгария</option>
+                  <option value="BO">Боливия</option>
+                  <option value="BA">Босния и Герцеговина</option>
+                  <option value="BW">Ботсвана</option>
+                  <option value="BR">Бразилия</option>
+                  <option value="IO">Британская территория в Индийском океане</option>
+                  <option value="VG">Британские Виргинские Острова</option>
+                  <option value="BN">Бруней</option>
+                  <option value="BF">Буркина Фасо</option>
+                  <option value="BI">Бурунди</option>
+                  <option value="BT">Бутан</option>
+                  <option value="VU">Вануату</option>
+                  <option value="VA">Ватикан</option>
+                  <option value="GB">Великобритания</option>
+                  <option value="HU">Венгрия</option>
+                  <option value="VE">Венесуэла</option>
+                  <option value="TL">Восточный Тимор</option>
+                  <option value="VN">Вьетнам</option>
+                  <option value="GA">Габон</option>
+                  <option value="HT">Гаити</option>
+                  <option value="GY">Гайана</option>
+                  <option value="GM">Гамбия</option>
+                  <option value="GH">Гана</option>
+                  <option value="GP">Гваделупа</option>
+                  <option value="GT">Гватемала</option>
+                  <option value="GN">Гвинея</option>
+                  <option value="GW">Гвинея-Биссау</option>
+                  <option value="DE">Германия</option>
+                  <option value="GI">Гибралтар</option>
+                  <option value="HN">Гондурас</option>
+                  <option value="HK">Гонконг</option>
+                  <option value="GD">Гренада</option>
+                  <option value="GL">Гренландия</option>
+                  <option value="GR">Греция</option>
+                  <option value="GE">Грузия</option>
+                  <option value="GU">Гуам</option>
+                  <option value="DK">Дания</option>
+                  <option value="DJ">Джибути</option>
+                  <option value="DM">Доминика</option>
+                  <option value="DO">Доминиканская Республика</option>
+                  <option value="EG">Египет</option>
+                  <option value="ZM">Замбия</option>
+                  <option value="EH">Западная Сахара</option>
+                  <option value="ZW">Зимбабве</option>
+                  <option value="IL">Израиль</option>
+                  <option value="IN">Индия</option>
+                  <option value="ID">Индонезия</option>
+                  <option value="JO">Иордания</option>
+                  <option value="IQ">Ирак</option>
+                  <option value="IR">Иран</option>
+                  <option value="IE">Ирландия</option>
+                  <option value="IS">Исландия</option>
+                  <option value="ES">Испания</option>
+                  <option value="IT">Италия</option>
+                  <option value="YE">Йемен</option>
+                  <option value="CV">Кабо-Верде</option>
+                  <option value="KZ">Казахстан</option>
+                  <option value="KY">Каймановы острова</option>
+                  <option value="KH">Камбоджа</option>
+                  <option value="CM">Камерун</option>
+                  <option value="CA">Канада</option>
+                  <option value="QA">Катар</option>
+                  <option value="KE">Кения</option>
+                  <option value="CY">Кипр</option>
+                  <option value="KG">Киргизстан</option>
+                  <option value="KI">Кирибати</option>
+                  <option value="CN">Китай</option>
+                  <option value="CO">Колумбия</option>
+                  <option value="KM">Коморские острова</option>
+                  <option value="CG">Конго</option>
+                  <option value="CD">Конго, Демократическая Республика</option>
+                  <option value="CR">Коста Рика</option>
+                  <option value="CI">Кот Д'ивуар</option>
+                  <option value="CU">Куба</option>
+                  <option value="KW">Кувейт</option>
+                  <option value="LA">Лаос</option>
+                  <option value="LV">Латвия</option>
+                  <option value="LS">Лесото</option>
+                  <option value="LR">Либерия</option>
+                  <option value="LB">Ливан</option>
+                  <option value="LY">Ливия</option>
+                  <option value="LT">Литва</option>
+                  <option value="LI">Лихтенштейн</option>
+                  <option value="LU">Люксембург</option>
+                  <option value="MU">Маврикий</option>
+                  <option value="MR">Мавритания</option>
+                  <option value="MG">Мадагаскар</option>
+                  <option value="YT">Майотта</option>
+                  <option value="MO">Макао</option>
+                  <option value="MK">Македония</option>
+                  <option value="MW">Малави</option>
+                  <option value="MY">Малазия</option>
+                  <option value="ML">Мали</option>
+                  <option value="MV">Мальдивы</option>
+                  <option value="MT">Мальта</option>
+                  <option value="MA">Марокко</option>
+                  <option value="MQ">Мартиника</option>
+                  <option value="MH">Маршалловы Острова</option>
+                  <option value="MX">Мексика</option>
+                  <option value="MZ">Мозамбик</option>
+                  <option value="MD">Молдова</option>
+                  <option value="MC">Монако</option>
+                  <option value="MN">Монголия</option>
+                  <option value="MS">Монтсеррат</option>
+                  <option value="MM">Мьянмар</option>
+                  <option value="NA">Намибия</option>
+                  <option value="NR">Науру</option>
+                  <option value="NP">Непал</option>
+                  <option value="NE">Нигер</option>
+                  <option value="NG">Нигерия</option>
+                  <option value="AN">Нидерландские Антильские острова</option>
+                  <option value="NL">Нидерланды</option>
+                  <option value="NI">Никарагуа</option>
+                  <option value="NU">Ниуэ</option>
+                  <option value="NZ">Новая Зеландия</option>
+                  <option value="NC">Новая Каледония</option>
+                  <option value="NO">Норвегия</option>
+                  <option value="AE">Объединенные Арабские Эмираты</option>
+                  <option value="OM">Оман</option>
+                  <option value="NF">Остров Норфолк</option>
+                  <option value="SH">Остров Святой Елены</option>
+                  <option value="CK">Острова Кука</option>
+                  <option value="PN">Острова Питкерна</option>
+                  <option value="WF">Острова Уоллис и Футуна</option>
+                  <option value="PK">Пакистан</option>
+                  <option value="PW">Палау</option>
+                  <option value="PS">Палестина</option>
+                  <option value="PA">Панама</option>
+                  <option value="PG">Папуа Новая Гвинея</option>
+                  <option value="PY">Парагвай</option>
+                  <option value="PE">Перу</option>
+                  <option value="PL">Польша</option>
+                  <option value="PT">Португалия</option>
+                  <option value="PR">Пуэрто-Рико</option>
+                  <option value="RE">Реюньон</option>
+                  <option value="RU">Россия</option>
+                  <option value="RW">Руанда</option>
+                  <option value="RO">Румыния</option>
+                  <option value="SV">Сальвадор</option>
+                  <option value="WS">Самоа</option>
+                  <option value="SM">Сан-Марино</option>
+                  <option value="ST">Сан-Томе и Принсипи</option>
+                  <option value="SA">Саудовская Аравия</option>
+                  <option value="SZ">Свазиленд</option>
+                  <option value="KP">Северная Корея</option>
+                  <option value="MP">Северные Марианские острова</option>
+                  <option value="SC">Сейшелы</option>
+                  <option value="SN">Сенегал</option>
+                  <option value="VC">Сент-Винсент и Гренадины</option>
+                  <option value="KN">Сент-Китс и Невис</option>
+                  <option value="LC">Сент-Люсия</option>
+                  <option value="RS">Сербия и Черногория</option>
+                  <option value="SG">Сингапур</option>
+                  <option value="SY">Сирия</option>
+                  <option value="SK">Словакия</option>
+                  <option value="SI">Словения</option>
+                  <option value="SB">Соломоновы Острова</option>
+                  <option value="SO">Сомали</option>
+                  <option value="SD">Судан</option>
+                  <option value="SR">Суринам</option>
+                  <option value="US">США</option>
+                  <option value="SL">Сьерра-Леоне</option>
+                  <option value="TJ">Таджикистан</option>
+                  <option value="TW">Тайвань</option>
+                  <option value="TH">Тайланд</option>
+                  <option value="TZ">Танзания</option>
+                  <option value="TC">Тёркс и Кайкос</option>
+                  <option value="TG">Того</option>
+                  <option value="TK">Токелау</option>
+                  <option value="TO">Тонго</option>
+                  <option value="TT">Тринидад и Тобаго</option>
+                  <option value="TV">Тувалу</option>
+                  <option value="TN">Тунис</option>
+                  <option value="TM">Туркменистан</option>
+                  <option value="TR">Турция</option>
+                  <option value="UG">Уганда</option>
+                  <option value="UZ">Узбекистан</option>
+                  <option value="UA" selected="selected">Украина</option>
+                  <option value="UY">Уругвай</option>
+                  <option value="FO">Фарерские острова</option>
+                  <option value="FM">Федеративные Штаты Микронезии</option>
+                  <option value="FJ">Фиджи</option>
+                  <option value="PH">Филиппины</option>
+                  <option value="FI">Финляндия</option>
+                  <option value="FK">Фолклендские (Мальвинские) острова</option>
+                  <option value="FR">Франция</option>
+                  <option value="GF">Французская Гвинея</option>
+                  <option value="PF">Французская Полинезия</option>
+                  <option value="HR">Хорватия</option>
+                  <option value="CF">Центральноафриканская Республика</option>
+                  <option value="TD">Чад</option>
+                  <option value="CZ">Чешская Республика</option>
+                  <option value="CL">Чили</option>
+                  <option value="CH">Швейцария</option>
+                  <option value="SE">Швеция</option>
+                  <option value="LK">Шри Ланка</option>
+                  <option value="EC">Эквадор</option>
+                  <option value="GQ">Экваториальная Гвинея</option>
+                  <option value="ER">Эритрея</option>
+                  <option value="EE">Эстония</option>
+                  <option value="ET">Эфиопия</option>
+                  <option value="KR">Южная Корея</option>
+                  <option value="ZA">Южноафриканская Республика</option>
+                  <option value="JM">Ямайка</option>
+                  <option value="JP">Япония</option>
 								</select>
 							</div>
 			 			</div>
      	 				<div id="savedPax0" class="userSavedPax" style="float:left; width:200px;"></div>
-      					<div style="clear:both; padding-top:10px;" align="left" class="smaller"><strong>Примечание</strong>: все поля нужно заполнить</div>
+      					<div style="clear:both; padding-top:10px;" align="left" class="smaller">
+                <strong>Примечание</strong>: все поля нужно заполнить</div>
 	  					<div style="clear:both; height:4px;"></div>
       					<div style="clear:both; border-color:#0074bc; border-width: 2px; margin:10px 0;" class="roundborder">
-        					<input type="checkbox" id="online_checkin0" name="online_checkin[0]" onClick="$('#OLcheckInInfo0').toggle(); updateInfoPage();"> 
+        					<input type="checkbox" id="online_checkin0" name="online_checkin[0]"> 
         					<label for="online_checkin0" class="labelInFrom">Онлайн-регистрация на рейс <strong>+3 евро</strong></label>
 						<div id="OLcheckInInfo0" style="display:none;">    
 							<div class="roundborder" style="margin-top:12px;">
 							<strong></strong>
-							<p><span class="red"><strong>Важно!</strong></span> Указаное место будет предоставлено только если авиакомпания дает возможность его выбрать.    <p><input type="checkbox" class="radio" name="oci[0][seat]" id="oci_window_seat0" value="window_seat"><label for="oci_window_seat0" class="labelInFrom">место возле окна</label>
-					    	<input type="checkbox" class="radio" name="oci[0][seat]" id="oci_aisle_seat0" value="aisle_seat"><label for="oci_aisle_seat0" class="labelInFrom">место возле прохода</label>
+							<p>
+                <span class="red">
+                  <strong>Важно!</strong>
+                </span> Указаное место будет предоставлено только если авиакомпания дает возможность его выбрать.    
+                <p>
+                <input type="checkbox" class="radio" name="oci[0][seat]" id="oci_window_seat0" value="window_seat">
+                <label for="oci_window_seat0" class="labelInFrom">место возле окна</label>
+					    	<input type="checkbox" class="radio" name="oci[0][seat]" id="oci_aisle_seat0" value="aisle_seat">
+                <label for="oci_aisle_seat0" class="labelInFrom">место возле прохода</label>
 					    </div>
-    <script type="application/javascript">
-$("input:checkbox.radio").click(function() {
-    if($(this).is(":checked")) {
-        var group = "input:checkbox[name='" + $(this).attr("name") + "']";
-        $(group).prop("checked", false);
-        $(this).prop("checked", true);
-    } else {
-        $(this).prop("checked", false);
-    }
-});
-</script>
 	</div>
 </div>
 <div class="formLine">
 	<div style="float:left; width:240px;">программа лояльного клиента:</div>	  
 		<select class="passSel" name="freq_fl_0" style="width:196px;">
 			<option value=""></option>
-	    	<option value="EI">Aer Lingus - Gold Circle Club</option><option value="SU">Aeroflot - Aeroflot Bonus</option><option value="AM">Aeromexico - Club Premier</option><option value="BT">Air Baltic - BaliticMiles</option><option value="AF">Air France/KLM - Flying Blue</option><option value="KM">Air Malta - FlyPass</option><option value="AZ">Alitalia - MilleMiglia</option><option value="AA">American Airlines - AAdvantage</option><option value="OS">Austrian Airlines - Miles & More</option><option value="BA">British Airways - Executive Club</option><option value="SN">Brussels Airlines - Privilige</option><option value="OK">CSA - OK Plus</option><option value="CO">Continental - OnePass</option><option value="OU">Croatia Airlines - Miles & More</option><option value="DL">Delta - Sky Miles</option><option value="LY">EL AL - Matmid Club</option><option value="EK">Emirates - Skywards</option><option value="OV">EstonianAir - EuroBonus</option><option value="SK">Euro Bonus</option><option value="AY">Finnair - Finnair Plus</option><option value="IB">Iberia - Madrid Amigo</option><option value="JL">JAL - Mileage Bank</option><option value="JU">JAT Airways - One Flight More</option><option value="KL">KLM - Flying Dutchman</option><option value="KE">Korean Air - Sky Pass</option><option value="LO">LOT - Miles & More</option><option value="LH">Lufthansa - Miles & More</option><option value="MA">Malev - Duna Club</option><option value="CX">Marco Polo Club</option><option value="NW">Northwest - WorldPerks</option><option value="QF">Qantas Frequent Flyer</option><option value="S7">S7 Airlines - S7 Priority</option><option value="FI">SAGA BONUS</option><option value="JJ">TAM - Fidelidade Program</option><option value="UT">UTair - Status</option><option value="U6">Ural Airlines - Club Wings</option>	  
+	    	<option value="EI">Aer Lingus - Gold Circle Club</option>
+        <option value="SU">Aeroflot - Aeroflot Bonus</option>
+        <option value="AM">Aeromexico - Club Premier</option>
+        <option value="BT">Air Baltic - BaliticMiles</option>
+        <option value="AF">Air France/KLM - Flying Blue</option>
+        <option value="KM">Air Malta - FlyPass</option>
+        <option value="AZ">Alitalia - MilleMiglia</option>
+        <option value="AA">American Airlines - AAdvantage</option>
+        <option value="OS">Austrian Airlines - Miles & More</option>
+        <option value="BA">British Airways - Executive Club</option>
+        <option value="SN">Brussels Airlines - Privilige</option>
+        <option value="OK">CSA - OK Plus</option>
+        <option value="CO">Continental - OnePass</option>
+        <option value="OU">Croatia Airlines - Miles & More</option>
+        <option value="DL">Delta - Sky Miles</option>
+        <option value="LY">EL AL - Matmid Club</option>
+        <option value="EK">Emirates - Skywards</option>
+        <option value="OV">EstonianAir - EuroBonus</option>
+        <option value="SK">Euro Bonus</option>
+        <option value="AY">Finnair - Finnair Plus</option>
+        <option value="IB">Iberia - Madrid Amigo</option>
+        <option value="JL">JAL - Mileage Bank</option>
+        <option value="JU">JAT Airways - One Flight More</option>
+        <option value="KL">KLM - Flying Dutchman</option>
+        <option value="KE">Korean Air - Sky Pass</option>
+        <option value="LO">LOT - Miles & More</option>
+        <option value="LH">Lufthansa - Miles & More</option>
+        <option value="MA">Malev - Duna Club</option>
+        <option value="CX">Marco Polo Club</option>
+        <option value="NW">Northwest - WorldPerks</option>
+        <option value="QF">Qantas Frequent Flyer</option>
+        <option value="S7">S7 Airlines - S7 Priority</option>
+        <option value="FI">SAGA BONUS</option>
+        <option value="JJ">TAM - Fidelidade Program</option>
+        <option value="UT">UTair - Status</option>
+        <option value="U6">Ural Airlines - Club Wings</option>
 	    </select>
 	</div>
 	<div class="formLine">
@@ -582,7 +1481,13 @@ $("input:checkbox.radio").click(function() {
 					</div>
 					<div class="dline"></div>
 						<div align="right">
-  							<div style="clear:both; float:none;"><strong>Всего:</strong> <span style="float:none;" class="offerPrice"><span id="totalAm2"></span> <span style="font-size:14px;">евро</span></span></div>
+  							<div style="clear:both; float:none;">
+                  <strong>Всего:</strong> 
+                  <span style="float:none;" class="offerPrice">
+                  <span id="totalAm2"></span> 
+                  <span style="font-size:14px;">евро</span>
+                  </span>
+                </div>
   						<div align="right">(<span id="totalAmInCurr2"></span> грн.)</div>
   					</div>
 					<div style="clear:both;"></div>
@@ -595,17 +1500,17 @@ $("input:checkbox.radio").click(function() {
 								<div class="smaller termsList"> 
 									<ul>
 										<li>В аэропорту могут взиматься дополнительные сборы авиакомпаний (за багаж, регистрационный и др.)</li>
-										<li>Пассажир(ы) обязан(ы) иметь все необходимые дорожные документы. <a href="JavaScript:openw('https://aviago.com.ua/help/?goto=3-3','','width=700,height=700');">Дополнительная информация</a></li>
-										<li><a href="https://aviago.com.ua/conditions_en.pdf" target="_blank">Условия и права договора с пассажирами</a></li> 
+										<li>Пассажир(ы) обязан(ы) иметь все необходимые дорожные документы. <a href="">Дополнительная информация</a></li>
+										<li><a href="" target="_blank">Условия и права договора с пассажирами</a></li> 
 								</div>
 								<div style="padding:8px;">
-	  								<input type="checkbox" id="agree" name="agree" value="1" onclick="checkSubmit();"/>
+	  								<input type="checkbox" id="agree" name="agree" value="1"/>
 	  								<label for="agree"><strong>Ознакомлен(а) и согласен(-на).</strong></label>
 								</div>
 							</td>
                     		<td width="144">                      
                     			<div id="disButton" class="buttonDis" style="font-size:14px;" title="Чтобы продолжить, вы должны согласиться с условиями">Бронировать</div>
-                      			<div id="enaButton" style="display:none;font-size:14px;" class="button" onclick="checkFDForm();" title="Бронировать">Бронировать</div>
+                      			<div id="enaButton" style="display:none;font-size:14px;" class="button" title="Бронировать">Бронировать</div>
                       		</td>
                   		</tr>
                 	</table>
@@ -628,497 +1533,12 @@ $("input:checkbox.radio").click(function() {
        </div>
   </div>
 </div>
-<script type="text/javascript">
-loginUrl = urlStart+"includes/fd/login_func.php";
-var ptout = false;
-//<script>
-var ociMessages= {"doc_type":"","doc_number":"","doc_country":"","doc_issue_date":"","doc_exp":"","citizenship":"","bdate":"","passport_num":"","passport_valid_through":"","passport_country":""};
-var passengers = new Array("ADULT");
-var departureDate = "140901";
-var regSurnames = /^[ ]*[a-z]+[ ]*[a-z]+[ a-z]*$/i;
-var regNames = /^[ ]*[a-z]+[ a-z]*$/i;
-function checkFDForm() {	
-	var Ctrl = el("flightForm");
-	var formName = "flightForm";
-	var field = null;
-	var message = "";
-	var ins_exist = false;
-	var pn = false;
-	
-	if(check_adc){
-		if(el("adc").checked){
-			if(el("adc_parking_plate").value.length < 6){
-				message = "Введите номер автомобиля."; 
-				field = el("adc_parking_plate");
-			} else if(!$('input[name=adc_type]:checked').val()){
-				message = "Выберите тип резервации парковки"; 
-				field = el("adc_type0");
-			}
-		}
-	}
-	
-		////////////////////////////////////////
-	if(!message.length){
-		var titleValue = '';
-		var kk;
-		
-		for(var k = 0; k < 10; k++) {
-			kk = k + 1;
-			if(!el("firstname"+k)) break;		
-			var isBirthDate = el("day"+k);
-			if(isBirthDate) {
-				var day = el("day"+k).value;
-				var month = el("month"+k).value;
-				var year = el("year"+k).value;
-			}
-			
-			if(passengers[k] != "INFANT"){
-				var title = getRadio("flightForm","title"+k);			
-				if(!title) {
-					message = "Укажите пол пассажира №" + kk;
-					field = Ctrl["title"+k];
-					break;
-				}
-			}
-			var firstname = el("firstname"+k).value = cyrlat(el("firstname"+k).value);
-			var surname = el("surname"+k).value = cyrlat(el("surname"+k).value);
-			
-			for(var n = 0; n < 10; n++){
-				if(!el("firstname"+n)) break;
-				if(n != k){
-					var f = el("firstname"+n).value;
-					var s = el("surname"+n).value;
-					if(f.length && s.length && firstname == f && surname == s){
-						message = "Имена и фамилии пассажиров № "+kk+" и № "+(n+1)+" совпадают.";
-						field = el("firstname"+n);
-						break;
-					}
-				}
-			}
-			
-			if(message.length) break;
-			switch(passengers[k]){
-				case "ADULT": var BDfrom = 12; var BDto = 100; break;
-				case "CHILD": var BDfrom = 2; var BDto = 12; break;
-				case "INFANT": var BDfrom = 0; var BDto = 2; break;
-			}
-			
-			if(!firstname.length || (firstname.search(regNames) == -1)) {
-			 	if(!firstname.length) message = "Укажите имя пассажира №"+ kk;
-			 	else message = "В имени пассажира введены недопустимые символы. ";
-			   	field = el("firstname"+k);
-			 	break;
-			} else if(!surname.length || (surname.search(regSurnames) == -1)) {
-				if(!surname.length)	message = "Укажите фамилию пассажира №" + kk;
-				else message = "В фамилии пассажира введены недопустимые символы. ";
-			  	field = el("surname"+k);
-				break;
-			}
-			if(isBirthDate){
-				if(day == "" || !day){
-					message = "Вы не выбрали день даты рождения.";
-					field = el("day"+k);
-					break;
-				} else if(month == "" || !month){
-					message = "Вы не выбрали месяц рождения.";
-					field = el("month"+k);
-					break;
-				} else if(year == "" || !year){
-					message = "Вы не выбрали год рождения.";
-					field = el("year"+k);
-					break;
-				} else if(day > DayEnd(month,year)) {
-					message = "Введена недопустимая дата рождения для пассажира № " + kk + "";
-					field = el("day"+k);
-					break;
-				} else if(!checkBirthDates(day, month, year, BDfrom, BDto)) {
-					console.log(BDfrom+"; "+BDto);
-					message = "Во время полета пассажир № "+ kk + " должен быть старше "+BDfrom+", но моложе "+BDto+" лет.";
-					field = el("day"+k);
-					break;     
-				}
-			} 
-			if(el("passport_num"+k)){
-				if(!el("passport_num"+k).value.length) {
-					message = "Не введен номер паспорта для пассажира № " + kk + "";
-					eval("field = Ctrl.passport_num"+k+";");
-					break;
-				} else if(!el("passport_exp_day"+k).value || !el("passport_exp_month"+k).value || !el("passport_exp_year"+k).value){
-					message = "Укажите срок действия паспорта для пассажира № "+kk;
-					break;
-				} else {
-					var p_exp_date = new Date(el("passport_exp_year"+k).value,el("passport_exp_month"+k).value,el("passport_exp_day"+k).value,0,0,0);					
-					var dep_date = new Date(2000+parseInt(departureDate.substr(0,2)),parseInt(remZero(departureDate.substr(2,2))),parseInt(remZero(departureDate.substr(4,2))),0,0,0);					
-					if(p_exp_date.getTime() < dep_date.getTime()){
-						message = "Указаный срок действия паспорта пассажира № "+kk+" заканчивается до вылета. С этим паспортом пассажир не может лететь.";
-						break;
-					}
-				}
-			} 
-			
-			if($("#freq_fl"+k).length){
-				var ff_prog = $("#freq_fl"+k).val();
-				var ff_val = $("#freq_fl_value"+k).val();
-				if(ff_val.length && ff_prog == ""){
-					message = "Просьба выбрать программу лояльности клиента.";
-					field = el("freq_fl"+k);
-				}
-				if(!ff_val.length && ff_prog != ""){
-					message = "Просьба ввести номер/код клиента программы лояльности";
-					field = el("freq_fl_value"+k);
-				}
-			}
-			
-			if($("#online_checkin"+k).is(":checked")){
-				$("[name^=oci\\["+k+"\\]]").each(function(){
-					if($(this).attr("name").indexOf("oci["+k+"][seat]") == -1){
-						if(!$(this).val()){
-							message = ociMessages[$(this).attr("param")];
-							field = $(this).get(0);
-							return false;
-						}
-					}
-				});
-			}
-			
-			if(k==0) {
-				el("country_ph_code").value = trim(el("country_ph_code").value);
-				if(el("country_ph_code").value.substr(0,1) != "+") el("country_ph_code").value = "+"+el("country_ph_code").value;
-				if(el("phone1").value.length) {
-					el("phone1").value = el("phone1").value.replace('-','');
-					el("phone1").value = el("phone1").value.replace('–','');
-					el("phone1").value = el("phone1").value.replace(' ','');
-				}
-				if(!el("phone1").value.length || el("phone1").value.search(regphone) == -1) {
-					message = "Введите правильный номер телефона.";
-					field = el("phone1");
-					break;
-				} else if(!el("country_ph_code").value.length || el("country_ph_code").value.search(/^\+?[0-9,-]{1,5}$/) == -1){
-					message = "Введите правильный телефонный код страны.";
-					field = el("country_ph_code");
-					break;
-				} else if(el("phone1").value.length > 12){
-					message = "Номер телефона не должен содержать более 12 цифр.";
-					field = el("phone1");
-				} else if(!Ctrl.email.value.length) {
-					message = " Не введен адрес эл. почты";
-					field = Ctrl.email;
-					break;
-				} else if(Ctrl.email.value.length && !emailcheck(trim(Ctrl.email.value))) {
-					message = "Введен недопустимы адрес эл. почты.";
-					field = Ctrl.email;
-					break;
-				} else if(Ctrl.email.value.length && (Ctrl.email.value == "info@aviago.ru" || Ctrl.email.value == "info@aviago.com.ua" || Ctrl.email.value == "info@aviago.by" || Ctrl.email.value == "info@avia.lt")){
-					message = "Проверьте адрес эл. почты. Вы ввели чужой адрес.";
-					field = Ctrl.email;
-					break;
-				}
-			}
-		}
-	}
-	if(message.length){
-		alert(message);		
-		$("#fdPassengers").switchTab("pass"+k);
-	} else {
-				submitFlightDetForm();
-	}
-	if(field != null) {
-		field.focus();	
-		if(field.type == "text") field.select();
-	}
-}
-
-function submitFlightDetForm(){
-		window.scrollTo(0,0);
-	showWait();
-	AjaxSubmitForm("flightForm","content","content");
-	}
-
-function cyrlat(str){
-	str = str.replace(/а/g, "a");
-	str = str.replace(/б/g, "b");
-	str = str.replace(/в/g, "v");
-	str = str.replace(/г/g, "g");
-	str = str.replace(/д/g, "d");
-	str = str.replace(/е/g, "e");
-	str = str.replace(/ё/g, "yo");
-	str = str.replace(/ж/g, "zh");
-	str = str.replace(/з/g, "z");
-	str = str.replace(/и/g, "i");
-	str = str.replace(/й/g, "j");
-	str = str.replace(/к/g, "k");
-	str = str.replace(/л/g, "l");
-	str = str.replace(/м/g, "m");
-	str = str.replace(/н/g, "n");
-	str = str.replace(/о/g, "o");
-	str = str.replace(/п/g, "p");
-	str = str.replace(/р/g, "r");
-	str = str.replace(/с/g, "s");
-	str = str.replace(/т/g, "t");
-	str = str.replace(/у/g, "u");
-	str = str.replace(/ф/g, "f");
-	str = str.replace(/х/g, "kh");
-	str = str.replace(/ц/g, "c");
-	str = str.replace(/ч/g, "ch");
-	str = str.replace(/ш/g, "sh");
-	str = str.replace(/щ/g, "shch");
-	str = str.replace(/ъ/g, "");
-	str = str.replace(/ы/g, "y");
-	str = str.replace(/ь/g, "");
-	str = str.replace(/э/g, "e");
-	str = str.replace(/ю/g, "yu");
-	str = str.replace(/я/g, "ya");
-	
-	str = str.replace(/А/g, "A");
-	str = str.replace(/Б/g, "B");
-	str = str.replace(/В/g, "V");
-	str = str.replace(/Г/g, "G");
-	str = str.replace(/Д/g, "D");
-	str = str.replace(/Е/g, "E");
-	str = str.replace(/Ё/g, "YO");
-	str = str.replace(/Ж/g, "ZH");
-	str = str.replace(/З/g, "Z");
-	str = str.replace(/И/g, "I");
-	str = str.replace(/Й/g, "Y");
-	str = str.replace(/К/g, "K");
-	str = str.replace(/Л/g, "L");
-	str = str.replace(/М/g, "M");
-	str = str.replace(/Н/g, "N");
-	str = str.replace(/О/g, "O");
-	str = str.replace(/П/g, "P");
-	str = str.replace(/Р/g, "R");
-	str = str.replace(/С/g, "S");
-	str = str.replace(/Т/g, "T");
-	str = str.replace(/У/g, "U");
-	str = str.replace(/Ф/g, "F");
-	str = str.replace(/Х/g, "KH");
-	str = str.replace(/Ц/g, "C");
-	str = str.replace(/Ч/g, "CH");
-	str = str.replace(/Ш/g, "SH");
-	str = str.replace(/Щ/g, "SHCH");
-	str = str.replace(/Ъ/g, "");
-	str = str.replace(/Ы/g, "Y");
-	str = str.replace(/Ь/g, "");
-	str = str.replace(/Э/g, "E");
-	str = str.replace(/Ю/g, "YU");
-	str = str.replace(/Я/g, "YA");
-	return str;
-}
-
-function checkBirthDates(day, month, year, Min, Max) {
-	var depDay = departureDate.substr(4,2);
-	var depMonth = departureDate.substr(2,2);
-	var depYear = departureDate.substr(0,2);
-	year1 = parseInt(year,10)+Min;
-	year3 = parseInt(year,10)+Max;
-	var stamp1 = new Date(year3, parseInt(month,10)-1, day);
-	var stamp2 = new Date(2000+parseInt(depYear,10), parseInt(depMonth,10)-1, parseInt(depDay));
-	var stamp3 = new Date(year1, parseInt(month,10)-1, day);
-	//alert(stamp1 + "\n" + stamp2 + "\n" + stamp3);
-	return ((stamp3.valueOf() <= stamp2.valueOf()) && (stamp2.valueOf() < stamp1.valueOf()));
-}
-
-function DayEnd(month, year) {
-   month -= 1;
-   days = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
-   return ((IsLeapYear(year)) && (month == 1)) ? 29 : days[month];
-}
-
-function IsLeapYear(y) {
-   return (0 == y%4 && ((y%100 != 0) || (y%400 == 0)));
-}
-function checkSubmit(){
-	var t = true;
-	if(el("flightForm")["agree"].checked == true && t){
-		$("#disButton").hide();
-		$("#enaButton").show();
-	} else {
-		$("#disButton").show();
-		$("#enaButton").hide();
-	}
-}
-
-//var rate = 0.28962001853568;
-var bankFee = 0;
-var passNum = 0;
-var check_adc = false;
-var totalServiceFee = 0;
-//<script>
-var totalAm = 0;
-var ticketAm = 0;
-var bankFee = 0;
-var adc_parking_price = 0;
-function updateInfoPage(){
-	var tAm = ticketAm = 1183.0977757183;
-	$("[id*=ticketPriceAm]").html(tAm.toFixed(0));
-		
-	//Loyalty
-	var lm = 0;
-	var lm = Number(el("flightForm").loyalty_balance.value)*rate;
-	if(lm > 0){
-		$("[id*=loyaltyMoney]").show();
-		$("[id*=loyaltyMoneyAm]").html(lm.toFixed(0));
-		tAm -= lm;
-	} else {
-		$("[id*=loyaltyMoney]").hide();
-	}
-	
-	//Luggage
-	var gm = getLuggagePrice();
-	
-	if(gm > 0){
-		$("[id*=luggagePrice]").show();
-		$("[id*=luggagePriceAm]").html(gm.toFixed(0));
-		tAm += gm;
-	} else {
-		$("[id*=luggagePrice]").hide();
-	}
-		
-	//ADC parking
-	if(adc_parking_price > 0){
-		$("[id*=adcParkingPrice]").show();
-		$("[id*=adcParkingPriceAm]").html(adc_parking_price.toFixed(0));
-		tAm += adc_parking_price;
-	} else {
-		$("[id*=adcParkingPrice]").hide();
-	}
-	//Online Checkin
-	var oci_price = 0;
-	for(var e=0; e<9; e++){
-		if($("#online_checkin"+e).is(":checked")){
-			oci_price += 3.1858202038925;
-		}
-	}
-	if(oci_price > 0){
-		$("[id*=onlineCheckinPrice]").show();
-		$("[id*=onlineCheckinPriceAm]").html(oci_price.toFixed(0));
-		tAm += oci_price;
-	} else {
-		$("[id*=onlineCheckinPrice]").hide();
-	}
-	//Bank fee
-	if(bankFee > 0){
-		$("[id*=bankFeePrice]").show();
-		$("[id*=bankFeePriceAm]").html(bankFee.toFixed(0));
-		tAm += bankFee;
-	} else {
-		$("[id*=bankFeePrice]").hide();
-	}
-	
-	totalAm = tAm;
-	$("[id*=totalAm]").html(tAm.toFixed(0));
-	$("[id*=totalAmInCurr]").html((tAm*17.52853616506).toFixed());
-	
-	var e = el("orderSummary");
-}
-
-function getLuggagePrice(){
-	var gm = 0;
-		return gm;
-}$(document).ready(
-function(){
-	updateInfoPage();
-	//setCCodeValue();
-	wrapSelect();
-	flightDetLoaded = true;
-	getSavedUserPax();
-		loadContent("includes/fd/get_rules.php?fare_id=0&combination_id=0&session=sl6z5x4q289uy44hb8md6qo5r0xkxo0k46il4kdv&office_id=lt&lng=ru&price=4085","rules","rules");
-	});
-var checkIns = false;
-var oldTabSelected = selected;
-inline("registerLine");
-hide("loginInfo");
-	fixbtn();
-</script>
 </div>
-    <div style="padding-top:14px; padding-bottom: 12px; clear:both; position:relative; z-index:38;">
-    	<div id="nav" align="justify" style="width:936px;">
-  			<ul>
-    			<li><a class="infoline"  href="about/">О нас</a></li>
-				<li><a class="infoline"  href="discounts/">Скидки</a></li>
-				<li><a class="infoline"  target="_blank" href="https://www.checkmytrip.com/cmt/apf/cmtng/index?LANGUAGE=RU&amp;SITE=NCMTNCMT" rel="nofollow">Проверить бронь</a></li>
-				<li><a class="infoline"  target="_blank" href="http://www.worldtimezone.com" rel="nofollow">Временные зоны</a></li>
-				<li><a class="infoline"  href="http://www.gismeteo.ru" rel="nofollow">Погода</a></li>
-			</ul>
-			<span class="stretcher"></span>
-		</div>
-	</div>
-    <div class="hr" style="width:940px;"></div>
-    <div class="slinks" style="padding:0 12px 0 12px; position:relative; width:940px;" align="left">
-    	<table border="0" width="100%" cellpadding="2" cellspacing="0">
-    		<tr>
-    			<td valign="top" width="17%">
-    				<p><a href="https://aviago.com.ua/авиабилеты-Аликанте/" title="Рейсы в Аликанте">Рейсы в Аликанте</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Бейрут/" title="Рейсы в Бейрут">Рейсы в Бейрут</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Берген/" title="Рейсы в Берген">Рейсы в Берген</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Бирмингем/" title="Рейсы в Бирмингем">Рейсы в Бирмингем</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Бристоль/" title="Рейсы в Бристоль">Рейсы в Бристоль</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Брюссель/" title="Рейсы в Брюссель">Рейсы в Брюссель</a></p>
-    			</td>
-    			<td valign="top" width="17%">
-    				<p><a href="https://aviago.com.ua/авиабилеты-Буэнос-Айрес/" title="Рейсы в Буэнос-Айрес">Рейсы в Буэнос-Айрес</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Вена/" title="Рейсы в Вену">Рейсы в Вену</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Гётеборг/" title="Рейсы в Гётеборг">Рейсы в Гётеборг</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Киев/" title="Рейсы в Киев">Рейсы в Киев</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Киев/" title="Рейсы в Киев">Рейсы в Киев</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Корк/" title="Рейсы в Корк">Рейсы в Корк</a></p>
-    			</td>
-    			<td valign="top" width="17%">
-    				<p><a href="https://aviago.com.ua/авиабилеты-Ливерпуль/" title="Рейсы в Ливерпуль">Рейсы в Ливерпуль</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Лиссабон/" title="Рейсы в Лиссабон">Рейсы в Лиссабон</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Мадрид/" title="Рейсы в Мадрид">Рейсы в Мадрид</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Малага/" title="Рейсы в Малагу">Рейсы в Малагу</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Мюнхен/" title="Рейсы в Мюнхен">Рейсы в Мюнхен</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Ницца/" title="Рейсы в Ниццу">Рейсы в Ниццу</a></p>
-    			</td>
-    			<td valign="top" width="17%">
-    				<p><a href="https://aviago.com.ua/авиабилеты-Нью-Дели/" title="Рейсы в Нью-Дели">Рейсы в Нью-Дели</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Пекин/" title="Рейсы в Пекин">Рейсы в Пекин</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Прага/" title="Рейсы в Прагу">Рейсы в Прагу</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Рио-де-Жанейро/" title="Рейсы в Рио-де-Жанейро">Рейсы в Рио-де-Жанейро</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Санкт-Петербург/" title="Рейсы в Санкт-Петербург">Рейсы в Санкт-Петербург</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Сидней/" title="Рейсы в Сидней">Рейсы в Сидней</a></p>
-    			</td>
-    			<td valign="top" width="17%">
-    				<p><a href="https://aviago.com.ua/авиабилеты-Ставангер/" title="Рейсы в Ставангера">Рейсы в Ставангера</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Стокгольм/" title="Рейсы в Стокгольм">Рейсы в Стокгольм</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Таллинн/" title="Рейсы в Таллинн">Рейсы в Таллинн</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Токио/" title="Рейсы в Токио">Рейсы в Токио</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Торонто/" title="Рейсы в Торонто">Рейсы в Торонто</a></p>
-    				<p><a href="https://aviago.com.ua/авиабилеты-Цюрих/" title="Рейсы в Цюрих">Рейсы в Цюрих</a></p>
-    			</td>
-    			<td valign="top" width="17%">
-    				<p><a href="https://aviago.com.ua/авиабилеты-Эдинбург/" title="Рейсы в Эдинбург">Рейсы в Эдинбург</a></p>
-    			</td>
-    		</tr>
-    	</table>
-    </div>
+
+    <div class="hr" style="width:940px;"></div>   
     <div class="hr" style="width:940px;"></div>
     <div style="padding:12px; padding-top:2px; width:940px; position:relative;">
-    	<div style="clear:both; position:relative;">
-  			<div align="left" class="copyright" style="padding-top:10px; text-align:left;"> © 2009 AviaGO.com.ua  | <a href="/все-рейсы/">Все полеты</a> | <a href="авиакомпании/">Все авиакомпании</a> | <a id="contactsLink" href="JavaScript:showNonModal('contacts');">Контакты</a> | 
-			<a href="https://aviago.ru/flight_details/?session=sl6z5x4q289uy44hb8md6qo5r0xkxo0k46il4kdv" target="_blank" title="Авиабилеты, дешевые полеты, Россия">Авиабилеты в России</a> | 
-			<a href="https://aviago.by/flight_details/?session=sl6z5x4q289uy44hb8md6qo5r0xkxo0k46il4kdv" target="_blank" title="Авиабилеты, дешевые полеты, Беларусь">Авиабилеты в Белорусии</a> |
-	        <a href="https://booking.avia.lt/" target="_blank" title="Internet hotels booking system">Internet hotels booking system</a> |
-        	<a href="http://avia.lt/" target="_blank" title="Авиабилеты, дешевые полеты, Литва">Pigūs skrydžiai</a>
-	  	  | <a href="http://pokupkaaviabiletov.ru/" target="_blank" title="Покупка авиабилетов">Покупка авиабилетов</a>| <a href="http://bc.lt/keliones/" target="_blank">Kelionės</a>
-          	<div style="position:relative; left:250px; top:-150px; width:300px;">
-          		<div id="contacts" align="left" class="white_block2" style="width:310px; position:absolute; display:none;">
-  					<div style="float:right;">
-  						<a href="JavaScript:void(0);" onclick="hideNonModal('contacts');" title="Закрыть"><img src="https://files.avia.lt/images/close.gif" alt="Закрыть" align="middle"></a>
-  					</div>
-  					<div class="hOne">AviaGO.com.ua контакты</div>
-  					<strong>Адрес</strong>: Украина, Крым, г. Симферополь, ул. Горького, 30, офис 7<br>
-  					<strong>Телефон</strong>:<blockquote>Киев (+38 044) 392-74-08<br>Симферополь (+38 0652) 790-290<br>Львов (+38 032) 229-58-63</blockquote><br>
-  					<strong>Эл. почта</strong>: <a style="font-size:inherit;" href="mailto:info@aviago.com.ua">info@aviago.com.ua</a> <br>
- 	 			</div>
- 	 		</div>
-  		</div>
-  		<div align="left" style="text-align:left;">
-  			<a href="http://www.iata.org" target="_blank" title="Аккредитованный член IATA"><img src="../images/iata_accredited_agent.png" title="Аккредитованный член IATA" alt="Аккредитованный член IATA"></a>
-  		</div>
-  		<div style="clear:both;"></div>
-	</div>
+    	
 </div>
 </div>
 </div>
@@ -1129,28 +1549,9 @@ hide("loginInfo");
     	<div style="padding:12px;"><img id="waitBar" src="https://files.avia.lt/images/progress_bar.gif" alt="Пожалуйста, подождите..."></div>
   	</div>
 </div>
-<script type="text/javascript">
-preloadImages("https://files.avia.lt/images/logos/aviagoua.gif","https://files.avia.lt/images/progress_bar.gif");
-</script>
 <div id="cover" style="width:100%; height:560px; position: absolute;
 top: 0; left: 0; background-color: white; opacity:.50; filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50); visibility:hidden;"></div>
 <script type="text/javascript">
-$(document).ready(function(e) {
-	$(".dialog").fancybox();
-	$(".ajaxDialog").fancybox({type:"ajax",titleShow:false,helpers:{title:null}});
-	try {
-		//fixbtn();
-		whiteBlock();
-		wrapSelect();
-		$(".textfill").textfill({maxFontPixels: 100});
-	} catch(e) {log(e)}
-	try{loadPrevSearches();}catch(e){}});	
-try{ 
-		var pageTracker = _gat._getTracker("UA-2757289-7");
-		pageTracker._trackPageview();
-	} catch(err) {}
-
-	
 $(".tabs").makeTabs();
 </script>
 </body>
