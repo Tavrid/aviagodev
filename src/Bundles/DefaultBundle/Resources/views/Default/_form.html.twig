@@ -13,7 +13,7 @@
     <div style="clear:both; width:597px; padding:6px 16px;">
         <div id="cityChecker" style="position:relative;"></div>
         <div style="height:10px; clear:both;"></div>
-        <form id="flightSearchForm" autocomplete="off" name="searchForm" method="post" action="search.php">
+        <form id="flightSearchForm" autocomplete="off" name="searchForm" method="post" action="">
             <div>
                 <div align="center">
                     <input type="radio" name="journey" id="journey-rt" checked="checked" value="roundTrip">
@@ -31,12 +31,7 @@
                             <div style="display:inline;">
                                 <div style="width:220px;" class="inputWrap">
                                     <div style="float:left;">
-                                        <input class="inpWbtn faint_input" id="" name="" type="text" placeholder="введите город" style="width:198px;">
-                                    </div>
-                                    <div class="input_icon">
-                                        <img src="https://files.avia.lt/images/cities-list.png" border="0"
-                                             alt="Список всех аэропортов" title="Список всех аэропортов" height="18"
-                                             width="18">
+                                        {{ form_widget(form.city_from) }}
                                     </div>
                                 </div>
                             </div>
@@ -46,46 +41,7 @@
                             <div style="display:inline;">
                                 <div style="width:220px;" class="inputWrap">
                                     <div style="float:left;">
-                                        <input class="inpWbtn faint_input" id="iata[2]" name="iata[2]" type="text"
-                                               placeholder="введите город"
-                                               title="Введите название города или нажмите на значёк с глобусом"
-                                               style="width:198px;">
-                                    </div>
-                                    <div class="input_icon">
-                                        <img src="https://files.avia.lt/images/cities-list.png" border="0" height="18" width="18">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="multi" style="height:32px; display:none;clear:both;">
-                        <div style="float:left; width:65px;" align="right" class="lbl">из (2):</div>
-                        <div style="float:left;">
-                            <div style="display:inline;">
-                                <div style="width:220px;" class="inputWrap">
-                                    <div style="float:left;">
-                                        <input class="inpWbtn faint_input" id="iata[3]" name="iata[3]" type="text" style="width:198px;">
-                                    </div>
-                                    <div class="input_icon">
-                                        <img src="https://files.avia.lt/images/cities-list.png" border="0" height="18" width="18">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="float:left; width:65px;" align="right" class="lbl">в (2):</div>
-                        <div style="float:left;">
-                            <div style="display:inline;">
-                                <div style="width:220px;" class="inputWrap">
-                                    <div style="float:left;">
-                                        <input class="inpWbtn faint_input" id="iata[4]" name="iata[4]" type="text"
-                                               placeholder="введите город"
-                                               title="Введите название города или нажмите на значёк с глобусом"
-                                               style="width:198px;">
-                                    </div>
-                                    <div class="input_icon">
-                                        <img src="https://files.avia.lt/images/cities-list.png" border="0"
-                                             alt="Список всех аэропортов" title="Список всех аэропортов" height="18"
-                                             width="18">
+                                        {{ form_widget(form.city_to) }}
                                     </div>
                                 </div>
                             </div>
@@ -96,9 +52,7 @@
                             <div style="float:left; width:65px;" align="right" class="lbl">туда:</div>
                             <div style="width:220px;" class="inputWrap">
                                 <div style="float:left;">
-                                    <input style="width:198px; border:none;" class="inpWbtn" type="text" size="10"
-                                           id="depDate" title="Календарь" placeholder="укажите дату">
-                                    <input type="hidden" id="depDateVal" name="depDate" value=""/>
+                                    {{ form_widget(form.date_from) }}
                                 </div>
                                 <div class="input_icon">
                                     <img src="https://files.avia.lt/images/calendar.png" id="depDateImg" alt="Календарь"
@@ -110,9 +64,7 @@
                             <div style="float:left; width:65px;" align="right" class="lbl">назад:</div>
                             <div style=" width:220px;" class="inputWrap">
                                 <div style="float:left;">
-                                    <input style="width:198px;" class="inpWbtn" type="text" size="10" id="arrDate"
-                                           name="arrDate" title="Календарь" placeholder="укажите дату">
-                                    <input type="hidden" id="arrDateVal" name="arrDate" value=""/>
+                                    {{ form_widget(form.date_to) }}
                                 </div>
                                 <div class="input_icon">
                                     <img src="https://files.avia.lt/images/calendar.png" id="arrDateImg" alt="Календарь"

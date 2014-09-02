@@ -4,6 +4,7 @@ namespace Bundles\DefaultBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use Bundles\DefaultBundle\Form\SearchForm;
 
 use Bundles\ApiBundle\Api\Query\AviaCityByQuery;
 
@@ -18,7 +19,8 @@ class DefaultController extends Controller
 //        $query->setQuery('Гон');
 //        $output = $api->getCityRequestor()->execute($query);
 //
-        return $this->render('BundlesDefaultBundle:Default:index.html.twig');
+        $form = $this->createForm(new SearchForm());
+        return $this->render('BundlesDefaultBundle:Default:index.html.twig',['form' => $form->createView()]);
     }
 
     public function teamAction()
