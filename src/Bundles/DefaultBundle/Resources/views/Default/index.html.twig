@@ -36,5 +36,39 @@
             </form>
         </div>
     </div>
+<script>
+    $(function() {
+
+
+        $( "#SearchForm_city_from" ).autocomplete({
+            source: function( request, response ) {
+                $.ajax({
+                    url: "{{ path('bundles_default_search_city') }}",
+                    dataType: "json",
+                    data: {
+                        q: request.term
+                    },
+                    success: function( data ) {
+                        console.log(data);
+                        var arr = [];
+
+                        $.each(data, function(key, val) {
+                            arr.push({
+                                value: val.name,
+                                'data-value': val.id
+                            });
+                        });
+
+                        response(arr.slice(0, 10));
+                    }
+                });
+            },
+            minLength: 3,
+            select: function( event, ui ) {
+                $( "#SearchForm_city_from").attr('data-value',ui.item['data-value'])
+            }
+        });
+    });
+</script>
 {% endblock %}
 
