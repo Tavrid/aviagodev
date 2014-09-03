@@ -7,11 +7,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Bundles\DefaultBundle\Form\SearchForm;
 
 use Bundles\ApiBundle\Api\Query\AviaCityByQuery;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
     // C330CA8C-DCDF-4CA8-A5E0-F5E4E1612440
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         /** @var \Bundles\ApiBundle\Api\Api $api */
         $api = $this->get('avia.api.manager');
@@ -21,6 +22,9 @@ class DefaultController extends Controller
 //        var_dump($output); exit;
 //
         $form = $this->createForm(new SearchForm());
+        $form->submit($request);
+//        var_dump($form->isValid(),$form->getErrors());
+//        var_dump($form->getData()); exit;
         return $this->render('BundlesDefaultBundle:Default:index.html.twig',['form' => $form->createView()]);
     }
 
