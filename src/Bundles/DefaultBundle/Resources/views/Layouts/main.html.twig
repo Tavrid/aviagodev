@@ -2,14 +2,23 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <meta charset="UTF-8">
-    <link href="{{ "/bundles/bundlesdefault/css/main.css" }}" rel="stylesheet" type="text/css">
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <link rel="stylesheet" href="{{ "/bundles/bundlesdefault/css/jquery.fancybox.css"}}" type="text/css" media="screen" />
-    <script type="text/javascript" src="{{ "/bundles/bundlesdefault/js/functions.js?id=flights&amp;lng=ru"}}"></script>
-    <script type="text/javascript" src="{{ "/bundles/bundlesdefault/js/jquery.fancybox.pack.js?v=2.1.5" }}"></script>
+    {% block stylesheets %}
+        {% stylesheets '@front_bootstrap_css' filter='cssrewrite' combine=true %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+        {% endstylesheets %}
+
+    {% endblock %}
+    {#<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />#}
+    {% block js %}
+        {% javascripts '@jquery' '@jquery_ui_js' '@front_bootstrap_js' combine=true%}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
 </head>
     <body>
-        {% block body %}{% endblock %}
+    <div class="page-header"></div>
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
     </body>
 </html>

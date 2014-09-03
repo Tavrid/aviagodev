@@ -1,71 +1,17 @@
 {% extends "BundlesDefaultBundle:Layouts:main.html.twig" %}
 {% block body %}
-<div style="width:960px;margin: 0 auto;" align="center">
-    <div style="clear:both">
-    <div style="float:left; width:640px;" align="left">
-        {% include 'BundlesDefaultBundle:Default:_form.html.twig' with {form: form} %}
-        <div style="clear:both; position:relative; z-index:4;">
-            <div style="float:left; position:relative;">
-                <div id="prevSearches" style="clear:both; width:639px;" align="left"></div>
-                <div style="width:640px; position:relative;" id="secondPage">
-                {% include 'BundlesDefaultBundle:Default:_tabs.html.twig' %}
-                </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="col-md-6">
+                {{ form_row(form.city_from) }}
+                {{ form_row(form.date_from) }}
             </div>
-        </div>
-    </div>
-    <div style="float:left; position:relative; padding-top:42px; margin-left:4px; z-index:14;">
-        <div class="blue_block" style="height:254px; width:282px; margin-top:0px; padding-right:0px;">
-            <div style="position:absolute; top: 112px;">
-                <div class="white_block" style="width:230px;">
-                    <div style="font-size:12px; margin-bottom:2px; font-weight:bold;">Сейчас на сайте находят</div>
-                    <div style="padding:4px;" class="roundborder">
-                        <div style="overflow:hidden; height:28px;">
-                            <div id="csSlider" style="position:relative; text-align:left; font-size:11px;">
-                                Вильнюс–Барселона, <span class="orange">1934 грн.</span><br>Вильнюс–Сантандер, <span
-                                        class="orange">2356 грн.</span><br>Минск–Анталия, <span
-                                        class="orange">8102 грн.</span><br>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-md-6">
+                {{ form_row(form.city_to) }}
+                {{ form_row(form.date_to) }}
             </div>
-            <div style="position:absolute; background-image:url({{ "/bundles/bundlesdefault/images/all_buys.png" }}); top:8px; left:126px; width:216px; height:148px;">
-                <div style="padding-top:42px;">
-                    <div style="font-size:11px; line-height:100%; color:white;">Нашими услугами <br>воспользовались уже
-                    </div>
-                    <div style="font-size:28px; line-height:100%; color:white; font-weight:bold;">163 683</div>
-                    <div style="font-size:12px; line-height:100%; color:white;">пассажиров</div>
-                </div>
-            </div>
-            <div style="height:118px;"></div>
-            <div style="padding-top:36px;">
-                <div style="float:left;">
-                    <div style="float:left;"><img src="{{ "/bundles/bundlesdefault/images/icons/time_help_skype.png" }}"
-                                                  width="28" height="72" alt=""></div>
-                    <div style="float:left; width:102px;" align="left">
-                        <div class="lbl" style="height:24px;"><a href="" title="Время работы">Время работы</a></div>
-                        <div class="lbl" style="height:24px;"><a href=""
-                                                                 onclick="openw('help/','','width=900,height=540,scrollbars,resizable'); return false;"
-                                                                 title="Помощь">Помощь</a></div>
-                        <div class="lbl" style="height:24px;"><a href="" title="Свяжитесь">Свяжитесь</a></div>
-                    </div>
-                </div>
-                <div align="right" style="position:relative; top:-4px; left:0px; float:left;">
-                    <div style="background-image:url({{ "/bundles/bundlesdefault/images/btn2.png" }}); width:150px; height:87px;"
-                         align="center">
-                        <div style="padding-top:22px;"><a href=""
-                                                          style="color:#FFFFFF;  font-size:18px; font-weight:bold; text-decoration:none; line-height:20px;">Оплатить<br>
-                                бронь</a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-</div>
-<script type="text/javascript">
-    $(".tabs").makeTabs();
-</script>
+        </div>
+    </div>
 {% endblock %}
 

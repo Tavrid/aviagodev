@@ -14,10 +14,11 @@ class DefaultController extends Controller
     public function indexAction()
     {
         /** @var \Bundles\ApiBundle\Api\Api $api */
-//        $api = $this->get('avia.api.manager');
-//        $query = new AviaCityByQuery();
-//        $query->setQuery('Гон');
-//        $output = $api->getCityRequestor()->execute($query);
+        $api = $this->get('avia.api.manager');
+        $query = new AviaCityByQuery();
+        $query->setQuery('Гон');
+        $output = $api->getCityRequestor()->execute($query);
+//        var_dump($output); exit;
 //
         $form = $this->createForm(new SearchForm());
         return $this->render('BundlesDefaultBundle:Default:index.html.twig',['form' => $form->createView()]);

@@ -14,23 +14,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 class SearchForm extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('city_from','text',['attr' => [
-            'style' => 'width:198px;',
-            'placeholder' => 'Введите город',
-            'class' => 'inpWbtn faint_input']])
-            ->add('city_to','text',['attr' => [
-                'style' => 'width:198px;',
-                'placeholder' => 'Введите город',
-                'class' => 'inpWbtn faint_input']])
-            ->add('date_from','text',['attr' => [
-                'style' => 'width:198px; border:none;',
-                'placeholder' => 'Укажите дату',
-                'class' => 'inpWbtn']])
-            ->add('date_to','text',['attr' => [
-                'style' => 'width:198px; border:none;',
-                'placeholder' => 'Укажите дату',
-                'class' => 'inpWbtn']])
-        ;
+        $builder->add('city_from','text',['attr' => ['placeholder' => 'Введите город']])
+            ->add('city_to','text',['attr' => ['placeholder' => 'Введите город']])
+            ->add('date_from','text',['attr' => ['placeholder' => 'Укажите дату']])
+            ->add('date_to','text',['attr' => ['placeholder' => 'Укажите дату']]);
 
     }
 
