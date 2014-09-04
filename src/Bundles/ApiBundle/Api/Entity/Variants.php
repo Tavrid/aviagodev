@@ -9,12 +9,38 @@
 namespace Bundles\ApiBundle\Api\Entity;
 
 
+/**
+ * Class Variants
+ * @package Bundles\ApiBundle\Api\Entity
+ */
 class Variants {
 
     /**
      * @var Segments[]
      */
     protected $segments;
+    /**
+     * @var
+     */
+    protected $duration;
+
+    /**
+     * @param mixed $duration
+     * @return $this
+     */
+    public function setDuration($duration)
+    {
+        $this->duration = $duration;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDuration()
+    {
+        return $this->duration;
+    }
     /**
      * @param \Bundles\ApiBundle\Api\Entity\Segments[] $segments
      * @return $this;

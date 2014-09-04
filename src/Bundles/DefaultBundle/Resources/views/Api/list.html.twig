@@ -2,41 +2,21 @@
 {% for int in data %}
     <div class="panel panel-default">
         <div class="panel-body">
-            {#{% for int in intir %}#}
-                {% for variant in int.variants %}
+            <h3>{{ int.totalPrice }}</h3>
+            {% for variant in int.variants %}
 
-                    {#<div>{{ v.VariantID }}</div>#}
-                    {#{{ dump(variant.segments) }}#}
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for segment in variant.segments %}
-                                    <tr>
-                                        <td>3</td>
-                                        <td>{{ segment.arrivalAirportName }}</td>
-                                        <td>{{ segment.departureCityName }}</td>
-                                        <td>{{ segment.departureAirportName }}</td>
-                                    </tr>
+                {% for segment in variant.segments %}
+                    <div class="row" style="margin-bottom: 15px;">
+                        <div class="col-md-4">
+                            {{ segment.departureCityName }}|{{ segment.departureAirportName }}({{ segment.departureDate }})
 
-
-
-                                {#<div>{{ value.DepartureCountryName }}, {{ value.DepartureCityName }} ({{ value.DepartureAirportName }})</div>#}
-                                {#<div>{{ value.DepartureDate }}</div>#}
-                                {#<div>{{ value.ArrivalCountryName }}, {{ value.ArrivalCityName }} ({{ value.ArrivalAirportName }})</div>#}
-                                {#<div>{{ value.DepartureDate }}</div>#}
-
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                        </div>
+                        <div class="col-md-4">
+                            {{ segment.arrivalCityName }}|{{ segment.arrivalAirportName }}({{ segment.arrivalDate }})
+                        </div>
+                    </div>
                 {% endfor %}
-            {#{% endfor %}#}
+            {% endfor %}
         </div>
     </div>
 {% endfor %}

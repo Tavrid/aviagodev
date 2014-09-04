@@ -99,30 +99,30 @@ class SearchResponse extends Response {
      */
     protected function createEntity($pos){
         $it = new Itineraries();
-//        var_dump($this->response); exit;
         $data = $this->response['result']['Data'][$pos];
-//        if(!empty($data['Itineraries'])){
+        $it->setTotalPrice($data['TotalPrice']['Total']);
+
         foreach($data['Itineraries'] as $inter){
             $variantsArr = array();
             foreach($inter['Variants'] as $variants){
 
                 $segmArr = array();
-//                    if(!empty($variants['Segments'])){
-                    foreach($variants['Segments'] as $segment){
-                        $segm = new Segments();
-                        $segm->setArrivalAirportName($segment['ArrivalAirportName'])
-                            ->setDepartureCountryName($segment['DepartureCountryName'])
-                            ->setDepartureCityName($segment['DepartureCityName'])
-                            ->setDepartureAirportName($segment['DepartureAirportName']);
-                        $segmArr[] = $segm;
-                    }
-//                    var_dump($segmArr); exit;
-//                    }
+                foreach($variants['Segments'] as $segment){
+                    $segm = new Segments();
+                    $segm->setArrivalAirportName($segment['ArrivalAirportName'])
+                        ->setArrivalCountryName($segment['ArrivalCountryName'])
+                        ->setArrivalCityName($segment['ArrivalCityName'])
+                        ->setArrivalDate($segment['ArrivalDate'])
+                        ->setDepartureCountryName($segment['DepartureCountryName'])
+                        ->setDepartureCityName($segment['DepartureCityName'])
+                        ->setDepartureAirportName($segment['DepartureAirportName'])
+                        ->setDepartureDate($segment['DepartureDate']);
+                    $segmArr[] = $segm;
+                }
                 $var = new Variants();
                 $var->setSegments($segmArr);
                 $variantsArr[] = $var;
             }
-//                print_r($variantsArr); exit;
             $it->setVariants($variantsArr);
             break;
         }

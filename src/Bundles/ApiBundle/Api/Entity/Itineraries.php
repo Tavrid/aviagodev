@@ -14,6 +14,25 @@ class Itineraries {
      * @var Variants[]
      */
     protected $variants;
+    protected $totalPrice;
+
+    /**
+     * @param mixed $totalPrice
+     * @return $this
+     */
+    public function setTotalPrice($totalPrice)
+    {
+        $this->totalPrice = $totalPrice;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTotalPrice()
+    {
+        return number_format($this->totalPrice,0,' ',' ');
+    }
 
     /**
      * @param \Bundles\ApiBundle\Api\Entity\Variants[] $variants

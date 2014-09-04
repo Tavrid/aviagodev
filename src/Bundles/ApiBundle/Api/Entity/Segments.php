@@ -85,7 +85,7 @@ class Segments {
      */
     public function setArrivalDate($arrivalDate)
     {
-        $this->arrivalDate = $arrivalDate;
+        $this->arrivalDate = date('Y-m-d H:i:s',$arrivalDate);
         return $this;
     }
 
@@ -175,7 +175,7 @@ class Segments {
      */
     public function setDepartureDate($departureDate)
     {
-        $this->departureDate = $departureDate;
+        $this->departureDate = date('Y-m-d H:i:s',$departureDate);
         return $this;
     }
 
