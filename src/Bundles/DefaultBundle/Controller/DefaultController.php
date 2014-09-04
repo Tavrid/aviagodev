@@ -5,8 +5,6 @@ namespace Bundles\DefaultBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Bundles\DefaultBundle\Form\SearchForm;
-
-use Bundles\ApiBundle\Api\Query\AviaCityByQuery;
 use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller

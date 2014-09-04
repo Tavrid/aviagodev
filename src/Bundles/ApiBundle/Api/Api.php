@@ -9,6 +9,7 @@
 namespace Bundles\ApiBundle\Api;
 use Lsw\ApiCallerBundle\Caller\ApiCallerInterface;
 use Bundles\ApiBundle\Api\Request\CityRequest;
+use Bundles\ApiBundle\Api\Request\SearchRequest;
 
 
 class Api {
@@ -29,6 +30,10 @@ class Api {
 
     public function getCityRequestor(){
         return new CityRequest($this->apiKey,$this->apiCaller);
+    }
+
+    public function getSearchRequestor(){
+        return new SearchRequest($this->apiKey,$this->apiCaller);
     }
 
 } 

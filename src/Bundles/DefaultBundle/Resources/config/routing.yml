@@ -2,7 +2,10 @@ bundles_default_homepage:
     pattern:  /
     defaults: { _controller: BundlesDefaultBundle:Default:index }
 bundles_default_search_city:
-    pattern:  /api/search
+    pattern:  /api/city/search
     defaults: { _controller: BundlesDefaultBundle:Api:searchCity }
+bundles_default_search:
+    pattern:  /api/search
+    defaults: { _controller: BundlesDefaultBundle:Api:search }
 
 
