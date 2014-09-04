@@ -10,6 +10,7 @@ namespace Bundles\ApiBundle\Api;
 use Lsw\ApiCallerBundle\Call\HttpPostJson;
 
 class ApiCall  extends HttpPostJson{
+//    protected $asAssociativeArray = true;
 
     /**
      * {@inheritdoc}
@@ -17,6 +18,14 @@ class ApiCall  extends HttpPostJson{
     public function generateRequestData()
     {
         $this->requestData = $this->requestObject;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function parseResponseData()
+    {
+        $this->responseObject = json_decode($this->responseData,true);
     }
 
 } 

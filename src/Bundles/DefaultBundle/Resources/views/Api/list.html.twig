@@ -1,0 +1,42 @@
+{#{{ dump(data.data) }}#}
+{% for int in data %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {#{% for int in intir %}#}
+                {% for variant in int.variants %}
+
+                    {#<div>{{ v.VariantID }}</div>#}
+                    {#{{ dump(variant.segments) }}#}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Username</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for segment in variant.segments %}
+                                    <tr>
+                                        <td>3</td>
+                                        <td>{{ segment.arrivalAirportName }}</td>
+                                        <td>{{ segment.departureCityName }}</td>
+                                        <td>{{ segment.departureAirportName }}</td>
+                                    </tr>
+
+
+
+                                {#<div>{{ value.DepartureCountryName }}, {{ value.DepartureCityName }} ({{ value.DepartureAirportName }})</div>#}
+                                {#<div>{{ value.DepartureDate }}</div>#}
+                                {#<div>{{ value.ArrivalCountryName }}, {{ value.ArrivalCityName }} ({{ value.ArrivalAirportName }})</div>#}
+                                {#<div>{{ value.DepartureDate }}</div>#}
+
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endfor %}
+            {#{% endfor %}#}
+        </div>
+    </div>
+{% endfor %}

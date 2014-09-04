@@ -9,7 +9,7 @@
 namespace Bundles\ApiBundle\Api\Response;
 
 
-abstract class Response implements \Iterator {
+abstract class Response implements \Iterator ,\ArrayAccess{
     protected $response;
     /**
      * @param $data

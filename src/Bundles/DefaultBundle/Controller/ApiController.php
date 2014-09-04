@@ -24,7 +24,8 @@ class ApiController extends Controller
         $query = new AviaCityByQuery();
         $query->setQuery($q);
         $output = $api->getCityRequestor()->execute($query);
-        $resp= new Response(json_encode($output->getResponseData()->result));
+        $resp = $output->getResponseData();
+        $resp= new Response(json_encode($resp['result']));
         $resp->headers->add(array('Content-Type' => 'application/json'));
         return $resp;
 
@@ -40,10 +41,15 @@ class ApiController extends Controller
             $query = new SearchByQuery();
             $query->setParams($params);
             $output = $api->getSearchRequestor()->execute($query);
-            echo '<pre>';
-            print_r($output); exit;
-            $resp= new Response(json_encode($output->getResponseData()->result));
-            $resp->headers->add(array('Content-Type' => 'application/json'));
+
+            if(!$output->getIsError()){
+
+                $data = $this->render('BundlesDefaultBundle:Api:list.html.twig',array('data' => $output));
+                $resp= new Response($data);
+//                $resp->headers->add(array('Content-Type' => 'application/json'));
+            } else {
+                $resp = new Response('',Response::HTTP_BAD_REQUEST);
+            }
         } else {
             $resp = new Response('',Response::HTTP_BAD_REQUEST);
         }

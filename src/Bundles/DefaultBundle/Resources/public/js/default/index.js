@@ -11,7 +11,7 @@ $(function() {
     $( "#SearchForm_date_from" ).datepicker({
         defaultDate: "+1w",
         numberOfMonths: 2,
-        dateFormat: 'yy-mm-dd',
+        dateFormat: 'dd-mm-yy',
         onClose: function( selectedDate ) {
             $( "#SearchForm_date_to" ).datepicker( "option", "minDate", selectedDate );
             $( "#SearchForm_date_to" ).datepicker( "show");
@@ -20,7 +20,7 @@ $(function() {
     $( "#SearchForm_date_to" ).datepicker({
         defaultDate: "+1w",
         numberOfMonths: 2,
-        dateFormat: 'yy-mm-dd',
+        dateFormat: 'dd-mm-yy',
         onClose: function( selectedDate ) {
             $( "#SearchForm_date_from" ).datepicker( "option", "maxDate", selectedDate );
         }

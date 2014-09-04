@@ -51,26 +51,19 @@ class SearchByQuery extends QueryAbstract {
                 [
                     'Routes' => [
                         [
-                            'Departure' => 'MOW',
-                            'Arrival' => 'LED',
+                            'Departure' => $this->params['city_from_code'],
+                            'Arrival' => $this->params['city_to_code'],
                             'Date' => $this->params['date_from'],
                         ],
-                        'Logic' => 'Default',
-                        'Class' => $this->params['class'],
-                        'Travellers' => [
-                                'ADT' => $this->params['adults'],
-                                'CHD' => $this->params['children'],
-                                'INF' => 0,
-                            ],
-                        [
-                            'Departure' => 'LED',
-                            'Arrival' => 'MOW',
-                            'Date' => $this->params['date_to'],
-                        ]
                     ],
+                    'Logic' => 'Default',
+                    'Class' => $this->params['class'],
                     'Travellers' => [
+                            'ADT' => $this->params['adults'],
+                            'CHD' => $this->params['children'],
+                            'INF' => 0,
+                    ],
 
-                    ]
 
                 ],
                 [
@@ -85,7 +78,6 @@ class SearchByQuery extends QueryAbstract {
                 ]
             ]
         ];
-        print_r($paramsR); exit;
         return $paramsR;
 
     }

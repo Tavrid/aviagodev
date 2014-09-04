@@ -28,7 +28,7 @@ class SearchForm extends AbstractType
             $adults[$i] = $i;
         }
         $children = array();
-        for ($i = 1; $i < 10; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $children[$i] = $i;
         }
         $builder->add('city_from', 'text', ['attr' => ['placeholder' => 'Введите город']])

@@ -8,15 +8,129 @@
 
 namespace Bundles\ApiBundle\Api\Response;
 
+use Bundles\ApiBundle\Api\Entity\Itineraries;
+use Bundles\ApiBundle\Api\Entity\Segments;
+use Bundles\ApiBundle\Api\Entity\Variants;
+
 
 class SearchResponse extends Response {
 
+    protected $position = 0;
+
+    public function __construct() {
+        $this->position = 0;
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.0.0)<br/>
+     * Whether a offset exists
+     * @link http://php.net/manual/en/arrayaccess.offsetexists.php
+     * @param mixed $offset <p>
+     * An offset to check for.
+     * </p>
+     * @return boolean true on success or false on failure.
+     * </p>
+     * <p>
+     * The return value will be casted to boolean if non-boolean was returned.
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->response['result']['Data'][$offset]);
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.0.0)<br/>
+     * Offset to retrieve
+     * @link http://php.net/manual/en/arrayaccess.offsetget.php
+     * @param mixed $offset <p>
+     * The offset to retrieve.
+     * </p>
+     * @return mixed Can return all value types.
+     */
+    public function offsetGet($offset)
+    {
+        return $this->createEntity($offset);
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.0.0)<br/>
+     * Offset to set
+     * @link http://php.net/manual/en/arrayaccess.offsetset.php
+     * @param mixed $offset <p>
+     * The offset to assign the value to.
+     * </p>
+     * @param mixed $value <p>
+     * The value to set.
+     * </p>
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->response['result']['Data'][$offset] = $value;
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.0.0)<br/>
+     * Offset to unset
+     * @link http://php.net/manual/en/arrayaccess.offsetunset.php
+     * @param mixed $offset <p>
+     * The offset to unset.
+     * </p>
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->response['result']['Data'][$offset]);
+    }
 
 
     public function getIsError()
     {
-        // TODO: Implement getIsError() method.
+        if(isset($this->response->errors)){
+
+            return count($this->response->errors);
+        }
+        return false;
     }
+
+    /**
+     * @param $pos
+     * @return Itineraries
+     */
+    protected function createEntity($pos){
+        $it = new Itineraries();
+//        var_dump($this->response); exit;
+        $data = $this->response['result']['Data'][$pos];
+//        if(!empty($data['Itineraries'])){
+        foreach($data['Itineraries'] as $inter){
+            $variantsArr = array();
+            foreach($inter['Variants'] as $variants){
+
+                $segmArr = array();
+//                    if(!empty($variants['Segments'])){
+                    foreach($variants['Segments'] as $segment){
+                        $segm = new Segments();
+                        $segm->setArrivalAirportName($segment['ArrivalAirportName'])
+                            ->setDepartureCountryName($segment['DepartureCountryName'])
+                            ->setDepartureCityName($segment['DepartureCityName'])
+                            ->setDepartureAirportName($segment['DepartureAirportName']);
+                        $segmArr[] = $segm;
+                    }
+//                    var_dump($segmArr); exit;
+//                    }
+                $var = new Variants();
+                $var->setSegments($segmArr);
+                $variantsArr[] = $var;
+            }
+//                print_r($variantsArr); exit;
+            $it->setVariants($variantsArr);
+            break;
+        }
+//        }
+
+        return $it;
+    }
+
 
     /**
      * (PHP 5 &gt;= 5.0.0)<br/>
@@ -26,7 +140,7 @@ class SearchResponse extends Response {
      */
     public function current()
     {
-        // TODO: Implement current() method.
+        return $this->createEntity($this->position);
     }
 
     /**
@@ -38,6 +152,7 @@ class SearchResponse extends Response {
     public function next()
     {
         // TODO: Implement next() method.
+        ++$this->position;
     }
 
     /**
@@ -49,6 +164,7 @@ class SearchResponse extends Response {
     public function key()
     {
         // TODO: Implement key() method.
+        return $this->position;
     }
 
     /**
@@ -61,6 +177,8 @@ class SearchResponse extends Response {
     public function valid()
     {
         // TODO: Implement valid() method.
+
+        return isset($this->response['result']['Data'][$this->position]);
     }
 
     /**
@@ -71,6 +189,7 @@ class SearchResponse extends Response {
      */
     public function rewind()
     {
+        $this->position = 0;
         // TODO: Implement rewind() method.
     }
 
