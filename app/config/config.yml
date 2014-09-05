@@ -35,7 +35,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    write_to:       %kernel.root_dir%/../web/assets/
+#    write_to:       %kernel.root_dir%/../web/assets/
     bundles:        ['AcmeAdminBundle','AcmeMediaBundle','AcmeUserBundle', 'AcmeCoreBundle', 'BundlesDefaultBundle','StbBootstrapBundle']
     #java: /usr/bin/java
     filters:

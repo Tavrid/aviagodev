@@ -42,7 +42,7 @@ assetic:
     default_bootstrap_css:
         inputs:
             -   bundles/bundlesdefault/lib/bootstrap/less/bootstrap.less
-            -   bundles/bundlesdefault/lib/awesome/css/font-awesome.min.css
+#            -   bundles/bundlesdefault/lib/awesome/css/font-awesome.min.css
         output: web/css/tmain.css
     default_bootstrap_js:
         inputs:
@@ -59,7 +59,7 @@ assetic:
             - bundles/bundlesdefault/lib/bootstrap/js/scrollspy.js
             - bundles/bundlesdefault/lib/bootstrap/js/tab.js
             - bundles/bundlesdefault/lib/bootstrap/js/transition.js
-            - bundles/bundlesdefault/lib/ajaxForm/ajaxForm.js
+#            - bundles/bundlesdefault/lib/ajaxForm/ajaxForm.js
         output: web/js/defaultbootstrap.js
 
 

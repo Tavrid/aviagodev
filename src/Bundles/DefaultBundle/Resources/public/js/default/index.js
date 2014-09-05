@@ -3,10 +3,22 @@ $(function() {
 
     $('#search-form').on('submit',function(){
 
-        $.post($(this).attr('action'),$(this).serialize(),function(){
-
+        $.post($(this).attr('action'),$(this).serialize(),function(data){
+            $('#result').html(data);
         });
         return false;
+    });
+    if(!parseInt($('#SearchForm_return_way input[type=radio]:checked').val())){
+        $('#SearchForm_date_to').parents('.form-group ').hide();
+    }
+    $('#SearchForm_return_way').on('click','input[type=radio]',function(){
+        var val = $('#SearchForm_return_way input[type=radio]:checked').val();
+        var sel = $('#SearchForm_date_to').parents('.form-group ');
+        if(!parseInt(val)){
+            sel.hide();
+        } else {
+            sel.show();
+        }
     });
     $( "#SearchForm_date_from" ).datepicker({
         defaultDate: "+1w",
@@ -14,7 +26,7 @@ $(function() {
         dateFormat: 'dd-mm-yy',
         onClose: function( selectedDate ) {
             $( "#SearchForm_date_to" ).datepicker( "option", "minDate", selectedDate );
-            $( "#SearchForm_date_to" ).datepicker( "show");
+//            $( "#SearchForm_date_to" ).datepicker( "show");
         }
     });
     $( "#SearchForm_date_to" ).datepicker({

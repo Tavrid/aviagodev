@@ -9,39 +9,47 @@
 {% block body %}
     <div class="row">
         <div class="col-md-8">
-            <form action="{{ path('bundles_default_search') }}" method="post" id="search-form">
-                <div class="col-md-6">
-                    {{ form_row(form.city_from) }}
-                    {{ form_row(form.city_from_code) }}
-                    {{ form_row(form.date_from) }}
-                    <div class="col-md-3">
-                        {{ form_row(form.adults) }}
-                        {{ form_row(form.children) }}
-                    </div>
-                    <div class="col-md-9">
-                        {{ form_row(form.class) }}
-                        {{ form_row(form.avia_company) }}
-                    </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Авиабилеты</h3>
                 </div>
-                <div class="col-md-6">
-                    {{ form_row(form.city_to) }}
-                    {{ form_row(form.city_to_code) }}
-                    {{ form_row(form.date_to) }}
-                        {{ form_row(form.currency) }}
-                    <div class="col-md-4">
-                        {{ form_row(form.best_price) }}
+                <div class="panel-body">
+                <form action="{{ path('bundles_default_search') }}" method="post" id="search-form">
+                    <div class="col-md-6">
+                        {{ form_row(form.city_from) }}
+                        {{ form_row(form.city_from_code) }}
+                        {{ form_row(form.date_from) }}
+                        {{ form_row(form.return_way) }}
+                        <div class="col-md-3">
+                            {{ form_row(form.adults) }}
+                            {{ form_row(form.children) }}
+                        </div>
+                        <div class="col-md-9">
+                            {{ form_row(form.class) }}
+                            {{ form_row(form.avia_company) }}
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        {{ form_row(form.direct_flights) }}
+                    <div class="col-md-6">
+                        {{ form_row(form.city_to) }}
+                        {{ form_row(form.city_to_code) }}
+                        {{ form_row(form.date_to) }}
+                            {{ form_row(form.currency) }}
+                        <div class="col-md-4">
+                            {{ form_row(form.best_price) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_row(form.direct_flights) }}
+
+                        </div>
+                        {#<div class="col-md-4">#}
+                        {#</div>#}
 
                     </div>
-                    <div class="col-md-4">
-                        <input type="submit" class="btn btn-default"/>
-                    </div>
-
+                    <input type="submit" class="btn btn-success pull-right"/>
+                    {{ form_row(form._token) }}
+                </form>
                 </div>
-                {{ form_row(form._token) }}
-            </form>
+            </div>
         </div>
     </div>
     <div class="row" id="result">

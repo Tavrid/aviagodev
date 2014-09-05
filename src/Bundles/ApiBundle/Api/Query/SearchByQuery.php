@@ -36,6 +36,23 @@ class SearchByQuery extends QueryAbstract {
      */
     public function buildParams($key)
     {
+        //return_way
+
+        $routes = [
+            [
+                'Departure' => $this->params['city_from_code'],
+                'Arrival' => $this->params['city_to_code'],
+                'Date' => $this->params['date_from'],
+            ],
+        ];
+
+        if($this->params['return_way']){
+            $routes[]=[
+                'Departure' => $this->params['city_to_code'],
+                'Arrival' => $this->params['city_from_code'],
+                'Date' => $this->params['date_from'],
+            ];
+        }
         $paramsR = [
             'jsonrpc' => '2.0',
             'id' => 1,
@@ -49,13 +66,7 @@ class SearchByQuery extends QueryAbstract {
                     'UserUUID' => ''
                 ],
                 [
-                    'Routes' => [
-                        [
-                            'Departure' => $this->params['city_from_code'],
-                            'Arrival' => $this->params['city_to_code'],
-                            'Date' => $this->params['date_from'],
-                        ],
-                    ],
+                    'Routes' =>$routes,
                     'Logic' => 'Default',
                     'Class' => $this->params['class'],
                     'Travellers' => [

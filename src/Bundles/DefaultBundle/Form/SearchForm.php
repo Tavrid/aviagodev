@@ -32,14 +32,24 @@ class SearchForm extends AbstractType
             $children[$i] = $i;
         }
         $builder->add('city_from', 'text', ['attr' => ['placeholder' => 'Введите город']])
+            ->add('return_way','choice',[
+                'choices' => ['Туда','В обе стороны'],
+                'multiple' => false,
+                'expanded' => true,
+                'required' => true,
+            ])
             ->add('city_from_code', 'hidden')
             ->add('city_to', 'text', ['attr' => ['placeholder' => 'Введите город']])
             ->add('city_to_code', 'hidden')
             ->add('date_from', 'text', ['attr' => ['placeholder' => 'Укажите дату']])
-            ->add('date_to', 'text', ['attr' => ['placeholder' => 'Укажите дату']])
+            ->add('date_to', 'text', ['attr' => ['placeholder' => 'Укажите дату'],'required' => false])
             ->add('adults', 'choice', ['choices' => $adults])
             ->add('children', 'choice', ['choices' => $children])
-            ->add('class', 'choice', ['choices' => ['none' => 'Любой', 'C' => 'бизнес /1 класс']])
+            ->add('class', 'choice', ['choices' => [
+                'Econom' => 'Эконом',
+                'Business' => 'Бизнес',
+                'First' => 'Первый',
+            ]])
             ->add('avia_company', 'choice', ['choices' => $this->getAviaCompany()])
             ->add('currency', 'choice', ['choices' => ['usd' => 'USD', 'uah' => 'UAH', 'eur' => 'EUR']])
             ->add('best_price', 'checkbox', ['required' => false])
