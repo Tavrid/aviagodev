@@ -12,13 +12,11 @@ namespace Bundles\ApiBundle\Api\Entity;
 class Segments {
     protected $departureCountryName;
     protected $departureCityName;
-    protected $departureDateName;
     protected $departureAirportName;
     protected $departureDate;
 
     protected $arrivalCountryName;
     protected $arrivalCityName;
-    protected $arrivalDateName;
     protected $arrivalAirportName;
     protected $arrivalDate;
 
@@ -85,7 +83,7 @@ class Segments {
      */
     public function setArrivalDate($arrivalDate)
     {
-        $this->arrivalDate = date('Y-m-d H:i:s',$arrivalDate);
+        $this->arrivalDate = $arrivalDate;
         return $this;
     }
 
@@ -94,26 +92,10 @@ class Segments {
      */
     public function getArrivalDate()
     {
-        return $this->arrivalDate;
+        return $this->date($this->arrivalDate);
     }
 
-    /**
-     * @param mixed $arrivalDateName
-     * @return $this;
-     */
-    public function setArrivalDateName($arrivalDateName)
-    {
-        $this->arrivalDateName = $arrivalDateName;
-        return $this;
-    }
 
-    /**
-     * @return mixed
-     */
-    public function getArrivalDateName()
-    {
-        return $this->arrivalDateName;
-    }
 
     /**
      * @param mixed $departureAirportName
@@ -175,7 +157,7 @@ class Segments {
      */
     public function setDepartureDate($departureDate)
     {
-        $this->departureDate = date('Y-m-d H:i:s',$departureDate);
+        $this->departureDate = $departureDate;
         return $this;
     }
 
@@ -184,26 +166,22 @@ class Segments {
      */
     public function getDepartureDate()
     {
-        return $this->departureDate;
+        return $this->date($this->departureDate);
     }
 
     /**
-     * @param mixed $departureDateName
-     * @return $this;
+     * @return string
+     *
+     * TODO надо проверить
      */
-    public function setDepartureDateName($departureDateName)
-    {
-        $this->departureDateName = $departureDateName;
-        return $this;
+    public function getFormattedDuration(){
+        $t = $this->arrivalDate - $this->departureDate;
+        $dataTime = new \DateTime('@'.$t);
+
+        return sprintf('%s ч %s мин',$dataTime->format('H'),$dataTime->format('i'));
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDepartureDateName()
-    {
-        return $this->departureDateName;
-    }
+
 
     /**
      * @param mixed $price
@@ -221,5 +199,17 @@ class Segments {
     public function getPrice()
     {
         return $this->price;
+    }
+
+    protected  function date($date, $format = "d MMMM H:mm")
+    {
+        if(is_string($date)){
+            $date = new \DateTime($date);
+        }
+
+        $formatter = new \IntlDateFormatter('ru', \IntlDateFormatter::NONE, \IntlDateFormatter::NONE);
+        $formatter->setPattern($format);
+
+        return $formatter->format($date);
     }
 } 

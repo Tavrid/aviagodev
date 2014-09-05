@@ -108,6 +108,7 @@ class SearchResponse extends Response {
             foreach($inter['Variants'] as $variants){
 
                 $var = new Variants();
+                $var->setDuration($variants['Duration']);
                 foreach($variants['Segments'] as $segment){
                     $segm = new Segments();
                     $segm->setArrivalAirportName($segment['ArrivalAirportName'])

@@ -45,6 +45,8 @@ class Variants {
     {
         return $this->duration;
     }
+
+
     /**
      * @param \Bundles\ApiBundle\Api\Entity\Segments[] $segments
      * @return $this;
