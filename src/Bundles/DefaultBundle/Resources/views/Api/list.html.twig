@@ -1,26 +1,34 @@
-{#{{ dump(data.data) }}#}
 
-{% for int in data %}
+
+{% for ticket in data %}
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title">{{ int.totalPrice }}</h3>
+            <h3 class="panel-title">{{ ticket.totalPrice }} руб</h3>
         </div>
         <div class="panel-body">
-            {% for variant in int.variants %}
+            {% for int in ticket.itineraries %}
+                {% for variant in int.variants %}
 
-                {% for segment in variant.segments %}
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="col-md-4">
-                                {{ segment.departureCityName }}|{{ segment.departureAirportName }}({{ segment.departureDate }})
-
+                    {% for segment in variant.segments %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title">{{ segment.departureDate }} - {{ segment.arrivalDate }}</div>
                             </div>
-                            <div class="col-md-4">
-                                {{ segment.arrivalCityName }}|{{ segment.arrivalAirportName }}({{ segment.arrivalDate }})
+                            <div class="panel-body">
+                                <div class="col-md-4">
+                                    {{ segment.departureCityName }}|{{ segment.departureAirportName }}
+
+                                </div>
+                                <div class="col-md-4">
+                                    {{ segment.arrivalCityName }}|{{ segment.arrivalAirportName }}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% endfor %}
                 {% endfor %}
+                {% if(not loop.last) %}
+                    <hr>
+                {% endif %}
             {% endfor %}
         </div>
     </div>

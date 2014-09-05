@@ -8,6 +8,7 @@
 
 namespace Bundles\ApiBundle\Api\Response;
 
+use Bundles\ApiBundle\Api\Entity\Ticket;
 use Bundles\ApiBundle\Api\Entity\Itineraries;
 use Bundles\ApiBundle\Api\Entity\Segments;
 use Bundles\ApiBundle\Api\Entity\Variants;
@@ -95,18 +96,18 @@ class SearchResponse extends Response {
 
     /**
      * @param $pos
-     * @return Itineraries
+     * @return Ticket
      */
     protected function createEntity($pos){
-        $it = new Itineraries();
         $data = $this->response['result']['Data'][$pos];
-        $it->setTotalPrice($data['TotalPrice']['Total']);
+        $ticket = new Ticket();
+        $ticket->setTotalPrice($data['TotalPrice']['Total']);
 
         foreach($data['Itineraries'] as $inter){
-            $variantsArr = array();
+            $it = new Itineraries();
             foreach($inter['Variants'] as $variants){
 
-                $segmArr = array();
+                $var = new Variants();
                 foreach($variants['Segments'] as $segment){
                     $segm = new Segments();
                     $segm->setArrivalAirportName($segment['ArrivalAirportName'])
@@ -117,18 +118,18 @@ class SearchResponse extends Response {
                         ->setDepartureCityName($segment['DepartureCityName'])
                         ->setDepartureAirportName($segment['DepartureAirportName'])
                         ->setDepartureDate($segment['DepartureDate']);
-                    $segmArr[] = $segm;
+
+                    $var->addSegment($segm);
                 }
-                $var = new Variants();
-                $var->setSegments($segmArr);
-                $variantsArr[] = $var;
+
+                $it->addVariant($var);
             }
-            $it->setVariants($variantsArr);
-            break;
+
+            $ticket->addItineraries($it);
         }
 //        }
 
-        return $it;
+        return $ticket;
     }
 
 

@@ -24,6 +24,10 @@ class Variants {
      */
     protected $duration;
 
+    public function __construct(){
+        $this->segments = array();
+    }
+
     /**
      * @param mixed $duration
      * @return $this
