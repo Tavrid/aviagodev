@@ -38,9 +38,14 @@ class ApiController extends Controller
             /** @var \Bundles\ApiBundle\Api\Api $api */
             $api = $this->get('avia.api.manager');
             $params = $form->getData();
-            $query = new SearchByQuery();
-            $query->setParams($params);
-            $output = $api->getSearchRequestor()->execute($query);
+            $key = preg_replace('/[ ]+/i','',implode(':',$params));
+
+            if(!$output = $this->get('memcache.default')->get($key)){
+                $query = new SearchByQuery();
+                $query->setParams($params);
+                $output = $api->getSearchRequestor()->execute($query);
+                $this->get('memcache.default')->set($key, $output, 500);
+            }
 
             if(!$output->getIsError()){
 
