@@ -20,9 +20,31 @@ class Variants {
      */
     protected $segments;
     /**
-     * @var
+     * @var int
      */
     protected $duration;
+    /**
+     * @var string
+     */
+    protected $variantID;
+
+    /**
+     * @param string $variantID
+     * @return $this
+     */
+    public function setVariantID($variantID)
+    {
+        $this->variantID = $variantID;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVariantID()
+    {
+        return $this->variantID;
+    }
 
     public function __construct(){
         $this->segments = array();

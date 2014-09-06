@@ -20,8 +20,28 @@ class Segments {
     protected $arrivalAirportName;
     protected $arrivalDate;
 
+    protected $availableSeats;
+
 
     protected $price;
+
+    /**
+     * @param mixed $availableSeats
+     * @return $this
+     */
+    public function setAvailableSeats($availableSeats)
+    {
+        $this->availableSeats = $availableSeats;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAvailableSeats()
+    {
+        return $this->availableSeats;
+    }
 
     /**
      * @param mixed $arrivalAirportName
@@ -88,11 +108,12 @@ class Segments {
     }
 
     /**
+     * @param string $format
      * @return mixed
      */
-    public function getArrivalDate()
+    public function getArrivalDate($format = "d MMMM H:mm")
     {
-        return $this->date($this->arrivalDate);
+        return $this->date($this->arrivalDate,$format);
     }
 
 
@@ -162,11 +183,12 @@ class Segments {
     }
 
     /**
+     * @param $format
      * @return mixed
      */
-    public function getDepartureDate()
+    public function getDepartureDate($format = "d MMMM H:mm")
     {
-        return $this->date($this->departureDate);
+        return $this->date($this->departureDate,$format);
     }
 
     /**

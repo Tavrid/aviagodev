@@ -108,7 +108,8 @@ class SearchResponse extends Response {
             foreach($inter['Variants'] as $variants){
 
                 $var = new Variants();
-                $var->setDuration($variants['Duration']);
+                $var->setDuration($variants['Duration'])
+                    ->setVariantID($variants['VariantID']);
                 foreach($variants['Segments'] as $segment){
                     $segm = new Segments();
                     $segm->setArrivalAirportName($segment['ArrivalAirportName'])
@@ -118,7 +119,8 @@ class SearchResponse extends Response {
                         ->setDepartureCountryName($segment['DepartureCountryName'])
                         ->setDepartureCityName($segment['DepartureCityName'])
                         ->setDepartureAirportName($segment['DepartureAirportName'])
-                        ->setDepartureDate($segment['DepartureDate']);
+                        ->setDepartureDate($segment['DepartureDate'])
+                        ->setAvailableSeats($segment['AvailableSeats']);
 
                     $var->addSegment($segm);
                 }

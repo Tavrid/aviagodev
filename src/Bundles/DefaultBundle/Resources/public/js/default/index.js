@@ -2,8 +2,9 @@ $(function() {
 
 
     $('#search-form').on('submit',function(){
-
+        _GlobalAppObject.loadingStart();
         $.post($(this).attr('action'),$(this).serialize(),function(data){
+            _GlobalAppObject.loadingStop();
             $('#result').html(data);
         });
         return false;
