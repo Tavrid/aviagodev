@@ -8,7 +8,6 @@
         <div class="panel-body">
             {% for int in ticket.itineraries %}
                 {% for variant in int.variants %}
-
                     {% for segment in variant.segments %}
                         <div class="panel panel-info">
                             <div class="panel-heading">
@@ -37,10 +36,10 @@
                             </div>
                         </div>
                     {% endfor %}
+                    {% if(not loop.last) %}
+                        <hr>
+                    {% endif %}
                 {% endfor %}
-                {% if(not loop.last) %}
-                    <hr>
-                {% endif %}
             {% endfor %}
         </div>
     </div>
