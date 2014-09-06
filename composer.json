@@ -51,7 +51,6 @@
         "white-october/pagerfanta-bundle": "dev-master",
         "knplabs/knp-menu": "2.0.*@dev",
         "knplabs/knp-menu-bundle":"dev-master",
-        "facebook/php-sdk": "dev-master",
         "leaseweb/api-caller-bundle": "*",
         "stb/bootstrap": "1.0"
     },
