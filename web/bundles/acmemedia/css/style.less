@@ -1,0 +1,47 @@
+.thumbnail-close{
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  cursor: pointer;
+  display: table;
+  padding: 3px;
+  z-index: 1000;
+  &:hover{
+    color: red;
+    border-color: dodgerblue;
+  }
+  .close-img{
+    position: absolute;
+    right: 1px;
+    margin: 2px;
+    font-size: 16px;
+  }
+  .avatar{
+    font-size:30px ;
+    position: absolute;
+    margin: 3px;
+    color:graytext;
+    bottom: 0;
+    opacity: 0.5;
+    &.active{
+      color:dodgerblue;
+      opacity: 1;
+    }
+    &:not(.active):hover{
+      opacity: 1;
+      color: #ff0000;
+    }
+  }
+
+}
+
+.load-box{
+  width: 120px;
+  height: 120px;
+
+  background-repeat: no-repeat;
+  background-position: 45px 45px;
+  position: relative;
+}
+.loader{
+  background-image: url("/bundles/acmemedia/img/ajax-loader.gif");
+}
