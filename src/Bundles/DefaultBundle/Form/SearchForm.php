@@ -11,6 +11,9 @@ namespace Bundles\DefaultBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+
 /**
  * Class SearchForm
  * @package Bundles\DefaultBundle\Form
@@ -33,7 +36,8 @@ class SearchForm extends AbstractType
         }
         $builder->add('city_from', 'text', ['attr' => ['placeholder' => 'Введите город']])
             ->add('return_way','choice',[
-                'choices' => ['Туда','В обе стороны'],
+                'choices' => ['В одну сторону','В обе стороны'],
+                'data' => 0,
                 'multiple' => false,
                 'expanded' => true,
                 'required' => true,
@@ -54,6 +58,11 @@ class SearchForm extends AbstractType
             ->add('currency', 'choice', ['choices' => ['usd' => 'USD', 'uah' => 'UAH', 'eur' => 'EUR']])
             ->add('best_price', 'checkbox', ['required' => false])
             ->add('direct_flights', 'checkbox', ['required' => false]);
+
+//        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+//            var_dump($event->getForm()); exit;
+//            // ... adding the name field if needed
+//        });
 
     }
 
@@ -405,6 +414,13 @@ class SearchForm extends AbstractType
     public function getName()
     {
         return 'SearchForm';
+    }
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'csrf_protection' => false
+        ));
     }
 
 } 

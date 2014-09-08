@@ -8,4 +8,8 @@ bundles_default_search:
     pattern:  /api/search
     defaults: { _controller: BundlesDefaultBundle:Api:search }
 
+bundles_default_api_list:
+    pattern:  /ticket/list
+    defaults: { _controller: BundlesDefaultBundle:Api:list }
+
 

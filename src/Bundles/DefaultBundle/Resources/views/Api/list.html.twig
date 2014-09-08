@@ -1,4 +1,5 @@
-
+{% extends "BundlesDefaultBundle:Layouts:main.html.twig" %}
+{% block body %}
 
 {% for ticket in data %}
     <div class="panel panel-primary">
@@ -59,3 +60,5 @@
         </div>
     </div>
 {% endfor %}
+
+{% endblock %}
