@@ -51,7 +51,7 @@ class ApiController extends Controller
 
             if(!$output->getIsError()){
 
-                $resp = $this->render('BundlesDefaultBundle:Api:list.html.twig',array('data' => $output));
+                $resp = $this->render('BundlesDefaultBundle:Api:list.html.twig',array('data' => $output,'form' => $form->createView()));
 
 //                $resp= new Response($data);
 //                $resp->headers->add(array('Content-Type' => 'application/json'));
@@ -78,7 +78,9 @@ class ApiController extends Controller
                 $query = new SearchByQuery();
                 $query->setParams($params);
                 $output = $api->getSearchRequestor()->execute($query);
-                $this->get('memcache.default')->set($key, $output, 500);
+                if(!$output->getIsError()){
+                    $this->get('memcache.default')->set($key, $output, 500);
+                }
             }
 
             if(!$output->getIsError()){
