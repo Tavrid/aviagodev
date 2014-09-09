@@ -12,8 +12,8 @@ namespace Bundles\ApiBundle\Api\Query;
 abstract class QueryAbstract {
 
 
-    public function __construct(){
-    }
+
+    public abstract function getKeyByParams();
 
     /**
      * @param $key

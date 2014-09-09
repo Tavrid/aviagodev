@@ -20,6 +20,28 @@ class SearchRequest implements Request{
      */
     protected $apiKey;
     /**
+     * @var \Memcached
+     */
+    protected $memcached;
+
+    /**
+     * @param \Memcached $memcached
+     * @return $this
+     */
+    public function setMemcached(\Memcached $memcached)
+    {
+        $this->memcached = $memcached;
+        return $this;
+    }
+
+    /**
+     * @return \Memcached
+     */
+    public function getMemcached()
+    {
+        return $this->memcached;
+    }
+    /**
      * @var ApiCallerInterface
      */
     protected $apiCaller;
@@ -28,13 +50,24 @@ class SearchRequest implements Request{
         $this->apiCaller = $apiCaller;
     }
 
+
+
     /**
      * @inheritdoc
      */
     public function execute(QueryAbstract $query)
     {
         $response = new SearchResponse();
-        $data = $this->apiCaller->call(new ApiCall($query->getApiUrl(),json_encode($query->buildParams($this->apiKey))));
+        $data = null;
+        if($this->memcached){
+            $data = $this->memcached->get($query->getKeyByParams());
+        }
+        if(!$data){
+            $data = $this->apiCaller->call(new ApiCall($query->getApiUrl(),json_encode($query->buildParams($this->apiKey))));
+            if($this->memcached){
+                $this->memcached->set($query->getKeyByParams(),$data);
+            }
+        }
         $response->setResponseData($data);
         return $response;
     }

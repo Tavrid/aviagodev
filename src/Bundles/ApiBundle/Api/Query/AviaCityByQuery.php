@@ -62,4 +62,11 @@ class AviaCityByQuery extends QueryAbstract {
     public function getApiUrl(){
         return 'http://ws.demo.webservices.aero/';
     }
+
+    public function getKeyByParams()
+    {
+        // TODO: Implement getKeyByParams() method.
+    }
+
+
 }

@@ -96,4 +96,11 @@ class SearchByQuery extends QueryAbstract {
     public function getApiUrl(){
         return 'http://ws.demo.webservices.aero/';
     }
+
+    public function getKeyByParams()
+    {
+        return preg_replace('/[ ]+/i','',implode(':',$this->params));
+    }
+
+
 }

@@ -21,10 +21,15 @@ class Api {
     /**
      * @var ApiCallerInterface
      */
+    /**
+     * @var \Memcached
+     */
+    protected $memcached;
     protected $apiCaller;
-    public function __construct($key,ApiCallerInterface $apiCaller){
+    public function __construct($key,ApiCallerInterface $apiCaller,\Memcached $memcached){
         $this->apiKey = $key;
         $this->apiCaller = $apiCaller;
+        $this->memcached = $memcached;
 
     }
 
@@ -33,7 +38,9 @@ class Api {
     }
 
     public function getSearchRequestor(){
-        return new SearchRequest($this->apiKey,$this->apiCaller);
+        $searchRequest = new SearchRequest($this->apiKey,$this->apiCaller);
+        $searchRequest->setMemcached($this->memcached);
+        return $searchRequest;
     }
 
 } 

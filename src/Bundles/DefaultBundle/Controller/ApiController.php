@@ -33,21 +33,18 @@ class ApiController extends Controller
     }
 
     public function listAction(Request $request){
+
         $form = $this->createForm(new SearchForm());
-        $form->submit(array_intersect_key($_GET,$form->all()));
+        $form->submit($request->get('_route_params'));
 
         if($form->isValid()){
             /** @var \Bundles\ApiBundle\Api\Api $api */
             $api = $this->get('avia.api.manager');
             $params = $form->getData();
-            $key = preg_replace('/[ ]+/i','',implode(':',$params));
+            $query = new SearchByQuery();
+            $query->setParams($params);
+            $output = $api->getSearchRequestor()->execute($query);
 
-            if(!$output = $this->get('memcache.default')->get($key)){
-                $query = new SearchByQuery();
-                $query->setParams($params);
-                $output = $api->getSearchRequestor()->execute($query);
-                $this->get('memcache.default')->set($key, $output, 500);
-            }
 
             if(!$output->getIsError()){
 
@@ -72,20 +69,19 @@ class ApiController extends Controller
             /** @var \Bundles\ApiBundle\Api\Api $api */
             $api = $this->get('avia.api.manager');
             $params = $form->getData();
-            $key = preg_replace('/[ ]+/i','',implode(':',$params));
 
-            if(!$output = $this->get('memcache.default')->get($key)){
-                $query = new SearchByQuery();
-                $query->setParams($params);
-                $output = $api->getSearchRequestor()->execute($query);
-                if(!$output->getIsError()){
-                    $this->get('memcache.default')->set($key, $output, 500);
-                }
-            }
+            $query = new SearchByQuery();
+            $query->setParams($params);
+            $output = $api->getSearchRequestor()->execute($query);
 
             if(!$output->getIsError()){
-
-                $resp= new AjaxSearchResponse($this->generateUrl('bundles_default_api_list',$form->getData()));
+                $params = $form->getData();
+                foreach ($params as $key => $val){
+                    if(empty($val)){
+                        unset($params[$key]);
+                    }
+                }
+                $resp= new AjaxSearchResponse($this->generateUrl('bundles_default_api_list',$params));
             } else {
                 $resp = new Response('',Response::HTTP_BAD_REQUEST);
             }

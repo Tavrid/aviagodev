@@ -9,7 +9,7 @@ bundles_default_search:
     defaults: { _controller: BundlesDefaultBundle:Api:search }
 
 bundles_default_api_list:
-    pattern:  /ticket/list
-    defaults: { _controller: BundlesDefaultBundle:Api:list }
+    pattern:  /flights/{city_from_code}_{city_to_code}/{date_from}_{date_to}/{adults}_{children}/{class}/{currency}/{direct_flights}/{return_way}/{avia_company}
+    defaults: { _controller: BundlesDefaultBundle:Api:list,date_to: 0 ,children: 0,return_way : 0,direct_flights: 0}
 
 
