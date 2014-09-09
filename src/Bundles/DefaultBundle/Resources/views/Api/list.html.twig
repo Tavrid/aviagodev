@@ -42,6 +42,7 @@
                 </div>
                 <div class="panel-body">
                     {% for int in ticket.itineraries %}
+                        {% if(loop.index > 1) %}{% set f = "Оттуда" %}{% else %}{% set f = "Туда" %}{% endif %}
                         {% for variant in int.variants %}
                             {% for segment in variant.segments %}
                                 <div class="panel panel-info">
@@ -50,7 +51,7 @@
                                     </div>
                                     <div class="panel-body">
                                         <div class="col-md-3">
-                                            <strong>Туда: {{ segment.departureDate("d MMMM Y г.") }}</strong>
+                                            <strong>{{ f }}: {{ segment.departureDate("d MMMM Y г.") }}</strong>
                                             <div>
                                                 <small> Колличество мест: {{ segment.availableSeats }}</small>
                                             </div>
@@ -83,13 +84,13 @@
                                     </div>
                                 </div>
                             {% endfor %}
-                            <hr />
-                            <div class="" style="margin-bottom: 15px">
-                                <div class="col-md-offset-9">
-                                    <a style="margin-left: 42%" class="btn btn-primary" href="#">Забронировать</a>
-                                </div>
-                            </div>
                         {% endfor %}
+                        <hr />
+                        <div class="" style="margin-bottom: 15px">
+                            <div class="col-md-offset-9">
+                                <a style="margin-left: 42%" class="btn btn-primary" href="#">Забронировать</a>
+                            </div>
+                        </div>
                     {% endfor %}
                 </div>
             </div>

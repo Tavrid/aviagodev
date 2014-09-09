@@ -37,8 +37,13 @@ class SearchForm extends AbstractType
         for ($i = 0; $i < 10; $i++) {
             $children[$i] = $i;
         }
-        $builder->add('city_from', 'text', ['attr' => ['placeholder' => 'Введите город']])
+        $builder->add('city_from', 'text', [
+            'label' => 'Из:',
+            'mapped' => false,
+            'attr' => ['placeholder' => 'Введите город']
+        ])
             ->add('return_way','choice',[
+
                 'choices' => ['В одну сторону','В обе стороны'],
                 'data' => 0,
                 'multiple' => false,
@@ -46,21 +51,50 @@ class SearchForm extends AbstractType
                 'required' => true,
             ])
             ->add('city_from_code', 'hidden')
-            ->add('city_to', 'text', ['mapped' => false,'attr' => ['placeholder' => 'Введите город']])
+            ->add('city_to', 'text', [
+                'label' => 'В:',
+                'mapped' => false,
+                'attr' => ['placeholder' => 'Введите город']
+            ])
             ->add('city_to_code', 'hidden')
-            ->add('date_from', 'text', ['attr' => ['placeholder' => 'Укажите дату']])
-            ->add('date_to', 'text', ['attr' => ['placeholder' => 'Укажите дату'],'required' => false])
-            ->add('adults', 'choice', ['choices' => $adults])
-            ->add('children', 'choice', ['choices' => $children])
-            ->add('class', 'choice', ['choices' => [
+            ->add('date_from', 'text', [
+                'label' => 'Дата вылета:',
+                'attr' => ['placeholder' => 'Укажите дату']
+            ])
+            ->add('date_to', 'text', [
+                'label' => 'Дата прилёта:',
+                'attr' => ['placeholder' => 'Укажите дату'],
+                'required' => false])
+            ->add('adults', 'choice', [
+
+                'label' => 'Взрослых (12+ лет):',
+                'choices' => $adults
+            ])
+            ->add('children', 'choice', [
+                'label' => 'Детей (2...<12 лет):',
+                'choices' => $children
+            ])
+            ->add('class', 'choice', [
+                'label' => 'Класс:',
+                'choices' => [
                 'Econom' => 'Эконом',
                 'Business' => 'Бизнес',
                 'First' => 'Первый',
             ]])
-            ->add('avia_company', 'choice', ['choices' => $this->getAviaCompany()])
-            ->add('currency', 'choice', ['choices' => ['usd' => 'USD', 'uah' => 'UAH', 'eur' => 'EUR']])
-            ->add('best_price', 'checkbox', ['required' => false])
+            ->add('avia_company', 'choice', [
+                'label' => 'Авиакомпания:',
+                'choices' => $this->getAviaCompany()
+            ])
+            ->add('currency', 'choice', [
+                'label' => 'Валюта:',
+                'choices' => ['usd' => 'USD', 'uah' => 'UAH', 'eur' => 'EUR']
+            ])
+            ->add('best_price', 'checkbox', [
+                'label' => 'Лучшая цена ±3 дня:',
+                'required' => false
+            ])
             ->add('direct_flights', 'checkbox', [
+                'label' => 'Только прямые рейсы:',
                 'required' => false,
             ]);
 

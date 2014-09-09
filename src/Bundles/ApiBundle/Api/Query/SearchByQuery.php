@@ -50,7 +50,7 @@ class SearchByQuery extends QueryAbstract {
             $routes[]=[
                 'Departure' => $this->params['city_to_code'],
                 'Arrival' => $this->params['city_from_code'],
-                'Date' => $this->params['date_from'],
+                'Date' => $this->params['date_to'],
             ];
         }
         $paramsR = [
