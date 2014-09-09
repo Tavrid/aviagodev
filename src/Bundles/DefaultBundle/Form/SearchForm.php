@@ -13,6 +13,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormEvent;
+
 
 /**
  * Class SearchForm
@@ -43,7 +46,7 @@ class SearchForm extends AbstractType
                 'required' => true,
             ])
             ->add('city_from_code', 'hidden')
-            ->add('city_to', 'text', ['attr' => ['placeholder' => 'Введите город']])
+            ->add('city_to', 'text', ['mapped' => false,'attr' => ['placeholder' => 'Введите город']])
             ->add('city_to_code', 'hidden')
             ->add('date_from', 'text', ['attr' => ['placeholder' => 'Укажите дату']])
             ->add('date_to', 'text', ['attr' => ['placeholder' => 'Укажите дату'],'required' => false])
@@ -57,12 +60,11 @@ class SearchForm extends AbstractType
             ->add('avia_company', 'choice', ['choices' => $this->getAviaCompany()])
             ->add('currency', 'choice', ['choices' => ['usd' => 'USD', 'uah' => 'UAH', 'eur' => 'EUR']])
             ->add('best_price', 'checkbox', ['required' => false])
-            ->add('direct_flights', 'checkbox', ['required' => false]);
+            ->add('direct_flights', 'checkbox', [
+                'required' => false,
+            ]);
 
-//        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-//            var_dump($event->getForm()); exit;
-//            // ... adding the name field if needed
-//        });
+
 
     }
 

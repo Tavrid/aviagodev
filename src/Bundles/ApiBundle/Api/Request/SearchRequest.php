@@ -65,7 +65,7 @@ class SearchRequest implements Request{
         if(!$data){
             $data = $this->apiCaller->call(new ApiCall($query->getApiUrl(),json_encode($query->buildParams($this->apiKey))));
             if($this->memcached){
-                $this->memcached->set($query->getKeyByParams(),$data);
+                $this->memcached->set($query->getKeyByParams(),$data,60);
             }
         }
         $response->setResponseData($data);

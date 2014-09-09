@@ -35,7 +35,10 @@ class ApiController extends Controller
     public function listAction(Request $request){
 
         $form = $this->createForm(new SearchForm());
-        $form->submit($request->get('_route_params'));
+        $data = $request->get('_route_params');
+        $data['best_price'] = boolval($data['best_price']);
+        $data['direct_flights'] = boolval($data['direct_flights']);
+        $form->submit($data);
 
         if($form->isValid()){
             /** @var \Bundles\ApiBundle\Api\Api $api */
