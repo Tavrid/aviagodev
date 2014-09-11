@@ -52,7 +52,7 @@
         "knplabs/knp-menu": "2.0.*@dev",
         "knplabs/knp-menu-bundle":"dev-master",
         "leaseweb/api-caller-bundle": "*",
-        "stb/bootstrap": "dev-master",
+        "stb/bootstrap": "1.0",
         "leaseweb/memcache-bundle": "*"
     },
     "scripts": {
