@@ -77,9 +77,9 @@ class SearchForm extends AbstractType
             ->add('class', 'choice', [
                 'label' => 'Класс:',
                 'choices' => [
-                'Econom' => 'Эконом',
-                'Business' => 'Бизнес',
-                'First' => 'Первый',
+                'Y' => 'Эконом',
+                'C' => 'Бизнес',
+                'F' => 'Первый',
             ]])
             ->add('avia_company', 'choice', [
                 'label' => 'Авиакомпания:',

@@ -8,6 +8,7 @@
 
 namespace Bundles\ApiBundle\Api\Query;
 
+use Bundles\ApiBundle\Api\Model\AviaClassMapping;
 
 class SearchByQuery extends QueryAbstract {
 
@@ -68,7 +69,7 @@ class SearchByQuery extends QueryAbstract {
                 [
                     'Routes' =>$routes,
                     'Logic' => 'Default',
-                    'Class' => $this->params['class'],
+                    'Class' => AviaClassMapping::getRealClassName($this->params['class']),
                     'Travellers' => [
                             'ADT' => $this->params['adults'],
                             'CHD' => $this->params['children'],
