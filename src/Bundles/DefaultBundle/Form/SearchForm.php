@@ -64,7 +64,9 @@ class SearchForm extends AbstractType
             ->add('date_to', 'text', [
                 'label' => 'Дата прилёта:',
                 'attr' => ['placeholder' => 'Укажите дату'],
-                'required' => false])
+                'required' => false,
+                'data' => 0
+            ])
             ->add('adults', 'choice', [
 
                 'label' => 'Взрослых (12+ лет):',

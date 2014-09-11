@@ -79,11 +79,13 @@ class ApiController extends Controller
 
             if(!$output->getIsError()){
                 $params = $form->getData();
-                foreach ($params as $key => $val){
-                    if(empty($val)){
-                        unset($params[$key]);
-                    }
-                }
+                $params['best_price'] = intval($params['best_price']);
+                $params['direct_flights'] = intval($params['direct_flights']);
+//                foreach ($params as $key => $val){
+//                    if(empty($val)){
+//                        unset($params[$key]);
+//                    }
+//                }
                 $resp= new AjaxSearchResponse($this->generateUrl('bundles_default_api_list',$params));
             } else {
                 $resp = new Response('',Response::HTTP_BAD_REQUEST);

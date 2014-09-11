@@ -100,7 +100,13 @@ class SearchByQuery extends QueryAbstract {
 
     public function getKeyByParams()
     {
-        return preg_replace('/[ ]+/i','',implode(':',$this->params));
+        $params = array();
+        foreach($this->params as $param){
+            if(!empty($param)){
+                $this->params[] = $param;
+            }
+        }
+        return preg_replace('/[ ]+/i','',implode(':',$params));
     }
 
 
