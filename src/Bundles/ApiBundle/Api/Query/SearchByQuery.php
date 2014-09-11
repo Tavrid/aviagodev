@@ -103,7 +103,7 @@ class SearchByQuery extends QueryAbstract {
         $params = array();
         foreach($this->params as $param){
             if(!empty($param)){
-                $this->params[] = $param;
+                $params[] = $param;
             }
         }
         return preg_replace('/[ ]+/i','',implode(':',$params));
