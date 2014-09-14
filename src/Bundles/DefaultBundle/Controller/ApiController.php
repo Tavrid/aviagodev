@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Bundles\DefaultBundle\Form\SearchForm;
 use Bundles\DefaultBundle\Form\BookInfoForm;
+use Bundles\DefaultBundle\Form\OrderForm;
 
 
 use Bundles\ApiBundle\Api\Query\AviaCityByQuery;
@@ -52,7 +53,7 @@ class ApiController extends Controller
                 $key = md5($str);
                 /** @var \Memcached $memcache */
                 $memcache = $this->get('memcache.default');
-                $memcache->set($key,$output,300);
+                $memcache->set($key,$output,3600);
                 $resp= new Response(json_encode(['url' => $this->generateUrl('bundles_default_api_book',['key' => $key])]));
                 $resp->headers->add(array('Content-Type' => 'application/json'));
                 return $resp;
@@ -64,8 +65,16 @@ class ApiController extends Controller
 
     public function bookAction(Request $request,$key){
         /** @var \Memcached $memcache */
-        $memcache = $this->get('memcache.default');
-        var_Dump($memcache->get($key));exit;
+//        $memcache = $this->get('memcache.default');
+//        var_Dump($memcache->get($key));exit;
+
+        $orderManager = $this->get('admin.order.manager');
+        $entity = $orderManager->getEntity();
+
+        $form = $this->createForm(new OrderForm(),$entity);
+        return $this->render('BundlesDefaultBundle:Api:book.html.twig',['form' => $form->createView()]);
+
+
     }
 
     public function listAction(Request $request){

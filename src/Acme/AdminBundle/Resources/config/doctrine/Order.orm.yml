@@ -1,0 +1,24 @@
+Acme\AdminBundle\Entity\Order:
+    type: entity
+    table: order
+    repositoryClass: Acme\AdminBundle\Repository\OrderRepository
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        state:
+            type: string
+            length: 1
+        date:
+            type: datetime
+            nullable: false
+        passengers:
+            type: text
+            nullable: true
+        info:
+            type: text
+            nullable: true
+
+
+

@@ -6,29 +6,14 @@ services:
 #    admin.project.model:
 #          class: Acme\AdminBundle\
     admin.routing_loader:
-            class: Acme\AdminBundle\Routing\ControllerLoader
-            arguments:
-                - @kernel
-            tags:
-                - { name: routing.loader }
-    admin.page.manager :
-          class: Acme\AdminBundle\Model\Page
+          class: Acme\AdminBundle\Routing\ControllerLoader
+          arguments:
+              - @kernel
+          tags:
+              - { name: routing.loader }
+    admin.order.manager :
+          class: Acme\AdminBundle\Model\Order
           arguments:
               - "@service_container"
-              - Acme\AdminBundle\Entity\Page
-    admin.menu.manager :
-          class: Acme\AdminBundle\Model\Menu
-          arguments:
-              - "@service_container"
-              - Acme\AdminBundle\Entity\Menu
-    admin.slider.manager :
-          class: Acme\AdminBundle\Model\Slider
-          arguments:
-              - "@service_container"
-              - Acme\AdminBundle\Entity\Slider
-    admin.gallery.manager :
-          class: Acme\AdminBundle\Model\Gallery
-          arguments:
-              - "@service_container"
-              - Acme\AdminBundle\Entity\Gallery
+              - Acme\AdminBundle\Entity\Order
 
