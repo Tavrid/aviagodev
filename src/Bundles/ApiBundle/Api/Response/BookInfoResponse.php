@@ -14,7 +14,7 @@ use Bundles\ApiBundle\Api\Entity\Segments;
 use Bundles\ApiBundle\Api\Entity\Variants;
 
 
-class SearchResponse extends Response {
+class BookInfoResponse extends Response {
 
     protected $position = 0;
 
@@ -100,13 +100,11 @@ class SearchResponse extends Response {
      */
     protected function createEntity($pos){
         $data = $this->response['result']['Data'][$pos];
-        $requestId = $this->response['result']['RequestID'];
         $ticket = new Ticket();
         $ticket->setTotalPrice($data['TotalPrice']['Total']);
 
         foreach($data['Itineraries'] as $inter){
             $it = new Itineraries();
-            $it->setRequestId($requestId);
             foreach($inter['Variants'] as $variants){
 
                 $var = new Variants();

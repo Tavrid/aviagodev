@@ -43,4 +43,10 @@ class Api {
         return $searchRequest;
     }
 
+    public function getBookInfoRequestor(){
+        $searchRequest = new SearchRequest($this->apiKey,$this->apiCaller);
+        $searchRequest->setMemcached($this->memcached);
+        return $searchRequest;
+    }
+
 } 

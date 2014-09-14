@@ -10,6 +10,7 @@ use Bundles\DefaultBundle\Form\BookInfoForm;
 
 use Bundles\ApiBundle\Api\Query\AviaCityByQuery;
 use Bundles\ApiBundle\Api\Query\SearchByQuery;
+use Bundles\ApiBundle\Api\Query\BookInfoQuery;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,7 +39,15 @@ class ApiController extends Controller
     public function infoAction(Request $request){
         $form = $this->createForm(new BookInfoForm());
         $form->submit($request);
-        var_dump($form->isValid(),$form->getData());
+        if($form->isValid()){
+            /** @var \Bundles\ApiBundle\Api\Api $api */
+            $api = $this->get('avia.api.manager');
+            $query = new BookInfoQuery();
+            $data  = $form->getData();
+            $query->setParams($data);
+            $output = $api->getBookInfoRequestor()->execute($query);
+            var_dump($output->getIsError(),$output);
+        }
         exit;
     }
 

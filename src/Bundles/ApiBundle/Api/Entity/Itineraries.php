@@ -14,6 +14,27 @@ class Itineraries {
      * @var Variants[]
      */
     protected $variants;
+
+    protected $requestId;
+
+    /**
+     * @param $requestId
+     * @return $this
+     */
+    public function setRequestId($requestId)
+    {
+        $this->requestId = $requestId;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRequestId()
+    {
+        return $this->requestId;
+    }
+
     public function __construct(){
         $this->variants = array();
     }

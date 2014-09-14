@@ -26,7 +26,8 @@ class BookInfoForm  extends AbstractType{
             'type'   => 'text',
             'allow_add' => true,
             'mapped' => false,
-        ]);
+        ])
+        ->add('request_id','hidden');
         $builder->addEventListener(FormEvents::PRE_SUBMIT,function(FormEvent $event){
             $form = $event->getForm();
             $data = $event->getData();
