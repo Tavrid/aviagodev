@@ -58,10 +58,15 @@ class SubMultifield extends AbstractType
             $options['field_map'] = $fields;
         }
 
+        if($options['need_value']) {
+            for($i = 1 ; $i <= $options['need_value']; $i++){
+                $builder->add($i, 'multi_field',$options);
+            }
+        }
+
 
         $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options) {
             $data = $event->getData();
-
             if(!empty($data)){
                 $newData = array();
                 $i = 1;
@@ -82,8 +87,6 @@ class SubMultifield extends AbstractType
                 foreach($data as $field => $val){
                     $form->add($field, 'multi_field',$options);
                 }
-            } else if($options['need_value']) {
-                $form->add(1, 'multi_field',$options);
             }
 
 

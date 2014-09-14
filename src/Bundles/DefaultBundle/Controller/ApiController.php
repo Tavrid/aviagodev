@@ -71,7 +71,11 @@ class ApiController extends Controller
         $orderManager = $this->get('admin.order.manager');
         $entity = $orderManager->getEntity();
 
-        $form = $this->createForm(new OrderForm(),$entity);
+        $form = $this->createForm(new OrderForm(array('ADT' => 2,'CHD' => 1,'INF' => 1)),$entity);
+        if($request->isMethod('post')){
+            $form->submit($request);
+            $form->isValid();
+        }
         return $this->render('BundlesDefaultBundle:Api:book.html.twig',['form' => $form->createView()]);
 
 

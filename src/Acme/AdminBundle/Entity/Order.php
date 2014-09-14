@@ -61,15 +61,20 @@ class Order extends AbstractEntity
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraint('state', new Assert\NotBlank());
-        $metadata->addPropertyConstraint('passengers', new Multifield(array(
-            'fields' => array(
-                'adt' => array(
-                    'sub_multi_field', 'fields' => [
-                    'bar1' => array('field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))),
-                    'bar2' => array('field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))),
-                ])
-            )
-        )));
+//        $metadata->addPropertyConstraint('passengers', new Multifield(array('fields' => [
+//                'adt' => array('sub_multi_field',
+//                    'fields' => [
+//                            'name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
+//                            'surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
+//                            'patronymic' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
+//                            'phone' => ['field', new Assert\NotBlank()],
+//                            'number_passport' => ['field', new Assert\NotBlank()],
+//                            'email' => ['field', new Assert\NotBlank(), new Assert\Email()],
+//                            'birthday' => ['field', new Assert\NotBlank(),new Assert\DateTime()],
+//                    ],
+//                ),
+//            ]
+//        )));
 
     }
 
