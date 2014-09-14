@@ -11,6 +11,8 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Validator\MetadataFactoryInterface;
 
+use Symfony\Component\PropertyAccess\PropertyAccess;
+
 /*
  *
  * add to you entity class
@@ -56,17 +58,10 @@ class SubMultifield extends AbstractType
             $options['field_map'] = $fields;
         }
 
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options) {
             $data = $event->getData();
-            $event->getForm()->setData($data);
 
-        });
-
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
-
-
-
-            $data = $event->getData();
             if(!empty($data)){
                 $newData = array();
                 $i = 1;
@@ -76,9 +71,11 @@ class SubMultifield extends AbstractType
                 $data = $newData;
             }
             $form = $event->getForm();
-            foreach($form as $child){
-                $form->remove($child->getName());
-            }
+
+
+//            foreach($form as $child){
+//                $form->remove($child->getName());
+//            }
 
             if(!empty($data)){
 
