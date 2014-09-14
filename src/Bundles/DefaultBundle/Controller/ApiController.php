@@ -46,10 +46,26 @@ class ApiController extends Controller
             $data  = $form->getData();
             $query->setParams($data);
             $output = $api->getBookInfoRequestor()->execute($query);
-            var_dump($output->getEntity());
+            if(!$output->getIsError()){
+                $str = implode(':',$data['variants']);
+
+                $key = md5($str);
+                /** @var \Memcached $memcache */
+                $memcache = $this->get('memcache.default');
+                $memcache->set($key,$output,300);
+                $resp= new Response(json_encode(['url' => $this->generateUrl('bundles_default_api_book',['key' => $key])]));
+                $resp->headers->add(array('Content-Type' => 'application/json'));
+                return $resp;
+            }
 
         }
-        exit;
+        return new Response('',Response::HTTP_BAD_REQUEST);
+    }
+
+    public function bookAction(Request $request,$key){
+        /** @var \Memcached $memcache */
+        $memcache = $this->get('memcache.default');
+        var_Dump($memcache->get($key));exit;
     }
 
     public function listAction(Request $request){

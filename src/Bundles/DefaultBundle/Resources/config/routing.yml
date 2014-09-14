@@ -22,4 +22,8 @@ bundles_default_api_info:
     pattern: /api/flight/info
     defaults: { _controller: BundlesDefaultBundle:Api:info}
 
+bundles_default_api_book:
+    pattern: /book/{key}
+    defaults: { _controller: BundlesDefaultBundle:Api:book}
+
 

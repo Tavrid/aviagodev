@@ -99,7 +99,7 @@
     <script type="text/javascript">
         $('body').on('submit','.book-form',function(){
             $.post($(this).attr('action'),$(this).serialize(),function(data){
-
+                window.location = data.url;
             });
             return false;
         });

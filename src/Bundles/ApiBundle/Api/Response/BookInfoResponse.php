@@ -26,7 +26,8 @@ class BookInfoResponse extends Response {
         $requestId = $this->response['result']['RequestID'];;
         $entity = new BookInfo();
         $ticket = new Ticket();
-        $ticket->setRequestId($requestId);
+        $ticket->setRequestId($requestId)
+            ->setTotalPrice($data['Price']['Total']);
         $entity->setTicket($ticket)
         ->setBookId($data['BookID']);
 
