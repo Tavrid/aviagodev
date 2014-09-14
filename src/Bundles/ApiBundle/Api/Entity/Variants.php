@@ -68,6 +68,18 @@ class Variants {
         return $this->duration;
     }
 
+    /**
+     * @return string
+     *
+     * TODO надо проверить
+     */
+    public function getFormattedDuration(){
+        $t = $this->duration*60;
+        $dataTime = new \DateTime('@'.$t);
+
+        return sprintf('%s ч %s мин',$dataTime->format('H'),$dataTime->format('i'));
+    }
+
 
     /**
      * @param \Bundles\ApiBundle\Api\Entity\Segments[] $segments

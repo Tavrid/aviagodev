@@ -18,4 +18,8 @@ bundles_default_api_list:
           return_way:  0|1
           best_price:  0|1
 
+bundles_default_api_info:
+    pattern: /api/flight/info
+    defaults: { _controller: BundlesDefaultBundle:Api:info}
+
 

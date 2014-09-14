@@ -21,7 +21,7 @@
     </div>
     <div class="col-md-9">
         {% for ticket in data %}
-            <form action="" class="book-form">
+            <form action="{{ path("bundles_default_api_info") }}" class="book-form">
 
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -34,9 +34,13 @@
                             {% for variant in int.variants %}
                                 <div class="well">
                                     <label>
-                                        <input value="{{ variant.variantID }}" type="radio" {% if loop.first %} checked="checked" {% endif %} name="variants[{{ parent_loop.index }}]" value="" />
+                                        <input value="{{ variant.variantID }}" type="radio" {% if loop.first %} checked="checked" {% endif %} name="info[variants][{{ parent_loop.index-1 }}]" />
                                         Выбрать
                                     </label>
+                                    <div>
+                                        {{ f }} (продолжительность - {{ variant.formattedDuration }})
+
+                                    </div>
                                     {% for segment in variant.segments %}
                                         <div class="panel panel-info">
                                             <div class="panel-heading">
@@ -44,7 +48,7 @@
                                             </div>
                                             <div class="panel-body">
                                                 <div class="col-md-3">
-                                                    <strong>{{ f }}: {{ segment.departureDate("d MMMM Y г.") }}</strong>
+                                                    <strong>{{ segment.departureDate("d MMMM Y г.") }}</strong>
                                                     <div>
                                                         <small> Колличество мест: {{ segment.availableSeats }}</small>
                                                     </div>
@@ -69,10 +73,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <strong>{{ segment.formattedDuration }}</strong>
-                                                    <div>
-                                                        <small>Продолжительность</small>
-                                                    </div>
+                                                    {#<strong>{{ segment.formattedDuration }}</strong>#}
+                                                    {#<div>#}
+                                                        {#<small>Продолжительность</small>#}
+                                                    {#</div>#}
                                                 </div>
                                             </div>
                                         </div>
@@ -93,7 +97,9 @@
     </div>
     <script type="text/javascript">
         $('body').on('submit','.book-form',function(){
-            console.log($(this).serializeArray());
+            $.post($(this).attr('action'),$(this).serialize(),function(data){
+
+            });
             return false;
         });
     </script>

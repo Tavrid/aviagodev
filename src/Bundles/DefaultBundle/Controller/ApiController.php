@@ -5,6 +5,8 @@ namespace Bundles\DefaultBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Bundles\DefaultBundle\Form\SearchForm;
+use Bundles\DefaultBundle\Form\BookInfoForm;
+
 
 use Bundles\ApiBundle\Api\Query\AviaCityByQuery;
 use Bundles\ApiBundle\Api\Query\SearchByQuery;
@@ -13,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use Bundles\DefaultBundle\Response\AjaxSearchResponse;
+
 
 class ApiController extends Controller
 {
@@ -32,9 +35,17 @@ class ApiController extends Controller
 
     }
 
+    public function infoAction(Request $request){
+        $form = $this->createForm(new BookInfoForm());
+        $form->submit($request);
+        var_dump($form->isValid(),$form->getData());
+        exit;
+    }
+
     public function listAction(Request $request){
 
         $form = $this->createForm(new SearchForm());
+        $formBook = $this->createForm(new BookInfoForm());
         $data = $request->get('_route_params');
         $data['best_price'] = boolval($data['best_price']);
         $data['direct_flights'] = boolval($data['direct_flights']);
@@ -51,7 +62,11 @@ class ApiController extends Controller
 
             if(!$output->getIsError()){
 
-                $resp = $this->render('BundlesDefaultBundle:Api:list.html.twig',array('data' => $output,'form' => $form->createView()));
+                $resp = $this->render('BundlesDefaultBundle:Api:list.html.twig',array(
+                    'data' => $output,
+                    'form' => $form->createView(),
+                    'form_info' => $formBook->createView()
+                ));
 
 //                $resp= new Response($data);
 //                $resp->headers->add(array('Content-Type' => 'application/json'));
