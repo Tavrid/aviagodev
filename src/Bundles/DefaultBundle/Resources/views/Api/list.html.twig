@@ -16,85 +16,86 @@
         <form action="{{ path('bundles_default_search') }}" method="post" id="search-form">
 
                 {{ form_row(form) }}
-                {#{{ form_row(form.city_from) }}#}
-                {#{{ form_row(form.city_from_code) }}#}
-                {#{{ form_row(form.date_from) }}#}
-                {#{{ form_row(form.return_way) }}#}
-                {#{{ form_row(form.adults) }}#}
-                {#{{ form_row(form.children) }}#}
-                {#{{ form_row(form.class) }}#}
-                {#{{ form_row(form.avia_company) }}#}
-            {##}
-                {#{{ form_row(form.city_to) }}#}
-                {#{{ form_row(form.city_to_code) }}#}
-                {#{{ form_row(form.date_to) }}#}
-                {#{{ form_row(form.currency) }}#}
-                {#{{ form_row(form.best_price) }}#}
-                {#{{ form_row(form.direct_flights) }}#}
             <input type="submit" class="btn btn-success pull-right"/>
         </form>
     </div>
     <div class="col-md-9">
         {% for ticket in data %}
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{{ ticket.totalPrice }} руб</h3>
-                </div>
-                <div class="panel-body">
-                    {% for int in ticket.itineraries %}
-                        {% if(loop.index > 1) %}{% set f = "Оттуда" %}{% else %}{% set f = "Туда" %}{% endif %}
-                        {% for variant in int.variants %}
-                            {% for segment in variant.segments %}
-                                <div class="panel panel-info">
-                                    <div class="panel-heading">
-                                        <div class="panel-title"></div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="col-md-3">
-                                            <strong>{{ f }}: {{ segment.departureDate("d MMMM Y г.") }}</strong>
-                                            <div>
-                                                <small> Колличество мест: {{ segment.availableSeats }}</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div>
-                                                <small>Вылет</small> <strong>{{ segment.departureDate("H:mm") }}</strong>
-                                            </div>
-                                            <strong>{{ segment.departureCityName }}, {{ segment.departureCountryName }}</strong>
-                                            <div>
-                                                <small>{{ segment.departureAirportName }}</small>
-                                            </div>
+            <form action="" class="book-form">
 
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div>
-                                                <small>Прилет</small> <strong>{{ segment.arrivalDate("H:mm") }}</strong>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ ticket.totalPrice }} руб</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% for int in ticket.itineraries %}
+                            {% if(loop.index > 1) %}{% set f = "Обратно" %}{% else %}{% set f = "Туда" %}{% endif %}
+                            {% set parent_loop = loop %}
+                            {% for variant in int.variants %}
+                                <div class="well">
+                                    <label>
+                                        <input value="{{ variant.variantID }}" type="radio" {% if loop.first %} checked="checked" {% endif %} name="variants[{{ parent_loop.index }}]" value="" />
+                                        Выбрать
+                                    </label>
+                                    {% for segment in variant.segments %}
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">
+                                                <div class="panel-title"></div>
                                             </div>
-                                            <strong>{{ segment.arrivalCityName }}, {{ segment.arrivalCountryName }}</strong>
-                                            <div>
-                                                <small>{{ segment.arrivalAirportName }}</small>
+                                            <div class="panel-body">
+                                                <div class="col-md-3">
+                                                    <strong>{{ f }}: {{ segment.departureDate("d MMMM Y г.") }}</strong>
+                                                    <div>
+                                                        <small> Колличество мест: {{ segment.availableSeats }}</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div>
+                                                        <small>Вылет</small> <strong>{{ segment.departureDate("H:mm") }}</strong>
+                                                    </div>
+                                                    <strong>{{ segment.departureCityName }}, {{ segment.departureCountryName }}</strong>
+                                                    <div>
+                                                        <small>{{ segment.departureAirportName }}</small>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div>
+                                                        <small>Прилет</small> <strong>{{ segment.arrivalDate("H:mm") }}</strong>
+                                                    </div>
+                                                    <strong>{{ segment.arrivalCityName }}, {{ segment.arrivalCountryName }}</strong>
+                                                    <div>
+                                                        <small>{{ segment.arrivalAirportName }}</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <strong>{{ segment.formattedDuration }}</strong>
+                                                    <div>
+                                                        <small>Продолжительность</small>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <strong>{{ segment.formattedDuration }}</strong>
-                                            <div>
-                                                <small>Продолжительность</small>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {% endfor %}
                                 </div>
                             {% endfor %}
                             <hr />
-                            <div class="" style="margin-bottom: 15px">
-                                <div class="col-md-offset-9">
-                                    <a style="margin-left: 42%" class="btn btn-primary" href="#">Забронировать</a>
-                                </div>
-                            </div>
                         {% endfor %}
-                    {% endfor %}
+                        <div class="" style="margin-bottom: 15px">
+                            <div class="col-md-offset-9">
+                                <input style="margin-left: 42%" class="btn btn-primary" type="submit" value="Забронировать">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </form>
         {% endfor %}
     </div>
-
+    <script type="text/javascript">
+        $('body').on('submit','.book-form',function(){
+            console.log($(this).serializeArray());
+            return false;
+        });
+    </script>
 {% endblock %}
+

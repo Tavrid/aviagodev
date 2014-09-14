@@ -34,8 +34,13 @@ class SearchForm extends AbstractType
             $adults[$i] = $i;
         }
         $children = array();
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $children[$i] = $i;
+        }
+
+        $infant = array();
+        for ($i = 0; $i < 5; $i++) {
+            $infant[$i] = $i;
         }
         $builder->add('city_from', 'text', [
             'label' => 'Из:',
@@ -75,6 +80,10 @@ class SearchForm extends AbstractType
             ->add('children', 'choice', [
                 'label' => 'Детей (2...<12 лет):',
                 'choices' => $children
+            ])
+            ->add('infant', 'choice', [
+                'label' => 'Младенцев:',
+                'choices' => $infant
             ])
             ->add('class', 'choice', [
                 'label' => 'Класс:',

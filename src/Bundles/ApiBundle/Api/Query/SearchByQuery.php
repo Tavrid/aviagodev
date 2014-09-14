@@ -73,7 +73,7 @@ class SearchByQuery extends QueryAbstract {
                     'Travellers' => [
                             'ADT' => $this->params['adults'],
                             'CHD' => $this->params['children'],
-                            'INF' => 0,
+                            'INF' => $this->params['infant'],
                     ],
 
 
