@@ -14,7 +14,7 @@ use Bundles\ApiBundle\Api\Entity\Segments;
 use Bundles\ApiBundle\Api\Entity\Variants;
 
 
-class SearchResponse extends Response {
+class SearchResponse extends Response implements \Iterator,\ArrayAccess{
 
     protected $position = 0;
 
@@ -146,6 +146,7 @@ class SearchResponse extends Response {
      */
     public function current()
     {
+
         return $this->createEntity($this->position);
     }
 
