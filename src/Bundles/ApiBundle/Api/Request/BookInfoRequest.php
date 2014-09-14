@@ -60,6 +60,7 @@ class BookInfoRequest implements Request{
         $response = new BookInfoResponse();
         $data = $this->apiCaller->call(new ApiCall($query->getApiUrl(),json_encode($query->buildParams($this->apiKey))));
         $response->setResponseData($data);
+//        file_put_contents(__DIR__.'/../Examples/book_info.json',json_encode($data));
         return $response;
     }
 }

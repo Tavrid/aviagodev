@@ -46,7 +46,8 @@ class ApiController extends Controller
             $data  = $form->getData();
             $query->setParams($data);
             $output = $api->getBookInfoRequestor()->execute($query);
-            var_dump($output->getIsError(),$output);
+            var_dump($output->getEntity());
+
         }
         exit;
     }

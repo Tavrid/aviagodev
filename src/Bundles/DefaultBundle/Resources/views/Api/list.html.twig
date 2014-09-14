@@ -37,7 +37,7 @@
                                         <input value="{{ variant.variantID }}" type="radio" {% if loop.first %} checked="checked" {% endif %} name="info[variants][{{ parent_loop.index-1 }}]" />
                                         Выбрать
                                     </label>
-                                    <input type="hidden" name="info[request_id]" value="{{ int.requestId }}">
+                                    <input type="hidden" name="info[request_id]" value="{{ ticket.requestId }}">
                                     <div>
                                         {{ f }} (продолжительность - {{ variant.formattedDuration }})
 

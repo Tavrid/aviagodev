@@ -9,7 +9,7 @@
 namespace Bundles\ApiBundle\Api\Response;
 
 
-abstract class Response implements \Iterator ,\ArrayAccess{
+abstract class Response {
     protected $response;
     /**
      * @param $data
@@ -31,6 +31,13 @@ abstract class Response implements \Iterator ,\ArrayAccess{
      * @return bool
      */
 
-    public abstract  function getIsError();
+    public function getIsError()
+    {
+        if(isset($this->response->errors)){
+
+            return count($this->response->errors);
+        }
+        return false;
+    }
 
 } 

@@ -102,11 +102,11 @@ class SearchResponse extends Response {
         $data = $this->response['result']['Data'][$pos];
         $requestId = $this->response['result']['RequestID'];
         $ticket = new Ticket();
+        $ticket->setRequestId($requestId);
         $ticket->setTotalPrice($data['TotalPrice']['Total']);
 
         foreach($data['Itineraries'] as $inter){
             $it = new Itineraries();
-            $it->setRequestId($requestId);
             foreach($inter['Variants'] as $variants){
 
                 $var = new Variants();

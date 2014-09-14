@@ -7,6 +7,8 @@
  */
 
 namespace Bundles\ApiBundle\Api;
+use Bundles\ApiBundle\Api\Request\BookInfoRequest;
+use Bundles\ApiBundle\Api\Response\BookInfoResponse;
 use Lsw\ApiCallerBundle\Caller\ApiCallerInterface;
 use Bundles\ApiBundle\Api\Request\CityRequest;
 use Bundles\ApiBundle\Api\Request\SearchRequest;
@@ -44,8 +46,7 @@ class Api {
     }
 
     public function getBookInfoRequestor(){
-        $searchRequest = new SearchRequest($this->apiKey,$this->apiCaller);
-        $searchRequest->setMemcached($this->memcached);
+        $searchRequest = new BookInfoRequest($this->apiKey,$this->apiCaller);
         return $searchRequest;
     }
 

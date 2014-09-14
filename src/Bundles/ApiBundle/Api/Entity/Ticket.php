@@ -9,16 +9,36 @@
 namespace Bundles\ApiBundle\Api\Entity;
 
 
-class Ticket {
+class Ticket
+{
     /**
      * @var Itineraries[]
      */
     protected $itineraries;
+    protected $requestId;
 
     protected $totalPrice;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->itineraries = array();
+    }
+
+    /** @param $requestId
+     * @return $this
+     */
+    public function setRequestId($requestId)
+    {
+        $this->requestId = $requestId;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRequestId()
+    {
+        return $this->requestId;
     }
 
     /**
@@ -36,7 +56,7 @@ class Ticket {
      */
     public function getTotalPrice()
     {
-        return number_format($this->totalPrice,0,' ',' ');
+        return number_format($this->totalPrice, 0, ' ', ' ');
     }
 
     /**
@@ -61,7 +81,8 @@ class Ticket {
      * @param Itineraries $itineraries
      * @return $this
      */
-    public function addItineraries(Itineraries $itineraries){
+    public function addItineraries(Itineraries $itineraries)
+    {
         $this->itineraries[] = $itineraries;
         return $this;
     }
