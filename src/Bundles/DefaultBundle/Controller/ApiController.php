@@ -65,8 +65,9 @@ class ApiController extends Controller
 
     public function bookAction(Request $request,$key){
         /** @var \Memcached $memcache */
-//        $memcache = $this->get('memcache.default');
-//        var_Dump($memcache->get($key));exit;
+        $memcache = $this->get('memcache.default');
+        $data = $memcache->get($key);
+
 
         $orderManager = $this->get('admin.order.manager');
         $entity = $orderManager->getEntity();
@@ -76,7 +77,11 @@ class ApiController extends Controller
             $form->submit($request);
             $form->isValid();
         }
-        return $this->render('BundlesDefaultBundle:Api:book.html.twig',['form' => $form->createView()]);
+//        var_dump($data->getEntity()->getTicket()->getItineraries()); exit;
+        return $this->render('BundlesDefaultBundle:Api:book.html.twig',[
+            'form' => $form->createView(),
+            'ticket' => $data->getEntity()->getTicket()
+        ]);
 
 
     }

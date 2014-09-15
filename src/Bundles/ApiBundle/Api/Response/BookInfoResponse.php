@@ -28,8 +28,46 @@ class BookInfoResponse extends Response {
         $ticket = new Ticket();
         $ticket->setRequestId($requestId)
             ->setTotalPrice($data['Price']['Total']);
+
+
+        $data = $this->response['result'];
+        $requestId = $this->response['result']['RequestID'];
+        $ticket = new Ticket();
+        $ticket->setRequestId($requestId);
+        $ticket->setTotalPrice($data['TotalPrice']['Total']);
+//        echo '<pre>';
+//        print_r($data['Itineraries']); exit;
+//            var_dump($data['Itineraries']); exit;
+        foreach($data['Itineraries'] as $variants){
+            $it = new Itineraries();
+//            foreach($inter as $variants){
+
+                $var = new Variants();
+                $var->setDuration($variants['Duration'])
+                    ->setVariantID($variants['VariantID']);
+                foreach($variants['Segments'] as $segment){
+                    $segm = new Segments();
+                    $segm->setArrivalAirportName($segment['ArrivalAirportName'])
+                        ->setArrivalCountryName($segment['ArrivalCountryName'])
+                        ->setArrivalCityName($segment['ArrivalCityName'])
+                        ->setArrivalDate($segment['ArrivalDate'])
+                        ->setDepartureCountryName($segment['DepartureCountryName'])
+                        ->setDepartureCityName($segment['DepartureCityName'])
+                        ->setDepartureAirportName($segment['DepartureAirportName'])
+                        ->setDepartureDate($segment['DepartureDate'])
+                        ->setAvailableSeats($segment['AvailableSeats']);
+
+                    $var->addSegment($segm);
+                }
+
+                $it->addVariant($var);
+//            }
+
+            $ticket->addItineraries($it);
+        }
+//
         $entity->setTicket($ticket)
-        ->setBookId($data['BookID']);
+            ->setBookId($data['BookID']);
 
         $this->entity = $entity;
     }

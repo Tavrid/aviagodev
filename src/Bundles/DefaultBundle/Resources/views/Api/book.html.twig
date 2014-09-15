@@ -1,8 +1,65 @@
 {% extends "BundlesDefaultBundle:Layouts:main.html.twig" %}
 
 {% block body %}
-    <div class="col-md-3">
 
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ ticket.totalPrice }} руб</h3>
+        </div>
+        <div class="panel-body">
+            {% for int in ticket.itineraries %}
+                {% if(loop.index > 1) %}{% set f = "Обратно" %}{% else %}{% set f = "Туда" %}{% endif %}
+                {% set parent_loop = loop %}
+                {% for variant in int.variants %}
+                    <div class="well">
+                        <div>
+                            {{ f }} (продолжительность - {{ variant.formattedDuration }})
+
+                        </div>
+                        {% for segment in variant.segments %}
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <div class="panel-title"></div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="col-md-3">
+                                        <strong>{{ segment.departureDate("d MMMM Y г.") }}</strong>
+                                        <div>
+                                            <small> Колличество мест: {{ segment.availableSeats }}</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div>
+                                            <small>Вылет</small> <strong>{{ segment.departureDate("H:mm") }}</strong>
+                                        </div>
+                                        <strong>{{ segment.departureCityName }}, {{ segment.departureCountryName }}</strong>
+                                        <div>
+                                            <small>{{ segment.departureAirportName }}</small>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div>
+                                            <small>Прилет</small> <strong>{{ segment.arrivalDate("H:mm") }}</strong>
+                                        </div>
+                                        <strong>{{ segment.arrivalCityName }}, {{ segment.arrivalCountryName }}</strong>
+                                        <div>
+                                            <small>{{ segment.arrivalAirportName }}</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <hr />
+            {% endfor %}
+
+        </div>
+    </div>
+    <div class="col-md-3">
     </div>
     <div class="col-md-9">
 
