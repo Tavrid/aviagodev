@@ -18,6 +18,30 @@ class BookInfo {
      * @var string
      */
     protected $bookId;
+    /**
+     * @var array
+     */
+    protected $travelers;
+
+    /**
+     * @param array $travelers
+     * @return $this
+     */
+    public function setTravelers($travelers)
+    {
+        $this->travelers = $travelers;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTravelers()
+    {
+        return $this->travelers;
+    }
+
+
 
     /**
      * @param string $bookId

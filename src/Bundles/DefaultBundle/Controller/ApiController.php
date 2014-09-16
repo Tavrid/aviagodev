@@ -68,14 +68,16 @@ class ApiController extends Controller
         $memcache = $this->get('memcache.default');
         $data = $memcache->get($key);
 
-
+        /** @var \Acme\AdminBundle\Model\Order $orderManager */
         $orderManager = $this->get('admin.order.manager');
         $entity = $orderManager->getEntity();
 
-        $form = $this->createForm(new OrderForm(array('ADT' => 2,'CHD' => 1,'INF' => 1)),$entity);
+        $form = $this->createForm(new OrderForm($data->getEntity()->getTravelers()),$entity);
         if($request->isMethod('post')){
             $form->submit($request);
-            $form->isValid();
+            if($form->isValid()){
+                $orderManager->save($entity);
+            }
         }
 //        var_dump($data->getEntity()->getTicket()->getItineraries()); exit;
         return $this->render('BundlesDefaultBundle:Api:book.html.twig',[

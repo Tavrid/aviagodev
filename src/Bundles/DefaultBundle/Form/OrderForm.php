@@ -27,6 +27,7 @@ class OrderForm  extends AbstractType{
 
         $fieldMap['ADT'] = ['sub_multi_field',
             'fields' => [
+                'gender' => ['field', new Assert\NotBlank()],
                 'name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
                 'surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
                 'patronymic' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
@@ -36,6 +37,7 @@ class OrderForm  extends AbstractType{
         ];
         $fieldMap['CHD'] = ['sub_multi_field',
             'fields' => [
+                'gender' => ['field', new Assert\NotBlank()],
                 'name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
                 'surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
                 'patronymic' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
@@ -44,6 +46,7 @@ class OrderForm  extends AbstractType{
         ];
         $fieldMap['INF'] = ['sub_multi_field',
             'fields' => [
+                'gender' => ['field', new Assert\NotBlank()],
                 'name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
                 'surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
                 'patronymic' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
@@ -55,6 +58,13 @@ class OrderForm  extends AbstractType{
             'field_map' => $fieldMap,
             'types' => ['ADT' => [
                 'options' => ['need_value' => $param['ADT']],
+                'gender' => ['type' => 'choice','options' => [
+                    'label' => 'frontend.order_form.passenger.gender',
+                    'choices' => ['m' => 'frontend.order_form.passenger.male','f' => 'frontend.order_form.passenger.female'],
+                    'multiple' => false,
+                    'expanded' => true,
+//                    'required' => true,
+                ]],
                 'name' => ['options' => ['label' => 'frontend.order_form.passenger.name']],
                 'surname' => ['options' => ['label' => 'frontend.order_form.passenger.surname']],
                 'patronymic' => ['options' => ['label' => 'frontend.order_form.passenger.patronymic']],
@@ -63,6 +73,13 @@ class OrderForm  extends AbstractType{
                 ],
                 'CHD' => [
                     'options' => ['need_value' => $param['CHD']],
+                    'gender' => ['type' => 'choice','options' => [
+                        'label' => 'frontend.order_form.passenger.gender',
+                        'choices' => ['m' => 'frontend.order_form.passenger.male','f' => 'frontend.order_form.passenger.female'],
+                        'multiple' => false,
+                        'expanded' => true,
+//                    'required' => true,
+                    ]],
                     'name' => ['options' => ['label' => 'frontend.order_form.passenger.name']],
                     'surname' => ['options' => ['label' => 'frontend.order_form.passenger.surname']],
                     'patronymic' => ['options' => ['label' => 'frontend.order_form.passenger.patronymic']],
@@ -70,6 +87,13 @@ class OrderForm  extends AbstractType{
                 ],
                 'INF' => [
                     'options' => ['need_value' => $param['INF']],
+                    'gender' => ['type' => 'choice','options' => [
+                        'label' => 'frontend.order_form.passenger.gender',
+                        'choices' => ['m' => 'frontend.order_form.passenger.male','f' => 'frontend.order_form.passenger.female'],
+                        'multiple' => false,
+                        'expanded' => true,
+//                    'required' => true,
+                    ]],
                     'name' => ['options' => ['label' => 'frontend.order_form.passenger.name']],
                     'surname' => ['options' => ['label' => 'frontend.order_form.passenger.surname']],
                     'patronymic' => ['options' => ['label' => 'frontend.order_form.passenger.patronymic']],

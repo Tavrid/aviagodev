@@ -6,5 +6,8 @@ frontend:
           name: Имя
           surname: Фамилия
           patronymic: Отчество
-          birthday: День рождения
+          birthday: Дата рождения
           number_passport: Номер паспорта
+          male: Мужской
+          female: Женский
+          gender: Пол

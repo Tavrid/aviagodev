@@ -23,8 +23,9 @@ class BookInfoResponse extends Response {
 
     protected function createEntity(){
         $data = $this->response['result'];
-        $requestId = $this->response['result']['RequestID'];;
+        $requestId = $data['RequestID'];;
         $entity = new BookInfo();
+        $entity->setTravelers($data['Travellers']);
         $ticket = new Ticket();
         $ticket->setRequestId($requestId)
             ->setTotalPrice($data['Price']['Total']);

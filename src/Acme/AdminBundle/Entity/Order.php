@@ -64,10 +64,13 @@ class Order extends AbstractEntity
     public function __construct()
     {
         $this->date = new \DateTime();
+        $this->state = self::STATE_DEALING;
+        $this->info = "info";
     }
 
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
+
         $metadata->addPropertyConstraint('state', new Assert\NotBlank())
             ->addPropertyConstraint('email', new Assert\Email());
 
@@ -139,7 +142,7 @@ class Order extends AbstractEntity
      */
     public function setPassengers($passengers)
     {
-        $this->passengers = $passengers;
+        $this->passengers = json_encode($passengers);
 
         return $this;
     }
@@ -151,7 +154,7 @@ class Order extends AbstractEntity
      */
     public function getPassengers()
     {
-        return $this->passengers;
+        return json_decode($this->passengers,true);
     }
 
     /**
