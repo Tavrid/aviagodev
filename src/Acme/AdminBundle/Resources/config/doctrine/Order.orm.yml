@@ -1,6 +1,6 @@
 Acme\AdminBundle\Entity\Order:
     type: entity
-    table: `order`
+    table: orders
     repositoryClass: Acme\AdminBundle\Repository\OrderRepository
     id:
         id:
@@ -14,6 +14,11 @@ Acme\AdminBundle\Entity\Order:
             type: string
             length: 255
             nullable: false
+        price:
+            type: float
+        order_id:
+            type: string
+            length: 50
         email:
             type: string
             length: 255
@@ -22,7 +27,7 @@ Acme\AdminBundle\Entity\Order:
             type: datetime
             nullable: false
         passengers:
-            type: text
+            type: json_array
             nullable: true
         info:
             type: text

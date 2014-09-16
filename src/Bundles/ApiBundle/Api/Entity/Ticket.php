@@ -56,7 +56,7 @@ class Ticket
      */
     public function getTotalPrice()
     {
-        return number_format($this->totalPrice, 0, ' ', ' ');
+        return $this->totalPrice;
     }
 
     /**

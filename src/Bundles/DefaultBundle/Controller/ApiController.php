@@ -74,9 +74,14 @@ class ApiController extends Controller
 
         $form = $this->createForm(new OrderForm($data->getEntity()->getTravelers()),$entity);
         if($request->isMethod('post')){
+//            $entity->setPrice($data->getEntity()->getTicket()->getTotalPrice());
+            $entity->setPrice($data->getEntity()->getTicket()->getTotalPrice());
             $form->submit($request);
             if($form->isValid()){
+
                 $orderManager->save($entity);
+            } else {
+//                var_Dump($form->getErrors()); exit;
             }
         }
 //        var_dump($data->getEntity()->getTicket()->getItineraries()); exit;

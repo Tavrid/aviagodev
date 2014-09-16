@@ -33,6 +33,9 @@ class Order extends AbstractEntity
      * @var string
      */
     protected $phone;
+    /**
+     * @var string
+     */
 
     protected $email;
     /**
@@ -44,6 +47,14 @@ class Order extends AbstractEntity
      * @var array
      */
     protected $passengers;
+    /**
+     * @var float
+     */
+    protected $price;
+    /**
+     * @var string
+     */
+    protected $order_id;
     /**
      * @var array
      */
@@ -66,13 +77,16 @@ class Order extends AbstractEntity
         $this->date = new \DateTime();
         $this->state = self::STATE_DEALING;
         $this->info = "info";
+        $this->order_id = md5(microtime().uniqid().'avia_go');
     }
 
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
 
         $metadata->addPropertyConstraint('state', new Assert\NotBlank())
-            ->addPropertyConstraint('email', new Assert\Email());
+            ->addPropertyConstraint('email', new Assert\Email())
+            ->addPropertyConstraint('price', new Assert\NotBlank())
+        ;
 
 
     }
@@ -142,7 +156,7 @@ class Order extends AbstractEntity
      */
     public function setPassengers($passengers)
     {
-        $this->passengers = json_encode($passengers);
+        $this->passengers = $passengers;
 
         return $this;
     }
@@ -154,7 +168,7 @@ class Order extends AbstractEntity
      */
     public function getPassengers()
     {
-        return json_decode($this->passengers,true);
+        return $this->passengers;
     }
 
     /**
@@ -224,5 +238,51 @@ class Order extends AbstractEntity
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     * @return Order
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float 
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set order_id
+     *
+     * @param string $orderId
+     * @return Order
+     */
+    public function setOrderId($orderId)
+    {
+        $this->order_id = $orderId;
+
+        return $this;
+    }
+
+    /**
+     * Get order_id
+     *
+     * @return string 
+     */
+    public function getOrderId()
+    {
+        return $this->order_id;
     }
 }
