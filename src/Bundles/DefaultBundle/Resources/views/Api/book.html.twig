@@ -114,6 +114,10 @@
                     {% for add in form.passengers.ADT %}
                         <div class="tab-pane {% if loop.first %}active{% endif %}" id="adult{{ loop.index }}">
                             {{ form_row(add) }}
+                            {% if loop.first %}
+                                {{ form_row(form.email) }}
+                                {{ form_row(form.phone) }}
+                            {% endif %}
                         </div>
                     {% endfor %}
                     {% for chd in form.passengers.CHD %}

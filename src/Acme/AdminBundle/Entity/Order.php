@@ -25,8 +25,16 @@ class Order extends AbstractEntity
     /**
      * @var integer
      */
-
+    /**
+     * @var string
+     */
     protected $state;
+    /**
+     * @var string
+     */
+    protected $phone;
+
+    protected $email;
     /**
      * @var \DateTime
      */
@@ -60,21 +68,9 @@ class Order extends AbstractEntity
 
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        $metadata->addPropertyConstraint('state', new Assert\NotBlank());
-//        $metadata->addPropertyConstraint('passengers', new Multifield(array('fields' => [
-//                'adt' => array('sub_multi_field',
-//                    'fields' => [
-//                            'name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
-//                            'surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
-//                            'patronymic' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
-//                            'phone' => ['field', new Assert\NotBlank()],
-//                            'number_passport' => ['field', new Assert\NotBlank()],
-//                            'email' => ['field', new Assert\NotBlank(), new Assert\Email()],
-//                            'birthday' => ['field', new Assert\NotBlank(),new Assert\DateTime()],
-//                    ],
-//                ),
-//            ]
-//        )));
+        $metadata->addPropertyConstraint('state', new Assert\NotBlank())
+            ->addPropertyConstraint('email', new Assert\Email());
+
 
     }
 
@@ -179,5 +175,51 @@ class Order extends AbstractEntity
     public function getInfo()
     {
         return $this->info;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     * @return Order
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Order
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 }

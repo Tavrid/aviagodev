@@ -10,6 +10,16 @@ Acme\AdminBundle\Entity\Order:
         state:
             type: string
             length: 1
+        phone:
+            type: string
+            length: 255
+            nullable: false
+            column: `phone`
+        email:
+            type: string
+            length: 255
+            nullable: false
+            column: `email`
         date:
             type: datetime
             nullable: false

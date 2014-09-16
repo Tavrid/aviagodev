@@ -1,0 +1,10 @@
+frontend:
+  order_form:
+      phone: Телефон
+      email: Email
+      passenger:
+          name: Имя
+          surname: Фамилия
+          patronymic: Отчество
+          birthday: День рождения
+          number_passport: Номер паспорта

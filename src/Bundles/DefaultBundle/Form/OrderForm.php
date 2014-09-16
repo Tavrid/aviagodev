@@ -30,7 +30,6 @@ class OrderForm  extends AbstractType{
                 'name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
                 'surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
                 'patronymic' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
-                'phone' => ['field', new Assert\NotBlank()],
                 'number_passport' => ['field', new Assert\NotBlank()],
                 'birthday' => ['field', new Assert\NotBlank(),new Assert\DateTime()],
             ],
@@ -56,15 +55,25 @@ class OrderForm  extends AbstractType{
             'field_map' => $fieldMap,
             'types' => ['ADT' => [
                 'options' => ['need_value' => $param['ADT']],
-//                'birthday' => ['type' => 'date']
+                'name' => ['options' => ['label' => 'frontend.order_form.passenger.name']],
+                'surname' => ['options' => ['label' => 'frontend.order_form.passenger.surname']],
+                'patronymic' => ['options' => ['label' => 'frontend.order_form.passenger.patronymic']],
+                'number_passport' => ['options' => ['label' => 'frontend.order_form.passenger.number_passport']],
+                'birthday' => ['options' => ['label' => 'frontend.order_form.passenger.birthday']]
                 ],
                 'CHD' => [
                     'options' => ['need_value' => $param['CHD']],
-//                'birthday' => ['type' => 'date']
+                    'name' => ['options' => ['label' => 'frontend.order_form.passenger.name']],
+                    'surname' => ['options' => ['label' => 'frontend.order_form.passenger.surname']],
+                    'patronymic' => ['options' => ['label' => 'frontend.order_form.passenger.patronymic']],
+                    'birthday' => ['options' => ['label' => 'frontend.order_form.passenger.birthday']]
                 ],
                 'INF' => [
                     'options' => ['need_value' => $param['INF']],
-//                'birthday' => ['type' => 'date']
+                    'name' => ['options' => ['label' => 'frontend.order_form.passenger.name']],
+                    'surname' => ['options' => ['label' => 'frontend.order_form.passenger.surname']],
+                    'patronymic' => ['options' => ['label' => 'frontend.order_form.passenger.patronymic']],
+                    'birthday' => ['options' => ['label' => 'frontend.order_form.passenger.birthday']]
                 ]
             ]
         ];
@@ -72,15 +81,10 @@ class OrderForm  extends AbstractType{
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('passengers','multi_field',$this->passengersParams);
-//        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            /** @var \Acme\AdminBundle\Entity\Order $data */
-//            $data = $event->getData();
-//            $data->setPassengers($_POST['order']['passengers']);
-//            var_dump($data); exit;
-//            $event->getForm()->setData($data);
+        $builder->add('passengers','multi_field',$this->passengersParams)
+        ->add('email','email',['label' => 'frontend.order_form.email'])
+        ->add('phone','text',['label' => 'frontend.order_form.phone']);
 
-//        });
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
