@@ -11,3 +11,4 @@ frontend:
           male: Мужской
           female: Женский
           gender: Пол
+          passport_valid_until: Паспорт дейст. до

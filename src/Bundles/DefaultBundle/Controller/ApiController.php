@@ -110,7 +110,6 @@ class ApiController extends Controller
             $query->setParams($params);
             $output = $api->getSearchRequestor()->execute($query);
 
-
             if(!$output->getIsError()){
 
                 $resp = $this->render('BundlesDefaultBundle:Api:list.html.twig',array(

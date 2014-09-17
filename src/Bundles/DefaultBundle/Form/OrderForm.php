@@ -32,7 +32,8 @@ class OrderForm  extends AbstractType{
                 'surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
                 'patronymic' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
                 'number_passport' => ['field', new Assert\NotBlank()],
-                'birthday' => ['field', new Assert\NotBlank(),new Assert\DateTime()],
+                'birthday' => ['field', new Assert\NotBlank(),new Assert\Date()],
+                'passport_valid_until' => ['field', new Assert\NotBlank(),new Assert\Date()],
             ],
         ];
         $fieldMap['CHD'] = ['sub_multi_field',
@@ -41,7 +42,8 @@ class OrderForm  extends AbstractType{
                 'name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
                 'surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
                 'patronymic' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
-                'birthday' => ['field', new Assert\NotBlank(),new Assert\DateTime()],
+                'birthday' => ['field', new Assert\NotBlank(),new Assert\Date()],
+
             ],
         ];
         $fieldMap['INF'] = ['sub_multi_field',
@@ -50,33 +52,44 @@ class OrderForm  extends AbstractType{
                 'name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
                 'surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
                 'patronymic' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
-                'birthday' => ['field', new Assert\NotBlank(),new Assert\DateTime()],
+                'birthday' => ['field', new Assert\NotBlank(),new Assert\Date()],
             ],
         ];
         $this->passengersParams = [
             'entity'   => 'Acme\AdminBundle\Entity\Order',
             'field_map' => $fieldMap,
-            'types' => ['ADT' => [
-                'options' => ['need_value' => $param['ADT']],
-                'gender' => ['type' => 'choice','options' => [
-                    'label' => 'frontend.order_form.passenger.gender',
-                    'choices' => ['m' => 'frontend.order_form.passenger.male','f' => 'frontend.order_form.passenger.female'],
-                    'multiple' => false,
-                    'expanded' => true,
-//                    'required' => true,
-                ]],
-                'name' => ['options' => ['label' => 'frontend.order_form.passenger.name']],
-                'surname' => ['options' => ['label' => 'frontend.order_form.passenger.surname']],
-                'patronymic' => ['options' => ['label' => 'frontend.order_form.passenger.patronymic']],
-                'number_passport' => ['options' => ['label' => 'frontend.order_form.passenger.number_passport']],
-                'birthday' => [
-                    'options' => [
-                        'label' => 'frontend.order_form.passenger.birthday',
-                        'attr' => ['class' => 'birthday form-inline'],
-                        'years' => range((date('Y') -99),date('Y'))
+            'types' => [
+                'ADT' => [
+                    'options' => ['need_value' => $param['ADT']],
+                    'gender' => ['type' => 'choice','options' => [
+                        'label' => 'frontend.order_form.passenger.gender',
+                        'choices' => ['m' => 'frontend.order_form.passenger.male','f' => 'frontend.order_form.passenger.female'],
+                        'multiple' => false,
+                        'expanded' => true,
+    //                    'required' => true,
+                    ]],
+                    'name' => ['options' => ['label' => 'frontend.order_form.passenger.name']],
+                    'surname' => ['options' => ['label' => 'frontend.order_form.passenger.surname']],
+                    'patronymic' => ['options' => ['label' => 'frontend.order_form.passenger.patronymic']],
+                    'number_passport' => ['options' => ['label' => 'frontend.order_form.passenger.number_passport']],
+                    'birthday' => [
+                        'options' => [
+                            'label' => 'frontend.order_form.passenger.birthday',
+                            'attr' => ['class' => 'birthday form-inline'],
+                            'years' => range(date('Y')-12,(date('Y') -99)),
+                            'input' => 'string'
+                        ],
+                        'type' => 'birthday'
                     ],
-                    'type' => 'birthday'
-                ]
+                    'passport_valid_until' => [
+                        'options' => [
+                            'label' => 'frontend.order_form.passenger.passport_valid_until',
+                            'attr' => ['class' => 'birthday form-inline'],
+                            'years' => range((date('Y') -2),date('Y')+10),
+                            'input' => 'string'
+                        ],
+                        'type' => 'date'
+                    ],
                 ],
                 'CHD' => [
                     'options' => ['need_value' => $param['CHD']],
@@ -90,7 +103,15 @@ class OrderForm  extends AbstractType{
                     'name' => ['options' => ['label' => 'frontend.order_form.passenger.name']],
                     'surname' => ['options' => ['label' => 'frontend.order_form.passenger.surname']],
                     'patronymic' => ['options' => ['label' => 'frontend.order_form.passenger.patronymic']],
-                    'birthday' => ['options' => ['label' => 'frontend.order_form.passenger.birthday']]
+                    'birthday' => [
+                        'options' => [
+                            'label' => 'frontend.order_form.passenger.birthday',
+                            'attr' => ['class' => 'birthday form-inline'],
+                            'years' => range(date('Y')-4,(date('Y') -13)),
+                            'input' => 'string'
+                        ],
+                        'type' => 'birthday'
+                    ]
                 ],
                 'INF' => [
                     'options' => ['need_value' => $param['INF']],
@@ -104,7 +125,15 @@ class OrderForm  extends AbstractType{
                     'name' => ['options' => ['label' => 'frontend.order_form.passenger.name']],
                     'surname' => ['options' => ['label' => 'frontend.order_form.passenger.surname']],
                     'patronymic' => ['options' => ['label' => 'frontend.order_form.passenger.patronymic']],
-                    'birthday' => ['options' => ['label' => 'frontend.order_form.passenger.birthday']]
+                    'birthday' => [
+                        'options' => [
+                            'label' => 'frontend.order_form.passenger.birthday',
+                            'attr' => ['class' => 'birthday form-inline'],
+                            'years' => range(date('Y'),(date('Y') -2)),
+                            'input' => 'string'
+                        ],
+                        'type' => 'birthday'
+                    ]
                 ]
             ]
         ];
