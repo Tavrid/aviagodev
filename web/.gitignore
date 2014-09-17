@@ -2,3 +2,4 @@
 !aviago/
 !public/
 !.gitignore
+!deploy.php
