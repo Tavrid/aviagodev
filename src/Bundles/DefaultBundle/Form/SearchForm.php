@@ -47,14 +47,6 @@ class SearchForm extends AbstractType
             'mapped' => false,
             'attr' => ['placeholder' => 'Введите город']
         ])
-            ->add('return_way','choice',[
-
-                'choices' => ['В одну сторону','В обе стороны'],
-                'data' => 0,
-                'multiple' => false,
-                'expanded' => true,
-                'required' => true,
-            ])
             ->add('city_from_code', 'hidden')
             ->add('city_to', 'text', [
                 'label' => 'В:',
@@ -71,6 +63,14 @@ class SearchForm extends AbstractType
                 'attr' => ['placeholder' => 'Укажите дату'],
                 'required' => false,
                 'data' => 0
+            ])
+            ->add('return_way','choice',[
+
+                'choices' => ['В одну сторону','В обе стороны'],
+                'data' => 0,
+                'multiple' => false,
+                'expanded' => true,
+                'required' => true,
             ])
             ->add('adults', 'choice', [
 
