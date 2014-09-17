@@ -281,13 +281,14 @@
 
 {% block form_row %}
 {% spaceless %}
-    {% if (form.count == 0) %}
+
+    {% if (form.vars.block_prefixes[1] != "multi_field") %}
     <div class="form-group {%if errors|length > 0%}has-error{%endif%}">
         {{ form_label(form) }}
         <div class="controls">
     {% endif %}
             {{ form_widget(form) }}
-    {% if (form.count == 0) %}
+    {% if (form.vars.block_prefixes[1] != "multi_field") %}
         </div>
         {{ form_errors(form) }}
     </div>

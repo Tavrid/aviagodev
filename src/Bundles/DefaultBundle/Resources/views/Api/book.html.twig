@@ -114,7 +114,6 @@
                 <div class="tab-content">
                     {% for add in form.passengers.ADT %}
                         <div class="tab-pane {% if loop.first %}active{% endif %}" id="adult{{ loop.index }}">
-                            {{ form_label(add.gender) }}
                             {{ form_row(add) }}
                             {% if loop.first %}
                                 {{ form_row(form.email) }}
@@ -124,13 +123,11 @@
                     {% endfor %}
                     {% for chd in form.passengers.CHD %}
                         <div class="tab-pane" id="child{{ loop.index }}">
-                            {{ form_label(chd.gender) }}
                             {{ form_row(chd) }}
                         </div>
                     {% endfor %}
                     {% for inf in form.passengers.INF %}
                         <div class="tab-pane" id="inf{{ loop.index }}">
-                            {{ form_label(inf.gender) }}
                             {{ form_row(inf) }}
                         </div>
                     {% endfor %}
@@ -144,5 +141,11 @@
             </div>
         </form>
     </div>
+    <style type="text/css">
+        .birthday select{
+            width: auto;
+            margin-right: 10px;
+        }
+    </style>
 
 {% endblock %}

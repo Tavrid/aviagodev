@@ -114,3 +114,4 @@ lsw_memcache:
         default:
             hosts:
               - { dsn: localhost, port: 11211 }
+

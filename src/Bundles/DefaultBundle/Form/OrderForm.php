@@ -69,7 +69,14 @@ class OrderForm  extends AbstractType{
                 'surname' => ['options' => ['label' => 'frontend.order_form.passenger.surname']],
                 'patronymic' => ['options' => ['label' => 'frontend.order_form.passenger.patronymic']],
                 'number_passport' => ['options' => ['label' => 'frontend.order_form.passenger.number_passport']],
-                'birthday' => ['options' => ['label' => 'frontend.order_form.passenger.birthday'],'type' => 'birthday']
+                'birthday' => [
+                    'options' => [
+                        'label' => 'frontend.order_form.passenger.birthday',
+                        'attr' => ['class' => 'birthday form-inline'],
+                        'years' => range((date('Y') -99),date('Y'))
+                    ],
+                    'type' => 'birthday'
+                ]
                 ],
                 'CHD' => [
                     'options' => ['need_value' => $param['CHD']],
