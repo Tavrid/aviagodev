@@ -1,5 +1,6 @@
-*
+
 !aviago/
 !public/
 !.gitignore
 !deploy.php
+!frontend
