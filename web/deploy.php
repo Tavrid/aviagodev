@@ -28,9 +28,19 @@ foreach ($commands AS $command) {
     $output .= "<span style=\"color: #6BE234;\">\$</span> <span style=\"color: #729FCF;\">{$command}\n</span>";
     $output .= htmlentities(trim($tmp)) . "\n";
 }
-if(@is_dir(__DIR__.'/../app/cache/prod')){
-    @rmdir(__DIR__.'/../app/cache/prod');
+function rrmdir($dir) {
+    if (@is_dir($dir)) {
+        $objects = scandir($dir);
+        foreach ($objects as $object) {
+            if ($object != "." && $object != "..") {
+                if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
+            }
+        }
+        reset($objects);
+        @rmdir($dir);
+    }
 }
+rrmdir(__DIR__.'/../app/cache/prod');
 // Make it pretty for manual user access (and why not?)
 ?>
 <!DOCTYPE HTML>
