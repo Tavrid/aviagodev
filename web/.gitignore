@@ -4,3 +4,4 @@
 !.gitignore
 !deploy.php
 !frontend
+!adminer.php
