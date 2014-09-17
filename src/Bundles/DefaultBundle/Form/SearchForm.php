@@ -43,30 +43,31 @@ class SearchForm extends AbstractType
             $infant[$i] = $i;
         }
         $builder->add('city_from', 'text', [
-            'label' => 'Из:',
-            'mapped' => false,
-            'attr' => ['placeholder' => 'Введите город']
-        ])
+                'label' => 'frontend.search_form.city_from',
+                'mapped' => false,
+                'attr' => ['placeholder' => 'frontend.search_form.placeholders.city']
+            ])
             ->add('city_from_code', 'hidden')
             ->add('city_to', 'text', [
-                'label' => 'В:',
+                'label' => 'frontend.search_form.city_to',
                 'mapped' => false,
-                'attr' => ['placeholder' => 'Введите город']
+                'attr' => ['placeholder' => 'frontend.search_form.placeholders.city']
             ])
             ->add('city_to_code', 'hidden')
+
             ->add('date_from', 'text', [
-                'label' => 'Дата вылета:',
-                'attr' => ['placeholder' => 'Укажите дату']
+                'label' => 'frontend.search_form.date_from',
+                'attr' => ['placeholder' => 'frontend.search_form.placeholders.date']
             ])
             ->add('date_to', 'text', [
-                'label' => 'Дата прилёта:',
+                'label' => 'frontend.search_form.date_to',
                 'attr' => ['placeholder' => 'Укажите дату'],
                 'required' => false,
                 'data' => 0
             ])
             ->add('return_way','choice',[
-
-                'choices' => ['В одну сторону','В обе стороны'],
+                'label' => 'frontend.search_form.return_way.label',
+                'choices' => ['frontend.search_form.return_way.one_way','frontend.search_form.return_way.multi_way'],
                 'data' => 0,
                 'multiple' => false,
                 'expanded' => true,
