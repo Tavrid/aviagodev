@@ -90,7 +90,7 @@
                                         {% if not loop.last %}
                                             <div class="text-center">
                                                 {% set next = variant.segments[loop.index0 +1] %}
-                                                Пересадка между рейсами <strong>{{ segment.transplantTime(next) }}</strong>
+                                                Пересадка между рейсами <strong>{{ segment.transplantTime(next)|secondToTime }}</strong>
                                             </div>
                                         {% endif %}
                                     {% endfor %}
