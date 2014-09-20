@@ -81,7 +81,7 @@ class SearchByQuery extends QueryAbstract {
                 [
                     'Compress' => null,
                     'Format' => 'Combined',
-                    'TimeLimit'	=> 180,
+                    'Timelimit'	=> 180,
 //                    'Return' => '',
                     'Return' => 'ByTimelimit',
                     'Currency' => [
