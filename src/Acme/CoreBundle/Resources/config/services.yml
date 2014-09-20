@@ -34,6 +34,10 @@ services:
             - "@service_container"
         tags:
             - { name: twig.extension }
+    acme.core.twig.seconds_to_time:
+            class: Acme\CoreBundle\Twig\SecondsToTime
+            tags:
+                - { name: twig.extension }
 
     assetic.filter.main_cssrewirte:
         class: Acme\CoreBundle\Model\CssRewriteFilter

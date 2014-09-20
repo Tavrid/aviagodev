@@ -9,7 +9,11 @@
 namespace Bundles\ApiBundle\Api\Entity;
 
 
+
 class Segments {
+    /**
+     * @var string
+     */
     protected $departureCountryName;
     protected $departureCityName;
     protected $departureAirportName;
@@ -24,6 +28,117 @@ class Segments {
 
 
     protected $price;
+
+    protected $flightTime;
+
+    protected $arrivalTimeZone;
+    protected $departureTimeZone;
+
+    /**
+     * @return mixed
+     */
+    public function getDepartureTimeZone()
+    {
+        return $this->departureTimeZone;
+    }
+
+    /**
+     * @param mixed $departureTimeZone
+     * @return $this
+     */
+    public function setDepartureTimeZone($departureTimeZone)
+    {
+        $this->departureTimeZone = $departureTimeZone;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArrivalTimeZone()
+    {
+        return $this->arrivalTimeZone;
+    }
+
+    /**
+     * @param mixed $arrivalTimeZone
+     * @return $this
+     */
+    public function setArrivalTimeZone($arrivalTimeZone)
+    {
+        $this->arrivalTimeZone = $arrivalTimeZone;
+        return $this;
+    }
+
+
+
+
+
+    /**
+     * @var
+     */
+    protected $marketingAirline;
+    /**
+     * @var
+     */
+    protected $flightNumber;
+
+
+    /**
+     * @return mixed
+     */
+    public function getFlightTime()
+    {
+        return $this->arrivalDate - $this->departureDate;
+//        return $this->flightTime;
+    }
+
+    /**
+     * @param mixed $flightTime
+     * @return $this
+     */
+    public function setFlightTime($flightTime)
+    {
+        $this->flightTime = $flightTime*60;
+        return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getFlightNumber()
+    {
+        return $this->flightNumber;
+    }
+
+    /**
+     * @param mixed $flightNumber
+     * @return $this
+     */
+    public function setFlightNumber($flightNumber)
+    {
+        $this->flightNumber = $flightNumber;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMarketingAirline()
+    {
+        return $this->marketingAirline;
+    }
+
+    /**
+     * @param mixed $marketingAirline
+     * @return $this
+     */
+    public function setMarketingAirline($marketingAirline)
+    {
+        $this->marketingAirline = $marketingAirline;
+        return $this;
+    }
 
     /**
      * @param mixed $availableSeats
@@ -111,9 +226,9 @@ class Segments {
      * @param string $format
      * @return mixed
      */
-    public function getArrivalDate($format = "d MMMM H:mm")
+    public function getArrivalDate()
     {
-        return $this->date($this->arrivalDate,$format);
+        return $this->arrivalDate;
     }
 
 
@@ -183,25 +298,14 @@ class Segments {
     }
 
     /**
-     * @param $format
+     *
      * @return mixed
      */
-    public function getDepartureDate($format = "d MMMM H:mm")
+    public function getDepartureDate()
     {
-        return $this->date($this->departureDate,$format);
+        return $this->departureDate;
     }
 
-    /**
-     * @return string
-     *
-     * TODO надо проверить
-     */
-    public function getFormattedDuration(){
-        $t = $this->arrivalDate - $this->departureDate;
-        $dataTime = new \DateTime('@'.$t);
-
-        return sprintf('%s ч %s мин',$dataTime->format('H'),$dataTime->format('i'));
-    }
 
 
 
@@ -221,6 +325,12 @@ class Segments {
     public function getPrice()
     {
         return $this->price;
+    }
+
+
+    public function getTransplantTime(Segments $next){
+        return $next->getDepartureDate() - $this->getArrivalDate();
+
     }
 
     protected  function date($date, $format = "d MMMM H:mm")

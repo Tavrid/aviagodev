@@ -56,7 +56,7 @@ class Variants {
      */
     public function setDuration($duration)
     {
-        $this->duration = $duration;
+        $this->duration = $duration*60;
         return $this;
     }
 

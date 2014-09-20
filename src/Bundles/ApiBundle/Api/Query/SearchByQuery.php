@@ -81,8 +81,9 @@ class SearchByQuery extends QueryAbstract {
                 [
                     'Compress' => null,
                     'Format' => 'Combined',
-                    'Return' => '',
-//                    'Return' => 'ByTimelimit',
+                    'TimeLimit'	=> 180,
+//                    'Return' => '',
+                    'Return' => 'ByTimelimit',
                     'Currency' => [
                         $this->params['currency']
                     ],

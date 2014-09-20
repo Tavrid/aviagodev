@@ -122,7 +122,13 @@ class SearchResponse extends Response implements \Iterator,\ArrayAccess{
                         ->setDepartureCityName($segment['DepartureCityName'])
                         ->setDepartureAirportName($segment['DepartureAirportName'])
                         ->setDepartureDate($segment['DepartureDate'])
-                        ->setAvailableSeats($segment['AvailableSeats']);
+                        ->setAvailableSeats($segment['AvailableSeats'])
+                        ->setMarketingAirline($segment['MarketingAirline'])
+                        ->setFlightNumber($segment['FlightNumber'])
+                        ->setFlightTime($segment['FlightTime'])
+                        ->setDepartureTimeZone($segment['DepartureTimeZone'])
+                        ->setArrivalTimeZone($segment['ArrivalTimeZone'])
+                    ;
 
                     $var->addSegment($segm);
                 }
