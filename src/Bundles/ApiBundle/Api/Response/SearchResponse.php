@@ -138,7 +138,7 @@ class SearchResponse extends Response implements \Iterator,\ArrayAccess{
 
             $ticket->addItineraries($it);
         }
-//        }
+
 
         return $ticket;
     }
