@@ -19,6 +19,8 @@ class Ticket
 
     protected $totalPrice;
 
+
+
     public function __construct()
     {
         $this->itineraries = array();

@@ -128,6 +128,9 @@ class SearchResponse extends Response implements \Iterator,\ArrayAccess{
                         ->setFlightTime($segment['FlightTime'])
                         ->setDepartureTimeZone($segment['DepartureTimeZone'])
                         ->setArrivalTimeZone($segment['ArrivalTimeZone'])
+                        ->setMarketingAirlineName($segment['MarketingAirlineName'])
+                        ->setDepartureAirport($segment['DepartureAirport'])
+                        ->setArrivalAirport($segment['ArrivalAirport'])
                     ;
 
                     $var->addSegment($segm);
@@ -138,7 +141,7 @@ class SearchResponse extends Response implements \Iterator,\ArrayAccess{
 
             $ticket->addItineraries($it);
         }
-//        }
+
 
         return $ticket;
     }

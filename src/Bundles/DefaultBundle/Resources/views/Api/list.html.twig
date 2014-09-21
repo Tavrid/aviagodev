@@ -20,6 +20,12 @@
         </form>
     </div>
     <div class="col-md-9">
+        <div class="well">
+            <form action="" class="form-inline">
+                {{ form_widget(filter_form) }}
+            </form>
+
+        </div>
         {% for ticket in data %}
             <form action="{{ path("bundles_default_api_info") }}" class="book-form">
 

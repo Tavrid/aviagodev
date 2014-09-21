@@ -84,6 +84,69 @@ class Segments {
     protected $flightNumber;
 
 
+    protected $marketingAirlineName;
+
+    protected $departureAirport;
+    protected $arrivalAirport;
+
+    /**
+     * @return mixed
+     */
+    public function getArrivalAirport()
+    {
+        return $this->arrivalAirport;
+    }
+
+    /**
+     * @param mixed $arrivalAirport
+     */
+    public function setArrivalAirport($arrivalAirport)
+    {
+        $this->arrivalAirport = $arrivalAirport;
+        return $this;
+    }
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getDepartureAirport()
+    {
+        return $this->departureAirport;
+    }
+
+    /**
+     * @param mixed $departureAirport
+     * @return $this
+     */
+    public function setDepartureAirport($departureAirport)
+    {
+        $this->departureAirport = $departureAirport;
+        return $this;
+    }
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getMarketingAirlineName()
+    {
+        return $this->marketingAirlineName;
+    }
+
+    /**
+     * @param mixed $marketingAirlineName
+     * @return $this
+     */
+    public function setMarketingAirlineName($marketingAirlineName)
+    {
+        $this->marketingAirlineName = $marketingAirlineName;
+        return $this;
+    }
+
+
     /**
      * @return mixed
      */

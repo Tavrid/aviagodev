@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Bundles\DefaultBundle\Form\SearchForm;
 use Bundles\DefaultBundle\Form\BookInfoForm;
 use Bundles\DefaultBundle\Form\OrderForm;
+use Bundles\DefaultBundle\Form\FilterForm;
 
 
 use Bundles\ApiBundle\Api\Query\AviaCityByQuery;
@@ -111,11 +112,12 @@ class ApiController extends Controller
             $output = $api->getSearchRequestor()->execute($query);
 
             if(!$output->getIsError()){
-
+                $filterForm = $this->createForm(new FilterForm($output));
                 $resp = $this->render('BundlesDefaultBundle:Api:list.html.twig',array(
                     'data' => $output,
                     'form' => $form->createView(),
-                    'form_info' => $formBook->createView()
+                    'form_info' => $formBook->createView(),
+                    'filter_form' => $filterForm->createView()
                 ));
 
 //                $resp= new Response($data);
