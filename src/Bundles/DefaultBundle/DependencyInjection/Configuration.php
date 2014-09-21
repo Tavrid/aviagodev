@@ -20,7 +20,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('bundles_default');
         $rootNode->children()
-            ->scalarNode('foo')->defaultValue('bundles/bundlesdefault/lib/owl/owl-carousel/owl.carousel.css')///TODO тесты ))
+            ->integerNode('count_on_page')->defaultValue(10)
             ->end();
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for

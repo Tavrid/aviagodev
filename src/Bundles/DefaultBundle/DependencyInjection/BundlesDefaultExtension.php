@@ -22,7 +22,7 @@ class BundlesDefaultExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('bundles_default.foo',$config['foo']);
+        $container->setParameter('bundles_default.count_on_page',$config['count_on_page']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

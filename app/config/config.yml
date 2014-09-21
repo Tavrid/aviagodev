@@ -99,6 +99,8 @@ fos_user:
             enabled:    false # disable default confirmation
             template:   FOSUserBundle:Registration:email.txt.twig
 
+bundles_default:
+    count_on_page: 10
 
 knp_menu:
     twig:  # use "twig: false" to disable the Twig extension and the TwigRenderer
