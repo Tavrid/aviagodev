@@ -9,6 +9,8 @@
 namespace Bundles\ApiBundle\Api\Model;
 use Bundles\ApiBundle\Api\Response\SearchResponse;
 
+use Bundles\ApiBundle\Api\Filter\Filter;
+
 class SearchResultFilter {
     /**
      * @var integer
@@ -50,23 +52,71 @@ class SearchResultFilter {
 
     /**
      * @param $page
-     * @param $filters \Closure[]
+     * @param $filters Filter[]
      * @return array
      */
     public function getData($page,$filters){
 
         $data = [];
         $ret = [];
-        foreach($this->response as $response){
+        foreach($this->response as $ticket){
             $success = true;
-            foreach($filters as $filter){
-                if(!$filter($response)){
-                    $success = false;
-                    break;
+            /** @var \Bundles\ApiBundle\Api\Entity\Itineraries[] $itineraries */
+            $itineraries = $ticket->getItineraries();
+            foreach($itineraries as $k => $iter){
+                $successIter = true;
+                foreach($filters as $filter){
+                    if(!$filter->filterItineraries($iter)){
+                        unset($itineraries[$k]);
+                        $successIter = false;
+                        break;
+                    }
                 }
+                if(!$successIter){
+                    continue;
+                }
+                $successVar = true;
+                $variants = $iter->getVariants();
+                foreach($variants  as $k => $variant){
+                    foreach($filters as $filter){
+                        if(!$filter->filterVariant($variant)){
+                            $successVar = false;
+                            unset($variants[$k]);
+                            break;
+                        }
+                    }
+                    if(!$successVar){
+                        continue;
+                    }
+
+                    $segments = $variant->getSegments();
+                    foreach($segments as $k => $segment){
+                        $successSeg = true;
+                        foreach($filters as $filter){
+                            if(!$filter->filterSegment($segment)){
+                                $successSeg = false;
+                                unset($segments[$k]);
+                                break;
+                            }
+                        }
+
+
+                    }
+                    if(empty($segments)){
+                        unset($variants[$k]);
+                    }
+
+
+                }
+                if(empty($variants)){
+                    unset($itineraries[$k]);
+                }
+
             }
-            if($success){
-                $data[] = $response;
+
+
+            if(!empty($itineraries)){
+                $data[] = $ticket;
             }
 
         }
