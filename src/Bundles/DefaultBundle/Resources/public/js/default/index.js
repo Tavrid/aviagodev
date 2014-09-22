@@ -7,6 +7,8 @@ $(function() {
             window.location = data.url;
 //            _GlobalAppObject.loadingStop();
 //            $('#result').html(data);
+        }).error(function(r){
+            _GlobalAppObject.loadingStop();
         });
         return false;
     });

@@ -28,7 +28,9 @@ class FilterForm extends AbstractType {
 
     public function __construct(SearchResponse $searchResponse= null){
         $this->searchResponse = $searchResponse;
-        $this->airlineCh = array();
+        $this->airlineCh = array(0 => 'Все');
+        $this->departureAirportCh = array(0 => 'Все');
+        $this->arrivalAirportCh = array(0 => 'Все');
         foreach($this->searchResponse as $ticket){
             foreach($ticket->getItineraries() as $itineraries){
                 foreach($itineraries->getVariants()  as $variant){

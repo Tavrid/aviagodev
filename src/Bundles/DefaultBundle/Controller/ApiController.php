@@ -19,6 +19,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 use Bundles\DefaultBundle\Response\AjaxSearchResponse;
 
+use Bundles\ApiBundle\Api\Model\SearchResultFilter;
+use Bundles\ApiBundle\Api\Model\SearchFilters;
+
 
 class ApiController extends Controller
 {
@@ -113,8 +116,11 @@ class ApiController extends Controller
 
             if(!$output->getIsError()){
                 $filterForm = $this->createForm(new FilterForm($output));
+                $f = new SearchResultFilter($output,$this->container->getParameter('bundles_default.count_on_page'));
+
                 $resp = $this->render('BundlesDefaultBundle:Api:list.html.twig',array(
-                    'data' => $output,
+                    'data' => $f->getData(1,array()),
+                    'pages' => $f->getCountPages(),
                     'form' => $form->createView(),
                     'form_info' => $formBook->createView(),
                     'filter_form' => $filterForm->createView()
@@ -129,6 +135,47 @@ class ApiController extends Controller
             $resp = new Response('',Response::HTTP_BAD_REQUEST);
         }
         return $resp;
+    }
+
+    public function getFilteredItemsAction(Request $request,$page){
+        $form = $this->createForm(new SearchForm());
+        $formBook = $this->createForm(new BookInfoForm());
+
+        $form->submit($request);
+        $resp = null;
+        if($form->isValid()){
+            /** @var \Bundles\ApiBundle\Api\Api $api */
+            $api = $this->get('avia.api.manager');
+            $params = $form->getData();
+
+            $query = new SearchByQuery();
+            $query->setParams($params);
+            $output = $api->getSearchRequestor()->execute($query);
+            if(!$output->getIsError()){
+                $filterForm = $this->createForm(new FilterForm($output));
+                $filterForm->submit($request);
+                if($filterForm->isValid()){
+
+                    $f = new SearchResultFilter($output,$this->container->getParameter('bundles_default.count_on_page'));
+                    $d = array( 'html'=>$this->renderView('BundlesDefaultBundle:Api:_items.html.twig',array(
+                            'data' => $f->getData($page,SearchFilters::getFiltersByParams($filterForm->getData())),
+                            'form' => $form->createView(),
+                            'form_info' => $formBook->createView(),
+                            'filter_form' => $filterForm->createView()
+                        )),
+                        'countPages' => $f->getCountPages(),
+                        'hasNext' => $page < $f->getCountPages()
+                    );
+                    $resp= new Response(json_encode($d));
+                    $resp->headers->add(array('Content-Type' => 'application/json'));
+                    return $resp;
+                }
+            }
+
+        } else {
+            throw $this->createNotFoundException();
+        }
+
     }
 
     public function searchAction(Request $request){

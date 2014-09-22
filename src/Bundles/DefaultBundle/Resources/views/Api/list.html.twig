@@ -13,7 +13,7 @@
         });
     </script>
     <div class="col-md-3 well">
-        <form action="{{ path('bundles_default_search') }}" method="post" id="search-form">
+        <form id="search-form" action="{{ path('bundles_default_search') }}" method="post" id="search-form">
 
                 {{ form_widget(form) }}
             <input type="submit" class="btn btn-success pull-right"/>
@@ -21,105 +21,66 @@
     </div>
     <div class="col-md-9">
         <div class="well">
-            <form action="" class="form-inline">
+            <form  id="filter-form" action="" class="form-inline">
                 {{ form_widget(filter_form) }}
             </form>
 
         </div>
-        {% for ticket in data %}
-            <form action="{{ path("bundles_default_api_info") }}" class="book-form">
-
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">{{ ticket.totalPrice|number_format(0,'.',' ') }} руб</h3>
-                    </div>
-                    <div class="panel-body">
-                        {% for int in ticket.itineraries %}
-                            {#{% if(loop.index > 1) %}{% set f = "Обратно" %}{% else %}{% set f = "Туда" %}{% endif %}#}
-                            {% set parent_loop = loop %}
-                            {% for variant in int.variants %}
-                                <div class="well">
-                                    <label>
-                                        <input value="{{ variant.variantID }}" type="radio" {% if loop.first %} checked="checked" {% endif %} name="info[variants][{{ parent_loop.index-1 }}]" />
-                                        Выбрать
-                                    </label>
-                                    <input type="hidden" name="info[request_id]" value="{{ ticket.requestId }}">
-                                    <div>
-                                        <strong>{{ variant.duration|secondToTime}}</strong> <small>продолжительность</small>
-                                    </div>
-                                    {% for segment in variant.segments %}
-                                        <div class="panel panel-info">
-                                            <div class="panel-heading">
-                                                <div class="panel-title"></div>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="col-md-3">
-                                                    <div>
-                                                        <strong>{{ segment.departureDate|date("d M Y г.") }}</strong>
-                                                    </div>
-                                                    <div class="logo-{{ segment.marketingAirline }}">
-                                                        LOGO
-                                                    </div>
-                                                    <small>{{ segment.marketingAirline }} {{ segment.flightNumber }}</small>
-                                                    <div>
-                                                        <small> Колличество мест: {{ segment.availableSeats }}</small>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div>
-                                                        <small>Вылет</small> <strong>{{ segment.departureDate|date("H:i") }}</strong>
-                                                    </div>
-                                                    <strong>{{ segment.departureCityName }}, {{ segment.departureCountryName }}</strong>
-                                                    <div>
-                                                        <small>{{ segment.departureAirportName }}</small>
-                                                    </div>
-
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div>
-                                                        <small>Прилет</small> <strong>{{ segment.arrivalDate|date("H:i") }}</strong>
-                                                    </div>
-                                                    <strong>{{ segment.arrivalCityName }}, {{ segment.arrivalCountryName }}</strong>
-                                                    <div>
-                                                        <small>{{ segment.arrivalAirportName }}</small>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div>
-                                                        <strong>{{ segment.flightTime|secondToTime }}</strong>
-                                                    </div>
-                                                    <smal>Продолжительность палета</smal>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        {% if not loop.last %}
-                                            <div class="text-center">
-                                                {% set next = variant.segments[loop.index0 +1] %}
-                                                Пересадка между рейсами <strong>{{ segment.transplantTime(next)|secondToTime }}</strong>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                            {% endfor %}
-                            <hr />
-                        {% endfor %}
-                        <div class="" style="margin-bottom: 15px">
-                            <div class="col-md-offset-9">
-                                <input style="margin-left: 42%" class="btn btn-primary" type="submit" value="Забронировать">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        {% endfor %}
+        <div id="result-box">
+            {#{% include 'BundlesDefaultBundle:Api:_items.html.twig' with {data: data} %}#}
+        </div>
+        {% if pages > 1 %}
+            <div class="btn btn-default" id="get-next">Показать еще</div>
+        {% endif %}
     </div>
     <script type="text/javascript">
-        $('body').on('submit','.book-form',function(){
-            $.post($(this).attr('action'),$(this).serialize(),function(data){
-                window.location = data.url;
+        $(document).ready(function(){
+            var url = "{{ path('bundles_default_api_flights_items') }}";
+            var p = 1;
+            function getItems(page,res){
+                _GlobalAppObject.loadingStart();
+                var filterForm = $('#filter-form').serializeArray();
+                var searchForm = $('#search-form').serializeArray();
+                var data = searchForm.concat(filterForm);
+                $.post(url+'/'+page,data,function(data){
+                    if(!data.hasNext){
+                        $('#get-next').hide()
+                    } else {
+                        $('#get-next').show()
+
+                    }
+                    res(data);
+
+                    _GlobalAppObject.loadingStop();
+                }).error(function(){
+                    _GlobalAppObject.loadingStop();
+                });
+            }
+            setTimeout(function(){
+                getItems(p,function(data){
+                    $('#result-box').html(data.html);
+                });
+            },100);
+            $('body').on('change','#filter-form',function(){
+                p = 1;
+                getItems(p,function(data){
+                    $('#result-box').html(data.html);
+                });
+
             });
-            return false;
+            $('body').on('click','#get-next',function(){
+                p ++;
+                getItems(p,function(data){
+                    $('#result-box').append(data.html);
+                });
+
+            });
+            $('body').on('submit','.book-form',function(){
+                $.post($(this).attr('action'),$(this).serialize(),function(data){
+                    window.location = data.url;
+                });
+                return false;
+            });
         });
     </script>
 {% endblock %}
