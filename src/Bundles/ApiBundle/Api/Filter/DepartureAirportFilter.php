@@ -25,7 +25,7 @@ class DepartureAirportFilter extends Filter {
 
     public function filterSegment(Segments $segment)
     {
-        if(empty($this->airport)){
+        if(empty($this->airport) || !$segment->getIsFirstSegment()){
             return true;
         }
         return $segment->getDepartureAirport() == $this->airport;

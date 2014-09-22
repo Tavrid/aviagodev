@@ -157,21 +157,25 @@ class ApiController extends Controller
                 if($filterForm->isValid()){
 
                     $f = new SearchResultFilter($output,$this->container->getParameter('bundles_default.count_on_page'));
-                    return $this->render('BundlesDefaultBundle:Api:_items.html.twig',array(
-                        'data' => $f->getData($page,SearchFilters::getFiltersByParams($filterForm->getData())),
-                        'pages' => $f->getCountPages(),
-                        'form' => $form->createView(),
-                        'form_info' => $formBook->createView(),
-                        'filter_form' => $filterForm->createView()
-                    ));
+                    $d = array( 'html'=>$this->renderView('BundlesDefaultBundle:Api:_items.html.twig',array(
+                            'data' => $f->getData($page,SearchFilters::getFiltersByParams($filterForm->getData())),
+                            'form' => $form->createView(),
+                            'form_info' => $formBook->createView(),
+                            'filter_form' => $filterForm->createView()
+                        )),
+                        'countPages' => $f->getCountPages(),
+                        'hasNext' => $page < $f->getCountPages()
+                    );
+                    $resp= new Response(json_encode($d));
+                    $resp->headers->add(array('Content-Type' => 'application/json'));
+                    return $resp;
                 }
             }
 
         } else {
             throw $this->createNotFoundException();
         }
-       ;
-//        SearchFilters::getFiltersByParams($filterForm->getData())
+
     }
 
     public function searchAction(Request $request){

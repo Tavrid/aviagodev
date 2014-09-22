@@ -30,7 +30,7 @@
             {#{% include 'BundlesDefaultBundle:Api:_items.html.twig' with {data: data} %}#}
         </div>
         {% if pages > 1 %}
-            <div class="btn btn-default">Показать еще</div>
+            <div class="btn btn-default" id="get-next">Показать еще</div>
         {% endif %}
     </div>
     <script type="text/javascript">
@@ -42,7 +42,13 @@
                 var filterForm = $('#filter-form').serializeArray();
                 var searchForm = $('#search-form').serializeArray();
                 var data = searchForm.concat(filterForm);
-                $.post(url,data,function(data){
+                $.post(url+'/'+page,data,function(data){
+                    if(!data.hasNext){
+                        $('#get-next').hide()
+                    } else {
+                        $('#get-next').show()
+
+                    }
                     res(data);
 
                     _GlobalAppObject.loadingStop();
@@ -52,13 +58,20 @@
             }
             setTimeout(function(){
                 getItems(p,function(data){
-                    $('#result-box').html(data);
+                    $('#result-box').html(data.html);
                 });
             },100);
             $('body').on('change','#filter-form',function(){
                 p = 1;
                 getItems(p,function(data){
-                    $('#result-box').html(data);
+                    $('#result-box').html(data.html);
+                });
+
+            });
+            $('body').on('click','#get-next',function(){
+                p ++;
+                getItems(p,function(data){
+                    $('#result-box').append(data.html);
                 });
 
             });

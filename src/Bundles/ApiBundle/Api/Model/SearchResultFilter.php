@@ -126,7 +126,7 @@ class SearchResultFilter {
                 $ret[] = $data[$i];
             }
         }
-
+        $this->countPages = ceil(count($data)/$this->countOnPage);
         return $ret;
     }
 

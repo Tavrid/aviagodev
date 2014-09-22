@@ -112,6 +112,8 @@ class SearchResponse extends Response implements \Iterator,\ArrayAccess, \Counta
                 $var = new Variants();
                 $var->setDuration($variants['Duration'])
                     ->setVariantID($variants['VariantID']);
+                $countSegments = count($variants['Segments']);
+                $i = 0;
                 foreach($variants['Segments'] as $segment){
                     $segm = new Segments();
                     $segm->setArrivalAirportName($segment['ArrivalAirportName'])
@@ -133,6 +135,13 @@ class SearchResponse extends Response implements \Iterator,\ArrayAccess, \Counta
                         ->setArrivalAirport($segment['ArrivalAirport'])
                     ;
 
+                    if($i == 0){
+                        $segm->setIsFirstSegment(true);
+                    }
+                    $i++;
+                    if($countSegments == $i){
+                        $segm->setIsLastSegment(true);
+                    }
                     $var->addSegment($segm);
                 }
 

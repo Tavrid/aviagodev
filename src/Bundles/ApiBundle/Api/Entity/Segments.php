@@ -34,6 +34,48 @@ class Segments {
     protected $arrivalTimeZone;
     protected $departureTimeZone;
 
+
+    protected $isFirstSegment;
+    protected $isLastSegment;
+
+    /**
+     * @return mixed
+     */
+    public function getIsFirstSegment()
+    {
+        return $this->isFirstSegment;
+    }
+
+    /**
+     * @param mixed $isFirstSegment
+     * @return $this
+     */
+    public function setIsFirstSegment($isFirstSegment)
+    {
+        $this->isFirstSegment = $isFirstSegment;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsLastSegment()
+    {
+        return $this->isLastSegment;
+    }
+
+    /**
+     * @param mixed $isLastSegment
+     * @return $this
+     */
+    public function setIsLastSegment($isLastSegment)
+    {
+        $this->isLastSegment = $isLastSegment;
+        return $this;
+    }
+
+
+
     /**
      * @return mixed
      */
