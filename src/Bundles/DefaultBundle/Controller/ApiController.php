@@ -119,7 +119,7 @@ class ApiController extends Controller
                 $f = new SearchResultFilter($output,$this->container->getParameter('bundles_default.count_on_page'));
 
                 $resp = $this->render('BundlesDefaultBundle:Api:list.html.twig',array(
-                    'data' => $f->getData(1,SearchFilters::getFiltersByParams($filterForm->getData())),
+                    'data' => $f->getData(1,array()),
                     'pages' => $f->getCountPages(),
                     'form' => $form->createView(),
                     'form_info' => $formBook->createView(),
@@ -135,6 +135,43 @@ class ApiController extends Controller
             $resp = new Response('',Response::HTTP_BAD_REQUEST);
         }
         return $resp;
+    }
+
+    public function getFilteredItemsAction(Request $request,$page){
+        $form = $this->createForm(new SearchForm());
+        $formBook = $this->createForm(new BookInfoForm());
+
+        $form->submit($request);
+        $resp = null;
+        if($form->isValid()){
+            /** @var \Bundles\ApiBundle\Api\Api $api */
+            $api = $this->get('avia.api.manager');
+            $params = $form->getData();
+
+            $query = new SearchByQuery();
+            $query->setParams($params);
+            $output = $api->getSearchRequestor()->execute($query);
+            if(!$output->getIsError()){
+                $filterForm = $this->createForm(new FilterForm($output));
+                $filterForm->submit($request);
+                if($filterForm->isValid()){
+
+                    $f = new SearchResultFilter($output,$this->container->getParameter('bundles_default.count_on_page'));
+                    return $this->render('BundlesDefaultBundle:Api:_items.html.twig',array(
+                        'data' => $f->getData($page,SearchFilters::getFiltersByParams($filterForm->getData())),
+                        'pages' => $f->getCountPages(),
+                        'form' => $form->createView(),
+                        'form_info' => $formBook->createView(),
+                        'filter_form' => $filterForm->createView()
+                    ));
+                }
+            }
+
+        } else {
+            throw $this->createNotFoundException();
+        }
+       ;
+//        SearchFilters::getFiltersByParams($filterForm->getData())
     }
 
     public function searchAction(Request $request){

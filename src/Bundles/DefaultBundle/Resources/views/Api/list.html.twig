@@ -13,7 +13,7 @@
         });
     </script>
     <div class="col-md-3 well">
-        <form action="{{ path('bundles_default_search') }}" method="post" id="search-form">
+        <form id="search-form" action="{{ path('bundles_default_search') }}" method="post" id="search-form">
 
                 {{ form_widget(form) }}
             <input type="submit" class="btn btn-success pull-right"/>
@@ -21,24 +21,53 @@
     </div>
     <div class="col-md-9">
         <div class="well">
-            <form action="" class="form-inline">
+            <form  id="filter-form" action="" class="form-inline">
                 {{ form_widget(filter_form) }}
             </form>
 
         </div>
         <div id="result-box">
-            {% include 'BundlesDefaultBundle:Api:_items.html.twig' with {data: data} %}
+            {#{% include 'BundlesDefaultBundle:Api:_items.html.twig' with {data: data} %}#}
         </div>
         {% if pages > 1 %}
             <div class="btn btn-default">Показать еще</div>
         {% endif %}
     </div>
     <script type="text/javascript">
-        $('body').on('submit','.book-form',function(){
-            $.post($(this).attr('action'),$(this).serialize(),function(data){
-                window.location = data.url;
+        $(document).ready(function(){
+            var url = "{{ path('bundles_default_api_flights_items') }}";
+            var p = 1;
+            function getItems(page,res){
+                _GlobalAppObject.loadingStart();
+                var filterForm = $('#filter-form').serializeArray();
+                var searchForm = $('#search-form').serializeArray();
+                var data = searchForm.concat(filterForm);
+                $.post(url,data,function(data){
+                    res(data);
+
+                    _GlobalAppObject.loadingStop();
+                }).error(function(){
+                    _GlobalAppObject.loadingStop();
+                });
+            }
+            setTimeout(function(){
+                getItems(p,function(data){
+                    $('#result-box').html(data);
+                });
+            },100);
+            $('body').on('change','#filter-form',function(){
+                p = 1;
+                getItems(p,function(data){
+                    $('#result-box').html(data);
+                });
+
             });
-            return false;
+            $('body').on('submit','.book-form',function(){
+                $.post($(this).attr('action'),$(this).serialize(),function(data){
+                    window.location = data.url;
+                });
+                return false;
+            });
         });
     </script>
 {% endblock %}

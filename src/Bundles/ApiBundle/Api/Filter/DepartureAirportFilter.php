@@ -10,8 +10,14 @@ namespace Bundles\ApiBundle\Api\Filter;
 use Bundles\ApiBundle\Api\Entity\Itineraries;
 use Bundles\ApiBundle\Api\Entity\Variants;
 use Bundles\ApiBundle\Api\Entity\Segments;
-class AirportFilter extends Filter {
+class DepartureAirportFilter extends Filter {
 
+
+    protected $airport;
+
+    public function __construct($airport){
+        $this->airport = $airport;
+    }
     public function filterVariant(Variants $variants)
     {
         return true;
@@ -19,8 +25,10 @@ class AirportFilter extends Filter {
 
     public function filterSegment(Segments $segment)
     {
-
-        return $segment->getDepartureAirport() == 'VKO';
+        if(empty($this->airport)){
+            return true;
+        }
+        return $segment->getDepartureAirport() == $this->airport;
     }
 
     public function filterItineraries(Itineraries $itineraries)

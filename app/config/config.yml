@@ -100,7 +100,7 @@ fos_user:
             template:   FOSUserBundle:Registration:email.txt.twig
 
 bundles_default:
-    count_on_page: 10
+    count_on_page: 1
 
 knp_menu:
     twig:  # use "twig: false" to disable the Twig extension and the TwigRenderer
