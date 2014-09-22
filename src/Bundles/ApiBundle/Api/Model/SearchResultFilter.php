@@ -60,61 +60,57 @@ class SearchResultFilter {
         $data = [];
         $ret = [];
         foreach($this->response as $ticket){
-            $success = true;
             /** @var \Bundles\ApiBundle\Api\Entity\Itineraries[] $itineraries */
             $itineraries = $ticket->getItineraries();
             foreach($itineraries as $k => $iter){
                 $successIter = true;
                 foreach($filters as $filter){
                     if(!$filter->filterItineraries($iter)){
-                        unset($itineraries[$k]);
                         $successIter = false;
                         break;
                     }
                 }
                 if(!$successIter){
+                    unset($itineraries[$k]);
                     continue;
                 }
                 $successVar = true;
                 $variants = $iter->getVariants();
-                foreach($variants  as $k => $variant){
+                foreach($variants  as $keyV => $variant){
                     foreach($filters as $filter){
                         if(!$filter->filterVariant($variant)){
                             $successVar = false;
-                            unset($variants[$k]);
                             break;
                         }
                     }
                     if(!$successVar){
+                        unset($variants[$keyV]);
                         continue;
                     }
 
                     $segments = $variant->getSegments();
-                    foreach($segments as $k => $segment){
-                        $successSeg = true;
+                    foreach($segments as $keyS => $segment){
                         foreach($filters as $filter){
                             if(!$filter->filterSegment($segment)){
-                                $successSeg = false;
-                                unset($segments[$k]);
+
+                                unset($segments[$keyS]);
                                 break;
                             }
                         }
-
-
                     }
+
                     if(empty($segments)){
-                        unset($variants[$k]);
+                        unset($variants[$keyV]);
                     }
 
 
                 }
+//                var_Dump($variants); exit;
                 if(empty($variants)){
                     unset($itineraries[$k]);
                 }
 
             }
-
-
             if(!empty($itineraries)){
                 $data[] = $ticket;
             }

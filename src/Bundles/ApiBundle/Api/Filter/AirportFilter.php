@@ -20,7 +20,7 @@ class AirportFilter extends Filter {
     public function filterSegment(Segments $segment)
     {
 
-        return $segment->getArrivalAirport() == 'VKO';
+        return $segment->getDepartureAirport() == 'VKO';
     }
 
     public function filterItineraries(Itineraries $itineraries)
