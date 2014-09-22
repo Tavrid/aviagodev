@@ -89,19 +89,21 @@ class SearchResultFilter {
                     }
 
                     $segments = $variant->getSegments();
+                    $successSeg = true;
                     foreach($segments as $keyS => $segment){
                         foreach($filters as $filter){
                             if(!$filter->filterSegment($segment)){
 
-                                unset($segments[$keyS]);
+                                $successSeg = false;
                                 break;
                             }
                         }
+                        if(empty($successSeg)){
+                            unset($variants[$keyV]);
+                            break;
+                        }
                     }
 
-                    if(empty($segments)){
-                        unset($variants[$keyV]);
-                    }
 
 
                 }
