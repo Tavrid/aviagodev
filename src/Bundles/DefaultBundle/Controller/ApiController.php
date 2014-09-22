@@ -19,7 +19,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 use Bundles\DefaultBundle\Response\AjaxSearchResponse;
 
-use Acme\CoreBundle\Model\ArraySlice;
+use Bundles\ApiBundle\Api\Model\SearchResultFilter;
+use Bundles\ApiBundle\Api\Model\SearchFilters;
 
 
 class ApiController extends Controller
@@ -115,11 +116,11 @@ class ApiController extends Controller
 
             if(!$output->getIsError()){
                 $filterForm = $this->createForm(new FilterForm($output));
-                $pa = ArraySlice::slice($output,$this->container->getParameter('bundles_default.count_on_page'),false);
+                $f = new SearchResultFilter($output,$this->container->getParameter('bundles_default.count_on_page'));
 
                 $resp = $this->render('BundlesDefaultBundle:Api:list.html.twig',array(
-                    'data' => isset($pa[0]) ? $pa[0]: array(),
-                    'pages' => $pa,
+                    'data' => $f->getData(1,SearchFilters::getFiltersByParams($filterForm->getData())),
+                    'pages' => $f->getCountPages(),
                     'form' => $form->createView(),
                     'form_info' => $formBook->createView(),
                     'filter_form' => $filterForm->createView()

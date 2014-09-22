@@ -29,7 +29,7 @@
         <div id="result-box">
             {% include 'BundlesDefaultBundle:Api:_items.html.twig' with {data: data} %}
         </div>
-        {% if pages|length > 1 %}
+        {% if pages > 1 %}
             <div class="btn btn-default">Показать еще</div>
         {% endif %}
     </div>

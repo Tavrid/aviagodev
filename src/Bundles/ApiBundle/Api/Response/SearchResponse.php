@@ -14,7 +14,7 @@ use Bundles\ApiBundle\Api\Entity\Segments;
 use Bundles\ApiBundle\Api\Entity\Variants;
 
 
-class SearchResponse extends Response implements \Iterator,\ArrayAccess{
+class SearchResponse extends Response implements \Iterator,\ArrayAccess, \Countable{
 
     protected $position = 0;
 
@@ -144,6 +144,25 @@ class SearchResponse extends Response implements \Iterator,\ArrayAccess{
 
 
         return $ticket;
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.1.0)<br/>
+     * Count elements of an object
+     * @link http://php.net/manual/en/countable.count.php
+     * @return int The custom count as an integer.
+     * </p>
+     * <p>
+     * The return value is cast to an integer.
+     */
+    public function count()
+    {
+        $data = $this->getResponseData();
+        if(isset($data['result']['Data'])){
+            return count($data['result']['Data']);
+        } else {
+            return 0;
+        }
     }
 
 
