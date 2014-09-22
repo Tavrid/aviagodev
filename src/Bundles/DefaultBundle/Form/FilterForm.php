@@ -48,6 +48,7 @@ class FilterForm extends AbstractType {
                     }
 
                 }
+                break; //Учитывать фильтры только в одну сторону
             }
         }
     }

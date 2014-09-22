@@ -108,14 +108,20 @@ class SearchResultFilter {
 
                 }
 //                var_Dump($variants); exit;
-                if(empty($variants)){
-                    unset($itineraries[$k]);
+//                if(empty($variants)){
+//                    unset($itineraries[$k]);
+//                }
+
+                if(!empty($variants)){
+                    $data[] = $ticket;
+//                    unset($itineraries[$k]);
                 }
+                break; //Учитывать фильтры только в одну сторону
 
             }
-            if(!empty($itineraries)){
-                $data[] = $ticket;
-            }
+//            if(!empty($itineraries)){
+//                $data[] = $ticket;
+//            }
 
         }
 
