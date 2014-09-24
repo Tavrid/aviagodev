@@ -126,3 +126,6 @@ parameters:
 #        sslversion: 3  # set to 3 to avoid any bugs that relate to automatic version selection.
 #        fresh_connect: false  # set to true to force full reconnect every call.
 
+fos_js_routing:
+    routes_to_expose: [ bundles_default_api_list ]
+

@@ -25,6 +25,8 @@ AcmeAdminBundle_Extra:
     resource: .
     type: extra
     prefix:   /admin
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 #
 #_imagine:
 #    resource: .

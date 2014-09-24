@@ -1,25 +1,38 @@
 $(function() {
-
+    $(document).ready(function(){
+    });
 
     $('#search-form').on('submit',function(){
-        _GlobalAppObject.loadingStart();
-        $.post($(this).attr('action'),$(this).serialize(),function(data){
-            window.location = data.url;
+        var routeParams = {};
+        $.each($(this).serializeArray(),function(k,v){
+            var name  = v.name.replace(/.*\[(.+)\].*/g,"$1");
+            if(name != "city_from" && name != "city_to" && v.value){
+                routeParams[name] = v.value;
+            }
+        });
+
+        var r = Routing.generate('bundles_default_api_list',routeParams);
+        window.location = r;
+        //_GlobalAppObject.loadingStart();
+        //$.post($(this).attr('action'),$(this).serialize(),function(data){
+        //    window.location = data.url;
 //            _GlobalAppObject.loadingStop();
 //            $('#result').html(data);
-        }).error(function(r){
-            _GlobalAppObject.loadingStop();
-        });
+//        }).error(function(r){
+//            _GlobalAppObject.loadingStop();
+//        });
         return false;
     });
     if(!parseInt($('#SearchForm_return_way input[type=radio]:checked').val())){
         $('#SearchForm_date_to').parents('.form-group ').hide();
+        $('#SearchForm_date_to').val('');
     }
     $('#SearchForm_return_way').on('click','input[type=radio]',function(){
         var val = $('#SearchForm_return_way input[type=radio]:checked').val();
         var sel = $('#SearchForm_date_to').parents('.form-group ');
         if(!parseInt(val)){
             sel.hide();
+            $('#SearchForm_date_to').val('');
         } else {
             sel.show();
         }

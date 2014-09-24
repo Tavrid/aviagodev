@@ -11,6 +11,8 @@
     {% endblock %}
     {#<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />#}
     {% block js %}
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
         {% javascripts '@jquery' '@jquery_ui_js' '@front_bootstrap_js' 'bundles/bundlesdefault/lib/popup.js'  'bundles/bundlesdefault/js/app.js' combine=true%}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}

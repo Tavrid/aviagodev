@@ -37,7 +37,8 @@ class AppKernel extends Kernel {
             new Acme\SocialBundle\AcmeSocialBundle(),
             new Lsw\ApiCallerBundle\LswApiCallerBundle(),
             new Bundles\ApiBundle\BundlesApiBundle(),
-            new Lsw\MemcacheBundle\LswMemcacheBundle()
+            new Lsw\MemcacheBundle\LswMemcacheBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
