@@ -59,70 +59,76 @@ class SearchResultFilter {
 
         $data = [];
         $ret = [];
-        foreach($this->response as $ticket){
-            /** @var \Bundles\ApiBundle\Api\Entity\Itineraries[] $itineraries */
-            $itineraries = $ticket->getItineraries();
-            foreach($itineraries as $k => $iter){
-                $successIter = true;
-                foreach($filters as $filter){
-                    if(!$filter->filterItineraries($iter)){
-                        $successIter = false;
-                        break;
-                    }
-                }
-                if(!$successIter){
-                    unset($itineraries[$k]);
-                    continue;
-                }
-                $successVar = true;
-                $variants = $iter->getVariants();
-                foreach($variants  as $keyV => $variant){
+        if(!empty($filters)){
+            foreach($this->response as $ticket){
+                /** @var \Bundles\ApiBundle\Api\Entity\Itineraries[] $itineraries */
+                $itineraries = $ticket->getItineraries();
+                foreach($itineraries as $k => $iter){
+                    $successIter = true;
                     foreach($filters as $filter){
-                        if(!$filter->filterVariant($variant)){
-                            $successVar = false;
+                        if(!$filter->filterItineraries($iter)){
+                            $successIter = false;
                             break;
                         }
                     }
-                    if(!$successVar){
-                        unset($variants[$keyV]);
+                    if(!$successIter){
+                        unset($itineraries[$k]);
                         continue;
                     }
-
-                    $segments = $variant->getSegments();
-                    $successSeg = true;
-                    foreach($segments as $keyS => $segment){
+                    $successVar = true;
+                    $variants = $iter->getVariants();
+                    foreach($variants  as $keyV => $variant){
                         foreach($filters as $filter){
-                            if(!$filter->filterSegment($segment)){
-
-                                $successSeg = false;
+                            if(!$filter->filterVariant($variant)){
+                                $successVar = false;
                                 break;
                             }
                         }
-                        if(empty($successSeg)){
+                        if(!$successVar){
                             unset($variants[$keyV]);
-                            break;
+                            continue;
                         }
+
+                        $segments = $variant->getSegments();
+                        $successSeg = true;
+                        foreach($segments as $keyS => $segment){
+                            foreach($filters as $filter){
+                                if(!$filter->filterSegment($segment)){
+
+                                    $successSeg = false;
+                                    break;
+                                }
+                            }
+                            if(empty($successSeg)){
+                                unset($variants[$keyV]);
+                                break;
+                            }
+                        }
+
+
+
                     }
+    //                var_Dump($variants); exit;
+    //                if(empty($variants)){
+    //                    unset($itineraries[$k]);
+    //                }
 
-
+                    if(!empty($variants)){
+                        $data[] = $ticket;
+    //                    unset($itineraries[$k]);
+                    }
+                    break; //Учитывать фильтры только в одну сторону
 
                 }
-//                var_Dump($variants); exit;
-//                if(empty($variants)){
-//                    unset($itineraries[$k]);
-//                }
-
-                if(!empty($variants)){
-                    $data[] = $ticket;
-//                    unset($itineraries[$k]);
-                }
-                break; //Учитывать фильтры только в одну сторону
+    //            if(!empty($itineraries)){
+    //                $data[] = $ticket;
+    //            }
 
             }
-//            if(!empty($itineraries)){
-//                $data[] = $ticket;
-//            }
-
+        } else {
+            foreach($this->response as $ticket){
+                $data[] = $ticket;
+            }
         }
 
 

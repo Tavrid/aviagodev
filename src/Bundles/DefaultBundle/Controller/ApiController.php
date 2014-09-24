@@ -107,30 +107,12 @@ class ApiController extends Controller
         $form->submit($data);
 
         if($form->isValid()){
-            /** @var \Bundles\ApiBundle\Api\Api $api */
-            $api = $this->get('avia.api.manager');
-            $params = $form->getData();
-            $query = new SearchByQuery();
-            $query->setParams($params);
-            $output = $api->getSearchRequestor()->execute($query);
 
-            if(!$output->getIsError()){
-                $filterForm = $this->createForm(new FilterForm($output));
-                $f = new SearchResultFilter($output,$this->container->getParameter('bundles_default.count_on_page'));
+            $resp = $this->render('BundlesDefaultBundle:Api:list.html.twig',array(
+                'form' => $form->createView(),
+                'form_info' => $formBook->createView(),
+            ));
 
-                $resp = $this->render('BundlesDefaultBundle:Api:list.html.twig',array(
-                    'data' => $f->getData(1,array()),
-                    'pages' => $f->getCountPages(),
-                    'form' => $form->createView(),
-                    'form_info' => $formBook->createView(),
-                    'filter_form' => $filterForm->createView()
-                ));
-
-//                $resp= new Response($data);
-//                $resp->headers->add(array('Content-Type' => 'application/json'));
-            } else {
-                $resp = new Response('',Response::HTTP_BAD_REQUEST);
-            }
         } else {
             $resp = new Response('',Response::HTTP_BAD_REQUEST);
         }
@@ -153,23 +135,30 @@ class ApiController extends Controller
             $output = $api->getSearchRequestor()->execute($query);
             if(!$output->getIsError()){
                 $filterForm = $this->createForm(new FilterForm($output));
-                $filterForm->submit($request);
-                if($filterForm->isValid()){
-
-                    $f = new SearchResultFilter($output,$this->container->getParameter('bundles_default.count_on_page'));
-                    $d = array( 'html'=>$this->renderView('BundlesDefaultBundle:Api:_items.html.twig',array(
-                            'data' => $f->getData($page,SearchFilters::getFiltersByParams($filterForm->getData())),
-                            'form' => $form->createView(),
-                            'form_info' => $formBook->createView(),
-                            'filter_form' => $filterForm->createView()
-                        )),
-                        'countPages' => $f->getCountPages(),
-                        'hasNext' => $page < $f->getCountPages()
-                    );
-                    $resp= new Response(json_encode($d));
-                    $resp->headers->add(array('Content-Type' => 'application/json'));
-                    return $resp;
+                if($request->get($filterForm->getName())){
+                    $filterForm->submit($request);
+                    $filterParams = $filterForm->getData();
+                } else {
+                    $filterParams = array();
                 }
+                $f = new SearchResultFilter($output,$this->container->getParameter('bundles_default.count_on_page'));
+                $data = !empty($filterParams) ? $f->getData($page,SearchFilters::getFiltersByParams($filterForm->getData())): $f->getData($page,array());
+                $d = array( 'html'=>$this->renderView('BundlesDefaultBundle:Api:_items.html.twig',array(
+                        'data' => $data,
+                        'form' => $form->createView(),
+                        'form_info' => $formBook->createView()
+                    )),
+                    'filter_form' => $this->renderView('BundlesDefaultBundle:Api:_filter_form.html.twig',
+                        ['filter_form'=>$filterForm->createView()]
+                    ),
+                    'countPages' => $f->getCountPages(),
+                    'hasNext' => $page < $f->getCountPages()
+                );
+                $resp= new Response(json_encode($d));
+                $resp->headers->add(array('Content-Type' => 'application/json'));
+                return $resp;
+            } else {
+                throw $this->createNotFoundException();
             }
 
         } else {
