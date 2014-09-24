@@ -1,7 +1,7 @@
 {% extends "BundlesDefaultBundle:Layouts:main.html.twig" %}
 {% block js %}
     {{ parent() }}
-    {% javascripts 'bundles/bundlesdefault/js/default/index.js' combine=true%}
+    {% javascripts 'bundles/bundlesdefault/js/default/index.js' 'bundles/bundlesdefault/js/api/list.js' combine=true%}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
