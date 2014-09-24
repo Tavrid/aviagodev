@@ -99,7 +99,7 @@ class SearchResultFilter {
                                     break;
                                 }
                             }
-                            if(empty($successSeg)){
+                            if(!$successSeg){
                                 unset($variants[$keyV]);
                                 break;
                             }
@@ -126,9 +126,10 @@ class SearchResultFilter {
 
             }
         } else {
-            foreach($this->response as $ticket){
-                $data[] = $ticket;
-            }
+            $data = $this->response;
+//            foreach($this->response as $ticket){
+//                $data[] = $ticket;
+//            }
         }
 
 
