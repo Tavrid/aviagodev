@@ -62,13 +62,12 @@ class SearchForm extends AbstractType
             ->add('date_to', 'text', [
                 'label' => 'frontend.search_form.date_to',
                 'attr' => ['placeholder' => 'Укажите дату'],
-                'required' => false,
-                'data' => 0
+                'required' => false
             ])
             ->add('return_way','choice',[
                 'label' => 'frontend.search_form.return_way.label',
                 'choices' => ['frontend.search_form.return_way.one_way','frontend.search_form.return_way.multi_way'],
-                'data' => 0,
+                'data' => 1,
                 'multiple' => false,
                 'expanded' => true,
                 'required' => true,

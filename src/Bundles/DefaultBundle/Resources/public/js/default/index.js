@@ -1,6 +1,6 @@
 $(function() {
 
-
+    $( "#search-form" ).sisyphus();
     $('#search-form').on('submit',function(){
         var routeParams = {};
         $.each($(this).serializeArray(),function(k,v){
@@ -10,21 +10,12 @@ $(function() {
             }
         });
 
-        var r = Routing.generate('bundles_default_api_list',routeParams);
-        window.location = r;
-        //_GlobalAppObject.loadingStart();
-        //$.post($(this).attr('action'),$(this).serialize(),function(data){
-        //    window.location = data.url;
-//            _GlobalAppObject.loadingStop();
-//            $('#result').html(data);
-//        }).error(function(r){
-//            _GlobalAppObject.loadingStop();
-//        });
+        window.location = Routing.generate('bundles_default_api_list',routeParams);
         return false;
     });
     if(!parseInt($('#SearchForm_return_way input[type=radio]:checked').val())){
         $('#SearchForm_date_to').parents('.form-group ').hide();
-        $('#SearchForm_date_to').val('');
+        //$('#SearchForm_date_to').val('');
     }
     $('#SearchForm_return_way').on('click','input[type=radio]',function(){
         var val = $('#SearchForm_return_way input[type=radio]:checked').val();
@@ -36,23 +27,36 @@ $(function() {
             sel.show();
         }
     });
-    $( "#SearchForm_date_from" ).datepicker({
-        defaultDate: "+1w",
-        numberOfMonths: 2,
-        dateFormat: 'dd-mm-yy',
-        onClose: function( selectedDate ) {
-            $( "#SearchForm_date_to" ).datepicker( "option", "minDate", selectedDate );
-//            $( "#SearchForm_date_to" ).datepicker( "show");
+
+    $( "#SearchForm_date_from" ).datetimepicker({
+        lang: "ru",
+        timepicker: false,
+        format: 'Y-m-d',
+        closeOnDateSelect: true,
+        minDate: new Date(),
+        onShow:function( ct ){
+            this.setOptions({
+                maxDate: $('#SearchForm_date_to').val()? $('#SearchForm_date_to').val():false
+            })
+        },
+        onClose: function(){
+            if($('#SearchForm_date_from').val() && !$("#SearchForm_date_to").val()){
+                $("#SearchForm_date_to").focus();
+            }
         }
     });
-    $( "#SearchForm_date_to" ).datepicker({
-        defaultDate: "+1w",
-        numberOfMonths: 2,
-        dateFormat: 'dd-mm-yy',
-        onClose: function( selectedDate ) {
-            $( "#SearchForm_date_from" ).datepicker( "option", "maxDate", selectedDate );
+    $( "#SearchForm_date_to" ).datetimepicker({
+        lang: "ru",
+        timepicker: false,
+        format: 'Y-m-d',
+        closeOnDateSelect: true,
+        onShow:function( ct ){
+            this.setOptions({
+                minDate: $('#SearchForm_date_from').val()? $('#SearchForm_date_from').val():false
+            })
         }
     });
+
     function autocomplete(input,hiddenInput){
         input.autocomplete({
             source: function( request, response ) {

@@ -426,3 +426,9 @@
         {% endif %}
     {% endspaceless %}
 {% endblock sub_multi_field_widget%}
+
+{% block jquery_range_widget %}
+    {% spaceless %}
+        {% include 'AcmeCoreBundle:Form:jquery_range.html.twig' %}
+    {% endspaceless %}
+{% endblock jquery_range_widget%}

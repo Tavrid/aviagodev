@@ -10,7 +10,7 @@ bundles_default_search:
 
 bundles_default_api_list:
     pattern:  /flights/{city_from_code}/{city_to_code}/{date_from}/{date_to}/{adults}/{return_way}/{children}/{infant}/{class}/{currency}/{avia_company}/{direct_flights}{best_price}
-    defaults: { _controller: BundlesDefaultBundle:Api:list,adults: 1,class: Y,date_to: 0 ,children: 0,infant: 0,return_way : 0,direct_flights: 0, best_price: 0,avia_company: all, currency: usd}
+    defaults: { _controller: BundlesDefaultBundle:Api:list,adults: 1,class: Y,date_to: 0 ,children: 0,infant: 0,return_way : 1,direct_flights: 0, best_price: 0,avia_company: all, currency: usd}
     requirements:
           date_to: "[\d\-]*"
           date_from: "[\d\-]*"

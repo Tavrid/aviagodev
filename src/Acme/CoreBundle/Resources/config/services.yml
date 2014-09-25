@@ -21,6 +21,11 @@ services:
             - @validator.mapping.class_metadata_factory
         tags:
             - { name: form.type, alias: multi_field }
+    jquery.range.form.type:
+            class: Acme\CoreBundle\Form\Extension\Range
+            tags:
+                - { name: form.type, alias: jquery_range }
+
     sub_multi_field.form.type:
             class: Acme\CoreBundle\Form\Extension\SubMultifield
             arguments:

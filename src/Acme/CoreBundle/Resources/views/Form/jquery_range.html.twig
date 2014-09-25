@@ -1,0 +1,29 @@
+{{ form_row(form.min) }}
+{{ form_row(form.max) }}
+<div id="{{ form.vars.id }}"></div>
+<script>
+    $(function() {
+        var min = {{ form.vars.min }};
+        var max = {{ form.vars.max }};
+        var min_selector = "#{{ form.min.vars.id }}";
+        var max_selector = "#{{ form.max.vars.id }}";
+        var slider_selector = "#{{ form.vars.id }}";
+        $(min_selector).datetimepicker({
+            datepicker:false,
+            formatDate:'H:i'
+        });
+//        $(slider_selector).slider({
+//            range: true,
+//            min: min,
+//            max: max,
+//            values: [ $(min_selector).val(), $(max_selector).val() ],
+//            slide: function( event, ui ) {
+//                console.log(ui.values);
+//                $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+//            }
+//        });
+        $(slider_selector).datetimepicker();
+//        $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+//        " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+    });
+</script>

@@ -3,7 +3,10 @@
 <html>
 <head>
     {% block stylesheets %}
-    {% stylesheets '@front_bootstrap_css' filter='cssrewrite' combine=true %}
+    {% stylesheets
+        '@front_bootstrap_css'
+        'bundles/acmecore/lib/datetimepicker-master/jquery.datetimepicker.css'
+    filter='cssrewrite' combine=true %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
     {% endstylesheets %}
     <link href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
@@ -13,7 +16,13 @@
     {% block js %}
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-        {% javascripts '@jquery' '@jquery_ui_js' '@front_bootstrap_js' 'bundles/bundlesdefault/lib/popup.js'  'bundles/bundlesdefault/js/app.js' combine=true%}
+        {% javascripts '@jquery' '@jquery_ui_js'
+        '@front_bootstrap_js'
+        'bundles/bundlesdefault/lib/popup.js'
+        'bundles/bundlesdefault/js/app.js'
+        'bundles/acmecore/lib/sisyphus/sisyphus.min.js'
+        'bundles/acmecore/lib/datetimepicker-master/jquery.datetimepicker.js'
+        combine=true%}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
     {% endblock %}

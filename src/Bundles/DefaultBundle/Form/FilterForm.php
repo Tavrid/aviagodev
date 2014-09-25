@@ -59,8 +59,8 @@ class FilterForm extends AbstractType {
         $builder
             ->add('departure_airport','choice',['label' => 'Аэропорт вылета','choices' => $this->departureAirportCh])
             ->add('arrival_airport','choice',['label' => 'Аэропорт прилета','choices' => $this->arrivalAirportCh])
-            ->add('departure_time','choice',['label' => 'время вылета'])
-            ->add('arrival_time','choice',['label' => 'время прилета'])
+//            ->add('departure_time','jquery_range',['min' => 1,'max' => 10])
+//            ->add('arrival_time','jquery_range',['min' => 1,'max' => 10])
             ->add('airline','choice',['label' => 'Авиакомпания','choices' => $this->airlineCh]);
 
     }
