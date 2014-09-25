@@ -1,6 +1,6 @@
 $(function() {
 
-    $( "#search-form" ).sisyphus();
+    $( "#search-form" ).sisyphus({timeout: 5});
     $('#search-form').on('submit',function(){
         var routeParams = {};
         $.each($(this).serializeArray(),function(k,v){
@@ -34,15 +34,14 @@ $(function() {
         format: 'Y-m-d',
         closeOnDateSelect: true,
         minDate: new Date(),
-        onShow:function( ct ){
-            this.setOptions({
-                maxDate: $('#SearchForm_date_to').val()? $('#SearchForm_date_to').val():false
-            })
-        },
-        onClose: function(){
-            if($('#SearchForm_date_from').val() && !$("#SearchForm_date_to").val()){
-                $("#SearchForm_date_to").focus();
-            }
+        onSelectDate: function(){
+            setTimeout(function () {
+
+                if($('#SearchForm_date_from').val().length){
+                    $("#SearchForm_date_to").val('');
+                    $("#SearchForm_date_to").datetimepicker('show');
+                }
+            },100);
         }
     });
     $( "#SearchForm_date_to" ).datetimepicker({
@@ -51,9 +50,11 @@ $(function() {
         format: 'Y-m-d',
         closeOnDateSelect: true,
         onShow:function( ct ){
+            var from_date = $('#SearchForm_date_from').val();
             this.setOptions({
-                minDate: $('#SearchForm_date_from').val()? $('#SearchForm_date_from').val():false
-            })
+                minDate: from_date,
+                startDate: from_date
+            });
         }
     });
 
