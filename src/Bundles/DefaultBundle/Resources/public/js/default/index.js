@@ -27,36 +27,51 @@ $(function() {
             sel.show();
         }
     });
-
     $( "#SearchForm_date_from" ).datetimepicker({
-        lang: "ru",
-        timepicker: false,
-        format: 'Y-m-d',
-        closeOnDateSelect: true,
-        minDate: new Date(),
-        onSelectDate: function(){
-            setTimeout(function () {
+        language: 'ru',
+        'format' :'YY-MM-D'
+    });
+    $('#SearchForm_date_to').datetimepicker({
+        language: 'ru',
+        'format' :'YY-MM-D'
+    });
 
-                if($('#SearchForm_date_from').val().length){
-                    $("#SearchForm_date_to").val('');
-                    $("#SearchForm_date_to").datetimepicker('show');
-                }
-            },100);
-        }
+    $("#SearchForm_date_from").on("dp.change",function (e) {
+        //$(this).date('hide');
+        $('#SearchForm_date_to').data("DateTimePicker").setMinDate(e.date);
     });
-    $( "#SearchForm_date_to" ).datetimepicker({
-        lang: "ru",
-        timepicker: false,
-        format: 'Y-m-d',
-        closeOnDateSelect: true,
-        onShow:function( ct ){
-            var from_date = $('#SearchForm_date_from').val();
-            this.setOptions({
-                minDate: from_date,
-                startDate: from_date
-            });
-        }
+    $("#SearchForm_date_to").on("dp.change",function (e) {
+        $('#SearchForm_date_from').data("DateTimePicker").setMaxDate(e.date);
     });
+    //$( "#SearchForm_date_from" ).datetimepicker({
+    //    lang: "ru",
+    //    timepicker: false,
+    //    format: 'Y-m-d',
+    //    closeOnDateSelect: true,
+    //    minDate: new Date(),
+    //    onSelectDate: function(){
+    //        setTimeout(function () {
+    //
+    //            if($('#SearchForm_date_from').val().length){
+    //                $("#SearchForm_date_to").val('');
+    //                $("#SearchForm_date_to").datetimepicker('show');
+    //            }
+    //        },100);
+    //    }
+    //});
+    //$( "#SearchForm_date_to" ).datetimepicker({
+    //    lang: "ru",
+    //    timepicker: false,
+    //    format: 'Y-m-d',
+    //    closeOnDateSelect: true,
+    //    onShow:function( ct ){
+    //        var from_date = $('#SearchForm_date_from').val();
+    //        this.setOptions({
+    //            minDate: from_date,
+    //            startDate: from_date
+    //        });
+    //    }
+    //});
 
     function autocomplete(input,hiddenInput){
         input.autocomplete({

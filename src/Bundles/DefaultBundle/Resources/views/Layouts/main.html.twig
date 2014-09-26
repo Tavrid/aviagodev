@@ -5,7 +5,7 @@
     {% block stylesheets %}
     {% stylesheets
         '@front_bootstrap_css'
-        'bundles/acmecore/lib/datetimepicker-master/jquery.datetimepicker.css'
+        'bundles/bundlesdefault/lib/bootstrap-datetimepicker-master/build/css/bootstrap-datetimepicker.min.css'
     filter='cssrewrite' combine=true %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
     {% endstylesheets %}
@@ -21,7 +21,8 @@
         'bundles/bundlesdefault/lib/popup.js'
         'bundles/bundlesdefault/js/app.js'
         'bundles/acmecore/lib/sisyphus/sisyphus.min.js'
-        'bundles/acmecore/lib/datetimepicker-master/jquery.datetimepicker.js'
+        'bundles/bundlesdefault/lib/moment.js'
+        'bundles/bundlesdefault/lib/bootstrap-datetimepicker-master/build/js/bootstrap-datetimepicker.min.js'
         combine=true%}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
