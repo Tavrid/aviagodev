@@ -25,12 +25,7 @@ class User extends BaseUser {
      */
     protected $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="`fb_id`", type="string", length=300, nullable=true)
-     */
-    protected $fbId;
+
 
     public function __construct() {
         parent::__construct();
@@ -49,26 +44,4 @@ class User extends BaseUser {
         return $this->id;
     }
 
-    /**
-     * Set fbId
-     *
-     * @param string $fbId
-     * @return User
-     */
-    public function setFbId($fbId)
-    {
-        $this->fbId = $fbId;
-
-        return $this;
-    }
-
-    /**
-     * Get fbId
-     *
-     * @return string
-     */
-    public function getFbId()
-    {
-        return $this->fbId;
-    }
 }

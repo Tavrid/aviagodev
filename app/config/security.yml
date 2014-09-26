@@ -1,4 +1,3 @@
-# app/config/security.yml
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
@@ -9,39 +8,19 @@ security:
 
     providers:
         fos_userbundle:
-            id: user.user_provider
+            id: fos_user.user_provider.username
+
     firewalls:
-        facebook_secured:
-            pattern: ^/facebook
-            facebook:  true
-            form_login:
-                login_path:  user.security.facebook.login
-                provider: fos_userbundle
-                csrf_provider: form.csrf_provider
-                check_path: user.security.facebook.check
-            logout:
-                path:   /logout
-                target: /
-            context: primary_auth  # new
-            anonymous: true
         main:
             pattern: ^/
             form_login:
-                login_path:  fos_user_security_login
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
-                check_path: fos_user_security_check
-            logout:
-                path:   /logout
-                target: /
+            logout:       true
             anonymous:    true
-            context: primary_auth
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/facebook/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/fb/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/user/register$, role: ROLE_ADMIN }
-        - { path: ^/admin/user/resetting$, role: ROLE_ADMIN }
-        - { path: ^/admin, role: ROLE_ADMIN }
-        - { path: ^/admin/user, role: ROLE_SUPER_ADMIN }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, role: ROLE_ADMIN }

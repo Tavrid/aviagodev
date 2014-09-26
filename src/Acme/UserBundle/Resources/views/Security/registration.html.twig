@@ -1,9 +1,0 @@
-{% extends "AcmeAdminBundle::Layouts/main.html.twig" %}
-
-{% block body %}
-<h1>Добавление пользователя</h1>
-<form id="mainForm" action="" method="post" {{ form_enctype(form) }}>
-        <p>{{ form_widget(form) }}</p>
-        <p><button form="mainForm" type="submit" class="btn btn-primary">Добавить</button></p>
-    </form>
-{%endblock%}

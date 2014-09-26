@@ -1,0 +1,8 @@
+.error{
+    background: none repeat scroll 0 0 #fff;
+    border-radius: 4px;
+    color: red;
+    font-family: "Georgia","Times New Roman",Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    text-align: center;
+}

@@ -36,7 +36,7 @@ assetic:
     debug:          %kernel.debug%
     use_controller: false
 #    write_to:       %kernel.root_dir%/../web/assets/
-    bundles:        ['AcmeAdminBundle','AcmeMediaBundle','AcmeUserBundle', 'AcmeCoreBundle', 'BundlesDefaultBundle','StbBootstrapBundle']
+    bundles:        ['AcmeAdminBundle','AcmeMediaBundle','AcmeUserBundle', 'AcmeCoreBundle', 'BundlesDefaultBundle','StbBootstrapBundle','FOSUserBundle']
     #java: /usr/bin/java
     filters:
 
@@ -85,19 +85,8 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Acme\UserBundle\Entity\User
-    template:
-        engine: twig
-    from_email:
-        address:        webmaster@example.com
-        sender_name:    Admin
-    service:
-        user_manager:           user.user_manager
-    registration:
-        form:
-            type: Registration
-        confirmation:
-            enabled:    false # disable default confirmation
-            template:   FOSUserBundle:Registration:email.txt.twig
+
+
 
 bundles_default:
     count_on_page: 5

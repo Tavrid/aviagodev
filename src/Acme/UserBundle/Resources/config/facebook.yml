@@ -1,7 +1,0 @@
-user.facebook.register:
-    pattern:  /register
-    defaults: { _controller: AcmeUserBundle:Facebook:registration }
-
-user.facebook.facebook_authenticate:
-    pattern:  /authenticate
-    defaults: { _controller: AcmeUserBundle:Facebook:facebookAuthenticate }

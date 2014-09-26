@@ -16,8 +16,6 @@ class BundlesDefaultBundle extends Bundle
     {
         parent::build($container);
 
-        $extension = $container->getExtension('security');
-        $extension->addSecurityListenerFactory(new FacebookFactory());
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/Resources/config'));
         $loader->load('assets.yml');
