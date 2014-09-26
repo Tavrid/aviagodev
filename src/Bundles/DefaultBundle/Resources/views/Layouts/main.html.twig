@@ -5,11 +5,11 @@
     {% block stylesheets %}
     {% stylesheets
         '@front_bootstrap_css'
-        'bundles/bundlesdefault/lib/bootstrap-datetimepicker-master/build/css/bootstrap-datetimepicker.min.css'
+        'bundles/bundlesdefault/lib/ui-theme/css/jquery-ui.css'
     filter='cssrewrite' combine=true %}
         <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
     {% endstylesheets %}
-    <link href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+    {#<link href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet"/>#}
         <link href="{{ asset('/frontend/css/style.css') }}" rel="stylesheet"/>
     {% endblock %}
     {#<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />#}
@@ -17,13 +17,12 @@
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
         {% javascripts '@jquery' '@jquery_ui_js'
-        '@front_bootstrap_js'
-        'bundles/bundlesdefault/lib/popup.js'
-        'bundles/bundlesdefault/js/app.js'
-        'bundles/acmecore/lib/sisyphus/sisyphus.min.js'
-        'bundles/bundlesdefault/lib/moment.js'
-        'bundles/bundlesdefault/lib/bootstrap-datetimepicker-master/build/js/bootstrap-datetimepicker.min.js'
-        combine=true%}
+            '@front_bootstrap_js'
+            'bundles/bundlesdefault/lib/popup.js'
+            'bundles/bundlesdefault/js/app.js'
+            'bundles/acmecore/lib/sisyphus/sisyphus.min.js'
+            combine=true
+        %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
     {% endblock %}

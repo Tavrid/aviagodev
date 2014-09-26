@@ -1,6 +1,6 @@
 $(function() {
 
-    $( "#search-form" ).sisyphus({timeout: 5});
+    $( "#search-form" ).sisyphus({timeout: 2});
     $('#search-form').on('submit',function(){
         var routeParams = {};
         $.each($(this).serializeArray(),function(k,v){
@@ -27,22 +27,34 @@ $(function() {
             sel.show();
         }
     });
-    $( "#SearchForm_date_from" ).datetimepicker({
-        language: 'ru',
-        'format' :'YY-MM-D'
+
+    $( "#SearchForm_date_from" ).datepicker({
+        defaultDate: "+1w",
+        minDate: "d",
+        lang: 'ru',
+        dateFormat: 'yy-mm-dd',
+        //changeMonth: true,
+
+        numberOfMonths: 1,
+        onClose: function( selectedDate ) {
+            $( "#SearchForm_date_to" ).datepicker( "option", "minDate", selectedDate );
+
+            if($( "#SearchForm_date_to").is(':visible')){
+                $( "#SearchForm_date_to").datepicker('show');
+            }
+        }
     });
-    $('#SearchForm_date_to').datetimepicker({
-        language: 'ru',
-        'format' :'YY-MM-D'
+    $( "#SearchForm_date_to" ).datepicker({
+        //defaultDate: "+1w",
+        changeMonth: true,
+        dateFormat: 'yy-mm-dd',
+        numberOfMonths: 1,
+        onClose: function( selectedDate ) {
+            $( "#SearchForm_date_from" ).datepicker( "option", "maxDate", selectedDate );
+        }
     });
 
-    $("#SearchForm_date_from").on("dp.change",function (e) {
-        //$(this).date('hide');
-        $('#SearchForm_date_to').data("DateTimePicker").setMinDate(e.date);
-    });
-    $("#SearchForm_date_to").on("dp.change",function (e) {
-        $('#SearchForm_date_from').data("DateTimePicker").setMaxDate(e.date);
-    });
+
     //$( "#SearchForm_date_from" ).datetimepicker({
     //    lang: "ru",
     //    timepicker: false,
