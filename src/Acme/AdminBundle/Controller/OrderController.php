@@ -20,7 +20,7 @@ use Stb\Bootstrap\Response\EditableTextResponse;
 class OrderController extends ControllerBase
 {
     public function indexAction(){
-        $data = $this->get('admin.order.manager')->findAll();
+        $data = $this->get('admin.order.manager')->findAllOrders();
 
 
         $controller = $this;
@@ -87,7 +87,12 @@ class OrderController extends ControllerBase
 
     public function showAction(Request $request){
         $orderManager = $this->get('admin.order.manager');
-        return $this->render('AcmeAdminBundle:Order:show.html.twig');
+        $data = $orderManager->loadModel((int) $request->get('id'));
+        if(!$data){
+            throw $this->createNotFoundException('Error load data');
+        }
+
+        return $this->render('AcmeAdminBundle:Order:show.html.twig',['data' => $data]);
     }
 
 //    public function editAction(Request $request)

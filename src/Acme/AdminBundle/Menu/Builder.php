@@ -18,16 +18,16 @@ class Builder extends ContainerAware
     {
         $menu = $factory->createItem('root');
         $menu->setChildrenAttribute('class', 'nav navbar-nav');
-        $menu->addChild('menu', array('route' => 'admin.menu.index','label'=>'Управление меню'))
+        $menu->addChild('menu', array('route' => 'admin.order.index','label'=>'Управление заказами'))
             ->setAttribute('icon','icon-align-center');
-        $menu->addChild('news', array('route' => 'admin.page.index','label'=>'Список страниц'))
-            ->setAttribute('icon','icon-file');
-        $menu->addChild('slider', array('route' => 'admin.slider.index','label'=>'Список слайдеров'))
-            ->setAttribute('icon','icon-desktop');
-        $menu->addChild('gallery', array('route' => 'admin.gallery.index','label'=>'Список галерей'))
-            ->setAttribute('icon','icon-picture');
-        $menu->addChild('user', array('route' => 'admin.listuser.index','label'=>'Список пользователей'))
-            ->setAttribute('icon','icon-picture');
+//        $menu->addChild('news', array('route' => 'admin.page.index','label'=>'Список страниц'))
+//            ->setAttribute('icon','icon-file');
+//        $menu->addChild('slider', array('route' => 'admin.slider.index','label'=>'Список слайдеров'))
+//            ->setAttribute('icon','icon-desktop');
+//        $menu->addChild('gallery', array('route' => 'admin.gallery.index','label'=>'Список галерей'))
+//            ->setAttribute('icon','icon-picture');
+//        $menu->addChild('user', array('route' => 'admin.listuser.index','label'=>'Список пользователей'))
+//            ->setAttribute('icon','icon-picture');
 
 //
 //
@@ -38,14 +38,14 @@ class Builder extends ContainerAware
     public function stackedMenu(FactoryInterface $factory, array $options)
     {
         $menu = $factory->createItem('root');
-        $menu->setChildrenAttribute('class', 'nav nav-tabs nav-stacked');
-
-        $menu->addChild('page', array('route' => 'Page','label'=>'Текстовые страницы'))
-            ->setAttribute('icon','icon-align-center');
-        $menu->addChild('news', array('route' => 'Menu','label'=>'Управление новостями'))
-            ->setAttribute('icon','icon-rss');
-        $menu->addChild('news', array('route' => 'Menu','label'=>'Управление новостями'))
-            ->setAttribute('icon','icon-rss');
+//        $menu->setChildrenAttribute('class', 'nav nav-tabs nav-stacked');
+//
+//        $menu->addChild('page', array('route' => 'Page','label'=>'Текстовые страницы'))
+//            ->setAttribute('icon','icon-align-center');
+//        $menu->addChild('news', array('route' => 'Menu','label'=>'Управление новостями'))
+//            ->setAttribute('icon','icon-rss');
+//        $menu->addChild('news', array('route' => 'Menu','label'=>'Управление новостями'))
+//            ->setAttribute('icon','icon-rss');
 
         return $menu;
     }

@@ -52,7 +52,7 @@
         "knplabs/knp-menu": "2.0.*@dev",
         "knplabs/knp-menu-bundle":"dev-master",
         "leaseweb/api-caller-bundle": "*",
-        "stb/bootstrap": "1.0",
+        "stb/bootstrap": "1.1",
         "leaseweb/memcache-bundle": "*",
         "friendsofsymfony/jsrouting-bundle": "@stable"
     },

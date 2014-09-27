@@ -1,4 +1,49 @@
 {% extends 'AcmeAdminBundle:Layouts:main.html.twig' %}
 {% block body %}
+    <h1>Заказ#{{ data.id }} <small># {{ data.orderId }}</small></h1>
+    <table class="table table-hover">
 
+        <tbody>
+            <tr>
+                <td>Статус</td>
+                <td><span class="text-primary">{{ data.stateName }}</span></td>
+            </tr>
+            <tr>
+                <td>Дата</td>
+                <td>{{ data.date.format('d M Y H:i:s') }}</td>
+            </tr>
+            <tr>
+                <td>Телефон</td>
+                <td>{{ data.phone }}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{ data.email }}</td>
+            </tr>
+            <tr>
+                <td>Order hash</td>
+                <td>{{ data.orderId }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr />
+    <strong>Пасажиры</strong>
+    {% set pm = {'ADT' :'Взрослые','CHD' :'Дети','INF' :'Младенцы' } %}
+    {% for t, pasangers in data.passengers %}
+        <div>
+            <small>{{ pm[t] }} ({{ pasangers|length }})</small>
+            {% for pasanger in pasangers %}
+                <div>Пассажир №{{ loop.index }}</div>
+                <div>
+                    {% for k,v in pasanger %}
+                        <p>
+
+                            <span class="text-info"> {{ k }}</span> - <span class="text-success">{{ v }}</span>
+                        </p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <hr />
 {% endblock %}
