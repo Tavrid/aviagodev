@@ -70,11 +70,12 @@ class OrderController extends ControllerBase
                 ),
                 'actions' => array(
                     'view' => array(
-                        'route' => array('admin.order.edit', array('id' => 'id'))
+                        'route' => array('admin.order.show', array('id' => 'id')),
+                        'type' => ColumnTypes::TYPE_LINK_IKON
                     ),
-                    'edit' => array(
-                        'route' => array('admin.order.edit', array('id' => 'id'))
-                    ),
+//                    'edit' => array(
+//                        'route' => array('admin.order.edit', array('id' => 'id'))
+//                    ),
                     'delete' => array(
                         'route' => array('admin.order.delete', array('id' => 'id'))
                     ),
@@ -84,12 +85,17 @@ class OrderController extends ControllerBase
 
     }
 
-    public function editAction(Request $request)
-    {
-
-        $this->initBaseEvent(Events::INITIALIZE_EDIT, new OrderType());
-        return $this->edit($request);
+    public function showAction(Request $request){
+        $orderManager = $this->get('admin.order.manager');
+        return $this->render('AcmeAdminBundle:Order:show.html.twig');
     }
+
+//    public function editAction(Request $request)
+//    {
+//
+//        $this->initBaseEvent(Events::INITIALIZE_EDIT, new OrderType());
+//        return $this->edit($request);
+//    }
 
     public function editStateAction(Request $request){
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
@@ -121,12 +127,12 @@ class OrderController extends ControllerBase
         return $this->edit($request);
     }
 
-    public function addAction(Request $request)
-    {
-
-        $this->initBaseEvent(Events::INITIALIZE_ADD, new OrderType());
-        return $this->add($request);
-    }
+//    public function addAction(Request $request)
+//    {
+//
+//        $this->initBaseEvent(Events::INITIALIZE_ADD, new OrderType());
+//        return $this->add($request);
+//    }
 
     public function deleteAction(Request $request)
     {

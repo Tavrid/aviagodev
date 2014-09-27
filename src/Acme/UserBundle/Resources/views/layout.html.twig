@@ -1,46 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8"/>
-    {% block stylesheets %}
-        {% stylesheets 'bundles/acmeadmin/lib/login/xHTML/css/*' filter='cssrewrite' combine=true %}
-        <link href="{{ asset_url }}" rel="stylesheet" media="screen"/>
-        {% endstylesheets %}
-
-    {% endblock %}
-</head>
-<body>
-
-
-
+{% extends 'AcmeAdminBundle:Layouts:main.html.twig' %}
+{% block body %}
     <div class="container">
-
-        <div class="form-bg">
-            <form action="{{ path("fos_user_security_check") }}" method="post">
-                <h2>Login</h2>
-
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-                <p>
-                    <input name="_username" value="{{ last_username }}" type="text" placeholder="{{ 'security.login.username'|trans }}">
-                </p>
-
-                <p>
-                    <input type="password" name="_password" placeholder="{{ 'security.login.password'|trans }}">
-                </p>
-                <label for="remember">
-                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-                    <span>{{ 'security.login.remember_me'|trans }}</span>
-                </label>
-                <button type="submit"></button>
-            </form>
-            <div class="error">
-                {% if error %}
-                    {{ error|trans({}, 'security') }}
-                {% endif %}
-            </div>
-        </div>
-
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
     </div>
-
-</body>
-</html>
+{% endblock %}

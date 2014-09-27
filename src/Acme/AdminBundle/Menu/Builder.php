@@ -63,7 +63,7 @@ class Builder extends ContainerAware
                 ->setAttribute('dropdown', true)
                 ->setAttribute('icon', 'icon-user');
 
-            $menu['User']->addChild('Profile', array('route'=>'fos_user_profile_show'))
+            $menu['User']->addChild('Change password', array('route'=>'fos_user_change_password'))
                 ->setAttribute('icon', 'icon-edit');
             $menu['User']->addChild('Выйти', array('route'=>'fos_user_security_logout'))
                 ->setAttribute('icon', 'icon-off');
