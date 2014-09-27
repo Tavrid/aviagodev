@@ -1,0 +1,5 @@
+{% extends 'AcmeAdminBundle:Layouts:main.html.twig' %}
+{% block body %}
+    <h1>Список заказов</h1>
+    {{ bootstrapTable(data,params) |raw}}
+{% endblock %}

@@ -66,9 +66,9 @@ class Order extends AbstractEntity
     const STATE_SUCCESS = 4;
 
     public static $states = array(
-        self::STATE_CANCEL => 'Отменен',
         self::STATE_DEALING => 'В ожидании',
         self::STATE_PAYED => 'Оплачен',
+        self::STATE_CANCEL => 'Отменен',
         self::STATE_SUCCESS => 'Выполнен',
     );
 
@@ -123,6 +123,10 @@ class Order extends AbstractEntity
     public function getState()
     {
         return $this->state;
+    }
+
+    public function getStateName(){
+        return self::$states[$this->state];
     }
 
     /**
