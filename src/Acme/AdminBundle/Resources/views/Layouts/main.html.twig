@@ -31,13 +31,13 @@
                 <div class="container">
                      <script type="text/javascript">
                          $(document).ready(function(){
-                             {% for flashMessage in app.session.flashbag.get('success') %}
-                                alertify.success('{{ flashMessage |trans({}, 'crud') }}');
-                             {% endfor %}
+                             {#{% for flashMessage in app.session.flashbag.get('success') %}#}
+                                {#alertify.success('{{ flashMessage |trans({}, 'crud') }}');#}
+                             {#{% endfor %}#}
 
-                             {% for flashMessage in app.session.flashbag.get('error') %}
-                                alertify.error('{{ flashMessage |trans({}, 'crud') }}');
-                             {% endfor %}
+                             {#{% for flashMessage in app.session.flashbag.get('error') %}#}
+                                {#alertify.error('{{ flashMessage |trans({}, 'crud') }}');#}
+                             {#{% endfor %}#}
                          });
                      </script>
 

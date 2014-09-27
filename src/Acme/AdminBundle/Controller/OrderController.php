@@ -21,6 +21,9 @@ class OrderController extends ControllerBase
 {
     public function indexAction(){
         $data = $this->get('admin.order.manager')->findAll();
+
+
+        $controller = $this;
         return $this->render('AcmeAdminBundle:Order:index.html.twig', array(
             'data' => $data,
             'params' => array(
@@ -31,13 +34,11 @@ class OrderController extends ControllerBase
                         'header' => 'Статус',
                         'type' => ColumnTypes::TYPE_EDITABLE_TEXT,
                         'route' => ['admin.order.editstate',['id' => 'id']],
-                        'form_builder' => function(FormBuilder $form,Order $order){
-                            $form->remove('stateName');
-                            $form->add('state','choice',[
-                                'choices' => Order::$states,
-                                'data' => $order->getState()
-                            ]);
-//                            $form->get('state');
+                        'form' => function(Order $order) use ($controller){
+                            return $controller->createFormBuilder($order)
+                                ->add('state','choice',['choices' => Order::$states])
+                                ->getForm()->createView();
+
                         }
                     ],
                     [
@@ -74,9 +75,9 @@ class OrderController extends ControllerBase
                     'edit' => array(
                         'route' => array('admin.order.edit', array('id' => 'id'))
                     ),
-//                    'delete' => array(
-//                        'route' => array('admin.order.delete', array('id' => 'id'))
-//                    ),
+                    'delete' => array(
+                        'route' => array('admin.order.delete', array('id' => 'id'))
+                    ),
                 )
             )
         ));
