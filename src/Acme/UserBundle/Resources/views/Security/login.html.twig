@@ -30,7 +30,7 @@
         </form>
         <div class="error">
             {% if error %}
-                {{ error|trans({}, 'security') }}
+                {{ error.message|trans({},'messages') }}
             {% endif %}
         </div>
     </div>
