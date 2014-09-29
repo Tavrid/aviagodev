@@ -10,7 +10,8 @@ namespace Bundles\ApiBundle\Api\Query;
 
 use Bundles\ApiBundle\Api\Model\AviaClassMapping;
 
-class SearchByQuery extends QueryAbstract {
+class SearchByQuery extends QueryAbstract
+{
 
     protected $params;
 
@@ -47,8 +48,8 @@ class SearchByQuery extends QueryAbstract {
             ],
         ];
 
-        if($this->params['return_way']){
-            $routes[]=[
+        if ($this->params['return_way']) {
+            $routes[] = [
                 'Departure' => $this->params['city_to_code'],
                 'Arrival' => $this->params['city_from_code'],
                 'Date' => $this->params['date_to'],
@@ -67,13 +68,13 @@ class SearchByQuery extends QueryAbstract {
                     'UserUUID' => ''
                 ],
                 [
-                    'Routes' =>$routes,
+                    'Routes' => $routes,
                     'Logic' => 'Default',
                     'Class' => AviaClassMapping::getRealClassName($this->params['class']),
                     'Travellers' => [
-                            'ADT' => $this->params['adults'],
-                            'CHD' => $this->params['children'],
-                            'INF' => $this->params['infant'],
+                        'ADT' => $this->params['adults'],
+                        'CHD' => $this->params['children'],
+                        'INF' => $this->params['infant'],
                     ],
 
 
@@ -81,10 +82,10 @@ class SearchByQuery extends QueryAbstract {
                 [
                     'Compress' => null,
                     'Format' => 'Combined',
-                    'Timelimit'	=> 180,
+                    'Timelimit' => 180,
 //                    'Return' => '',
                     'Return' => 'ByTimelimit',
-                    'Currency' => array('RUB','USD','EUR'),
+                    'Currency' => array('RUB', 'USD', 'EUR'),
                     'Language' => 'RU'
                 ]
             ]
@@ -93,19 +94,20 @@ class SearchByQuery extends QueryAbstract {
 
     }
 
-    public function getApiUrl(){
+    public function getApiUrl()
+    {
         return 'http://ws.demo.webservices.aero/';
     }
 
     public function getKeyByParams()
     {
         $params = array();
-        foreach($this->params as $param){
-            if(!empty($param)){
+        foreach ($this->params as $param) {
+            if (!empty($param)) {
                 $params[] = $param;
             }
         }
-        return preg_replace('/[ ]+/i','',implode(':',$params));
+        return preg_replace('/[ ]+/i', '', implode(':', $params));
     }
 
 
