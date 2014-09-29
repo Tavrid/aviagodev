@@ -45,9 +45,22 @@ class SearchRequest implements Request{
      * @var ApiCallerInterface
      */
     protected $apiCaller;
+    /**
+     * @var \Acme\AdminBundle\Model\Log
+     */
+    protected $logger;
     public function __construct($key ,ApiCallerInterface $apiCaller){
         $this->apiKey = $key;
         $this->apiCaller = $apiCaller;
+    }
+
+    /**
+     * @param \Acme\AdminBundle\Model\Log $logger
+     */
+    public function setLogger(\Acme\CoreBundle\Model\AbstractModel $logger)
+    {
+        $this->logger = $logger;
+        return $this;
     }
 
 
@@ -64,6 +77,12 @@ class SearchRequest implements Request{
         }
         if(!$data){
             $data = $this->apiCaller->call(new ApiCall($query->getApiUrl(),json_encode($query->buildParams($this->apiKey))));
+
+            $logParams = [
+                'query' => $query->buildParams($this->apiKey),
+                'result' => $data
+            ];
+            $this->logger->addLog($logParams);
             if($this->memcached){
                 $this->memcached->set($query->getKeyByParams(),$data,3600);
             }

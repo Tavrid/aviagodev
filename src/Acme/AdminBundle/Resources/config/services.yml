@@ -16,4 +16,9 @@ services:
           arguments:
               - "@service_container"
               - Acme\AdminBundle\Entity\Order
+    main.log.manager :
+              class: Acme\AdminBundle\Model\Log
+              arguments:
+                  - "@service_container"
+                  - Acme\AdminBundle\Entity\Log
 

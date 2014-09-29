@@ -23,6 +23,29 @@ class BookInfoRequest implements Request{
      * @var \Memcached
      */
     protected $memcached;
+    /**
+     * @var \Acme\AdminBundle\Model\Log
+     */
+    protected $logger;
+
+
+    /**
+     * @var ApiCallerInterface
+     */
+    protected $apiCaller;
+    public function __construct($key ,ApiCallerInterface $apiCaller){
+        $this->apiKey = $key;
+        $this->apiCaller = $apiCaller;
+    }
+
+    /**
+     * @param \Acme\AdminBundle\Model\Log $logger
+     */
+    public function setLogger(\Acme\CoreBundle\Model\AbstractModel $logger)
+    {
+        $this->logger = $logger;
+        return $this;
+    }
 
     /**
      * @param \Memcached $memcached
@@ -41,14 +64,6 @@ class BookInfoRequest implements Request{
     {
         return $this->memcached;
     }
-    /**
-     * @var ApiCallerInterface
-     */
-    protected $apiCaller;
-    public function __construct($key ,ApiCallerInterface $apiCaller){
-        $this->apiKey = $key;
-        $this->apiCaller = $apiCaller;
-    }
 
 
 
@@ -60,6 +75,11 @@ class BookInfoRequest implements Request{
         $response = new BookInfoResponse();
         $data = $this->apiCaller->call(new ApiCall($query->getApiUrl(),json_encode($query->buildParams($this->apiKey))));
         $response->setResponseData($data);
+        $logParams = [
+            'query' => $query->buildParams($this->apiKey),
+            'result' => $data
+        ];
+        $this->logger->addLog($logParams);
 //        file_put_contents(__DIR__.'/../Examples/book_info.json',json_encode($data));
         return $response;
     }

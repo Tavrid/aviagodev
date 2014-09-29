@@ -84,9 +84,7 @@ class SearchByQuery extends QueryAbstract {
                     'Timelimit'	=> 180,
 //                    'Return' => '',
                     'Return' => 'ByTimelimit',
-                    'Currency' => [
-                        $this->params['currency']
-                    ],
+                    'Currency' => array('RUB','USD','EUR'),
                     'Language' => 'RU'
                 ]
             ]

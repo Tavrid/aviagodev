@@ -1,0 +1,18 @@
+Acme\AdminBundle\Entity\Log:
+    type: entity
+    table: logs
+    repositoryClass: Acme\AdminBundle\Repository\LogRepository
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        info:
+            type: json_array
+            nullable: true
+        date:
+            type: datetime
+            nullable: false
+
+
+
