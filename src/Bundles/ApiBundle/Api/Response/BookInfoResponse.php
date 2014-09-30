@@ -34,8 +34,9 @@ class BookInfoResponse extends Response {
         $data = $this->response['result'];
         $requestId = $this->response['result']['RequestID'];
         $ticket = new Ticket();
-        $ticket->setRequestId($requestId);
-        $ticket->setTotalPrice($data['TotalPrice']['Total']);
+        $ticket->setRequestId($requestId)
+            ->setTotalPrice($data['TotalPrice']['Total'])
+            ->setPricing($data['Pricing']);
 //        echo '<pre>';
 //        print_r($data['Itineraries']); exit;
 //            var_dump($data['Itineraries']); exit;

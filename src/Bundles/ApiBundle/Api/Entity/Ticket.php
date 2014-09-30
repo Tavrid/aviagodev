@@ -19,12 +19,34 @@ class Ticket
 
     protected $totalPrice;
 
+    protected $pricing;
+
 
 
     public function __construct()
     {
         $this->itineraries = array();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPricing()
+    {
+        return $this->pricing;
+    }
+
+    /**
+     * @param mixed $pricing
+     * @return $this
+     */
+    public function setPricing($pricing)
+    {
+        $this->pricing = $pricing;
+        return $this;
+    }
+
+
 
     /** @param $requestId
      * @return $this

@@ -61,9 +61,8 @@ class BookInfoQuery extends QueryAbstract {
                     'Format' => 'Combined',
                     'Return' => '',
 //                    'Return' => 'ByTimelimit',
-                    'Currency' => [
-                        'usd'
-                    ],
+                    'Currency' => array('RUB','USD','EUR'),
+
                     'Language' => 'RU'
                 ]
             ]
