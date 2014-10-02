@@ -100,7 +100,7 @@ class ApiController extends Controller
 
     public function listAction(Request $request){
 
-        $form = $this->createForm(new SearchForm());
+        $form = $this->createForm(new SearchForm($this->get('admin.city.manager')));
         $formBook = $this->createForm(new BookInfoForm());
         $data = $request->get('_route_params');
         $data['best_price'] = boolval($data['best_price']);

@@ -16,6 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 
+use Acme\CoreBundle\Model\AbstractModel;
 
 /**
  * Class SearchForm
@@ -26,6 +27,13 @@ use Symfony\Component\Form\FormEvent;
  */
 class SearchForm extends AbstractType
 {
+    /**
+     * @var \Acme\AdminBundle\Model\City
+     */
+    protected $model;
+    public function __construct(AbstractModel $model = null){
+        $this->model = $model;
+    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -44,13 +52,13 @@ class SearchForm extends AbstractType
         }
         $builder->add('city_from', 'text', [
                 'label' => 'frontend.search_form.city_from',
-                'mapped' => false,
+//                'mapped' => false,
                 'attr' => ['placeholder' => 'frontend.search_form.placeholders.city']
             ])
             ->add('city_from_code', 'hidden')
             ->add('city_to', 'text', [
                 'label' => 'frontend.search_form.city_to',
-                'mapped' => false,
+//                'mapped' => false,
                 'attr' => ['placeholder' => 'frontend.search_form.placeholders.city']
             ])
             ->add('city_to_code', 'hidden')
@@ -108,7 +116,17 @@ class SearchForm extends AbstractType
                 'label' => 'Только прямые рейсы:',
                 'required' => false,
             ]);
+        if($this->model){
+            $model = $this->model;
+            $builder->addEventListener(FormEvents::PRE_SUBMIT,function(FormEvent $formEvent)use($model){
+                $data = $formEvent->getData();
 
+                $data['city_to'] = $model->getFormattedNameByIata($data['city_to_code']);
+                $data['city_from'] = $model->getFormattedNameByIata($data['city_from_code']);
+
+                $formEvent->setData($data);
+            });
+        }
 
 
     }

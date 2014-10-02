@@ -23,11 +23,15 @@ class City extends AbstractModel {
         return $res;
     }
 
-    public function getByIata($iata){
-        return $this->getRepository()
-            ->findBy(array(
-                'iata' => $iata
+    public function getFormattedNameByIata($iata){
+        $val = $this->getRepository()
+            ->findOneBy(array(
+                'iata_code' => $iata
             ));
+        if($val){
+            return $val->getCountryRus().', '.$val->getCityRus().' ('.$val->getIataCode().')';
+        }
+        return null;
     }
 
 } 
