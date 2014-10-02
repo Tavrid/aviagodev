@@ -8,7 +8,8 @@ class CityRepository extends AbstractRepository {
 
     public function searchByToken($token){
 
-        $token = '%'.$token.'%';
+        $tokens = $this->createTokens($token);
+
         $searchFields = array(
             'iata_code',
             'name_rus',
@@ -20,27 +21,61 @@ class CityRepository extends AbstractRepository {
             'country_eng'
         );
         $count = count($searchFields);
+        $xpressions = array();
         for($i = 0 ; $i <$count; $i++){
             $field = 'p.'.$searchFields[$i];
-            $xpr = $this->query
-                ->expr()
-                ->like($field, $this->query->expr()
-                    ->literal($token)
-                );
-            if($i == 0){
-                $this->mergeScope(array(
-                    'where' => [$xpr]
-                ));
-            } else {
-                $this->mergeScope(array(
-                    'orWhere' => [$xpr]
-                ));
-
+            $xprPar = array();
+            foreach($tokens as $t){
+                $xprPar[] = $this->query
+                    ->expr()
+                    ->like($field, $this->query->expr()
+                        ->literal($t)
+                    );
             }
+            $xpressions[] = call_user_func_array([$this->query
+                ->expr(),'orX'],$xprPar);
+//
         }
-        $this->mergeScope(array('setMaxResults' => 10));
-
+        $xpr = call_user_func_array([$this->query
+            ->expr(),'orX'],$xpressions);
+        $this->mergeScope(array(
+            'setMaxResults' => 10,
+            'where' => [$xpr]
+        ));
+//        var_dump($this->query->getDQL());exit;
 
     }
+
+    /**
+     * @param $token
+     * @return array
+     */
+    protected function createTokens($token){
+        $tokens = array(
+            $token,
+            $this->correctString($token)
+        );
+        foreach($tokens as &$t){
+            $t = '%'.$t.'%';
+        }
+
+        return array_unique($tokens);
+    }
+
+    private function correctString ($string)
+    {
+        $search = array(
+            "й","ц","у","к","е","н","г","ш","щ","з","х","ъ",
+            "ф","ы","в","а","п","р","о","л","д","ж","э",
+            "я","ч","с","м","и","т","ь","б","ю"
+        );
+        $replace = array(
+            "q","w","e","r","t","y","u","i","o","p","[","]",
+            "a","s","d","f","g","h","j","k","l",";","'",
+            "z","x","c","v","b","n","m",",","."
+        );
+        return str_replace($replace,$search, $string);
+    }
+
 
 } 
