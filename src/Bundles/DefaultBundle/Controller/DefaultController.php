@@ -14,7 +14,21 @@ class DefaultController extends Controller
     // C330CA8C-DCDF-4CA8-A5E0-F5E4E1612440
     public function indexAction(Request $request)
     {
-//        ini_set('max_execution_time', 300);
+
+
+        $form = $this->createForm(new SearchForm(null,$this->get('session')));
+
+        $flights = $this->get('session')->get('flights',[]);
+
+        return $this->render('BundlesDefaultBundle:Default:index.html.twig',[
+            'form' => $form->createView(),
+            'flights' => $flights
+        ]);
+    }
+
+
+
+    //        ini_set('max_execution_time', 300);
 //        $model = $this->get('admin.city.manager');
 //        $curl = curl_init();
 //            curl_setopt($curl, CURLOPT_URL, 'http://www.apinfo.ru/airports/export.html');
@@ -51,11 +65,5 @@ class DefaultController extends Controller
 //            }
 //        }
 //        exit;
-
-
-        $form = $this->createForm(new SearchForm());
-
-        return $this->render('BundlesDefaultBundle:Default:index.html.twig',['form' => $form->createView()]);
-    }
 
 }

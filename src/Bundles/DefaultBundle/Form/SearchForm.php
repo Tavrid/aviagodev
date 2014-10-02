@@ -18,6 +18,8 @@ use Symfony\Component\Form\FormEvent;
 
 use Acme\CoreBundle\Model\AbstractModel;
 
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 /**
  * Class SearchForm
  * @package Bundles\DefaultBundle\Form
@@ -31,7 +33,12 @@ class SearchForm extends AbstractType
      * @var \Acme\AdminBundle\Model\City
      */
     protected $model;
-    public function __construct(AbstractModel $model = null){
+    /**
+     * @var SessionInterface
+     */
+    protected $session;
+    public function __construct(AbstractModel $model = null,SessionInterface $session = null){
+        $this->session = $session;
         $this->model = $model;
     }
 
@@ -128,6 +135,16 @@ class SearchForm extends AbstractType
             });
         }
 
+        if($this->session){
+            $session = $this->session;
+            $builder->addEventListener(FormEvents::PRE_SET_DATA,function(FormEvent $formEvent)use($session){
+                $flights = $session->get('flights',[]);
+                $d = array_pop($flights);
+                if(isset($d['formData'])){
+                    $formEvent->setData($d['formData']);
+                }
+            });
+        }
 
     }
 
