@@ -16,6 +16,12 @@ services:
           arguments:
               - "@service_container"
               - Acme\AdminBundle\Entity\Order
+    admin.city.manager :
+          class: Acme\AdminBundle\Model\City
+          arguments:
+              - "@service_container"
+              - Acme\AdminBundle\Entity\City
+
     main.log.manager :
               class: Acme\AdminBundle\Model\Log
               arguments:

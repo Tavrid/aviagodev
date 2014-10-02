@@ -77,7 +77,7 @@ class Order extends AbstractEntity
         $this->date = new \DateTime();
         $this->state = self::STATE_DEALING;
         $this->info = "info";
-        $this->order_id = md5(microtime().uniqid().'avia_go');
+        $this->order_id = uniqid();
     }
 
     public static function loadValidatorMetadata(ClassMetadata $metadata)
