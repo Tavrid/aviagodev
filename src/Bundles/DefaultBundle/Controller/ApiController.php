@@ -30,12 +30,13 @@ class ApiController extends Controller
     {
         $q = $request->get('q');
         /** @var \Bundles\ApiBundle\Api\Api $api */
-        $api = $this->get('avia.api.manager');
-        $query = new AviaCityByQuery();
-        $query->setQuery($q);
-        $output = $api->getCityRequestor()->execute($query);
-        $resp = $output->getResponseData();
-        $resp= new Response(json_encode($resp['result']));
+//        $api = $this->get('avia.api.manager');
+//        $query = new AviaCityByQuery();
+//        $query->setQuery($q);
+//        $output = $api->getCityRequestor()->execute($query);
+//        $resp = $output->getResponseData();
+        $model = $this->get('admin.city.manager');
+        $resp= new Response(json_encode($model->searchByToken($q)));
         $resp->headers->add(array('Content-Type' => 'application/json'));
         return $resp;
 

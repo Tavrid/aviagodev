@@ -52,6 +52,7 @@ class DefaultController extends Controller
 //        }
 //        exit;
 
+
         $form = $this->createForm(new SearchForm());
 
         return $this->render('BundlesDefaultBundle:Default:index.html.twig',['form' => $form->createView()]);
