@@ -31,9 +31,9 @@ class Airports extends AbstractModel {
                         'name' => $f['country'].', '.$f['city'].', Все аэропорты ('.$city.')'
                     );
                 }
-                foreach($airport as $aCode => $name){
+                foreach($airport as $name){
                     $r[] = array(
-                        'id' => $aCode,
+                        'id' => $name['code'],
                         'name' => $name['country'].', '.$name['city'].', '.$name['airport'].' ('.$name['code'].')'
                     );
                 }
