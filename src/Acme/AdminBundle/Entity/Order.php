@@ -76,7 +76,6 @@ class Order extends AbstractEntity
     {
         $this->date = new \DateTime();
         $this->state = self::STATE_DEALING;
-        $this->info = "info";
         $this->order_id = uniqid();
     }
 

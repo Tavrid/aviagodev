@@ -142,8 +142,17 @@ class OrderForm  extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('passengers','multi_field',$this->passengersParams)
-        ->add('email','email',['label' => 'frontend.order_form.email'])
-        ->add('phone','text',['label' => 'frontend.order_form.phone']);
+            ->add('email','email',['label' => 'frontend.order_form.email'])
+            ->add('phone','text',['label' => 'frontend.order_form.phone'])
+            ->add('info','multi_field',[
+                'entity' => false,
+                'field_map' => [
+                    'i_agree' => ['field', new Assert\NotBlank()]
+                ],
+                'types' => [
+                    'i_agree' => ['type' => 'checkbox']
+                ]
+            ]);
 
     }
 

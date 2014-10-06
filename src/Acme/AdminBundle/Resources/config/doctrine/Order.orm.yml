@@ -30,7 +30,7 @@ Acme\AdminBundle\Entity\Order:
             type: json_array
             nullable: true
         info:
-            type: text
+            type: json_array
             nullable: true
 
 

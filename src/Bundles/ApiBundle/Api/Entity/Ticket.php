@@ -103,7 +103,9 @@ class Ticket
         $total = $this->getTotalPrice();
         foreach($this->getTravelers() as $name => $count){
             $pricing = $this->getPricingByName($name);
-            $pr+=$pricing['Total']*$count;
+            if(!empty($pricing['Total'])){
+                $pr+=$pricing['Total']*$count;
+            }
         }
         return $total-$pr;
     }
