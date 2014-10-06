@@ -36,7 +36,8 @@ class BookInfoResponse extends Response {
         $ticket = new Ticket();
         $ticket->setRequestId($requestId)
             ->setTotalPrice($data['TotalPrice']['Total'])
-            ->setPricing($data['Pricing']);
+            ->setPricing($data['Pricing'])
+            ->setTravelers($data['Travellers']);
 //        echo '<pre>';
 //        print_r($data['Itineraries']); exit;
 //            var_dump($data['Itineraries']); exit;

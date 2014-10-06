@@ -21,6 +21,26 @@ class Ticket
 
     protected $pricing;
 
+    protected $travelers;
+
+    /**
+     * @return mixed
+     */
+    public function getTravelers()
+    {
+        return $this->travelers;
+    }
+
+    /**
+     * @param mixed $travelers
+     * @return $this
+     */
+    public function setTravelers($travelers)
+    {
+        $this->travelers = $travelers;
+        return $this;
+    }
+
 
 
     public function __construct()
@@ -67,6 +87,25 @@ class Ticket
     {
         $this->pricing = $pricing;
         return $this;
+    }
+
+    public function getPricingByName($name){
+        foreach($this->getPricing() as $pricing){
+            if($pricing['Type'] == $name){
+                return $pricing;
+            }
+        }
+        return [];
+    }
+
+    public function getTariffCollection(){
+        $pr = 0;
+        $total = $this->getTotalPrice();
+        foreach($this->getTravelers() as $name => $count){
+            $pricing = $this->getPricingByName($name);
+            $pr+=$pricing['Total']*$count;
+        }
+        return $total-$pr;
     }
 
 

@@ -4,7 +4,8 @@
     <div class="col-md-3">
         <h3>Информация о заказе</h3>
         <hr />
-        <strong>Всего</strong>: {{ ticket.totalPrice|number_format(0, '.', ' ')  }} руб
+        <strong>Всего: {{ ticket.totalPrice|number_format(0, '.', ' ')  }} руб.</strong>
+
     </div>
     <div class="col-md-9">
         <h3>{{ ticket.routes|join(' - ') }}</h3>
@@ -25,7 +26,39 @@
                     <div class="">
                         Если в вашем билете несколько рейсов, при неявке на один из них авиакомпания имеет право отменить бронь на оставшиеся рейсы.
                     </div>
-
+                    <hr />
+                    {% set pm = {'ADT' :'Взрослые','CHD' :'Дети','INF' :'Младенцы' } %}
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Пассажиры</th>
+                            <th>Тариф + Таксы</th>
+                            <th>Кол-во</th>
+                            <th>Итого</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for t,travelers in ticket.travelers %}
+                            {% if travelers >0 %}
+                                {% set pricing = ticket.pricingByName(t) %}
+                                <tr>
+                                    <td>{{ pm[t] }}</td>
+                                    <td>({{ pricing.Base|number_format(0, '.', ' ')}} + {{ pricing.Tax|number_format(0, '.', ' ') }})</td>
+                                    <td>x{{ travelers }}</td>
+                                    <td>{{ (pricing.Total*travelers)|number_format(0, '.', ' ') }} руб.</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <strong>Тарифный сбор</strong>
+                            </td>
+                            <td>{{ ticket.tariffCollection|number_format(0, '.', ' ')}} руб</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="tab-pane" id="info"  style="padding: 15px">
                     <div class="panel panel-primary">
