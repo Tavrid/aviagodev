@@ -4,21 +4,20 @@
 namespace Acme\AdminBundle\Repository;
 use Acme\CoreBundle\Repository\AbstractRepository;
 
-class CityRepository extends AbstractRepository {
+class AirportsRepository extends AbstractRepository {
 
     public function searchByToken($token){
 
         $tokens = $this->createTokens($token);
 
         $searchFields = array(
-            'iata_code',
-            'name_rus',
-            'name_eng',
-            'city_rus',
-            'city_eng',
-            'gmt_offset',
-            'country_rus',
-            'country_eng'
+            'iataRegionCode',
+            'airportRus',
+            'airportEng',
+            'cityRus',
+            'cityEng',
+            'countryRus',
+            'countryEng'
         );
         $count = count($searchFields);
         $xpressions = array();

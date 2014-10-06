@@ -1,0 +1,259 @@
+Acme\AdminBundle\Entity\AviaAirports:
+    type: entity
+    table: avia_airports
+    repositoryClass: Acme\AdminBundle\Repository\AirportsRepository
+    indexes:
+        region_code:
+            columns:
+                - region_code
+        country_code:
+            columns:
+                - country_code
+        state_code:
+            columns:
+                - state_code
+        city_code_eng:
+            columns:
+                - city_code_eng
+        city_code_rus:
+            columns:
+                - city_code_rus
+        airport_code_eng:
+            columns:
+                - airport_code_eng
+        airport_code_rus:
+            columns:
+                - airport_code_rus
+        city_code_eng_2:
+            columns:
+                - city_code_eng
+                - city_code_rus
+                - city_eng
+                - city_rus
+                - airport_code_eng
+                - airport_code_rus
+                - airport_eng
+                - airport_rus
+        iata_region_code:
+            columns:
+                - iata_region_code
+                - iata_tc_code
+    id:
+        id:
+            type: bigint
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        favorite:
+            type: boolean
+            nullable: false
+            comment: ''
+            default: '0'
+        iataRegionCode:
+            type: string
+            nullable: false
+            length: 3
+            fixed: false
+            comment: ''
+            column: iata_region_code
+        iataTcCode:
+            type: string
+            nullable: false
+            length: 3
+            fixed: false
+            comment: 'Traffic Conference Code'
+            column: iata_tc_code
+        regionCode:
+            type: string
+            nullable: true
+            length: 10
+            fixed: false
+            comment: ''
+            column: region_code
+        regionCodeRus:
+            type: string
+            nullable: true
+            length: 10
+            fixed: false
+            comment: ''
+            column: region_code_rus
+        regionEng:
+            type: string
+            nullable: true
+            length: 100
+            fixed: false
+            comment: ''
+            column: region_eng
+        regionRus:
+            type: string
+            nullable: true
+            length: 100
+            fixed: false
+            comment: ''
+            column: region_rus
+        countryCode:
+            type: string
+            nullable: true
+            length: 10
+            fixed: false
+            comment: ''
+            column: country_code
+        countryCodeRus:
+            type: string
+            nullable: true
+            length: 10
+            fixed: false
+            comment: ''
+            column: country_code_rus
+        countryEng:
+            type: string
+            nullable: true
+            length: 100
+            fixed: false
+            comment: ''
+            column: country_eng
+        countryRus:
+            type: string
+            nullable: true
+            length: 100
+            fixed: false
+            comment: ''
+            column: country_rus
+        stateCode:
+            type: string
+            nullable: true
+            length: 10
+            fixed: false
+            comment: ''
+            column: state_code
+        stateCodeRus:
+            type: string
+            nullable: true
+            length: 10
+            fixed: false
+            comment: ''
+            column: state_code_rus
+        stateEng:
+            type: string
+            nullable: true
+            length: 100
+            fixed: false
+            comment: ''
+            column: state_eng
+        stateRus:
+            type: string
+            nullable: true
+            length: 100
+            fixed: false
+            comment: ''
+            column: state_rus
+        cityCodeEng:
+            type: string
+            nullable: true
+            length: 10
+            fixed: false
+            comment: ''
+            column: city_code_eng
+        cityCodeRus:
+            type: string
+            nullable: false
+            length: 10
+            fixed: false
+            comment: ''
+            default: ''
+            column: city_code_rus
+        cityEng:
+            type: string
+            nullable: true
+            length: 100
+            fixed: false
+            comment: ''
+            column: city_eng
+        cityRus:
+            type: string
+            nullable: true
+            length: 100
+            fixed: false
+            comment: ''
+            column: city_rus
+        cityLat:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+            comment: ''
+            default: '0'
+            column: city_lat
+        cityLng:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+            comment: ''
+            default: '0'
+            column: city_lng
+        cityTimezone:
+            type: string
+            nullable: false
+            length: 10
+            fixed: false
+            comment: ''
+            default: ''
+            column: city_timezone
+        airportCodeEng:
+            type: string
+            nullable: true
+            length: 10
+            fixed: false
+            comment: ''
+            column: airport_code_eng
+        airportCodeRus:
+            type: string
+            nullable: false
+            length: 10
+            fixed: false
+            comment: ''
+            default: ''
+            column: airport_code_rus
+        airportEng:
+            type: string
+            nullable: true
+            length: 100
+            fixed: false
+            comment: ''
+            column: airport_eng
+        airportRus:
+            type: string
+            nullable: true
+            length: 100
+            fixed: false
+            comment: ''
+            column: airport_rus
+        airportLat:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+            comment: ''
+            default: '0'
+            column: airport_lat
+        airportLng:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+            comment: ''
+            default: '0'
+            column: airport_lng
+        timezone:
+            type: string
+            nullable: false
+            length: 10
+            fixed: false
+            comment: ''
+            default: ''
+    lifecycleCallbacks: {  }

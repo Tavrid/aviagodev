@@ -17,10 +17,10 @@ services:
               - "@service_container"
               - Acme\AdminBundle\Entity\Order
     admin.city.manager :
-          class: Acme\AdminBundle\Model\City
+          class: Acme\AdminBundle\Model\Airports
           arguments:
               - "@service_container"
-              - Acme\AdminBundle\Entity\City
+              - Acme\AdminBundle\Entity\AviaAirports
 
     main.log.manager :
               class: Acme\AdminBundle\Model\Log
