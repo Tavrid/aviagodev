@@ -12,16 +12,26 @@ namespace Bundles\DefaultBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 
 use Symfony\Component\Validator\Constraints as Assert;
-use Acme\CoreBundle\Validator\Multifield;
-use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Form\FormError;
+use Bundles\ApiBundle\Api\Api;
 
 class OrderForm  extends AbstractType{
-    protected $passengersParams ;
-    public function __construct($param){
+    /**
+     * @var
+     */
+    protected $passengersParams;
+    /**
+     * @var Api
+     */
+    protected $api;
+    public function __construct($param,Api $api){
+        $this->api = $api;
         $param = array_merge(array('ADT' => 1,'CHD' => 1,'INF' => 0),$param);
         $fieldMap = array();
 
@@ -153,6 +163,10 @@ class OrderForm  extends AbstractType{
                     'i_agree' => ['type' => 'checkbox']
                 ]
             ]);
+        $builder->addEventListener(FormEvents::SUBMIT,function(FormEvent $event){
+            $formError = new FormError('Error book');
+            $event->getForm()->addError($formError);
+        });
 
     }
 
