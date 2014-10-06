@@ -33,12 +33,12 @@
                         </div>
                         <div class="panel-body">
                             {% for int in ticket.itineraries %}
-                                {% if(loop.index > 1) %}{% set f = "Обратно" %}{% else %}{% set f = "Туда" %}{% endif %}
+
                                 {% set parent_loop = loop %}
                                 {% for variant in int.variants %}
                                     <div class="well">
                                         <div>
-                                            {{ f }} (продолжительность - {{ variant.formattedDuration }})
+                                            продолжительность - {{ variant.duration|secondToTime }}
 
                                         </div>
                                         {% for segment in variant.segments %}
@@ -48,14 +48,14 @@
                                                 </div>
                                                 <div class="panel-body">
                                                     <div class="col-md-4">
-                                                        <strong>{{ segment.departureDate("d MMMM Y г.") }}</strong>
+                                                        <strong>{{ segment.departureDate|date("d M Y г.") }}</strong>
                                                         <div>
                                                             <small> Колличество мест: {{ segment.availableSeats }}</small>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div>
-                                                            <small>Вылет</small> <strong>{{ segment.departureDate("H:mm") }}</strong>
+                                                            <small>Вылет</small> <strong>{{ segment.departureDate|date("H:i") }}</strong>
                                                         </div>
                                                         <strong>{{ segment.departureCityName }}, {{ segment.departureCountryName }}</strong>
                                                         <div>
@@ -65,7 +65,7 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div>
-                                                            <small>Прилет</small> <strong>{{ segment.arrivalDate("H:mm") }}</strong>
+                                                            <small>Прилет</small> <strong>{{ segment.arrivalDate|date("H:i") }}</strong>
                                                         </div>
                                                         <strong>{{ segment.arrivalCityName }}, {{ segment.arrivalCountryName }}</strong>
                                                         <div>

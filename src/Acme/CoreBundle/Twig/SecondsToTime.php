@@ -24,35 +24,32 @@ class SecondsToTime extends \Twig_Extension
 
     public function secondToTime($seconds)
     {
-//        return $seconds;
+
         if($seconds){
-            $days = 0;
-            $hours = 0;
-            $min = 0;
+            $params = [
+                '%d%' => '',
+                '%h%' => '',
+                '%m%' => '',
+            ];
             if($seconds >= (60*60*24)){
                 $days = floor($seconds/(60*60*24));
                 $seconds -= $days*(60*60*24);
+                $params['%d%'] = $days.' д.';
             }
 
             if($seconds>=60*60){
                 $hours = floor($seconds/(60*60));
                 $seconds -= $hours*(60*60);
+                $params['%h%'] = ' '.$hours.' ч.';
             }
 
             if($seconds>=60){
                 $min = floor($seconds/60);
                 $seconds -= $min*60;
-            }
-            if($days){
-                return sprintf('%d д. %d ч. %d мин.',$days,$hours,$min);
-            } else if($hours){
-                return sprintf('%d ч. %d мин.',$hours,$min);
-            } else {
-                return sprintf('%d мин.',$min);
-
+                $params['%m%'] = ' '.$min.' мин.';
             }
 
-
+            return str_replace(array_keys($params),$params,'%d%%h%%m%');
         } else {
             return 0;
         }
