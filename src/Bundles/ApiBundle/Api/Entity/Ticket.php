@@ -28,6 +28,29 @@ class Ticket
         $this->itineraries = array();
     }
 
+    public function getRoutes(){
+        $routes = array();
+        foreach ($this->getItineraries() as $it) {
+            foreach($it->getVariants() as $var){
+                $segments = $var->getSegments();
+
+                /** @var Segments $f */
+                $f = array_shift($segments);
+                /** @var Segments $l */
+                $l = array_pop($segments);
+                $routes[] = $f->getDepartureCityName().' ('.$f->getDepartureAirportName().')';
+                $routes[] = $l->getArrivalCityName().' ('.$l->getArrivalAirportName().')';
+            }
+        }
+        $c = count($routes) -1;
+        for($i=0; $i < $c; $i++){
+            if($routes[$i] == $routes[$i+1]){
+                unset($routes[$i]);
+            }
+        }
+        return $routes;
+    }
+
     /**
      * @return mixed
      */
