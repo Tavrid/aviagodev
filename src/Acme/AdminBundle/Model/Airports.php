@@ -8,28 +8,51 @@ class Airports extends AbstractModel {
 
     public function searchByToken($token){
         $res = array();
+        $r = array();
         /** @var \Acme\AdminBundle\Entity\AviaAirports[] $d */
         $d =  $this->getRepository()
             ->createQuery(array('searchByToken' => array($token)))
             ->getResult();
         if($d){
             foreach ($d as $val){
-                $res[] = [
-                    'id' => $val->getAirportCodeEng(),
-                    'name' => $val->getCountryRus().', '.$val->getCityRus().' ('.$val->getAirportCodeEng().')'
+
+                $res[$val->getCityCodeEng()][] = [
+                    'country' => $val->getCountryRus(),
+                    'city' => $val->getCityRus(),
+                    'code' => $val->getAirportCodeEng(),
+                    'airport' => $val->getAirportRus()
                 ];
             }
+            foreach($res as $city => $airport){
+                if(count($airport) > 1){
+                    $f = $airport[0];
+                    $r[] = array(
+                        'id' => $city,
+                        'name' => $f['country'].', '.$f['city'].', Все аэропорты ('.$city.')'
+                    );
+                }
+                foreach($airport as $aCode => $name){
+                    $r[] = array(
+                        'id' => $aCode,
+                        'name' => $name['country'].', '.$name['city'].', '.$name['airport'].' ('.$name['code'].')'
+                    );
+                }
+            }
         }
-        return $res;
+        return $r;
     }
 
-    public function getFormattedNameByIata($iata){
-        $val = $this->getRepository()
-            ->findOneBy(array(
-                'airportCodeEng' => $iata
-            ));
-        if($val){
-            return $val->getCountryRus().', '.$val->getCityRus().' ('.$val->getIataCode().')';
+    public function getFormattedNameByIata($code){
+        /** @var \Acme\AdminBundle\Entity\AviaAirports[] $results */
+        $results = $this->getRepository()
+            ->createQuery(['getByCode' => $code])->getResult();
+
+        if($results){
+            foreach($results as $val){
+                if($code == $val->getCityCodeEng() ||  $code == $val->getAirportCodeEng()){
+                    return $val->getCountryRus().', '.$val->getCityRus().' ('.$code.')';
+                }
+            }
         }
         return null;
     }

@@ -6,6 +6,14 @@ use Acme\CoreBundle\Repository\AbstractRepository;
 
 class AirportsRepository extends AbstractRepository {
 
+    public function getByCode($code){
+        $this->mergeScope([
+            'where' => ['p.airportCodeEng = :code'],
+            'orWhere' => ['p.cityCodeEng = :code'],
+            'params' => ['code' => $code]
+        ]);
+    }
+
     public function searchByToken($token){
 
         $tokens = $this->createTokens($token);
@@ -50,6 +58,7 @@ class AirportsRepository extends AbstractRepository {
      * @return array
      */
     protected function createTokens($token){
+        $token = trim($token);
         $tokens = array(
             $token,
             $this->correctString($token)
