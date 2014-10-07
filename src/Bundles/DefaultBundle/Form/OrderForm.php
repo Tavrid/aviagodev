@@ -51,29 +51,28 @@ class OrderForm  extends AbstractType{
 //                'patronymic' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
                 'Document' => [
                     'Number' => ['field', new Assert\NotBlank()],
-                    'ExpireDate' => ['field', new Assert\NotBlank(),new Assert\Date()],
+                    'ExpireDate' => ['field', new Assert\NotBlank()],
 //                    ]
                 ],
-                'Birthday' => ['field', new Assert\NotBlank(),new Assert\Date()],
+                'Citizen' => ['field', new Assert\NotBlank()],
+                'Birthday' => ['field', new Assert\NotBlank()],
             ],
         ];
         $fieldMap['CHD'] = ['sub_multi_field',
             'fields' => [
-                'gender' => ['field', new Assert\NotBlank()],
-                'name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
-                'surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
-                'patronymic' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
-                'birthday' => ['field', new Assert\NotBlank(),new Assert\Date()],
+                'Sex' => ['field', new Assert\NotBlank()],
+                'Name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
+                'Surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
+                'Birthday' => ['field', new Assert\NotBlank()],
 
             ],
         ];
         $fieldMap['INF'] = ['sub_multi_field',
             'fields' => [
-                'gender' => ['field', new Assert\NotBlank()],
-                'name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
-                'surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
-                'patronymic' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
-                'birthday' => ['field', new Assert\NotBlank(),new Assert\Date()],
+                'Sex' => ['field', new Assert\NotBlank()],
+                'Name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
+                'Surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
+                'Birthday' => ['field', new Assert\NotBlank()],
             ],
         ];
         $this->passengersParams = [
@@ -97,10 +96,11 @@ class OrderForm  extends AbstractType{
                             'label' => 'frontend.order_form.passenger.birthday',
                             'attr' => ['class' => 'birthday form-inline'],
                             'years' => range(date('Y')-12,(date('Y') -99)),
-//                            'input' => 'string'
+                            'input' => 'array'
                         ],
                         'type' => 'birthday'
                     ],
+                    'Citizen' => ['options' => ['data' => 'RU'],'type' => 'hidden'],
                     'Document' => [
                         'Number' => ['options' => ['label' => 'frontend.order_form.passenger.number_passport']],
                         'ExpireDate' => [
@@ -108,7 +108,7 @@ class OrderForm  extends AbstractType{
                                 'label' => 'frontend.order_form.passenger.passport_valid_until',
                                 'attr' => ['class' => 'birthday form-inline'],
                                 'years' => range((date('Y') -2),date('Y')+10),
-                                'input' => 'string'
+                                'input' => 'array'
                             ],
                             'type' => 'date'
                         ],
@@ -116,44 +116,44 @@ class OrderForm  extends AbstractType{
                 ],
                 'CHD' => [
                     'options' => ['need_value' => $param['CHD']],
-                    'gender' => ['type' => 'choice','options' => [
+                    'Sex' => ['type' => 'choice','options' => [
                         'label' => 'frontend.order_form.passenger.gender',
                         'choices' => ['Male' => 'frontend.order_form.passenger.male','Female' => 'frontend.order_form.passenger.female'],
                         'multiple' => false,
                         'expanded' => true,
-//                    'required' => true,
+                        //                    'required' => true,
                     ]],
-                    'name' => ['options' => ['label' => 'frontend.order_form.passenger.name']],
-                    'surname' => ['options' => ['label' => 'frontend.order_form.passenger.surname']],
-                    'patronymic' => ['options' => ['label' => 'frontend.order_form.passenger.patronymic']],
-                    'birthday' => [
+                    'Name' => ['options' => ['label' => 'frontend.order_form.passenger.name']],
+                    'Surname' => ['options' => ['label' => 'frontend.order_form.passenger.surname']],
+//                    'patronymic' => ['options' => ['label' => 'frontend.order_form.passenger.patronymic']],
+                    'Birthday' => [
                         'options' => [
                             'label' => 'frontend.order_form.passenger.birthday',
                             'attr' => ['class' => 'birthday form-inline'],
-                            'years' => range(date('Y')-4,(date('Y') -13)),
-                            'input' => 'string'
+                            'years' => range(date('Y')-12,(date('Y') -99)),
+//                            'input' => 'string'
                         ],
                         'type' => 'birthday'
-                    ]
+                    ],
                 ],
                 'INF' => [
                     'options' => ['need_value' => $param['INF']],
-                    'gender' => ['type' => 'choice','options' => [
+                    'Sex' => ['type' => 'choice','options' => [
                         'label' => 'frontend.order_form.passenger.gender',
-                        'choices' => ['m' => 'frontend.order_form.passenger.male','f' => 'frontend.order_form.passenger.female'],
+                        'choices' => ['Male' => 'frontend.order_form.passenger.male','Female' => 'frontend.order_form.passenger.female'],
                         'multiple' => false,
                         'expanded' => true,
-//                    'required' => true,
+                        //                    'required' => true,
                     ]],
-                    'name' => ['options' => ['label' => 'frontend.order_form.passenger.name']],
-                    'surname' => ['options' => ['label' => 'frontend.order_form.passenger.surname']],
-                    'patronymic' => ['options' => ['label' => 'frontend.order_form.passenger.patronymic']],
-                    'birthday' => [
+                    'Name' => ['options' => ['label' => 'frontend.order_form.passenger.name']],
+                    'Surname' => ['options' => ['label' => 'frontend.order_form.passenger.surname']],
+//                    'patronymic' => ['options' => ['label' => 'frontend.order_form.passenger.patronymic']],
+                    'Birthday' => [
                         'options' => [
                             'label' => 'frontend.order_form.passenger.birthday',
                             'attr' => ['class' => 'birthday form-inline'],
-                            'years' => range(date('Y'),(date('Y') -2)),
-                            'input' => 'string'
+                            'years' => range(date('Y')-12,(date('Y') -99)),
+//                            'input' => 'string'
                         ],
                         'type' => 'birthday'
                     ]
@@ -184,11 +184,17 @@ class OrderForm  extends AbstractType{
         $builder->addEventListener(FormEvents::SUBMIT,function(FormEvent $event) use ($bookInfoResponse,$api){
             $data = $event->getData();
             $query = new BookQuery();
+            $travelers = $data->getPassengers();
+            foreach($travelers as $k => $v){
+                if(empty($v)){
+                    unset($travelers[$k]);
+                }
+            }
             $query->setParams([
                 'bookID' => $bookInfoResponse->getEntity()->getBookId(),
-                'travellers' => $data->getPassengers(),
+                'travellers' => $travelers,
                 'contacts' => array(
-                    'email' => 'ablylimov@gmail.com',
+                    'Email' => 'ablylimov@gmail.com',
                     'PhoneMobile' => '+380669533156',
                     'PhoneHome' => ''
                 ),
