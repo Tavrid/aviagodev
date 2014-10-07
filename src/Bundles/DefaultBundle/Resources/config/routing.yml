@@ -29,4 +29,8 @@ bundles_default_api_book:
     pattern: /book/{key}
     defaults: { _controller: BundlesDefaultBundle:Api:book}
 
+bundles_default_api_order:
+    pattern: /order/{orderID}
+    defaults: { _controller: BundlesDefaultBundle:Api:order}
+
 

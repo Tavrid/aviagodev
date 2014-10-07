@@ -1,0 +1,60 @@
+{% extends "BundlesDefaultBundle:Layouts:main.html.twig" %}
+{% block body %}
+
+    <div class="content">
+        <div class="col-md-3">
+            <h3>Информация о заказе</h3>
+            <hr />
+            <strong>Всего: {{ bookInfo.ticket.totalPrice|number_format(0, '.', ' ')  }} руб.</strong>
+        </div>
+        <div class="col-md-9">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active">
+                    <a href="#rules" role="tab" data-toggle="tab">
+                        Детали заказа
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#info" role="tab" data-toggle="tab">Детали рейса</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="rules" style="padding: 15px">
+                    <h4>Бронирование прошло успешно!</h4>
+
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td>Направление:</td>
+                            <td>
+                                <strong>{{ bookInfo.ticket.routes|join(' - ') }}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Код брони:</td>
+                            <td>
+                                <strong class="text-danger">{{ order.pnr }}</strong>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane" id="info"  style="padding: 15px">
+                    {% include 'BundlesDefaultBundle:Api:_items.html.twig' with {data: [bookInfo.ticket],needBook: false} %}
+                </div>
+            </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active">
+                    <a href="#pay" role="tab" data-toggle="tab">
+                        Оплата
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="pay" style="padding: 15px">
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

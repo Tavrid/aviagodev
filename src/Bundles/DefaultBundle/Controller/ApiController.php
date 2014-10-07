@@ -23,6 +23,7 @@ use Bundles\DefaultBundle\Response\AjaxSearchResponse;
 use Bundles\ApiBundle\Api\Model\SearchResultFilter;
 use Bundles\ApiBundle\Api\Model\SearchFilters;
 
+use Bundles\ApiBundle\Api\Response\BookInfoResponse;
 
 class ApiController extends Controller
 {
@@ -81,17 +82,18 @@ class ApiController extends Controller
 
         $form = $this->createForm(new OrderForm($data,$this->get('avia.api.manager')),$entity);
         if($request->isMethod('post')){
-//            $entity->setPrice($data->getEntity()->getTicket()->getTotalPrice());
+
             $entity->setPrice($data->getEntity()->getTicket()->getTotalPrice());
             $form->submit($request);
             if($form->isValid()){
 
                 $orderManager->save($entity);
-            } else {
-//                var_Dump($form->getErrors()); exit;
+                return $this->redirect($this->generateUrl('bundles_default_api_order',array(
+                    'orderID' => $entity->getOrderId()
+                )));
             }
         }
-//        var_dump($data->getEntity()->getTicket()->getItineraries()); exit;
+
         return $this->render('BundlesDefaultBundle:Api:book.html.twig',[
             'form' => $form->createView(),
             'ticket' => $data->getEntity()->getTicket()
@@ -201,11 +203,7 @@ class ApiController extends Controller
                 $params = $form->getData();
                 $params['best_price'] = intval($params['best_price']);
                 $params['direct_flights'] = intval($params['direct_flights']);
-//                foreach ($params as $key => $val){
-//                    if(empty($val)){
-//                        unset($params[$key]);
-//                    }
-//                }
+
                 $resp= new AjaxSearchResponse($this->generateUrl('bundles_default_api_list',$params));
             } else {
                 $resp = new Response('',Response::HTTP_BAD_REQUEST);
@@ -214,6 +212,21 @@ class ApiController extends Controller
             $resp = new Response('',Response::HTTP_BAD_REQUEST);
         }
         return $resp;
+    }
+
+    public function orderAction(Request $request,$orderID){
+        /** @var \Acme\AdminBundle\Model\Order $orderManager */
+        $orderManager = $this->get('admin.order.manager');
+        $order = $orderManager->getOrderByOrderId($orderID);
+
+        $bookInfoResponse = new BookInfoResponse();
+        $bookInfoResponse->setResponseData($order->getOrderInfo());
+
+        return $this->render('BundlesDefaultBundle:Api:order.html.twig',[
+            'order' => $order,
+            'bookInfo' => $bookInfoResponse->getEntity()
+        ]);
+
     }
 
 }

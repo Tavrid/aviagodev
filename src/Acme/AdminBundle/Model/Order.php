@@ -17,4 +17,14 @@ class Order extends AbstractModel {
             ->find($id);
     }
 
+    /**
+     * @param $orderId
+     * @return \Acme\AdminBundle\Entity\Order
+     */
+    public function getOrderByOrderId($orderId){
+        return $this->getRepository()->findOneBy(array(
+           'order_id' => $orderId
+        ));
+    }
+
 } 
