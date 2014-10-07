@@ -160,7 +160,10 @@ class OrderForm  extends AbstractType{
                     'i_agree' => ['field', new Assert\NotBlank()]
                 ],
                 'types' => [
-                    'i_agree' => ['type' => 'checkbox']
+                    'i_agree' => [
+                        'options' => ['label' => 'Ознакомлен(а) и согласен(-на)'],
+                        'type' => 'checkbox'
+                    ]
                 ]
             ]);
         $builder->addEventListener(FormEvents::SUBMIT,function(FormEvent $event){

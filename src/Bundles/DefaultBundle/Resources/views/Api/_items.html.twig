@@ -1,6 +1,8 @@
+{% set needBook = needBook is defined ? needBook : true %}
 {% for ticket in data %}
-    <form action="{{ path("bundles_default_api_info") }}" class="book-form">
-
+    {% if needBook %}
+        <form action="{{ path("bundles_default_api_info") }}" class="book-form">
+    {% endif %}
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">{{ ticket.totalPrice|number_format(0,'.',' ') }} руб</h3>
@@ -11,11 +13,13 @@
                     {% set parent_loop = loop %}
                     {% for variant in int.variants %}
                         <div class="well">
-                            <label>
-                                <input value="{{ variant.variantID }}" type="radio" {% if loop.first %} checked="checked" {% endif %} name="info[variants][{{ parent_loop.index-1 }}]" />
-                                Выбрать
-                            </label>
-                            <input type="hidden" name="info[request_id]" value="{{ ticket.requestId }}">
+                            {% if needBook %}
+                                <label>
+                                    <input value="{{ variant.variantID }}" type="radio" {% if loop.first %} checked="checked" {% endif %} name="info[variants][{{ parent_loop.index-1 }}]" />
+                                    Выбрать
+                                </label>
+                                <input type="hidden" name="info[request_id]" value="{{ ticket.requestId }}">
+                            {% endif %}
                             <div>
                                 <small>Общая продолжительность</small> <strong>{{ variant.duration|secondToTime}}</strong>
                             </div>
@@ -76,12 +80,16 @@
                     {% endfor %}
                     <hr />
                 {% endfor %}
-                <div class="" style="margin-bottom: 15px">
-                    <div class="col-md-offset-9">
-                        <input style="margin-left: 42%" class="btn btn-primary" type="submit" value="Забронировать">
+                {% if needBook %}
+                    <div class="" style="margin-bottom: 15px">
+                        <div class="col-md-offset-9">
+                            <input style="margin-left: 42%" class="btn btn-primary" type="submit" value="Забронировать">
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             </div>
         </div>
-    </form>
+    {% if needBook %}
+        </form>
+    {% endif %}
 {% endfor %}

@@ -54,10 +54,14 @@ class Ticket
             foreach($it->getVariants() as $var){
                 $segments = $var->getSegments();
 
-                /** @var Segments $f */
-                $f = array_shift($segments);
-                /** @var Segments $l */
-                $l = array_pop($segments);
+                if(count($segments) > 1){
+                    /** @var Segments $f */
+                    $f = array_shift($segments);
+                    /** @var Segments $l */
+                    $l = array_pop($segments);
+                } else {
+                    $f = $l = array_shift($segments);
+                }
                 $routes[] = $f->getDepartureCityName().' ('.$f->getDepartureAirportName().')';
                 $routes[] = $l->getArrivalCityName().' ('.$l->getArrivalAirportName().')';
             }
