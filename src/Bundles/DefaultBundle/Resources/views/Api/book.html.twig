@@ -53,9 +53,17 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <strong>Тарифный сбор</strong>
+                                <strong>Тарифный сбор:</strong>
                             </td>
                             <td>{{ ticket.tariffCollection|number_format(0, '.', ' ')}} руб</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <strong>Итого:</strong>
+                            </td>
+                            <td>{{ ticket.totalPrice|number_format(0, '.', ' ')}} руб</td>
                         </tr>
                         </tbody>
                     </table>
