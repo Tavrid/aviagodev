@@ -60,6 +60,16 @@ class Order extends AbstractEntity
      */
     protected $info;
 
+    /**
+     * @var string
+     */
+    private $pnr;
+
+    /**
+     * @var array
+     */
+    private $order_info;
+
     const STATE_DEALING = 1;
     const STATE_PAYED = 2;
     const STATE_CANCEL = 3;
@@ -167,7 +177,7 @@ class Order extends AbstractEntity
     /**
      * Get passengers
      *
-     * @return string
+     * @return array
      */
     public function getPassengers()
     {
@@ -287,5 +297,53 @@ class Order extends AbstractEntity
     public function getOrderId()
     {
         return $this->order_id;
+    }
+
+
+
+    /**
+     * Set pnr
+     *
+     * @param string $pnr
+     * @return Order
+     */
+    public function setPnr($pnr)
+    {
+        $this->pnr = $pnr;
+
+        return $this;
+    }
+
+    /**
+     * Get pnr
+     *
+     * @return string 
+     */
+    public function getPnr()
+    {
+        return $this->pnr;
+    }
+
+    /**
+     * Set order_info
+     *
+     * @param array $orderInfo
+     * @return Order
+     */
+    public function setOrderInfo($orderInfo)
+    {
+        $this->order_info = $orderInfo;
+
+        return $this;
+    }
+
+    /**
+     * Get order_info
+     *
+     * @return array 
+     */
+    public function getOrderInfo()
+    {
+        return $this->order_info;
     }
 }

@@ -9,6 +9,7 @@
 namespace Bundles\DefaultBundle\Form;
 
 
+use Acme\AdminBundle\Model\Order;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -182,6 +183,7 @@ class OrderForm  extends AbstractType{
         $bookInfoResponse = $this->bookInfoResponse;
         $api = $this->api;
         $builder->addEventListener(FormEvents::SUBMIT,function(FormEvent $event) use ($bookInfoResponse,$api){
+            /** @var \Acme\AdminBundle\Entity\Order $data */
             $data = $event->getData();
             $query = new BookQuery();
             $travelers = $data->getPassengers();
@@ -203,8 +205,8 @@ class OrderForm  extends AbstractType{
                 'bookID' => $bookInfoResponse->getEntity()->getBookId(),
                 'travellers' => $travelers,
                 'contacts' => array(
-                    'Email' => 'ablylimov@gmail.com',
-                    'PhoneMobile' => '+380669533156',
+                    'Email' => $data->getEmail(),
+                    'PhoneMobile' => $data->getPhone(),
                     'PhoneHome' => ''
                 ),
             ]);
@@ -213,6 +215,10 @@ class OrderForm  extends AbstractType{
             if($output->getIsError()){
                 $formError = new FormError('Error book');
                 $event->getForm()->addError($formError);
+            } else {
+                $d = $output->getResponseData();
+                $data->setPnr($d['result']['PNR'])
+                    ->setOrderInfo($d);
             }
         });
 

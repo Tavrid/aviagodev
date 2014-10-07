@@ -32,6 +32,13 @@ Acme\AdminBundle\Entity\Order:
         info:
             type: json_array
             nullable: true
+        pnr:
+            type: string
+            length: 255
+            nullable: false
+        order_info:
+            type: json_array
+            nullable: true
 
 
 

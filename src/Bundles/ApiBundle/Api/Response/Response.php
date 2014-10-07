@@ -33,9 +33,9 @@ abstract class Response {
 
     public function getIsError()
     {
-        if(isset($this->response->errors)){
+        if(isset($this->response['errors'])){
 
-            return count($this->response->errors);
+            return count($this->response['errors']);
         }
         return false;
     }
