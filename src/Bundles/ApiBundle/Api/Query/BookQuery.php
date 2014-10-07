@@ -48,7 +48,6 @@ class BookQuery extends QueryAbstract {
                 ]
             ]
         ];
-
         return $paramsR;
 
     }

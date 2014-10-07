@@ -188,8 +188,20 @@ class OrderForm  extends AbstractType{
             foreach($travelers as $k => $v){
                 if(empty($v)){
                     unset($travelers[$k]);
+                } else {
+                    $i = 0;
+                    foreach($travelers[$k] as $key => $val){
+                        $t = $travelers[$k][$key];
+                        unset($travelers[$k][$key]);
+
+//                        $t['Bonus']['Company'] = 'Ps';
+//                        $t['Bonus']['Number'] = '123456';
+                        $travelers[$k][$i] = $t;
+                        $i++;
+                    }
                 }
             }
+//            var_Dump($travelers); exit;
             $query->setParams([
                 'bookID' => $bookInfoResponse->getEntity()->getBookId(),
                 'travellers' => $travelers,
@@ -200,7 +212,7 @@ class OrderForm  extends AbstractType{
                 ),
             ]);
 
-            $output = $api->getBookInfoRequestor()->execute($query);
+            $output = $api->getBookRequestor()->execute($query);
             $formError = new FormError('Error book');
             $event->getForm()->addError($formError);
         });
