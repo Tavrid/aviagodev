@@ -193,15 +193,12 @@ class OrderForm  extends AbstractType{
                     foreach($travelers[$k] as $key => $val){
                         $t = $travelers[$k][$key];
                         unset($travelers[$k][$key]);
-
-//                        $t['Bonus']['Company'] = 'Ps';
-//                        $t['Bonus']['Number'] = '123456';
                         $travelers[$k][$i] = $t;
                         $i++;
                     }
                 }
             }
-//            var_Dump($travelers); exit;
+            $travelers = $this->ucfirstKeyRecursive($travelers);
             $query->setParams([
                 'bookID' => $bookInfoResponse->getEntity()->getBookId(),
                 'travellers' => $travelers,
@@ -213,10 +210,24 @@ class OrderForm  extends AbstractType{
             ]);
 
             $output = $api->getBookRequestor()->execute($query);
-            $formError = new FormError('Error book');
-            $event->getForm()->addError($formError);
+            if($output->getIsError()){
+                $formError = new FormError('Error book');
+                $event->getForm()->addError($formError);
+            }
         });
 
+    }
+
+    protected function ucfirstKeyRecursive($array){
+        foreach($array as $key => $val){
+            unset($array[$key]);
+            if(is_array($val)){
+                $array[ucfirst($key)]  = $this->ucfirstKeyRecursive($val);
+            } else {
+                $array[ucfirst($key)] = $val;
+            }
+        }
+        return $array;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
