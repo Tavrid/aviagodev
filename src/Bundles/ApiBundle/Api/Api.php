@@ -12,6 +12,7 @@ use Bundles\ApiBundle\Api\Response\BookInfoResponse;
 use Lsw\ApiCallerBundle\Caller\ApiCallerInterface;
 use Bundles\ApiBundle\Api\Request\CityRequest;
 use Bundles\ApiBundle\Api\Request\SearchRequest;
+use Bundles\ApiBundle\Api\Request\BookRequest;
 
 use Acme\CoreBundle\Model\AbstractModel;
 
@@ -58,6 +59,12 @@ class Api {
 
     public function getBookInfoRequestor(){
         $searchRequest = new BookInfoRequest($this->apiKey,$this->apiCaller);
+        $searchRequest->setLogger($this->logger);
+        return $searchRequest;
+    }
+
+    public function getBookRequestor(){
+        $searchRequest = new BookRequest($this->apiKey,$this->apiCaller);
         $searchRequest->setLogger($this->logger);
         return $searchRequest;
     }

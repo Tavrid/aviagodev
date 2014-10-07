@@ -17,6 +17,7 @@ use Bundles\ApiBundle\Api\Entity\Segments;
 use Bundles\ApiBundle\Api\Entity\Variants;
 
 
+
 class BookInfoResponse extends Response {
 
     protected $entity;
@@ -74,6 +75,10 @@ class BookInfoResponse extends Response {
 
         $this->entity = $entity;
     }
+
+    /**
+     * @return BookInfo
+     */
 
     public function getEntity(){
         if(!$this->entity){

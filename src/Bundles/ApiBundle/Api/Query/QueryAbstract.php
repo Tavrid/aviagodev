@@ -12,6 +12,26 @@ namespace Bundles\ApiBundle\Api\Query;
 abstract class QueryAbstract {
 
 
+    protected $params;
+
+    /**
+     * @param $params
+     * @return $this
+     */
+    public function setParams($params)
+    {
+        $this->params = $params;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParams()
+    {
+        return $this->params;
+    }
+
 
     public abstract function getKeyByParams();
 

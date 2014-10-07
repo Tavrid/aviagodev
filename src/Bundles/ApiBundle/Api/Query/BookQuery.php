@@ -12,25 +12,7 @@ use Bundles\ApiBundle\Api\Model\AviaClassMapping;
 
 class BookQuery extends QueryAbstract {
 
-    protected $params;
 
-    /**
-     * @param $params
-     * @return $this
-     */
-    public function setParams($params)
-    {
-        $this->params = $params;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getParams()
-    {
-        return $this->params;
-    }
 
     /**
      * @inheritdoc
@@ -40,7 +22,7 @@ class BookQuery extends QueryAbstract {
         $paramsR = [
             'jsonrpc' => '2.0',
             'id' => 1,
-            'method' => 'AviaInformation',
+            'method' => 'AviaBook',
             'params' => [
                 [
                     'Type' => 'Site',

@@ -13,6 +13,7 @@ use Bundles\DefaultBundle\Form\FilterForm;
 use Bundles\ApiBundle\Api\Query\AviaCityByQuery;
 use Bundles\ApiBundle\Api\Query\SearchByQuery;
 use Bundles\ApiBundle\Api\Query\BookInfoQuery;
+use Bundles\ApiBundle\Api\Query\BookQuery;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -73,11 +74,12 @@ class ApiController extends Controller
         $memcache = $this->get('memcache.default');
         $data = $memcache->get($key);
 
+
         /** @var \Acme\AdminBundle\Model\Order $orderManager */
         $orderManager = $this->get('admin.order.manager');
         $entity = $orderManager->getEntity();
 
-        $form = $this->createForm(new OrderForm($data->getEntity()->getTravelers(),$this->get('avia.api.manager')),$entity);
+        $form = $this->createForm(new OrderForm($data,$this->get('avia.api.manager')),$entity);
         if($request->isMethod('post')){
 //            $entity->setPrice($data->getEntity()->getTicket()->getTotalPrice());
             $entity->setPrice($data->getEntity()->getTicket()->getTotalPrice());
