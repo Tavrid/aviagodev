@@ -47,11 +47,15 @@ class OrderForm  extends AbstractType{
         $fieldMap['ADT'] = ['sub_multi_field',
             'fields' => [
                 'Sex' => ['field', new Assert\NotBlank()],
-                'Name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
-                'Surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
-//                'patronymic' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
+                'Name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3)),new Assert\Regex([
+                    'pattern' => '/[a-zA-z0-9]/'
+                ])],
+                'Surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3)),new Assert\Regex([
+                    'pattern' => '/[a-zA-z0-9]/'
+                ])],
+
                 'Document' => [
-                    'Number' => ['field', new Assert\NotBlank()],
+                    'Number' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
                     'ExpireDate' => ['field', new Assert\NotBlank()],
 //                    ]
                 ],
@@ -62,8 +66,12 @@ class OrderForm  extends AbstractType{
         $fieldMap['CHD'] = ['sub_multi_field',
             'fields' => [
                 'Sex' => ['field', new Assert\NotBlank()],
-                'Name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
-                'Surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
+                'Name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3)),new Assert\Regex([
+                    'pattern' => '/[a-zA-z0-9]/'
+                ])],
+                'Surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3)),new Assert\Regex([
+                    'pattern' => '/[a-zA-z0-9]/'
+                ])],
                 'Birthday' => ['field', new Assert\NotBlank()],
 
             ],
@@ -71,8 +79,12 @@ class OrderForm  extends AbstractType{
         $fieldMap['INF'] = ['sub_multi_field',
             'fields' => [
                 'Sex' => ['field', new Assert\NotBlank()],
-                'Name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
-                'Surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
+                'Name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3)),new Assert\Regex([
+                    'pattern' => '/[a-zA-z0-9]/'
+                ])],
+                'Surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3)),new Assert\Regex([
+                    'pattern' => '/[a-zA-z0-9]/'
+                ])],
                 'Birthday' => ['field', new Assert\NotBlank()],
             ],
         ];
@@ -183,6 +195,7 @@ class OrderForm  extends AbstractType{
         $bookInfoResponse = $this->bookInfoResponse;
         $api = $this->api;
         $builder->addEventListener(FormEvents::SUBMIT,function(FormEvent $event) use ($bookInfoResponse,$api){
+
             /** @var \Acme\AdminBundle\Entity\Order $data */
             $data = $event->getData();
             $query = new BookQuery();
@@ -213,7 +226,7 @@ class OrderForm  extends AbstractType{
 
             $output = $api->getBookRequestor()->execute($query);
             if($output->getIsError()){
-                $formError = new FormError('Error book');
+                $formError = new FormError('Ошибка бронирования');
                 $event->getForm()->addError($formError);
             } else {
                 $d = $output->getResponseData();
