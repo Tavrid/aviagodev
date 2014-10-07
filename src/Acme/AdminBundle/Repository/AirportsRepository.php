@@ -46,7 +46,7 @@ class AirportsRepository extends AbstractRepository {
         $xpr = call_user_func_array([$this->query
             ->expr(),'orX'],$xpressions);
         $this->mergeScope(array(
-            'setMaxResults' => 10,
+//            'setMaxResults' => 10,
             'where' => [$xpr]
         ));
 //        var_dump($this->query->getDQL());exit;
@@ -63,8 +63,12 @@ class AirportsRepository extends AbstractRepository {
             $token,
             $this->correctString($token)
         );
+        $split = preg_split('#[\s]+#i',$token,-1,PREG_SPLIT_NO_EMPTY);
+        if(is_array($split)){
+            $tokens = array_merge($tokens,$split);
+        }
         foreach($tokens as &$t){
-            $t = '%'.$t.'%';
+            $t = $t.'%';
         }
 
         return array_unique($tokens);
