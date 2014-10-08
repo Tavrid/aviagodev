@@ -25,7 +25,8 @@ class AirportsRepository extends AbstractRepository {
             'cityRus',
             'cityEng',
             'countryRus',
-            'countryEng'
+            'countryEng',
+            'cityCodeEng'
         );
         $count = count($searchFields);
         $xpressions = array();
