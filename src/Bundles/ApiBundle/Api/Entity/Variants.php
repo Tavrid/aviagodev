@@ -13,7 +13,8 @@ namespace Bundles\ApiBundle\Api\Entity;
  * Class Variants
  * @package Bundles\ApiBundle\Api\Entity
  */
-class Variants {
+class Variants
+{
 
     /**
      * @var Segments[]
@@ -46,7 +47,8 @@ class Variants {
         return $this->variantID;
     }
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->segments = array();
     }
 
@@ -56,7 +58,7 @@ class Variants {
      */
     public function setDuration($duration)
     {
-        $this->duration = $duration*60;
+        $this->duration = $duration * 60;
         return $this;
     }
 
@@ -73,11 +75,12 @@ class Variants {
      *
      * TODO надо проверить
      */
-    public function getFormattedDuration(){
-        $t = $this->duration*60;
-        $dataTime = new \DateTime('@'.$t);
+    public function getFormattedDuration()
+    {
+        $t = $this->duration * 60;
+        $dataTime = new \DateTime('@' . $t);
 
-        return sprintf('%s ч %s мин',$dataTime->format('H'),$dataTime->format('i'));
+        return sprintf('%s ч %s мин', $dataTime->format('H'), $dataTime->format('i'));
     }
 
 
@@ -103,35 +106,57 @@ class Variants {
      * @param Segments $segment
      * @return $this;
      */
-    public function addSegment(Segments $segment){
+    public function addSegment(Segments $segment)
+    {
         $this->segments[] = $segment;
         return $this;
     }
 
-    public function getCountTransplant(){
-        return count($this->getSegments()) -1;
+    public function getCountTransplant()
+    {
+        return count($this->getSegments()) - 1;
     }
 
-    public function decl($number,$titles){
-        $cases = array (2, 0, 1, 1, 1, 2);
-        return $titles[ ($number%100 > 4 && $number %100 < 20) ? 2 : $cases[min($number%10, 5)] ];
+    public function decl($number, $titles)
+    {
+        $cases = array(2, 0, 1, 1, 1, 2);
+        return $titles[($number % 100 > 4 && $number % 100 < 20) ? 2 : $cases[min($number % 10, 5)]];
 
     }
 
-    public function getDepartureSegment(){
+    public function getDepartureSegment()
+    {
         $segments = $this->getSegments();
         return array_shift($segments);
 
     }
 
-    public function getArrivalSegment(){
+    public function getArrivalSegment()
+    {
         $segments = $this->getSegments();
         $count = count($segments);
-        if($count > 1){
+        if ($count > 1) {
             return array_pop($segments);
         } else {
             return array_shift($segments);
         }
+    }
+
+    public function getTransplantAirports()
+    {
+        $ret = array();
+
+        $segments = $this->getSegments();
+        $count = count($segments);
+        if ($count > 1) {
+            for($i =0; $i < ($count-1); $i++){
+                $ret[] = [
+                    'name' => $segments[$i]->getArrivalCountryName().', '.$segments[$i]->getArrivalCityName(),
+                    'time' => $segments[$i]->getTransplantTime($segments[$i+1])
+                ];
+            }
+        }
+        return $ret;
     }
 
 

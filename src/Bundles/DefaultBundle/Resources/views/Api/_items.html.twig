@@ -73,11 +73,32 @@
                                 <strong class="text-warning">{{ variant.duration|secondToTime }}</strong>
                             </div>
                             {% if variant.countTransplant %}
-                                <div class="text-info show-transplant" style="cursor: pointer">
-                                    {{ variant.countTransplant }} {{ variant.decl(variant.countTransplant,['пересадка','пересадок','пересадок']) }}
-                                    <div style="" class="popup">
-                                        popup
-                                        <small class="close text-danger">Закрыть</small>
+                                <div>
+                                    <div  class="text-info show-transplant" style="cursor: pointer">
+                                        {{ variant.countTransplant }} {{ variant.decl(variant.countTransplant,['пересадка','пересадок','пересадок']) }}
+                                    </div>
+                                    <div class="popup">
+                                        <table>
+                                            <tbody>
+                                                {% for a in variant.transplantAirports %}
+                                                    <tr>
+                                                        <td>
+                                                            <strong>
+                                                                {{ a.name }}
+                                                            </strong>
+                                                        </td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td><small>Между рейсами:</small></td>
+                                                        <td><strong>{{ a.time|secondToTime }}</strong></td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        <div>
+                                            <small class="close-popup text-danger pull-right" style="cursor: pointer">Закрыть</small>
+                                        </div>
                                     </div>
                                 </div>
                             {% endif %}
@@ -102,10 +123,11 @@
 <script>
     $(document).ready(function(){
         $('.show-transplant').on('click',function(){
-            var popup = $(this).find('.popup').popup({
+            var popup = $(this).parent('div').find('.popup').popup({
                 popup : {
                     position : 'absolute',
                     bottom:0,
+                    right:0,
                     display: 'none',
                     'z-index': 10000
                 },
@@ -114,7 +136,7 @@
                     'z-index': 1000
                 },
                 closeOnClickOverlay: true,
-                closeSelectors : ['.close']
+                closeSelectors : ['.close-popup']
             });
             var self = $(this);
             popup.openWithOutOffsets();
@@ -129,5 +151,6 @@
         box-shadow: 1px 2px 6px -3px #000000;
         padding: 25px;
         border: 1px solid #cccccc;
+        width: 350px;
     }
 </style>
