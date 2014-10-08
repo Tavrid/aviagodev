@@ -34,6 +34,11 @@ class Itineraries {
         return $this;
     }
 
+    public function getFirstVariant(){
+        $var = $this->getVariants();
+        return array_shift($var);
+    }
+
     /**
      * @return \Bundles\ApiBundle\Api\Entity\Variants[]
      */

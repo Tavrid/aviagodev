@@ -1,95 +1,133 @@
 {% set needBook = needBook is defined ? needBook : true %}
 {% for ticket in data %}
-    {% if needBook %}
-        <form action="{{ path("bundles_default_api_info") }}" class="book-form">
-    {% endif %}
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">{{ ticket.totalPrice|number_format(0,'.',' ') }} руб</h3>
-            </div>
-            <div class="panel-body">
-                {% for int in ticket.itineraries %}
-                    {#{% if(loop.index > 1) %}{% set f = "Обратно" %}{% else %}{% set f = "Туда" %}{% endif %}#}
-                    {% set parent_loop = loop %}
-                    {% for variant in int.variants %}
-                        <div class="well">
-                            {% if needBook %}
-                                <label>
-                                    <input value="{{ variant.variantID }}" type="radio" {% if loop.first %} checked="checked" {% endif %} name="info[variants][{{ parent_loop.index-1 }}]" />
-                                    Выбрать
-                                </label>
+
+    <div class="well">
+        <strong class="text-danger">{{ ticket.totalPrice|number_format(0,'.',' ') }} руб</strong>
+        <strong  class="text-warning">{{ ticket.firstItinerarie.firstVariant.departureSegment.departureDate|date("d.m.Y") }}</strong>
+        {% if needBook %}
+            <form action="{{ path("bundles_default_api_info") }}" class="book-form">
+        {% endif %}
+        {% for int in ticket.itineraries %}
+            {% set parent_loop = loop %}
+            {% for variant in int.variants %}
+
+
+
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="panel-title"></div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-1">
+                                <input value="{{ variant.variantID }}"
+                                       type="radio" {% if loop.first %} checked="checked" {% endif %}
+                                       name="info[variants][{{ parent_loop.index-1 }}]"/>
                                 <input type="hidden" name="info[request_id]" value="{{ ticket.requestId }}">
-                            {% endif %}
+                        </div>
+                        <div class="col-md-3">
+                            <div class="logo-{{ variant.departureSegment.marketingAirline }}"></div>
                             <div>
-                                <small>Общая продолжительность</small> <strong>{{ variant.duration|secondToTime}}</strong>
+                                <strong>
+                                    {{ variant.departureSegment.marketingAirlineName }}
+                                </strong>
                             </div>
-                            {% for segment in variant.segments %}
-                                <div class="panel panel-info">
-                                    <div class="panel-heading">
-                                        <div class="panel-title"></div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="col-md-3">
-                                            <div>
-                                                <strong>{{ segment.departureDate|date("d M Y г.") }}</strong>
-                                            </div>
-                                            <div class="logo-{{ segment.marketingAirline }}">
-                                                LOGO
-                                            </div>
-                                            <small>{{ segment.marketingAirline }} {{ segment.flightNumber }}</small>
-                                            <div>
-                                                <small> Колличество мест: {{ segment.availableSeats }}</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div>
-                                                <small>Вылет</small> <strong>{{ segment.departureDate|date("H:i") }}</strong>
-                                            </div>
-                                            <strong>{{ segment.departureCityName }}, {{ segment.departureCountryName }}</strong>
-                                            <div>
-                                                <small>{{ segment.departureAirportName }}</small>
-                                            </div>
+                            <small>{{ variant.departureSegment.marketingAirline }} {{ variant.departureSegment.flightNumber }}</small>
+                            {#<div>#}
+                                {#<small> Колличество мест: {{ variant.departureSegment.availableSeats }}</small>#}
+                            {#</div>#}
+                        </div>
+                        <div class="col-md-3">
+                            <div>
+                                <div>
+                                    <small>Время вылета:</small>
 
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div>
-                                                <small>Прилет</small> <strong>{{ segment.arrivalDate|date("H:i") }}</strong>
-                                            </div>
-                                            <strong>{{ segment.arrivalCityName }}, {{ segment.arrivalCountryName }}</strong>
-                                            <div>
-                                                <small>{{ segment.arrivalAirportName }}</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div>
-                                                <strong>{{ segment.flightTime|secondToTime }}</strong>
-                                            </div>
-                                            <smal>Продолжительность палета</smal>
-                                        </div>
+                                </div>
+                                <strong class="text-warning">{{ variant.departureSegment.departureDate|date("H:i") }}</strong>
+                            </div>
+                            <strong>{{ variant.departureSegment.departureCityName }}
+                                , {{ variant.departureSegment.departureCountryName }}</strong>
 
+                            <div>
+                                <small>{{ variant.departureSegment.departureAirportName }}</small>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div>
+                                <div>
+                                    <small>Время прилета:</small>
+
+                                </div>
+                                <strong class="text-warning">{{ variant.arrivalSegment.arrivalDate|date("H:i") }}</strong>
+                            </div>
+                            <strong>{{ variant.arrivalSegment.arrivalCityName }}
+                                , {{ variant.arrivalSegment.arrivalCountryName }}</strong>
+
+                            <div>
+                                <small>{{ variant.arrivalSegment.arrivalAirportName }}</small>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <small>Продолжительность:</small>
+                            <div>
+                                <strong class="text-warning">{{ variant.duration|secondToTime }}</strong>
+                            </div>
+                            {% if variant.countTransplant %}
+                                <div class="text-info show-transplant" style="cursor: pointer">
+                                    {{ variant.countTransplant }} {{ variant.decl(variant.countTransplant,['пересадка','пересадок','пересадок']) }}
+                                    <div style="" class="popup">
+                                        popup
+                                        <small class="close text-danger">Закрыть</small>
                                     </div>
                                 </div>
-                                {% if not loop.last %}
-                                    <div class="text-center">
-                                        {% set next = variant.segments[loop.index0 +1] %}
-                                        Пересадка между рейсами <strong>{{ segment.transplantTime(next)|secondToTime }}</strong>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
+                            {% endif %}
                         </div>
-                    {% endfor %}
-                    <hr />
-                {% endfor %}
-                {% if needBook %}
-                    <div class="" style="margin-bottom: 15px">
-                        <div class="col-md-offset-9">
-                            <input style="margin-left: 42%" class="btn btn-primary" type="submit" value="Забронировать">
-                        </div>
+
                     </div>
-                {% endif %}
+                </div>
+            {% endfor %}
+            <hr/>
+
+        {% endfor %}
+        {% if needBook %}
+            <div class="" style="margin-bottom: 15px">
+                <div class="col-md-offset-9">
+                    <input style="margin-left: 42%" class="btn btn-primary" type="submit" value="Забронировать">
+                </div>
             </div>
-        </div>
-    {% if needBook %}
-        </form>
-    {% endif %}
+            </form>
+        {% endif %}
+    </div>
 {% endfor %}
+<script>
+    $(document).ready(function(){
+        $('.show-transplant').on('click',function(){
+            var popup = $(this).find('.popup').popup({
+                popup : {
+                    position : 'absolute',
+                    bottom:0,
+                    display: 'none',
+                    'z-index': 10000
+                },
+                overlay : {
+                    background : 'none',
+                    'z-index': 1000
+                },
+                closeOnClickOverlay: true,
+                closeSelectors : ['.close']
+            });
+            var self = $(this);
+            popup.openWithOutOffsets();
+        });
+    });
+</script>
+<style>
+    .popup{
+        display: none;
+        background-color: #ffffff;
+        z-index: 10000;
+        box-shadow: 1px 2px 6px -3px #000000;
+        padding: 25px;
+        border: 1px solid #cccccc;
+    }
+</style>

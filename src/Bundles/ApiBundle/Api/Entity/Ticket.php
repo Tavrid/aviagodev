@@ -23,6 +23,28 @@ class Ticket
 
     protected $travelers;
 
+    protected $validatingAirline;
+
+    /**
+     * @return mixed
+     */
+    public function getValidatingAirline()
+    {
+        return $this->validatingAirline;
+    }
+
+    /**
+     * @param mixed $validatingAirline
+     * @return $this
+     */
+    public function setValidatingAirline($validatingAirline)
+    {
+        $this->validatingAirline = $validatingAirline;
+        return $this;
+    }
+
+
+
     /**
      * @return mixed
      */
@@ -159,6 +181,11 @@ class Ticket
     {
         $this->itineraries = $itineraries;
         return $this;
+    }
+
+    public function getFirstItinerarie(){
+        $i = $this->getItineraries();
+        return array_shift($i);
     }
 
     /**
