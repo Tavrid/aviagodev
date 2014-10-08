@@ -27,25 +27,15 @@ class BookInfoResponse extends Response {
         $requestId = $data['RequestID'];;
         $entity = new BookInfo();
         $entity->setTravelers($data['Travellers']);
-        $ticket = new Ticket();
-        $ticket->setRequestId($requestId)
-            ->setTotalPrice($data['Price']['Total']);
 
-
-        $data = $this->response['result'];
-        $requestId = $this->response['result']['RequestID'];
         $ticket = new Ticket();
         $ticket->setRequestId($requestId)
             ->setTotalPrice($data['TotalPrice']['Total'])
             ->setPricing($data['Pricing'])
-            ->setTravelers($data['Travellers']);
-//        echo '<pre>';
-//        print_r($data['Itineraries']); exit;
-//            var_dump($data['Itineraries']); exit;
+            ->setTravelers($data['Travellers'])
+            ->setLatinRegistration($data['LatinRegistration']);
         foreach($data['Itineraries'] as $variants){
             $it = new Itineraries();
-//            foreach($inter as $variants){
-
                 $var = new Variants();
                 $var->setDuration($variants['Duration'])
                     ->setVariantID($variants['VariantID']);
@@ -60,19 +50,13 @@ class BookInfoResponse extends Response {
                         ->setDepartureAirportName($segment['DepartureAirportName'])
                         ->setDepartureDate($segment['DepartureDate'])
                         ->setAvailableSeats($segment['AvailableSeats']);
-
                     $var->addSegment($segm);
                 }
-
                 $it->addVariant($var);
-//            }
-
             $ticket->addItineraries($it);
         }
-//
         $entity->setTicket($ticket)
             ->setBookId($data['BookID']);
-
         $this->entity = $entity;
     }
 

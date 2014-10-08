@@ -40,4 +40,12 @@ abstract class Response {
         return false;
     }
 
+    public function getErrors(){
+        if(isset($this->response['errors'])){
+
+            return $this->response['errors'];
+        }
+        return array();
+    }
+
 } 

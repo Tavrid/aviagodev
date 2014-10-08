@@ -25,6 +25,28 @@ class Ticket
 
     protected $validatingAirline;
 
+    protected $latinRegistration;
+
+    /**
+     * @return mixed
+     */
+    public function getLatinRegistration()
+    {
+        return $this->latinRegistration;
+    }
+
+    /**
+     * @param mixed $latinRegistration
+     * @return $this
+     */
+    public function setLatinRegistration($latinRegistration)
+    {
+        $this->latinRegistration = $latinRegistration;
+        return $this;
+    }
+
+
+
     /**
      * @return mixed
      */

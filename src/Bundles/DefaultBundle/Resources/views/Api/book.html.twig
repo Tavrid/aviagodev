@@ -73,7 +73,10 @@
                 </div>
             </div>
         </div>
-        <div class="alert alert-warning" role="alert">Все поля должны быть заполнены латиницей</div>
+
+        {% if ticket.latinRegistration %}
+            <div class="alert alert-warning" role="alert">Все поля должны быть заполнены латиницей</div>
+        {% endif %}
         <form action="" method="post">
             {{ form_errors(form) }}
             <div>

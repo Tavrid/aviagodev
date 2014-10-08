@@ -43,15 +43,18 @@ class OrderForm  extends AbstractType{
         $this->api = $api;
         $param = array_merge(array('ADT' => 1,'CHD' => 1,'INF' => 0),$param);
         $fieldMap = array();
-
+        $pattern = '/[\w\d]/';
+        if($bookInfoResponse->getEntity()->getTicket()->getLatinRegistration()){
+            $pattern = '/[a-zA-z0-9]/';
+        }
         $fieldMap['ADT'] = ['sub_multi_field',
             'fields' => [
                 'Sex' => ['field', new Assert\NotBlank()],
                 'Name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3)),new Assert\Regex([
-                    'pattern' => '/[a-zA-z0-9]/'
+                    'pattern' => $pattern
                 ])],
                 'Surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3)),new Assert\Regex([
-                    'pattern' => '/[a-zA-z0-9]/'
+                    'pattern' => $pattern
                 ])],
 
                 'Document' => [
@@ -67,10 +70,10 @@ class OrderForm  extends AbstractType{
             'fields' => [
                 'Sex' => ['field', new Assert\NotBlank()],
                 'Name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3)),new Assert\Regex([
-                    'pattern' => '/[a-zA-z0-9]/'
+                    'pattern' => $pattern
                 ])],
                 'Surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3)),new Assert\Regex([
-                    'pattern' => '/[a-zA-z0-9]/'
+                    'pattern' => $pattern
                 ])],
                 'Birthday' => ['field', new Assert\NotBlank()],
 
@@ -80,10 +83,10 @@ class OrderForm  extends AbstractType{
             'fields' => [
                 'Sex' => ['field', new Assert\NotBlank()],
                 'Name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3)),new Assert\Regex([
-                    'pattern' => '/[a-zA-z0-9]/'
+                    'pattern' => $pattern
                 ])],
                 'Surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3)),new Assert\Regex([
-                    'pattern' => '/[a-zA-z0-9]/'
+                    'pattern' => $pattern
                 ])],
                 'Birthday' => ['field', new Assert\NotBlank()],
             ],
@@ -99,11 +102,9 @@ class OrderForm  extends AbstractType{
                         'choices' => ['Male' => 'frontend.order_form.passenger.male','Female' => 'frontend.order_form.passenger.female'],
                         'multiple' => false,
                         'expanded' => true,
-    //                    'required' => true,
                     ]],
                     'Name' => ['options' => ['label' => 'frontend.order_form.passenger.name']],
                     'Surname' => ['options' => ['label' => 'frontend.order_form.passenger.surname']],
-//                    'patronymic' => ['options' => ['label' => 'frontend.order_form.passenger.patronymic']],
                     'Birthday' => [
                         'options' => [
                             'label' => 'frontend.order_form.passenger.birthday',
@@ -120,7 +121,7 @@ class OrderForm  extends AbstractType{
                             'options' => [
                                 'label' => 'frontend.order_form.passenger.passport_valid_until',
                                 'attr' => ['class' => 'birthday form-inline'],
-                                'years' => range((date('Y') -2),date('Y')+10),
+                                'years' => range(date('Y'),date('Y')+10),
                                 'input' => 'array'
                             ],
                             'type' => 'date'
@@ -226,11 +227,15 @@ class OrderForm  extends AbstractType{
 
             $output = $api->getBookRequestor()->execute($query);
             if($output->getIsError()){
-                $formError = new FormError('Ошибка бронирования');
+                $m = '';
+                foreach($output->getErrors() as $error){
+                    $m.=$error['Data']['Message']."\n";//TODO потенциальная проблема при смене апи
+                }
+                $formError = new FormError($m);
                 $event->getForm()->addError($formError);
             } else {
                 $d = $output->getResponseData();
-                $data->setPnr($d['result']['PNR'])
+                $data->setPnr($d['result']['PNR'])//TODO потенциальная проблема при смене апи
                     ->setOrderInfo($d);
             }
         });
