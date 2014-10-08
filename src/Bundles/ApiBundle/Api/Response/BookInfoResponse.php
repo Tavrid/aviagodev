@@ -32,8 +32,10 @@ class BookInfoResponse extends Response {
         $ticket->setRequestId($requestId)
             ->setTotalPrice($data['TotalPrice']['Total'])
             ->setPricing($data['Pricing'])
-            ->setTravelers($data['Travellers'])
-            ->setLatinRegistration($data['LatinRegistration']);
+            ->setTravelers($data['Travellers']);
+        if(isset($data['LatinRegistration'])){
+            $ticket->setLatinRegistration($data['LatinRegistration']);
+        }
         foreach($data['Itineraries'] as $variants){
             $it = new Itineraries();
                 $var = new Variants();
