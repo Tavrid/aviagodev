@@ -44,7 +44,7 @@
                                 </div>
                                 <strong class="text-warning">{{ variant.departureSegment.departureDate|date("H:i") }}</strong>
                             </div>
-                            <strong>{{ variant.departureSegment.departureCityName }}, {{ variant.departureSegment.departureCountryName }}</strong>
+                            <strong>{{ variant.departureSegment.departureCityName }}</strong>
 
                             <div>
                                 <small>{{ variant.departureSegment.departureAirportName }}</small>
@@ -59,7 +59,7 @@
                                 </div>
                                 <strong class="text-warning">{{ variant.arrivalSegment.arrivalDate|date("H:i") }}</strong>
                             </div>
-                            <strong>{{ variant.arrivalSegment.arrivalCityName }}, {{ variant.arrivalSegment.arrivalCountryName }}</strong>
+                            <strong>{{ variant.arrivalSegment.arrivalCityName }}</strong>
 
                             <div>
                                 <small>{{ variant.arrivalSegment.arrivalAirportName }}</small>
@@ -72,32 +72,13 @@
                             </div>
                             {% if variant.countTransplant %}
                                 <div>
-                                    <div  class="text-info show-transplant" style="cursor: pointer">
-                                        {{ variant.countTransplant }} {{ variant.decl(variant.countTransplant,['пересадка','пересадки','пересадок']) }}
-                                    </div>
-                                    <div class="popup">
-                                        <table>
-                                            <tbody>
-                                                {% for a in variant.transplantAirports %}
-                                                    <tr>
-                                                        <td>
-                                                            <strong>
-                                                                {{ a.name }}
-                                                            </strong>
-                                                        </td>
+                                    <small>
+                                        {{ variant.countTransplant }} {{ variant.decl(variant.countTransplant,['пересадка','пересадки','пересадок']) }}:
+                                    </small>
+                                    {% for a in variant.transplantAirports %}
+                                        <strong>{{ a.name }}</strong>, <small>между рейсами:{{ a.time|secondToTime }}</small>
+                                    {% endfor %}
 
-                                                    </tr>
-                                                    <tr>
-                                                        <td><small>Между рейсами:</small><strong class="text-warning">{{ a.time|secondToTime }}</strong></td>
-
-                                                    </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                        <div>
-                                            <small class="close-popup text-danger pull-right" style="cursor: pointer">Закрыть</small>
-                                        </div>
-                                    </div>
                                 </div>
                             {% endif %}
                         </div>
@@ -118,37 +99,3 @@
         {% endif %}
     </div>
 {% endfor %}
-<script>
-    $(document).ready(function(){
-        $('.show-transplant').on('click',function(){
-            var popup = $(this).parent('div').find('.popup').popup({
-                popup : {
-                    position : 'absolute',
-                    bottom:0,
-                    right:0,
-                    display: 'none',
-                    'z-index': 10000
-                },
-                overlay : {
-                    background : 'none',
-                    'z-index': 1000
-                },
-                closeOnClickOverlay: true,
-                closeSelectors : ['.close-popup']
-            });
-            var self = $(this);
-            popup.openWithOutOffsets();
-        });
-    });
-</script>
-<style>
-    .popup{
-        display: none;
-        background-color: #ffffff;
-        z-index: 10000;
-        box-shadow: 1px 2px 6px -3px #000000;
-        padding: 25px;
-        border: 1px solid #cccccc;
-        width: 450px;
-    }
-</style>
