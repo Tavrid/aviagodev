@@ -55,35 +55,23 @@ $(function() {
     });
 
 
-    //$( "#SearchForm_date_from" ).datetimepicker({
-    //    lang: "ru",
-    //    timepicker: false,
-    //    format: 'Y-m-d',
-    //    closeOnDateSelect: true,
-    //    minDate: new Date(),
-    //    onSelectDate: function(){
-    //        setTimeout(function () {
-    //
-    //            if($('#SearchForm_date_from').val().length){
-    //                $("#SearchForm_date_to").val('');
-    //                $("#SearchForm_date_to").datetimepicker('show');
-    //            }
-    //        },100);
-    //    }
-    //});
-    //$( "#SearchForm_date_to" ).datetimepicker({
-    //    lang: "ru",
-    //    timepicker: false,
-    //    format: 'Y-m-d',
-    //    closeOnDateSelect: true,
-    //    onShow:function( ct ){
-    //        var from_date = $('#SearchForm_date_from').val();
-    //        this.setOptions({
-    //            minDate: from_date,
-    //            startDate: from_date
-    //        });
-    //    }
-    //});
+    $('body').on('click','#filter-time-btn',function(){
+
+        $('#filter-time-popup').popup(
+            {
+                popup: {
+                    'z-index': 450
+                },
+                overlay : {
+                    background: 'none',
+                    'z-index': 400
+                },
+                overlaySelector : '#overlay-filter',
+                closeOnClickOverlay: true
+
+            }
+        ).openWithOutOffsets();
+    });
 
     function autocomplete(input,hiddenInput){
         input.autocomplete({

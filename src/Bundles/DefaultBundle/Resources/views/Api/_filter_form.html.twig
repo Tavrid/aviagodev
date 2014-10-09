@@ -1,6 +1,20 @@
 <div class="well">
     <form  id="filter-form" action="" class="form-inline">
-        {{ form_widget(filter_form) }}
+        {{ form_row(filter_form.departure_airport) }}
+        {{ form_row (filter_form.arrival_airport) }}
+        {{ form_row (filter_form.airline) }}
+
+        <a href="#" id="filter-time-btn">Время вылета прилета</a>
+        <div style="display: none;right: -25px;" class="panel panel-primary" id="filter-time-popup">
+            <div class="panel-body">
+                <div>
+                    {{ form_row(filter_form.departure_time) }}
+                </div>
+                <div>
+                    {{ form_row(filter_form.arrival_time) }}
+                </div>
+            </div>
+        </div>
     </form>
 
 </div>

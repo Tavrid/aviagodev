@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Bundles\ApiBundle\Api\Filter\Time;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Bundles\ApiBundle\Api\Response\SearchResponse;
@@ -52,15 +53,25 @@ class FilterForm extends AbstractType {
             }
         }
     }
-
+    //утро день вечер и ночь
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
         $builder
             ->add('departure_airport','choice',['label' => 'Аэропорт вылета','choices' => $this->departureAirportCh])
             ->add('arrival_airport','choice',['label' => 'Аэропорт прилета','choices' => $this->arrivalAirportCh])
-//            ->add('departure_time','jquery_range',['min' => 1,'max' => 10])
-//            ->add('arrival_time','jquery_range',['min' => 1,'max' => 10])
+            ->add('departure_time','choice',[
+                'multiple' => true,
+                'label' => 'Время вылета',
+                'choices' => Time::getFilterValues(),
+                "expanded" => true,
+            ])
+            ->add('arrival_time','choice',[
+                'multiple' => true,
+                'label' => 'Время прилета',
+                'choices' => Time::getFilterValues(),
+                "expanded" => true,
+            ])
             ->add('airline','choice',['label' => 'Авиакомпания','choices' => $this->airlineCh]);
 
     }
