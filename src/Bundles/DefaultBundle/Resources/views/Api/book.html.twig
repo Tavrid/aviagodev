@@ -1,5 +1,18 @@
 {% extends "BundlesDefaultBundle:Layouts:main.html.twig" %}
-
+{% block js %}
+    {{ parent() }}
+    {% javascripts 'bundles/bundlesdefault/lib/masked.js' 'bundles/bundlesdefault/js/default/book.js' 'bundles/bundlesdefault/lib/intl-tel-input-master/build/js/intlTelInput.min.js' combine=true%}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% block stylesheets %}
+        {{ parent() }}
+        {% stylesheets
+            'bundles/bundlesdefault/lib/intl-tel-input-master/build/css/intlTelInput.css'
+        filter='cssrewrite' combine=true %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+        {% endstylesheets %}
+    {% endblock %}
+{% endblock %}
 {% block body %}
     <div class="col-md-3">
         <h3>Информация о заказе</h3>
