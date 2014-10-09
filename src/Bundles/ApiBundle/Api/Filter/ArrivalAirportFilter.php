@@ -7,9 +7,8 @@
  */
 namespace Bundles\ApiBundle\Api\Filter;
 
-use Bundles\ApiBundle\Api\Entity\Itineraries;
-use Bundles\ApiBundle\Api\Entity\Variants;
-use Bundles\ApiBundle\Api\Entity\Segments;
+use Bundles\ApiBundle\Api\Entity\Ticket;
+
 class ArrivalAirportFilter extends Filter {
 
 
@@ -18,22 +17,29 @@ class ArrivalAirportFilter extends Filter {
     public function __construct($airport){
         $this->airport = $airport;
     }
-    public function filterVariant(Variants $variants)
-    {
-        return true;
-    }
 
-    public function filterSegment(Segments $segment)
+    public function filterItem(Ticket &$ticket)
     {
-        if(empty($this->airport) || !$segment->getIsLastSegment()){
+        if(!$this->airport){
             return true;
         }
-        return $segment->getArrivalAirport() == $this->airport;
-    }
+        $variants = $ticket->getFirstItinerarie()->getVariants();
 
-    public function filterItineraries(Itineraries $itineraries)
-    {
-        return true;
+        foreach($variants as $k => $variant){
+            $segment = $variant->getArrivalSegment();
+            $variant->setDuration(0);
+            if($segment->getArrivalAirport() != $this->airport){
+                unset($variants[$k]);
+            }
+        }
+
+        if(!empty($variants)){
+            $ticket->getFirstItinerarie()->setVariants($variants);
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
 }

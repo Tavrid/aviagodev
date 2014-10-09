@@ -205,9 +205,16 @@ class Ticket
         return $this;
     }
 
+    /**
+     * @return \Bundles\ApiBundle\Api\Entity\Itineraries
+     */
     public function getFirstItinerarie(){
         $i = $this->getItineraries();
-        return array_shift($i);
+        if(isset($i[0])){
+            return $i[0];
+        } else {
+            return new Itineraries();
+        }
     }
 
     /**

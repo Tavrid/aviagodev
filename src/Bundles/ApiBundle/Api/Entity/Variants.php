@@ -124,21 +124,33 @@ class Variants
 
     }
 
+    /**
+     * @return Segments
+     */
     public function getDepartureSegment()
     {
         $segments = $this->getSegments();
-        return array_shift($segments);
+        if(!isset($segments[0])){
+            return new Segments();
+        }
+        return $segments[0];
 
     }
 
+    /**
+     * @return Segments
+     */
     public function getArrivalSegment()
     {
         $segments = $this->getSegments();
         $count = count($segments);
+        if(!$count){
+            return new Segments();
+        }
         if ($count > 1) {
-            return array_pop($segments);
+            return $segments[$count-1];
         } else {
-            return array_shift($segments);
+            return $segments[0];
         }
     }
 

@@ -160,6 +160,7 @@ class ApiController extends Controller
                 } else {
                     $filterParams = array();
                 }
+
                 $f = new SearchResultFilter($output,$this->container->getParameter('bundles_default.count_on_page'));
                 $data = !empty($filterParams) ? $f->getData($page,SearchFilters::getFiltersByParams($filterForm->getData())): $f->getData($page,array());
                 $d = array( 'html'=>$this->renderView('BundlesDefaultBundle:Api:_items.html.twig',array(
