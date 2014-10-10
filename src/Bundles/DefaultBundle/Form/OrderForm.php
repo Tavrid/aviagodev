@@ -9,7 +9,6 @@
 namespace Bundles\DefaultBundle\Form;
 
 
-use Acme\AdminBundle\Model\Order;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -23,6 +22,9 @@ use Symfony\Component\Form\FormError;
 use Bundles\ApiBundle\Api\Api;
 use Bundles\ApiBundle\Api\Response\BookInfoResponse;
 use Bundles\ApiBundle\Api\Query\BookQuery;
+use Acme\CoreBundle\Model\AbstractModel;
+
+
 
 class OrderForm  extends AbstractType{
     /**
@@ -37,7 +39,12 @@ class OrderForm  extends AbstractType{
      * @var BookInfoResponse
      */
     protected $bookInfoResponse;
-    public function __construct(BookInfoResponse $bookInfoResponse,Api $api){
+    /**
+     * @var \Acme\AdminBundle\Model\Country
+     */
+    protected $countryModel;
+    public function __construct(BookInfoResponse $bookInfoResponse,Api $api,AbstractModel $countryModel){
+        $this->countryModel = $countryModel;
         $param = $bookInfoResponse->getEntity()->getTravelers();
         $this->bookInfoResponse = $bookInfoResponse;
         $this->api = $api;
@@ -114,7 +121,13 @@ class OrderForm  extends AbstractType{
                         ],
                         'type' => 'birthday'
                     ],
-                    'Citizen' => ['options' => ['data' => 'RU'],'type' => 'hidden'],
+                    'Citizen' => [
+                        'options' => [
+                            'label' => 'frontend.order_form.passenger.citizen',
+                            'choices' => $this->countryModel->getCountries()
+                        ],
+                        'type' => 'choice'
+                    ],
                     'Document' => [
                         'Number' => ['options' => ['label' => 'frontend.order_form.passenger.number_passport']],
                         'ExpireDate' => [
@@ -199,6 +212,8 @@ class OrderForm  extends AbstractType{
 
             /** @var \Acme\AdminBundle\Entity\Order $data */
             $data = $event->getData();
+            echo '<pre>';
+            print_r($data); exit;
             $query = new BookQuery();
             $travelers = $data->getPassengers();
             foreach($travelers as $k => $v){

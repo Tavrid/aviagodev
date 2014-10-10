@@ -1,0 +1,25 @@
+Acme\AdminBundle\Entity\Country:
+    type: entity
+    table: country
+    repositoryClass: Acme\AdminBundle\Repository\CountryRepository
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+        code:
+            type: integer
+            length: 10
+        fullname:
+            type: string
+        alpha2:
+            type: string
+            length: 2
+        alpha3:
+            type: string
+            length: 3
+
+
+

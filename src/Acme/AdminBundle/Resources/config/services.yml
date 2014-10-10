@@ -27,4 +27,8 @@ services:
               arguments:
                   - "@service_container"
                   - Acme\AdminBundle\Entity\Log
-
+    country.model.manager :
+          class: Acme\AdminBundle\Model\Country
+          arguments:
+              - "@service_container"
+              - Acme\AdminBundle\Entity\Country

@@ -80,7 +80,7 @@ class ApiController extends Controller
         $orderManager = $this->get('admin.order.manager');
         $entity = $orderManager->getEntity();
 
-        $form = $this->createForm(new OrderForm($data,$this->get('avia.api.manager')),$entity);
+        $form = $this->createForm(new OrderForm($data,$this->get('avia.api.manager'),$this->get('country.model.manager')),$entity);
         if($request->isMethod('post')){
 
             $entity->setPrice($data->getEntity()->getTicket()->getTotalPrice());
