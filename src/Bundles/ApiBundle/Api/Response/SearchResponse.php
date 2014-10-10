@@ -104,7 +104,8 @@ class SearchResponse extends Response implements \Iterator,\ArrayAccess, \Counta
         $ticket = new Ticket();
         $ticket->setRequestId($requestId);
         $ticket->setTotalPrice($data['TotalPrice']['Total'])
-                ->setValidatingAirline($data['ValidatingAirline']);
+                ->setValidatingAirline($data['ValidatingAirline'])
+                ->setLastTicketDate($data['LastTicketDate']);
 
         foreach($data['Itineraries'] as $inter){
             $it = new Itineraries();

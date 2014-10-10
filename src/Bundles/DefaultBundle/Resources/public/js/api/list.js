@@ -41,8 +41,11 @@ $(document).ready(function(){
 
     });
     $('body').on('submit','.book-form',function(){
+        _GlobalAppObject.loadingStart();
         $.post($(this).attr('action'),$(this).serialize(),function(data){
             window.location = data.url;
+        }).error(function(){
+            _GlobalAppObject.loadingStop();
         });
         return false;
     });

@@ -27,6 +27,28 @@ class Ticket
 
     protected $latinRegistration;
 
+    protected $lastTicketDate;
+
+    /**
+     * @return mixed
+     */
+    public function getLastTicketDate()
+    {
+        return $this->lastTicketDate;
+    }
+
+    /**
+     * @param mixed $lastTicketDate
+     * @return $this
+     */
+    public function setLastTicketDate($lastTicketDate)
+    {
+        $this->lastTicketDate = $lastTicketDate;
+        return $this;
+    }
+
+
+
     /**
      * @return mixed
      */

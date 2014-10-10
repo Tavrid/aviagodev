@@ -25,3 +25,6 @@ frontend:
       placeholders:
           city: Выберите город
           date: Укажите дату
+
+  flights:
+      last_ticket_date: Оплатить до

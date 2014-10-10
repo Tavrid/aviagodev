@@ -105,7 +105,12 @@
         {% endfor %}
         {% if needBook %}
             <div class="" style="margin-bottom: 15px">
-                <div class="col-md-offset-9">
+                <div class="col-md-4">
+                    {% if ticket.lastTicketDate %}
+                       {% trans %}frontend.flights.last_ticket_date{% endtrans %}: <strong class="text-warning">{{ ticket.lastTicketDate|date('d.m.Y') }}</strong>
+                    {% endif %}
+                </div>
+                <div class="col-md-offset-8">
                     <input style="margin-left: 42%" class="btn btn-primary" type="submit" value="Забронировать">
                 </div>
             </div>
