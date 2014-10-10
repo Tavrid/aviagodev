@@ -2,6 +2,7 @@
 
 namespace Bundles\DefaultBundle\Controller;
 
+use Bundles\ApiBundle\Api\Api;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Bundles\DefaultBundle\Form\SearchForm;
@@ -24,6 +25,9 @@ use Bundles\ApiBundle\Api\Model\SearchResultFilter;
 use Bundles\ApiBundle\Api\Model\SearchFilters;
 
 use Bundles\ApiBundle\Api\Response\BookInfoResponse;
+
+use Symfony\Component\Form\FormError;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ApiController extends Controller
 {
@@ -73,30 +77,55 @@ class ApiController extends Controller
     public function bookAction(Request $request,$key){
         /** @var \Memcached $memcache */
         $memcache = $this->get('memcache.default');
-        $data = $memcache->get($key);
 
+        $bookInfoResponse = $memcache->get($key);
+        if(empty($bookInfoResponse)){
+            throw $this->createNotFoundException();
+        }
 
         /** @var \Acme\AdminBundle\Model\Order $orderManager */
         $orderManager = $this->get('admin.order.manager');
         $entity = $orderManager->getEntity();
 
-        $form = $this->createForm(new OrderForm($data,$this->get('avia.api.manager'),$this->get('country.model.manager')),$entity);
+        $form = $this->createForm(new OrderForm($bookInfoResponse,$this->get('country.model.manager')),$entity);
         if($request->isMethod('post')){
 
-            $entity->setPrice($data->getEntity()->getTicket()->getTotalPrice());
+            $entity->setPrice($bookInfoResponse->getEntity()->getTicket()->getTotalPrice());
             $form->submit($request);
             if($form->isValid()){
 
-                $orderManager->save($entity);
-                return $this->redirect($this->generateUrl('bundles_default_api_order',array(
-                    'orderID' => $entity->getOrderId()
-                )));
+                $query = new BookQuery();
+                $travelers = $entity->getPassengers();
+
+                $query->setParams([
+                    'bookID' => $bookInfoResponse->getEntity()->getBookId(),
+                    'travellers' => $travelers,
+                    'contacts' => array(
+                        'Email' => $entity->getEmail(),
+                        'PhoneMobile' => $entity->getPhone(),
+                        'PhoneHome' => ''
+                    ),
+                ]);
+                /** @var Api $api */
+                $api = $this->get('avia.api.manager');
+                $output = $api->getBookRequestor()->execute($query);
+                if(!$output->getIsError()){
+                    $d = $output->getResponseData();
+                    $entity->setPnr($d['result']['PNR'])//TODO потенциальная проблема при смене апи
+                    ->setOrderInfo($d);
+                    $orderManager->save($entity);
+                    return $this->redirect($this->generateUrl('bundles_default_api_order',array(
+                        'orderID' => $entity->getOrderId()
+                    )));
+                }  else {
+                    $form->addError(new FormError('Error book'));
+                }
             }
         }
 
         return $this->render('BundlesDefaultBundle:Api:book.html.twig',[
             'form' => $form->createView(),
-            'ticket' => $data->getEntity()->getTicket()
+            'ticket' => $bookInfoResponse->getEntity()->getTicket()
         ]);
 
 

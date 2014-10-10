@@ -11,16 +11,10 @@ namespace Bundles\DefaultBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
-
-
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Form\FormError;
-use Bundles\ApiBundle\Api\Api;
+
 use Bundles\ApiBundle\Api\Response\BookInfoResponse;
-use Bundles\ApiBundle\Api\Query\BookQuery;
+
 use Acme\CoreBundle\Model\AbstractModel;
 
 use Bundles\DefaultBundle\Form\DataTransformer\PassengerTransformer;
@@ -30,10 +24,7 @@ class OrderForm  extends AbstractType{
      * @var
      */
     protected $passengersParams;
-    /**
-     * @var Api
-     */
-    protected $api;
+
     /**
      * @var BookInfoResponse
      */
@@ -42,11 +33,11 @@ class OrderForm  extends AbstractType{
      * @var \Acme\AdminBundle\Model\Country
      */
     protected $countryModel;
-    public function __construct(BookInfoResponse $bookInfoResponse,Api $api,AbstractModel $countryModel){
+    public function __construct(BookInfoResponse $bookInfoResponse,AbstractModel $countryModel){
         $this->countryModel = $countryModel;
         $param = $bookInfoResponse->getEntity()->getTravelers();
         $this->bookInfoResponse = $bookInfoResponse;
-        $this->api = $api;
+
         $param = array_merge(array('ADT' => 1,'CHD' => 1,'INF' => 0),$param);
         $fieldMap = array();
         $pattern = '/[\w\d]/';
@@ -124,14 +115,17 @@ class OrderForm  extends AbstractType{
                         'options' => [
                             'label' => 'frontend.order_form.passenger.citizen',
                             'choices' => $this->countryModel->getCountries(),
-                            'data' => 'UA'
+                            'data' => 'UA',
+                            'attr' => ['class' => 'citizen','mask-input' => 'passport-mask-adt']
                         ],
                         'type' => 'choice'
                     ],
                     'Document' => [
                         'Number' => ['options' => [
                             'label' => 'frontend.order_form.passenger.number_passport',
-                            'attr' => ['class' => 'passport-mask']
+                            'attr' => [
+                                'class' => 'passport-mask-adt'
+                            ]
                         ]],
                         'ExpireDate' => [
                             'options' => [
@@ -212,43 +206,6 @@ class OrderForm  extends AbstractType{
             ]);
         $transformer = new PassengerTransformer();
         $builder->get('passengers')->addModelTransformer($transformer);
-
-
-
-        $bookInfoResponse = $this->bookInfoResponse;
-        $api = $this->api;
-        $builder->addEventListener(FormEvents::SUBMIT,function(FormEvent $event) use ($bookInfoResponse,$api){
-
-            /** @var \Acme\AdminBundle\Entity\Order $data */
-            $data = $event->getData();
-
-            $query = new BookQuery();
-            $travelers = $data->getPassengers();
-
-            $query->setParams([
-                'bookID' => $bookInfoResponse->getEntity()->getBookId(),
-                'travellers' => $travelers,
-                'contacts' => array(
-                    'Email' => $data->getEmail(),
-                    'PhoneMobile' => $data->getPhone(),
-                    'PhoneHome' => ''
-                ),
-            ]);
-
-            $output = $api->getBookRequestor()->execute($query);
-            if($output->getIsError()){
-                $m = '';
-                foreach($output->getErrors() as $error){
-                    $m.=$error['Data']['Message']."\n";//TODO потенциальная проблема при смене апи
-                }
-                $formError = new FormError($m);
-                $event->getForm()->addError($formError);
-            } else {
-                $d = $output->getResponseData();
-                $data->setPnr($d['result']['PNR'])//TODO потенциальная проблема при смене апи
-                    ->setOrderInfo($d);
-            }
-        });
 
     }
     /**

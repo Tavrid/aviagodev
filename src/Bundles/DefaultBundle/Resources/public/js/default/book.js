@@ -1,7 +1,27 @@
 $(document).ready(function(){
-    $.mask.definitions["d"] = "[a-zA_Z0-9]";
-    //CC DDDDDD ukraine
-    $('.passport-mask').mask("99 99 999999");
+
+    var masks = {
+        'RU' : '99 99 999999',
+        'UA' :'dd 999999'
+    };
+    $.mask.definitions["d"] = "[a-zA-Z]";
+
+    function createMask(){
+        $('.citizen').each(function(){
+            var val = $(this).val();
+            var inputSelector = $(this).attr('mask-input');
+            if(masks.hasOwnProperty(val)){
+                $('.'+inputSelector).mask(masks[val])
+            } else {
+                $('.'+inputSelector).unmask();
+            }
+        })
+    }
+    $('body').on('change','.citizen',function(){
+        createMask();
+    });
+    createMask();
+
     $('#order_phone').intlTelInput({
         'numberType' : 'MOBILE',
         'defaultCountry' : 'ua',
