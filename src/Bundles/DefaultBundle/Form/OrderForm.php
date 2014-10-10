@@ -14,7 +14,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 
 use Symfony\Component\Validator\Constraints as Assert;
@@ -24,7 +23,7 @@ use Bundles\ApiBundle\Api\Response\BookInfoResponse;
 use Bundles\ApiBundle\Api\Query\BookQuery;
 use Acme\CoreBundle\Model\AbstractModel;
 
-
+use Bundles\DefaultBundle\Form\DataTransformer\PassengerTransformer;
 
 class OrderForm  extends AbstractType{
     /**
@@ -64,12 +63,12 @@ class OrderForm  extends AbstractType{
                     'pattern' => $pattern
                 ])],
 
+                'Citizen' => ['field', new Assert\NotBlank()],
                 'Document' => [
                     'Number' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
                     'ExpireDate' => ['field', new Assert\NotBlank()],
 //                    ]
                 ],
-                'Citizen' => ['field', new Assert\NotBlank()],
                 'Birthday' => ['field', new Assert\NotBlank()],
             ],
         ];
@@ -124,12 +123,16 @@ class OrderForm  extends AbstractType{
                     'Citizen' => [
                         'options' => [
                             'label' => 'frontend.order_form.passenger.citizen',
-                            'choices' => $this->countryModel->getCountries()
+                            'choices' => $this->countryModel->getCountries(),
+                            'data' => 'UA'
                         ],
                         'type' => 'choice'
                     ],
                     'Document' => [
-                        'Number' => ['options' => ['label' => 'frontend.order_form.passenger.number_passport']],
+                        'Number' => ['options' => [
+                            'label' => 'frontend.order_form.passenger.number_passport',
+                            'attr' => ['class' => 'passport-mask']
+                        ]],
                         'ExpireDate' => [
                             'options' => [
                                 'label' => 'frontend.order_form.passenger.passport_valid_until',
@@ -191,6 +194,7 @@ class OrderForm  extends AbstractType{
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder->add('passengers','multi_field',$this->passengersParams)
             ->add('email','email',['label' => 'frontend.order_form.email'])
             ->add('phone','text',['label' => 'frontend.order_form.phone'])
@@ -206,30 +210,21 @@ class OrderForm  extends AbstractType{
                     ]
                 ]
             ]);
+        $transformer = new PassengerTransformer();
+        $builder->get('passengers')->addModelTransformer($transformer);
+
+
+
         $bookInfoResponse = $this->bookInfoResponse;
         $api = $this->api;
         $builder->addEventListener(FormEvents::SUBMIT,function(FormEvent $event) use ($bookInfoResponse,$api){
 
             /** @var \Acme\AdminBundle\Entity\Order $data */
             $data = $event->getData();
-            echo '<pre>';
-            print_r($data); exit;
+
             $query = new BookQuery();
             $travelers = $data->getPassengers();
-            foreach($travelers as $k => $v){
-                if(empty($v)){
-                    unset($travelers[$k]);
-                } else {
-                    $i = 0;
-                    foreach($travelers[$k] as $key => $val){
-                        $t = $travelers[$k][$key];
-                        unset($travelers[$k][$key]);
-                        $travelers[$k][$i] = $t;
-                        $i++;
-                    }
-                }
-            }
-            $travelers = $this->ucfirstKeyRecursive($travelers);
+
             $query->setParams([
                 'bookID' => $bookInfoResponse->getEntity()->getBookId(),
                 'travellers' => $travelers,
@@ -256,24 +251,6 @@ class OrderForm  extends AbstractType{
         });
 
     }
-
-    protected function ucfirstKeyRecursive($array){
-        foreach($array as $key => $val){
-            unset($array[$key]);
-            if(is_array($val)){
-                $array[ucfirst($key)]  = $this->ucfirstKeyRecursive($val);
-            } else {
-                $array[ucfirst($key)] = $val;
-            }
-        }
-        return $array;
-    }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-
-    }
-
     /**
      * Returns the name of this type.
      *

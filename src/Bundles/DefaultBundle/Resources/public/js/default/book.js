@@ -1,6 +1,7 @@
 $(document).ready(function(){
-    $('#order_passengers_ADT_1_Document_Number').mask("99/99/9999");
-    $.mask.definitions["d"] = "[0-9]";
+    $.mask.definitions["d"] = "[a-zA_Z0-9]";
+    //CC DDDDDD ukraine
+    $('.passport-mask').mask("99 99 999999");
     $('#order_phone').intlTelInput({
         'numberType' : 'MOBILE',
         'defaultCountry' : 'ua',
