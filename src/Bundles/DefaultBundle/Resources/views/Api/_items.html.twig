@@ -2,20 +2,27 @@
 {% for ticket in data %}
 
     <div class="well">
-        <strong class="text-danger">{{ ticket.totalPrice|number_format(0,'.',' ') }} руб</strong>
-        <strong  class="text-warning">{{ ticket.firstItinerarie.firstVariant.departureSegment.departureDate|date("d.m.Y") }}</strong>
+        <strong class="text-danger">
+            <h4>{{ ticket.totalPrice|number_format(0,'.',' ') }} руб</h4>
+        </strong>
+
         {% if needBook %}
             <form action="{{ path("bundles_default_api_info") }}" class="book-form">
         {% endif %}
         {% for int in ticket.itineraries %}
             {% set parent_loop = loop %}
             {% for variant in int.variants %}
-
-
-
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        <div class="panel-title"></div>
+                        <div class="panel-title">
+                            {% if loop.first  %}
+                                {% if parent_loop.first %}
+                                    {{ variant.departureSegment.departureDate|date("d.m.Y") }}
+                                {% elseif parent_loop.last %}
+                                    {{ variant.arrivalSegment.arrivalDate|date("d.m.Y") }}
+                                {% endif %}
+                            {% endif %}
+                        </div>
                     </div>
                     <div class="panel-body">
                         <div class="col-md-1">
@@ -31,10 +38,17 @@
                                     {{ variant.departureSegment.marketingAirlineName }}
                                 </strong>
                             </div>
-                            <small>{{ variant.departureSegment.marketingAirline }} {{ variant.departureSegment.flightNumber }}</small>
-                            {#<div>#}
-                                {#<small> Колличество мест: {{ variant.departureSegment.availableSeats }}</small>#}
-                            {#</div>#}
+                            <div>
+                                <small>
+                                    {{ variant.departureSegment.aircraftName }}
+                                </small>
+                            </div>
+                            <small>
+                                {% for segment in variant.segments %}
+                                    {{ segment.marketingAirline }}{{ segment.flightNumber }}{% if not loop.last %}/{% endif %}
+                                {% endfor %}
+                            </small>
+
                         </div>
                         <div class="col-md-3">
                             <div>

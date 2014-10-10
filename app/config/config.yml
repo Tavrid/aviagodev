@@ -89,7 +89,7 @@ fos_user:
 
 
 bundles_default:
-    count_on_page: 5
+    count_on_page: 20
 
 knp_menu:
     twig:  # use "twig: false" to disable the Twig extension and the TwigRenderer

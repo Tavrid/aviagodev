@@ -134,6 +134,7 @@ class SearchResponse extends Response implements \Iterator,\ArrayAccess, \Counta
                         ->setMarketingAirlineName($segment['MarketingAirlineName'])
                         ->setDepartureAirport($segment['DepartureAirport'])
                         ->setArrivalAirport($segment['ArrivalAirport'])
+                        ->setAircraftName($segment['AircraftName'])
                     ;
 
                     if($i == 0){

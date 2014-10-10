@@ -131,6 +131,27 @@ class Segments {
     protected $departureAirport;
     protected $arrivalAirport;
 
+    protected $aircraftName;
+
+    /**
+     * @return mixed
+     */
+    public function getAircraftName()
+    {
+        return $this->aircraftName;
+    }
+
+    /**
+     * @param mixed $aircraftName
+     * @return $this
+     */
+    public function setAircraftName($aircraftName)
+    {
+        $this->aircraftName = $aircraftName;
+        return $this;
+    }
+
+
     /**
      * @return mixed
      */
