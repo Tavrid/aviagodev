@@ -4,7 +4,7 @@ $(document).ready(function(){
         'RU' : '99 99 999999',
         'UA' :'dd 999999'
     };
-    $.mask.definitions["d"] = "[a-zA-Z]";
+    $.mask.definitions["d"] = "[a-zA-Zа-яА-Я]";
 
     function createMask(){
         $('.citizen').each(function(){
