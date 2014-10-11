@@ -3,6 +3,7 @@
 namespace Bundles\DefaultBundle\Controller;
 
 use Bundles\ApiBundle\Api\Api;
+use Bundles\ApiBundle\Api\Response\AviaCalendarResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Bundles\DefaultBundle\Form\SearchForm;
@@ -15,6 +16,7 @@ use Bundles\ApiBundle\Api\Query\AviaCityByQuery;
 use Bundles\ApiBundle\Api\Query\SearchByQuery;
 use Bundles\ApiBundle\Api\Query\BookInfoQuery;
 use Bundles\ApiBundle\Api\Query\BookQuery;
+use Bundles\ApiBundle\Api\Query\AviaCalendarQuery;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,7 +29,7 @@ use Bundles\ApiBundle\Api\Model\SearchFilters;
 use Bundles\ApiBundle\Api\Response\BookInfoResponse;
 
 use Symfony\Component\Form\FormError;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+
 
 class ApiController extends Controller
 {
@@ -213,6 +215,29 @@ class ApiController extends Controller
         } else {
             throw $this->createNotFoundException();
         }
+
+    }
+
+
+    public function calendarAction(Request $request){
+        $form = $this->createForm(new SearchForm());
+
+        $form->submit($request);
+        $resp = null;
+        if($form->isValid()){
+            /** @var \Bundles\ApiBundle\Api\Api $api */
+            $api = $this->get('avia.api.manager');
+            $params = $form->getData();
+
+            $query = new AviaCalendarQuery();
+            $query->setParams($params);
+            $output = $api->getAviaCalendarRequestor()->execute($query);
+            if(!$output->getIsError()){
+                var_dump($output->getResponseData()); exit;
+            }
+
+        }
+        throw $this->createNotFoundException();
 
     }
 

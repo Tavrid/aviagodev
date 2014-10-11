@@ -21,9 +21,14 @@ bundles_default_api_list:
 bundles_default_api_info:
     pattern: /api/flight/info
     defaults: { _controller: BundlesDefaultBundle:Api:info}
+
 bundles_default_api_flights_items:
     pattern: /flight/get-flights/{page}
     defaults: { _controller: BundlesDefaultBundle:Api:getFilteredItems,page: 1}
+
+bundles_default_api_calendar:
+    pattern: /api/avia-calendar
+    defaults: { _controller: BundlesDefaultBundle:Api:calendar}
 
 bundles_default_api_book:
     pattern: /book/{key}

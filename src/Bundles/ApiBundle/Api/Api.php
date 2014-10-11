@@ -7,6 +7,8 @@
  */
 
 namespace Bundles\ApiBundle\Api;
+
+use Bundles\ApiBundle\Api\Request\AviaCalendarRequest;
 use Bundles\ApiBundle\Api\Request\BookInfoRequest;
 use Bundles\ApiBundle\Api\Response\BookInfoResponse;
 use Lsw\ApiCallerBundle\Caller\ApiCallerInterface;
@@ -46,10 +48,17 @@ class Api {
 
     }
 
+    /**
+     * @return CityRequest
+     */
+
     public function getCityRequestor(){
         return new CityRequest($this->apiKey,$this->apiCaller);
     }
 
+    /**
+     * @return SearchRequest
+     */
     public function getSearchRequestor(){
         $searchRequest = new SearchRequest($this->apiKey,$this->apiCaller);
         $searchRequest->setMemcached($this->memcached)
@@ -57,14 +66,31 @@ class Api {
         return $searchRequest;
     }
 
+    /**
+     * @return BookInfoRequest
+     */
     public function getBookInfoRequestor(){
         $searchRequest = new BookInfoRequest($this->apiKey,$this->apiCaller);
         $searchRequest->setLogger($this->logger);
         return $searchRequest;
     }
 
+    /**
+     * @return BookRequest
+     */
+
     public function getBookRequestor(){
         $searchRequest = new BookRequest($this->apiKey,$this->apiCaller);
+        $searchRequest->setLogger($this->logger);
+        return $searchRequest;
+    }
+
+    /**
+     * @return AviaCalendarRequest
+     */
+
+    public function getAviaCalendarRequestor(){
+        $searchRequest = new AviaCalendarRequest($this->apiKey,$this->apiCaller);
         $searchRequest->setLogger($this->logger);
         return $searchRequest;
     }
