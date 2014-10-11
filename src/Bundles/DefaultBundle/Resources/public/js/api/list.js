@@ -31,7 +31,7 @@ $(document).ready(function(){
         var data = searchForm.concat(filterForm);
         var url =  Routing.generate('bundles_default_api_calendar');
         $.post(url,data,function(data){
-            console.log(data);
+            $('#avia-calendar-box').html(data);
         })
     },100);
     $('body').on('change','#filter-form',function(){

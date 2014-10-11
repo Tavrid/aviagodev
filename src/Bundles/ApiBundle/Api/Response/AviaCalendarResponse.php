@@ -9,17 +9,29 @@
 namespace Bundles\ApiBundle\Api\Response;
 
 use Bundles\ApiBundle\Api\Entity\Ticket;
-use Bundles\ApiBundle\Api\Entity\Itineraries;
-use Bundles\ApiBundle\Api\Entity\Segments;
-use Bundles\ApiBundle\Api\Entity\Variants;
+
+use Bundles\ApiBundle\Api\Entity\Calendar;
 
 
 class AviaCalendarResponse extends Response implements \Iterator,\ArrayAccess, \Countable{
 
-    protected $position = 0;
+    protected $data;
 
     public function __construct() {
-        $this->position = 0;
+        $this->data = array();
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function setResponseData($data)
+    {
+        // TODO: Implement setResponseData() method.
+        $this->response = $data;
+        if(isset($this->response['result']['Data'])){
+            $this->data = $this->response['result']['Data'];
+        }
     }
 
     /**
@@ -36,7 +48,7 @@ class AviaCalendarResponse extends Response implements \Iterator,\ArrayAccess, \
      */
     public function offsetExists($offset)
     {
-        return isset($this->response['result']['Data'][$offset]);
+        return isset($this->data[$offset]);
     }
 
     /**
@@ -67,7 +79,7 @@ class AviaCalendarResponse extends Response implements \Iterator,\ArrayAccess, \
      */
     public function offsetSet($offset, $value)
     {
-        $this->response['result']['Data'][$offset] = $value;
+        $this->data[$offset] = $value;
     }
 
     /**
@@ -81,17 +93,16 @@ class AviaCalendarResponse extends Response implements \Iterator,\ArrayAccess, \
      */
     public function offsetUnset($offset)
     {
-        unset($this->response['result']['Data'][$offset]);
+        unset($this->data[$offset]);
     }
 
 
-    public function getIsError()
-    {
-        if(isset($this->response->errors)){
+    public function getArrivalDates(){
 
-            return count($this->response->errors);
-        }
-        return false;
+    }
+
+    public function getDepartureDates(){
+
     }
 
     /**
@@ -99,7 +110,8 @@ class AviaCalendarResponse extends Response implements \Iterator,\ArrayAccess, \
      * @return Ticket
      */
     protected function createEntity($pos){
-
+        $data = $this->response['result']['Data'][$pos];
+        return new Calendar($data,$pos);
     }
 
     /**
@@ -113,12 +125,7 @@ class AviaCalendarResponse extends Response implements \Iterator,\ArrayAccess, \
      */
     public function count()
     {
-        $data = $this->getResponseData();
-        if(isset($data['result']['Data'])){
-            return count($data['result']['Data']);
-        } else {
-            return 0;
-        }
+        return count($this->data);
     }
 
 
@@ -130,8 +137,10 @@ class AviaCalendarResponse extends Response implements \Iterator,\ArrayAccess, \
      */
     public function current()
     {
+        $key = key($this->data);
 
-        return $this->createEntity($this->position);
+        $this->data[$key] = $this->createEntity($key);
+        return $this->data[$key];
     }
 
     /**
@@ -142,8 +151,7 @@ class AviaCalendarResponse extends Response implements \Iterator,\ArrayAccess, \
      */
     public function next()
     {
-        // TODO: Implement next() method.
-        ++$this->position;
+        next($this->data);
     }
 
     /**
@@ -154,8 +162,7 @@ class AviaCalendarResponse extends Response implements \Iterator,\ArrayAccess, \
      */
     public function key()
     {
-        // TODO: Implement key() method.
-        return $this->position;
+        return key($this->data);
     }
 
     /**
@@ -167,9 +174,7 @@ class AviaCalendarResponse extends Response implements \Iterator,\ArrayAccess, \
      */
     public function valid()
     {
-        // TODO: Implement valid() method.
-
-        return isset($this->response['result']['Data'][$this->position]);
+        return key($this->data) !== null;
     }
 
     /**
@@ -180,8 +185,8 @@ class AviaCalendarResponse extends Response implements \Iterator,\ArrayAccess, \
      */
     public function rewind()
     {
-        $this->position = 0;
-        // TODO: Implement rewind() method.
+        reset($this->data);
+
     }
 
 

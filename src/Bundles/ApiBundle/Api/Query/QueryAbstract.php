@@ -37,7 +37,7 @@ abstract class QueryAbstract {
 
     /**
      * @param $key
-     * @return mixed
+     * @return array
      */
     abstract function buildParams($key);
 

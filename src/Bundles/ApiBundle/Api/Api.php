@@ -91,7 +91,8 @@ class Api {
 
     public function getAviaCalendarRequestor(){
         $searchRequest = new AviaCalendarRequest($this->apiKey,$this->apiCaller);
-        $searchRequest->setLogger($this->logger);
+        $searchRequest->setLogger($this->logger)
+            ->setMemcached($this->memcached);
         return $searchRequest;
     }
 

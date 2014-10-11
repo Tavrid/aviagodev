@@ -29,6 +29,7 @@ use Bundles\ApiBundle\Api\Model\SearchFilters;
 use Bundles\ApiBundle\Api\Response\BookInfoResponse;
 
 use Symfony\Component\Form\FormError;
+use Bundles\ApiBundle\Api\Util\Calendar;
 
 
 class ApiController extends Controller
@@ -233,7 +234,10 @@ class ApiController extends Controller
             $query->setParams($params);
             $output = $api->getAviaCalendarRequestor()->execute($query);
             if(!$output->getIsError()){
-                var_dump($output->getResponseData()); exit;
+                return $this->render('BundlesDefaultBundle:Api:_calendar.html.twig',[
+                    'data' => $output,
+                    'table' =>Calendar::createTable($params['date_from'],$params['date_to'])
+                ]);
             }
 
         }
