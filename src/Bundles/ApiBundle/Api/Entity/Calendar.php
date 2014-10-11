@@ -35,12 +35,11 @@ class Calendar {
         $this->price = isset($data['TotalPrice']['Total']) ? $data['TotalPrice']['Total'] : null;
         $this->date = strtotime($date);
         if($isRoot){
-//            ksort($data);
             foreach($data as $de => $da){
-                if(!$t = strtotime($de)){
-                    break;
+                if(!strtotime($de)){
+                    continue;
                 }
-                $this->addChild(new Calendar($da,$t,false));
+                $this->addChild(new Calendar($da,$de,false));
             }
         }
     }
@@ -67,9 +66,12 @@ class Calendar {
 
     /**
      * @param Calendar $calendar
+     * @return $this
      */
     public function addChild(Calendar $calendar){
         $this->child[$calendar->getDate()] = $calendar;
+
+        return $this;
     }
     public function findChild($key){
         if(isset($this->child[$key])){

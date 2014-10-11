@@ -44,13 +44,14 @@
                 {% for date,val in table %}
                     <tr>
                         <td>{{ date|date('d.m.Y') }}</td>
-                        {% for item in data %}
-                            <td>
-                                {{ dump(date|date('d.m.Y')) }}
-                                {% if item.findChild(date) %}
-                                    {{ item.findChild(date).price }}
+                        {% for d,v in val %}
+                            {% for item in data %}
+                                {% if item.date == d and item.findChild(date) %}
+                                    <td>
+                                        {{ item.findChild(d).price }}
+                                    </td>
                                 {% endif %}
-                            </td>
+                            {% endfor %}
                         {% endfor %}
                     </tr>
                 {% endfor %}
