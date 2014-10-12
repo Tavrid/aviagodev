@@ -9,7 +9,9 @@ $(function() {
                 routeParams[name] = v.value;
             }
         });
-
+        if(routeParams['best_price'] === undefined){
+            routeParams['best_price'] = 0;
+        }
         window.location = Routing.generate('bundles_default_api_list',routeParams);
         return false;
     });
