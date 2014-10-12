@@ -117,7 +117,8 @@ class SearchForm extends AbstractType
             ])
             ->add('best_price', 'checkbox', [
                 'label' => 'Лучшая цена ±3 дня:',
-                'required' => false
+                'required' => false,
+                'attr' => ['checked' => true]
             ])
             ->add('direct_flights', 'checkbox', [
                 'label' => 'Только прямые рейсы:',

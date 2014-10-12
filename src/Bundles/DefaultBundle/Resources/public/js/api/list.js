@@ -26,7 +26,7 @@ $(document).ready(function(){
             $('#search-result-box').html(data.filter_form)
         });
 
-        if($('#SearchForm_direct_flights').is(':checked')){
+        if($('#SearchForm_best_price').is(':checked')){
 
             var filterForm = $('#filter-form').serializeArray();
             var searchForm = $('#search-form').serializeArray();
