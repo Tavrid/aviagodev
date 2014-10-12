@@ -23,9 +23,18 @@
         <div id="search-result-box">
 
         </div>
-        <div id="avia-calendar-box" class="well">
-            Загрузка...
-        </div>
+        {% if form.direct_flights.vars.data %}
+            <div class="well">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Лучшие цены в пределах +/- 3 дней</h3>
+                    </div>
+                    <div  id="avia-calendar-box" class="panel-body">
+                        Загрузка...
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         <div id="result-box">
             {#{% include 'BundlesDefaultBundle:Api:_items.html.twig' with {data: data} %}#}
         </div>

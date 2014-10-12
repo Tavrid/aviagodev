@@ -111,6 +111,7 @@ class AviaCalendarResponse extends Response implements \Iterator,\ArrayAccess, \
      */
     protected function createEntity($pos){
         $data = $this->response['result']['Data'][$pos];
+        
         return new Calendar($data,$pos);
     }
 

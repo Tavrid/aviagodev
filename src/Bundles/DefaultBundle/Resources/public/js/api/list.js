@@ -26,13 +26,16 @@ $(document).ready(function(){
             $('#search-result-box').html(data.filter_form)
         });
 
-        var filterForm = $('#filter-form').serializeArray();
-        var searchForm = $('#search-form').serializeArray();
-        var data = searchForm.concat(filterForm);
-        var url =  Routing.generate('bundles_default_api_calendar');
-        $.post(url,data,function(data){
-            $('#avia-calendar-box').html(data);
-        })
+        if($('#SearchForm_direct_flights').is(':checked')){
+
+            var filterForm = $('#filter-form').serializeArray();
+            var searchForm = $('#search-form').serializeArray();
+            var data = searchForm.concat(filterForm);
+            var url =  Routing.generate('bundles_default_api_calendar');
+            $.post(url,data,function(data){
+                $('#avia-calendar-box').html(data);
+            })
+        }
     },100);
     $('body').on('change','#filter-form',function(){
         p = 1;

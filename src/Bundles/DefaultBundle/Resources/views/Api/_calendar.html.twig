@@ -1,62 +1,56 @@
-
-<div class="panel panel-success">
-    <div class="panel-heading">
-        <h3 class="panel-title">Лучшие цены в пределах +/- 3 дней</h3>
-    </div>
-    <div class="panel-body">
-        {% set c = table|first %}
-        <table class="table table-bordered">
-            {% if c is empty %}
-                <thead>
-                    <tr>
-                        {% for date,p in table %}
-                            <th>{{ date|date('d.m.Y') }}</th>
-                        {% endfor %}
-                    </tr>
-                </thead>
-                <tbody>
-                {% for p in data %}
-                    <tr>
-                        {% for date,val in table %}
-                            {% if p.date == date %}
-                                <th>
-                                    <span class="text-warning">
-                                        {{ p.price|number_format(0,' ',' ') }} руб.
-                                    </span>
-                                </th>
-                            {% else %}
-                                <th></th>
-                            {% endif %}
-                        {% endfor %}
-                    </tr>
+{% set c = table|first %}
+<table class="table table-bordered">
+    {% if c is empty %}
+        <thead>
+            <tr>
+                {% for date,p in table %}
+                    <th>{{ date|date('d.m.Y') }}</th>
                 {% endfor %}
-                </tbody>
-            {% else %}
-                <thead>
-                    <tr>
-                        <th></th>
-                        {% for date in c %}
-                            <th>{{ date|date('d.m.Y') }}</th>
-                        {% endfor %}
-                    </tr>
-                </thead>
-                <tbody>
+            </tr>
+        </thead>
+        <tbody>
+        {% for p in data %}
+            <tr>
                 {% for date,val in table %}
-                    <tr>
-                        <td>{{ date|date('d.m.Y') }}</td>
-                        {% for d,v in val %}
+                    {% if p.date == date %}
+                        <th>
+                            <span class="text-warning">
+                                {{ p.price|number_format(0,' ',' ') }} руб.
+                            </span>
+                        </th>
+                    {% else %}
+                        <th></th>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    {% else %}
+        <thead>
+            <tr>
+                <th></th>
+                {% for date in c %}
+                    <th>{{ date|date('d.m.Y') }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+        {% for date,val in table %}
+            <tr>
+                <td>{{ date|date('d.m.Y') }}</td>
+                {% for d,v in val %}
+                    <td>
+                        <span class="text-warning">
                             {% for item in data %}
-                                {% if item.date == d and item.findChild(date) %}
-                                    <td>
-                                        {{ item.findChild(d).price }}
-                                    </td>
+                                {% if item.date == date and item.findChild(d) %}
+                                    {{ item.findChild(d).price|number_format(0,' ',' ') }} руб
                                 {% endif %}
                             {% endfor %}
-                        {% endfor %}
-                    </tr>
+                        </span>
+                    </td>
                 {% endfor %}
-                </tbody>
-            {% endif %}
-        </table>
-    </div>
-</div>
+            </tr>
+        {% endfor %}
+        </tbody>
+    {% endif %}
+</table>
