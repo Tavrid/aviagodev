@@ -45,13 +45,8 @@
     </div>
     <script>
         $(document).ready(function(){
-            $('body').on('click','.lang',function(){
-                $.post(Routing.generate('bundles_default_change_locale',{
-                    '_locale': $(this).attr('data-value')
-                }),function(){
-                    window.location.reload();
-                });
-            });
+            _GlobalAppObject.setLocale("{{app.request.locale}}");
+            
         });
     </script>
 </body>

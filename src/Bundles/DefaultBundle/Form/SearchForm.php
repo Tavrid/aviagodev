@@ -76,7 +76,7 @@ class SearchForm extends AbstractType
             ])
             ->add('date_to', 'text', [
                 'label' => 'frontend.search_form.date_to',
-                'attr' => ['placeholder' => 'Укажите дату'],
+                'attr' => ['placeholder' => 'frontend.search_form.placeholders.date'],
                 'required' => false
             ])
             ->add('return_way','choice',[
@@ -89,15 +89,15 @@ class SearchForm extends AbstractType
             ])
             ->add('adults', 'choice', [
 
-                'label' => 'Взрослых (12+ лет):',
+                'label' => 'frontend.search_form.adults',
                 'choices' => $adults
             ])
             ->add('children', 'choice', [
-                'label' => 'Детей (2...<12 лет):',
+                'label' => 'frontend.search_form.child',
                 'choices' => $children
             ])
             ->add('infant', 'choice', [
-                'label' => 'Младенцев:',
+                'label' => 'frontend.search_form.infant',
                 'choices' => $infant
             ])
             ->add('class', 'choice', [
@@ -108,21 +108,21 @@ class SearchForm extends AbstractType
                 'F' => 'Первый',
             ]])
             ->add('avia_company', 'choice', [
-                'label' => 'Авиакомпания:',
+                'label' => 'frontend.search_form.airline',
                 'choices' => $this->getAviaCompany()
             ])
             ->add('currency', 'choice', [
-                'label' => 'Валюта:',
+                'label' => 'frontend.search_form.currency',
                 'choices' => ['usd' => 'USD', 'uah' => 'UAH', 'eur' => 'EUR']
             ])
             ->add('best_price', 'checkbox', [
-                'label' => 'Лучшая цена ±3 дня:',
+                'label' => 'frontend.search_form.best_price',
                 'required' => false,
 //                'empty_data' => 0,
                 'attr' => ['checked' => true]
             ])
             ->add('direct_flights', 'checkbox', [
-                'label' => 'Только прямые рейсы:',
+                'label' => 'frontend.search_form.direct_flights',
                 'required' => false,
             ]);
         if($this->model){

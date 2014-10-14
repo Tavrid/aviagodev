@@ -1,0 +1,37 @@
+frontend:
+  order_form:
+      phone: Phone
+      email: Email
+      passenger:
+          name: Name
+          surname: Surname
+          patronymic: Patronymic
+          birthday: Birthday
+          number_passport: Number of passport
+          male: Male
+          female: Female
+          gender: Sex
+          passport_valid_until: Valid passport to
+          citizen: Citizenship
+  search_form:
+      city_from: From
+      city_to: To
+      date_from: Departure date
+      date_to: Arrival date
+      adults: Adults (12 + years)
+      child: Children (2...<12 лет)
+      infant: Infant
+      airline: Airline
+      currency: Currency
+      best_price: Best price ± 3 days
+      direct_flights: Direct flights only
+      return_way:
+          label: Choice of direction
+          one_way: One way
+          multi_way: In both sides
+      placeholders:
+          city: Select a city
+          date: Select dates
+
+  flights:
+      last_ticket_date: Pay up
