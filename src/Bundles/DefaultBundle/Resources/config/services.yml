@@ -2,5 +2,10 @@ parameters:
 #    bundles_default.example.class: Bundles\DefaultBundle\Example
 
 services:
+    budnels_default.locale_listener:
+        class: Bundles\DefaultBundle\EventListener\LocaleListener
+        arguments: ["%kernel.default_locale%"]
+        tags:
+            - { name: kernel.event_subscriber }
 
 

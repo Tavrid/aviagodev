@@ -37,5 +37,9 @@ bundles_default_api_book:
 bundles_default_api_order:
     pattern: /order/{orderID}
     defaults: { _controller: BundlesDefaultBundle:Api:order}
+    
+bundles_default_change_locale:
+    pattern: /locale/{_locale}
+    defaults: {_controller: BundlesDefaultBundle:Default:changeLocale}
 
 

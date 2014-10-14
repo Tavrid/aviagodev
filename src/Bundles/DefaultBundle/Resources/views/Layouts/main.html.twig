@@ -1,38 +1,58 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-    {% block stylesheets %}
-    {% stylesheets
+    <head>
+        {% block stylesheets %}
+            {% stylesheets
         '@front_bootstrap_css'
         'bundles/bundlesdefault/lib/ui-theme/css/jquery-ui.css'
     filter='cssrewrite' combine=true %}
-        <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
-    {% endstylesheets %}
-    {#<link href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet"/>#}
-        <link href="{{ asset('/frontend/css/style.css') }}" rel="stylesheet"/>
-    {% endblock %}
-    {#<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />#}
-    {% block js %}
-        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-        {% javascripts '@jquery' '@jquery_ui_js'
+            <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+            {% endstylesheets %}
+            {#<link href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet"/>#}
+            <link href="{{ asset('/frontend/css/style.css') }}" rel="stylesheet"/>
+        {% endblock %}
+        {#<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />#}
+        {% block js %}
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+            {% javascripts '@jquery' '@jquery_ui_js'
             '@front_bootstrap_js'
             'bundles/bundlesdefault/lib/popup.js'
             'bundles/bundlesdefault/js/app.js'
             combine=true
-        %}
+            %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-    {% endblock %}
-</head>
+            {% endjavascripts %}
+        {% endblock %}
+    </head>
     <body>
-    <div class="page-header"></div>
+        <div class="page-header">
+            <div class="container">
+                
+                <div class="btn-group pull-right row">
+                    <button data-value="ru"  type="button" class="btn btn-default lang {{app.request.locale == 'ru' ? 'active':''}}">ru</button>
+                    <button data-value="en" type="button" class="btn btn-default lang {{app.request.locale == 'en' ? 'active':''}}">en</button>
+                    <button data-value="ua" type="button" class="btn btn-default lang {{app.request.locale == 'ua' ? 'active':''}}">ua</button>
+                </div>
+            </div>
+        </div>
         <div class="container">
-            {% block body %}{% endblock %}
-        </div>
-        <div id="loader" style="display: none; z-index: 10000; padding: 30px 60px; ">
-            <img alt="" src="{{ asset('/bundles/bundlesdefault/img/ajax-loader.gif') }}" />
-        </div>
-    </body>
+        {% block body %}{% endblock %}
+    </div>
+    <div id="loader" style="display: none; z-index: 10000; padding: 30px 60px; ">
+        <img alt="" src="{{ asset('/bundles/bundlesdefault/img/ajax-loader.gif') }}" />
+    </div>
+    <script>
+        $(document).ready(function(){
+            $('body').on('click','.lang',function(){
+                $.post(Routing.generate('bundles_default_change_locale',{
+                    '_locale': $(this).attr('data-value')
+                }),function(){
+                    window.location.reload();
+                });
+            });
+        });
+    </script>
+</body>
 </html>
