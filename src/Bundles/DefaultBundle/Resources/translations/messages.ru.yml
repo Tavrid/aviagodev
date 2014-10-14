@@ -1,5 +1,5 @@
 frontend:
-  order_form:
+    order_form:
       phone: Телефон
       email: Email
       passenger:
@@ -13,7 +13,7 @@ frontend:
           gender: Пол
           passport_valid_until: Паспорт дейст. до
           citizen: Гражданство
-  search_form:
+    search_form:
       city_from: Из
       city_to: В
       date_from: Дата вылета
@@ -25,6 +25,7 @@ frontend:
       currency: Валюта
       best_price: Лучшая цена ±3 дня
       direct_flights: Только прямые рейсы
+      submit: Искать
       return_way:
           label: Выбор направления
           one_way: В одну сторону
@@ -33,5 +34,10 @@ frontend:
           city: Выберите город
           date: Укажите дату
 
-  flights:
+    flights:
       last_ticket_date: Оплатить до
+    default:
+        flights: Авиабилеты
+        previous_searches: Предыдущие поиски
+        all_airports: country, city, Все аэропорты (code)
+      

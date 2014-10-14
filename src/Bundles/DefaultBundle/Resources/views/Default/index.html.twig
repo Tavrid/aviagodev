@@ -11,7 +11,7 @@
         <div class="col-md-8">
             <div class="panel panel-primary well">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Авиабилеты</h3>
+                    <h3 class="panel-title">{% trans %}frontend.default.flights{% endtrans %}</h3>
                 </div>
                 <div class="panel-body">
                 <form action="{{ path('bundles_default_search') }}" method="post" id="search-form">
@@ -52,7 +52,7 @@
                         {#</div>#}
 
                     </div>
-                    <input type="submit" class="btn btn-success pull-right"/>
+                        <input type="submit" value="{%trans%}frontend.search_form.submit{%endtrans%}" class="btn btn-success pull-right"/>
                 </form>
                 </div>
             </div>
@@ -61,7 +61,7 @@
     {% if flights %}
         <div class="row">
             <div class="col-md-8">
-                <h4>Предыдущие поиски</h4>
+                <h4>{%trans%}frontend.default.previous_searches{%endtrans%}</h4>
                 <ul class="list-group">
                     {% for flight in flights %}
                         <li class="list-group-item">

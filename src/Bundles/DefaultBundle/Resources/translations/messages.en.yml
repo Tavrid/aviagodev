@@ -1,5 +1,5 @@
 frontend:
-  order_form:
+    order_form:
       phone: Phone
       email: Email
       passenger:
@@ -13,7 +13,7 @@ frontend:
           gender: Sex
           passport_valid_until: Valid passport to
           citizen: Citizenship
-  search_form:
+    search_form:
       city_from: From
       city_to: To
       date_from: Departure date
@@ -25,6 +25,7 @@ frontend:
       currency: Currency
       best_price: Best price ± 3 days
       direct_flights: Direct flights only
+      submit: Search
       return_way:
           label: Choice of direction
           one_way: One way
@@ -33,5 +34,9 @@ frontend:
           city: Select a city
           date: Select dates
 
-  flights:
+    flights:
       last_ticket_date: Pay up
+    default:
+      flights: Flights
+      previous_searches: Previous searches
+      all_airports: country, city, All airports (code)
