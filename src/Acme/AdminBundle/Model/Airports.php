@@ -63,14 +63,19 @@ class Airports extends AbstractModel {
     }
 
     public function getFormattedNameByIata($code){
-        /** @var \Acme\AdminBundle\Entity\AviaAirports[] $results */
+        $locale = $this->container->get('request')->getLocale();
+        /* @var $results \Acme\AdminBundle\Entity\AviaAirports[]  */
         $results = $this->getRepository()
             ->createQuery(['getByCode' => $code])->getResult();
 
         if($results){
             foreach($results as $val){
                 if($code == $val->getCityCodeEng() ||  $code == $val->getAirportCodeEng()){
-                    return $val->getCountryRus().', '.$val->getCityRus().' ('.$code.')';
+                    if($locale == 'en'){
+                        return $val->getCountryEng().', '.$val->getCityEng().' ('.$code.')';
+                    } else {
+                        return $val->getCountryRus().', '.$val->getCityRus().' ('.$code.')';
+                    }
                 }
             }
         }
