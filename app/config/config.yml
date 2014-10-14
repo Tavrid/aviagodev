@@ -116,5 +116,5 @@ parameters:
 #        fresh_connect: false  # set to true to force full reconnect every call.
 
 fos_js_routing:
-    routes_to_expose: [ bundles_default_api_list,bundles_default_api_flights_items,bundles_default_api_calendar ]
+    routes_to_expose: [ bundles_default_api_list,bundles_default_api_flights_items,bundles_default_api_calendar,bundles_default_change_locale ]
 
