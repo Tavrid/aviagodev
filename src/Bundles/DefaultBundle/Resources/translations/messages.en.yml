@@ -33,10 +33,27 @@ frontend:
       placeholders:
           city: Select a city
           date: Select dates
-
+    filter_form:
+        time: Departure Time Arrival
+        departure_time: Departure time
+        arrival_time:   Arrival time
+        airline: Airline
+        departure_airport: Departure airport
+        arrival_airport: Arrival airport
     flights:
       last_ticket_date: Pay up
     default:
-      flights: Flights
-      previous_searches: Previous searches
-      all_airports: country, city, All airports (code)
+        flights: Flights
+        previous_searches: Previous searches
+        all_airports: country, city, All airports (code)
+        calendar:
+            best_price: Best prices within +/- 3 days
+        list:
+            show_more: Show more
+            item:
+                departure_time: Departure time
+                arrival_time: Arrival time
+                duration: Duration
+                between_flights: Between flights
+                transplant: %count% transplant
+                submit: Book

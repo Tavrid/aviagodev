@@ -58,21 +58,21 @@ class FilterForm extends AbstractType {
     {
 
         $builder
-            ->add('departure_airport','choice',['label' => 'Аэропорт вылета','choices' => $this->departureAirportCh])
-            ->add('arrival_airport','choice',['label' => 'Аэропорт прилета','choices' => $this->arrivalAirportCh])
+            ->add('departure_airport','choice',['label' => 'frontend.filter_form.departure_airport','choices' => $this->departureAirportCh])
+            ->add('arrival_airport','choice',['label' => 'frontend.filter_form.arrival_airport','choices' => $this->arrivalAirportCh])
             ->add('departure_time','choice',[
                 'multiple' => true,
-                'label' => 'Время вылета',
+                'label' => 'frontend.filter_form.departure_time',
                 'choices' => Time::getFilterValues(),
                 "expanded" => true,
             ])
             ->add('arrival_time','choice',[
                 'multiple' => true,
-                'label' => 'Время прилета',
+                'label' => 'frontend.filter_form.arrival_time',
                 'choices' => Time::getFilterValues(),
                 "expanded" => true,
             ])
-            ->add('airline','choice',['label' => 'Авиакомпания','choices' => $this->airlineCh]);
+            ->add('airline','choice',['label' => 'frontend.filter_form.airline','choices' => $this->airlineCh]);
 
     }
 

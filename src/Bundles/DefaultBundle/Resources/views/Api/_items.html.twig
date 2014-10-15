@@ -53,7 +53,7 @@
                         <div class="col-md-3">
                             <div>
                                 <div>
-                                    <small>Время вылета:</small>
+                                    <small>{%trans%}frontend.default.list.item.departure_time{%endtrans%}</small>
 
                                 </div>
                                 <strong class="text-warning">{{ variant.departureSegment.departureDate|date("H:i") }}</strong>
@@ -68,7 +68,7 @@
                         <div class="col-md-3">
                             <div>
                                 <div>
-                                    <small>Время прилета:</small>
+                                    <small>{%trans%}frontend.default.list.item.arrival_time{%endtrans%}</small>
 
                                 </div>
                                 <strong class="text-warning">{{ variant.arrivalSegment.arrivalDate|date("H:i") }}</strong>
@@ -80,17 +80,19 @@
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <small>Продолжительность:</small>
+                            <small>{%trans%}frontend.default.list.item.duration{%endtrans%}</small>
                             <div>
                                 <strong class="text-warning">{{ variant.duration|secondToTime }}</strong>
                             </div>
                             {% if variant.countTransplant %}
                                 <div>
                                     <small>
-                                        {{ variant.countTransplant }} {{ variant.decl(variant.countTransplant,['пересадка','пересадки','пересадок']) }}:
+                                        {% transchoice variant.countTransplant with {'%count%':  variant.countTransplant} %}
+                                            frontend.default.list.item.transplant
+                                        {% endtranschoice %}
                                     </small>
                                     {% for a in variant.transplantAirports %}
-                                        <strong>{{ a.name }}</strong>, <small>между рейсами:{{ a.time|secondToTime }}</small>
+                                        <strong>{{ a.name }}</strong>, <small>{%trans%}frontend.default.list.item.between_flights{%endtrans%}:{{ a.time|secondToTime }}</small>
                                     {% endfor %}
 
                                 </div>
@@ -111,7 +113,7 @@
                     {% endif %}
                 </div>
                 <div class="col-md-offset-8">
-                    <input style="margin-left: 42%" class="btn btn-primary" type="submit" value="Забронировать">
+                    <input style="margin-left: 42%" class="btn btn-primary" type="submit" value="{%trans%}frontend.default.list.item.submit{%endtrans%}">
                 </div>
             </div>
             </form>

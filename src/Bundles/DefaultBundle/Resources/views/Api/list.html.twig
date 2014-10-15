@@ -27,10 +27,10 @@
             <div class="well">
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Лучшие цены в пределах +/- 3 дней</h3>
+                        <h3 class="panel-title">{%trans%}frontend.default.calendar.best_price{%endtrans%}</h3>
                     </div>
                     <div  id="avia-calendar-box" class="panel-body">
-                        Загрузка...
+                        <img alt="" src="{{ asset('/bundles/bundlesdefault/img/ajax-loader.gif') }}" />
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
             {#{% include 'BundlesDefaultBundle:Api:_items.html.twig' with {data: data} %}#}
         </div>
         {#{% if pages > 1 %}#}
-            <div class="btn btn-default hidden" id="get-next">Показать еще</div>
+            <div class="btn btn-default hidden" id="get-next">{%trans%}frontend.default.list.show_more{%endtrans%}</div>
         {#{% endif %}#}
     </div>
 {% endblock %}

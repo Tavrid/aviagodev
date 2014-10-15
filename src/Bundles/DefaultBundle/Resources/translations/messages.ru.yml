@@ -33,11 +33,28 @@ frontend:
       placeholders:
           city: Выберите город
           date: Укажите дату
-
+    filter_form:
+        time: Время вылета прилета
+        departure_time: Время вылета
+        arrival_time:   Время прилета
+        airline: Авиакомпания
+        departure_airport: Аэропорт вылета
+        arrival_airport: Аэропорт прилета
     flights:
       last_ticket_date: Оплатить до
     default:
         flights: Авиабилеты
         previous_searches: Предыдущие поиски
         all_airports: country, city, Все аэропорты (code)
+        calendar:
+            best_price: Лучшие цены в пределах +/- 3 дней
+        list:
+            show_more: Показать еще
+            item:
+                departure_time: Время вылета
+                arrival_time: Время прилета
+                duration: Продолжительность
+                between_flights: Между рейсами
+                transplant: %count% пересадка|%count% пересадки|%count% пересадок
+                submit: Забронировать
       
