@@ -23,10 +23,10 @@ $(document).ready(function(){
     setTimeout(function(){
         getItems(p,function(data){
             $('#result-box').html(data.html);
-            $('#search-result-box').html(data.filter_form)
+            $('#search-result-box').html(data.filter_form);
         });
 
-        if($('#SearchForm_best_price').is(':checked')){
+        if($('#search_form_best_price').is(':checked')){
 
             var filterForm = $('#filter-form').serializeArray();
             var searchForm = $('#search-form').serializeArray();
@@ -34,7 +34,7 @@ $(document).ready(function(){
             var url =  Routing.generate('bundles_default_api_calendar');
             $.post(url,data,function(data){
                 $('#avia-calendar-box').html(data);
-            })
+            });
         }
     },100);
     $('body').on('change','#filter-form',function(){

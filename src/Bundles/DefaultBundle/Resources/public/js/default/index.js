@@ -15,22 +15,22 @@ $(function() {
         window.location = Routing.generate('bundles_default_api_list',routeParams);
         return false;
     });
-    if(!parseInt($('#SearchForm_return_way input[type=radio]:checked').val())){
-        $('#SearchForm_date_to').parents('.form-group ').hide();
-        //$('#SearchForm_date_to').val('');
+    if(!parseInt($('#search_form_return_way input[type=radio]:checked').val())){
+        $('#search_form_date_to').parents('.form-group ').hide();
+        //$('#search_form_date_to').val('');
     }
-    $('#SearchForm_return_way').on('click','input[type=radio]',function(){
-        var val = $('#SearchForm_return_way input[type=radio]:checked').val();
-        var sel = $('#SearchForm_date_to').parents('.form-group ');
+    $('#search_form_return_way').on('click','input[type=radio]',function(){
+        var val = $('#search_form_return_way input[type=radio]:checked').val();
+        var sel = $('#search_form_date_to').parents('.form-group ');
         if(!parseInt(val)){
             sel.hide();
-            $('#SearchForm_date_to').val('');
+            $('#search_form_date_to').val('');
         } else {
             sel.show();
         }
     });
 
-    $( "#SearchForm_date_from" ).datepicker({
+    $( "#search_form_date_from" ).datepicker({
         defaultDate: "+1w",
         minDate: "d",
         lang: 'ru',
@@ -39,20 +39,20 @@ $(function() {
 
         numberOfMonths: 1,
         onClose: function( selectedDate ) {
-            $( "#SearchForm_date_to" ).datepicker( "option", "minDate", selectedDate );
+            $( "#search_form_date_to" ).datepicker( "option", "minDate", selectedDate );
 
-            if($( "#SearchForm_date_to").is(':visible')){
-                $( "#SearchForm_date_to").datepicker('show');
+            if($( "#search_form_date_to").is(':visible')){
+                $( "#search_form_date_to").datepicker('show');
             }
         }
     });
-    $( "#SearchForm_date_to" ).datepicker({
+    $( "#search_form_date_to" ).datepicker({
         //defaultDate: "+1w",
         changeMonth: true,
         dateFormat: 'yy-mm-dd',
         numberOfMonths: 1,
         onClose: function( selectedDate ) {
-            $( "#SearchForm_date_from" ).datepicker( "option", "maxDate", selectedDate );
+            $( "#search_form_date_from" ).datepicker( "option", "maxDate", selectedDate );
         }
     });
 
@@ -99,11 +99,11 @@ $(function() {
             },
             minLength: 3,
             select: function( event, ui ) {
-                hiddenInput.val(ui.item['data-value'])
+                hiddenInput.val(ui.item['data-value']);
             }
         });
     }
-    autocomplete($( "#SearchForm_city_from" ),$( "#SearchForm_city_from_code"));
-    autocomplete($( "#SearchForm_city_to" ),$( "#SearchForm_city_to_code"));
+    autocomplete($( "#search_form_city_from" ),$( "#search_form_city_from_code"));
+    autocomplete($( "#search_form_city_to" ),$( "#search_form_city_to_code"));
 
 });

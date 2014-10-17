@@ -37,9 +37,8 @@ class SearchForm extends AbstractType
      * @var SessionInterface
      */
     protected $session;
-    public function __construct(AbstractModel $model = null,SessionInterface $session = null){
+    public function __construct(SessionInterface $session = null){
         $this->session = $session;
-        $this->model = $model;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -125,8 +124,8 @@ class SearchForm extends AbstractType
                 'label' => 'frontend.search_form.direct_flights',
                 'required' => false,
             ]);
-        if($this->model){
-            $model = $this->model;
+        if($options['city_manager']){
+            $model = $options['city_manager'];
             $builder->addEventListener(FormEvents::PRE_SUBMIT,function(FormEvent $formEvent)use($model){
                 $data = $formEvent->getData();
 
@@ -497,14 +496,16 @@ class SearchForm extends AbstractType
 
     public function getName()
     {
-        return 'SearchForm';
+        return 'search_form';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'csrf_protection' => false
+            'csrf_protection' => false,
+            'city_manager' => null
         ));
+        $resolver->setRequired(['city_manager']);
     }
 
 } 

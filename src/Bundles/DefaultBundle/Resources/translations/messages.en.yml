@@ -19,7 +19,7 @@ frontend:
       date_from: Departure date
       date_to: Arrival date
       adults: Adults (12 + years)
-      child: Children (2...<12 лет)
+      child: Children (2...<12 years)
       infant: Infant
       airline: Airline
       currency: Currency

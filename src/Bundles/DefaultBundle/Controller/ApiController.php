@@ -150,7 +150,7 @@ class ApiController extends Controller
 
     public function listAction(Request $request){
 
-        $form = $this->createForm(new SearchForm($this->get('admin.city.manager')));
+        $form = $this->createForm('search_form',null,['city_manager' => $this->get('admin.city.manager')]);
         $formBook = $this->createForm(new BookInfoForm());
         $data = $request->get('_route_params');
 
@@ -174,7 +174,7 @@ class ApiController extends Controller
     }
 
     public function getFilteredItemsAction(Request $request,$page){
-        $form = $this->createForm(new SearchForm());
+        $form = $this->createForm('search_form');
         $formBook = $this->createForm(new BookInfoForm());
 
         $form->submit($request);
@@ -224,7 +224,7 @@ class ApiController extends Controller
 
 
     public function calendarAction(Request $request){
-        $form = $this->createForm(new SearchForm());
+        $form = $this->createForm('search_form');
 
         $form->submit($request);
         $resp = null;
@@ -249,7 +249,7 @@ class ApiController extends Controller
     }
 
     public function searchAction(Request $request){
-        $form = $this->createForm(new SearchForm());
+        $form = $this->createForm('search_form');
         $form->submit($request);
 
         if($form->isValid()){

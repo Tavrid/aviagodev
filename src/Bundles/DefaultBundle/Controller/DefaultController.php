@@ -13,7 +13,7 @@ class DefaultController extends Controller {
     public function indexAction(Request $request) {
 
         
-        $form = $this->createForm(new SearchForm(null, $this->get('session')));
+        $form = $this->createForm('search_form');
 
         $flights = $this->get('session')->get('flights', []);
 
