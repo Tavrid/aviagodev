@@ -54,6 +54,22 @@ class PassengerTransformer implements DataTransformerInterface{
                     if(isset($t['Document']['Number'])){
                         $t['Document']['Number'] = preg_replace('/[^a-zA-z0-9]/i','',$t['Document']['Number']);
                     }
+                    if(isset($t['Document']['Number'])){
+                        $t['Document']['ExpireDate'] = [
+                            'day' => $t['Document']['ExpireDate']->format('d'),
+                            'year' => $t['Document']['ExpireDate']->format('Y'),
+                            'month' => $t['Document']['ExpireDate']->format('m'),
+                            
+                        ];
+                    }
+                    if(isset($t['Birthday'])){
+                        $t['Birthday'] = [
+                            'day' => $t['Birthday']->format('d'),
+                            'year' => $t['Birthday']->format('Y'),
+                            'month' => $t['Birthday']->format('m'),
+                            
+                        ];
+                    }
                     unset($value[$k][$key]);
                     $value[$k][$i] = $t;
                     $i++;
@@ -61,6 +77,7 @@ class PassengerTransformer implements DataTransformerInterface{
             }
         }
         $value = $this->ucfirstKeyRecursive($value);
+//        var_dump($value); exit;
         return $value;
     }
 
