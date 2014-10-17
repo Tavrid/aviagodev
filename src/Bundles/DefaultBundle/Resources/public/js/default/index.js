@@ -55,7 +55,17 @@ $(function() {
             $( "#search_form_date_from" ).datepicker( "option", "maxDate", selectedDate );
         }
     });
-
+    
+    $('body').on('click','#reverse-city',function(){
+        var cityFrom = $( "#search_form_city_from" ).val();
+        var cityFromCode = $( "#search_form_city_from_code").val();
+        $( "#search_form_city_from" ).val($( "#search_form_city_to" ).val());
+        $( "#search_form_city_from_code" ).val($( "#search_form_city_to_code" ).val());
+        
+        $( "#search_form_city_to" ).val(cityFrom);
+        $( "#search_form_city_to_code" ).val(cityFromCode);
+        
+    });
 
     $('body').on('click','#filter-time-btn',function(){
 

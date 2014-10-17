@@ -15,8 +15,19 @@
                 </div>
                 <div class="panel-body">
                 <form action="{{ path('bundles_default_search') }}" method="post" id="search-form">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         {{ form_row(form.city_from) }}
+                    </div>
+                    <div class="col-md-1">
+                        <div style="margin-top: 30px" class="btn btn-success">
+                                <span class="glyphicon glyphicon-refresh" id="reverse-city"></span>
+                            </div>
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.city_to) }}
+                    </div>
+                    <div class="col-md-6">
+                        
                         {{ form_row(form.city_from_code) }}
                         {{ form_row(form.date_from) }}
                         {{ form_row(form.return_way) }}
@@ -37,7 +48,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        {{ form_row(form.city_to) }}
+                        
                         {{ form_row(form.city_to_code) }}
                         {{ form_row(form.date_to) }}
                             {{ form_row(form.currency) }}
