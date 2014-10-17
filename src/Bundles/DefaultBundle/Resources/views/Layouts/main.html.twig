@@ -28,7 +28,9 @@
             %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
-            <script type="text/javascript" src="/bundles/bundlesdefault/lib/jquery_validator/dist/localization/messages_{{app.request.locale}}.js"></script>
+            {%if app.request.locale!='en' %}
+                <script type="text/javascript" src="/bundles/bundlesdefault/lib/jquery_validator/dist/localization/messages_{{app.request.locale}}.js"></script>
+            {%endif%}
         {% endblock %}
     </head>
     <body>

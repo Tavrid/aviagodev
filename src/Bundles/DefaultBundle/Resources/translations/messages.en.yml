@@ -1,38 +1,43 @@
 frontend:
     order_form:
-      phone: Phone
-      email: Email
-      passenger:
-          name: Name
-          surname: Surname
-          patronymic: Patronymic
-          birthday: Birthday
-          number_passport: Number of passport
-          male: Male
-          female: Female
-          gender: Sex
-          passport_valid_until: Valid passport to
-          citizen: Citizenship
+        phone: Phone
+        email: Email
+        passenger:
+            name: Name
+            surname: Surname
+            patronymic: Patronymic
+            birthday: Birthday
+            number_passport: Number of passport
+            male: Male
+            female: Female
+            gender: Sex
+            passport_valid_until: Valid passport to
+            citizen: Citizenship
     search_form:
-      city_from: From
-      city_to: To
-      date_from: Departure date
-      date_to: Arrival date
-      adults: Adults (12 + years)
-      child: Children (2...<12 years)
-      infant: Infant
-      airline: Airline
-      currency: Currency
-      best_price: Best price ± 3 days
-      direct_flights: Direct flights only
-      submit: Search
-      return_way:
-          label: Choice of direction
-          one_way: One way
-          multi_way: In both sides
-      placeholders:
-          city: Select a city
-          date: Select dates
+        city_from: From
+        city_to: To
+        date_from: Departure date
+        date_to: Arrival date
+        adults: Adults (12 + years)
+        child: Children (2...<12 years)
+        infant: Infant
+        airline: Airline
+        currency: Currency
+        best_price: Best price ± 3 days
+        direct_flights: Direct flights only
+        submit: Search
+        class: Class
+        class_values:
+              y: Economy
+              c: Business
+              f: First
+        return_way:
+            label: Choice of direction
+            one_way: One way
+            multi_way: In both sides
+        placeholders:
+            city: Select a city
+            date: Select dates
     filter_form:
         time: Departure Time Arrival
         departure_time: Departure time

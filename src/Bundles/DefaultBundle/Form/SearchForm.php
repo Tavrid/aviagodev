@@ -16,7 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 
-use Acme\CoreBundle\Model\AbstractModel;
+use Symfony\Component\Translation\TranslatorInterface;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -37,8 +37,20 @@ class SearchForm extends AbstractType
      * @var SessionInterface
      */
     protected $session;
-    public function __construct(SessionInterface $session = null){
+    
+    /**
+     *
+     * @var TranslatorInterface 
+     */
+    protected $translation;
+    /**
+     * 
+     * @param SessionInterface $session
+     * @param TranslatorInterface $translation
+     */
+    public function __construct(SessionInterface $session, TranslatorInterface $translation){
         $this->session = $session;
+        $this->translation = $translation;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -100,11 +112,11 @@ class SearchForm extends AbstractType
                 'choices' => $infant
             ])
             ->add('class', 'choice', [
-                'label' => 'Класс:',
+                'label' => 'frontend.search_form.class',
                 'choices' => [
-                'Y' => 'Эконом',
-                'C' => 'Бизнес',
-                'F' => 'Первый',
+                'Y' => $this->translation->trans('frontend.search_form.class_values.y'),
+                'C' => $this->translation->trans('frontend.search_form.class_values.c'),
+                'F' => $this->translation->trans('frontend.search_form.class_values.f'),
             ]])
             ->add('avia_company', 'choice', [
                 'label' => 'frontend.search_form.airline',

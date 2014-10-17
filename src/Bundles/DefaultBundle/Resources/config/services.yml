@@ -14,7 +14,7 @@ services:
             - { name: form.type, alias: order }
     budnels_default.form.type.search_form:
         class: Bundles\DefaultBundle\Form\SearchForm
-        arguments: [@session]
+        arguments: [@session,@translator]
         tags:
             - { name: form.type, alias: search_form }
 
