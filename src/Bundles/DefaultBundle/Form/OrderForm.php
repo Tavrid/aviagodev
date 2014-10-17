@@ -69,6 +69,7 @@ class OrderForm extends AbstractType {
                 'Surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3)), new Assert\Regex([
                         'pattern' => $pattern
                             ])],
+                'Citizen' => ['field', new Assert\NotBlank()],
                 'Birthday' => ['field', new Assert\NotBlank()],
             ],
         ];
@@ -81,6 +82,7 @@ class OrderForm extends AbstractType {
                 'Surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3)), new Assert\Regex([
                         'pattern' => $pattern
                             ])],
+                'Citizen' => ['field', new Assert\NotBlank()],
                 'Birthday' => ['field', new Assert\NotBlank()],
             ],
         ];
@@ -102,8 +104,9 @@ class OrderForm extends AbstractType {
                         'options' => [
                             'label' => 'frontend.order_form.passenger.birthday',
                             'attr' => ['class' => 'birthday form-inline'],
-                            'years' => range(date('Y') - 12, (date('Y') - 99)),
-                            'input' => 'array'
+                            'input' => 'array',
+                            'widget' => 'single_text',
+                            'format' => 'dd.M.yyyy',
                         ],
                         'type' => 'birthday'
                     ],
@@ -127,8 +130,9 @@ class OrderForm extends AbstractType {
                             'options' => [
                                 'label' => 'frontend.order_form.passenger.passport_valid_until',
                                 'attr' => ['class' => 'birthday form-inline'],
-                                'years' => range(date('Y'), date('Y') + 10),
-                                'input' => 'array'
+                                'input' => 'array',
+                                'widget' => 'single_text',
+                                'format' => 'dd.MM.yyyy',
                             ],
                             'type' => 'date'
                         ],
@@ -149,11 +153,21 @@ class OrderForm extends AbstractType {
                     'Birthday' => [
                         'options' => [
                             'label' => 'frontend.order_form.passenger.birthday',
-                            'attr' => ['class' => 'birthday form-inline'],
-                            'years' => range(date('Y') - 12, (date('Y') - 99)),
-//                            'input' => 'string'
+                            'attr' => ['class' => 'birthday form-inline child'],
+                            'input' => 'array',
+                            'widget' => 'single_text',
+                            'format' => 'dd.M.yyyy',
                         ],
                         'type' => 'birthday'
+                    ],
+                    'Citizen' => [
+                        'options' => [
+                            'label' => 'frontend.order_form.passenger.citizen',
+                            'choices' => $this->countryModel->getCountries(),
+                            'data' => 'UA',
+                            'attr' => ['class' => 'citizen', 'mask-input' => 'passport-mask-adt']
+                        ],
+                        'type' => 'choice'
                     ],
                 ],
                 'INF' => [
@@ -171,12 +185,22 @@ class OrderForm extends AbstractType {
                     'Birthday' => [
                         'options' => [
                             'label' => 'frontend.order_form.passenger.birthday',
-                            'attr' => ['class' => 'birthday form-inline'],
-                            'years' => range(date('Y') - 12, (date('Y') - 99)),
-//                            'input' => 'string'
+                            'attr' => ['class' => 'birthday form-inline infant'],
+                            'input' => 'array',
+                            'widget' => 'single_text',
+                            'format' => 'dd.M.yyyy',
                         ],
                         'type' => 'birthday'
-                    ]
+                    ],
+                    'Citizen' => [
+                        'options' => [
+                            'label' => 'frontend.order_form.passenger.citizen',
+                            'choices' => $this->countryModel->getCountries(),
+                            'data' => 'UA',
+                            'attr' => ['class' => 'citizen', 'mask-input' => 'passport-mask-adt']
+                        ],
+                        'type' => 'choice'
+                    ],
                 ]
             ]
         ];

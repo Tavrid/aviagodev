@@ -15,12 +15,46 @@ $(document).ready(function(){
             } else {
                 $('.'+inputSelector).unmask();
             }
-        })
+        });
     }
+    createMask();
+    $('.birthday').mask('99.99.9999');
     $('body').on('change','.citizen',function(){
         createMask();
     });
-    createMask();
+    var validDate = moment.unix(VALID_DATE);
+    
+    $('body').on('change','.birthday',function(){
+        if($(this).hasClass('child')){
+            validateChild($(this));
+        }
+    });
+    function validateChild(input){
+        var maxBirthday = moment();
+        maxBirthday.year(maxBirthday.year() -12);
+        var minBirhtday = moment();
+        minBirhtday.year(minBirhtday.year() -2);
+        console.log(minBirhtday.format('DD.MM.YYYY'));
+        var val = moment(input.val(), "DD.MM.YYYY");
+        console.log(val.isBefore(minBirhtday));
+        if(val.isBefore(minBirhtday) && val.isAfter(maxBirthday)){
+            input.parent('div').removeClass('has-error');
+        } else {
+            input.parent('div').addClass('has-error');
+            return;
+        }
+        var vd = validDate.clone();
+        vd.year(vd.year() - 12);
+        
+        if(val.isBefore(vd)){
+            input.parent('div').addClass('has-warning');
+        } else {
+            input.parent('div').removeClass('has-warning');
+            
+        }
+        
+        
+    }
 
     $('#order_phone').intlTelInput({
         'numberType' : 'MOBILE',
