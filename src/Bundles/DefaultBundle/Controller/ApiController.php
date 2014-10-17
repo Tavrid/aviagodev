@@ -112,12 +112,13 @@ class ApiController extends Controller
                         'PhoneHome' => ''
                     ),
                 ]);
-                /** @var Api $api */
+                /* @var $api Api */
                 $api = $this->get('avia.api.manager');
                 $output = $api->getBookRequestor()->execute($query);
-                if(!$output->getIsError()){
+                if(!$output->getIsError()|| empty($output->getPnr())){
+                    var_dump($output->getResponseData()); exit;
                     $d = $output->getResponseData();
-                    $entity->setPnr($d['result']['PNR'])//TODO потенциальная проблема при смене апи
+                    $entity->setPnr($output->getPnr())
                     ->setOrderInfo($d);
                     $orderManager->save($entity);
                     return $this->redirect($this->generateUrl('bundles_default_api_order',array(

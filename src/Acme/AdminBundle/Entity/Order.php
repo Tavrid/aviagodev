@@ -95,6 +95,7 @@ class Order extends AbstractEntity
         $metadata->addPropertyConstraint('state', new Assert\NotBlank())
             ->addPropertyConstraint('email', new Assert\Email())
             ->addPropertyConstraint('price', new Assert\NotBlank())
+//            ->addPropertyConstraint('pnr', new Assert\NotBlank())
         ;
 
 

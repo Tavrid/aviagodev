@@ -67,9 +67,11 @@ class BookRequest implements Request{
 
 
 
-    /**
-     * @inheritdoc
-     */
+   /**
+    * 
+    * @param QueryAbstract $query
+    * @return BookResponse
+    */
     public function execute(QueryAbstract $query)
     {
         $response = new BookResponse();

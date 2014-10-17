@@ -19,5 +19,7 @@ use Bundles\ApiBundle\Api\Entity\Variants;
 
 class BookResponse extends Response {
 
-
+    public function getPnr() {
+        return $this->response['result']['PNR'];
+    }
 }
