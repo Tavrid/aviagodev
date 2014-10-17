@@ -55,6 +55,7 @@ frontend:
         calendar:
             best_price: Best prices within +/- 3 days
         list:
+            search_not_found: Flights not found
             show_more: Show more
             item:
                 departure_time: Departure time

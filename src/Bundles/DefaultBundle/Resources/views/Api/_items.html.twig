@@ -1,6 +1,5 @@
 {% set needBook = needBook is defined ? needBook : true %}
 {% for ticket in data %}
-
     <div class="well">
         <strong class="text-danger">
             <h4>{{ ticket.totalPrice|number_format(0,'.',' ') }} руб</h4>
@@ -119,4 +118,6 @@
             </form>
         {% endif %}
     </div>
+{%else%}
+    <div class="text-info">{%trans%}frontend.default.list.search_not_found{%endtrans%}</div>
 {% endfor %}

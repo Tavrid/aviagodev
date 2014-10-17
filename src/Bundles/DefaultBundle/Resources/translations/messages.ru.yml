@@ -55,6 +55,7 @@ frontend:
         calendar:
             best_price: Лучшие цены в пределах +/- 3 дней
         list:
+            search_not_found: Не найдены варианты перелёта, соответствующие вашим критериям
             show_more: Показать еще
             item:
                 departure_time: Время вылета

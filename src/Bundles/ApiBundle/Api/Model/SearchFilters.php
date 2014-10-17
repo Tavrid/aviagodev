@@ -28,7 +28,7 @@ class SearchFilters {
         }
         if(isset($params['airline'])){
             $filters[] = new AirlineFilter($params['airline']);
-        } else if(!empty($additionalParams['avia_company'])){
+        } else if(!empty($additionalParams['avia_company']) && $additionalParams['avia_company'] != 'all'){
             $filters[] = new AirlineFilter($additionalParams['avia_company']);
         }
         if(isset($params['departure_time'])){
@@ -40,6 +40,7 @@ class SearchFilters {
         if(isset($additionalParams['direct_flights'])){
             $filters[] =  new DirectFlightsFilter($additionalParams['direct_flights']);
         }
+        
         return $filters;
     }
 
