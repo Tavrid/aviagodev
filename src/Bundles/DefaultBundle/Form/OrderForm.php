@@ -15,6 +15,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Bundles\ApiBundle\Api\Response\BookInfoResponse;
 use Acme\CoreBundle\Model\AbstractModel;
 use Bundles\DefaultBundle\Form\DataTransformer\PassengerTransformer;
+use Acme\CoreBundle\Validator\DateRange;
+
 
 class OrderForm extends AbstractType {
 
@@ -30,8 +32,8 @@ class OrderForm extends AbstractType {
         
     }
     
-    private function createTime($diffYear){
-        return mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y') + $diffYear);
+    private function createTime($diffYear,$diffMonth = 0){
+        return mktime(date('H'), date('i'), date('s'), date('m') + $diffMonth, date('d'), date('Y') + $diffYear);
     }
 
 
@@ -61,7 +63,9 @@ class OrderForm extends AbstractType {
                     'ExpireDate' => ['field', new Assert\NotBlank()],
 //                    ]
                 ],
-                'Birthday' => ['field', new Assert\NotBlank()],
+                'Birthday' => ['field', new Assert\NotBlank(),new DateRange([
+                    'max' => date('Y-m-d',$this->createTime(-12))
+                ])],
             ],
         ];
         $fieldMap['CHD'] = ['sub_multi_field',
@@ -74,7 +78,10 @@ class OrderForm extends AbstractType {
                         'pattern' => $pattern
                             ])],
                 'Citizen' => ['field', new Assert\NotBlank()],
-                'Birthday' => ['field', new Assert\NotBlank()],
+                'Birthday' => ['field', new Assert\NotBlank(),new DateRange([
+                    'max' => date('Y-m-d',$this->createTime(-2)),
+                    'min' => date('Y-m-d',$this->createTime(-12)),
+                ])],
             ],
         ];
         $fieldMap['INF'] = ['sub_multi_field',
@@ -87,7 +94,9 @@ class OrderForm extends AbstractType {
                         'pattern' => $pattern
                             ])],
                 'Citizen' => ['field', new Assert\NotBlank()],
-                'Birthday' => ['field', new Assert\NotBlank()],
+                'Birthday' => ['field', new Assert\NotBlank(),new DateRange([
+                    'min' => date('Y-m-d',$this->createTime(-2))
+                ])],
             ],
         ];
         $passengersParams = [
@@ -114,7 +123,7 @@ class OrderForm extends AbstractType {
                                 'class' => 'birthday form-inline date-validator',
                                 'maxdate' => date('d.m.Y',$this->createTime(-12))
                                 ],
-                            'input' => 'array',
+//                            'input' => 'array',
                             'widget' => 'single_text',
                             'format' => 'dd.M.yyyy',
                         ],
@@ -140,7 +149,7 @@ class OrderForm extends AbstractType {
                             'options' => [
                                 'label' => 'frontend.order_form.passenger.passport_valid_until',
                                 'attr' => ['class' => 'birthday form-inline'],
-                                'input' => 'array',
+//                                'input' => 'array',
                                 'widget' => 'single_text',
                                 'format' => 'dd.MM.yyyy',
                             ],
@@ -163,8 +172,12 @@ class OrderForm extends AbstractType {
                     'Birthday' => [
                         'options' => [
                             'label' => 'frontend.order_form.passenger.birthday',
-                            'attr' => ['class' => 'birthday form-inline child'],
-                            'input' => 'array',
+                            'attr' => [
+                                'class' => 'birthday form-inline child date-validator',
+                                'maxdate' => date('d.m.Y',$this->createTime(-2)),
+                                'mindate' => date('d.m.Y',$this->createTime(-12))
+                                ],
+//                            'input' => 'array',
                             'widget' => 'single_text',
                             'format' => 'dd.M.yyyy',
                         ],
@@ -195,8 +208,11 @@ class OrderForm extends AbstractType {
                     'Birthday' => [
                         'options' => [
                             'label' => 'frontend.order_form.passenger.birthday',
-                            'attr' => ['class' => 'birthday form-inline infant'],
-                            'input' => 'array',
+                            'attr' => [
+                                'class' => 'birthday form-inline infant date-validator',
+                                'mindate' => date('d.m.Y',$this->createTime(-2)),
+                                ],
+//                            'input' => 'array',
                             'widget' => 'single_text',
                             'format' => 'dd.M.yyyy',
                         ],

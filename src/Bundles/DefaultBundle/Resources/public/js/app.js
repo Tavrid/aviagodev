@@ -70,5 +70,39 @@ jQuery(function ($) {
             window.location.reload();
         });
     });
+    
+    $.validator.setDefaults({
+        ignore: []
+                // any other default options and/or rules
+    });
+    $.validator.addMethod("date_range", function (value, element) {
+        var dateFormat = $(element).attr('date-format');
+        if(dateFormat === undefined){
+            dateFormat = 'DD.MM.YYYY';
+        }
+        var val = moment(value, dateFormat);
+        if(!val.isValid()){
+            return false;
+        }
+        var minDate = $(element).attr('mindate');
+        var maxDate =  $(element).attr('maxdate');
+        if(minDate !== undefined && maxDate !== undefined){
+            minDate = moment(minDate, dateFormat);
+            maxDate = moment(maxDate, dateFormat);
+            return val.isAfter(minDate) && val.isBefore(maxDate);
+        } else if(minDate !== undefined){
+            minDate = moment(minDate, dateFormat);
+            return val.isAfter(minDate);
+        } else if (maxDate !== undefined){
+            maxDate = moment(maxDate, dateFormat);
+            return val.isBefore(maxDate);
+        } 
+    },'Error date');
+
+    $.validator.addClassRules({
+        'date-validator': {
+            date_range: true
+        }
+    });
 });
 
