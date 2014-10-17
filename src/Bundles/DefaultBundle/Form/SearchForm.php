@@ -164,7 +164,7 @@ class SearchForm extends AbstractType
     protected function getAviaCompany()
     {
         return [
-            "all" => "любая",
+            "all" => $this->translation->trans('frontend.search_form.airline_value_any'),
             "NH" => "ANA All Nippon Airways (NH)",
             "TZ" => "ATA Airlines Inc (TZ)",
             "JP" => "Adria Airways (JP)",

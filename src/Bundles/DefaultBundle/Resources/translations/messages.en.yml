@@ -27,6 +27,7 @@ frontend:
         direct_flights: Direct flights only
         submit: Search
         class: Class
+        airline_value_any: Any
         class_values:
               y: Economy
               c: Business

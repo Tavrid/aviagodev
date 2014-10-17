@@ -27,6 +27,7 @@ frontend:
         direct_flights: Только прямые рейсы
         submit: Искать
         class: Класс
+        airline_value_any: Любая
         class_values:
             y: Эконом
             c: Бизнес
