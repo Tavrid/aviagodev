@@ -101,12 +101,18 @@ class SearchByQuery extends QueryAbstract
 
     public function getKeyByParams()
     {
-        $params = array();
-        foreach ($this->params as $param) {
-            if (!empty($param)) {
-                $params[] = $param;
-            }
-        }
+        $params = array_intersect_key($this->params, [
+            'city_from_code' => '',
+            'city_to_code' => '',
+            'date_from' => '',
+            'city_to_code' => '',
+            'date_to' => '',
+            'class' => '',
+            'adults' => '',
+            'children' => '',
+            'infant' => '',
+            ]);
+//        var_dump($params);exit;
         return preg_replace('/[ ]+/i', '', implode(':', $params));
     }
 

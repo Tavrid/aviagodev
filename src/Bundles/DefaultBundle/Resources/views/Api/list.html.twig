@@ -16,7 +16,7 @@
         <form id="search-form" action="{{ path('bundles_default_search') }}" method="post" id="search-form">
 
                 {{ form_widget(form) }}
-            <input type="submit" class="btn btn-success pull-right"/>
+                <input type="submit" class="btn btn-success pull-right" value="{%trans%}frontend.search_form.submit{%endtrans%}"/>
         </form>
     </div>
     <div class="col-md-9">

@@ -87,7 +87,7 @@ class AirportsRepository extends AbstractRepository {
             "a","s","d","f","g","h","j","k","l",";","'",
             "z","x","c","v","b","n","m",",","."
         );
-        return str_replace($replace,$search, $string);
+        return str_replace($replace,$search, strtolower($string));
     }
 
 
