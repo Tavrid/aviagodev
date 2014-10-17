@@ -1,65 +1,97 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
     var masks = {
-        'RU' : '99 99 999999',
-        'UA' :'dd 999999'
+        'RU': '99 99 999999',
+        'UA': 'dd 999999'
     };
     $.mask.definitions["d"] = "[a-zA-Zа-яА-Я]";
+    $.validator.setDefaults({
+        ignore: []
+                // any other default options and/or rules
+    });
+    $.validator.addMethod("date_range", function (value, element) {
+        var val = moment(value, "DD.MM.YYYY");
+        var minDate = $(element).attr('mindate');
+        var maxDate =  $(element).attr('maxdate');
+        if(minDate !== undefined && maxDate !== undefined){
+            minDate = moment(minDate, "DD.MM.YYYY");
+            maxDate = moment(maxDate, "DD.MM.YYYY");
+            return val.isAfter(minDate) && val.isBefore(maxDate);
+        } else if(minDate !== undefined){
+            minDate = moment(minDate, "DD.MM.YYYY");
+            return val.isAfter(minDate);
+        } else if (maxDate !== undefined){
+            maxDate = moment(maxDate, "DD.MM.YYYY");
+            return val.isBefore(maxDate);
+        } 
+    }, "Please don't insert numbers.");
 
-    function createMask(){
-        $('.citizen').each(function(){
+    $.validator.addClassRules({
+        'date-validator': {
+            date_range: true
+        }
+    });
+    function createMask() {
+        $('.citizen').each(function () {
             var val = $(this).val();
             var inputSelector = $(this).attr('mask-input');
-            if(masks.hasOwnProperty(val)){
-                $('.'+inputSelector).mask(masks[val])
+            if (masks.hasOwnProperty(val)) {
+                $('.' + inputSelector).mask(masks[val]);
             } else {
-                $('.'+inputSelector).unmask();
+                $('.' + inputSelector).unmask();
             }
         });
     }
     createMask();
     $('.birthday').mask('99.99.9999');
-    $('body').on('change','.citizen',function(){
+    $('body').on('change', '.citizen', function () {
         createMask();
     });
     var validDate = moment.unix(VALID_DATE);
-    
-    $('body').on('change','.birthday',function(){
-        if($(this).hasClass('child')){
+
+    $('body').on('change', '.birthday', function () {
+        if ($(this).hasClass('child')) {
             validateChild($(this));
         }
     });
-    function validateChild(input){
-        var maxBirthday = moment();
-        maxBirthday.year(maxBirthday.year() -12);
-        var minBirhtday = moment();
-        minBirhtday.year(minBirhtday.year() -2);
-        console.log(minBirhtday.format('DD.MM.YYYY'));
+    function validateChild(input) {
         var val = moment(input.val(), "DD.MM.YYYY");
-        console.log(val.isBefore(minBirhtday));
-        if(val.isBefore(minBirhtday) && val.isAfter(maxBirthday)){
-            input.parent('div').removeClass('has-error');
-        } else {
-            input.parent('div').addClass('has-error');
-            return;
-        }
+        
         var vd = validDate.clone();
         vd.year(vd.year() - 12);
-        
-        if(val.isBefore(vd)){
+
+        if (val.isBefore(vd)) {
             input.parent('div').addClass('has-warning');
         } else {
             input.parent('div').removeClass('has-warning');
-            
+
         }
-        
-        
     }
 
+    $(function () {
+        $("#order-form").validate({
+            highlight: function (element) {
+                $(element).closest('.form-group').addClass('has-error');
+            },
+            unhighlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            errorElement: 'span',
+            errorClass: 'help-block',
+            errorPlacement: function (error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+    });
+
     $('#order_phone').intlTelInput({
-        'numberType' : 'MOBILE',
-        'defaultCountry' : 'ua',
-        'preferredCountries' :['ua','ru'],
-        'utilsScript' : '/bundles/bundlesdefault/lib/intl-tel-input-master/lib/libphonenumber/build/utils.js'
+        'numberType': 'MOBILE',
+        'defaultCountry': 'ua',
+        'preferredCountries': ['ua', 'ru'],
+        'utilsScript': '/bundles/bundlesdefault/lib/intl-tel-input-master/lib/libphonenumber/build/utils.js'
     });
 });

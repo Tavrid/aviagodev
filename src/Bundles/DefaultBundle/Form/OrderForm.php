@@ -30,8 +30,12 @@ class OrderForm extends AbstractType {
         
     }
     
+    private function createTime($diffYear){
+        return mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y') + $diffYear);
+    }
 
-    
+
+        
     public function buildForm(FormBuilderInterface $builder, array $options) {
         /* @var $bookInfoResponse BookInfoResponse */
         $bookInfoResponse = $options['bookInfoResponse'];
@@ -45,15 +49,15 @@ class OrderForm extends AbstractType {
         $fieldMap['ADT'] = ['sub_multi_field',
             'fields' => [
                 'Sex' => ['field', new Assert\NotBlank()],
-                'Name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3)), new Assert\Regex([
+                'Name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 2)), new Assert\Regex([
                         'pattern' => $pattern
                             ])],
-                'Surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3)), new Assert\Regex([
+                'Surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 2)), new Assert\Regex([
                         'pattern' => $pattern
                             ])],
                 'Citizen' => ['field', new Assert\NotBlank()],
                 'Document' => [
-                    'Number' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3))],
+                    'Number' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 2))],
                     'ExpireDate' => ['field', new Assert\NotBlank()],
 //                    ]
                 ],
@@ -63,10 +67,10 @@ class OrderForm extends AbstractType {
         $fieldMap['CHD'] = ['sub_multi_field',
             'fields' => [
                 'Sex' => ['field', new Assert\NotBlank()],
-                'Name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3)), new Assert\Regex([
+                'Name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 2)), new Assert\Regex([
                         'pattern' => $pattern
                             ])],
-                'Surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3)), new Assert\Regex([
+                'Surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 2)), new Assert\Regex([
                         'pattern' => $pattern
                             ])],
                 'Citizen' => ['field', new Assert\NotBlank()],
@@ -76,10 +80,10 @@ class OrderForm extends AbstractType {
         $fieldMap['INF'] = ['sub_multi_field',
             'fields' => [
                 'Sex' => ['field', new Assert\NotBlank()],
-                'Name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3)), new Assert\Regex([
+                'Name' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 2)), new Assert\Regex([
                         'pattern' => $pattern
                             ])],
-                'Surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 3)), new Assert\Regex([
+                'Surname' => ['field', new Assert\NotBlank(), new Assert\Length(array('min' => 2)), new Assert\Regex([
                         'pattern' => $pattern
                             ])],
                 'Citizen' => ['field', new Assert\NotBlank()],
@@ -98,12 +102,18 @@ class OrderForm extends AbstractType {
                             'multiple' => false,
                             'expanded' => true,
                         ]],
-                    'Name' => ['options' => ['label' => 'frontend.order_form.passenger.name']],
+                    'Name' => ['options' => [
+                        'label' => 'frontend.order_form.passenger.name',
+                        'attr' => ['minlength' => 2],
+                        ]],
                     'Surname' => ['options' => ['label' => 'frontend.order_form.passenger.surname']],
                     'Birthday' => [
                         'options' => [
                             'label' => 'frontend.order_form.passenger.birthday',
-                            'attr' => ['class' => 'birthday form-inline'],
+                            'attr' => [
+                                'class' => 'birthday form-inline date-validator',
+                                'maxdate' => date('d.m.Y',$this->createTime(-12))
+                                ],
                             'input' => 'array',
                             'widget' => 'single_text',
                             'format' => 'dd.M.yyyy',

@@ -90,7 +90,7 @@
         {% if ticket.latinRegistration %}
             <div class="alert alert-warning" role="alert">Все поля должны быть заполнены латиницей</div>
         {% endif %}
-        <form action="" method="post">
+        <form action="" method="post" id="order-form">
             {{ form_errors(form) }}
             <div>
                 <ul class="nav nav-tabs" role="tablist">

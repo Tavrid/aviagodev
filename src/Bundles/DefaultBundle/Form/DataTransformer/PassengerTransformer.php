@@ -51,7 +51,9 @@ class PassengerTransformer implements DataTransformerInterface{
                 $i = 0;
                 foreach($value[$k] as $key => $val){
                     $t = $value[$k][$key];
-                    $t['Document']['Number'] = preg_replace('/[^a-zA-z0-9]/i','',$t['Document']['Number']);
+                    if(isset($t['Document']['Number'])){
+                        $t['Document']['Number'] = preg_replace('/[^a-zA-z0-9]/i','',$t['Document']['Number']);
+                    }
                     unset($value[$k][$key]);
                     $value[$k][$i] = $t;
                     $i++;

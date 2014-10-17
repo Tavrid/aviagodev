@@ -16,15 +16,19 @@
         {% block js %}
             <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
             <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-            {% javascripts '@jquery' '@jquery_ui_js'
-            '@front_bootstrap_js'
-            'bundles/bundlesdefault/lib/popup.js'
-            'bundles/bundlesdefault/lib/moment.js'
-            'bundles/bundlesdefault/js/app.js'
-            combine=true
+            {% javascripts 
+                '@jquery' 
+                '@jquery_ui_js'
+                '@front_bootstrap_js'
+                'bundles/bundlesdefault/lib/popup.js'
+                'bundles/bundlesdefault/lib/moment.js'
+                'bundles/bundlesdefault/js/app.js'
+                'bundles/bundlesdefault/lib/jquery_validator/dist/jquery.validate.min.js'
+                combine=true
             %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
+            <script type="text/javascript" src="/bundles/bundlesdefault/lib/jquery_validator/dist/localization/messages_{{app.request.locale}}.js"></script>
         {% endblock %}
     </head>
     <body>
@@ -34,7 +38,7 @@
                 <div class="btn-group pull-right row">
                     <button data-value="ru"  type="button" class="btn btn-default lang {{app.request.locale == 'ru' ? 'active':''}}">ru</button>
                     <button data-value="en" type="button" class="btn btn-default lang {{app.request.locale == 'en' ? 'active':''}}">en</button>
-                    <button data-value="ua" type="button" class="btn btn-default lang {{app.request.locale == 'ua' ? 'active':''}}">ua</button>
+                    <button data-value="uk" type="button" class="btn btn-default lang {{app.request.locale == 'uk' ? 'active':''}}">ua</button>
                 </div>
             </div>
         </div>
