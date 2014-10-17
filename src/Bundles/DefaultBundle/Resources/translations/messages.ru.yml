@@ -64,4 +64,6 @@ frontend:
                 between_flights: Между рейсами
                 transplant: %count% пересадка|%count% пересадки|%count% пересадок
                 submit: Забронировать
+        order:
+            order_info: Информация о заказе
       
