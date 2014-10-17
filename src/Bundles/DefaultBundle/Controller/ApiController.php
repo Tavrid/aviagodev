@@ -86,11 +86,14 @@ class ApiController extends Controller
             throw $this->createNotFoundException();
         }
 
-        /** @var \Acme\AdminBundle\Model\Order $orderManager */
+        /* @var $orderManager \Acme\AdminBundle\Model\Order  */
         $orderManager = $this->get('admin.order.manager');
         $entity = $orderManager->getEntity();
 
-        $form = $this->createForm(new OrderForm($bookInfoResponse,$this->get('country.model.manager')),$entity);
+        /* @var $form OrderForm */
+        $form = $this->createForm('order',$entity,[
+            'bookInfoResponse' => $bookInfoResponse
+        ]);
         if($request->isMethod('post')){
 
             $entity->setPrice($bookInfoResponse->getEntity()->getTicket()->getTotalPrice());
