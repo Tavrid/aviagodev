@@ -66,3 +66,19 @@ frontend:
                 submit: Book
         order:
             order_info: Order info
+            total: Total
+            fare_rules: Fare rules
+            flight_details: Flight details
+            passengers: Passengers
+            passenger:
+                ADT: Adults
+                CHD: Childs
+                INF: Infants
+            pass:
+                adt: Passanger №%count% (Adult)
+                chd: Passanger №%count% (Children)
+                inf: Passanger №%count% (Infant)
+            rate_taxes: Rate + Taxes
+            number_off: Number off
+            in_total: Total
+            tariff_collection: Tariff collection

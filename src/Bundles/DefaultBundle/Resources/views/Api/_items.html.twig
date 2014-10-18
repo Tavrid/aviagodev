@@ -2,7 +2,7 @@
 {% for ticket in data %}
     <div class="well">
         <strong class="text-danger">
-            <h4>{{ ticket.totalPrice|number_format(0,'.',' ') }} руб</h4>
+            <h4>{{ ticket.totalPrice|number_format(0,'.',' ') }} {{ticket.currency}}</h4>
         </strong>
 
         {% if needBook %}

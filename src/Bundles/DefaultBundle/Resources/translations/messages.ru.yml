@@ -66,4 +66,20 @@ frontend:
                 submit: Забронировать
         order:
             order_info: Информация о заказе
+            total: Всего
+            fare_rules: Правила тарифа
+            flight_details: Детали рейса
+            passengers: Пассажиры
+            passenger:
+                ADT: Взрослые
+                CHD: Дети
+                INF: Младенцы
+            pass:
+                adt: Пасажир №%count% (Взрослый)
+                chd: Пасажир №%count% (Ребенок)
+                inf: Пасажир №%count% (Младенец)
+            rate_taxes: Тариф + Таксы
+            number_off: Количество
+            in_total: Итого
+            tariff_collection: Тарифный сбор
       

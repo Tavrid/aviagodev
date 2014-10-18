@@ -22,6 +22,8 @@ class Calendar {
      * @var float
      */
     protected $price;
+    
+    protected $currency;
 
     protected $date;
 
@@ -43,8 +45,17 @@ class Calendar {
             }
         }
     }
+    public function getCurrency() {
+        return 'руб.';
+        return $this->currency;
+    }
 
-    /**
+    public function setCurrency($currency) {
+        $this->currency = $currency;
+        return $this;
+    }
+
+        /**
      * @return mixed
      */
     public function getDate()

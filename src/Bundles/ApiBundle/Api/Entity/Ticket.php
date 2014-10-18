@@ -22,11 +22,23 @@ class Ticket {
     protected $validatingAirline;
     protected $latinRegistration;
     protected $lastTicketDate;
+    protected $currency;
 
     public function __construct() {
         $this->itineraries = array();
     }
+    
+    public function getCurrency() {
+        return 'руб.';
+        return $this->currency;
+    }
 
+    public function setCurrency($currency) {
+        $this->currency = $currency;
+        return $this;
+    }
+
+    
     /**
      * @return mixed
      */

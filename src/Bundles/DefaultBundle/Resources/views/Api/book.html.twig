@@ -15,9 +15,9 @@
 {% endblock %}
 {% block body %}
     <div class="col-md-3">
-        <h3>Информация о заказе</h3>
+        <h3>{%trans%}frontend.default.order.order_info{%endtrans%}</h3>
         <hr />
-        <strong>Всего: {{ ticket.totalPrice|number_format(0, '.', ' ')  }} руб.</strong>
+        <strong>{%trans%}frontend.default.order.total{%endtrans%}: {{ ticket.totalPrice|number_format(0, '.', ' ')  }} {{ ticket.currency}}</strong>
 
     </div>
     <div class="col-md-9">
@@ -27,11 +27,11 @@
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active">
                     <a href="#rules" role="tab" data-toggle="tab">
-                        Правила тарифа
+                        {%trans%}frontend.default.order.fare_rules{%endtrans%}
                     </a>
                 </li>
                 <li class="">
-                    <a href="#info" role="tab" data-toggle="tab">Детали рейса</a>
+                    <a href="#info" role="tab" data-toggle="tab">{%trans%}frontend.default.order.flight_details{%endtrans%}</a>
                 </li>
             </ul>
             <div class="tab-content">
@@ -40,14 +40,14 @@
                         Если в вашем билете несколько рейсов, при неявке на один из них авиакомпания имеет право отменить бронь на оставшиеся рейсы.
                     </div>
                     <hr />
-                    {% set pm = {'ADT' :'Взрослые','CHD' :'Дети','INF' :'Младенцы' } %}
+                    
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>Пассажиры</th>
-                            <th>Тариф + Таксы</th>
-                            <th>Кол-во</th>
-                            <th>Итого</th>
+                            <th>{%trans%}frontend.default.order.passengers{%endtrans%}</th>
+                            <th>{%trans%}frontend.default.order.rate_taxes{%endtrans%}</th>
+                            <th>{%trans%}frontend.default.order.number_off{%endtrans%}</th>
+                            <th>{%trans%}frontend.default.order.in_total{%endtrans%}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -55,10 +55,10 @@
                             {% if travelers >0 %}
                                 {% set pricing = ticket.pricingByName(t) %}
                                 <tr>
-                                    <td>{{ pm[t] }}</td>
+                                    <td>{{ ("frontend.default.order.passenger."~t)|trans }}</td>
                                     <td>({{ pricing.Base|number_format(0, '.', ' ')}} + {{ pricing.Tax|number_format(0, '.', ' ') }})</td>
                                     <td>x{{ travelers }}</td>
-                                    <td>{{ (pricing.Total*travelers)|number_format(0, '.', ' ') }} руб.</td>
+                                    <td>{{ (pricing.Total*travelers)|number_format(0, '.', ' ') }} {{ ticket.currency}}</td>
                                 </tr>
                             {% endif %}
                         {% endfor %}
@@ -66,17 +66,17 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <strong>Тарифный сбор:</strong>
+                                <strong>{%trans%}frontend.default.order.tariff_collection{%endtrans%}:</strong>
                             </td>
-                            <td>{{ ticket.tariffCollection|number_format(0, '.', ' ')}} руб</td>
+                            <td>{{ ticket.tariffCollection|number_format(0, '.', ' ')}} {{ ticket.currency}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td>
-                                <strong>Итого:</strong>
+                                <strong>{%trans%}frontend.default.order.in_total{%endtrans%}:</strong>
                             </td>
-                            <td>{{ ticket.totalPrice|number_format(0, '.', ' ')}} руб</td>
+                            <td>{{ ticket.totalPrice|number_format(0, '.', ' ')}} {{ ticket.currency}}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -97,21 +97,21 @@
                     {% for adt in form.passengers.ADT %}
                         <li class="{% if loop.first %}active{% endif %}">
                             <a href="#adult{{ loop.index }}" role="tab" data-toggle="tab">
-                                Пассажир № {{ loop.index }} (Взрослый)
+                                {% trans with {'%count%': loop.index} %}frontend.default.order.pass.adt{% endtrans %}
                             </a>
                         </li>
                     {% endfor %}
                     {% for chd in form.passengers.CHD %}
                         <li class="">
                             <a href="#child{{ loop.index }}" role="tab" data-toggle="tab">
-                                Пассажир № {{ loop.index }} (Ребенок)
+                                {% trans with {'%count%': loop.index} %}frontend.default.order.pass.chd{% endtrans %}
                             </a>
                         </li>
                     {% endfor %}
                     {% for inf in form.passengers.INF %}
                         <li class="">
                             <a href="#inf{{ loop.index }}" role="tab" data-toggle="tab">
-                                Пассажир № {{ loop.index }} (Младенец)
+                                {% trans with {'%count%': loop.index} %}frontend.default.order.pass.inf{% endtrans %}
                             </a>
                         </li>
                     {% endfor %}
@@ -147,12 +147,7 @@
             </div>
         </form>
     </div>
-    <style type="text/css">
-        .birthday select{
-            width: auto;
-            margin-right: 10px;
-        }
-    </style>
+   
     <script>
         VALID_DATE = {{ticket.validTime}};
         VALID_MASCS = {{masks|raw}};
