@@ -21,6 +21,8 @@ class Builder extends ContainerAware {
                 ->setAttribute('icon', 'icon-align-center');
         $menu->addChild('airports', array('route' => 'admin.aviaairports.index', 'label' => 'Список аэропортов'))
                 ->setAttribute('icon', 'icon-file');
+        $menu->addChild('country', array('route' => 'admin.country.index', 'label' => 'Список стран'))
+                ->setAttribute('icon', 'icon-file');
 
         return $menu;
     }

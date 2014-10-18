@@ -40,6 +40,11 @@ class Country extends AbstractEntity {
      * @var string
      */
     private $alpha3;
+    
+    /**
+     * @var string
+     */
+    private $passport_mask;
 
 
     /**
@@ -165,5 +170,30 @@ class Country extends AbstractEntity {
     public function getAlpha3()
     {
         return $this->alpha3;
+    }
+    
+
+
+    /**
+     * Set passport_mask
+     *
+     * @param string $passportMask
+     * @return Country
+     */
+    public function setPassportMask($passportMask)
+    {
+        $this->passport_mask = $passportMask;
+
+        return $this;
+    }
+
+    /**
+     * Get passport_mask
+     *
+     * @return string 
+     */
+    public function getPassportMask()
+    {
+        return $this->passport_mask;
     }
 }
