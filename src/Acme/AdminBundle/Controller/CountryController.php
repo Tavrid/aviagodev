@@ -25,7 +25,7 @@ class CountryController extends ControllerBase {
 
         $p = $manager->paginator($request->get('page', 1), $queryBuilder, 'admin.country.index', 20);
         $controller = $this;
-        return $this->render('AcmeAdminBundle:Aviaairports:index.html.twig', array(
+        return $this->render('AcmeAdminBundle:Country:index.html.twig', array(
                     'data' => $p[0],
                     'pagerHtml' => $p[1],
                     'params' => array(
