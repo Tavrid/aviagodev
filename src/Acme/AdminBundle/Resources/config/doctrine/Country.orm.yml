@@ -16,6 +16,7 @@ Acme\AdminBundle\Entity\Country:
             type: string
         passport_mask:
             type: string
+            nullable: true
         alpha2:
             type: string
             length: 2

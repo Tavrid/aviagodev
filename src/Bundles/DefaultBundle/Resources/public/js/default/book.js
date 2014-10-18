@@ -1,9 +1,7 @@
 $(document).ready(function () {
 
-    var masks = {
-        'RU': '99 99 999999',
-        'UA': 'dd 999999'
-    };
+    var masks = VALID_MASCS;
+    
     $.mask.definitions["d"] = "[a-zA-Zа-яА-Я]";
     
     function createMask() {
