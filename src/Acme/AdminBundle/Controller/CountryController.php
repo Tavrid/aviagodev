@@ -34,7 +34,7 @@ class CountryController extends ControllerBase {
                             'name',
                             [
                                 'name' => 'passportMask',
-                                'header' => 'Статус',
+                                'header' => 'Маска для номера паспорта',
                                 'type' => ColumnTypes::TYPE_EDITABLE_TEXT,
                                 'route' => ['admin.country.editmask', ['id' => 'id']],
                                 'form' => function(Country $country) use ($controller) {
