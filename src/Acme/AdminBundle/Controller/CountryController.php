@@ -2,7 +2,8 @@
 
 namespace Acme\AdminBundle\Controller;
 
-use Acme\BootstrapBundle\ColumnTypes;
+use Stb\Bootstrap\ColumnTypes;
+use Stb\Bootstrap\Response\EditableTextResponse;
 use Symfony\Component\Form\AbstractType;
 use Acme\AdminBundle\Form\Type\CountryType;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,7 +11,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Acme\AdminBundle\AcmeAdminBundleEvents as Events;
 use Acme\AdminBundle\Event\ControllerEvent;
-use Doctrine\ORM\Query\Expr;
+use Acme\AdminBundle\Entity\Country;
 
 class CountryController extends ControllerBase {
 
@@ -19,12 +20,11 @@ class CountryController extends ControllerBase {
         $manager = $this->get('country.model.manager');
         $queryBuilder = $manager->getRepository()
                 ->createQueryBuilder('p')
-                ->orderBy('p.passport_mask','DESC')
-                ->addOrderBy('p.name')
-        ;
+                ->orderBy('p.passport_mask', 'DESC')
+                ->addOrderBy('p.name');
 
         $p = $manager->paginator($request->get('page', 1), $queryBuilder, 'admin.country.index', 20);
-
+        $controller = $this;
         return $this->render('AcmeAdminBundle:Aviaairports:index.html.twig', array(
                     'data' => $p[0],
                     'pagerHtml' => $p[1],
@@ -32,7 +32,17 @@ class CountryController extends ControllerBase {
                         'columns' => array(
                             'id',
                             'name',
-                            'passportMask',
+                            [
+                                'name' => 'passportMask',
+                                'header' => 'Статус',
+                                'type' => ColumnTypes::TYPE_EDITABLE_TEXT,
+                                'route' => ['admin.country.editmask', ['id' => 'id']],
+                                'form' => function(Country $country) use ($controller) {
+                            return $controller->createFormBuilder($country)
+                                            ->add('passportMask')
+                                            ->getForm()->createView();
+                        }
+                            ],
                             'alpha2',
                             'code',
                         ),
@@ -46,6 +56,34 @@ class CountryController extends ControllerBase {
                         )
                     )
         ));
+    }
+
+    public function editMaskAction(Request $request) {
+
+        /* @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->get('event_dispatcher');
+        $controller = $this;
+        $dispatcher->addListener(Events::INITIALIZE_EDIT, function (ControllerEvent $event) {
+
+
+            $event->setDataManager($this->get('country.model.manager'));
+        });
+        $dispatcher->addListener(Events::LOAD_ENTITY_EDIT, function(ControllerEvent $event) use ($controller) {
+            $form = $controller->createFormBuilder($event->getDataManager()->getEntity())
+                    ->add('passportMask')
+                    ->getForm();
+            $event->setFrom($form);
+        });
+
+        $dispatcher->addListener(Events::ENTITY_SUCCESS_EDIT, function (ControllerEvent $event) {
+            $form = $event->getForm();
+            $entity = $event->getDataManager()->getEntity();
+            $renderedForm = $this->renderView(
+                    "AcmeAdminBundle:Country:_mask_form.html.twig", array("form" => $form->createView())
+            );
+            $event->setResponse(new EditableTextResponse($renderedForm, $entity->getPassportMask()));
+        });
+        return $this->edit($request);
     }
 
     public function editAction(Request $request) {
