@@ -82,3 +82,6 @@ frontend:
             number_off: Number off
             in_total: Total
             tariff_collection: Tariff collection
+            latin_registration: All fields must be filled in latin
+            submit: Book
+            i_gree: Aware of (a) and agree (-on)

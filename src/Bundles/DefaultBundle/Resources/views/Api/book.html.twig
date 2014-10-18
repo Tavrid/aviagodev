@@ -88,7 +88,7 @@
         </div>
 
         {% if ticket.latinRegistration %}
-            <div class="alert alert-warning" role="alert">Все поля должны быть заполнены латиницей</div>
+            <div class="alert alert-warning" role="alert">{%trans%}frontend.default.order.latin_registration{%endtrans%}</div>
         {% endif %}
         <form action="" method="post" id="order-form">
             {{ form_errors(form) }}
@@ -142,7 +142,7 @@
             {{ form_row(form._token) }}
             <div  class="form-group">
                 <div class="controls">
-                    <input type="submit" value="Забронировать" class="btn btn-success">
+                    <input type="submit" value="{% trans %}frontend.default.order.submit{% endtrans %}" class="btn btn-success">
                 </div>
             </div>
         </form>

@@ -82,4 +82,7 @@ frontend:
             number_off: Количество
             in_total: Итого
             tariff_collection: Тарифный сбор
+            latin_registration: Все поля должны быть заполнены латиницей
+            submit: Забронировать
+            i_gree: Ознакомлен(а) и согласен(-на)
       

@@ -298,7 +298,7 @@ class OrderForm extends AbstractType {
                     ],
                     'types' => [
                         'i_agree' => [
-                            'options' => ['label' => 'Ознакомлен(а) и согласен(-на)'],
+                            'options' => ['label' => 'frontend.default.order.i_gree'],
                             'type' => 'checkbox'
                         ]
                     ]
