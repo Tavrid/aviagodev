@@ -21,10 +21,10 @@ class Time {
      */
     public static function getFilterValues() {
         return [
-            self::TIME_NIGHT => 'ночь (00-06)',
-            self::TIME_MORNING => 'утро (06-12)',
-            self::TIME_DAY => 'день (12-18)',
-            self::TIME_EVENING => 'вечер (18-00)',
+            self::TIME_NIGHT => 'frontend.times.night',
+            self::TIME_MORNING => 'frontend.times.morning',
+            self::TIME_DAY => 'frontend.times.day',
+            self::TIME_EVENING => 'frontend.times.evening',
         ];
     }
 

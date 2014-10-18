@@ -17,5 +17,10 @@ services:
         arguments: [@session,@translator]
         tags:
             - { name: form.type, alias: search_form }
+    budnels_default.form.type.filter:
+        class: Bundles\DefaultBundle\Form\FilterForm
+        arguments: [@translator]
+        tags:
+            - { name: form.type, alias: filter }
 
 

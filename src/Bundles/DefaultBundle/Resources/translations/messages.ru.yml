@@ -1,4 +1,9 @@
 frontend:
+    times:
+        night: Ночь (00-06)
+        morning: Утро (06-12)
+        day: День (12-18)
+        evening: Вечер (18-00)
     order_form:
         phone: Телефон
         email: Email
@@ -46,6 +51,7 @@ frontend:
         airline: Авиакомпания
         departure_airport: Аэропорт вылета
         arrival_airport: Аэропорт прилета
+        all: Все
     flights:
       last_ticket_date: Оплатить до
     default:

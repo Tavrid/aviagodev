@@ -1,4 +1,9 @@
 frontend:
+    times:
+        night: Night (00-06)
+        morning: Morning (06-12)
+        day: Day (12-18)
+        evening: Evening (18-00)
     order_form:
         phone: Phone
         email: Email
@@ -46,6 +51,7 @@ frontend:
         airline: Airline
         departure_airport: Departure airport
         arrival_airport: Arrival airport
+        all: All
     flights:
       last_ticket_date: Pay up
     default:
