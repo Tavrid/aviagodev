@@ -85,3 +85,7 @@ frontend:
             latin_registration: All fields must be filled in latin
             submit: Book
             i_gree: Aware of (a) and agree (-on)
+            direction: Direction
+            success: Book was successful!
+            pnr: Booking code
+            pay: Pay

@@ -3,15 +3,15 @@
 
     <div class="content">
         <div class="col-md-3">
-            <h3>{%trans%}frontend.defautl.order.order_info{%endtrans%}</h3>
+            <h3>{%trans%}frontend.default.order.order_info{%endtrans%}</h3>
             <hr />
-            <strong>Всего: {{ bookInfo.ticket.totalPrice|number_format(0, '.', ' ')  }} руб.</strong>
+            <strong>{%trans%}frontend.default.order.total{%endtrans%}: {{ bookInfo.ticket.totalPrice|number_format(0, '.', ' ')  }} {{bookInfo.ticket.currency}}</strong>
         </div>
         <div class="col-md-9">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active">
                     <a href="#rules" role="tab" data-toggle="tab">
-                        {%trans%}frontend.default.order.flight_details{%endtrans%}
+                        {%trans%}frontend.default.order.order_info{%endtrans%}
                     </a>
                 </li>
                 <li class="">
@@ -20,18 +20,18 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="rules" style="padding: 15px">
-                    <h4>Бронирование прошло успешно!</h4>
+                    <h4>{%trans%}frontend.default.order.success{%endtrans%}</h4>
 
                     <table class="table">
                         <tbody>
                         <tr>
-                            <td>Направление:</td>
+                            <td>{%trans%}frontend.default.order.direction{%endtrans%}:</td>
                             <td>
                                 <strong>{{ bookInfo.ticket.routes|join(' - ') }}</strong>
                             </td>
                         </tr>
                         <tr>
-                            <td>Код брони:</td>
+                            <td>{%trans%}frontend.default.order.pnr{%endtrans%}:</td>
                             <td>
                                 <strong class="text-danger">{{ order.pnr }}</strong>
                             </td>
@@ -46,7 +46,7 @@
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active">
                     <a href="#pay" role="tab" data-toggle="tab">
-                        Оплата
+                        {%trans%}frontend.default.order.pay{%endtrans%}
                     </a>
                 </li>
             </ul>
