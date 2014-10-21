@@ -94,25 +94,30 @@ class SearchByQuery extends QueryAbstract
 
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getApiUrl()
     {
         return 'http://ws.demo.webservices.aero/';
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getKeyByParams()
     {
         $params = array_intersect_key($this->params, [
             'city_from_code' => '',
             'city_to_code' => '',
             'date_from' => '',
-            'city_to_code' => '',
             'date_to' => '',
             'class' => '',
             'adults' => '',
             'children' => '',
             'infant' => '',
             ]);
-//        var_dump($params);exit;
+        $params[] = 'AviaSearch';
         return preg_replace('/[ ]+/i', '', implode(':', $params));
     }
 

@@ -32,7 +32,9 @@ abstract class QueryAbstract {
         return $this->params;
     }
 
-
+    /**
+     * @return string return uniq key by request params
+     */
     public abstract function getKeyByParams();
 
     /**

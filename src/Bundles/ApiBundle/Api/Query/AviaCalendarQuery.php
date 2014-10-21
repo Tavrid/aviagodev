@@ -101,13 +101,17 @@ class AviaCalendarQuery extends QueryAbstract
 
     public function getKeyByParams()
     {
-        $params = array('AviaCalendar');
-        foreach ($this->params as $param) {
-            if (!empty($param)) {
-                $params[] = $param;
-            }
-        }
-
+        $params = array_intersect_key($this->params, [
+            'city_from_code' => '',
+            'city_to_code' => '',
+            'date_from' => '',
+            'date_to' => '',
+            'class' => '',
+            'adults' => '',
+            'children' => '',
+            'infant' => '',
+        ]);
+        $params[] = 'AviaCalendar';
         return preg_replace('/[ ]+/i', '', implode(':', $params));
     }
 
