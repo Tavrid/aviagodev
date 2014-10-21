@@ -19,10 +19,12 @@ use Bundles\ApiBundle\Api\Response\BookInfoResponse;
 use Symfony\Component\Form\FormError;
 use Bundles\ApiBundle\Api\Util\Calendar;
 
-class ApiController extends Controller {
+class ApiController extends Controller
+{
 
     // C330CA8C-DCDF-4CA8-A5E0-F5E4E1612440
-    public function searchCityAction(Request $request) {
+    public function searchCityAction(Request $request)
+    {
         $q = $request->get('q');
         /** @var \Bundles\ApiBundle\Api\Api $api */
 //        $api = $this->get('avia.api.manager');
@@ -36,7 +38,8 @@ class ApiController extends Controller {
         return $resp;
     }
 
-    public function infoAction(Request $request) {
+    public function infoAction(Request $request)
+    {
         $form = $this->createForm(new BookInfoForm());
         $form->submit($request);
         if ($form->isValid()) {
@@ -61,7 +64,8 @@ class ApiController extends Controller {
         return new Response('', Response::HTTP_BAD_REQUEST);
     }
 
-    public function bookAction(Request $request, $key) {
+    public function bookAction(Request $request, $key)
+    {
         /** @var \Memcached $memcache */
         $memcache = $this->get('memcache.default');
 
@@ -70,7 +74,7 @@ class ApiController extends Controller {
             throw $this->createNotFoundException();
         }
 
-        /* @var $orderManager \Acme\AdminBundle\Model\Order  */
+        /* @var $orderManager \Acme\AdminBundle\Model\Order */
         $orderManager = $this->get('admin.order.manager');
         $entity = $orderManager->getEntity();
 
@@ -102,10 +106,10 @@ class ApiController extends Controller {
                 if (!$output->getIsError() && !empty($output->getPnr())) {
                     $d = $output->getResponseData();
                     $entity->setPnr($output->getPnr())
-                            ->setOrderInfo($d);
+                        ->setOrderInfo($d);
                     $orderManager->save($entity);
                     return $this->redirect($this->generateUrl('bundles_default_api_order', array(
-                                        'orderID' => $entity->getOrderId()
+                        'orderID' => $entity->getOrderId()
                     )));
                 } else {
                     $form->addError(new FormError('Error book'));
@@ -116,13 +120,14 @@ class ApiController extends Controller {
         $countryManager = $this->get('country.model.manager');
 
         return $this->render('BundlesDefaultBundle:Api:book.html.twig', [
-                    'form' => $form->createView(),
-                    'ticket' => $bookInfoResponse->getEntity()->getTicket(),
-                    'masks' => json_encode($countryManager->getMasks())
+            'form' => $form->createView(),
+            'ticket' => $bookInfoResponse->getEntity()->getTicket(),
+            'masks' => json_encode($countryManager->getMasks())
         ]);
     }
 
-    public function addSearchData($params, $data) {
+    public function addSearchData($params, $data)
+    {
         $flights = $this->get('session')->get('flights', array());
         $d = array(
             'url' => $this->generateUrl('bundles_default_api_list', $params),
@@ -132,7 +137,8 @@ class ApiController extends Controller {
         $this->get('session')->set('flights', $flights);
     }
 
-    public function listAction(Request $request) {
+    public function listAction(Request $request)
+    {
 
         $form = $this->createForm('search_form', null, ['city_manager' => $this->get('admin.city.manager')]);
         $formBook = $this->createForm(new BookInfoForm());
@@ -156,7 +162,8 @@ class ApiController extends Controller {
         return $resp;
     }
 
-    public function getFilteredItemsAction(Request $request, $page) {
+    public function getFilteredItemsAction(Request $request, $page)
+    {
         $form = $this->createForm('search_form');
         $formBook = $this->createForm(new BookInfoForm());
 
@@ -203,7 +210,8 @@ class ApiController extends Controller {
         }
     }
 
-    public function calendarAction(Request $request) {
+    public function calendarAction(Request $request)
+    {
         $form = $this->createForm('search_form');
 
         $form->submit($request);
@@ -217,16 +225,54 @@ class ApiController extends Controller {
             $query->setParams($params);
             $output = $api->getAviaCalendarRequestor()->execute($query);
             if (!$output->getIsError()) {
+                $routeParams = $form->getData();
+                $routeParams['direct_flights'] = intval($routeParams['direct_flights']);
+                unset($routeParams['city_from'],$routeParams['city_to']);
                 return $this->render('BundlesDefaultBundle:Api:_calendar.html.twig', [
-                            'data' => $output,
-                            'table' => Calendar::createTable($params['date_from'], $params['date_to'])
+                    'data' => $output,
+                    'route_params' => $routeParams,
+                    'table' => Calendar::createTable($params['date_from'], $params['date_to'])
                 ]);
             }
         }
         throw $this->createNotFoundException();
     }
 
-    public function searchAction(Request $request) {
+    public function calendarItemInfoAction(Request $request){
+        $form = $this->createForm('search_form');
+        $form->add('new_date_from','text')
+            ->add('new_date_to','text');
+        $form->submit($request->query->all());
+
+        if ($form->isValid()) {
+            /** @var \Bundles\ApiBundle\Api\Api $api */
+            $api = $this->get('avia.api.manager');
+            $params = $form->getData();
+
+            $query = new AviaCalendarQuery();
+            $query->setParams($params);
+            $output = $api->getAviaCalendarRequestor()->execute($query);
+
+            if (!$output->getIsError()) {
+                $routeParams = $form->getData();
+                /** @var \Bundles\ApiBundle\Api\Entity\Calendar $calendar */
+                $calendar = $output[date('Y-m-d',$routeParams['new_date_from'])];
+                if($calendar->getChild()){
+                   $calendar = $calendar->findChild(date('Y-m-d',$routeParams['new_date_to']));
+                }
+                $routeParams['direct_flights'] = intval($routeParams['direct_flights']);
+                return $this->render('BundlesDefaultBundle:Api:_calendar_popup.html.twig',[
+                    'ticket' => $calendar->getTicket(),
+                    'routeParams' => $routeParams
+                ]);
+
+            }
+        }
+        throw $this->createNotFoundException();
+    }
+
+    public function searchAction(Request $request)
+    {
         $form = $this->createForm('search_form');
         $form->submit($request);
 
@@ -254,7 +300,8 @@ class ApiController extends Controller {
         return $resp;
     }
 
-    public function orderAction(Request $request, $orderID) {
+    public function orderAction(Request $request, $orderID)
+    {
         /** @var \Acme\AdminBundle\Model\Order $orderManager */
         $orderManager = $this->get('admin.order.manager');
         $order = $orderManager->getOrderByOrderId($orderID);
@@ -263,8 +310,8 @@ class ApiController extends Controller {
         $bookInfoResponse->setResponseData($order->getOrderInfo());
 
         return $this->render('BundlesDefaultBundle:Api:order.html.twig', [
-                    'order' => $order,
-                    'bookInfo' => $bookInfoResponse->getEntity()
+            'order' => $order,
+            'bookInfo' => $bookInfoResponse->getEntity()
         ]);
     }
 

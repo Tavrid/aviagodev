@@ -30,6 +30,9 @@ bundles_default_api_calendar:
     pattern: /api/avia-calendar
     defaults: { _controller: BundlesDefaultBundle:Api:calendar}
 
+bundles_default.api.calendar_item_info:
+    pattern: /api/avia-calendar/info
+    defaults: { _controller: BundlesDefaultBundle:Api:calendarItemInfo}
 bundles_default_api_book:
     pattern: /book/{key}
     defaults: { _controller: BundlesDefaultBundle:Api:book}

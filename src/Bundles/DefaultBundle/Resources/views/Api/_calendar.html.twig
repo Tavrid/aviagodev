@@ -1,4 +1,6 @@
 {% set c = table|first %}
+
+
 <table class="table table-bordered">
     {% if c is empty %}
         <thead>
@@ -15,7 +17,11 @@
                     {% if p.date == date %}
                         <th>
                             <span class="text-warning">
-                                {{ p.price|number_format(0,' ',' ') }} {{p.currency}}
+                                {% set route_params = route_params|merge({'new_date_from' : date,'new_date_to' : 0}) %}
+                                <a class="calendar-item" href="{{ path('bundles_default.api.calendar_item_info',route_params) }}">
+                                    {{ p.price|number_format(0,' ',' ') }} {{p.currency}}
+                                </a>
+
                             </span>
                         </th>
                     {% else %}
@@ -43,7 +49,10 @@
                         <span class="text-warning">
                             {% for item in data %}
                                 {% if item.date == date and item.findChild(d) %}
-                                    {{ item.findChild(d).price|number_format(0,' ',' ') }} {{item.findChild(d).currency}}
+                                    {% set route_params = route_params|merge({'new_date_from' : item.date,'new_date_to' : d}) %}
+                                    <a class="calendar-item" href="{{ path('bundles_default.api.calendar_item_info',route_params) }}">
+                                        {{ item.findChild(d).price|number_format(0,' ',' ') }} {{item.findChild(d).currency}}
+                                    </a>
                                 {% endif %}
                             {% endfor %}
                         </span>
