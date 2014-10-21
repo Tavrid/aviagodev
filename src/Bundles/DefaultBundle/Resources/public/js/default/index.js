@@ -15,6 +15,16 @@ $(function() {
         window.location = Routing.generate('bundles_default_api_list',routeParams);
         return false;
     });
+
+    $('body').on('click','.calendar-item',function(){
+        $.get($(this).attr('href'),{},function(data){
+            $('#calendar-popup').html(data);
+            $('#calendar-popup').popup({
+                closeOnClickOverlay: true
+            }).open();
+        });
+        return false;
+    });
     if(!parseInt($('#search_form_return_way input[type=radio]:checked').val())){
         $('#search_form_date_to').parents('.form-group ').hide();
         //$('#search_form_date_to').val('');
