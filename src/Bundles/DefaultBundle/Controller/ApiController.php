@@ -103,7 +103,7 @@ class ApiController extends Controller
                 /* @var $api Api */
                 $api = $this->get('avia.api.manager');
                 $output = $api->getBookRequestor()->execute($query);
-                if (!$output->getIsError() && !empty($output->getPnr())) {
+                if (!$output->getIsError() && !$output->getPnr()) {
                     $d = $output->getResponseData();
                     $entity->setPnr($output->getPnr())
                         ->setOrderInfo($d);
