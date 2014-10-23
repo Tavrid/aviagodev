@@ -269,12 +269,12 @@ class ApiController extends Controller
                 /** @var \Bundles\ApiBundle\Api\Entity\Calendar $calendar */
                 $calendar = $output[date('Y-m-d',$routeParams['new_date_from'])];
 
+                $routeParams['date_from'] = date('Y-m-d',$routeParams['new_date_from']);
                 if($calendar->getChild()){
                    $calendar = $calendar->findChild($routeParams['new_date_to']);
+                    $routeParams['date_to'] = date('Y-m-d',$routeParams['new_date_to']);
                 }
 
-                $routeParams['date_from'] = date('Y-m-d',$routeParams['new_date_from']);
-                $routeParams['date_to'] = date('Y-m-d',$routeParams['new_date_to']);
                 unset($routeParams['new_date_to'],$routeParams['new_date_from']);
                 return $this->render('BundlesDefaultBundle:Api:_calendar_popup.html.twig',[
                     'ticket' => $calendar->getTicket(),
