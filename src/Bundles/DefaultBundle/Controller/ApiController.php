@@ -226,6 +226,7 @@ class ApiController extends Controller
             $output = $api->getAviaCalendarRequestor()->execute($query);
             if (!$output->getIsError()) {
                 $routeParams = $form->getData();
+                //TODO костыль ;)
                 $routeParams['direct_flights'] = intval($routeParams['direct_flights']);
                 unset($routeParams['city_from'],$routeParams['city_to']);
                 return $this->render('BundlesDefaultBundle:Api:_calendar.html.twig', [
@@ -242,8 +243,14 @@ class ApiController extends Controller
         $form = $this->createForm('search_form');
         $form->add('new_date_from','text')
             ->add('new_date_to','text');
-        $form->submit($request->query->all());
 
+        $queryGet = $request->query->all();
+
+        //TODO костыль ;)
+        $queryGet['best_price'] = boolval($queryGet['best_price']);
+        $queryGet['direct_flights'] = boolval($queryGet['direct_flights']);
+
+        $form->submit($queryGet);
         if ($form->isValid()) {
             /** @var \Bundles\ApiBundle\Api\Api $api */
             $api = $this->get('avia.api.manager');
@@ -255,12 +262,20 @@ class ApiController extends Controller
 
             if (!$output->getIsError()) {
                 $routeParams = $form->getData();
+                //TODO костыль ;)
+                $routeParams['best_price'] = intval($routeParams['best_price']);
+                $routeParams['direct_flights'] = intval($routeParams['direct_flights']);
+
                 /** @var \Bundles\ApiBundle\Api\Entity\Calendar $calendar */
                 $calendar = $output[date('Y-m-d',$routeParams['new_date_from'])];
+
                 if($calendar->getChild()){
-                   $calendar = $calendar->findChild(date('Y-m-d',$routeParams['new_date_to']));
+                   $calendar = $calendar->findChild($routeParams['new_date_to']);
                 }
-                $routeParams['direct_flights'] = intval($routeParams['direct_flights']);
+
+                $routeParams['date_from'] = date('Y-m-d',$routeParams['new_date_from']);
+                $routeParams['date_to'] = date('Y-m-d',$routeParams['new_date_to']);
+                unset($routeParams['new_date_to'],$routeParams['new_date_from']);
                 return $this->render('BundlesDefaultBundle:Api:_calendar_popup.html.twig',[
                     'ticket' => $calendar->getTicket(),
                     'routeParams' => $routeParams

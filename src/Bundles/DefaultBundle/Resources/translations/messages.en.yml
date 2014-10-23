@@ -55,6 +55,10 @@ frontend:
     flights:
       last_ticket_date: Pay up
     default:
+        modal:
+            title: Lowest price for the chosen dates
+            close: Slose
+            search: Search
         flights: Flights
         previous_searches: Previous searches
         all_airports: country, city, All airports (code)

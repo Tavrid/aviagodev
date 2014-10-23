@@ -17,11 +17,11 @@ $(function() {
     });
 
     $('body').on('click','.calendar-item',function(){
+        _GlobalAppObject.loadingStart();
         $.get($(this).attr('href'),{},function(data){
+            _GlobalAppObject.loadingStop();
             $('#calendar-popup').html(data);
-            $('#calendar-popup').popup({
-                closeOnClickOverlay: true
-            }).open();
+            $('#calendar-popup #calendar-modal').modal('show');
         });
         return false;
     });
