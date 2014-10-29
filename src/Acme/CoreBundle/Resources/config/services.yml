@@ -48,3 +48,6 @@ services:
         class: Acme\CoreBundle\Model\CssRewriteFilter
         tags:
             - { name: assetic.filter, alias: main_cssrewirte}
+
+    main.cache.service:
+        class: Acme\CoreBundle\Model\Cache

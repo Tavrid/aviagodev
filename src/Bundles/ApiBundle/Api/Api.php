@@ -40,7 +40,7 @@ class Api {
      * @var \Acme\AdminBundle\Model\Log
      */
     protected $logger;
-    public function __construct($key,ApiCallerInterface $apiCaller,\Memcached $memcached,AbstractModel $logger){
+    public function __construct($key,ApiCallerInterface $apiCaller,\Memcached $memcached = null,AbstractModel $logger){
         $this->apiKey = $key;
         $this->apiCaller = $apiCaller;
         $this->memcached = $memcached;
@@ -61,8 +61,8 @@ class Api {
      */
     public function getSearchRequestor(){
         $searchRequest = new SearchRequest($this->apiKey,$this->apiCaller);
-        $searchRequest->setMemcached($this->memcached)
-        ->setLogger($this->logger);
+//        $searchRequest->setMemcached($this->memcached)
+        $searchRequest->setLogger($this->logger);
         return $searchRequest;
     }
 
@@ -91,8 +91,8 @@ class Api {
 
     public function getAviaCalendarRequestor(){
         $searchRequest = new AviaCalendarRequest($this->apiKey,$this->apiCaller);
-        $searchRequest->setLogger($this->logger)
-            ->setMemcached($this->memcached);
+        $searchRequest->setLogger($this->logger);
+//            ->setMemcached($this->memcached);
         return $searchRequest;
     }
 

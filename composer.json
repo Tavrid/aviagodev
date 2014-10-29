@@ -53,7 +53,7 @@
         "knplabs/knp-menu-bundle":"dev-master",
         "leaseweb/api-caller-bundle": "*",
         "stb/bootstrap": "1.1",
-        "leaseweb/memcache-bundle": "*",
+        "Beryllium/CacheBundle": "dev-master",
         "friendsofsymfony/jsrouting-bundle": "@stable"
     },
     "scripts": {

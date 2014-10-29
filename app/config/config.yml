@@ -98,13 +98,13 @@ knp_menu:
     default_renderer: twig # The renderer to use, list is also available by default
 
 
-lsw_memcache:
-    session:
-        client: default
-    clients:
-        default:
-            hosts:
-              - { dsn: localhost, port: 11211 }
+#lsw_memcache:
+#    session:
+#        client: default
+#    clients:
+#        default:
+#            hosts:
+#              - { dsn: localhost, port: 11211 }
 
 parameters:
     api_caller.options:
