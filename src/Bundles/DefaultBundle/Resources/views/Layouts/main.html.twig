@@ -6,32 +6,17 @@
             {% stylesheets
         '@front_bootstrap_css'
         'bundles/bundlesdefault/lib/ui-theme/css/jquery-ui.css'
-    filter='cssrewrite' combine=true %}
+    filter='cssrewrite' %}
             <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
             {% endstylesheets %}
             {#<link href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet"/>#}
             <link href="{{ asset('/frontend/css/style.css') }}" rel="stylesheet"/>
         {% endblock %}
         {#<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />#}
-        {% block js %}
-            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-            <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-            {% javascripts 
-                '@jquery' 
-                '@jquery_ui_js'
-                '@front_bootstrap_js'
-                'bundles/bundlesdefault/lib/popup.js'
-                'bundles/bundlesdefault/lib/moment.js'
-                'bundles/bundlesdefault/js/app.js'
-                'bundles/bundlesdefault/lib/jquery_validator/dist/jquery.validate.min.js'
-                combine=true
-            %}
-            <script type="text/javascript" src="{{ asset_url }}"></script>
-            {% endjavascripts %}
-            {%if app.request.locale!='en' %}
-                <script type="text/javascript" src="/bundles/bundlesdefault/lib/jquery_validator/dist/localization/messages_{{app.request.locale}}.js"></script>
-            {%endif%}
-        {% endblock %}
+
+                <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+                <script type="text/javascript" src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+
     </head>
     <body>
         <div class="page-header">
@@ -50,6 +35,23 @@
     <div id="loader" style="display: none; z-index: 10000; padding: 30px 60px; ">
         <img alt="" src="{{ asset('/bundles/bundlesdefault/img/ajax-loader.gif') }}" />
     </div>
+        {% block js %}
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+            {% javascripts
+            '@front_bootstrap_js'
+            'bundles/bundlesdefault/lib/popup.js'
+            'bundles/bundlesdefault/lib/moment.js'
+            'bundles/bundlesdefault/js/app.js'
+            'bundles/bundlesdefault/lib/jquery_validator/dist/jquery.validate.min.js'
+            debug=true
+            %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+            {%if app.request.locale!='en' %}
+            <script type="text/javascript" src="/bundles/bundlesdefault/lib/jquery_validator/dist/localization/messages_{{app.request.locale}}.js"></script>
+            {%endif%}
+        {% endblock %}
     <script>
         $(document).ready(function(){
             _GlobalAppObject.setLocale("{{app.request.locale}}");
