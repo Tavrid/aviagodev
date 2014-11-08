@@ -6,7 +6,7 @@
             {% stylesheets
         '@front_bootstrap_css'
         'bundles/bundlesdefault/lib/ui-theme/css/jquery-ui.css'
-            filter='cssrewrite' combine=true %}
+    filter='cssrewrite' combine=true %}
             <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
             {% endstylesheets %}
             {#<link href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet"/>#}
@@ -32,22 +32,11 @@
                 <script type="text/javascript" src="/bundles/bundlesdefault/lib/jquery_validator/dist/localization/messages_{{app.request.locale}}.js"></script>
             {%endif%}
         {% endblock %}
-        <style>
-            .logo {
-                width: 300px;
-                float: left;
-            }
-
-            .logo img {
-                width: 100%;
-                height: auto;
-            }
-        </style> 
     </head>
     <body>
         <div class="page-header">
             <div class="container">
-                <a href="/" class="logo"><img src="file:///C:/OpenServer/domains/localhost/avia/web/images/logo.png" alt=""></a>
+                
                 <div class="btn-group pull-right row">
                     <button data-value="ru"  type="button" class="btn btn-default lang {{app.request.locale == 'ru' ? 'active':''}}">ru</button>
                     <button data-value="en" type="button" class="btn btn-default lang {{app.request.locale == 'en' ? 'active':''}}">en</button>
