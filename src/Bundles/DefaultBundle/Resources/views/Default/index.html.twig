@@ -4,66 +4,169 @@
     {% javascripts 'bundles/bundlesdefault/js/default/index.js' combine=true%}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
+    <link rel="stylesheet" href="css/avia.css">
+    <script src="js/jquery.selectbox.min.js" type="text/javascript"></script>
+    <script src="js/checkbox.js" type="text/javascript"></script>
+    <script src="js/avia.js"></script>
+    <script src="js/date.js" type="text/javascript"></script>
 {% endblock %}
 
 {% block body %}
+
     <div class="row">
-        <div class="col-md-8">
-            <div class="panel panel-primary well">
-                <div class="panel-heading">
+        <div class="col-md-7">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active"><a href="#avia" data-toggle="tab">{% trans %}frontend.default.flights{% endtrans %}</a></li>
+            </ul>
+            <div class="form-search-index panel panel-primary well">
+                <!--<div class="panel-heading">
                     <h3 class="panel-title">{% trans %}frontend.default.flights{% endtrans %}</h3>
-                </div>
-                <div class="panel-body">
+                </div>-->
+                <div class="panel-body" style="padding: 15px 0 0;">
                 <form action="{{ path('bundles_default_search') }}" method="post" id="search-form">
-                    <div class="col-md-5">
-                        {{ form_row(form.city_from) }}
+                    <div class="row return_way border">
+                        <div class="col-md-12">
+                            {{ form_widget(form.return_way, {'attr': {'class': 'foo'}}) }}
+                        </div>
                     </div>
-                    <div class="col-md-1">
-                        <div style="margin-top: 30px" class="btn btn-success">
+                    <div class="row from-to">
+                        <div class="col-md-5">
+                            <div class="city_from">
+                                {{ form_widget(form.city_from, {'attr': {'class': 'from_city'}}) }}
+                                <a href="#" class="clear_input">X</a>
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <div class="btn-refresh btn btn-success">
                                 <span class="glyphicon glyphicon-refresh" id="reverse-city"></span>
                             </div>
-                    </div>
-                    <div class="col-md-6">
-                        {{ form_row(form.city_to) }}
-                    </div>
-                    <div class="col-md-6">
-                        
-                        {{ form_row(form.city_from_code) }}
-                        {{ form_row(form.date_from) }}
-                        {{ form_row(form.return_way) }}
-                        <div class="row">
-                            <div class="col-md-4">
-                                {{ form_row(form.adults) }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form_row(form.children) }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form_row(form.infant) }}
+                        </div>
+                        <div class="col-md-5">
+                            <div class="city_to">
+                                {{ form_widget(form.city_to, {'attr': {'class': 'to_city'}}) }}
+                                <a href="#" class="clear_input">X</a>
                             </div>
                         </div>
-                        <div>
-                            {{ form_row(form.class) }}
-                            {{ form_row(form.avia_company) }}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(form.city_from_code) }}
+                            <div class="row line">
+                                <div class="col-md-12 date_from">
+                                    {{ form_row(form.date_from) }}
+                                    <div class="popup-date">
+                                        <div class="dateavia"></div>
+                                        <a href="#" class="close">Закрыть</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row vozrast line">    
+                                <div class="row">
+                                    <div class="col-md-12 title">
+                                        <b>Количество пассажиров:</b>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                {{ form_label(form.adults, ' ', {'label_attr': {'class': 'adults-icon',' title': 'frontend.search_form.adults'|trans }}) }}
+                                            </div>
+                                            <div class="col-md-8 btn-blocks">
+                                                {{ form_widget(form.adults, {'attr': {'class': 'adults'}}) }}
+                                                <div class="btn-vozrast">
+                                                    <a href="#" class="plus">+</a>
+                                                    <a href="#" class="minus">-</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                {{ form_label(form.adults, '', {'label_attr':{'class':'info-vozrast'}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                {{ form_label(form.children, ' ', {'label_attr': {'class': 'children-icon',' title': 'frontend.search_form.children'|trans }}) }}
+                                            </div>
+                                            <div class="col-md-8 btn-blocks">
+                                                {{ form_widget(form.children, {'attr': {'class': 'children'}}) }}
+                                                <div class="btn-vozrast">
+                                                    <a href="#" class="plus">+</a>
+                                                    <a href="#" class="minus">-</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                {{ form_label(form.children, '', {'label_attr':{'class':'info-vozrast'}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                {{ form_label(form.infant, ' ', {'label_attr': {'class': 'infant-icon',' title': 'frontend.search_form.infant'|trans }}) }}
+                                            </div>    
+                                            <div class="col-md-8 btn-blocks">
+                                                {{ form_widget(form.infant, {'attr': {'class': 'infant'}}) }}
+                                                <div class="btn-vozrast">
+                                                    <a href="#" class="plus">+</a>
+                                                    <a href="#" class="minus">-</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                {{ form_label(form.infant, '', {'label_attr':{'class':'info-vozrast'}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row line">
+                                <div class="col-md-12 avia">
+                                    {{ form_row(form.avia_company) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(form.city_to_code) }}
+                            <div class="row line">
+                                <div class="col-md-12 date_to">    
+                                    {{ form_row(form.date_to) }}
+                                </div>
+                            </div>
+                            <div class="row line">
+                                <div class="col-md-7 klass">
+                                    {{ form_row(form.class) }}
+                                </div>
+                                <div class="col-md-5 currency">
+                                    {{ form_row(form.currency) }}
+                                </div>
+                            </div>
+                            <div class="row price-flight line">
+                                <label>&nbsp;</label>
+                                <div class="col-md-12 check-block">
+                                    {{ form_label(form.best_price, 'frontend.search_form.best_price'|trans) }}
+                                    <div class="checkbox-dop">
+                                        {{ form_widget(form.best_price, {'attr': {'class': 'best-price checkbox'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-12 check-block">
+                                    {{ form_label(form.direct_flights, 'frontend.search_form.direct_flights'|trans) }}
+                                    <div class="checkbox-dop">
+                                        {{ form_widget(form.direct_flights, {'attr': {'class': 'best-price checkbox'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                            {#<div class="col-md-4">#}
+                            {#</div>#}
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        
-                        {{ form_row(form.city_to_code) }}
-                        {{ form_row(form.date_to) }}
-                            {{ form_row(form.currency) }}
-                        <div class="col-md-4">
-                            {{ form_row(form.best_price) }}
-                        </div>
-                        <div class="col-md-4">
-                            {{ form_row(form.direct_flights) }}
-
-                        </div>
-                        {#<div class="col-md-4">#}
-                        {#</div>#}
-
-                    </div>
-                        <input type="submit" value="{%trans%}frontend.search_form.submit{%endtrans%}" class="btn btn-success pull-right"/>
+                    <input type="submit" value="{%trans%}frontend.search_form.submit{%endtrans%}" class="btn-fly btn btn-success pull-right"/>
                 </form>
                 </div>
             </div>
