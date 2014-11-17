@@ -13,10 +13,134 @@
         });
     </script>
     <div class="col-md-3 well">
-        <form id="search-form" action="{{ path('bundles_default_search') }}" method="post" id="search-form">
-
-                {{ form_widget(form) }}
-                <input type="submit" class="btn btn-success pull-right" value="{%trans%}frontend.search_form.submit{%endtrans%}"/>
+        <form id="search-form" class="form-filter-inner" action="{{ path('bundles_default_search') }}" method="post" id="search-form">
+            <div class="row from-to">
+                <div class="col-md-12">
+                    <div class="city_from">
+                        {{ form_widget(form.city_from, {'attr': {'class': 'from_city'}}) }}
+                        <a href="#" class="clear_input">X</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row from-to">
+                <div class="col-md-12 text-center">
+                    <div class="btn-refresh btn btn-success">
+                        <span class="glyphicon glyphicon-refresh" id="reverse-city"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row from-to">
+                <div class="col-md-12">
+                    <div class="city_to">
+                        {{ form_widget(form.city_to, {'attr': {'class': 'to_city'}}) }}
+                        <a href="#" class="clear_input">X</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row return_way return_way_inner border">
+                <div class="col-md-12">
+                    {{ form_widget(form.return_way, {'attr': {'class': 'foo'}}) }}
+                </div>
+            </div>
+            {{ form_row(form.city_from_code) }}
+            <div class="row line">
+                <div class="col-md-12 date_from">
+                    {{ form_row(form.date_from) }}
+                </div>
+            </div>
+            {{ form_row(form.city_to_code) }}
+            <div class="row line">
+                <div class="col-md-12 date_to">    
+                    {{ form_row(form.date_to) }}
+                </div>
+            </div>
+            <div class="row vozrast line">    
+                <div class="row">
+                    <div class="col-md-12 title">
+                        <b>{% trans %}frontend.default.index.num_passengers{% endtrans %}</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-12 btn-blocks">
+                                {{ form_widget(form.adults, {'attr': {'class': 'adults'}}) }}
+                                <div class="btn-vozrast">
+                                    <a href="#" class="plus">+</a>
+                                    <a href="#" class="minus">-</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ form_label(form.adults, '', {'label_attr':{'class':'info-vozrast'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-12 btn-blocks">
+                                {{ form_widget(form.children, {'attr': {'class': 'children'}}) }}
+                                <div class="btn-vozrast">
+                                    <a href="#" class="plus">+</a>
+                                    <a href="#" class="minus">-</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ form_label(form.children, '', {'label_attr':{'class':'info-vozrast'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">    
+                            <div class="col-md-12 btn-blocks">
+                                {{ form_widget(form.infant, {'attr': {'class': 'infant'}}) }}
+                                <div class="btn-vozrast">
+                                    <a href="#" class="plus">+</a>
+                                    <a href="#" class="minus">-</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ form_label(form.infant, '', {'label_attr':{'class':'info-vozrast'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    {{ form_row(form.avia_company) }}
+                </div>
+            </div>
+            <div class="row line">
+                <div class="col-md-7 klass">
+                    {{ form_row(form.class) }}
+                </div>
+                <div class="col-md-5 currency">
+                    {{ form_row(form.currency) }}
+                </div>
+            </div>
+            <div class="row price-flight line">
+                <label>&nbsp;</label>
+                <div class="col-md-12 check-block">
+                    {{ form_label(form.best_price, 'frontend.search_form.best_price'|trans) }}
+                    <div class="pull-right checkbox-dop">
+                        {{ form_widget(form.best_price, {'attr': {'class': 'best-price checkbox'}}) }}
+                    </div>
+                </div>
+                <div class="col-md-12 check-block">
+                    {{ form_label(form.direct_flights, 'frontend.search_form.direct_flights'|trans) }}
+                    <div class="pull-right checkbox-dop">
+                        {{ form_widget(form.direct_flights, {'attr': {'class': 'best-price checkbox'}}) }}
+                    </div>
+                </div>
+            </div>
+            {{ form_widget(form) }}
+            <input type="submit" class="btn btn-success pull-right" value="{%trans%}frontend.search_form.submit{%endtrans%}"/>
         </form>
     </div>
     <div class="col-md-9">
@@ -45,5 +169,56 @@
     <div id="calendar-popup">
 
     </div>
+    <script>
+        $(document).ready(function($) {
+            $(".return_way input[type='radio']").each(function() {
+                $(this).wrap("<span class='niceRadio'></span>");
+                var check = $(this).attr('checked')
+                if(check=='checked'){
+                    $(this).parent().addClass('act-radio');
+                }
+                $(this).parent().click(function(event) {
+                    if(!$(this).hasClass('act-radio')){
+                        $(".return_way .niceRadio").removeClass('act-radio');
+                        $(this).addClass('act-radio');
+                    }
+                });
+            }); 
+
+            
+    $(".checkbox-dop").mousedown(function() {
+        changeCheck($(this)); 
+    });
+
+    $(".checkbox-dop").each(function() {
+         changeCheckStart($(this));
+    });
+
+            function changeCheck(el){
+        var el = el,
+        input = el.find("input").eq(0);
+        if(!input.attr("checked")) {
+            el.css("background-position","0 -20px");    
+            el.addClass('act');
+            input.attr("checked", true)
+        } else {
+            el.removeClass('act');
+            el.css("background-position","0 0");    
+            input.attr("checked", false)
+        }
+        return true;
+    }
+
+    function changeCheckStart(el){
+        var el = el,
+        input = el.find("input").eq(0);
+        if(input.attr("checked")) {
+            el.css("background-position","0 -20px");    
+            el.addClass('act');
+        }
+        return true;
+    }
+        });
+    </script>
 {% endblock %}
 

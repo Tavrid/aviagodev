@@ -1,14 +1,18 @@
 {% extends "BundlesDefaultBundle:Layouts:main.html.twig" %}
 {% block js %}
     {{ parent() }}
-    {% javascripts 'bundles/bundlesdefault/js/default/index.js' combine=true%}
+    {% javascripts 
+    'bundles/bundlesdefault/js/default/index.js' 
+    'bundles/bundlesdefault/js/default/jquery.selectbox.min.js' 
+    'bundles/bundlesdefault/js/default/avia.js' 
+    combine=true%}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
-    <link rel="stylesheet" href="css/avia.css">
-    <script src="js/jquery.selectbox.min.js" type="text/javascript"></script>
-    <script src="js/checkbox.js" type="text/javascript"></script>
-    <script src="js/avia.js"></script>
-    <script src="js/date.js" type="text/javascript"></script>
+    {% stylesheets
+        'bundles/bundlesdefault/css/avia.css'
+        filter='cssrewrite' combine=true %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
 {% endblock %}
 
 {% block body %}
@@ -54,16 +58,12 @@
                             <div class="row line">
                                 <div class="col-md-12 date_from">
                                     {{ form_row(form.date_from) }}
-                                    <div class="popup-date">
-                                        <div class="dateavia"></div>
-                                        <a href="#" class="close">Закрыть</a>
-                                    </div>
                                 </div>
                             </div>
                             <div class="row vozrast line">    
                                 <div class="row">
                                     <div class="col-md-12 title">
-                                        <b>Количество пассажиров:</b>
+                                        <b>{% trans %}frontend.default.index.num_passengers{% endtrans %}</b>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -190,6 +190,53 @@
     {% endif %}
 <script>
     $(document).ready(function(){
+        $(".return_way input[type='radio']").each(function() {
+            $(this).wrap("<span class='niceRadio'></span>");
+            var check = $(this).attr('checked')
+            if(check=='checked'){
+                $(this).parent().addClass('act-radio');
+            }
+            $(this).parent().click(function(event) {
+                if(!$(this).hasClass('act-radio')){
+                    $(".return_way .niceRadio").removeClass('act-radio');
+                    $(this).addClass('act-radio');
+                }
+            });
+        });
+
+        
+    $(".checkbox-dop").mousedown(function() {
+        changeCheck($(this)); 
+    });
+
+    $(".checkbox-dop").each(function() {
+         changeCheckStart($(this));
+    });
+
+        function changeCheck(el){
+        var el = el,
+        input = el.find("input").eq(0);
+        if(!input.attr("checked")) {
+            el.css("background-position","0 -20px");    
+            el.addClass('act');
+            input.attr("checked", true)
+        } else {
+            el.removeClass('act');
+            el.css("background-position","0 0");    
+            input.attr("checked", false)
+        }
+        return true;
+    }
+
+    function changeCheckStart(el){
+        var el = el,
+        input = el.find("input").eq(0);
+        if(input.attr("checked")) {
+            el.css("background-position","0 -20px");    
+            el.addClass('act');
+        }
+        return true;
+    }
 
         _GlobalAppObject.searchUrl = "{{ path('bundles_default_search_city') }}";
     });

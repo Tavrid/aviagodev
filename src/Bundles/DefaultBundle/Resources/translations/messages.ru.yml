@@ -55,6 +55,8 @@ frontend:
     flights:
       last_ticket_date: Оплатить до
     default:
+        index:
+            num_passengers: Количество пассажиров:
         modal:
             title: Самая низкая цена на выбранные даты
             close: Закрыть
