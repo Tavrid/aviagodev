@@ -53,8 +53,8 @@ class ApiController extends Controller
                 $str = implode(':', $data['variants']);
 
                 $key = md5($str);
-                /** @var \Memcached $memcache */
-                $memcache = $this->get('memcache.default');
+
+                $memcache = $this->get('main.cache');
                 $memcache->set($key, $output, 3600);
                 $resp = new Response(json_encode(['url' => $this->generateUrl('bundles_default_api_book', ['key' => $key])]));
                 $resp->headers->add(array('Content-Type' => 'application/json'));
@@ -67,7 +67,7 @@ class ApiController extends Controller
     public function bookAction(Request $request, $key)
     {
         /** @var \Memcached $memcache */
-        $memcache = $this->get('memcache.default');
+        $memcache = $this->get('main.cache');
 
         $bookInfoResponse = $memcache->get($key);
         if (empty($bookInfoResponse)) {
