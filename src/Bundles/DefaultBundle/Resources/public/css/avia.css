@@ -1,0 +1,671 @@
+/* Шапка */
+
+.page-header {
+	margin: 10px 0;
+}
+
+.logo {
+	width: 300px;
+	float: left;
+}
+
+.logo img {
+	width: 100%;
+	height: auto;
+}
+
+/* Форма поиска на главной */
+
+.form-search-index {
+	/* background: url('../images/bg-form-search.png') no-repeat center top; */
+	background: #34363E;
+	-webkit-background-size: cover;
+	background-size: cover;
+	color:#fff;
+	font-size: 14px;
+	padding-top: 0;
+	font-family: Tahoma;
+}
+
+.form-search-index label,
+.form-search-index b {
+	font-size: 13px;
+}
+
+.form-search-index * {
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+.form-search-index label,
+.form-search-index .title {
+	margin-bottom: 5px;
+}
+
+.line .form-group {
+	padding-bottom: 10px;
+}
+
+.form-control {
+	padding: 6px 12px !important;	
+}
+
+.border {
+	border-bottom: 1px dashed #fff;
+	padding-bottom: 10px;
+}
+
+/* Поле вылета */
+
+.city_from {
+	background: #fff url('../images/avia-up.png') no-repeat 3px center;
+}
+
+/* Поле прилета */
+
+#ui-id-1,
+#ui-id-2 {
+	top: 40px !important;
+	left: 0 !important;
+	z-index: 999999;
+	width: 100% !important;
+}
+
+#ui-id-1 li,
+#ui-id-2 li {
+	padding: 2px 4px;
+	cursor: pointer;
+}
+
+#ui-id-1 li:hover,
+#ui-id-2 li:hover,
+#ui-id-1 .ui-state-focus,
+#ui-id-2 .ui-state-focus {
+	font-weight: normal;
+	background: #00beff;
+}
+
+.from-to {
+	padding: 5px 0 10px;
+}
+
+.city_to {
+	background: #fff url('../images/avia-down.png') no-repeat 3px center;
+}
+
+.city_from,
+.city_to,
+.date_from .controls,
+.date_to .controls {
+	border:1px solid #cecece;
+	height: 41px;
+}
+
+.city_from,
+.city_to {
+	padding-left: 35px;
+	position: relative;
+}
+
+.clear_input {
+	height: 39px;
+    line-height: 41px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: 25px;
+    background: #fff url('../images/close2.png') no-repeat center center;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
+.clear_input:focus {
+	outline: none;
+}
+
+.city_from input,
+.city_to input,
+.date_from input,
+.date_to input {
+	border: none;
+	background: none;
+	height: 41px;
+	line-height: 41px;
+	font-size: 16px;
+}
+
+.date_from .controls,
+.date_to .controls {
+	position: relative;
+}
+
+.date_from .controls:after,
+.date_to .controls:after {
+	content: '';
+	position: absolute;
+	width: 40px;
+	height: 41px;
+	right: 0;
+	top: 0;
+	cursor: pointer;
+}
+
+.city_from input:focus,
+.city_to input:focus,
+.date_from input:focus,
+.date_to input:focus {
+	box-shadow: none;
+}
+
+.date_from {
+	position: relative;
+}
+
+.dp-highlight .ui-state-default {
+	background: #00BDFF;
+    color: #FFF;
+}
+
+.first-sel a {
+	background: #0085B0;
+} 
+
+.popup-date {
+	display: none;
+	position: absolute;
+	left: 15px;
+    top: 65px;
+	z-index: 999999;
+}
+
+.search_form_date_to {
+	left: 55.5px !important;
+}
+
+.ui-datepicker {
+	border-color: #00BEFF;
+}
+
+.ui-state-default, 
+.ui-widget-content .ui-state-default, 
+.ui-widget-header .ui-state-default {
+	background: -webkit-linear-gradient(#f4f4f4 0%, #dcdcdc 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: -o-linear-gradient(#f4f4f4 0%, #dcdcdc 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: linear-gradient(#f4f4f4 0%, #dcdcdc 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	font-weight: normal;
+	box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.7) inset;
+	border-color: -moz-use-text-color #009cc3 #007897 -moz-use-text-color;
+    border-image: none;
+    border-right: 1px solid #009cc3;
+    border-style: none solid solid none;
+    border-width: medium 1px 1px medium;
+}
+
+.ui-datepicker-calendar .ui-state-default, 
+.ui-datepicker-calendar .ui-state-hover, 
+.ui-datepicker-calendar .ui-state-highlight, 
+.ui-datepicker-calendar .ui-state-active {
+	border-width: 0;
+}
+
+.ui-datepicker-calendar .ui-state-highlight { 
+	color: #525252 !important;
+	background: -webkit-linear-gradient(#C9C9C9 0%, #DFDFDF 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: -o-linear-gradient(#C9C9C9 0%, #DFDFDF 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: linear-gradient(#C9C9C9 0%, #DFDFDF 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.ui-datepicker-calendar .ui-state-hover {
+	color: #525252 !important;	
+	background: -webkit-linear-gradient(#C9C9C9 0%, #DFDFDF 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: -o-linear-gradient(#C9C9C9 0%, #DFDFDF 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: linear-gradient(#C9C9C9 0%, #DFDFDF 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.ui-datepicker-group-last {
+	width: 33.4%;
+}
+
+.ui-datepicker-group .ui-datepicker-header {
+	background: #00BEFF;
+	padding: 5px 0;
+}
+
+.ui-datepicker-group-middle .ui-datepicker-header {
+	border-left-width: 1px !important;
+	border-left-style: solid;
+	border-left-color: #fff;
+	border-right: 1px solid #fff;
+} 
+
+.ui-datepicker .ui-datepicker-prev,
+.ui-datepicker .ui-datepicker-next {
+	top: 7px;
+}
+
+.ui-datepicker .ui-datepicker-prev {
+	left: 7px
+}
+
+.ui-datepicker .ui-datepicker-next {
+	right: 7px
+}
+
+.ui-datepicker-week-end a,
+.ui-datepicker-week-end .ui-state-hover,
+.ui-datepicker-week-end.sel-date a {
+	color: #D70000 !important;
+}
+
+.sel-date a {
+	background: #00bdff !important;
+	color:#fff !important;
+}
+
+.ui-datepicker-calendar .ui-state-active,
+.ui-datepicker-calendar.first-date .ui-state-highlight,
+.last-date a,
+.first-date a {
+	background: #FF9D1A !important;
+	color:#fff !important;
+}
+
+.last-date:hover a,
+.first-date:hover a {
+	color:#fff !important;
+	background: #FF9D1A !important;
+}
+
+.ui-datepicker-calendar .ui-state-active:hover {
+	color:#fff !important;
+}
+
+.ui-datepicker {
+	width: 45em !important;
+}
+
+/* Автокомплит */
+
+.ui-autocomplete {
+	border: 1px solid #cecece;
+}
+
+/* Кнопка менять местами */
+
+.btn-refresh {
+	width: 41px;
+	height: 41px;
+	background: url('../images/refresh.jpg') no-repeat center center;
+	border:none;
+	transition: transform .4s;
+}
+
+.btn-refresh:hover {
+	transform: rotate(180deg);
+}
+
+.btn-refresh:active {
+	background: url('../images/refresh.jpg') no-repeat center center;
+}
+
+.btn-refresh .glyphicon-refresh {
+	width: 41px;
+	height: 41px;
+	margin: -6px 0 0 -12px;
+}
+
+.btn-refresh .glyphicon-refresh:before {
+	display: none;
+}
+
+/* Заголовок формы */
+
+.form-search-index .panel-heading {
+	background: #5fbdff;
+}
+
+/* Дата вылета и прилета */
+
+.date_from .controls,
+.date_to .controls {
+	background: #fff url('../images/date.png') no-repeat 99% center;
+}
+
+/* Выбор возраста */
+
+.vozrast {
+	padding-left: 0;
+	padding-right: 0;
+	margin-right: 0;
+	margin-left: 0;
+}
+
+.info-vozrast {
+	text-align: center;
+	font-weight: normal;
+	width: 100%;
+	text-transform: lowercase;
+	font-size: 12px;
+	padding: 5px 0;
+}
+
+.vozrast .title {
+	padding-top: 0;
+}
+
+.vozrast > div {
+	padding-top: 1px;
+}
+
+.vozrast > div select {
+	padding: 6px;
+	height: 39px;
+}
+
+.vozrast .select .text {
+	text-align: center;
+	padding-left: 7px;
+}
+
+.vozrast .trigger {
+	width: 26px !important;
+	position: absolute;
+	right: 0;
+	background: url('../images/select-unact2.png') no-repeat center center;
+}
+
+.adults-icon,
+.children-icon,
+.infant-icon {
+	width: 11px;
+	height: 36px;
+	position: relative;
+/* 	left: 10px;*/
+}
+
+.adults-icon {
+	background: url('../images/adults.png') no-repeat center center;
+}
+
+.children-icon {
+	background: url('../images/child.png') no-repeat center center;
+}
+
+.infant-icon {
+	background: url('../images/infant.png') no-repeat center center;
+}
+
+.btn-block {
+	position: relative;
+}
+
+.btn-blocks {/* 
+	padding-left: 0; */
+}
+
+.btn-vozrast {
+	position: absolute;
+	right: 4px;
+	top:-5px;
+	width: 32px;
+	height: 42px;
+	background: url('../images/form-btn.png') no-repeat center center;
+	display: none;
+}
+
+.btn-vozrast a {
+	color:#fff;
+	display: block;
+	clear: both;
+	text-align: center;
+	font-size: 18px;
+	height: 18px;
+	line-height: 20px;
+}
+
+/* Авиакомпании */
+
+.avia .select .text {
+	padding-left: 10px;
+}
+
+.avia .trigger {
+	position: absolute;
+	right: 0;
+	width: 38px;
+}
+
+/* Валюта */
+
+.currency .select .text {
+	padding-left: 10px;
+}
+
+.currency .trigger {
+	position: absolute;
+	right: 0;
+	width: 38px;
+}
+
+/* Класс */
+
+.klass .select .text {
+	padding-left: 10px
+}
+
+.klass .trigger {
+	position: absolute;
+	right: 0;
+	width: 38px;
+}
+
+/* Авиакомпании */
+
+.form-filter-inner .select .text {
+	padding-left: 10px;
+}
+
+.form-filter-inner .trigger {
+	position: absolute;
+	right: 0;
+	width: 38px;
+}
+
+/* Выпадающие списки */
+
+.selectbox {
+	width: 100%;
+}
+
+.select {
+	width: 100%;
+	border:1px solid #cecece;
+	height: 41px;
+	background: #fff;
+}
+
+.select .text,
+.select .trigger {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.select .text {
+	height: 40px;
+	line-height: 40px;
+	color:#555;
+	font-size: 16px;
+	padding-left: 10px
+}
+
+.trigger {
+	width: 38px;
+	height: 38px;
+	background: url('../images/select-unact.png') no-repeat center center;
+	cursor: pointer;
+	position: absolute;
+	right: 0;
+}
+
+.dropdown {
+	top: 41px;
+	width: 100%;
+	background: #fff;
+	color:#555;
+	border:1px solid #cecece;
+}
+
+.dropdown ul {
+	padding: 0;
+	margin: 0;
+}
+
+.dropdown ul li {
+	padding: 1px 6px;
+	cursor: pointer;
+}
+
+.dropdown ul li:hover,
+.dropdown ul li.sel {
+	background: #00BEFF;
+	color:#fff;
+}
+
+/* Календарь */
+
+#ui-datepicker-div {
+	z-index: 99999 !important;
+}
+
+/* Нестандартные чебоксы */
+
+.price-flight > div {
+	position: relative;
+	top: -6px;
+	margin-bottom: 5px;
+}
+/* 
+.check-block label {
+	width: 150px;
+} */
+
+.check-block label,
+.check-block .checkbox-dop {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+.form-filter-inner .checkbox-dop {
+	border: 1px solid #ddd;
+	width: 22px;
+	height: 22px;
+}
+
+.checkbox-dop {
+	width: 22px;
+	height: 22px;
+	border: 1px solid #ddd;
+	cursor: pointer;
+	background: url('../images/checkbox.jpg');
+	opacity: .8;
+	transition:opacity .4s;
+}
+
+.checkbox-dop.act {
+	opacity: 1;
+}
+
+.checkbox-dop:hover {
+	opacity: 1;
+}
+
+.checkbox-dop input {
+	display: none;
+}
+
+/* Кнопка поиска */
+
+.btn-fly {
+	margin-top: 20px;
+	border: none;
+	font-size: 16px;
+	text-transform: uppercase;
+	height: 57px;
+	line-height: 57px;
+	padding: 0 48px 0 20px;
+	background: #FF9D1A url('../images/fly.png') no-repeat 90% center;
+ 	transition:background .4s;
+}
+
+.btn-fly:hover,
+.btn-fly:active,
+.btn-fly.active,
+.btn-fly:focus {
+	background: #ff9000 url('../images/fly.png') no-repeat 90% center;
+}
+
+/* Нестандартные радио button */
+
+.return_way {
+	padding: 10px 0 15px;
+	margin-bottom: 10px;
+}
+
+.form-search-index .return_way .radiobtn,
+.form-search-index .return_way label {
+	display: inline-block;
+	vertical-align: top;
+	margin-right: 40px;
+	margin-left: -25px;
+    padding-left: 30px;
+}
+
+.return_way_inner .radiobtn,
+.return_way_inner label {
+	display: inline-block;
+	vertical-align: top;
+	margin-right: 5px;
+	margin-left: -25px;
+    padding-left: 30px;
+}
+
+.return_way-index label {
+	margin-right: 30px;
+	cursor: pointer;
+}
+
+.niceRadio {
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	cursor: pointer;
+	background: url('../images/radio-btn.png');
+	overflow: hidden;
+}
+
+.radioChecked {
+	background-position: 0 -20px;
+}
+
+.niceRadio input {
+	margin-left: -25px;
+}
+
+.act-radio {
+	background: url('../images/radio-btn.png') no-repeat bottom center;
+}
+
+/* Меню табов */
+
+
+#myTab .active a {
+	background: #4989bb;
+	color:#fff;
+	padding: 0 25px;
+	height: 50px;
+	line-height: 50px;
+	text-transform: uppercase;
+}
+

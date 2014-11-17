@@ -1,5 +1,4 @@
 $(function() {
-    alert(1);
     //$( "#search-form" ).sisyphus({timeout: 2});
     $('#search-form').on('submit',function(){
         var routeParams = {};
