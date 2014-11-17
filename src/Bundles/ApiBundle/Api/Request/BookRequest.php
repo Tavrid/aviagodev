@@ -19,10 +19,7 @@ class BookRequest implements Request{
      * @var string
      */
     protected $apiKey;
-    /**
-     * @var \Memcached
-     */
-    protected $memcached;
+
     /**
      * @var \Acme\AdminBundle\Model\Log
      */
@@ -33,6 +30,11 @@ class BookRequest implements Request{
      * @var ApiCallerInterface
      */
     protected $apiCaller;
+
+    /**
+     * @param $key
+     * @param ApiCallerInterface $apiCaller
+     */
     public function __construct($key ,ApiCallerInterface $apiCaller){
         $this->apiKey = $key;
         $this->apiCaller = $apiCaller;
@@ -40,29 +42,12 @@ class BookRequest implements Request{
 
     /**
      * @param \Acme\AdminBundle\Model\Log $logger
+     * @return $this
      */
     public function setLogger(\Acme\CoreBundle\Model\AbstractModel $logger)
     {
         $this->logger = $logger;
         return $this;
-    }
-
-    /**
-     * @param \Memcached $memcached
-     * @return $this
-     */
-    public function setMemcached(\Memcached $memcached)
-    {
-        $this->memcached = $memcached;
-        return $this;
-    }
-
-    /**
-     * @return \Memcached
-     */
-    public function getMemcached()
-    {
-        return $this->memcached;
     }
 
 
