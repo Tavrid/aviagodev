@@ -16,6 +16,8 @@ use Bundles\ApiBundle\Api\Request\CityRequest;
 use Bundles\ApiBundle\Api\Request\SearchRequest;
 use Bundles\ApiBundle\Api\Request\BookRequest;
 
+use Bundles\ApiBundle\Api\Model\CacheInterface;
+
 use Acme\CoreBundle\Model\AbstractModel;
 
 
@@ -26,12 +28,9 @@ class Api {
      */
     protected $apiKey;
     /**
-     * @var ApiCallerInterface
+     * @var CacheInterface
      */
-    /**
-     * @var \Memcached
-     */
-    protected $memcached;
+    protected $cache;
     /**
      * @var ApiCallerInterface
      */
@@ -40,10 +39,10 @@ class Api {
      * @var \Acme\AdminBundle\Model\Log
      */
     protected $logger;
-    public function __construct($key,ApiCallerInterface $apiCaller,\Memcached $memcached = null,AbstractModel $logger){
+    public function __construct($key,ApiCallerInterface $apiCaller,CacheInterface $cacheInterface = null,AbstractModel $logger){
         $this->apiKey = $key;
         $this->apiCaller = $apiCaller;
-        $this->memcached = $memcached;
+        $this->cache = $cacheInterface;
         $this->logger = $logger;
 
     }
@@ -61,7 +60,7 @@ class Api {
      */
     public function getSearchRequestor(){
         $searchRequest = new SearchRequest($this->apiKey,$this->apiCaller);
-//        $searchRequest->setMemcached($this->memcached)
+        $searchRequest->setCache($this->cache);
         $searchRequest->setLogger($this->logger);
         return $searchRequest;
     }
@@ -91,8 +90,8 @@ class Api {
 
     public function getAviaCalendarRequestor(){
         $searchRequest = new AviaCalendarRequest($this->apiKey,$this->apiCaller);
-        $searchRequest->setLogger($this->logger);
-//            ->setMemcached($this->memcached);
+        $searchRequest->setLogger($this->logger)
+            ->setCache($this->cache);
         return $searchRequest;
     }
 

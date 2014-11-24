@@ -8,6 +8,7 @@
 
 namespace Bundles\ApiBundle\Api\Request;
 
+use Bundles\ApiBundle\Api\Model\CacheInterface;
 use Lsw\ApiCallerBundle\Caller\ApiCallerInterface;
 use Bundles\ApiBundle\Api\ApiCall;
 use Bundles\ApiBundle\Api\Query\QueryAbstract;
@@ -19,28 +20,7 @@ class AviaCalendarRequest implements Request{
      * @var string
      */
     protected $apiKey;
-    /**
-     * @var \Memcached
-     */
-    protected $memcached;
 
-    /**
-     * @param \Memcached $memcached
-     * @return $this
-     */
-    public function setMemcached(\Memcached $memcached)
-    {
-        $this->memcached = $memcached;
-        return $this;
-    }
-
-    /**
-     * @return \Memcached
-     */
-    public function getMemcached()
-    {
-        return $this->memcached;
-    }
     /**
      * @var ApiCallerInterface
      */
@@ -49,6 +29,32 @@ class AviaCalendarRequest implements Request{
      * @var \Acme\AdminBundle\Model\Log
      */
     protected $logger;
+
+    /**
+     * @var CacheInterface
+     */
+    protected $cache;
+
+    /**
+     * @return CacheInterface
+     */
+    public function getCache()
+    {
+        return $this->cache;
+    }
+
+    /**
+     * @param CacheInterface $cache
+     */
+    public function setCache(CacheInterface $cache)
+    {
+        $this->cache = $cache;
+    }
+
+    /**
+     * @param $key
+     * @param ApiCallerInterface $apiCaller
+     */
     public function __construct($key ,ApiCallerInterface $apiCaller){
         $this->apiKey = $key;
         $this->apiCaller = $apiCaller;
@@ -72,8 +78,8 @@ class AviaCalendarRequest implements Request{
     {
         $response = new AviaCalendarResponse();
         $data = null;
-        if($this->memcached){
-            $data = $this->memcached->get($query->getKeyByParams());
+        if($this->cache){
+            $data = $this->cache->get($query->getKeyByParams());
         }
         if(!$data){
             $data = $this->apiCaller->call(new ApiCall($query->getApiUrl(),json_encode($query->buildParams($this->apiKey))));
@@ -84,8 +90,8 @@ class AviaCalendarRequest implements Request{
                 'result' => $data
             ];
             $this->logger->addLog($logParams);
-            if($this->memcached){
-                $this->memcached->set($query->getKeyByParams(),$data,3600);
+            if($this->cache){
+                $this->cache->set($query->getKeyByParams(),$data,3600);
             }
         }
         $response->setResponseData($data);
