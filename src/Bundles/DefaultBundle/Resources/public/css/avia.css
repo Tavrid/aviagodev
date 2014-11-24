@@ -1,7 +1,7 @@
 /* Шапка */
 
 .page-header {
-	margin: 5px 0;
+	margin: 10px 0;
 }
 
 .logo {
@@ -345,6 +345,12 @@
 	width: 100%;
 	text-transform: lowercase;
 	font-size: 12px;
+	margin-bottom: -5px;
+}
+
+.avia-company {
+	position: relative;
+	top: -3px;
 }
 
 /* .vozrast .title {
@@ -937,7 +943,17 @@ a:focus {
 #search-form .row,
 .date-from,
 .date-to {
+	padding-bottom: 10px;
+}
+
+.form-filter-inner #search-form .row,
+.form-filter-inner .date-from,
+.form-filter-inner .date-to {
 	padding-bottom: 5px;
+}
+
+.form-filter-inner .price-best .form-group {
+	margin-bottom: 5px;
 }
 
 .price-reys > div.price-block {
@@ -1037,7 +1053,7 @@ a:focus {
 }
 
 .group-lang {
-	margin-right: 5px;
+	margin-right: 14px;
 }
 
 .label-from label {
@@ -1155,72 +1171,44 @@ a:focus {
 	background: url('../images/avia-down.png') no-repeat 0px 5px;
 }
 
-.price-best .form-group {
-	margin-bottom: 5px;
-}
-
-.result-box .panel-box {
-	margin-bottom: 0;
-}
-
-.well-box {
-	padding: 0;
-	border: none;
-}
-
 /* Таблица календарь */
 
-.table-calendar > thead > tr > th, 
-.table-calendar > thead > tr > td, 
-.table-calendar > tbody > tr > th, 
-.table-calendar > tbody > tr > td, 
-.table-calendar > tfoot > tr > th, 
-.table-calendar > tfoot > tr > td {
-	padding: 5px !important;
-	font-weight: normal;
+.result-box .panel-box {
+    margin-bottom: 0;
 }
-
-.table-calendar td:first-of-type,
-.table-calendar thead th {
-	background: #98d0ff;
-	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#98d0ff), to(#d4effc));
-	background: -webkit-linear-gradient(#98d0ff, #d4effc);
-	background: -moz-linear-gradient(#98d0ff, #d4effc);
-	background: -ms-linear-gradient(#98d0ff, #d4effc);
-	background: -o-linear-gradient(#98d0ff, #d4effc);
-	background: linear-gradient(#98d0ff, #d4effc);
-	text-align: center;
+.well-box {
+    border: medium none;
+    padding: 0;
 }
-
+.table-calendar > thead > tr > th, .table-calendar > thead > tr > td, .table-calendar > tbody > tr > th, .table-calendar > tbody > tr > td, .table-calendar > tfoot > tr > th, .table-calendar > tfoot > tr > td {
+    font-weight: normal;
+    padding: 5px !important;
+}
+.table-calendar td:first-of-type, .table-calendar thead th {
+    background: linear-gradient(#98d0ff, #d4effc) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    text-align: center;
+}
 .table-calendar thead th:first-of-type {
-	background: #fff;
-	color:#000;
+    background: none repeat scroll 0 0 #fff;
+    color: #000;
 }
-
-.table-hover > tbody > tr:hover > td, 
-.table-hover > tbody > tr:hover > th {
-	color:#000;
+.table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th {
+    color: #000;
 }
-
 .tooltip.in {
-	opacity: 1;
+    opacity: 1;
 }
-
 .tooltip-inner {
-	background: #428BCA;
-	color:#fff;
+    background: none repeat scroll 0 0 #428bca;
+    color: #fff;
 }
-
 .tooltip.top .tooltip-arrow {
-    border-top-color: #428BCA;
+    border-top-color: #428bca;
 }
-
-.form-filter-inner label,
-.table-calendar {
-	margin-bottom: 0;
+.form-filter-inner label, .table-calendar {
+    margin-bottom: 0;
 }
-
 .return-way-inner label {
-	top: -2px;
-	position: relative;
+    position: relative;
+    top: -2px;
 }
