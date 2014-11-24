@@ -1,7 +1,11 @@
 {% extends "BundlesDefaultBundle:Layouts:main.html.twig" %}
 {% block js %}
     {{ parent() }}
-    {% javascripts 'bundles/bundlesdefault/lib/masked.js' 'bundles/bundlesdefault/js/default/book.js' 'bundles/bundlesdefault/lib/intl-tel-input-master/build/js/intlTelInput.min.js' combine=true%}
+    {% javascripts 
+        'bundles/bundlesdefault/lib/masked.js' 
+        'bundles/bundlesdefault/js/default/book.js' 
+        'bundles/bundlesdefault/lib/intl-tel-input-master/build/js/intlTelInput.min.js' 
+    combine=true%}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
     {% block stylesheets %}

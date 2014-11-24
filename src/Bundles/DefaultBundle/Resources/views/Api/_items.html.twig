@@ -1,123 +1,143 @@
 {% set needBook = needBook is defined ? needBook : true %}
 {% for ticket in data %}
-    <div class="well">
-        <strong class="text-danger">
-            <h4>{{ ticket.totalPrice|number_format(0,'.',' ') }} {{ticket.currency}}</h4>
-        </strong>
-
+    <div class="ticket-well well">
+        <div class="price-ticket">
+            <h2>{{ ticket.totalPrice|number_format(0,'.',' ') }} {{ticket.currency}}</h2>
+        </div>
         {% if needBook %}
             <form action="{{ path("bundles_default_api_info") }}" class="book-form">
-        {% endif %}
-        {% for int in ticket.itineraries %}
-            {% set parent_loop = loop %}
-            {% for variant in int.variants %}
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <div class="panel-title">
-                            {% if loop.first  %}
-                                {% if parent_loop.first %}
-                                    {{ variant.departureSegment.departureDate|date("d.m.Y") }}
-                                {% elseif parent_loop.last %}
-                                    {{ variant.arrivalSegment.arrivalDate|date("d.m.Y") }}
-                                {% endif %}
-                            {% endif %}
-                        </div>
+                {% endif %}
+                {% for int in ticket.itineraries %}
+                    {% set parent_loop = loop %}
+                        {% for variant in int.variants %}
+                            <div class="ticket-item">
+                                <div class="date-ticket">
+                                    <div class="date-title">
+                                        {% if loop.first  %}
+                                            {% if parent_loop.first %}
+                                                {{ variant.departureSegment.departureDate|date("d.m.Y") }}
+                                            {% elseif parent_loop.last %}
+                                                {{ variant.arrivalSegment.arrivalDate|date("d.m.Y") }}
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="panel panel-info panel-ticket">
+                                    <div class="panel-body panel-gradient ticket-body">
+                                        <div class="col-md-1 radio-ticket">
+                                            <div class="radio-button">
+                                                <input value="{{ variant.variantID }}" type="radio" {% if loop.first %} checked="checked" {% endif %} name="info[variants][{{ parent_loop.index-1 }}]"/>
+                                                <input type="hidden" name="info[request_id]" value="{{ ticket.requestId }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 company-info">
+                                            <div class="row">
+                                                <div class="img-company col-md-5">
+                                                    <img src="/avia/web/images/company.jpg" alt="">
+                                                </div>
+                                                <div class="img-name col-md-7">
+                                                    <div class="name-company">{{ variant.departureSegment.marketingAirlineName }}</div>
+                                                    <div class="num-company">{{ variant.departureSegment.aircraftName }}</div>
+                                                    <div class="free-mest">
+                                                        {% for segment in variant.segments %}
+                                                            {{ segment.marketingAirline }}{{ segment.flightNumber }}{% if not loop.last %}/{% endif %}
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 time-up-avia">
+                                            <p>{%trans%}frontend.default.list.item.departure_time{%endtrans%}:</p>
+                                            <div class="row">
+                                                <div class="time-up col-md-4">{{ variant.departureSegment.departureDate|date("H:i") }}</div>
+                                                <div class="city-aero col-md-8">
+                                                    <div class="city-up">{{ variant.departureSegment.departureCityName }}</div>
+                                                    <div class="aeropot-up">({{ variant.departureSegment.departureAirportName }})</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 time-down-avia">
+                                            <p>{%trans%}frontend.default.list.item.arrival_time{%endtrans%}:</p>
+                                            <div class="row">
+                                                <div class="time-down col-md-4">{{ variant.arrivalSegment.arrivalDate|date("H:i") }}</div>
+                                                <div class="city-aero col-md-8">
+                                                    <div class="city-down">{{ variant.arrivalSegment.arrivalCityName }}</div>
+                                                    <div class="aeropot-down">({{ variant.arrivalSegment.arrivalAirportName }})</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 time-duration-avia">
+                                            <p>{%trans%}frontend.default.list.item.duration{%endtrans%}:</p>
+                                            <div class="time-duration">{{ variant.duration|secondToTime }}</div>
+                                            <div class="transplant">
+                                                {% if variant.countTransplant %}
+                                                    <div>
+                                                        <small>
+                                                            {% transchoice variant.countTransplant with {'%count%':  variant.countTransplant} %}
+                                                                frontend.default.list.item.transplant
+                                                            {% endtranschoice %}
+                                                        </small>
+                                                        {% for a in variant.transplantAirports %}
+                                                            <strong>{{ a.name }}</strong>, <small>{%trans%}frontend.default.list.item.between_flights{%endtrans%}:{{ a.time|secondToTime }}</small>
+                                                        {% endfor %}
+
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                {% endfor %}
+                {% if needBook %}
+                <div class="row add-btn">
+                    <div class="col-md-3">
+                        {% if ticket.lastTicketDate %}
+                            {% trans %}frontend.flights.last_ticket_date{% endtrans %}: <strong class="text-warning buy-do">{{ ticket.lastTicketDate|date('d.m.Y') }}</strong>
+                        {% endif %}
                     </div>
-                    <div class="panel-body">
-                        <div class="col-md-1">
-                                <input value="{{ variant.variantID }}"
-                                       type="radio" {% if loop.first %} checked="checked" {% endif %}
-                                       name="info[variants][{{ parent_loop.index-1 }}]"/>
-                                <input type="hidden" name="info[request_id]" value="{{ ticket.requestId }}">
-                        </div>
-                        <div class="col-md-3">
-                            <div class="logo-{{ variant.departureSegment.marketingAirline }}"></div>
-                            <div>
-                                <strong>
-                                    {{ variant.departureSegment.marketingAirlineName }}
-                                </strong>
-                            </div>
-                            <div>
-                                <small>
-                                    {{ variant.departureSegment.aircraftName }}
-                                </small>
-                            </div>
-                            <small>
-                                {% for segment in variant.segments %}
-                                    {{ segment.marketingAirline }}{{ segment.flightNumber }}{% if not loop.last %}/{% endif %}
-                                {% endfor %}
-                            </small>
-
-                        </div>
-                        <div class="col-md-3">
-                            <div>
-                                <div>
-                                    <small>{%trans%}frontend.default.list.item.departure_time{%endtrans%}</small>
-
-                                </div>
-                                <strong class="text-warning">{{ variant.departureSegment.departureDate|date("H:i") }}</strong>
-                            </div>
-                            <strong>{{ variant.departureSegment.departureCityName }}</strong>
-
-                            <div>
-                                <small>{{ variant.departureSegment.departureAirportName }}</small>
-                            </div>
-
-                        </div>
-                        <div class="col-md-3">
-                            <div>
-                                <div>
-                                    <small>{%trans%}frontend.default.list.item.arrival_time{%endtrans%}</small>
-
-                                </div>
-                                <strong class="text-warning">{{ variant.arrivalSegment.arrivalDate|date("H:i") }}</strong>
-                            </div>
-                            <strong>{{ variant.arrivalSegment.arrivalCityName }}</strong>
-
-                            <div>
-                                <small>{{ variant.arrivalSegment.arrivalAirportName }}</small>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <small>{%trans%}frontend.default.list.item.duration{%endtrans%}</small>
-                            <div>
-                                <strong class="text-warning">{{ variant.duration|secondToTime }}</strong>
-                            </div>
-                            {% if variant.countTransplant %}
-                                <div>
-                                    <small>
-                                        {% transchoice variant.countTransplant with {'%count%':  variant.countTransplant} %}
-                                            frontend.default.list.item.transplant
-                                        {% endtranschoice %}
-                                    </small>
-                                    {% for a in variant.transplantAirports %}
-                                        <strong>{{ a.name }}</strong>, <small>{%trans%}frontend.default.list.item.between_flights{%endtrans%}:{{ a.time|secondToTime }}</small>
-                                    {% endfor %}
-
-                                </div>
-                            {% endif %}
-                        </div>
-
+                    <div class="col-md-6"></div>
+                    <div class="col-md-3">
+                        <button class="btn btn-warning btn-lg buy-ticket pull-right" type="submit">{%trans%}frontend.default.list.item.submit{%endtrans%}</button>
                     </div>
                 </div>
-            {% endfor %}
-            <hr/>
-
-        {% endfor %}
-        {% if needBook %}
-            <div class="" style="margin-bottom: 15px">
-                <div class="col-md-4">
-                    {% if ticket.lastTicketDate %}
-                       {% trans %}frontend.flights.last_ticket_date{% endtrans %}: <strong class="text-warning">{{ ticket.lastTicketDate|date('d.m.Y') }}</strong>
-                    {% endif %}
-                </div>
-                <div class="col-md-offset-8">
-                    <input style="margin-left: 42%" class="btn btn-primary" type="submit" value="{%trans%}frontend.default.list.item.submit{%endtrans%}">
-                </div>
-            </div>
             </form>
         {% endif %}
     </div>
 {%else%}
-    <div class="text-info">{%trans%}frontend.default.list.search_not_found{%endtrans%}</div>
+<div class="text-info">{%trans%}frontend.default.list.search_not_found{%endtrans%}</div>
 {% endfor %}
+
+<script>
+    $(document).ready(function($) {
+        $('.radio-button input[type="radio"]:checked').each(function() {
+            $(this).parent().parent().parent().addClass('checked-block');
+        });  
+        $('.radio-button input[type="radio"]').change(function(event) {
+            var radioName = $(this).attr('name');
+            $('.radio-button input[name="'+ radioName +'"]').parent().parent().parent().removeClass('checked-block');
+            $('.radio-button input[type="radio"]:checked').each(function() {
+                $(this).parent().parent().parent().addClass('checked-block');
+            });
+            $(this).parent().parent().parent().addClass('checked-block');
+            event.preventDefault();
+        });
+        $('.ticket-body').click(function(event) {
+            var checkattr = $(this).find('input[type="radio"]').attr('checked');
+            var nameattr = $(this).find('input[type="radio"]').attr('name');
+            if(checkattr=='checked'){
+                return true;
+            } else {
+                $(this).parent().parent().parent().find('input[name="'+ nameattr +'"]').removeAttr('checked');
+                $(this).find('input[type="radio"]').attr('checked', true);
+                $(this).parent().parent().parent().find('input[name="'+ nameattr +'"]').parent().parent().parent().parent().find('.ticket-body').removeClass('checked-block');
+                $(this).addClass('checked-block');
+            }
+            event.preventDefault();
+        });
+        $('input[name="info[variants][1]"]').parent().parent().parent().parent().parent().addClass('down-time-block');
+    });
+</script>
+
+    

@@ -1,0 +1,29 @@
+
+<tr>
+    {%  for key, value in row.columns  %}
+        <td>
+            {% if(row.index > 0 and loop.index == 1) %}
+                {% set p = row.hasChild ? ((row.index-1)*40) - 12 : (row.index-1)*40 %}
+                <div style="padding-left: {{ p }}px;padding-right: 5px">
+                    {% if(row.hasChild) %}
+                        <i class="caret"></i>
+                    {% endif %}
+                    {{ value|raw }}
+                </div>
+            {% else %}
+
+                {{ value|raw }}
+            {% endif %}
+        </td>
+    {% endfor %}
+    {% if(row.actions is defined) %}
+        <td class="table-actions">
+            <div class="btn-group">
+                {% for n,val in row.actions %}
+                    {{ val|raw }}
+
+                {% endfor %}
+            </div>
+        </td>
+    {% endif %}
+</tr>

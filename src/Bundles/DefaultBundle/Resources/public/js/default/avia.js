@@ -1,15 +1,26 @@
 $(document).ready(function($) {
 
-	$("#ui-id-1").prependTo(".city_from");
-	$("#ui-id-2").prependTo(".city_to");
+	$('#search_form_return_way').on('click','input[type=radio]',function(){
+        var val = $('#search_form_return_way input[type=radio]:checked').val();
+        var sel = $('#search_form_date_to').parents('.date-to');
+        if(!parseInt(val)){
+            sel.hide();
+            $('#search_form_date_to').val('');
+        } else {
+            sel.show();
+        }
+    });
 
-	$('.form-search-index select').selectbox();
+	$("#ui-id-1").prependTo(".city-from");
+	$("#ui-id-2").prependTo(".city-to");
+
+	/*$('.form-search-index select').selectbox();
 	$('#search-form select').selectbox();
-	$('#filter-form select').selectbox();
+	$('#filter-form select').selectbox();*/
 
-	$('.clear_input').each(function() {
+	$('.button-close').each(function() {
 		$(this).click(function(event) {
-			$(this).parent().find('input[type="text"]').val('');
+			$(this).parent().parent().find('input[type="text"]').val('');
 			event.preventDefault();
 		});
 	});
@@ -79,5 +90,55 @@ $(document).ready(function($) {
 			$("#search_form_date_from").datepicker( "option", "maxDate", selectedDate);		
 		}
 	});
+
+	/*$(".return_way input[type='radio']").each(function() {
+        $(this).wrap("<span class='niceRadio'></span>");
+        var check = $(this).attr('checked')
+        if(check=='checked'){
+            $(this).parent().addClass('act-radio');
+        }
+        $(this).parent().click(function(event) {
+            if(!$(this).hasClass('act-radio')){
+            	$(".return_way .niceRadio").removeClass('act-radio');
+            	$(this).addClass('act-radio');
+        	}
+    	});
+    });*/
+        
+    $(".checkbox-dop").mousedown(function() {
+        changeCheck($(this)); 
+    });
+
+    $(".checkbox-dop").each(function() {
+         changeCheckStart($(this));
+    });
+
+    function changeCheck(el){
+        var el = el,
+        input = el.find("input").eq(0);
+        if(!input.attr("checked")) {
+            el.css("background-position","0 -20px");    
+            el.addClass('act');
+            input.attr("checked", true)
+        } else {
+            el.removeClass('act');
+            el.css("background-position","0 0");    
+            input.attr("checked", false)
+        }
+        return true;
+    }
+
+    function changeCheckStart(el){
+        var el = el,
+        input = el.find("input").eq(0);
+        if(input.attr("checked")) {
+            el.css("background-position","0 -20px");    
+            el.addClass('act');
+        }
+        return true;
+    }
+
+    $('span').tooltip();
+    $('button').tooltip();
 
 });

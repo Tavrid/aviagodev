@@ -1,36 +1,21 @@
-{% javascripts 
-    'bundles/bundlesdefault/js/default/index.js' 
-    'bundles/bundlesdefault/js/default/jquery.selectbox.min.js' 
-    'bundles/bundlesdefault/js/default/avia.js' 
-    combine=true%}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
-
-{% stylesheets
-    'bundles/bundlesdefault/css/avia.css'
-    filter='cssrewrite' combine=true %}
-    <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
-{% endstylesheets %}
-
-
 <div class="well">
     <form  id="filter-form" action="" class="form-inline">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 {{ form_row(filter_form.departure_airport) }}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 {{ form_row (filter_form.arrival_airport) }}
             </div>
-            <div class="col-md-5">
+            <div class="col-md-3">
                 {{ form_row (filter_form.airline) }}
             </div>
             <div class="col-md-3">
                 <a href="#" id="filter-time-btn">{%trans%}frontend.filter_form.time{%endtrans%}</a>
-                <div style="display: none;right: -25px;" class="panel panel-primary" id="filter-time-popup">
-                    <div class="panel-body">
+                <div style="display: none;" class="panel panel-primary" id="filter-time-popup">
+                    <div class="panel-body time-down-up">
                         <div>
-                            {{ form_row(filter_form.departure_time) }}
+                            {{ form_row(filter_form.departure_time) }} 
                         </div>
                         <div>
                             {{ form_row(filter_form.arrival_time) }}

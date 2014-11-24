@@ -1,0 +1,17 @@
+{
+    "name": "stb/bootstrap",
+    "type": "library",
+    "description": "Symfony twitter bootstrap table generator",
+    "keywords": ["symfony","twitter bootstrap"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ablyalimov Ablyakim",
+            "email": "ablylimov@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "Stb\\Bootstrap": "" }
+    },
+    "target-dir": "Stb/Bootstrap"
+}

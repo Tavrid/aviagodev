@@ -1,0 +1,31 @@
+
+<div data-url="{{ url }}" id="{{ id }}"
+        {% if (notify) %}
+            title="{{ notify }}"
+        {% endif %}
+        {% if(confirm) %}data-confirm="{{ confirm }}"{% endif %} class="btn btn-default ajax-link" style="padding: 2px 9px;">
+    <i class="{{ icon }}"></i>
+    <form action="{{ url }}" id="form-{{ id }}" style="display: none">
+        {{ form_row(form) }}
+    </form>
+<script type="text/javascript">
+    $(document).ready(function(){
+        (function(o){
+            var el = $('#{{ id }}');
+            var url = "{{ url }}";
+            var form = $('#form-{{ id }}');
+            o.confirm = function(){
+                return confirm(el.attr('data-confirm'));
+            };
+            o.addElement(el,{
+                url : "{{ url }}",
+                data : form.serialize()
+            });
+            o.onSuccess = function(res,e){
+                window.location.reload();
+            }
+        })(_stbBootstrapBundle.create());
+    });
+</script>
+</div>
+

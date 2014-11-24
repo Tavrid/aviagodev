@@ -1,0 +1,57 @@
+{% macro boolIcon(value,url,name,notify = null) %}
+    {% if value %}
+        {%  set class = 'fa fa-check-circle true-color' %}
+    {% else %}
+        {% set class = 'fa fa-minus-circle false-color'  %}
+    {% endif %}
+    <i class="{{ class }}"
+            {% if(notify) %}
+                data-toggle="tooltip" data-original-title="{{ notify }}"
+            {% endif %}
+                style="font-size: 17px;"
+
+            ></i>
+{% endmacro %}
+<div class="btn ajax-edit-bool" id="{{ id }}" style="padding: 2px 6px;" data-false="{{ _self.boolIcon(false,url,name,notify) | escape }}" data-true="{{ _self.boolIcon(true,url,name,notify) | escape }}">
+    {{ _self.boolIcon(value,url,name,notify) }}
+    <form action="{{ url }}" id="form-{{ id }}">
+        {{ form_row(form) }}
+    </form>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        (function(o){
+            var value = !!"{{ value }}";
+
+            var el = $('#{{ id }}');
+            var form = $('#form-{{ id }}');
+
+            o.onError = function(res,e){
+                el.html(e.html());
+            };
+            o.onLoad = function(){
+                el.html($('<div>',{
+                    'class' : 'loading'
+                }))
+            };
+
+            o.onSuccess = function(res,e){
+                value = !value;
+                if(value){
+                    el.html(el.attr('data-true'));
+                } else {
+                    el.html(el.attr('data-false'));
+
+                }
+            };
+
+            o.addElement(el,{
+                url : "{{ url }}",
+                data : form.serialize()
+            });
+        })(_stbBootstrapBundle.create());
+    });
+</script>
+
+

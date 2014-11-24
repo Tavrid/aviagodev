@@ -1,0 +1,10 @@
+parameters:
+#    acme_bootstrap.example.class: Stb\Bootstrap\Example
+
+services:
+    acme.twig.bootstrap.extension:
+        class: Stb\Bootstrap\Components\BootstrapTable
+        arguments:
+            - "@service_container"
+        tags:
+            - { name: twig.extension }

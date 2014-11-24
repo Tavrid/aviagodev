@@ -12,144 +12,170 @@
             _GlobalAppObject.searchUrl = "{{ path('bundles_default_search_city') }}";
         });
     </script>
-    <div class="col-md-3 well">
+    <div class="col-md-3 well filter-form">
         <form id="search-form" class="form-filter-inner" action="{{ path('bundles_default_search') }}" method="post" id="search-form">
-            <div class="row from-to">
-                <div class="col-md-12">
-                    <div class="city_from">
-                        {{ form_widget(form.city_from, {'attr': {'class': 'from_city'}}) }}
-                        <a href="#" class="clear_input">X</a>
-                    </div>
+            <div class="city-from-block">
+                <div class="input-group city-from">
+                    <span class="input-group-addon label-from">
+                        {{ form_label(form.city_from)}}
+                    </span>
+                    {{ form_widget(form.city_from, {'attr': {'class': 'from_city'}}) }}
+                    <span class="input-group-btn">
+                        <button class="btn btn-default button-close button-close-i" type="button"></button>
+                    </span>
                 </div>
             </div>
-            <div class="row from-to">
-                <div class="col-md-12 text-center">
-                    <div class="btn-refresh btn btn-success">
-                        <span class="glyphicon glyphicon-refresh" id="reverse-city"></span>
-                    </div>
+            <div class="city-to-block">
+                <div class="input-group city-to">
+                    <span class="input-group-addon label-from">
+                        {{ form_label(form.city_to)}}
+                    </span>
+                    {{ form_widget(form.city_to, {'attr': {'class': 'to_city'}}) }}
+                    <span class="input-group-btn">
+                        <button class="btn btn-default button-close button-close-i" type="button"></button>
+                    </span>
                 </div>
             </div>
-            <div class="row from-to">
-                <div class="col-md-12">
-                    <div class="city_to">
-                        {{ form_widget(form.city_to, {'attr': {'class': 'to_city'}}) }}
-                        <a href="#" class="clear_input">X</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row return_way return_way_inner border">
-                <div class="col-md-12">
+            <div class="return-way-block return-way-inner">
+                <div class="input-group"> 
                     {{ form_widget(form.return_way, {'attr': {'class': 'foo'}}) }}
                 </div>
             </div>
-            {{ form_row(form.city_from_code) }}
-            <div class="row line">
-                <div class="col-md-12 date_from">
-                    {{ form_row(form.date_from) }}
+            <!-- Дата вылета -->
+            <div class="date-from">
+                {{ form_row(form.city_from_code) }}
+                {{ form_label(form.date_from, '', {'attr': {'class': 'date_from'}}) }}
+                <div class="input-group">
+                    {{ form_widget(form.date_from, {'attr': {'class': 'date_from'}}) }}
+                    <span class="input-group-addon date-icon"></span>
                 </div>
             </div>
-            {{ form_row(form.city_to_code) }}
-            <div class="row line">
-                <div class="col-md-12 date_to">    
-                    {{ form_row(form.date_to) }}
+            <!-- Дата вылета -->
+            <!-- Дата прилета -->
+            <div class="date-to">
+                {{ form_row(form.city_to_code) }}
+                {{ form_label(form.date_to, '', {'attr': {'class': 'date_to'}}) }}
+                <div class="input-group">
+                    {{ form_widget(form.date_to, {'attr': {'class': 'date_to'}}) }}
+                    <span class="input-group-addon date-icon"></span>
                 </div>
             </div>
-            <div class="row vozrast line">    
-                <div class="row">
-                    <div class="col-md-12 title">
-                        <b>{% trans %}frontend.default.index.num_passengers{% endtrans %}</b>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="col-md-12 btn-blocks">
-                                {{ form_widget(form.adults, {'attr': {'class': 'adults'}}) }}
-                                <div class="btn-vozrast">
-                                    <a href="#" class="plus">+</a>
-                                    <a href="#" class="minus">-</a>
-                                </div>
-                            </div>
+            <!-- Дата прилета -->
+            <!-- Блоки с возрастом -->
+            <div class="vozrast-block">
+                <!-- <label for="">{% trans %}frontend.default.index.num_passengers{% endtrans %}</label> -->
+                <!-- Выбор взрослых -->
+                <div class="adult-block">
+                    <div class="row">
+                        <div class="col-md-7 text-left">
+                            {{ form_label(form.adults, '', {'label_attr':{'class':'info-vozrast'}}) }}
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                {{ form_label(form.adults, '', {'label_attr':{'class':'info-vozrast'}}) }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="col-md-12 btn-blocks">
-                                {{ form_widget(form.children, {'attr': {'class': 'children'}}) }}
-                                <div class="btn-vozrast">
-                                    <a href="#" class="plus">+</a>
-                                    <a href="#" class="minus">-</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                {{ form_label(form.children, '', {'label_attr':{'class':'info-vozrast'}}) }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="row">    
-                            <div class="col-md-12 btn-blocks">
-                                {{ form_widget(form.infant, {'attr': {'class': 'infant'}}) }}
-                                <div class="btn-vozrast">
-                                    <a href="#" class="plus">+</a>
-                                    <a href="#" class="minus">-</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                {{ form_label(form.infant, '', {'label_attr':{'class':'info-vozrast'}}) }}
+                        <div class="col-md-5">
+                            <div class="input-group">
+                                <span class="input-group-addon vozrast-icon adult-icon"></span>
+                                {{ form_widget(form.adults, {'attr': {'class': 'child'}}) }}
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    {{ form_row(form.avia_company) }}
-                </div>
-            </div>
-            <div class="row line">
-                <div class="col-md-7 klass">
-                    {{ form_row(form.class) }}
-                </div>
-                <div class="col-md-5 currency">
-                    {{ form_row(form.currency) }}
-                </div>
-            </div>
-            <div class="row price-flight line">
-                <label>&nbsp;</label>
-                <div class="col-md-12 check-block">
-                    {{ form_label(form.best_price, 'frontend.search_form.best_price'|trans) }}
-                    <div class="pull-right checkbox-dop">
-                        {{ form_widget(form.best_price, {'attr': {'class': 'best-price checkbox'}}) }}
+                <!-- Выбор взрослых -->
+                <!-- Выбор детей -->
+                <div class="children-block">
+                    <div class="row">
+                        <div class="col-md-7 text-left">
+                            {{ form_label(form.children, '', {'label_attr':{'class':'info-vozrast'}}) }}
+                        </div>
+                        <div class="col-md-5">
+                            <div class="input-group">
+                                <span class="input-group-addon vozrast-icon child-icon"></span>
+                                {{ form_widget(form.children, {'attr': {'class': 'child'}}) }}
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-12 check-block">
-                    {{ form_label(form.direct_flights, 'frontend.search_form.direct_flights'|trans) }}
-                    <div class="pull-right checkbox-dop">
-                        {{ form_widget(form.direct_flights, {'attr': {'class': 'best-price checkbox'}}) }}
+                <!-- Выбор детей -->
+                <!-- Выбор младенцев -->
+                <div class="infant-block">
+                    <div class="row">
+                        <div class="col-md-7 text-left">
+                            {{ form_label(form.infant, '', {'label_attr':{'class':'info-vozrast'}}) }}
+                        </div>
+                        <div class="col-md-5">
+                            <div class="input-group">
+                                <span class="input-group-addon vozrast-icon infants-icon"></span>
+                                {{ form_widget(form.infant, {'attr': {'class': 'child'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Выбор младенцев -->
+            </div>
+            <!-- Блоки с возрастом -->
+            <!-- Имя авиакомпании -->
+            <div style="height: 0;overflow: hidden;" class="avia-company">
+                <div class="form-group">
+                    <div class="input-group">
+                        {{ form_label(form.avia_company, '') }}
+                        {{ form_widget(form.avia_company) }}
                     </div>
                 </div>
             </div>
+            <!-- Имя авиакомпании -->
+            <!-- Класс -->
+            <div style="height: 0;overflow: hidden;" class="klass">
+                <div class="form-group">
+                    <div class="row-group">
+                        {{ form_label(form.class, '') }}
+                        {{ form_widget(form.class) }}
+                    </div>
+                </div>
+            </div>
+            <!-- Класс -->
+            <!-- Валюта -->
+            <div style="height: 0;overflow: hidden;" class="currency">
+                <div class="form-group">
+                    <div class="row-group">
+                        {{ form_label(form.currency, '') }}
+                        {{ form_widget(form.currency) }}
+                    </div>
+                </div>
+            </div>
+            <!-- Валюта -->
+            <!-- Лучшая цена -->
+            <div class="price-best">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            {{ form_widget(form.best_price, {'attr': {'class': 'best-price checkbox'}}) }}
+                        </span>
+                        {{ form_label(form.best_price, 'frontend.search_form.best_price'|trans, {'label_attr':{'class':'form-control'}}) }}
+                    </div>
+                </div>
+            </div>
+            <!-- Лучшая цена -->
+            <!-- Прямые рейсы -->
+            <div class="reys-line">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            {{ form_widget(form.direct_flights, {'attr': {'class': 'best-price checkbox'}}) }}
+                        </span>
+                        {{ form_label(form.direct_flights, 'frontend.search_form.direct_flights'|trans, {'label_attr':{'class':'form-control'}}) }}
+                    </div>
+                </div>
+            </div>
+            <!-- Прямые рейсы -->
             {{ form_widget(form) }}
-            <input type="submit" class="btn btn-success pull-right" value="{%trans%}frontend.search_form.submit{%endtrans%}"/>
+            <input type="submit" class="btn-fly btn btn-success pull-right" value="{%trans%}frontend.search_form.submit{%endtrans%}"/>
         </form>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-9 result-box">
         <div id="search-result-box">
 
         </div>
         {% if form.best_price.vars.data %}
-            <div class="well">
-                <div class="panel panel-success">
+            <div class="well well-box">
+                <div class="panel panel-box panel-success">
                     <div class="panel-heading">
                         <h3 class="panel-title">{%trans%}frontend.default.calendar.best_price{%endtrans%}</h3>
                     </div>
@@ -169,56 +195,5 @@
     <div id="calendar-popup">
 
     </div>
-    <script>
-        $(document).ready(function($) {
-            $(".return_way input[type='radio']").each(function() {
-                $(this).wrap("<span class='niceRadio'></span>");
-                var check = $(this).attr('checked')
-                if(check=='checked'){
-                    $(this).parent().addClass('act-radio');
-                }
-                $(this).parent().click(function(event) {
-                    if(!$(this).hasClass('act-radio')){
-                        $(".return_way .niceRadio").removeClass('act-radio');
-                        $(this).addClass('act-radio');
-                    }
-                });
-            }); 
-
-            
-    $(".checkbox-dop").mousedown(function() {
-        changeCheck($(this)); 
-    });
-
-    $(".checkbox-dop").each(function() {
-         changeCheckStart($(this));
-    });
-
-            function changeCheck(el){
-        var el = el,
-        input = el.find("input").eq(0);
-        if(!input.attr("checked")) {
-            el.css("background-position","0 -20px");    
-            el.addClass('act');
-            input.attr("checked", true)
-        } else {
-            el.removeClass('act');
-            el.css("background-position","0 0");    
-            input.attr("checked", false)
-        }
-        return true;
-    }
-
-    function changeCheckStart(el){
-        var el = el,
-        input = el.find("input").eq(0);
-        if(input.attr("checked")) {
-            el.css("background-position","0 -20px");    
-            el.addClass('act');
-        }
-        return true;
-    }
-        });
-    </script>
 {% endblock %}
 

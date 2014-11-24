@@ -1,11 +1,11 @@
 /* Шапка */
 
 .page-header {
-	margin: 10px 0;
+	margin: 5px 0;
 }
 
 .logo {
-	width: 300px;
+	width: 200px;
 	float: left;
 }
 
@@ -16,8 +16,8 @@
 
 /* Форма поиска на главной */
 
-.form-search-index {
-	/* background: url('../images/bg-form-search.png') no-repeat center top; */
+/* .form-search-index {
+	background: url('../images/bg-form-search.png') no-repeat center top;
 	background: #34363E;
 	-webkit-background-size: cover;
 	background-size: cover;
@@ -53,14 +53,14 @@
 .border {
 	border-bottom: 1px dashed #fff;
 	padding-bottom: 10px;
-}
+} */
 
 /* Поле вылета */
 
-.city_from {
+/* .city_from {
 	background: #fff url('../images/avia-up.png') no-repeat 3px center;
 }
-
+ */
 /* Поле прилета */
 
 #ui-id-1,
@@ -84,7 +84,7 @@
 	font-weight: normal;
 	background: #00beff;
 }
-
+/* 
 .from-to {
 	padding: 5px 0 10px;
 }
@@ -156,7 +156,7 @@
 .date_from input:focus,
 .date_to input:focus {
 	box-shadow: none;
-}
+} */
 
 .date_from {
 	position: relative;
@@ -319,21 +319,21 @@
 	display: none;
 }
 
-/* Заголовок формы */
+/* Заголовок формы
 
 .form-search-index .panel-heading {
 	background: #5fbdff;
 }
 
-/* Дата вылета и прилета */
+Дата вылета и прилета
 
 .date_from .controls,
 .date_to .controls {
 	background: #fff url('../images/date.png') no-repeat 99% center;
 }
 
-/* Выбор возраста */
-
+Выбор возраста
+*/
 .vozrast {
 	padding-left: 0;
 	padding-right: 0;
@@ -342,15 +342,12 @@
 }
 
 .info-vozrast {
-	text-align: center;
-	font-weight: normal;
 	width: 100%;
 	text-transform: lowercase;
 	font-size: 12px;
-	padding: 5px 0;
 }
 
-.vozrast .title {
+/* .vozrast .title {
 	padding-top: 0;
 }
 
@@ -369,10 +366,10 @@
 }
 
 .vozrast .trigger {
-	width: 26px !important;
+width: 26px !important;
 	position: absolute;
 	right: 0;
-	background: url('../images/select-unact2.png') no-repeat center center;
+background: url('../images/select-unact2.png') no-repeat center center;
 }
 
 .adults-icon,
@@ -381,7 +378,7 @@
 	width: 11px;
 	height: 36px;
 	position: relative;
-/* 	left: 10px;*/
+left: 10px;
 }
 
 .adults-icon {
@@ -394,14 +391,15 @@
 
 .infant-icon {
 	background: url('../images/infant.png') no-repeat center center;
-}
+} */
+
+/*
 
 .btn-block {
 	position: relative;
 }
 
-.btn-blocks {/* 
-	padding-left: 0; */
+.btn-blocks {padding-left: 0;
 }
 
 .btn-vozrast {
@@ -424,7 +422,7 @@
 	line-height: 20px;
 }
 
-/* Авиакомпании */
+Авиакомпании
 
 .avia .select .text {
 	padding-left: 10px;
@@ -436,7 +434,7 @@
 	width: 38px;
 }
 
-/* Валюта */
+Валюта
 
 .currency .select .text {
 	padding-left: 10px;
@@ -448,7 +446,7 @@
 	width: 38px;
 }
 
-/* Класс */
+Класс
 
 .klass .select .text {
 	padding-left: 10px
@@ -460,7 +458,7 @@
 	width: 38px;
 }
 
-/* Авиакомпании */
+Авиакомпании
 
 .form-filter-inner .select .text {
 	padding-left: 10px;
@@ -472,7 +470,7 @@
 	width: 38px;
 }
 
-/* Выпадающие списки */
+Выпадающие списки
 
 .selectbox {
 	width: 100%;
@@ -532,23 +530,22 @@
 	color:#fff;
 }
 
-/* Календарь */
+Календарь
 
 #ui-datepicker-div {
 	z-index: 99999 !important;
 }
 
-/* Нестандартные чебоксы */
+Нестандартные чебоксы
 
 .price-flight > div {
 	position: relative;
 	top: -6px;
 	margin-bottom: 5px;
 }
-/* 
 .check-block label {
 	width: 150px;
-} */
+}
 
 .check-block label,
 .check-block .checkbox-dop {
@@ -585,6 +582,8 @@
 	display: none;
 }
 
+
+*/
 /* Кнопка поиска */
 
 .btn-fly {
@@ -605,8 +604,8 @@
 .btn-fly:focus {
 	background: #ff9000 url('../images/fly.png') no-repeat 90% center;
 }
-
-/* Нестандартные радио button */
+/*
+Нестандартные радио button
 
 .return_way {
 	padding: 10px 0 15px;
@@ -657,7 +656,7 @@
 	background: url('../images/radio-btn.png') no-repeat bottom center;
 }
 
-/* Меню табов */
+Меню табов
 
 
 #myTab .active a {
@@ -669,3 +668,559 @@
 	text-transform: uppercase;
 }
 
+Вывод результатов
+
+.ticket-item {
+	display: block;
+	clear: both;
+	padding-bottom: 15px;
+}
+
+.ticket-well {
+	padding: 0 10px 10px !important;
+}
+
+.ticket-body {
+	padding: 15px 0 15px;
+}
+
+.ticket-body .col-md-1 {
+	width: 5.333%;
+}
+
+.ticket-body .col-md-3 {
+	width: 23%;
+}
+
+.panel-ticket {
+	position: relative;
+}
+*/
+.radio-ticket {
+	width: 4.33333%;
+	height: 100%;
+	position: relative;
+}
+
+.col-md-3.company-info {
+    width: 29%;
+}
+
+/*
+.radio-ticket .niceRadio {
+	position: absolute;
+	top: 50%;
+}
+.price-ticket h2 {
+	margin-top: 10px;
+	margin-bottom: 0;
+	font-size: 40px;
+	color:#ff9000;
+	font-weight: bold;
+}
+
+.price-ticket .valuta {
+	font-size: 20px;
+}
+
+.rub-valuta {
+	display: none;
+}
+
+.company-img {
+	width: 30%;
+	float: left; 
+}
+
+.company-img img {
+	width: 100%;
+	height: auto;
+}
+
+.company-desc {
+	width: 65%;
+	padding-left: 5%;
+	float: left;
+}
+
+.name-company {
+	font-size:16px;
+	text-transform: uppercase;
+	padding-bottom: 10px;
+}
+
+.num-company {
+	font-size: 10px;
+}
+
+.free-mest {
+	font-size: 14px;
+}
+
+.total-mest {
+	font-size: 20px;
+}
+*/
+.time-up-avia p,
+.time-down-avia p{
+	font-size: 14px;
+ 	margin-bottom: 0;
+}
+
+.time-up,
+.time-down {
+	font-size: 26px;
+	font-weight: bold;
+	color:#ff9000;
+	/* width: 40%;*/
+	margin-top: -3px; 
+}
+
+/* .time-up,
+.time-down,
+.city-aero {
+	float: left;
+} */
+
+/* .time-duration-avia p {
+	margin-bottom: 0;
+} */
+/* 
+.city-aero {
+	width: 60%;
+} */
+
+.city-up,
+.city-down {
+	font-size: 20px;
+	font-weight: bold;
+	color:#5b5b5b;
+	text-transform: uppercase;
+}
+
+.aeropot-up,
+.aeropot-down {
+	color:#949494;
+	font-weight: bold;
+}
+
+
+.time-duration {
+	font-weight: bold;
+	font-size: 20px;
+	color:#ff9000;
+}
+/*
+.date-ticket {
+	font-size: 20px;
+	color:#292929;
+	text-align: center;
+	margin-top: -25px;
+}
+
+.date-ticket .date-title {
+	width: 168px;
+	display: inline-block;
+	background: url('../images/avia-up.png') no-repeat 5px 9px;
+	text-align: left;
+	padding-left: 45px;
+}
+
+.buy-ticket {
+	background: none;
+	border: none;
+	height: 40px;
+	padding: 0 20px;
+	line-height: 40px;
+	color:#fff;
+	text-transform: uppercase;
+	font-size: 14px;
+	border-radius: 10px;
+	background: #ff9000;
+	box-shadow: 0 3px 0 0 #B96A00;
+	position: relative;
+	float: right;
+}
+
+.buy-ticket:hover {
+	top:2px;
+	box-shadow: 0 1px 0 0 #B96A00;
+}
+
+.buy-do {
+	color:#ff9000;
+}
+
+.add-btn {
+	margin-top: -25px;
+}
+
+Календарь	
+
+#avia-calendar-box td:first-of-type:hover {
+	background: #f5f5f5;
+}
+
+#avia-calendar-box td:hover {
+	background: #CEDBDF;
+}
+
+Время прибытия прилета
+
+#filter-time-popup label:after {
+	content: '';
+	display: block;
+	clear: right;
+	width: 100%;
+	height: 1px;
+}
+
+.well {
+	padding: 10px;
+}
+
+.return_way_inner .niceRadio {
+	position: absolute;
+	left: 0;
+} */
+
+/* Заголовок календаря */
+
+.panel-success > .panel-heading {
+	background: #f5f5f5;
+}
+
+.panel-heading .panel-title {
+	color:#FF9000;
+}
+
+
+/* Табы */
+
+/* .input-group-addon {
+	padding: 6px 12px 5px;
+}
+ */
+a:focus {
+	outline: none;
+}
+
+.button-close {
+	padding: 16px;
+	background: #fff url('../images/close2.png') no-repeat center center;
+}
+
+.block-img-avia {
+	padding: 6px 6px 2px;
+}
+
+.tab-pane {
+
+}
+
+.vozrast-icon {
+	padding: 2px 9px;
+}
+
+.button-refresh {
+	padding: 2px 8px;
+}
+
+.ui-datepicker {
+	width: 45.6em !important;
+}
+
+.search_form_date_to {
+	left: 50.5px !important;
+}
+
+#search-form .row,
+.date-from,
+.date-to {
+	padding-bottom: 5px;
+}
+
+.price-reys > div.price-block {
+	margin-bottom: 15px;
+}
+
+.vozrast > div select {
+	height: 33px;
+}
+
+.btn-fly {
+	margin-top: -10px;
+}
+
+#search_form_return_way label {
+	margin-right: 15px;
+	font-size: 11px;
+}
+
+#ui-id-1, #ui-id-2 {
+	top: 33px !important;
+}
+
+.nav-tabs > li.active > a, 
+.nav-tabs > li.active > a:hover, 
+.nav-tabs > li.active > a:focus {
+	background: #98d0ff;
+}
+
+.panel-default > .panel-heading {
+	background: #98d0ff;
+	border-bottom: 1px dashed #fff;
+}
+
+.panel-default {
+	border-top: none;
+}
+
+.panel-blue {
+	background: #98d0ff;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#98d0ff), to(#d4effc));
+	background: -webkit-linear-gradient(#98d0ff, #d4effc);
+	background: -moz-linear-gradient(#98d0ff, #d4effc);
+	background: -ms-linear-gradient(#98d0ff, #d4effc);
+	background: -o-linear-gradient(#98d0ff, #d4effc);
+	background: linear-gradient(#98d0ff, #d4effc);
+}
+
+.input-group-addon {
+	background-color: #f8f8f8;
+}
+
+.now-find .panel-body {
+	height: 414px;
+	margin-top: 41px;
+}
+
+.list-now-find {
+	height: 205px;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+.glyphicon-times,
+.glyphicon-help,
+.glyphicon-skype {
+	height: 22px;
+	display: inline-block;
+}
+
+.glyphicon-times {
+	background: url('../images/glyphicon-times.png') no-repeat center;
+}
+
+.glyphicon-help {
+	background: url('../images/glyphicon-help.png') no-repeat center center;
+}
+
+.glyphicon-skype {
+	background: url('../images/glyphicon-skype.png') no-repeat center center;
+}
+
+.btn-info {
+	padding: 5px 6px;
+}
+
+.btn-info .glyphicon:empty {
+	width: 2em;
+}
+
+.group-info .form-group {
+	margin-bottom: 5px;
+}
+
+.group-info .form-group .form-group {
+	vertical-align: middle;
+}
+
+.group-lang {
+	margin-right: 5px;
+}
+
+.label-from label {
+	margin-bottom: 0;
+}
+
+.date-icon {
+	background: #fff url('../images/date-min.png') no-repeat center center;
+	padding: 4px 16px;
+}
+
+.adult-icon {
+	background: #f8f8f8 url('../images/adults-min-blue.png') no-repeat center center;
+}
+
+.child-icon {
+	background: #f8f8f8 url('../images/child-blue.png') no-repeat center center;
+}
+
+.infants-icon {
+	background: #f8f8f8 url('../images/infant-blue.png') no-repeat center center;
+}
+
+.filter-form {
+	width: 20%;
+	background: #98d0ff;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#98d0ff), to(#d4effc));
+	background: -webkit-linear-gradient(#98d0ff, #d4effc);
+	background: -moz-linear-gradient(#98d0ff, #d4effc);
+	background: -ms-linear-gradient(#98d0ff, #d4effc);
+	background: -o-linear-gradient(#98d0ff, #d4effc);
+	background: linear-gradient(#98d0ff, #d4effc);
+}
+
+.result-box {
+	width: 80%;
+}
+
+.well {
+	padding: 10px;
+}
+
+.city-from-block,
+.city-to-block {
+	padding-bottom: 10px;
+}
+
+.return-way-block {
+	padding-bottom: 5px;
+}
+
+.return-way-block input {
+	margin-right: 5px;
+}
+
+.checked-block {
+	background: #98d0ff;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#98d0ff), to(#d4effc));
+	background: -webkit-linear-gradient(#98d0ff, #d4effc);
+	background: -moz-linear-gradient(#98d0ff, #d4effc);
+	background: -ms-linear-gradient(#98d0ff, #d4effc);
+	background: -o-linear-gradient(#98d0ff, #d4effc);
+	background: linear-gradient(#98d0ff, #d4effc);
+	box-shadow: 0 0 4px 0 #999;
+}
+
+.ticket-body {
+	cursor: pointer;
+	padding: 10px;
+}
+
+.panel-ticket {
+	border-radius: 5px;
+}
+
+.img-company img {
+	width: 100%;
+	height: auto;
+}
+
+.ticket-well.well {
+    padding-top: 26px;
+    position: relative;
+}
+
+.price-ticket {
+    left: 10px;
+    position: absolute;
+    top: 5px;
+}
+
+.price-ticket h2 {
+	margin-top: 0;
+	margin-bottom: 0;
+	font-size: 40px;
+	color:#ff9000;
+	font-weight: bold;
+}
+
+.date-ticket {
+	font-size: 20px;
+	color:#292929;
+	text-align: center;
+}
+
+.date-ticket .date-title {
+	width: 168px;
+	display: inline-block;
+	background: url('../images/avia-up.png') no-repeat 5px 9px;
+	text-align: left;
+	padding-left: 45px;
+}
+
+.down-time-block .date-title {
+	background: url('../images/avia-down.png') no-repeat 0px 5px;
+}
+
+.price-best .form-group {
+	margin-bottom: 5px;
+}
+
+.result-box .panel-box {
+	margin-bottom: 0;
+}
+
+.well-box {
+	padding: 0;
+	border: none;
+}
+
+/* Таблица календарь */
+
+.table-calendar > thead > tr > th, 
+.table-calendar > thead > tr > td, 
+.table-calendar > tbody > tr > th, 
+.table-calendar > tbody > tr > td, 
+.table-calendar > tfoot > tr > th, 
+.table-calendar > tfoot > tr > td {
+	padding: 5px !important;
+	font-weight: normal;
+}
+
+.table-calendar td:first-of-type,
+.table-calendar thead th {
+	background: #98d0ff;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#98d0ff), to(#d4effc));
+	background: -webkit-linear-gradient(#98d0ff, #d4effc);
+	background: -moz-linear-gradient(#98d0ff, #d4effc);
+	background: -ms-linear-gradient(#98d0ff, #d4effc);
+	background: -o-linear-gradient(#98d0ff, #d4effc);
+	background: linear-gradient(#98d0ff, #d4effc);
+	text-align: center;
+}
+
+.table-calendar thead th:first-of-type {
+	background: #fff;
+	color:#000;
+}
+
+.table-hover > tbody > tr:hover > td, 
+.table-hover > tbody > tr:hover > th {
+	color:#000;
+}
+
+.tooltip.in {
+	opacity: 1;
+}
+
+.tooltip-inner {
+	background: #428BCA;
+	color:#fff;
+}
+
+.tooltip.top .tooltip-arrow {
+    border-top-color: #428BCA;
+}
+
+.form-filter-inner label,
+.table-calendar {
+	margin-bottom: 0;
+}
+
+.return-way-inner label {
+	top: -2px;
+	position: relative;
+}
