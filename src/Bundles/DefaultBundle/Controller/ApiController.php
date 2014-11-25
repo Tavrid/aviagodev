@@ -144,9 +144,13 @@ class ApiController extends Controller
         $formBook = $this->createForm(new BookInfoForm());
         $data = $request->get('_route_params');
 
+        if(empty($data['best_price'])){
+            unset($data['best_price']);
+        }
+        if(empty($data['direct_flights'])){
+            unset($data['direct_flights']);
+        }
 
-        $data['best_price'] = boolval($data['best_price']);
-        $data['direct_flights'] = boolval($data['direct_flights']);
         $form->submit($data);
 
         if ($form->isValid()) {

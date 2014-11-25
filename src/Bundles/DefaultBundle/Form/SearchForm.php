@@ -130,7 +130,7 @@ class SearchForm extends AbstractType
                 'label' => 'frontend.search_form.best_price',
                 'required' => false,
 //                'empty_data' => 0,
-                'attr' => ['checked' => true]
+//                'attr' => ['checked' => true]
             ])
             ->add('direct_flights', 'checkbox', [
                 'label' => 'frontend.search_form.direct_flights',
