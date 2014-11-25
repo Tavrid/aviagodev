@@ -73,7 +73,6 @@ jQuery(function ($) {
     
     $.validator.setDefaults({
         ignore: []
-                // any other default options and/or rules
     });
     $.validator.addMethod("date_range", function (value, element) {
         var dateFormat = $(element).attr('date-format');

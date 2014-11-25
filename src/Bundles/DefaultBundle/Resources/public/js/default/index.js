@@ -1,20 +1,41 @@
 $(function() {
-
-    //$( "#search-form" ).sisyphus({timeout: 2});
-    $('#search-form').on('submit',function(){
-        var routeParams = {};
-        $.each($(this).serializeArray(),function(k,v){
-            var name  = v.name.replace(/.*\[(.+)\].*/g,"$1");
-            if(name != "city_from" && name != "city_to" && v.value){
-                routeParams[name] = v.value;
-            }
+    $(function () {
+        $("#search-form").validate({
+            highlight: function (element) {
+                $(element).closest('.form-group').addClass('has-error');
+            },
+            unhighlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            errorElement: 'span',
+            errorClass: 'help-block',
+            errorPlacement: function (error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+                var routeParams = {};
+                $.each($(form).serializeArray(),function(k,v){
+                    var name  = v.name.replace(/.*\[(.+)\].*/g,"$1");
+                    if(name != "city_from" && name != "city_to" && v.value){
+                        routeParams[name] = v.value;
+                    }
+                });
+                if(routeParams['best_price'] === undefined){
+                    routeParams['best_price'] = 0;
+                }
+                window.location = Routing.generate('bundles_default_api_list',routeParams);
+                return false;
+            },
+            ignore: ":hidden"
         });
-        if(routeParams['best_price'] === undefined){
-            routeParams['best_price'] = 0;
-        }
-        window.location = Routing.generate('bundles_default_api_list',routeParams);
-        return false;
     });
+    //$('#search-form').on('submit',function(){
+    //
+    //});
 
     $('body').on('click','.calendar-item',function(){
         _GlobalAppObject.loadingStart();
@@ -25,13 +46,13 @@ $(function() {
         });
         return false;
     });
+
     if(!parseInt($('#search_form_return_way input[type=radio]:checked').val())){
-        $('#search_form_date_to').parents('.form-group ').hide();
-        //$('#search_form_date_to').val('');
+        $('#search_form_date_to').parents('.date-to').hide();
     }
     $('#search_form_return_way').on('click','input[type=radio]',function(){
         var val = $('#search_form_return_way input[type=radio]:checked').val();
-        var sel = $('#search_form_date_to').parents('.form-group ');
+        var sel = $('#search_form_date_to').parents('.date-to');
         if(!parseInt(val)){
             sel.hide();
             $('#search_form_date_to').val('');

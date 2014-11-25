@@ -153,16 +153,13 @@ class ApiController extends Controller
 
         $form->submit($data);
 
-        if ($form->isValid()) {
-            $this->addSearchData($request->get('_route_params'), $form->getData());
+        $this->addSearchData($request->get('_route_params'), $form->getData());
 
-            $resp = $this->render('BundlesDefaultBundle:Api:list.html.twig', array(
-                'form' => $form->createView(),
-                'form_info' => $formBook->createView(),
-            ));
-        } else {
-            $resp = new Response('', Response::HTTP_BAD_REQUEST);
-        }
+        $resp = $this->render('BundlesDefaultBundle:Api:list.html.twig', array(
+            'form' => $form->createView(),
+            'form_info' => $formBook->createView(),
+        ));
+
         return $resp;
     }
 
@@ -173,45 +170,42 @@ class ApiController extends Controller
 
         $form->submit($request);
         $resp = null;
-        if ($form->isValid()) {
-            /** @var \Bundles\ApiBundle\Api\Api $api */
-            $api = $this->get('avia.api.manager');
-            $params = $form->getData();
+        /** @var \Bundles\ApiBundle\Api\Api $api */
+        $api = $this->get('avia.api.manager');
+        $params = $form->getData();
 
-            $query = new SearchByQuery();
-            $query->setParams($params);
-            $output = $api->getSearchRequestor()->execute($query);
-            if (!$output->getIsError()) {
-                $filterForm = $this->createForm('filter', null, ['searchResponse' => $output]);
-                if ($request->get($filterForm->getName())) {
-                    $filterForm->submit($request);
-                    $filterParams = $filterForm->getData();
-                } else {
-                    $filterParams = array();
-                }
-
-                $f = new SearchResultFilter($output, $this->container->getParameter('bundles_default.count_on_page'));
-                $data = $f->getData($page, SearchFilters::getFiltersByParams($filterForm->getData(), $form->getData()));
-                $d = array(
-                    'html' => $this->renderView('BundlesDefaultBundle:Api:_items.html.twig', array(
-                        'data' => $data,
-                        'form' => $form->createView(),
-                        'form_info' => $formBook->createView()
-                    )),
-                    'filter_form' => $this->renderView('BundlesDefaultBundle:Api:_filter_form.html.twig', ['filter_form' => $filterForm->createView()]
-                    ),
-                    'countPages' => $f->getCountPages(),
-                    'hasNext' => $page < $f->getCountPages()
-                );
-                $resp = new Response(json_encode($d));
-                $resp->headers->add(array('Content-Type' => 'application/json'));
-                return $resp;
+        $query = new SearchByQuery();
+        $query->setParams($params);
+        $output = $api->getSearchRequestor()->execute($query);
+        if (!$output->getIsError()) {
+            $filterForm = $this->createForm('filter', null, ['searchResponse' => $output]);
+            if ($request->get($filterForm->getName())) {
+                $filterForm->submit($request);
+                $filterParams = $filterForm->getData();
             } else {
-                throw $this->createNotFoundException();
+                $filterParams = array();
             }
+
+            $f = new SearchResultFilter($output, $this->container->getParameter('bundles_default.count_on_page'));
+            $data = $f->getData($page, SearchFilters::getFiltersByParams($filterForm->getData(), $form->getData()));
+            $d = array(
+                'html' => $this->renderView('BundlesDefaultBundle:Api:_items.html.twig', array(
+                    'data' => $data,
+                    'form' => $form->createView(),
+                    'form_info' => $formBook->createView()
+                )),
+                'filter_form' => $this->renderView('BundlesDefaultBundle:Api:_filter_form.html.twig', ['filter_form' => $filterForm->createView()]
+                ),
+                'countPages' => $f->getCountPages(),
+                'hasNext' => $page < $f->getCountPages()
+            );
+            $resp = new Response(json_encode($d));
+            $resp->headers->add(array('Content-Type' => 'application/json'));
+            return $resp;
         } else {
             throw $this->createNotFoundException();
         }
+
     }
 
     public function calendarAction(Request $request)
@@ -220,25 +214,23 @@ class ApiController extends Controller
 
         $form->submit($request);
         $resp = null;
-        if ($form->isValid()) {
-            /** @var \Bundles\ApiBundle\Api\Api $api */
-            $api = $this->get('avia.api.manager');
-            $params = $form->getData();
+        /** @var \Bundles\ApiBundle\Api\Api $api */
+        $api = $this->get('avia.api.manager');
+        $params = $form->getData();
 
-            $query = new AviaCalendarQuery();
-            $query->setParams($params);
-            $output = $api->getAviaCalendarRequestor()->execute($query);
-            if (!$output->getIsError()) {
-                $routeParams = $form->getData();
-                //TODO костыль ;)
-                $routeParams['direct_flights'] = intval($routeParams['direct_flights']);
-                unset($routeParams['city_from'],$routeParams['city_to']);
-                return $this->render('BundlesDefaultBundle:Api:_calendar.html.twig', [
-                    'data' => $output,
-                    'route_params' => $routeParams,
-                    'table' => Calendar::createTable($params['date_from'], $params['date_to'])
-                ]);
-            }
+        $query = new AviaCalendarQuery();
+        $query->setParams($params);
+        $output = $api->getAviaCalendarRequestor()->execute($query);
+        if (!$output->getIsError()) {
+            $routeParams = $form->getData();
+            //TODO костыль ;)
+            $routeParams['direct_flights'] = intval($routeParams['direct_flights']);
+            unset($routeParams['city_from'],$routeParams['city_to']);
+            return $this->render('BundlesDefaultBundle:Api:_calendar.html.twig', [
+                'data' => $output,
+                'route_params' => $routeParams,
+                'table' => Calendar::createTable($params['date_from'], $params['date_to'])
+            ]);
         }
         throw $this->createNotFoundException();
     }

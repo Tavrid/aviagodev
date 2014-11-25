@@ -8,6 +8,7 @@
 
 namespace Bundles\DefaultBundle\Form;
 
+use Bundles\DefaultBundle\Form\DataTransformer\SearchFormTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -81,13 +82,15 @@ class SearchForm extends AbstractType
             ])
             ->add('city_to_code', 'hidden')
 
-            ->add('date_from', 'text', [
+            ->add('date_from', 'date', [
                 'label' => 'frontend.search_form.date_from',
-                'attr' => ['placeholder' => 'frontend.search_form.placeholders.date']
+                'attr' => ['placeholder' => 'frontend.search_form.placeholders.date'],
+                'widget' => 'single_text',
             ])
-            ->add('date_to', 'text', [
+            ->add('date_to', 'date', [
                 'label' => 'frontend.search_form.date_to',
                 'attr' => ['placeholder' => 'frontend.search_form.placeholders.date'],
+                'widget' => 'single_text',
                 'required' => false
             ])
             ->add('return_way','choice',[
@@ -147,6 +150,9 @@ class SearchForm extends AbstractType
                 $formEvent->setData($data);
             });
         }
+
+        $transformer = new SearchFormTransformer();
+        $builder->addModelTransformer($transformer);
 
         if($this->session){
             $session = $this->session;
