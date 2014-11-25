@@ -1,7 +1,5 @@
 {% set c = table|first %}
-
-
-<table class="table-calendar table table-bordered table-hover text-center">
+<table class="table-calendar table table-bordered table-hover text-center" id="calendar_table">
     {% if c is empty %}
         <thead>
             <tr>
@@ -11,25 +9,25 @@
             </tr>
         </thead>
         <tbody>
-        {% for p in data %}
-            <tr>
-                {% for date,val in table %}
-                    {% if p.date == date %}
-                        <th>
-                            <span class="text-warning">
-                                {% set route_params = route_params|merge({'new_date_from' : date,'new_date_to' : 0}) %}
-                                <a class="calendar-item" href="{{ path('bundles_default.api.calendar_item_info',route_params) }}">
-                                    {{ p.price|number_format(0,' ',' ') }} {{p.currency}}
-                                </a>
-
-                            </span>
-                        </th>
-                    {% else %}
-                        <th></th>
-                    {% endif %}
-                {% endfor %}
-            </tr>
-        {% endfor %}
+        {#{% for p in data %}#}
+        <tr>
+            {% for date,val in table %}
+                {% if data[date|date('Y-m-d')] is defined %}
+                    {% set p = data[date|date('Y-m-d')] %}
+                    <th>
+                        <span class="text-warning">
+                            {% set route_params = route_params|merge({'new_date_from' : date,'new_date_to' : 0}) %}
+                            <a class="calendar-item" href="{{ path('bundles_default.api.calendar_item_info',route_params) }}">
+                                {{ p.price|number_format(0,' ',' ') }} {{p.currency}}
+                            </a>
+                        </span>
+                    </th>
+                {% else %}
+                    <th></th>
+                {% endif %}
+            {% endfor %}
+        </tr>
+        {#{% endfor %}#}
         </tbody>
     {% else %}
         <thead>

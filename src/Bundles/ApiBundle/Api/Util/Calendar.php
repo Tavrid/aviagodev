@@ -8,9 +8,7 @@
 namespace Bundles\ApiBundle\Api\Util;
 class Calendar {
     public static function createTable($dataFrom,$dataTo){
-        $res = array(
-
-        );
+        $res = array();
         for ($i = -3; $i <=3; $i++){
             $strtotime = strtotime($dataFrom);
             $time = mktime(0, 0, 0, date("m",$strtotime)  , date("d",$strtotime)+($i), date("Y",$strtotime));
