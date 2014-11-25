@@ -52,7 +52,7 @@
                                                 <div class="time-up col-md-4">{{ variant.departureSegment.departureDate|date("H:i") }}</div>
                                                 <div class="city-aero col-md-8">
                                                     <div class="city-up">{{ variant.departureSegment.departureCityName }}</div>
-                                                    <div class="aeropot-up">({{ variant.departureSegment.departureAirportName }})</div>
+                                                    <div class="aeropot-up">{{ variant.departureSegment.departureAirportName }}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -62,7 +62,7 @@
                                                 <div class="time-down col-md-4">{{ variant.arrivalSegment.arrivalDate|date("H:i") }}</div>
                                                 <div class="city-aero col-md-8">
                                                     <div class="city-down">{{ variant.arrivalSegment.arrivalCityName }}</div>
-                                                    <div class="aeropot-down">({{ variant.arrivalSegment.arrivalAirportName }})</div>
+                                                    <div class="aeropot-down">{{ variant.arrivalSegment.arrivalAirportName }}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -71,17 +71,13 @@
                                             <div class="time-duration">{{ variant.duration|secondToTime }}</div>
                                             <div class="transplant">
                                                 {% if variant.countTransplant %}
-                                                    <div>
-                                                        <small>
-                                                            {% transchoice variant.countTransplant with {'%count%':  variant.countTransplant} %}
+                                                    <button type="button" class="btn-transplant btn btn-xs" data-container="body" data-toggle="popover" data-placement="top" data-content="{% for a in variant.transplantAirports %}
+                                                            <div class='list-transplant'>
+                                                            <strong>{{ a.name }}</strong><br/> <small>{%trans%}frontend.default.list.item.between_flights{%endtrans%}:{{ a.time|secondToTime }}</small>
+                                                        </div>
+                                                        {% endfor %}">{% transchoice variant.countTransplant with {'%count%':  variant.countTransplant} %}
                                                                 frontend.default.list.item.transplant
-                                                            {% endtranschoice %}
-                                                        </small>
-                                                        {% for a in variant.transplantAirports %}
-                                                            <strong>{{ a.name }}</strong>, <small>{%trans%}frontend.default.list.item.between_flights{%endtrans%}:{{ a.time|secondToTime }}</small>
-                                                        {% endfor %}
-
-                                                    </div>
+                                                            {% endtranschoice %}</button>
                                                 {% endif %}
                                             </div>
                                         </div>
@@ -137,6 +133,9 @@
             event.preventDefault();
         });
         $('input[name="info[variants][1]"]').parent().parent().parent().parent().parent().addClass('down-time-block');
+        $('.btn-transplant').popover({
+            html: true
+        });
     });
 </script>
 

@@ -18,13 +18,13 @@
     {% endblock %}
 {% endblock %}
 {% block body %}
-    <div class="col-md-3">
+    <div class="col-md-3 total-price-block">
         <h3>{%trans%}frontend.default.order.order_info{%endtrans%}</h3>
         <hr />
-        <strong>{%trans%}frontend.default.order.total{%endtrans%}: {{ ticket.totalPrice|number_format(0, '.', ' ')  }} {{ ticket.currency}}</strong>
+        <strong>{%trans%}frontend.default.order.total{%endtrans%}: <span class="total-price">{{ ticket.totalPrice|number_format(0, '.', ' ')  }} {{ ticket.currency}}</span></strong>
 
     </div>
-    <div class="col-md-9">
+    <div class="col-md-9 order-block">
         <h3>{{ ticket.routes|join(' - ') }}</h3>
         <div style="margin-bottom: 50px">
 
@@ -38,13 +38,12 @@
                     <a href="#info" role="tab" data-toggle="tab">{%trans%}frontend.default.order.flight_details{%endtrans%}</a>
                 </li>
             </ul>
-            <div class="tab-content">
-                <div class="tab-pane active" id="rules" style="padding: 15px">
+            <div class="tab-content book-tab">
+                <div class="tab-pane active rules-tab" id="rules" style="padding: 15px">
                     <div class="">
                         Если в вашем билете несколько рейсов, при неявке на один из них авиакомпания имеет право отменить бронь на оставшиеся рейсы.
                     </div>
                     <hr />
-                    
                     <table class="table">
                         <thead>
                         <tr>
@@ -85,7 +84,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="tab-pane" id="info"  style="padding: 15px">
+                <div class="tab-pane tab-info" id="info">
                     {% include 'BundlesDefaultBundle:Api:_items.html.twig' with {data: [ticket],needBook: false} %}
                 </div>
             </div>
@@ -122,23 +121,35 @@
                 </ul>
                 <div class="tab-content">
                     {% for add in form.passengers.ADT %}
-                        <div class="tab-pane {% if loop.first %}active{% endif %}" id="adult{{ loop.index }}">
-                            {{ form_row(add) }}
-                            {% if loop.first %}
-                                {{ form_row(form.email) }}
-                                {{ form_row(form.phone) }}
-                                {{ form_row(form.info) }}
-                            {% endif %}
+                        <div class="tab-user-info tab-pane {% if loop.first %}active{% endif %}" id="adult{{ loop.index }}">
+                            <div class="well">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        {{ form_row(add) }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {% if loop.first %}
+                                            {{ form_row(form.email) }}
+                                            {{ form_row(form.phone) }}
+                                            {{ form_row(form.info) }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     {% endfor %}
                     {% for chd in form.passengers.CHD %}
-                        <div class="tab-pane" id="child{{ loop.index }}">
-                            {{ form_row(chd) }}
+                        <div class="tab-pane tab-user-info" id="child{{ loop.index }}">
+                            <div class="well">
+                                {{ form_row(chd) }}
+                            </div>
                         </div>
                     {% endfor %}
                     {% for inf in form.passengers.INF %}
-                        <div class="tab-pane" id="inf{{ loop.index }}">
-                            {{ form_row(inf) }}
+                        <div class="tab-pane tab-user-info" id="inf{{ loop.index }}">
+                            <div class="well">
+                                {{ form_row(inf) }}
+                            </div>
                         </div>
                     {% endfor %}
                 </div>

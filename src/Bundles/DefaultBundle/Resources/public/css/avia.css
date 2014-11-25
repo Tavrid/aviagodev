@@ -768,7 +768,8 @@ left: 10px;
 }
 */
 .time-up-avia p,
-.time-down-avia p{
+.time-down-avia p,
+.time-duration-avia p{
 	font-size: 14px;
  	margin-bottom: 0;
 }
@@ -813,9 +814,34 @@ left: 10px;
 
 .time-duration {
 	font-weight: bold;
-	font-size: 20px;
+	font-size: 16px;
 	color:#ff9000;
 }
+
+.btn-transplant {
+	background: none;
+	border: none;
+	border-radius: 5px;
+	background: #aaa;
+	border: 1px solid #999;
+	background: -webkit-linear-gradient(#fff, #aaa) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: -o-linear-gradient(#fff, #aaa) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: linear-gradient(#fff, #aaa) repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.btn-transplant:focus,
+.btn-transplant:hover,
+.btn-transplant:active {
+	background: #fff;
+	background: -webkit-linear-gradient(#aaa, #fff) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: -o-linear-gradient(#aaa, #fff) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: linear-gradient(#aaa, #fff) repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.list-transplant {
+	
+}
+
 /*
 .date-ticket {
 	font-size: 20px;
@@ -1168,7 +1194,7 @@ a:focus {
 }
 
 .down-time-block .date-title {
-	background: url('../images/avia-down.png') no-repeat 0px 5px;
+	background: url('../images/avia-up-back.png') no-repeat 0px 7px;
 }
 
 /* Таблица календарь */
@@ -1185,6 +1211,8 @@ a:focus {
     padding: 5px !important;
 }
 .table-calendar td:first-of-type, .table-calendar thead th {
+    background: -webkit-linear-gradient(#98d0ff, #d4effc) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: -o-linear-gradient(#98d0ff, #d4effc) repeat scroll 0 0 rgba(0, 0, 0, 0);
     background: linear-gradient(#98d0ff, #d4effc) repeat scroll 0 0 rgba(0, 0, 0, 0);
     text-align: center;
 }
@@ -1212,3 +1240,82 @@ a:focus {
     position: relative;
     top: -2px;
 }
+
+/* Общая сумма за билет */
+
+.total-price-block {
+	width: 20%;	
+}
+
+.total-price-block h3 {
+	font-size: 22px;
+}
+
+.total-price {
+	color: #ff9000;
+    font-size: 26px;
+    font-weight: bold;
+    position: relative;
+    top:1px;
+}
+
+.order-block {
+	width: 80%;
+}
+
+.book-tab hr {
+	margin-top: 10px;
+	margin-bottom: 0;
+}
+
+.book-tab .rules-tab,
+.tab-user-info .well {
+	background: #98d0ff;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#98d0ff), to(#d4effc));
+	background: -webkit-linear-gradient(#98d0ff, #d4effc);
+	background: -moz-linear-gradient(#98d0ff, #d4effc);
+	background: -ms-linear-gradient(#98d0ff, #d4effc);
+	background: -o-linear-gradient(#98d0ff, #d4effc);
+	background: linear-gradient(#98d0ff, #d4effc);
+}
+
+.tab-user-info .well {
+	border-top: 0 none;
+	box-shadow: none;
+}
+
+.book-tab table {
+	margin-bottom: 0;
+}
+
+.book-tab td,
+.book-tab th {
+	border-bottom: 1px solid #Fff;
+}
+
+.book-tab tbody td {
+	color:#555;
+}
+
+.book-tab tbody td:last-of-type {
+	color: #333;
+	font-weight: bold;
+}
+
+.tab-info .down-time-block .panel:last-of-type {
+	margin-bottom: 0;
+}
+
+/* .tab-user-info label,
+.tab-user-info .controls {
+	display: inline-block;
+	margin-right: -5px;
+}
+
+.tab-user-info label {
+	width: 20%;
+}
+
+.tab-user-info .controls {
+	width: 80%;
+} */

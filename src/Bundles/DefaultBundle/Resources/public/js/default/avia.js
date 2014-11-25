@@ -138,7 +138,9 @@ $(document).ready(function($) {
         return true;
     }
 
+    $('.btn-transplant').popover({
+    	html: true
+    });
     $('span').tooltip();
     $('button').tooltip();
-
 });
