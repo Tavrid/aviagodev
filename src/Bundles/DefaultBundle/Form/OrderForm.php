@@ -40,7 +40,7 @@ class OrderForm extends AbstractType {
         $fieldMap = array();
         $pattern = '/[\w\d]/';
         if ($bookInfoResponse->getEntity()->getTicket()->getLatinRegistration()) {
-            $pattern = '/[a-zA-z0-9]/';
+            $pattern = '/^[a-zA-z0-9]+$/';
         }
         $fieldMap['ADT'] = ['sub_multi_field',
             'fields' => [

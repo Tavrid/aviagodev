@@ -1,4 +1,6 @@
 frontend:
+    book:
+      error_book: Ошибка бронирования
     times:
         night: Ночь (00-06)
         morning: Утро (06-12)

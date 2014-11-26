@@ -149,29 +149,30 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    {{ form_label(add.Name) }}
-                                                    {{ form_widget(add.Name, {'attr': {'placeholder': 'Введите имя'}}) }}
+                                                    {#{{ form_label(add.Name) }}#}
+                                                    {{ form_row(add.Name, {'attr': {'placeholder': 'Введите имя'}}) }}
+                                                    {#{{ form_errors(add.Name) }}#}
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    {{ form_label(add.Surname) }}
-                                                    {{ form_widget(add.Surname, {'attr': {'placeholder': 'Введите фамилию'}}) }}
+                                                    {#{{ form_label(add.Surname) }}#}
+                                                    {{ form_row(add.Surname, {'attr': {'placeholder': 'Введите фамилию'}}) }}
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    {{ form_label(add.Birthday) }}
-                                                    {{ form_widget(add.Birthday, {'attr': {'placeholder': 'Введите дату рождения'}}) }}
+                                                    {#{{ form_label(add.Birthday) }}#}
+                                                    {{ form_row(add.Birthday, {'attr': {'placeholder': 'Введите дату рождения'}}) }}
                                                 </div>
                                             </div>
                                         {% if loop.first %}
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    {{ form_label(form.email) }}
-                                                    {{ form_widget(form.email, {'attr': {'placeholder': 'Введите email'}}) }}
+                                                    {#{{ form_label(form.email) }}#}
+                                                    {{ form_row(form.email, {'attr': {'placeholder': 'Введите email'}}) }}
                                                 </div>
                                             </div>
                                         </div>
@@ -191,28 +192,28 @@
                                         <div class="row">   
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    {{ form_label(form.phone) }} <br/>
-                                                    {{ form_widget(form.phone) }}
+                                                    {#{{ form_label(form.phone) }} <br/>#}
+                                                    {{ form_row(form.phone) }}
                                                 </div>                
                                             </div>                
                                             <div class="col-md-6"> 
                                                 <div class="form-group">
-                                                    {{ form_label(add.Citizen) }}
-                                                    {{ form_widget(add.Citizen) }}
+                                                    {#{{ form_label(add.Citizen) }}#}
+                                                    {{ form_row(add.Citizen) }}
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    {{ form_label(add.Document.Number) }}
-                                                    {{ form_widget(add.Document.Number) }}
+                                                    {#{{ form_label(add.Document.Number) }}#}
+                                                    {{ form_row(add.Document.Number) }}
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    {{ form_label(add.Document.ExpireDate ) }}
-                                                    {{ form_widget(add.Document.ExpireDate) }}
+                                                    {#{{ form_label(add.Document.ExpireDate ) }}#}
+                                                    {{ form_row(add.Document.ExpireDate) }}
                                                 </div>
                                             </div>
                                         </div>

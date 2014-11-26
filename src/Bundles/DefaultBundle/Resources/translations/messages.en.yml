@@ -1,4 +1,6 @@
 frontend:
+    book:
+      error_book: Booking error
     times:
         night: Night (00-06)
         morning: Morning (06-12)

@@ -66,7 +66,6 @@ class ApiController extends Controller
 
     public function bookAction(Request $request, $key)
     {
-        /** @var \Memcached $memcache */
         $memcache = $this->get('main.cache');
 
         $bookInfoResponse = $memcache->get($key);
@@ -74,11 +73,9 @@ class ApiController extends Controller
             throw $this->createNotFoundException();
         }
 
-        /* @var $orderManager \Acme\AdminBundle\Model\Order */
         $orderManager = $this->get('admin.order.manager');
         $entity = $orderManager->getEntity();
 
-        /* @var $form OrderForm */
         $form = $this->createForm('order', $entity, [
             'bookInfoResponse' => $bookInfoResponse
         ]);
@@ -103,7 +100,7 @@ class ApiController extends Controller
                 /* @var $api Api */
                 $api = $this->get('avia.api.manager');
                 $output = $api->getBookRequestor()->execute($query);
-                if (!$output->getIsError() && !$output->getPnr()) {
+                if (!$output->getIsError() && $output->getPnr()) {
                     $d = $output->getResponseData();
                     $entity->setPnr($output->getPnr())
                         ->setOrderInfo($d);
@@ -112,7 +109,7 @@ class ApiController extends Controller
                         'orderID' => $entity->getOrderId()
                     )));
                 } else {
-                    $form->addError(new FormError('Error book'));
+                    $form->addError(new FormError($this->get('translator')->trans('frontend.book.error_book')));
                 }
             }
         }
