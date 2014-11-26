@@ -90,8 +90,7 @@ class SearchForm extends AbstractType
             ->add('date_to', 'date', [
                 'label' => 'frontend.search_form.date_to',
                 'attr' => ['placeholder' => 'frontend.search_form.placeholders.date'],
-                'widget' => 'single_text',
-                'required' => false
+                'widget' => 'single_text'
             ])
             ->add('return_way','choice',[
                 'label' => 'frontend.search_form.return_way.label',
