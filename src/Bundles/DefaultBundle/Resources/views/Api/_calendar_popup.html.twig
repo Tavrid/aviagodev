@@ -1,5 +1,18 @@
+<style>
+.down-time-block .panel {
+    margin-bottom: 0;
+}
 
-<div class="modal fade" id="calendar-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+#calendar-modal .well {
+    margin-bottom: 0;
+}
+
+#calendar-modal .modal-body {
+    padding-bottom: 0;
+}
+
+</style>
+<div class="modal fade bs-example-modal-lg" id="calendar-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -16,3 +29,10 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function($) {
+        $('.btn-transplant').popover({
+            html: true
+        });   
+    });
+</script>

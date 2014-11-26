@@ -1302,7 +1302,7 @@ a:focus {
 	font-weight: bold;
 }
 
-.tab-info .down-time-block .panel:last-of-type {
+.list-in-tab .down-time-block .panel:last-of-type {
 	margin-bottom: 0;
 }
 
@@ -1319,3 +1319,19 @@ a:focus {
 .tab-user-info .controls {
 	width: 80%;
 } */
+
+.intl-tel-input .flag-dropdown {
+	height: 34px;
+}
+
+@media screen and (min-width: 1000px) {
+	.modal-dialog {
+	    padding-bottom: 30px;
+	    padding-top: 30px;
+	    width: 1000px;
+	}
+}
+
+.popover.fade.top.in {
+    z-index: 9999;
+}

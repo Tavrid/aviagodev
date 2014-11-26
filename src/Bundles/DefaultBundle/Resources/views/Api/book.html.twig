@@ -84,7 +84,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="tab-pane tab-info" id="info">
+                <div class="tab-pane tab-info list-in-tab" id="info">
                     {% include 'BundlesDefaultBundle:Api:_items.html.twig' with {data: [ticket],needBook: false} %}
                 </div>
             </div>
@@ -125,14 +125,97 @@
                             <div class="well">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        {{ form_row(add) }}
+                                        <div class="form-group">
+                                            <label for="#">Выберите пол</label>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            {{ form_widget(add.Sex.0) }}
+                                                        </span>
+                                                        {{ form_label(add.Sex.0, '', {'label_attr':{'class':'form-control'}}) }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            {{ form_widget(add.Sex.1) }}
+                                                        </span>
+                                                        {{ form_label(add.Sex.1, '', {'label_attr':{'class':'form-control'}}) }}
+                                                    </div>
+                                                </div>
+                                            </div>           
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    {{ form_label(add.Name) }}
+                                                    {{ form_widget(add.Name, {'attr': {'placeholder': 'Введите имя'}}) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    {{ form_label(add.Surname) }}
+                                                    {{ form_widget(add.Surname, {'attr': {'placeholder': 'Введите фамилию'}}) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    {{ form_label(add.Birthday) }}
+                                                    {{ form_widget(add.Birthday, {'attr': {'placeholder': 'Введите дату рождения'}}) }}
+                                                </div>
+                                            </div>
+                                        {% if loop.first %}
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    {{ form_label(form.email) }}
+                                                    {{ form_widget(form.email, {'attr': {'placeholder': 'Введите email'}}) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        {{ form_widget(form.info) }}
+                                                    </span>
+                                                    {{ form_label(form.info, '', {'label_attr':{'class':'form-control'}}) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
                                     </div>
                                     <div class="col-md-6">
-                                        {% if loop.first %}
-                                            {{ form_row(form.email) }}
-                                            {{ form_row(form.phone) }}
-                                            {{ form_row(form.info) }}
-                                        {% endif %}
+                                        <div class="row">   
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    {{ form_label(form.phone) }} <br/>
+                                                    {{ form_widget(form.phone) }}
+                                                </div>                
+                                            </div>                
+                                            <div class="col-md-6"> 
+                                                <div class="form-group">
+                                                    {{ form_label(add.Citizen) }}
+                                                    {{ form_widget(add.Citizen) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    {{ form_label(add.Document.Number) }}
+                                                    {{ form_widget(add.Document.Number) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    {{ form_label(add.Document.ExpireDate ) }}
+                                                    {{ form_widget(add.Document.ExpireDate) }}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
