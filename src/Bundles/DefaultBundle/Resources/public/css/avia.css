@@ -1105,6 +1105,11 @@ a:focus {
 
 .filter-form {
 	width: 20%;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.bg-gradient {
 	background: #98d0ff;
 	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#98d0ff), to(#d4effc));
 	background: -webkit-linear-gradient(#98d0ff, #d4effc);
