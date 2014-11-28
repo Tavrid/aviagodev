@@ -23,6 +23,9 @@ class BookInfoResponse extends Response {
     protected $entity;
 
     protected function createEntity(){
+        if(!isset($this->response['result'])){
+            return;
+        }
         $data = $this->response['result'];
         $requestId = $data['RequestID'];;
         $entity = new BookInfo();
