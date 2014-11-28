@@ -1184,6 +1184,20 @@ a:focus {
 	font-weight: bold;
 }
 
+.price-ticket h2,
+.price-ticket .col-block {
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+.price-ticket span.col-user {
+	font-size: 20px;
+	color:#292929;
+	display: inline-block;
+	position: relative;
+	top: 1px;
+}
+
 .date-ticket {
 	font-size: 20px;
 	color:#292929;
@@ -1225,6 +1239,11 @@ a:focus {
     background: none repeat scroll 0 0 #fff;
     color: #000;
 }
+
+.betterhover {
+    background: #f5f5f5;
+}
+
 .table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th {
     color: #000;
 }

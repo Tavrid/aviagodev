@@ -2,7 +2,8 @@
 {% for ticket in data %}
     <div class="ticket-well well">
         <div class="price-ticket">
-            <h2>{{ ticket.totalPrice|number_format(0,'.',' ') }} {{ticket.currency}}</h2>
+            <h2>{{ ticket.totalPrice|number_format(0,'.',' ') }} {{ticket.currency}} </h2>
+            <span class="col-block"> - за <span class="col-user">3</span> <span class="end-word"></span></span>
         </div>
         {% if needBook %}
             <form action="{{ path("bundles_default_api_info") }}" class="book-form">
@@ -136,6 +137,19 @@
         $('.btn-transplant').popover({
             html: true
         });
+
+        var coladult = $('#search_form_adults').val();
+        var colchild = $('#search_form_children').val();
+        var colinf = $('#search_form_infant').val();
+        var totalUser = parseInt(coladult) + parseInt(colchild) + parseInt(colinf);
+        $('.col-user').text(totalUser);
+        function plural(number, titles){
+            cases = [2, 0, 1, 1, 1, 2];
+            return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];
+        }
+        var cmt = totalUser;
+        //jquery
+        $('.end-word').html(plural(cmt, ['человека', 'человек', 'человек']));
     });
 </script>
 
