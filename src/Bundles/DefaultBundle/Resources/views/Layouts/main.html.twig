@@ -39,7 +39,7 @@
     <body>
         <div class="page-header">
             <div class="container">
-                <a href="/avia/web/app_dev.php" class="logo"><img src="/avia/web/images/logo.png" alt=""></a>
+                <a href="{{ path('bundles_default_homepage') }}" class="logo"><img src="{{ asset('/images/logo.png') }}" alt=""></a>
                 <div class="group-lang btn-group pull-right row">
                     <button data-value="ru"  type="button" class="btn btn-default lang {{app.request.locale == 'ru' ? 'active':''}}">ru</button>
                     <button data-value="en" type="button" class="btn btn-default lang {{app.request.locale == 'en' ? 'active':''}}">en</button>
@@ -51,7 +51,7 @@
         {% block body %}{% endblock %}
     </div>
     <div id="loader" style="display: none; z-index: 10000; padding: 30px 60px; ">
-        <img alt="" src="/avia/web/images/progress_bar.gif" />
+        <img alt="" src="{{ asset('/images/progress_bar.gif') }}" />
     </div>
     <script>
         $(document).ready(function(){

@@ -42,7 +42,7 @@
                                     <div class="col-md-5">
                                         <div class="input-group city-from">
                                             <span class="input-group-addon block-img-avia">
-                                                <img src="images/avia-up.png" alt="">
+                                                <img src="{{ asset('/images/avia-up.png') }}" alt="">
                                             </span>
                                             {{ form_widget(form.city_from, {'attr': {'class': 'from_city'}}) }}
                                             <span class="input-group-btn">
@@ -52,13 +52,13 @@
                                     </div>
                                     <div class="col-md-2 text-center">
                                         <button id="reverse-city" type="button" class="btn btn-primary button-refresh" data-toggle="tooltip" data-placement="top" data-original-title="Поменять местами вылет и прилет">
-                                            <img src="images/refresh-white.png" alt="">
+                                            <img src="{{ asset('/images/refresh-white.png') }}" alt="">
                                         </button>
                                     </div>
                                     <div class="col-md-5">
                                         <div class="input-group city-to">
                                             <span class="input-group-addon block-img-avia">
-                                                <img src="images/avia-down.png" alt="">
+                                                <img src="{{ asset('/images/avia-down.png') }}" alt="">
                                             </span>
                                             {{ form_widget(form.city_to, {'attr': {'class': 'to_city'}}) }}
                                             <span class="input-group-btn">
