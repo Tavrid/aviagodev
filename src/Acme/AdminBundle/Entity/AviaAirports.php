@@ -836,4 +836,88 @@ class AviaAirports
     {
         return $this->timezone;
     }
+    /**
+     * @var string
+     */
+    private $nameShortRu;
+
+    /**
+     * @var string
+     */
+    private $nameShortEn;
+
+    /**
+     * @var string
+     */
+    private $nameShortUk;
+
+
+    /**
+     * Set nameShortRu
+     *
+     * @param string $nameShortRu
+     * @return AviaAirports
+     */
+    public function setNameShortRu($nameShortRu)
+    {
+        $this->nameShortRu = $nameShortRu;
+
+        return $this;
+    }
+
+    /**
+     * Get nameShortRu
+     *
+     * @return string 
+     */
+    public function getNameShortRu()
+    {
+        return $this->nameShortRu;
+    }
+
+    /**
+     * Set nameShortEn
+     *
+     * @param string $nameShortEn
+     * @return AviaAirports
+     */
+    public function setNameShortEn($nameShortEn)
+    {
+        $this->nameShortEn = $nameShortEn;
+
+        return $this;
+    }
+
+    /**
+     * Get nameShortEn
+     *
+     * @return string 
+     */
+    public function getNameShortEn()
+    {
+        return $this->nameShortEn;
+    }
+
+    /**
+     * Set nameShortUk
+     *
+     * @param string $nameShortUk
+     * @return AviaAirports
+     */
+    public function setNameShortUk($nameShortUk)
+    {
+        $this->nameShortUk = $nameShortUk;
+
+        return $this;
+    }
+
+    /**
+     * Get nameShortUk
+     *
+     * @return string 
+     */
+    public function getNameShortUk()
+    {
+        return $this->nameShortUk;
+    }
 }

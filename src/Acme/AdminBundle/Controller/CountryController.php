@@ -38,10 +38,10 @@ class CountryController extends ControllerBase {
                                 'type' => ColumnTypes::TYPE_EDITABLE_TEXT,
                                 'route' => ['admin.country.editmask', ['id' => 'id']],
                                 'form' => function(Country $country) use ($controller) {
-                            return $controller->createFormBuilder($country)
-                                            ->add('passportMask')
-                                            ->getForm()->createView();
-                        }
+                                    return $controller->createFormBuilder($country)
+                                                    ->add('passportMask')
+                                                    ->getForm()->createView();
+                                }
                             ],
                             'alpha2',
                             'code',
