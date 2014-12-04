@@ -54,10 +54,11 @@ $(function() {
         var val = $('#search_form_return_way input[type=radio]:checked').val();
         var sel = $('#search_form_date_to').parents('.date-to');
         if(!parseInt(val)){
-            sel.hide();
+            $('#search_form_date_to').attr('disabled', 'disabled');
             $('#search_form_date_to').val('');
         } else {
-            sel.show();
+            $('#search_form_date_to').removeAttr('disabled');/*
+            sel.show();*/
         }
     });
 

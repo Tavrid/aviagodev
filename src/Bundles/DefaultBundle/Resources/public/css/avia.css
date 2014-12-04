@@ -1,11 +1,30 @@
+/* Контент */
+
+body,
+html {
+	background: #fff;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#fff), to(#E8EFF6));
+	background: -webkit-linear-gradient(#fff, #E8EFF6);
+	background: -moz-linear-gradient(#fff, #E8EFF6);
+	background: -ms-linear-gradient(#fff, #E8EFF6);
+	background: -o-linear-gradient(#fff, #E8EFF6);
+	background: linear-gradient(#fff, #E8EFF6);
+	-pie-background: linear-gradient(#fff, #E8EFF6);
+}
+
+body,
+html {
+	min-height: 100%;
+}
+
 /* Шапка */
 
-.page-header {
-	margin: 10px 0;
+header {
+	padding: 20px 0;
 }
 
 .logo {
-	width: 200px;
+	width: 150px;
 	float: left;
 }
 
@@ -179,10 +198,10 @@
 	z-index: 999999;
 }
 
-.search_form_date_to {
+/* .search_form_date_to {
 	left: 55.5px !important;
 }
-
+ */
 .ui-datepicker {
 	border-color: #00BEFF;
 }
@@ -597,18 +616,33 @@ left: 10px;
 	border: none;
 	font-size: 16px;
 	text-transform: uppercase;
-	height: 57px;
-	line-height: 57px;
-	padding: 0 48px 0 20px;
-	background: #FF9D1A url('../images/fly.png') no-repeat 90% center;
- 	transition:background .4s;
+	text-align: center; 
+	padding: 10px 30px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	-webkit-box-shadow: #888 0px 2px 3px;
+	-moz-box-shadow: #888 0px 2px 3px;
+	box-shadow: #888 0px 2px 3px;
+	background: #FDAB01;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#FDAB01), to(#D95C23));
+	background: -webkit-linear-gradient(#FDAB01, #D95C23);
+	background: -moz-linear-gradient(#FDAB01, #D95C23);
+	background: -ms-linear-gradient(#FDAB01, #D95C23);
+	background: -o-linear-gradient(#FDAB01, #D95C23);
+	background: linear-gradient(#FDAB01, #D95C23);
+	-pie-background: linear-gradient(#FDAB01, #D95C23);
+	behavior: url(/pie/PIE.htc);
+	/* background: #FF9D1A url('../images/fly.png') no-repeat 90% center; */
+ 	font-weight: bold;
 }
 
 .btn-fly:hover,
 .btn-fly:active,
 .btn-fly.active,
 .btn-fly:focus {
-	background: #ff9000 url('../images/fly.png') no-repeat 90% center;
+	/* background: #ff9000 url('../images/fly.png') no-repeat 90% center; */
+	background: #D95C23;
 }
 /*
 Нестандартные радио button
@@ -943,11 +977,12 @@ a:focus {
 }
 
 .block-img-avia {
-	padding: 6px 6px 2px;
+	padding: 6px 4px 2px;
 }
 
 .tab-pane {
-
+	box-shadow: 0 0 3px 0 #999;
+	border-radius: 0 0px 10px 10px
 }
 
 .vozrast-icon {
@@ -959,11 +994,12 @@ a:focus {
 }
 
 .ui-datepicker {
-	width: 45.6em !important;
+	width: 39.3em !important;
 }
 
 .search_form_date_to {
-	left: 50.5px !important;
+	left: none !important;
+	right: 0 !important;
 }
 
 #search-form .row,
@@ -984,6 +1020,7 @@ a:focus {
 
 .price-reys > div.price-block {
 	margin-bottom: 15px;
+	margin-top: 5px;
 }
 
 .vozrast > div select {
@@ -994,19 +1031,68 @@ a:focus {
 	margin-top: -10px;
 }
 
-#search_form_return_way label {
+.col-avia {
+	width: 46%;
+}
+
+.col-return {
+	width: 8%;
+	padding: 0;
+}
+
+.return-way-index label,
+.return-way-index input {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.return-way-index label {
 	margin-right: 15px;
-	font-size: 11px;
+	font-size: 13px;
+	margin-top: 9px;
+	font-weight: normal;
+}
+
+.return-way-index input {
+	margin-right: 5px;
 }
 
 #ui-id-1, #ui-id-2 {
 	top: 33px !important;
 }
 
+.nav-tabs > li {
+	margin-bottom: 0;
+}
+
+.nav-tabs li a {
+	font-size: 18px;
+	position: relative;
+}
+
 .nav-tabs > li.active > a, 
 .nav-tabs > li.active > a:hover, 
 .nav-tabs > li.active > a:focus {
 	background: #98d0ff;
+	border-radius: 10px 10px 0 0;
+}
+
+.nav-tabs > li.active > a {
+	box-shadow: 0 0 3px 0 #999;
+}
+
+.now-find .panel-body {
+	box-shadow: 0 0 3px 0 #999;
+}
+
+.nav-tabs > li.active > a:after {
+	content: '';
+	width: 100%;
+	height: 3px;
+	position: absolute;
+	bottom: -4px;
+	left: 0;
+	background: #98D0FF;
 }
 
 .panel-default > .panel-heading {
@@ -1033,8 +1119,21 @@ a:focus {
 }
 
 .now-find .panel-body {
-	height: 414px;
-	margin-top: 41px;
+	height: 405px;
+	margin-top: 48px;
+}
+
+.now-find .panel-heading {
+	padding: 0px 15px 10px;
+}
+
+.panel-body {
+	color:#666;
+}
+
+.panel-body label {
+	font-weight: normal;
+	margin-bottom: 2px !important;
 }
 
 .list-now-find {
@@ -1079,7 +1178,7 @@ a:focus {
 }
 
 .group-lang {
-	margin-right: 14px;
+	margin-right: 0px;
 }
 
 .label-from label {
@@ -1358,4 +1457,13 @@ a:focus {
 
 .popover.fade.top.in {
     z-index: 9999;
+}
+
+select {
+	font-size: 14px;
+}
+
+select option {
+	font-size: 14px;
+	padding: 3px 10px;
 }

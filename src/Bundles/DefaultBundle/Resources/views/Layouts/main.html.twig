@@ -37,17 +37,17 @@
         {% endblock %}
     </head>
     <body>
-        <div class="page-header">
-            <div class="container">
+        <header role="contentinfo">
+            <div class="container" style="max-width:1000px;">
                 <a href="{{ path('bundles_default_homepage') }}" class="logo"><img src="{{ asset('/images/logo.png') }}" alt=""></a>
                 <div class="group-lang btn-group pull-right row">
-                    <button data-value="ru"  type="button" class="btn btn-default lang {{app.request.locale == 'ru' ? 'active':''}}">ru</button>
-                    <button data-value="en" type="button" class="btn btn-default lang {{app.request.locale == 'en' ? 'active':''}}">en</button>
-                    <button data-value="uk" type="button" class="btn btn-default lang {{app.request.locale == 'uk' ? 'active':''}}">ua</button>
+                    <button data-value="ru"  type="button" class="btn btn-info lang {{app.request.locale == 'ru' ? 'active':''}}">ru</button>
+                    <button data-value="en" type="button" class="btn btn-info lang {{app.request.locale == 'en' ? 'active':''}}">en</button>
+                    <button data-value="uk" type="button" class="btn btn-info lang {{app.request.locale == 'uk' ? 'active':''}}">ua</button>
                 </div>
             </div>
-        </div>
-        <div class="container">
+        </header>
+        <div class="container" style="max-width:1000px;">
         {% block body %}{% endblock %}
     </div>
     <div id="loader" style="display: none; z-index: 10000; padding: 30px 60px; ">

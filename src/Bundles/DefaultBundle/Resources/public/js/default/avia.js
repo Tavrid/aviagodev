@@ -1,6 +1,6 @@
 $(document).ready(function($) {
 
-	$('#search_form_return_way').on('click','input[type=radio]',function(){
+	/*$('#search_form_return_way').on('click','input[type=radio]',function(){
         var val = $('#search_form_return_way input[type=radio]:checked').val();
         var sel = $('#search_form_date_to').parents('.date-to');
         if(!parseInt(val)){
@@ -9,7 +9,7 @@ $(document).ready(function($) {
         } else {
             sel.show();
         }
-    });
+    });*/
 
 	$("#ui-id-1").prependTo(".city-from");
 	$("#ui-id-2").prependTo(".city-to");

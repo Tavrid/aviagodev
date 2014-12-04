@@ -18,7 +18,7 @@
 {% block body %}
 
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-8">
             <ul class="nav nav-tabs">
                 <li class="active">
                     <a href="#avia" data-toggle="tab">
@@ -33,15 +33,15 @@
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="avia">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
+                            <div class="panel-heading return-way-index">
                                 {{ form_widget(form.return_way, {'attr': {'class': 'foo'}}) }}
                             </div>
                             <div class="panel-body panel-blue">
                                 <!-- Город вылета прилета -->
                                 <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="col-md-5 col-avia">
                                         <div class="input-group city-from">
-                                            <span class="input-group-addon block-img-avia">
+                                            <span class="input-group-addon block-img-avia" data-toggle="tooltip" data-placement="top" data-original-title="Откуда вы вылетаете?">
                                                 <img src="{{ asset('/images/avia-up.png') }}" alt="">
                                             </span>
                                             {{ form_widget(form.city_from, {'attr': {'class': 'from_city'}}) }}
@@ -50,14 +50,14 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="col-md-2 text-center">
+                                    <div class="col-md-2 text-center col-return">
                                         <button id="reverse-city" type="button" class="btn btn-primary button-refresh" data-toggle="tooltip" data-placement="top" data-original-title="Поменять местами вылет и прилет">
                                             <img src="{{ asset('/images/refresh-white.png') }}" alt="">
                                         </button>
                                     </div>
-                                    <div class="col-md-5">
+                                    <div class="col-md-5 col-avia">
                                         <div class="input-group city-to">
-                                            <span class="input-group-addon block-img-avia">
+                                            <span class="input-group-addon block-img-avia" data-toggle="tooltip" data-placement="top" data-original-title="Куда вы летите?">
                                                 <img src="{{ asset('/images/avia-down.png') }}" alt="">
                                             </span>
                                             {{ form_widget(form.city_to, {'attr': {'class': 'to_city'}}) }}
@@ -188,7 +188,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-5 now-find">
+        <div class="col-md-4 now-find">
             <div class="panel-body panel-blue">
                 <!-- Default panel contents -->
                 <div class="panel-heading text-center">Сейчас на сайте находят</div>
@@ -228,7 +228,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-6 text-right">
-                        <button type="button" class="btn btn-lg btn-primary">Оплатить бронь</button>
+                        <button type="button" class="btn btn-lg btn-primary">Оплатить <br/> бронь</button>
                     </div>
                 </div>
             </div>
@@ -257,7 +257,7 @@
     <script>
         $(document).ready(function(){
 
-            $('body').on('click','#reverse-city',function(){
+            $('body').live('click','#reverse-city',function(){
                 var cityFrom = $( "#search_form_city_from" ).val();
                 var cityFromCode = $( "#search_form_city_from_code").val();
                 $( "#search_form_city_from" ).val($( "#search_form_city_to" ).val());
@@ -265,8 +265,8 @@
                 
                 $( "#search_form_city_to" ).val(cityFrom);
                 $( "#search_form_city_to_code" ).val(cityFromCode);
-                
             });
+
             _GlobalAppObject.searchUrl = "{{ path('bundles_default_search_city') }}";
         });
     </script>
