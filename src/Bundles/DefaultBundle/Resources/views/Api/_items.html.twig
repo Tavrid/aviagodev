@@ -135,10 +135,22 @@
             event.preventDefault();
         });
 
+        $('input[name="info[variants][1]"]').parent().parent().parent().parent().parent().first().addClass('first');
+
         $('input[name="info[variants][1]"]').parent().parent().parent().parent().parent().addClass('down-time-block');
         $('.btn-transplant').popover({
             html: true
         });
+ 
+        $('.down-time-block').each(function(index, el) {
+            var dateTitle = $(this).find('.date-title').text();
+            dateTitle=dateTitle.replace(/\s+/g,'');
+            var ldateTitle = dateTitle.length;
+            if(ldateTitle==10){
+                $(this).addClass('first-element');
+            }
+        }); 
+        
 
         var coladult = $('#search_form_adults').val();
         var colchild = $('#search_form_children').val();

@@ -48,7 +48,8 @@ $(function() {
     });
 
     if(!parseInt($('#search_form_return_way input[type=radio]:checked').val())){
-        $('#search_form_date_to').parents('.date-to').hide();
+        /*$('#search_form_date_to').parents('.date-to').hide();*/
+        $('#search_form_date_to').attr('disabled', 'disabled');
     }
     $('#search_form_return_way').on('click','input[type=radio]',function(){
         var val = $('#search_form_return_way input[type=radio]:checked').val();
