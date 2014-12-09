@@ -255,9 +255,9 @@
         </div>
     {% endif %}
     <script>
-        $(document).ready(function(){
+        $(function(){
 
-            $('body').live('click','#reverse-city',function(){
+            $('body').on('click','#reverse-city',function(){
                 var cityFrom = $( "#search_form_city_from" ).val();
                 var cityFromCode = $( "#search_form_city_from_code").val();
                 $( "#search_form_city_from" ).val($( "#search_form_city_to" ).val());
