@@ -876,7 +876,7 @@ left: 10px;
 
 .city-up,
 .city-down {
-	font-size: 16px;
+	font-size: 12px;
 	font-weight: bold;
 	color:#5b5b5b;
 	text-transform: uppercase;
@@ -886,6 +886,7 @@ left: 10px;
 .aeropot-down {
 	color:#949494;
 	font-weight: bold;
+	font-size: 10px;
 }
 
 
@@ -1059,6 +1060,20 @@ a:focus {
 
 .form-filter-inner .price-best .form-group {
 	margin-bottom: 5px;
+}
+
+.form-filter-inner label,
+#filter-form label {
+	font-weight: normal;
+}
+
+#filter_departure_time label,
+#filter_arrival_time label {
+	margin-left: 5px;
+}
+
+#search_form_return_way label {
+	margin-bottom: 2px;
 }
 
 .price-reys > div.price-block {
