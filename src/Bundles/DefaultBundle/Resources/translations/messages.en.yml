@@ -6,6 +6,8 @@ frontend:
         morning: Morning (06-12)
         day: Day (12-18)
         evening: Evening (18-00)
+    pay_form:
+        submit: Pay
     order_form:
         phone: Phone
         email: Email

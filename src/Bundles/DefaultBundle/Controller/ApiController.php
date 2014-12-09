@@ -141,10 +141,10 @@ class ApiController extends Controller
         $formBook = $this->createForm(new BookInfoForm());
         $data = $request->get('_route_params');
 
-        if(empty($data['best_price'])){
+        if (empty($data['best_price'])) {
             unset($data['best_price']);
         }
-        if(empty($data['direct_flights'])){
+        if (empty($data['direct_flights'])) {
             unset($data['direct_flights']);
         }
 
@@ -222,7 +222,7 @@ class ApiController extends Controller
             $routeParams = $form->getData();
             //TODO костыль ;)
             $routeParams['direct_flights'] = intval($routeParams['direct_flights']);
-            unset($routeParams['city_from'],$routeParams['city_to']);
+            unset($routeParams['city_from'], $routeParams['city_to']);
             return $this->render('BundlesDefaultBundle:Api:_calendar.html.twig', [
                 'data' => $output,
                 'route_params' => $routeParams,
@@ -232,10 +232,11 @@ class ApiController extends Controller
         throw $this->createNotFoundException();
     }
 
-    public function calendarItemInfoAction(Request $request){
+    public function calendarItemInfoAction(Request $request)
+    {
         $form = $this->createForm('search_form');
-        $form->add('new_date_from','text')
-            ->add('new_date_to','text');
+        $form->add('new_date_from', 'text')
+            ->add('new_date_to', 'text');
 
         $queryGet = $request->query->all();
 
@@ -260,16 +261,16 @@ class ApiController extends Controller
                 $routeParams['direct_flights'] = intval($routeParams['direct_flights']);
 
                 /** @var \Bundles\ApiBundle\Api\Entity\Calendar $calendar */
-                $calendar = $output[date('Y-m-d',$routeParams['new_date_from'])];
+                $calendar = $output[date('Y-m-d', $routeParams['new_date_from'])];
 
-                $routeParams['date_from'] = date('Y-m-d',$routeParams['new_date_from']);
-                if($calendar->getChild()){
-                   $calendar = $calendar->findChild($routeParams['new_date_to']);
-                    $routeParams['date_to'] = date('Y-m-d',$routeParams['new_date_to']);
+                $routeParams['date_from'] = date('Y-m-d', $routeParams['new_date_from']);
+                if ($calendar->getChild()) {
+                    $calendar = $calendar->findChild($routeParams['new_date_to']);
+                    $routeParams['date_to'] = date('Y-m-d', $routeParams['new_date_to']);
                 }
 
-                unset($routeParams['new_date_to'],$routeParams['new_date_from']);
-                return $this->render('BundlesDefaultBundle:Api:_calendar_popup.html.twig',[
+                unset($routeParams['new_date_to'], $routeParams['new_date_from']);
+                return $this->render('BundlesDefaultBundle:Api:_calendar_popup.html.twig', [
                     'ticket' => $calendar->getTicket(),
                     'routeParams' => $routeParams
                 ]);
@@ -310,7 +311,7 @@ class ApiController extends Controller
 
     public function orderAction(Request $request, $orderID)
     {
-        /** @var \Acme\AdminBundle\Model\Order $orderManager */
+
         $orderManager = $this->get('admin.order.manager');
         $order = $orderManager->getOrderByOrderId($orderID);
 

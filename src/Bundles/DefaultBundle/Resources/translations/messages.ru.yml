@@ -6,6 +6,8 @@ frontend:
         morning: Утро (06-12)
         day: День (12-18)
         evening: Вечер (18-00)
+    pay_form:
+        submit: Оплатить
     order_form:
         phone: Телефон
         email: Email
