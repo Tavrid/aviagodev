@@ -47,7 +47,7 @@ $(function() {
         return false;
     });
 
-    $('#search_form_return_way label').after('<div class="clear"></div>');  
+    $('.return-way-inner #search_form_return_way label').after('<div class="clear"></div>');  
 
     if(!parseInt($('#search_form_return_way input[type=radio]:checked').val())){
         /*$('#search_form_date_to').parents('.date-to').hide();*/

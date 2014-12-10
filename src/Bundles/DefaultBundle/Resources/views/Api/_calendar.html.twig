@@ -1,44 +1,37 @@
 {% set c = table|first %}
 <table class="table-calendar table table-bordered table-hover text-center" id="calendar_table">
     {% if c is empty %}
-        <thead>
             <tr>
                 {% for date,p in table %}
-                    <th>{{ date|date('d.m.Y') }}</th>
+                    <td>{{ date|date('d.m.Y') }}</td>
                 {% endfor %}
             </tr>
-        </thead>
-        <tbody>
         {#{% for p in data %}#}
         <tr>
             {% for date,val in table %}
                 {% if data[date|date('Y-m-d')] is defined %}
                     {% set p = data[date|date('Y-m-d')] %}
-                    <th>
+                    <td>
                         <span class="text-warning">
                             {% set route_params = route_params|merge({'new_date_from' : date,'new_date_to' : 0}) %}
                             <a class="calendar-item" href="{{ path('bundles_default.api.calendar_item_info',route_params) }}">
                                 {{ p.price|number_format(0,' ',' ') }} {{p.currency}}
                             </a>
                         </span>
-                    </th>
+                    </td>
                 {% else %}
-                    <th></th>
+                    <td></td>
                 {% endif %}
             {% endfor %}
         </tr>
         {#{% endfor %}#}
-        </tbody>
     {% else %}
-        <thead>
             <tr>
-                <th></th>
+                <td></td>
                 {% for date in c %}
-                    <th>{{ date|date('d.m.Y') }}</th>
+                    <td>{{ date|date('d.m.Y') }}</td>
                 {% endfor %}
             </tr>
-        </thead>
-        <tbody>
         {% for date,val in table %}
             <tr>
                 <td>{{ date|date('d.m.Y') }}</td>
@@ -58,11 +51,11 @@
                 {% endfor %}
             </tr>
         {% endfor %}
-        </tbody>
     {% endif %}
 </table>
 <script>
     $(document).ready(function($) {
+
         $('#calendar_table').columnHover({
             eachCell:true, 
             hoverClass:'betterhover'

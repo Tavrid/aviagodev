@@ -1067,6 +1067,31 @@ a:focus {
 	font-weight: normal;
 }
 
+#filter-form .form-group {
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+	border-bottom: 1px dashed #fff;
+}
+
+.list-form-input {
+	box-shadow: 0 0 5px 0 #999;
+	border: none;
+	border-radius: 5px;
+}
+
+.form-control {
+	padding: 6px 7px;
+}
+
+#filter-form .form-control {
+	padding: 2px;
+	height: 28px;
+}
+
+#filter-form .form-control option {
+	padding: 2px;
+}
+
 #filter_departure_time label,
 #filter_arrival_time label {
 	margin-left: 5px;
@@ -1421,16 +1446,33 @@ a:focus {
     border: medium none;
     padding: 0;
 }
-.table-calendar > thead > tr > th, .table-calendar > thead > tr > td, .table-calendar > tbody > tr > th, .table-calendar > tbody > tr > td, .table-calendar > tfoot > tr > th, .table-calendar > tfoot > tr > td {
+.table-calendar {
+	font-size: 12px;
+}
+
+.table-calendar > thead > tr > th, 
+.table-calendar > thead > tr > td, 
+.table-calendar > tbody > tr > th, 
+.table-calendar > tbody > tr > td, 
+.table-calendar > tfoot > tr > th, 
+.table-calendar > tfoot > tr > td {
     font-weight: normal;
     padding: 5px !important;
 }
-.table-calendar td:first-of-type, .table-calendar thead th {
-    background: -webkit-linear-gradient(#98d0ff, #d4effc) repeat scroll 0 0 rgba(0, 0, 0, 0);
+.table-calendar td:first-of-type,
+.table-calendar tr:first-of-type td, 
+.table-calendar thead th {
+	background: #EDEDEE;
+    /* background: -webkit-linear-gradient(#98d0ff, #d4effc) repeat scroll 0 0 rgba(0, 0, 0, 0);
     background: -o-linear-gradient(#98d0ff, #d4effc) repeat scroll 0 0 rgba(0, 0, 0, 0);
-    background: linear-gradient(#98d0ff, #d4effc) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: linear-gradient(#98d0ff, #d4effc) repeat scroll 0 0 rgba(0, 0, 0, 0); */
     text-align: center;
 }
+
+.table-calendar tr:first-of-type td:first-of-type {
+	background: #fff;
+}
+
 .table-calendar thead th:first-of-type {
     background: none repeat scroll 0 0 #fff;
     color: #000;
@@ -1440,9 +1482,23 @@ a:focus {
     background: #f5f5f5;
 }
 
-.table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th {
-    color: #000;
+.table-hover > tbody > tr:hover > td, 
+.table-hover > tbody > tr:hover > th {
+    color: #0074bc;
 }
+
+.table-hover tr:first-of-type:hover > td {
+	color:#666;
+}
+
+.table-hover tr:first-of-type:hover td {
+	background: #ededee !important;
+}
+
+.table-hover tr:first-of-type:hover td:first-of-type {
+	background: #fff !important;
+}
+
 .tooltip.in {
     opacity: 1;
 }

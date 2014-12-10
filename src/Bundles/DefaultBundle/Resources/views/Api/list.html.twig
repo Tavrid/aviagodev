@@ -13,11 +13,11 @@
         });
     </script>
     <div class="col-md-3 filter-form">
-        <div class="well bg-gradient">
+        <div class="well bg-gradient list-form-input">
             <form id="search-form" class="form-filter-inner" action="{{ path('bundles_default_search') }}" method="post" id="search-form">
                 <div class="city-from-block">
                     <div class="input-group city-from">
-                        <span class="input-group-addon label-from">
+                        <span class="input-group-addon label-from" data-toggle="tooltip" data-placement="top" data-original-title="Откуда вы вылетаете?">
                             {{ form_label(form.city_from)}}
                         </span>
                         {{ form_widget(form.city_from, {'attr': {'class': 'from_city'}}) }}
@@ -28,7 +28,7 @@
                 </div>
                 <div class="city-to-block">
                     <div class="input-group city-to">
-                        <span class="input-group-addon label-from">
+                        <span class="input-group-addon label-from" data-toggle="tooltip" data-placement="top" data-original-title="Куда вы летите?">
                             {{ form_label(form.city_to)}}
                         </span>
                         {{ form_widget(form.city_to, {'attr': {'class': 'to_city'}}) }}
@@ -48,7 +48,7 @@
                     {{ form_label(form.date_from, '', {'attr': {'class': 'date_from'}}) }}
                     <div class="input-group">
                         {{ form_widget(form.date_from, {'attr': {'class': 'date_from'}}) }}
-                        <span class="input-group-addon date-icon"></span>
+                        <span class="input-group-addon date-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите дату вылета"></span>
                     </div>
                 </div>
                 <!-- Дата вылета -->
@@ -58,7 +58,7 @@
                     {{ form_label(form.date_to, '', {'attr': {'class': 'date_to'}}) }}
                     <div class="input-group">
                         {{ form_widget(form.date_to, {'attr': {'class': 'date_to'}}) }}
-                        <span class="input-group-addon date-icon"></span>
+                        <span class="input-group-addon date-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите дату прилета"></span>
                     </div>
                 </div>
                 <!-- Дата прилета -->
@@ -73,7 +73,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="input-group">
-                                    <span class="input-group-addon vozrast-icon adult-icon"></span>
+                                    <span class="input-group-addon vozrast-icon adult-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите количество взрослых"></span>
                                     {{ form_widget(form.adults, {'attr': {'class': 'child'}}) }}
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="input-group">
-                                    <span class="input-group-addon vozrast-icon child-icon"></span>
+                                    <span class="input-group-addon vozrast-icon child-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите количество детей"></span>
                                     {{ form_widget(form.children, {'attr': {'class': 'child'}}) }}
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="input-group">
-                                    <span class="input-group-addon vozrast-icon infants-icon"></span>
+                                    <span class="input-group-addon vozrast-icon infants-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите количество младенцев"></span>
                                     {{ form_widget(form.infant, {'attr': {'class': 'child'}}) }}
                                 </div>
                             </div>
@@ -172,7 +172,7 @@
                 </div>
             </form>
         </div>
-        <div class="well bg-gradient">
+        <div class="well bg-gradient list-form-input">
             <div id="search-result-box">
 
             </div>
@@ -201,4 +201,13 @@
     <div id="calendar-popup">
 
     </div>
+
+    <script>
+        $(document).ready(function($) {
+            $("#ui-id-1").prependTo(".city-from");
+            $("#ui-id-2").prependTo(".city-to");   
+        });
+    </script>
+
+
 {% endblock %}
