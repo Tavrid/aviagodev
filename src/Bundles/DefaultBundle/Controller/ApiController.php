@@ -18,6 +18,7 @@ use Bundles\ApiBundle\Api\Model\SearchFilters;
 use Bundles\ApiBundle\Api\Response\BookInfoResponse;
 use Symfony\Component\Form\FormError;
 use Bundles\ApiBundle\Api\Util\Calendar;
+use Bundles\DefaultBundle\Model\PayU;
 
 class ApiController extends Controller
 {
@@ -311,6 +312,25 @@ class ApiController extends Controller
 
     public function orderAction(Request $request, $orderID)
     {
+        $option = array('merchant' => 'aviago.c', 'secretkey' => '3+mm8|W(1?B58%g9P^4q', 'debug' => 1);
+
+
+        $forSend = array(
+            'ORDER_REF' => $orderID, # Uniqe order
+            'ORDER_PNAME' => array("Test_goods", "Тест товар №1", "Test_goods3"), # Array with data of goods
+            'ORDER_PCODE' => array("testgoods1", "testgoods2", "testgoods3"), # Array with codes of goods
+            'ORDER_PINFO' => array("", "", ""), # Array with additional data of goods
+            'ORDER_PRICE' => array("0.10", "0.11", "0.12"), # Array with prices of goods
+            'ORDER_QTY' => array(1, 2, 1), # Array with data of counts of each goods
+            'ORDER_VAT' => array(0, 0, 0), # Array with VAT of each goods
+            'ORDER_SHIPPING' => 0, # Shipping cost
+            'PRICES_CURRENCY' => "",  # Currency
+            'LANGUAGE' => "RU",
+            'BILL_FNAME' => "TEST" # ...  etc.
+        );
+
+        $pay = PayU::getInst()->setOptions($option)->setData($forSend)->LU();
+
 
         $orderManager = $this->get('admin.order.manager');
         $order = $orderManager->getOrderByOrderId($orderID);
@@ -320,7 +340,8 @@ class ApiController extends Controller
 
         return $this->render('BundlesDefaultBundle:Api:order.html.twig', [
             'order' => $order,
-            'bookInfo' => $bookInfoResponse->getEntity()
+            'bookInfo' => $bookInfoResponse->getEntity(),
+            'payForm' => $pay
         ]);
     }
 
