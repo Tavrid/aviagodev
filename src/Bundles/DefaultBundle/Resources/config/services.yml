@@ -1,3 +1,5 @@
+imports:
+    - { resource: forms.yml }
 parameters:
 #    bundles_default.example.class: Bundles\DefaultBundle\Example
 
@@ -7,21 +9,14 @@ services:
         arguments: ["%kernel.default_locale%"]
         tags:
             - { name: kernel.event_subscriber }
-    budnels_default.form.type.order:
-        class: Bundles\DefaultBundle\Form\OrderForm
-        arguments: [@country.model.manager]
-        tags:
-            - { name: form.type, alias: order }
-    budnels_default.form.type.search_form:
-        class: Bundles\DefaultBundle\Form\SearchForm
-        arguments: [@session,@translator]
-        tags:
-            - { name: form.type, alias: search_form }
-    budnels_default.form.type.filter:
-        class: Bundles\DefaultBundle\Form\FilterForm
-        arguments: [@translator]
-        tags:
-            - { name: form.type, alias: filter }
+    bundels_default.payu.manager:
+        class: Bundles\DefaultBundle\Model\Pay
+        arguments:
+            - merchant: "aviago.c"
+              secretkey: "3+mm8|W(1?B58%g9P^4q"
+              debug: 1
+
+
 
 
 

@@ -1,0 +1,22 @@
+
+
+services:
+    budnels_default.form.type.search_form:
+            class: Bundles\DefaultBundle\Form\SearchForm
+            arguments: [@session,@translator]
+            tags:
+                - { name: form.type, alias: search_form }
+    budnels_default.form.type.filter:
+        class: Bundles\DefaultBundle\Form\FilterForm
+        arguments: [@translator]
+        tags:
+            - { name: form.type, alias: filter }
+    budnels_default.form.type.pay_form:
+        class: Bundles\DefaultBundle\Form\PayForm
+        tags:
+            - { name: form.type, alias: pay_form }
+    budnels_default.form.type.order:
+        class: Bundles\DefaultBundle\Form\OrderForm
+        arguments: [@country.model.manager]
+        tags:
+            - { name: form.type, alias: order }

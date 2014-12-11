@@ -1,1 +1,4 @@
-{{ payForm|raw }}
+<form action="{{ path('bundles_default_api_create_pay',{orderID: order.orderId}) }}" method="post">
+    {{ form_widget(payForm) }}
+    <input type="submit" class="btn-fly btn btn-success" value="{% trans %}frontend.pay_form.submit{% endtrans %}">
+</form>

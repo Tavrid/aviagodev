@@ -8,6 +8,7 @@ frontend:
         evening: Вечер (18-00)
     pay_form:
         submit: Оплатить
+        pay_method: Способ оплаты
     order_form:
         phone: Телефон
         email: Email

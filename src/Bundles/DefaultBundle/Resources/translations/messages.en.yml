@@ -8,6 +8,7 @@ frontend:
         evening: Evening (18-00)
     pay_form:
         submit: Pay
+        pay_method: Pay method
     order_form:
         phone: Phone
         email: Email

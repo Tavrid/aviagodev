@@ -43,6 +43,8 @@ $(function() {
             _GlobalAppObject.loadingStop();
             $('#calendar-popup').html(data);
             $('#calendar-popup #calendar-modal').modal('show');
+        }).error(function(){
+            _GlobalAppObject.loadingStop();
         });
         return false;
     });
