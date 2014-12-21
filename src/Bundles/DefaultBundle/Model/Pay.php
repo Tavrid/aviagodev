@@ -25,6 +25,10 @@ class Pay {
     protected $payMethod;
 
     protected $info;
+    /**
+     * @var \DateTime
+     */
+    protected $date;
 
     public function __construct($opt){
         $this->options = $opt;
@@ -39,20 +43,41 @@ class Pay {
     public function createForm(){
         $forSend = array(
             'ORDER_REF' => $this->orderId, # Uniqe order
+            'ORDER_DATE' => $this->getDate()->format('Y-m-d H:i:s'),
             'ORDER_PNAME' => $this->name, # Array with data of goods
             'ORDER_PCODE' => $this->code, # Array with codes of goods
             'ORDER_PINFO' => $this->info, # Array with additional data of goods
             'ORDER_PRICE' => $this->price, # Array with prices of goods
             'ORDER_QTY' => array(1), # Array with data of counts of each goods
             'PRICES_CURRENCY' => "RUR",  # Currency
-            'ORDER_VAT' => array(19),
+            'ORDER_VAT' => array(0),
             'ORDER_SHIPPING' => 0,
             'LANGUAGE' => "RU",
-            'PAY_METHOD' => $this->payMethod
+            'PAY_METHOD' => 'PRIVATBANK'
         );
 
         return PayU::getInst()->setOptions($this->options)->setData($forSend)->LU();
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     * @return $this
+     */
+    public function setDate(\DateTime $date)
+    {
+        $this->date = $date;
+        return $this;
+    }
+
+
 
     /**
      * @return array

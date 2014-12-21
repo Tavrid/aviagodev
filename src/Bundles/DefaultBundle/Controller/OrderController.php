@@ -59,6 +59,8 @@ class OrderController extends Controller
                 ->addName('Book')
                 ->addCode($order->getPnr())
                 ->addInfo('some_info1')
+                ->setDate($order->getDate())
+                ->addPrice($order->getPrice())
                 ->createForm();
             return $this->render('BundlesDefaultBundle:Pay:pay.html.twig', [
                 'pay_form' => $pay_form
