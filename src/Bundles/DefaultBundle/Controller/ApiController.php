@@ -310,38 +310,5 @@ class ApiController extends Controller
         return $resp;
     }
 
-    public function orderAction(Request $request, $orderID)
-    {
-
-        $orderManager = $this->get('admin.order.manager');
-        $order = $orderManager->getOrderByOrderId($orderID);
-        $form = $this->createForm('pay_form');
-        $bookInfoResponse = new BookInfoResponse();
-        $bookInfoResponse->setResponseData($order->getOrderInfo());
-
-        return $this->render('BundlesDefaultBundle:Api:order.html.twig', [
-            'order' => $order,
-            'bookInfo' => $bookInfoResponse->getEntity(),
-            'payForm' => $form->createView()
-        ]);
-    }
-    public function createPayAction(Request $request, $orderID)
-    {
-        $orderManager = $this->get('admin.order.manager');
-        $order = $orderManager->getOrderByOrderId($orderID);
-        if(!$order){
-            throw $this->createNotFoundException();
-        }
-        $form = $this->createForm('pay_form');
-        $form->submit($request);
-        if($form->isValid()){
-            $pay = $this->get('bundels_default.payu.manager');
-            $pay_form = $pay->createForm($order,$form->get('pay_method')->getData());
-            return $this->render('BundlesDefaultBundle:Pay:pay.html.twig',[
-               'pay_form' => $pay_form
-            ]);
-        }
-        throw $this->createNotFoundException();
-    }
 
 }

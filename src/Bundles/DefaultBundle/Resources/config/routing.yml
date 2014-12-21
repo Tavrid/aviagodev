@@ -39,10 +39,10 @@ bundles_default_api_book:
 
 bundles_default_api_order:
     pattern: /order/{orderID}
-    defaults: { _controller: BundlesDefaultBundle:Api:order}
+    defaults: { _controller: BundlesDefaultBundle:Order:order}
 bundles_default_api_create_pay:
     pattern: /pay-order/{orderID}
-    defaults: { _controller: BundlesDefaultBundle:Api:createPay}
+    defaults: { _controller: BundlesDefaultBundle:Order:createPay}
     methods: POST
     
 bundles_default_change_locale:
