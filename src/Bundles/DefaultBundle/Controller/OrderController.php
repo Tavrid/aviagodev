@@ -58,7 +58,7 @@ class OrderController extends Controller
                 ->setPayMethod($form->get('pay_method')->getData())
                 ->addName('Book')
                 ->addCode($order->getPnr())
-                ->addInfo('some_info1')
+                ->addInfo(htmlspecialchars('[{"departuredate":"20130716","locationnumber":2,"locationcode1":"SVX","locationcode2":"MSQ","passengername":"TATIANA PONOMAREVA","reservationcode":"VJRVNU"}]'))
                 ->setDate($order->getDate())
                 ->addPrice($order->getPrice())
                 ->createForm();
