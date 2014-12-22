@@ -1621,3 +1621,51 @@ select option {
 	font-size: 14px;
 	padding: 3px 10px;
 }
+
+.list-passangers {
+	padding-right: 0 !important;
+	margin-right: 0 !important;
+	position: relative;
+	z-index: 9;
+	left: 3px;
+}
+
+.list-passangers a {
+	border-radius: 0 !important;
+	background: none !important;
+	box-shadow: none !important;
+	border: none !important;
+	font-size: 14px !important;
+	padding: 10px !important;
+}
+
+.list-passangers .active a {
+	background: #99D0FE !important;
+	color:#Fff !important;
+	font-weight: bold;
+}
+
+.list-passangers a:after {
+	display: none !important;
+}
+
+.list-passangers .nav-tabs {
+	border: none !important;
+}
+
+.select-passangers {
+	margin-left: 0 !important;
+	padding-left: 0 !important;
+}
+
+.select-passangers .well {
+	background: #99D0FE !important;
+}
+
+.select-passangers .tab-content .tab-pane {
+	border-radius: 0 !important;
+}
+
+.select-passangers .panel-info {
+	margin-bottom: 0 !important;
+}
