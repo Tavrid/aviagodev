@@ -21,7 +21,8 @@
     <div class="col-md-3 total-price-block">
         <h3>{%trans%}frontend.default.order.order_info{%endtrans%}</h3>
         <hr />
-        <strong>{%trans%}frontend.default.order.total{%endtrans%}: <span class="total-price">{{ ticket.totalPrice|number_format(0, '.', ' ')  }} {{ ticket.currency}}</span></strong>
+        <strong>{%trans%}frontend.default.order.total{%endtrans%}: 
+            <div class="total-price">{{ ticket.totalPrice|number_format(0, '.', ' ')  }} {{ ticket.currency}}</div></strong>
 
     </div>
     <div class="col-md-9 order-block">
@@ -123,116 +124,260 @@
                     {% for add in form.passengers.ADT %}
                         <div class="tab-user-info tab-pane {% if loop.first %}active{% endif %}" id="adult{{ loop.index }}">
                             <div class="well">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="#">Выберите пол</label>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            {{ form_widget(add.Sex.0) }}
-                                                        </span>
-                                                        {{ form_label(add.Sex.0, '', {'label_attr':{'class':'form-control'}}) }}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            {{ form_widget(add.Sex.1) }}
-                                                        </span>
-                                                        {{ form_label(add.Sex.1, '', {'label_attr':{'class':'form-control'}}) }}
-                                                    </div>
-                                                </div>
-                                            </div>           
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    {#{{ form_label(add.Name) }}#}
-                                                    {{ form_row(add.Name, {'attr': {'placeholder': 'Введите имя'}}) }}
-                                                    {#{{ form_errors(add.Name) }}#}
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    {#{{ form_label(add.Surname) }}#}
-                                                    {{ form_row(add.Surname, {'attr': {'placeholder': 'Введите фамилию'}}) }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    {#{{ form_label(add.Birthday) }}#}
-                                                    {{ form_row(add.Birthday, {'attr': {'placeholder': 'Введите дату рождения'}}) }}
-                                                </div>
-                                            </div>
-                                        {% if loop.first %}
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    {#{{ form_label(form.email) }}#}
-                                                    {{ form_row(form.email, {'attr': {'placeholder': 'Введите email'}}) }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-6">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        {{ form_widget(form.info) }}
-                                                    </span>
-                                                    {{ form_label(form.info, '', {'label_attr':{'class':'form-control'}}) }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {% endif %}
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="row">   
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    {#{{ form_label(form.phone) }} <br/>#}
-                                                    {{ form_row(form.phone) }}
-                                                </div>                
-                                            </div>                
-                                            <div class="col-md-6"> 
-                                                <div class="form-group">
-                                                    {#{{ form_label(add.Citizen) }}#}
-                                                    {{ form_row(add.Citizen) }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    {#{{ form_label(add.Document.Number) }}#}
-                                                    {{ form_row(add.Document.Number) }}
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    {#{{ form_label(add.Document.ExpireDate ) }}#}
-                                                    {{ form_row(add.Document.ExpireDate) }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
+<div class="panel panel-info">
+    <div class="panel-heading">Информация для бронирования пассажира</div>
+    <div class="panel-body">
+        <!-- Имя и фамилию -->
+        <div class="row">
+            <div class="col-md-6">
+                {#{{ form_label(add.Name) }}#}
+                {{ form_row(add.Name, {'attr': {'placeholder': 'Введите имя'}}) }}
+                {#{{ form_errors(add.Name) }}#}
+            </div>
+            <div class="col-md-6">
+                {#{{ form_label(add.Surname) }}#}
+                {{ form_row(add.Surname, {'attr': {'placeholder': 'Введите фамилию'}}) }}
+            </div>
+        </div>
+        <!-- Имя и фамилию -->
+        <!-- Дата рождения и выбор пола -->
+        <div class="row">
+            <div class="col-md-6">
+                <label for="#">Выберите пол</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                {{ form_widget(add.Sex.0) }}
+                            </span>
+                            {{ form_label(add.Sex.0, '', {'label_attr':{'class':'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                {{ form_widget(add.Sex.1) }}
+                            </span>
+                            {{ form_label(add.Sex.1, '', {'label_attr':{'class':'form-control'}}) }}
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                            {#{{ form_label(add.Birthday) }}#}
+                            {{ form_row(add.Birthday, {'attr': {'placeholder': 'Введите дату рождения'}}) }}
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <!-- Дата рождения и выбор пола -->
+        {% if loop.first %}
+        <!-- Контакты -->
+        <div class="row">
+            <div class="col-md-6">
+                {#{{ form_label(form.email) }}#}
+                {{ form_row(form.email, {'attr': {'placeholder': 'Введите email'}}) }}
+            </div>
+            <div class="col-md-6">
+                {#{{ form_label(form.phone) }} <br/>#}
+                {{ form_row(form.phone) }}
+            </div>
+        </div>
+        <!-- Контакты -->
+        <!-- Паспорт, гражданство -->
+        <div class="row">
+            <div class="col-md-6">
+                {#{{ form_label(add.Document.Number) }}#}
+                {{ form_row(add.Document.Number) }}
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        {#{{ form_label(add.Document.ExpireDate ) }}#}
+                        {{ form_row(add.Document.ExpireDate) }}
+                    </div>
+                    <div class="col-md-6">
+                        {#{{ form_label(add.Citizen) }}#}
+                        {{ form_row(add.Citizen) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Паспорт, гражданство -->
+        {{ form_widget(form.info) }}
+        {% endif %}
+    </div>
+</div>
+
                             </div>
                         </div>
                     {% endfor %}
                     {% for chd in form.passengers.CHD %}
                         <div class="tab-pane tab-user-info" id="child{{ loop.index }}">
                             <div class="well">
-                                {{ form_row(chd) }}
+
+
+<div class="panel panel-info">
+    <div class="panel-heading">Информация для бронирования пассажира</div>
+    <div class="panel-body">
+        <!-- Имя и фамилию -->
+        <div class="row">
+            <div class="col-md-6">
+                {#{{ form_label(chd.Name) }}#}
+                {{ form_row(chd.Name, {'attr': {'placeholder': 'Введите имя'}}) }}
+                {#{{ form_errors(chd.Name) }}#}
+            </div>
+            <div class="col-md-6">
+                {#{{ form_label(chd.Surname) }}#}
+                {{ form_row(chd.Surname, {'attr': {'placeholder': 'Введите фамилию'}}) }}
+            </div>
+        </div>
+        <!-- Имя и фамилию -->
+        <!-- Дата рождения и выбор пола -->
+        <div class="row">
+            <div class="col-md-6">
+                <label for="#">Выберите пол</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                {{ form_widget(chd.Sex.0) }}
+                            </span>
+                            {{ form_label(chd.Sex.0, '', {'label_attr':{'class':'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                {{ form_widget(chd.Sex.1) }}
+                            </span>
+                            {{ form_label(chd.Sex.1, '', {'label_attr':{'class':'form-control'}}) }}
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        {#{{ form_label(chd.Birthday) }}#}
+                        {{ form_row(chd.Birthday, {'attr': {'placeholder': 'Введите дату рождения'}}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Дата рождения и выбор пола -->
+        {% if loop.first %}
+        <!-- Паспорт, гражданство -->
+        <div class="row">
+            <div class="col-md-6">
+                {#{{ form_label(chd.Document.Number) }}#}
+                {{ form_row(chd.Document.Number) }}
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        {#{{ form_label(chd.Document.ExpireDate ) }}#}
+                        {{ form_row(chd.Document.ExpireDate) }}
+                    </div>
+                    <div class="col-md-6">
+                        {#{{ form_label(chd.Citizen) }}#}
+                        {{ form_row(chd.Citizen) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Паспорт, гражданство -->
+        {{ form_widget(form.info) }}
+        {% endif %}
+    </div>
+</div>
                             </div>
                         </div>
                     {% endfor %}
                     {% for inf in form.passengers.INF %}
                         <div class="tab-pane tab-user-info" id="inf{{ loop.index }}">
                             <div class="well">
-                                {{ form_row(inf) }}
+
+
+<div class="panel panel-info">
+    <div class="panel-heading">Информация для бронирования пассажира</div>
+    <div class="panel-body">
+        <!-- Имя и фамилию -->
+        <div class="row">
+            <div class="col-md-6">
+                {#{{ form_label(inf.Name) }}#}
+                {{ form_row(inf.Name, {'attr': {'placeholder': 'Введите имя'}}) }}
+                {#{{ form_errors(inf.Name) }}#}
+            </div>
+            <div class="col-md-6">
+                {#{{ form_label(inf.Surname) }}#}
+                {{ form_row(inf.Surname, {'attr': {'placeholder': 'Введите фамилию'}}) }}
+            </div>
+        </div>
+        <!-- Имя и фамилию -->
+        <!-- Дата рождения и выбор пола -->
+        <div class="row">
+            <div class="col-md-6">
+                <label for="#">Выберите пол</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                {{ form_widget(inf.Sex.0) }}
+                            </span>
+                            {{ form_label(inf.Sex.0, '', {'label_attr':{'class':'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                {{ form_widget(inf.Sex.1) }}
+                            </span>
+                            {{ form_label(inf.Sex.1, '', {'label_attr':{'class':'form-control'}}) }}
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        {#{{ form_label(inf.Birthday) }}#}
+                        {{ form_row(inf.Birthday, {'attr': {'placeholder': 'Введите дату рождения'}}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Дата рождения и выбор пола -->
+        {% if loop.first %}
+        <!-- Паспорт, гражданство -->
+        <div class="row">
+            <div class="col-md-6">
+                {#{{ form_label(inf.Document.Number) }}#}
+                {{ form_row(inf.Document.Number) }}
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        {#{{ form_label(inf.Document.ExpireDate ) }}#}
+                        {{ form_row(inf.Document.ExpireDate) }}
+                    </div>
+                    <div class="col-md-6">
+                        {#{{ form_label(inf.Citizen) }}#}
+                        {{ form_row(inf.Citizen) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Паспорт, гражданство -->
+        {{ form_widget(form.info) }}
+        {% endif %}
+    </div>
+</div>
+
+
                             </div>
                         </div>
                     {% endfor %}
