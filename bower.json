@@ -1,0 +1,19 @@
+{
+  "name": "avia",
+  "version": "1.0.0",
+  "authors": [
+    "ablyakim <ablylimov@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.11.*",
+    "jquery.ui": "1.11.*"
+  }
+}
