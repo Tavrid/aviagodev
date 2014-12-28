@@ -15,6 +15,8 @@ Building
 	$ npm update
 	$ bower install
 	$ gulp
+**3) Add parameters**
+Copy `app/config/parameters.yml.dist` to `app/config/parameters.yml`
 
 Watch changes
 ----------------------
