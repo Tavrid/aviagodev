@@ -14,18 +14,20 @@
             <link href="{{ asset('/frontend/css/style.css') }}" rel="stylesheet"/>
         {% endblock %}
         {#<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />#}
+    </head>
+    <body>
         {% block js %}
             <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
             <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-            {% javascripts 
-                '@jquery' 
+            {% javascripts
+                '@jquery'
                 '@jquery_ui_js'
                 '@front_bootstrap_js'
                 'bundles/bundlesdefault/lib/popup.js'
                 'bundles/bundlesdefault/lib/moment.js'
                 'bundles/bundlesdefault/js/app.js'
                 'bundles/bundlesdefault/lib/jquery_validator/dist/jquery.validate.min.js'
-                'bundles/bundlesdefault/js/default/jquery.selectbox.min.js' 
+                'bundles/bundlesdefault/js/default/jquery.selectbox.min.js'
                 'bundles/bundlesdefault/js/default/avia.js'
                 'bundles/bundlesdefault/js/default/jquery.columnhover.js'
                 combine=true%}
@@ -35,8 +37,6 @@
             <script type="text/javascript" src="/bundles/bundlesdefault/lib/jquery_validator/dist/localization/messages_{{app.request.locale}}.js"></script>
             {%endif%}
         {% endblock %}
-    </head>
-    <body>
         <header role="contentinfo">
             <div class="container" style="max-width:1000px;">
                 <a href="{{ path('bundles_default_homepage') }}" class="logo"><img src="{{ asset('/images/logo.png') }}" alt=""></a>
@@ -53,7 +53,7 @@
     <div id="loader" style="display: none; z-index: 10000; padding: 30px 60px; ">
         <img alt="" src="{{ asset('/images/progress_bar.gif') }}" />
     </div>
-    <script>
+    <script type="text/javascript">
         $(document).ready(function(){
             _GlobalAppObject.setLocale("{{app.request.locale}}");
             
