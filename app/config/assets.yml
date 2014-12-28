@@ -46,7 +46,6 @@ assetic:
         output: web/css/tmain.css
     default_bootstrap_js:
         inputs:
-            - @AcmeAdminBundle/Resources/public/test.js
             - bundles/bundlesdefault/lib/bootstrap/js/tooltip.js
             - bundles/bundlesdefault/lib/bootstrap/js/dropdown.js
             - bundles/bundlesdefault/lib/bootstrap/js/affix.js
