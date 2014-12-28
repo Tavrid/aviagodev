@@ -4,16 +4,13 @@
     <head>
         {% block stylesheets %}
             {% stylesheets
-                '@front_bootstrap_css'
                 'bundles/bundlesdefault/lib/ui-theme/css/jquery-ui.css'
                 'bundles/bundlesdefault/css/avia.css'
                 filter='cssrewrite' combine=true %}
                 <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
             {% endstylesheets %}
-            {#<link href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet"/>#}
-            <link href="{{ asset('/frontend/css/style.css') }}" rel="stylesheet"/>
         {% endblock %}
-        {#<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />#}
+        <link href="{{ asset('build/css/dist/bootstrap.css') }}" rel="stylesheet" media="screen" />
     </head>
     <body>
         {% block js %}
@@ -34,7 +31,7 @@
                 <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
             {%if app.request.locale!='en' %}
-            <script type="text/javascript" src="/bundles/bundlesdefault/lib/jquery_validator/dist/localization/messages_{{app.request.locale}}.js"></script>
+                <script type="text/javascript" src="/bundles/bundlesdefault/lib/jquery_validator/dist/localization/messages_{{app.request.locale}}.js"></script>
             {%endif%}
         {% endblock %}
         <header role="contentinfo">

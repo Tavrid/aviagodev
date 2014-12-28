@@ -1,0 +1,23 @@
+{
+  "name": "avia",
+  "version": "1.0.0",
+  "description": "Symfony Standard Edition ========================",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-less": "^2.0.1",
+    "gulp-minify-css": "^0.3.11",
+    "less": "^2.1.2",
+    "path": "*",
+    "yargs": "^1.3.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:Ablyakim/avia.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
