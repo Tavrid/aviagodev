@@ -38,10 +38,6 @@ assetic:
     bundles:        ['AcmeAdminBundle','AcmeMediaBundle','AcmeUserBundle', 'AcmeCoreBundle', 'BundlesDefaultBundle','StbBootstrapBundle','FOSUserBundle']
     #java: /usr/bin/java
     filters:
-#        less:
-#            node: "/usr/local/bin/node"
-#            node_paths: ["%kernel.root_dir%/../node_modules"]
-#            apply_to: "*\.less$"
         lessphp:
             file: %kernel.root_dir%/../vendor/leafo/lessphp/lessc.inc.php
             apply_to:   "\.less$"

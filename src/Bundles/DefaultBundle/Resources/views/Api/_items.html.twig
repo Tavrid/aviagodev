@@ -110,7 +110,7 @@
     $(document).ready(function($) {
         $('.radio-button input[type="radio"]:checked').each(function() {
             $(this).parent().parent().parent().addClass('checked-block');
-        });  
+        });
         $('.radio-button input[type="radio"]').change(function(event) {
             var radioName = $(this).attr('name');
             $('.radio-button input[name="'+ radioName +'"]').parent().parent().parent().removeClass('checked-block');
@@ -120,7 +120,7 @@
             $(this).parent().parent().parent().addClass('checked-block');
             event.preventDefault();
         });
-        
+
         $('.ticket-body').click(function(event) {
             var checkattr = $(this).find('input[type="radio"]').attr('checked');
             var nameattr = $(this).find('input[type="radio"]').attr('name');
@@ -141,7 +141,7 @@
         $('.btn-transplant').popover({
             html: true
         });
- 
+
         $('.down-time-block').each(function(index, el) {
             var dateTitle = $(this).find('.date-title').text();
             dateTitle=dateTitle.replace(/\s+/g,'');
@@ -149,8 +149,8 @@
             if(ldateTitle==10){
                 $(this).addClass('first-element');
             }
-        }); 
-        
+        });
+
 
         var coladult = $('#search_form_adults').val();
         var colchild = $('#search_form_children').val();

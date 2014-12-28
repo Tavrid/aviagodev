@@ -1,27 +1,31 @@
 {% extends "BundlesDefaultBundle:Layouts:main.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+        'bundles/bundlesdefault/lib/intl-tel-input-master/build/css/intlTelInput.css'
+    filter='cssrewrite' combine=true %}
+    <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+{% endblock %}
 {% block js %}
     {{ parent() }}
-    {% javascripts 
-        'bundles/bundlesdefault/lib/masked.js' 
-        'bundles/bundlesdefault/js/default/book.js' 
-        'bundles/bundlesdefault/lib/intl-tel-input-master/build/js/intlTelInput.min.js' 
+    {% javascripts
+        'bundles/bundlesdefault/lib/masked.js'
+        'bundles/bundlesdefault/js/default/book.js'
+        'bundles/bundlesdefault/lib/intl-tel-input-master/build/js/intlTelInput.min.js'
     combine=true%}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
-    {% block stylesheets %}
-        {{ parent() }}
-        {% stylesheets
-            'bundles/bundlesdefault/lib/intl-tel-input-master/build/css/intlTelInput.css'
-        filter='cssrewrite' combine=true %}
-        <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
-        {% endstylesheets %}
-    {% endblock %}
+    <script type="text/javascript">
+        VALID_DATE = {{ticket.validTime}};
+        VALID_MASCS = {{masks|raw}};
+    </script>
 {% endblock %}
 {% block body %}
     <div class="col-md-3 total-price-block">
         <h3>{%trans%}frontend.default.order.order_info{%endtrans%}</h3>
         <hr />
-        <strong>{%trans%}frontend.default.order.total{%endtrans%}: 
+        <strong>{%trans%}frontend.default.order.total{%endtrans%}:
             <div class="total-price">{{ ticket.totalPrice|number_format(0, '.', ' ')  }} {{ ticket.currency}}</div></strong>
 
     </div>
@@ -164,7 +168,7 @@
                                         {{ form_widget(add.Sex.1) }}
                                     </span>
                                     {{ form_label(add.Sex.1, '', {'label_attr':{'class':'form-control'}}) }}
-                                </div>  
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -255,7 +259,7 @@
                                         {{ form_widget(chd.Sex.1) }}
                                     </span>
                                     {{ form_label(chd.Sex.1, '', {'label_attr':{'class':'form-control'}}) }}
-                                </div>  
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -337,7 +341,7 @@
                                         {{ form_widget(inf.Sex.1) }}
                                     </span>
                                     {{ form_label(inf.Sex.1, '', {'label_attr':{'class':'form-control'}}) }}
-                                </div>  
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -393,10 +397,7 @@
             </div>
         </form>
     </div>
-   
-    <script>
-        VALID_DATE = {{ticket.validTime}};
-        VALID_MASCS = {{masks|raw}};
-    </script>
+
+
 
 {% endblock %}

@@ -1,17 +1,23 @@
 {% extends "BundlesDefaultBundle:Layouts:main.html.twig" %}
 {% block js %}
     {{ parent() }}
-    {% javascripts 'bundles/bundlesdefault/js/default/index.js' 'bundles/bundlesdefault/js/api/list.js' combine=true%}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% javascripts
+        'bundles/bundlesdefault/js/default/index.js'
+        'bundles/bundlesdefault/js/api/list.js'
+        combine=true
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
-{% endblock %}
-{% block body %}
-    <script>
-        $(document).ready(function(){
 
+    <script type="text/javascript">
+        $(function($) {
             _GlobalAppObject.searchUrl = "{{ path('bundles_default_search_city') }}";
+            $("#ui-id-1").prependTo(".city-from");
+            $("#ui-id-2").prependTo(".city-to");
         });
     </script>
+{% endblock %}
+{% block body %}
     <div class="col-md-3 filter-form">
         <div class="well bg-gradient list-form-input">
             <form id="search-form" class="form-filter-inner" action="{{ path('bundles_default_search') }}" method="post" id="search-form">
@@ -202,12 +208,6 @@
 
     </div>
 
-    <script>
-        $(document).ready(function($) {
-            $("#ui-id-1").prependTo(".city-from");
-            $("#ui-id-2").prependTo(".city-to");   
-        });
-    </script>
 
 
 {% endblock %}
