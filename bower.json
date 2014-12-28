@@ -15,6 +15,7 @@
   "dependencies": {
     "jquery": "1.11.*",
     "jquery-ui": "1.11.*",
-    "bootstrap" : "3.3.1"
+    "bootstrap": "3.3.1",
+    "knockoutjs": "3.2.0"
   }
 }

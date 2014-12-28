@@ -9,6 +9,10 @@ assetic:
         inputs:
             - %kernel.root_dir%/../bower_components/jquery-ui/jquery-ui.min.js
         output: web/js/jquery-ui.js
+    knockoutjs:
+        inputs:
+            - %kernel.root_dir%/../bower_components/knockoutjs/dist/knockout.js
+        output: web/js/knockout.js
 
     fancybox_js:
         inputs :

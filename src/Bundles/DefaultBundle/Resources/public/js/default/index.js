@@ -1,41 +1,77 @@
 $(function() {
-    $(function () {
-        $("#search-form").validate({
-            highlight: function (element) {
-                $(element).closest('.form-group').addClass('has-error');
-            },
-            unhighlight: function (element) {
-                $(element).closest('.form-group').removeClass('has-error');
-            },
-            errorElement: 'span',
-            errorClass: 'help-block',
-            errorPlacement: function (error, element) {
-                if (element.parent('.input-group').length) {
-                    error.insertAfter(element.parent());
-                } else {
-                    error.insertAfter(element);
+    ko.bindingHandlers.valueWithInit = {
+        init: function(element, valueAccessor, allBindingsAccessor, data, context) {
+            var bindings = valueAccessor();
+
+            Object.keys(bindings).forEach(function(key) {
+                var observable = bindings[key],
+                    binding = {};
+
+                switch (key) {
+                    case 'value':
+                        initialValue = element.value;
+                        break;
+                    case 'text':
+                        initialValue = $(element).text();
                 }
-            },
-            submitHandler: function (form) {
-                var routeParams = {};
-                $.each($(form).serializeArray(),function(k,v){
-                    var name  = v.name.replace(/.*\[(.+)\].*/g,"$1");
-                    if(name != "city_from" && name != "city_to" && v.value){
-                        routeParams[name] = v.value;
+                var spl = observable.split('.');
+                if(spl.length > 1){
+                    if (!ko.isWriteableObservable(data[spl[0]][spl[1]])) {
+                        data[spl[0]][spl[1]] = ko.observable();
                     }
-                });
-                if(routeParams['best_price'] === undefined){
-                    routeParams['best_price'] = 0;
+                    data[spl[0]][spl[1]](initialValue);
+
+                    binding[key] = data[spl[0]][spl[1]];
+                    ko.applyBindingsToNode(element, binding, context);
+                } else {
+                    if (!ko.isWriteableObservable(data[spl[0]])) {
+                        data[spl[0]] = ko.observable();
+                    }
+                    data[spl[0]](initialValue);
+
+                    binding[key] = data[spl[0]];
+                    ko.applyBindingsToNode(element, binding, context);
                 }
-                window.location = Routing.generate('bundles_default_api_list',routeParams);
-                return false;
-            },
-            ignore: ":hidden"
-        });
+            });
+
+
+        }
+    };
+
+    $("#search-form").validate({
+        highlight: function (element) {
+            $(element).closest('.form-group').addClass('has-error');
+        },
+        unhighlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-error');
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        submitHandler: function (form) {
+            var routeParams = {};
+            $.each($(form).serializeArray(),function(k,v){
+                var name  = v.name.replace(/.*\[(.+)\].*/g,"$1");
+                if(name != "city_from" && name != "city_to" && v.value){
+                    routeParams[name] = v.value;
+                }
+            });
+            if(routeParams['best_price'] === undefined){
+                routeParams['best_price'] = 0;
+            }
+            window.location = Routing.generate('bundles_default_api_list',routeParams);
+            return false;
+        },
+        ignore: ":hidden"
     });
-    //$('#search-form').on('submit',function(){
-    //
-    //});
+
+
 
     $('body').on('click','.calendar-item',function(){
         _GlobalAppObject.loadingStart();
@@ -152,5 +188,16 @@ $(function() {
     }
     autocomplete($( "#search_form_city_from" ),$( "#search_form_city_from_code"));
     autocomplete($( "#search_form_city_to" ),$( "#search_form_city_to_code"));
+    console.log($('#search_form_retur_way input[type=radio]'));
+    $('#search_form_retur_way input[type=radio]').attr('data-bind', 'valueWithInit: { value: "r" }, click: changeR');
+    var ViewModel = function(){
+        var self = this;
+        self.r = ko.observable();
+        self.changeR = function(){
+            console.log(self.r());
+        }
+    };
+    var vm = new ViewModel();
+    ko.applyBindings(vm);
 
 });

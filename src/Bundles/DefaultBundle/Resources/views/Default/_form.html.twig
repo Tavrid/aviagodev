@@ -1,0 +1,158 @@
+<form action="{{ path('bundles_default_search') }}" method="post" id="search-form">
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="avia">
+            <div class="panel panel-default">
+                <div class="panel-heading return-way-index">
+                    {{ form_widget(form.return_way, {'attr': {'class': 'foo'}}) }}
+                </div>
+                <div class="panel-body panel-blue">
+                    <!-- Город вылета прилета -->
+                    <div class="row">
+                        <div class="col-md-5 col-avia">
+                            <div class="input-group city-from">
+                                            <span class="input-group-addon block-img-avia" data-toggle="tooltip" data-placement="top" data-original-title="Откуда вы вылетаете?">
+                                                <img src="{{ asset('/images/avia-up.png') }}" alt="">
+                                            </span>
+                                {{ form_widget(form.city_from, {'attr': {'class': 'from_city'}}) }}
+                                <span class="input-group-btn">
+                                                <button class="btn btn-default button-close" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Очистить поле"></button>
+                                            </span>
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-center col-return">
+                            <button id="reverse-city" type="button" class="btn btn-primary button-refresh" data-toggle="tooltip" data-placement="top" data-original-title="Поменять местами вылет и прилет">
+                                <img src="{{ asset('/images/refresh-white.png') }}" alt="">
+                            </button>
+                        </div>
+                        <div class="col-md-5 col-avia">
+                            <div class="input-group city-to">
+                                            <span class="input-group-addon block-img-avia" data-toggle="tooltip" data-placement="top" data-original-title="Куда вы летите?">
+                                                <img src="{{ asset('/images/avia-down.png') }}" alt="">
+                                            </span>
+                                {{ form_widget(form.city_to, {'attr': {'class': 'to_city'}}) }}
+                                <span class="input-group-btn">
+                                                <button class="btn btn-default button-close" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Очистить поле"></button>
+                                            </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Город вылета прилета -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Дата вылета -->
+                            <div class="date-from">
+                                {{ form_row(form.city_from_code) }}
+                                {{ form_label(form.date_from, '', {'attr': {'class': 'date_from'}}) }}
+                                <div class="input-group">
+                                    {{ form_widget(form.date_from, {'attr': {'class': 'date_from'}}) }}
+                                    <span class="input-group-addon date-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите дату вылета"></span>
+                                </div>
+                            </div>
+                            <!-- Дата вылета -->
+                            <!-- Возраст -->
+                            <div class="vozrast">
+                                <label for="">{% trans %}frontend.default.index.num_passengers{% endtrans %}</label>
+                                <div class="row">
+                                    <!-- Выбор взрослых -->
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon vozrast-icon adult-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите количество взрослых"></span>
+                                            {{ form_widget(form.adults, {'attr': {'class': 'adults'}}) }}
+                                        </div>
+                                        {{ form_label(form.adults, '', {'label_attr':{'class':'info-vozrast'}}) }}
+                                    </div>
+                                    <!-- Выбор взрослых -->
+                                    <!-- Выбор детей -->
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon vozrast-icon child-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите количество детей"></span>
+                                            {{ form_widget(form.children, {'attr': {'class': 'child'}}) }}
+                                        </div>
+                                        {{ form_label(form.children, '', {'label_attr':{'class':'info-vozrast'}}) }}
+                                    </div>
+                                    <!-- Выбор детей -->
+                                    <!-- Выбор младенцев -->
+                                    <div class="col-md-4">
+                                        <div class="input-group">
+                                            <span class="input-group-addon vozrast-icon infants-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите количество младенцев"></span>
+                                            {{ form_widget(form.infant, {'attr': {'class': 'infant'}}) }}
+                                        </div>
+                                        {{ form_label(form.infant, '', {'label_attr':{'class':'info-vozrast'}}) }}
+                                    </div>
+                                    <!-- Выбор младенцев -->
+                                </div>
+                            </div>
+                            <!-- Возраст -->
+                            <!-- Авиакомпания -->
+                            <div class="avia-company">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {{ form_label(form.avia_company, '') }}
+                                        {{ form_widget(form.avia_company) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Авиакомпания -->
+                        </div>
+                        <div class="col-md-6">
+                            <!-- Дата прилета -->
+                            <div class="date-to">
+                                {{ form_row(form.city_to_code) }}
+                                {{ form_label(form.date_to, '', {'attr': {'class': 'date_from'}}) }}
+                                <div class="input-group">
+                                    {{ form_widget(form.date_to, {'attr': {'class': 'date_from'}}) }}
+                                    <span class="input-group-addon date-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите дату прилета"></span>
+                                </div>
+                            </div>
+                            <!-- Дата прилета -->
+                            <!-- Класс и валюта -->
+                            <div class="row class-valuta">
+                                <div class="col-md-7 klass">
+                                    {{ form_label(form.class, '') }}
+                                    {{ form_widget(form.class) }}
+                                </div>
+                                <div class="col-md-5 currency">
+                                    {{ form_label(form.currency, '') }}
+                                    {{ form_widget(form.currency) }}
+                                </div>
+                            </div>
+                            <!-- Класс и валюта -->
+                            <!-- Цена и рейсы -->
+                            <div class="row price-reys">
+                                <div class="col-md-12 price-block">
+                                    <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        {{ form_widget(form.best_price, {'attr': {'class': 'best-price checkbox','checked' : true}}) }}
+                                                    </span>
+                                        {{ form_label(form.best_price, 'frontend.search_form.best_price'|trans, {'label_attr':{'class':'form-control'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        {{ form_widget(form.direct_flights, {'attr': {'class': 'best-price checkbox'}}) }}
+                                                    </span>
+                                        {{ form_label(form.direct_flights, 'frontend.search_form.direct_flights'|trans, {'label_attr':{'class':'form-control'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Цена и рейсы -->
+                        </div>
+                    </div>
+                    <!-- Дата вылета прилета -->
+                    <input type="submit" value="{%trans%}frontend.search_form.submit{%endtrans%}" class="btn-fly btn btn-success pull-right"/>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="hotels">
+            <div class="panel panel-default">
+                <div class="panel-body panel-blue">Отели контент</div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="auto">
+            <div class="panel panel-default">
+                <div class="panel-body panel-blue">Авто контент</div>
+            </div>
+        </div>
+    </div>
+</form>
