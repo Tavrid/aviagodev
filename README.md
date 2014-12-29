@@ -8,7 +8,7 @@ Building
     $ php app/console assets:install
 	$ php app/console assetic:dump --env=prod
 
-**2) Building vs node.js**
+**2) Building with node.js**
 
 	$ npm i gulp -g
 	$ npm i bower -g
