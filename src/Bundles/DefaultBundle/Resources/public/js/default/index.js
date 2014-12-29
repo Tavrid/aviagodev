@@ -1,42 +1,5 @@
 $(function() {
-    ko.bindingHandlers.valueWithInit = {
-        init: function(element, valueAccessor, allBindingsAccessor, data, context) {
-            var bindings = valueAccessor();
 
-            Object.keys(bindings).forEach(function(key) {
-                var observable = bindings[key],
-                    binding = {};
-
-                switch (key) {
-                    case 'value':
-                        initialValue = element.value;
-                        break;
-                    case 'text':
-                        initialValue = $(element).text();
-                }
-                var spl = observable.split('.');
-                if(spl.length > 1){
-                    if (!ko.isWriteableObservable(data[spl[0]][spl[1]])) {
-                        data[spl[0]][spl[1]] = ko.observable();
-                    }
-                    data[spl[0]][spl[1]](initialValue);
-
-                    binding[key] = data[spl[0]][spl[1]];
-                    ko.applyBindingsToNode(element, binding, context);
-                } else {
-                    if (!ko.isWriteableObservable(data[spl[0]])) {
-                        data[spl[0]] = ko.observable();
-                    }
-                    data[spl[0]](initialValue);
-
-                    binding[key] = data[spl[0]];
-                    ko.applyBindingsToNode(element, binding, context);
-                }
-            });
-
-
-        }
-    };
 
     $("#search-form").validate({
         highlight: function (element) {
@@ -85,23 +48,23 @@ $(function() {
         return false;
     });
 
-    $('.return-way-inner #search_form_return_way label').after('<div class="clear"></div>');  
+    $('.return-way-inner #search_form_return_way label').after('<div class="clear"></div>');
 
-    if(!parseInt($('#search_form_return_way input[type=radio]:checked').val())){
-        /*$('#search_form_date_to').parents('.date-to').hide();*/
-        $('#search_form_date_to').attr('disabled', 'disabled');
-    }
-    $('#search_form_return_way').on('click','input[type=radio]',function(){
-        var val = $('#search_form_return_way input[type=radio]:checked').val();
-        var sel = $('#search_form_date_to').parents('.date-to');
-        if(!parseInt(val)){
-            $('#search_form_date_to').attr('disabled', 'disabled');
-            $('#search_form_date_to').val('');
-        } else {
-            $('#search_form_date_to').removeAttr('disabled');/*
-            sel.show();*/
-        }
-    });
+    //if(!parseInt($('#search_form_return_way input[type=radio]:checked').val())){
+    //    /*$('#search_form_date_to').parents('.date-to').hide();*/
+    //    $('#search_form_date_to').attr('disabled', 'disabled');
+    //}
+    //$('#search_form_return_way').on('click','input[type=radio]',function(){
+    //    var val = $('#search_form_return_way input[type=radio]:checked').val();
+    //    var sel = $('#search_form_date_to').parents('.date-to');
+    //    if(!parseInt(val)){
+    //        $('#search_form_date_to').attr('disabled', 'disabled');
+    //        $('#search_form_date_to').val('');
+    //    } else {
+    //        $('#search_form_date_to').removeAttr('disabled');/*
+    //        sel.show();*/
+    //    }
+    //});
 
     $( "#search_form_date_from" ).datepicker({
         defaultDate: "+1w",
@@ -128,16 +91,16 @@ $(function() {
             $( "#search_form_date_from" ).datepicker( "option", "maxDate", selectedDate );
         }
     });
-    
+
     $('body').on('click','#reverse-city',function(){
         var cityFrom = $( "#search_form_city_from" ).val();
         var cityFromCode = $( "#search_form_city_from_code").val();
         $( "#search_form_city_from" ).val($( "#search_form_city_to" ).val());
         $( "#search_form_city_from_code" ).val($( "#search_form_city_to_code" ).val());
-        
+
         $( "#search_form_city_to" ).val(cityFrom);
         $( "#search_form_city_to_code" ).val(cityFromCode);
-        
+
     });
 
     $('body').on('click','#filter-time-btn',function(){
@@ -188,14 +151,19 @@ $(function() {
     }
     autocomplete($( "#search_form_city_from" ),$( "#search_form_city_from_code"));
     autocomplete($( "#search_form_city_to" ),$( "#search_form_city_to_code"));
-    console.log($('#search_form_retur_way input[type=radio]'));
-    $('#search_form_retur_way input[type=radio]').attr('data-bind', 'valueWithInit: { value: "r" }, click: changeR');
+
     var ViewModel = function(){
         var self = this;
-        self.r = ko.observable();
-        self.changeR = function(){
-            console.log(self.r());
-        }
+        self.direction = ko.observable($('input[name="search_form[return_way]"][checked=checked]').val());
+        self.changeDirection = function(){
+
+        };
+        self.disableDateTo = ko.computed(function(){
+            return self.direction() != "0";
+        },self);
+        self.complexSearch = ko.computed(function(){
+            return self.direction() == "2";
+        },self);
     };
     var vm = new ViewModel();
     ko.applyBindings(vm);

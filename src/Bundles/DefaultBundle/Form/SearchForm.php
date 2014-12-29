@@ -12,6 +12,8 @@ use Bundles\DefaultBundle\Form\DataTransformer\SearchFormTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 use Symfony\Component\Form\FormEvents;
@@ -69,7 +71,22 @@ class SearchForm extends AbstractType
         for ($i = 0; $i < 5; $i++) {
             $infant[$i] = $i;
         }
-        $builder->add('city_from', 'text', [
+        $builder->add('complex','sub_multi_field',array(
+            'entity' => null,
+            'label' => 'Города',
+            'need_value' => 2,
+            'field_map' => [
+                'city_from' => ['field', new Assert\NotBlank()],
+                'city_to' => ['field', new Assert\NotBlank()],
+                'date' => ['field', new Assert\NotBlank()],
+            ],
+            'types' => [
+                'city_from' => ['options' => ['attr' => ['placeholder' => 'frontend.search_form.placeholders.city']]],
+                'city_to' => ['options' => ['attr' => ['placeholder' => 'frontend.search_form.placeholders.city']]],
+                'date' => ['type' => 'date','options' => ['widget' => 'single_text','attr' => ['placeholder' => 'Дата']]]
+            ]
+        ))
+            ->add('city_from', 'text', [
                 'label' => 'frontend.search_form.city_from',
 //                'mapped' => false,
                 'attr' => ['placeholder' => 'frontend.search_form.placeholders.city']
@@ -94,7 +111,7 @@ class SearchForm extends AbstractType
             ])
             ->add('return_way','choice',[
                 'label' => 'frontend.search_form.return_way.label',
-                'choices' => ['frontend.search_form.return_way.one_way','frontend.search_form.return_way.multi_way'],
+                'choices' => ['frontend.search_form.return_way.one_way','frontend.search_form.return_way.multi_way','frontend.search_form.return_way.complex_search'],
                 'data' => 1,
                 'multiple' => false,
                 'expanded' => true,

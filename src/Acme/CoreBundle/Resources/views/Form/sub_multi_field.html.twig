@@ -1,120 +1,28 @@
-<script type="text/javascript" src="{{ asset('/bundles/acmecore/js/sortable.js') }}"></script>
 <div class="wrap-fields">
     <ul id="field-sortable" class="field-list" data-prototype="{{ form_row(fields.vars.prototype)| noJsScript | e }}" style="margin-bottom: 20px;padding: 0;list-style: none outside;">
-
             {% for name,f in fields %}
-                {#<li>#}
                     <li class="delete-block">
                         {{ form_row(f) }}
-                        <div>
-                            <a class="delete btn btn-danger">
-                                <i class="icon-trash"></i> Удалить
-                            </a>
-                        </div>
+                        {% if not loop.first %}
+                            <div>
+                                <a class="delete btn btn-danger">
+                                    <i class="icon-trash"></i> Удалить
+                                </a>
+                            </div>
+                        {% endif %}
                         <span class="handle"><i class="icon-move"></i> </span>
                      </li>
-                {#</li>#}
             {% endfor %}
     </ul>
     <div class="controls">
         <a href="#" class="btn btn-success add-another"><i class="icon-plus"></i> Добавить</a>
     </div>
-    {#TODO Пока только один уровень вложеннсоти!#}
 </div>
-<style>
-    .delete-block{
-        position: relative;
-    }
-    .delete-block:hover{
-        /*border-bottom: 1px solid #0044CC;*/
-        box-shadow: -1px 11px 11px -13px #CCCCCC;
-        background-color: #FAFBFB;
-
-    }
-    .delete-block .handle{
-        position: absolute;
-        right: 0;
-        bottom: 10px;
-        font-size:20px;
-        color: #cccccc;
-        cursor: move;
-    }
-    .wrap-fields{
-        background: none repeat scroll 0 0 #FAFBFB;
-        border: 1px solid #CCCCCC;
-        padding: 25px;
-    }
-</style>
-
 <script type="text/javascript">
 
     $(document).ready(function() {
         (function(){
-//            $('#field-sortable').sortable({
-//                handle: '.handle',
-//                stop: function(e,ui){
-//                    var ul = $(ui.item).parents('.field-list');
-//                    var li = ul.find('li');
-//                    var n = li.length;
-//                    var prototype = ul.attr('data-prototype');
-//                    var a = prototype.match(/name=.*__prototype__[^\"]*/gi);
-//                    var reg = [];
-//                    $.each(a,function(key,val){
-////                        console.log(val);
-//                        for (var i = 1; i<=n; i++){
-//                            var d = val.replace(/__prototype__/g, i);
-//                            reg.push({
-//                                p : val,
-//                                r : d
-//                            });
-//                        }
-//                    });
-//                    li.each(function(i){
-//                        var index = i+1;
-//                        var html = $(this).html();
-//                        $.each(reg,function(key,val){
-//                            var rep = val.p.replace(/__prototype__/g, index);
-//                            html = html.replace(val.r, rep);
-//                        });
-//                        $(this).html(html);
-//                    });
-//
-//                }
-//            });
-            new Sortable(document.getElementById("field-sortable"), {
-                group: "name",
-                handle: ".handle",
-                ghostClass: "sortable-ghost",
-                onUpdate: function (evt){
-//                    var itemEl = evt.item;
-//                    var ul = $(itemEl).parents('.field-list');
-//                    var li = ul.find('li.delete-block');
-//                    var n = li.length;
-//                    var prototype = ul.attr('data-prototype');
-//                    var a = prototype.match(/name=.*__prototype__[^\"]*/gi);
-//                    var reg = [];
-//                    $.each(a,function(key,val){
-//
-//                        for (var i = 1; i<=n; i++){
-//                            var d = val.replace(/name=\"(.*)__prototype__([^\"]*)/g, '$1'+i+'$2');
-//                            reg.push({
-//                                p : val,
-//                                r : d
-//                            });
-//                        }
-//                    });
-//                    console.log(reg);
-//                    li.each(function(i){
-//                        var index = i+1;
-//                        var $this = $(this);
-//                        $.each(reg,function(key,val){
-//                            var rep = val.p.replace(/__prototype__/g, index).replace(/name=\"([^\"]*)/g, '$1');
-//                            $this.find("[name='"+val.r+"']").attr('name',rep);
-//                        });
-//
-//                    });
-                }
-            });
+
             $('body').on('click','.add-another',function() {
                 var list = $(this).parent('div')
                         .parent('.wrap-fields').find('> .field-list');
@@ -138,10 +46,7 @@
             });
             $('body').on('click','.delete',function(){
                 var target =$(this).parents('li.delete-block');
-                target.fadeOut(200);
-                setTimeout(function(){
-                    target.remove()
-                },500);
+                target.remove();
             });
         })();
     })

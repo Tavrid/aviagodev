@@ -46,6 +46,7 @@ frontend:
             label: Выбор направления
             one_way: В одну сторону
             multi_way: В обе стороны
+            complex_search: Сложный маршрут
         placeholders:
             city: Выберите город
             date: Укажите дату

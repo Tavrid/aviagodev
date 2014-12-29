@@ -3,15 +3,21 @@
         <div class="tab-pane fade in active" id="avia">
             <div class="panel panel-default">
                 <div class="panel-heading return-way-index">
-                    {{ form_widget(form.return_way, {'attr': {'class': 'foo'}}) }}
+                    {% for ch in form.return_way.children %}
+                        {{ form_widget(ch,{attr: {'data-bind': 'event: {change: changeDirection}, checked: direction'}}) }}
+                        {{ form_label(ch) }}
+                    {% endfor %}
                 </div>
                 <div class="panel-body panel-blue">
                     <!-- Город вылета прилета -->
-                    <div class="row">
+                    <div class="row" data-bind="visible: complexSearch()">
+                        {% include "BundlesDefaultBundle:Default:_complex_field.html.twig" %}
+                    </div>
+                    <div class="row" data-bind="visible: !complexSearch()">
                         <div class="col-md-5 col-avia">
                             <div class="input-group city-from">
                                             <span class="input-group-addon block-img-avia" data-toggle="tooltip" data-placement="top" data-original-title="Откуда вы вылетаете?">
-                                                <img src="{{ asset('/images/avia-up.png') }}" alt="">
+                                                <img src="{{ asset('images/avia-up.png') }}" alt="">
                                             </span>
                                 {{ form_widget(form.city_from, {'attr': {'class': 'from_city'}}) }}
                                 <span class="input-group-btn">
@@ -21,13 +27,13 @@
                         </div>
                         <div class="col-md-2 text-center col-return">
                             <button id="reverse-city" type="button" class="btn btn-primary button-refresh" data-toggle="tooltip" data-placement="top" data-original-title="Поменять местами вылет и прилет">
-                                <img src="{{ asset('/images/refresh-white.png') }}" alt="">
+                                <img src="{{ asset('images/refresh-white.png') }}" alt="">
                             </button>
                         </div>
                         <div class="col-md-5 col-avia">
                             <div class="input-group city-to">
                                             <span class="input-group-addon block-img-avia" data-toggle="tooltip" data-placement="top" data-original-title="Куда вы летите?">
-                                                <img src="{{ asset('/images/avia-down.png') }}" alt="">
+                                                <img src="{{ asset('images/avia-down.png') }}" alt="">
                                             </span>
                                 {{ form_widget(form.city_to, {'attr': {'class': 'to_city'}}) }}
                                 <span class="input-group-btn">
@@ -40,7 +46,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <!-- Дата вылета -->
-                            <div class="date-from">
+                            <div class="date-from" data-bind="visible: !complexSearch()">
                                 {{ form_row(form.city_from_code) }}
                                 {{ form_label(form.date_from, '', {'attr': {'class': 'date_from'}}) }}
                                 <div class="input-group">
@@ -96,11 +102,11 @@
                         </div>
                         <div class="col-md-6">
                             <!-- Дата прилета -->
-                            <div class="date-to">
+                            <div class="date-to" data-bind="visible: !complexSearch()">
                                 {{ form_row(form.city_to_code) }}
                                 {{ form_label(form.date_to, '', {'attr': {'class': 'date_from'}}) }}
                                 <div class="input-group">
-                                    {{ form_widget(form.date_to, {'attr': {'class': 'date_from'}}) }}
+                                    {{ form_widget(form.date_to, {'attr': {'class': 'date_from','data-bind': 'enable:disableDateTo'}}) }}
                                     <span class="input-group-addon date-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите дату прилета"></span>
                                 </div>
                             </div>

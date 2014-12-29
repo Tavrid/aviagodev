@@ -46,6 +46,7 @@ frontend:
             label: Choice of direction
             one_way: One way
             multi_way: In both sides
+            complex_search: Complex search
         placeholders:
             city: Select a city
             date: Select dates
