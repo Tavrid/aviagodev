@@ -77,10 +77,14 @@ class SearchForm extends AbstractType
             'need_value' => 2,
             'field_map' => [
                 'city_from' => ['field', new Assert\NotBlank()],
+                'city_from_code' => ['field', new Assert\NotBlank()],
                 'city_to' => ['field', new Assert\NotBlank()],
+                'city_to_code' => ['field', new Assert\NotBlank()],
                 'date' => ['field', new Assert\NotBlank()],
             ],
             'types' => [
+                'city_from_code' => ['type' => 'hidden'],
+                'city_to_code' => ['type' => 'hidden'],
                 'city_from' => ['options' => ['attr' => ['placeholder' => 'frontend.search_form.placeholders.city']]],
                 'city_to' => ['options' => ['attr' => ['placeholder' => 'frontend.search_form.placeholders.city']]],
                 'date' => ['type' => 'date','options' => ['widget' => 'single_text','attr' => ['placeholder' => 'Дата']]]
