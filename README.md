@@ -6,7 +6,7 @@ Building
 **1) install assets**
 
     $ php app/console assets:install
-	$ php app/console assetic:dump --env=pro
+	$ php app/console assetic:dump --env=prod
 
 **2) Building vs node.js**
 
