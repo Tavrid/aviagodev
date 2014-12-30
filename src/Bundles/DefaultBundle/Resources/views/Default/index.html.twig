@@ -1,7 +1,10 @@
 {% extends "BundlesDefaultBundle:Layouts:main.html.twig" %}
 {% block js %}
     {{ parent() }}
-    {% javascripts 
+    <script>
+        Window.SearchFormData = {{ form_data|raw }};
+    </script>
+    {% javascripts
     'bundles/bundlesdefault/js/default/index.js'
     '@knockoutjs'
     combine=true%}

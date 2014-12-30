@@ -47,64 +47,53 @@
         {{ form_widget(f.city_to_code) }}
     </div>
 {% endmacro %}
-<div class="wrap-fields">
-    <ul id="field-sortable" class="field-list"
-        data-prototype="{{ _self.renderField(form.complex.vars.prototype)| noJsScript | e }}"
-        style="padding: 0;list-style: none outside;">
-        {% for name,f in form.complex %}
-            <li class="delete-block">
-                {{ _self.renderField(f) }}
-                {% if loop.index > 2 %}
-                    <div class="row">
-                        <a class="delete btn btn-danger">
-                            Удалить
-                        </a>
-                    </div>
-                {% endif %}
-                <span class="handle"><i class="icon-move"></i> </span>
-            </li>
-        {% endfor %}
-    </ul>
-    <div class="controls">
-        <a href="#" class="btn btn-success add-another"><i class="icon-plus"></i> Добавить</a>
+<div class="wrap-fields" data-bind="foreach: complexFields">
+    {% set f =form.complex|first %}
+    <div class="row">
+        <div class="col-md-5 col-avia">
+            <div class="input-group city-from">
+                <span class="input-group-addon block-img-avia" data-toggle="tooltip" data-placement="top"
+                      data-original-title="Откуда вы вылетаете?">
+                    <img src="{{ asset('images/avia-up.png') }}" alt="">
+                </span>
+                {{ form_widget(f.city_from, {'attr': {'class': 'from_city'}}) }}
+                <span class="input-group-btn">
+                    <button class="btn btn-default button-close" type="button" data-toggle="tooltip"
+                            data-placement="top" data-original-title="Очистить поле"></button>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-2 text-center col-return">
+            <button id="reverse-city" type="button" class="btn btn-primary button-refresh" data-toggle="tooltip"
+                    data-placement="top" data-original-title="Поменять местами вылет и прилет">
+                <img src="{{ asset('images/refresh-white.png') }}" alt="">
+            </button>
+        </div>
+        <div class="col-md-5 col-avia">
+            <div class="input-group city-to">
+                <span class="input-group-addon block-img-avia" data-toggle="tooltip"
+                      data-placement="top" data-original-title="Куда вы летите?">
+                    <img src="{{ asset('images/avia-down.png') }}" alt="">
+                </span>
+                {{ form_widget(f.city_to, {'attr': {'class': 'to_city'}}) }}
+                <span class="input-group-btn">
+                    <button class="btn btn-default button-close" type="button"
+                            data-toggle="tooltip" data-placement="top"
+                            data-original-title="Очистить поле"></button>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="date-from">
+                {{ form_label(f.date, '', {'attr': {'class': 'date_from'}}) }}
+                <div class="input-group">
+                    {{ form_widget(f.date, {'attr': {'class': 'date_from'}}) }}
+                    <span class="input-group-addon date-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите дату вылета"></span>
+                </div>
+            </div>
+        </div>
+        {{ form_widget(f.city_from_code) }}
+        {{ form_widget(f.city_to_code) }}
     </div>
 </div>
-<script type="text/javascript">
-
-    $(document).ready(function () {
-        (function () {
-
-            $('body').on('click', '.add-another', function () {
-                var list = $(this).parent('div')
-                        .parent('.wrap-fields').find('> .field-list');
-                var count = list.find('> .delete-block').length;
-                count++;
-                var newWidget = list.attr('data-prototype');
-
-                newWidget = newWidget.replace(/__prototype__/g, count);
-                var newDiv = $('<li></li>', {"class": "delete-block"})
-                        .append(newWidget, $('<div>', {
-                            html: $('<a>', {
-                                "class": 'delete btn btn-danger',
-                                html: '<i class="icon-trash"></i>  Удалить'
-                            })
-                        }), '<span class="handle"><i class="icon-move"></i> </span>');
-                list.append(newDiv);
-                $(newDiv).find('textarea.useEditor').each(function (i) {
-                    var ckeditorContent = CKEDITOR.replace(this, {language: 'ru'});
-                    AjexFileManager.init({returnTo: 'ckeditor', editor: ckeditorContent});
-                });
-                return false;
-            });
-            $('body').on('click', '.delete', function () {
-                var target = $(this).parents('li.delete-block');
-                target.remove();
-            });
-        })();
-    })
-</script>
-<style>
-    li.delete-block{
-        padding: 5px 15px;
-    }
-</style>

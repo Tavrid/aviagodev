@@ -50,21 +50,6 @@ $(function() {
 
     $('.return-way-inner #search_form_return_way label').after('<div class="clear"></div>');
 
-    //if(!parseInt($('#search_form_return_way input[type=radio]:checked').val())){
-    //    /*$('#search_form_date_to').parents('.date-to').hide();*/
-    //    $('#search_form_date_to').attr('disabled', 'disabled');
-    //}
-    //$('#search_form_return_way').on('click','input[type=radio]',function(){
-    //    var val = $('#search_form_return_way input[type=radio]:checked').val();
-    //    var sel = $('#search_form_date_to').parents('.date-to');
-    //    if(!parseInt(val)){
-    //        $('#search_form_date_to').attr('disabled', 'disabled');
-    //        $('#search_form_date_to').val('');
-    //    } else {
-    //        $('#search_form_date_to').removeAttr('disabled');/*
-    //        sel.show();*/
-    //    }
-    //});
 
     $( "#search_form_date_from" ).datepicker({
         defaultDate: "+1w",
@@ -164,6 +149,10 @@ $(function() {
         self.complexSearch = ko.computed(function(){
             return self.direction() == "2";
         },self);
+
+        self.complexFields = ko.observableArray($.map(Window.SearchFormData.complex, function(value, index) {
+            return [value];
+        }));
     };
     var vm = new ViewModel();
     ko.applyBindings(vm);

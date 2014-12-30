@@ -19,7 +19,8 @@ class DefaultController extends Controller {
 
         return $this->render('BundlesDefaultBundle:Default:index.html.twig', [
                     'form' => $form->createView(),
-                    'flights' => $flights
+                    'flights' => $flights,
+                    'form_data' => json_encode($form->getData())
         ]);
     }
 
