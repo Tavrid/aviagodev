@@ -14,7 +14,7 @@
         {% endjavascripts %}
         <header role="contentinfo">
             <div class="container" style="max-width:1000px;">
-                <a href="{{ path('bundles_default_homepage') }}" class="logo"><img src="{{ asset('/images/logo.png') }}" alt=""></a>
+                <a href="{{ path('bundles_default_homepage') }}" class="logo"><img src="{{ asset('images/logo.png') }}" alt=""></a>
                 <div class="group-lang btn-group pull-right row">
                     <button data-value="ru"  type="button" class="btn btn-info lang {{app.request.locale == 'ru' ? 'active':''}}">ru</button>
                     <button data-value="en" type="button" class="btn btn-info lang {{app.request.locale == 'en' ? 'active':''}}">en</button>
@@ -26,7 +26,7 @@
         {% block body %}{% endblock %}
     </div>
     <div id="loader" style="display: none; z-index: 10000; padding: 30px 60px; ">
-        <img alt="" src="{{ asset('/images/progress_bar.gif') }}" />
+        <img alt="" src="{{ asset('images/progress_bar.gif') }}" />
     </div>
     {% block js %}
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
@@ -44,7 +44,7 @@
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
         {%if app.request.locale!='en' %}
-        <script type="text/javascript" src="/bundles/bundlesdefault/lib/jquery_validator/dist/localization/messages_{{app.request.locale}}.js"></script>
+         <script type="text/javascript" src="/bundles/bundlesdefault/lib/jquery_validator/dist/localization/messages_{{app.request.locale}}.js"></script>
         {%endif%}
         <script type="text/javascript">
             $(document).ready(function(){
