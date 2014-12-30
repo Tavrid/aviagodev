@@ -27,7 +27,8 @@ module.exports = function (gulp, argv) {
             if (argv.dev) {
                 browserify({
                     entries: [paths.coffee],
-                    extensions: ['.coffee']
+                    extensions: ['.coffee'],
+                    debug: true
                 })
                     .transform('coffeeify')
                     .bundle()
