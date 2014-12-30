@@ -48,7 +48,7 @@
     </div>
 {% endmacro %}
 <div class="wrap-fields" data-bind="foreach: complexFields">
-    {% set f =form.complex|first %}
+    {% set f =form.complex.vars.prototype %}
     <div class="row">
         <div class="col-md-5 col-avia">
             <div class="input-group city-from">
