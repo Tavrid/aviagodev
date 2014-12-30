@@ -1,1 +1,1 @@
-console.log "Ablyakim"
+class A
