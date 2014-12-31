@@ -1,4 +1,13 @@
-
+<script type="text/javascript">
+    var searchForm = {
+        returnWay: "{{ form.return_way.vars.data }}",
+        cityFrom: "{{ form.city_from.vars.data }}",
+        cityFromCode: "{{ form.city_from_code.vars.data }}",
+        cityTo: "{{ form.city_to.vars.data }}",
+        cityToCode: "{{ form.city_to_code.vars.data }}",
+        complexFields: {{ form.complex.vars.data|json_encode|raw }}
+    }
+</script>
 <form action="{{ path('bundles_default_search') }}" method="post" id="search-form">
     <div class="tab-content">
         <div class="tab-pane fade in active" id="avia">

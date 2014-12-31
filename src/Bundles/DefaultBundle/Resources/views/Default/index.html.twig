@@ -2,21 +2,7 @@
 {% block js %}
     {{ parent() }}
     <script type="application/javascript" src="{{ asset('build/dist/js/index/index.js') }}"></script>
-    {#<script>#}
-        {#$(function(){#}
-            {#$('body').on('click','#reverse-city',function(){#}
-                {#var cityFrom = $( "#search_form_city_from" ).val();#}
-                {#var cityFromCode = $( "#search_form_city_from_code").val();#}
-                {#$( "#search_form_city_from" ).val($( "#search_form_city_to" ).val());#}
-                {#$( "#search_form_city_from_code" ).val($( "#search_form_city_to_code" ).val());#}
 
-                {#$( "#search_form_city_to" ).val(cityFrom);#}
-                {#$( "#search_form_city_to_code" ).val(cityFromCode);#}
-            {#});#}
-
-            {#_GlobalAppObject.searchUrl = "{{ path('bundles_default_search_city') }}";#}
-        {#});#}
-    {#</script>#}
 {% endblock %}
 
 {% block body %}
