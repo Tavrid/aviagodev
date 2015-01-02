@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Symfony Standard Edition ========================",
   "dependencies": {
-    "knockout": "3.2.0"
+    "knockout": "3.2.0",
+    "underscore": "^1.7.0"
   },
   "devDependencies": {
     "gulp": "*",

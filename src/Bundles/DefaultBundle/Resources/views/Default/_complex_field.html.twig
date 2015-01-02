@@ -1,54 +1,5 @@
-{% macro renderField(f) %}
-    <div class="row">
-        <div class="col-md-5 col-avia">
-            <div class="input-group city-from">
-                <span class="input-group-addon block-img-avia" data-toggle="tooltip" data-placement="top"
-                      data-original-title="Откуда вы вылетаете?">
-                    <img src="{{ asset('images/avia-up.png') }}" alt="">
-                </span>
-                {{ form_widget(f.city_from, {'attr': {'class': 'from_city'}}) }}
-                <span class="input-group-btn">
-                    <button class="btn btn-default button-close" type="button" data-toggle="tooltip"
-                            data-placement="top" data-original-title="Очистить поле"></button>
-                </span>
-            </div>
-        </div>
-        <div class="col-md-2 text-center col-return">
-            <button id="reverse-city" type="button" class="btn btn-primary button-refresh" data-toggle="tooltip"
-                    data-placement="top" data-original-title="Поменять местами вылет и прилет">
-                <img src="{{ asset('images/refresh-white.png') }}" alt="">
-            </button>
-        </div>
-        <div class="col-md-5 col-avia">
-            <div class="input-group city-to">
-                <span class="input-group-addon block-img-avia" data-toggle="tooltip"
-                      data-placement="top" data-original-title="Куда вы летите?">
-                    <img src="{{ asset('images/avia-down.png') }}" alt="">
-                </span>
-                {{ form_widget(f.city_to, {'attr': {'class': 'to_city'}}) }}
-                <span class="input-group-btn">
-                    <button class="btn btn-default button-close" type="button"
-                            data-toggle="tooltip" data-placement="top"
-                            data-original-title="Очистить поле"></button>
-                </span>
-            </div>
-        </div>
-
-        <div class="col-md-5">
-            <div class="date-from">
-                {{ form_label(f.date, '', {'attr': {'class': 'date_from'}}) }}
-                <div class="input-group">
-                    {{ form_widget(f.date, {'attr': {'class': 'date_from'}}) }}
-                    <span class="input-group-addon date-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите дату вылета"></span>
-                </div>
-            </div>
-        </div>
-        {{ form_widget(f.city_from_code) }}
-        {{ form_widget(f.city_to_code) }}
-    </div>
-{% endmacro %}
+{% set f =form.complex.vars.prototype %}
 <div class="wrap-fields" data-bind="foreach: complexFields">
-    {% set f =form.complex.vars.prototype %}
     <div class="row">
         <div class="col-md-5 col-avia">
             <div class="input-group city-from">
@@ -56,10 +7,11 @@
                       data-original-title="Откуда вы вылетаете?">
                     <img src="{{ asset('images/avia-up.png') }}" alt="">
                 </span>
-                {{ form_widget(f.city_from, {'attr': {'class': 'from_city'}}) }}
+                {{ form_widget(f.city_from, {'attr': {'class': 'from_city','data-bind': 'value: city_from,autocomplete: "city_from_code"'}}) }}
                 <span class="input-group-btn">
                     <button class="btn btn-default button-close" type="button" data-toggle="tooltip"
-                            data-placement="top" data-original-title="Очистить поле"></button>
+                            data-placement="top" data-original-title="Очистить поле">
+                    </button>
                 </span>
             </div>
         </div>
@@ -75,25 +27,26 @@
                       data-placement="top" data-original-title="Куда вы летите?">
                     <img src="{{ asset('images/avia-down.png') }}" alt="">
                 </span>
-                {{ form_widget(f.city_to, {'attr': {'class': 'to_city'}}) }}
+                {{ form_widget(f.city_to, {'attr': {'class': 'to_city','data-bind': 'value: city_to'}}) }}
                 <span class="input-group-btn">
                     <button class="btn btn-default button-close" type="button"
                             data-toggle="tooltip" data-placement="top"
-                            data-original-title="Очистить поле"></button>
+                            data-original-title="Очистить поле">
+                    </button>
                 </span>
             </div>
         </div>
-
         <div class="col-md-5">
             <div class="date-from">
-                <label></label>
                 <div class="input-group">
-                    {{ form_widget(f.date, {'attr': {'class': 'date_from'}}) }}
-                    <span class="input-group-addon date-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите дату вылета"></span>
+                    {{ form_widget(f.date, {'attr': {'class': 'date_from','data-bind': 'value: date'}}) }}
+                    <span class="input-group-addon date-icon" data-toggle="tooltip" data-placement="top"
+                          data-original-title="Выберите дату вылета">
+                    </span>
                 </div>
             </div>
         </div>
-        {{ form_widget(f.city_from_code) }}
-        {{ form_widget(f.city_to_code) }}
+        {{ form_widget(f.city_from_code,{'attr': {'data-bind': 'value: city_from_code'}}) }}
+        {{ form_widget(f.city_to_code,{'attr': {'data-bind': 'value: city_to_code'}}) }}
     </div>
 </div>

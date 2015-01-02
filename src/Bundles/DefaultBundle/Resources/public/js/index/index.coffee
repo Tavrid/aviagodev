@@ -1,28 +1,27 @@
 ko = require "knockout"
-ko.bindingHandlers.valueWithInit = init: (element, valueAccessor, allBindingsAccessor, data, context) ->
-  bindings = valueAccessor()
-  Object.keys(bindings).forEach (key) ->
-    observable = bindings[key]
-    binding = {}
-    switch key
-      when "value"
-        initialValue = element.value
-      when "text"
-        initialValue = $(element).text()
-    spl = observable.split(".")
-    if spl.length > 1
-      data[spl[0]][spl[1]] = ko.observable()  unless ko.isWriteableObservable(data[spl[0]][spl[1]])
-      data[spl[0]][spl[1]] initialValue
-      binding[key] = data[spl[0]][spl[1]]
-      ko.applyBindingsToNode element, binding, context
-    else
-      data[spl[0]] = ko.observable()  unless ko.isWriteableObservable(data[spl[0]])
-      data[spl[0]] initialValue
-      binding[key] = data[spl[0]]
-      ko.applyBindingsToNode element, binding, context
-    return
+_ = require "underscore"
+require "./ko_autocomplete"
 
-  return
+resolveField = (objList) ->
+  retList = []
+  defaultMap =
+    city_from: null
+    city_from_code: null
+    city_to: null
+    city_to_code: null
+    date: null
+
+  _.each objList,(obj)->
+    ext = _.extend(defaultMap, obj)
+    ext.city_from = ko.observable ext.city_from
+    ext.city_from_code = ko.observable ext.city_from_code
+    ext.city_to = ko.observable ext.city_to
+    ext.city_to_code = ko.observable ext.city_to_code
+    ext.date = ko.observable ext.date
+    retList.push ext
+  return retList
+
+
 class ViewModel
   constructor: ->
     @direction = ko.observable(searchForm.returnWay)
@@ -34,7 +33,10 @@ class ViewModel
     @complexSearch= ko.computed =>
       parseInt(@direction()) == 2
 
-    @complexFields= ko.observableArray([1])
-
-ko.applyBindings new ViewModel
-console.log searchForm
+    @complexFields= ko.observableArray(resolveField searchForm.complexFields)
+    console.log @complexFields()
+$(->
+  vm = new ViewModel
+  ko.applyBindings vm
+  console.log  vm.direction.prototype
+)

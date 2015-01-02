@@ -1,8 +1,6 @@
-{% block form_widget_simple %}
+{% block widget_attributes %}
     {% spaceless %}
-        {% set type = type|default('text') %}
-        {% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
-        {% set attr = attr|merge({'data-bind': 'valueWithInit: { value:"'~id~'" }, value: '~id}) %}
-        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        data-bind="value: {{ id }}" id="{{ id }}" name="{{ full_name }}"{% if read_only %} readonly="readonly"{% endif %}{% if disabled %} disabled="disabled"{% endif %}{% if required %} required="required"{% endif %}{% if max_length %} maxlength="{{ max_length }}"{% endif %}{% if pattern %} pattern="{{ pattern }}"{% endif %}
+        {% for attrname, attrvalue in attr %}{% if attrname in ['placeholder', 'title'] %}{{ attrname }}="{{ attrvalue|trans({}, translation_domain) }}" {% else %}{{ attrname }}="{{ attrvalue }}" {% endif %}{% endfor %}
     {% endspaceless %}
-{% endblock form_widget_simple %}
+{% endblock widget_attributes %}

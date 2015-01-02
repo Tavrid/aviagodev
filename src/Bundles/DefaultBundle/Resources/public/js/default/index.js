@@ -110,7 +110,7 @@ $(function() {
         input.autocomplete({
             source: function( request, response ) {
                 $.ajax({
-                    url: _GlobalAppObject.searchUrl,
+                    url: Routing.generate('bundles_default_search_city'),
                     dataType: "json",
                     data: {
                         q: request.term
@@ -137,24 +137,5 @@ $(function() {
     autocomplete($( "#search_form_city_from" ),$( "#search_form_city_from_code"));
     autocomplete($( "#search_form_city_to" ),$( "#search_form_city_to_code"));
 
-    var ViewModel = function(){
-        var self = this;
-        self.direction = ko.observable($('input[name="search_form[return_way]"][checked=checked]').val());
-        self.changeDirection = function(){
-
-        };
-        self.disableDateTo = ko.computed(function(){
-            return self.direction() != "0";
-        },self);
-        self.complexSearch = ko.computed(function(){
-            return self.direction() == "2";
-        },self);
-
-        self.complexFields = ko.observableArray($.map(Window.SearchFormData.complex, function(value, index) {
-            return [value];
-        }));
-    };
-    var vm = new ViewModel();
-    ko.applyBindings(vm);
 
 });
