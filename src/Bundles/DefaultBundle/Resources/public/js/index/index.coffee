@@ -4,27 +4,28 @@ require "./ko_autocomplete"
 
 resolveField = (objList) ->
   retList = []
-  defaultMap =
-    city_from: null
-    city_from_code: null
-    city_to: null
-    city_to_code: null
-    date: null
+  class ComplexSearch
+    constructor: (o) ->
+      @city_from = ko.observable o.city_from
+      @city_from_code = ko.observable o.city_from_code
+      @city_to = ko.observable o.city_to
+      @city_to_code = ko.observable o.city_to_code
+      @date = ko.observable o.date
 
   _.each objList,(obj)->
-    ext = _.extend(defaultMap, obj)
-    ext.city_from = ko.observable ext.city_from
-    ext.city_from_code = ko.observable ext.city_from_code
-    ext.city_to = ko.observable ext.city_to
-    ext.city_to_code = ko.observable ext.city_to_code
-    ext.date = ko.observable ext.date
-    retList.push ext
+    retList.push new ComplexSearch obj
   return retList
 
 
 class ViewModel
   constructor: ->
     @direction = ko.observable(searchForm.returnWay)
+    @cityFrom = ko.observable searchForm.cityFrom
+    @cityFromCode = ko.observable searchForm.cityFromCode
+
+    @cityTo = ko.observable searchForm.cityTo
+    @cityToCode = ko.observable searchForm.cityToCode
+
     @changeDirection= ->
 
     @disableDateTo = ko.computed =>
@@ -34,9 +35,8 @@ class ViewModel
       parseInt(@direction()) == 2
 
     @complexFields= ko.observableArray(resolveField searchForm.complexFields)
-    console.log @complexFields()
+
 $(->
   vm = new ViewModel
   ko.applyBindings vm
-  console.log  vm.direction.prototype
 )

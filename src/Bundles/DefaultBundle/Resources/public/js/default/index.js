@@ -134,8 +134,8 @@ $(function() {
             }
         });
     }
-    autocomplete($( "#search_form_city_from" ),$( "#search_form_city_from_code"));
-    autocomplete($( "#search_form_city_to" ),$( "#search_form_city_to_code"));
+    //autocomplete($( "#search_form_city_from" ),$( "#search_form_city_from_code"));
+    //autocomplete($( "#search_form_city_to" ),$( "#search_form_city_to_code"));
 
 
 });
