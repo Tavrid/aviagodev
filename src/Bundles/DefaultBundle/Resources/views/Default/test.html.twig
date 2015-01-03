@@ -1,0 +1,51 @@
+<link href="{{ asset('build/dist/css/bootstrap.css') }}" rel="stylesheet" media="screen" />
+<link href="{{ asset('build/dist/css/jquery-ui.css') }}" rel="stylesheet" media="screen" />
+<script>
+    var searchForm = {};
+</script>
+{% javascripts '@jquery' '@jquery_ui_js' '@front_bootstrap_js' combine=true%}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% block js %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    {% javascripts
+    '@front_bootstrap_js'
+    'bundles/bundlesdefault/lib/popup.js'
+    'bundles/bundlesdefault/lib/moment.js'
+    'bundles/bundlesdefault/js/app.js'
+    'bundles/bundlesdefault/lib/jquery_validator/dist/jquery.validate.min.js'
+    'bundles/bundlesdefault/js/default/jquery.selectbox.min.js'
+    'bundles/bundlesdefault/js/default/avia.js'
+    'bundles/bundlesdefault/js/default/jquery.columnhover.js'
+    combine=true%}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {%if app.request.locale!='en' %}
+        <script type="text/javascript" src="/bundles/bundlesdefault/lib/jquery_validator/dist/localization/messages_{{app.request.locale}}.js"></script>
+    {%endif%}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            _GlobalAppObject.setLocale("{{app.request.locale}}");
+
+        });
+    </script>
+{% endblock %}
+<script type="application/javascript" src="{{ asset('build/dist/js/index/index.js') }}"></script>
+<input type="text" data-bind="value:cityFrom,autocomplete:'cityFromCode'">
+<input type="text" data-bind="value:cityFromCode"><br />
+<input type="text" data-bind="value:cityTo,autocomplete:'cityToCode'">
+<input type="text" data-bind="value:cityToCode">
+<style>
+    .typeahead{
+        position: absolute;
+        list-style: none;
+        padding: 0;
+        padding-left: 2px;
+        padding-top: 3px;
+    }
+    .typeahead > li > a{
+        padding: 5px 10px;
+        background: #ffffff;
+    }
+</style>

@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Symfony Standard Edition ========================",
   "dependencies": {
+    "bloodhound": "^1.0.0",
     "knockout": "3.2.0",
+    "typeahead": "^0.2.0",
+    "typeahead.js": "^0.10.5",
     "underscore": "^1.7.0"
   },
   "devDependencies": {

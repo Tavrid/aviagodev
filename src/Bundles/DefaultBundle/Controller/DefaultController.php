@@ -32,4 +32,8 @@ class DefaultController extends Controller {
         return new Response();
     }
 
+    public function testAction(){
+        return $this->render('BundlesDefaultBundle:Default:test.html.twig');
+    }
+
 }

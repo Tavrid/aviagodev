@@ -1,6 +1,9 @@
 bundles_default_homepage:
     pattern:  /
     defaults: { _controller: BundlesDefaultBundle:Default:index }
+bundles_default_test:
+    pattern:  /test
+    defaults: { _controller: BundlesDefaultBundle:Default:test }
 bundles_default_search_city:
     pattern:  /api/city/search
     defaults: { _controller: BundlesDefaultBundle:Api:searchCity }
