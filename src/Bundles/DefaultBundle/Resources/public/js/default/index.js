@@ -51,43 +51,6 @@ $(function() {
     $('.return-way-inner #search_form_return_way label').after('<div class="clear"></div>');
 
 
-    $( "#search_form_date_from" ).datepicker({
-        defaultDate: "+1w",
-        minDate: "d",
-        lang: 'ru',
-        dateFormat: 'yy-mm-dd',
-        //changeMonth: true,
-
-        numberOfMonths: 1,
-        onClose: function( selectedDate ) {
-            $( "#search_form_date_to" ).datepicker( "option", "minDate", selectedDate );
-
-            if($( "#search_form_date_to").is(':visible')){
-                $( "#search_form_date_to").datepicker('show');
-            }
-        }
-    });
-    $( "#search_form_date_to" ).datepicker({
-        //defaultDate: "+1w",
-        changeMonth: true,
-        dateFormat: 'yy-mm-dd',
-        numberOfMonths: 1,
-        onClose: function( selectedDate ) {
-            $( "#search_form_date_from" ).datepicker( "option", "maxDate", selectedDate );
-        }
-    });
-
-    $('body').on('click','#reverse-city',function(){
-        var cityFrom = $( "#search_form_city_from" ).val();
-        var cityFromCode = $( "#search_form_city_from_code").val();
-        $( "#search_form_city_from" ).val($( "#search_form_city_to" ).val());
-        $( "#search_form_city_from_code" ).val($( "#search_form_city_to_code" ).val());
-
-        $( "#search_form_city_to" ).val(cityFrom);
-        $( "#search_form_city_to_code" ).val(cityFromCode);
-
-    });
-
     $('body').on('click','#filter-time-btn',function(){
 
         $('#filter-time-popup').popup(
@@ -106,36 +69,6 @@ $(function() {
         ).openWithOutOffsets();
     });
 
-    function autocomplete(input,hiddenInput){
-        input.autocomplete({
-            source: function( request, response ) {
-                $.ajax({
-                    url: Routing.generate('bundles_default_search_city'),
-                    dataType: "json",
-                    data: {
-                        q: request.term
-                    },
-                    success: function( data ) {
-                        var arr = [];
-                        $.each(data, function(key, val) {
-                            arr.push({
-                                value: val.name,
-                                'data-value': val.id
-                            });
-                        });
-
-                        response(arr.slice(0, 10));
-                    }
-                });
-            },
-            minLength: 3,
-            select: function( event, ui ) {
-                hiddenInput.val(ui.item['data-value']);
-            }
-        });
-    }
-    //autocomplete($( "#search_form_city_from" ),$( "#search_form_city_from_code"));
-    //autocomplete($( "#search_form_city_to" ),$( "#search_form_city_to_code"));
 
 
 });

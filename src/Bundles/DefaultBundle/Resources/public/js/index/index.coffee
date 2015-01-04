@@ -1,19 +1,26 @@
 ko = require "knockout"
 _ = require "underscore"
 require "./ko_autocomplete"
-
+require "./datepicker"
 class ComplexSearch
-  constructor: (o) ->
-    @city_from = ko.observable o.city_from
-    @city_from_code = ko.observable o.city_from_code
-    @city_to = ko.observable o.city_to
-    @city_to_code = ko.observable o.city_to_code
+  constructor: (o = {}) ->
+    @cityFrom = ko.observable o.cityFrom
+    @cityFromCode = ko.observable o.cityFromCode
+    @cityTo = ko.observable o.cityTo
+    @cityToCode = ko.observable o.cityToCode
     @date = ko.observable o.date
+    @minDate = 0
+    @reverseCity = ->
+      cityFromTemp = @cityFrom()
+      cityFromCodeTemp = @cityFromCode()
+      @cityFrom(@cityTo())
+      @cityFromCode(@cityToCode())
+      @cityTo(cityFromTemp)
+      @cityToCode(cityFromCodeTemp)
+
 resolveField = (objList) ->
-  objList = objList || [new ComplexSearch({}),new ComplexSearch({})]
+  objList = objList || [{},{}]
   retList = []
-
-
   _.each objList,(obj)->
     retList.push new ComplexSearch obj
   return retList
@@ -37,7 +44,16 @@ class ViewModel
       parseInt(@direction()) == 2
     @complexFields= ko.observableArray(resolveField searchForm.complexFields)
     @addLocation = ->
-      @complexFields.push new ComplexSearch {}
+      @complexFields.push new ComplexSearch
+
+    @removeLocation = (o)=>
+      if @complexFields().length > 2
+        @complexFields.remove o
+
+    @submitForm= ->
+      console.log arguments
+
+
 
 $(->
   vm = new ViewModel
