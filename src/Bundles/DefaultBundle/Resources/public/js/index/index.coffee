@@ -2,6 +2,7 @@ ko = require "knockout"
 _ = require "underscore"
 require "./ko_autocomplete"
 require "./datepicker"
+require "./validate"
 class ComplexSearch
   constructor: (o = {}) ->
     @cityFrom = ko.observable o.cityFrom
@@ -50,8 +51,6 @@ class ViewModel
       if @complexFields().length > 2
         @complexFields.remove o
 
-    @submitForm= ->
-      console.log arguments
 
 
 

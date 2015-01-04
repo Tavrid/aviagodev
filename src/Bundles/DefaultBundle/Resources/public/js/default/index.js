@@ -1,38 +1,38 @@
 $(function() {
 
 
-    $("#search-form").validate({
-        highlight: function (element) {
-            $(element).closest('.form-group').addClass('has-error');
-        },
-        unhighlight: function (element) {
-            $(element).closest('.form-group').removeClass('has-error');
-        },
-        errorElement: 'span',
-        errorClass: 'help-block',
-        errorPlacement: function (error, element) {
-            if (element.parent('.input-group').length) {
-                error.insertAfter(element.parent());
-            } else {
-                error.insertAfter(element);
-            }
-        },
-        submitHandler: function (form) {
-            var routeParams = {};
-            $.each($(form).serializeArray(),function(k,v){
-                var name  = v.name.replace(/.*\[(.+)\].*/g,"$1");
-                if(name != "city_from" && name != "city_to" && v.value){
-                    routeParams[name] = v.value;
-                }
-            });
-            if(routeParams['best_price'] === undefined){
-                routeParams['best_price'] = 0;
-            }
-            window.location = Routing.generate('bundles_default_api_list',routeParams);
-            return false;
-        },
-        ignore: ":hidden"
-    });
+    //$("#search-form").validate({
+    //    highlight: function (element) {
+    //        $(element).closest('.form-group').addClass('has-error');
+    //    },
+    //    unhighlight: function (element) {
+    //        $(element).closest('.form-group').removeClass('has-error');
+    //    },
+    //    errorElement: 'span',
+    //    errorClass: 'help-block',
+    //    errorPlacement: function (error, element) {
+    //        if (element.parent('.input-group').length) {
+    //            error.insertAfter(element.parent());
+    //        } else {
+    //            error.insertAfter(element);
+    //        }
+    //    },
+    //    submitHandler: function (form) {
+    //        var routeParams = {};
+    //        $.each($(form).serializeArray(),function(k,v){
+    //            var name  = v.name.replace(/.*\[(.+)\].*/g,"$1");
+    //            if(name != "city_from" && name != "city_to" && v.value){
+    //                routeParams[name] = v.value;
+    //            }
+    //        });
+    //        if(routeParams['best_price'] === undefined){
+    //            routeParams['best_price'] = 0;
+    //        }
+    //        window.location = Routing.generate('bundles_default_api_list',routeParams);
+    //        return false;
+    //    },
+    //    ignore: ":hidden"
+    //});
 
 
 
