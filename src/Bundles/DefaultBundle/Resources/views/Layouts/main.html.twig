@@ -28,6 +28,25 @@
     <div id="loader" style="display: none; z-index: 10000; padding: 30px 60px; ">
         <img alt="" src="{{ asset('images/progress_bar.gif') }}" />
     </div>
+        <style>
+            .typeahead{
+                position: absolute;
+                list-style: none;
+                padding: 0;
+                background: #ffffff;
+                z-index: 10000;
+            }
+            .typeahead > li > a{
+                padding: 5px 10px;
+                color: #333;
+                display: block;
+            }
+            .typeahead > li > a:hover{
+                background: #428bca;
+                color: #ffffff;
+                text-decoration: none;
+            }
+        </style>
     {% block js %}
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>

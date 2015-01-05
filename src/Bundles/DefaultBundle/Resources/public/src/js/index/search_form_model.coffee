@@ -1,7 +1,8 @@
 ko = require "knockout"
 _ = require "underscore"
 resolveField = (objList) ->
-  objList = objList || [{},{}]
+#  objList = if objList instanceof Object then
+  objList = if objList.length > 0 then objList else [{},{}]
   retList = []
   _.each objList,(obj)->
     retList.push new ComplexSearch obj
@@ -54,6 +55,7 @@ module.exports = class ViewModel
 
     @complexSearch= ko.computed =>
       parseInt(@direction()) == 2
+
     @complexFields= ko.observableArray(resolveField searchForm.complexFields)
     @addLocation = ->
       @complexFields.push new ComplexSearch
