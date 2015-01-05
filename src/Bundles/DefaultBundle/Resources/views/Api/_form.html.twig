@@ -1,60 +1,57 @@
-<form id="search-form" class="form-filter-inner" action="{{ path('bundles_default_search') }}" method="post"
-      id="search-form">
-    <div class="city-from-block">
-        <div class="input-group city-from">
-            <span class="input-group-addon label-from" data-toggle="tooltip" data-placement="top"
-                  data-original-title="Откуда вы вылетаете?">
-                {{ form_label(form.city_from) }}
-            </span>
-            {{ form_widget(form.city_from, {'attr': {'class': 'from_city'}}) }}
-            <span class="input-group-btn">
-                            <button class="btn btn-default button-close button-close-i" type="button"></button>
-                        </span>
-        </div>
-    </div>
-    <div class="city-to-block">
-        <div class="input-group city-to">
-                        <span class="input-group-addon label-from" data-toggle="tooltip" data-placement="top"
-                              data-original-title="Куда вы летите?">
-                            {{ form_label(form.city_to) }}
-                        </span>
-            {{ form_widget(form.city_to, {'attr': {'class': 'to_city'}}) }}
-            <span class="input-group-btn">
-                            <button class="btn btn-default button-close button-close-i" type="button"></button>
-                        </span>
-        </div>
-    </div>
+<script type="text/javascript">
+    var searchForm = {{ form_data|json_encode|raw }};
+</script>
+
+<form id="search-form" class="form-filter-inner" action="{{ path('bundles_default_search') }}" method="post" data-bind="validate">
     <div class="return-way-block return-way-inner">
         <div class="input-group">
-            {{ form_widget(form.return_way, {'attr': {'class': 'foo'}}) }}
+            {% for ch in form.return_way.children %}
+                {{ form_widget(ch,{attr: {'data-bind': 'event: {change: changeDirection}, checked: direction'}}) }}
+                {{ form_label(ch) }}
+                <div class="clear"></div>
+            {% endfor %}
         </div>
     </div>
-    <!-- Дата вылета -->
-    <div class="date-from">
-        {{ form_row(form.city_from_code) }}
+    <div class="city-from-block"  data-bind="visible: !complexSearch()">
+        <div class="input-group city-from">
+            <span class="input-group-addon label-from" data-toggle="tooltip" data-placement="top" data-original-title="Откуда вы вылетаете?">
+                {{ form_label(form.city_from) }}
+            </span>
+            {{ form_widget(form.city_from, {'attr': {'class': 'from_city','data-bind' : 'value: cityFrom'}}) }}
+            <span class="input-group-btn">
+                <button class="btn btn-default button-close button-close-i" type="button"></button>
+            </span>
+        </div>
+    </div>
+    <div class="city-to-block"  data-bind="visible: !complexSearch()">
+        <div class="input-group city-to">
+            <span class="input-group-addon label-from" data-toggle="tooltip" data-placement="top" data-original-title="Куда вы летите?">
+                {{ form_label(form.city_to) }}
+            </span>
+            {{ form_widget(form.city_to, {'attr': {'class': 'to_city','data-bind' : 'value: cityTo'}}) }}
+            <span class="input-group-btn">
+                <button class="btn btn-default button-close button-close-i" type="button"></button>
+            </span>
+        </div>
+    </div>
+    <div class="date-from"  data-bind="visible: !complexSearch()">
         {{ form_label(form.date_from, '', {'attr': {'class': 'date_from'}}) }}
         <div class="input-group">
-            {{ form_widget(form.date_from, {'attr': {'class': 'date_from'}}) }}
-            <span class="input-group-addon date-icon" data-toggle="tooltip" data-placement="top"
-                  data-original-title="Выберите дату вылета"></span>
+            {{ form_widget(form.date_from, {'attr': {'class': 'date_from','data-bind' : 'value: dateFrom'}}) }}
+            <span class="input-group-addon date-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите дату вылета">
+
+            </span>
         </div>
     </div>
-    <!-- Дата вылета -->
-    <!-- Дата прилета -->
-    <div class="date-to">
-        {{ form_row(form.city_to_code) }}
+    <div class="date-to"  data-bind="visible: !complexSearch()">
         {{ form_label(form.date_to, '', {'attr': {'class': 'date_to'}}) }}
         <div class="input-group">
-            {{ form_widget(form.date_to, {'attr': {'class': 'date_to'}}) }}
+            {{ form_widget(form.date_to, {'attr': {'class': 'date_to','data-bind': 'value: dateTo,enable:disableDateTo'}}) }}
             <span class="input-group-addon date-icon" data-toggle="tooltip" data-placement="top"
                   data-original-title="Выберите дату прилета"></span>
         </div>
     </div>
-    <!-- Дата прилета -->
-    <!-- Блоки с возрастом -->
     <div class="vozrast-block">
-        <!-- <label for="">{% trans %}frontend.default.index.num_passengers{% endtrans %}</label> -->
-        <!-- Выбор взрослых -->
         <div class="adult-block">
             <div class="row">
                 <div class="col-md-6 text-left">
@@ -64,13 +61,11 @@
                     <div class="input-group">
                         <span class="input-group-addon vozrast-icon adult-icon" data-toggle="tooltip"
                               data-placement="top" data-original-title="Выберите количество взрослых"></span>
-                        {{ form_widget(form.adults, {'attr': {'class': 'child'}}) }}
+                        {{ form_widget(form.adults, {'attr': {'class': 'child','data-bind' : 'value: adults'}}) }}
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Выбор взрослых -->
-        <!-- Выбор детей -->
         <div class="children-block">
             <div class="row">
                 <div class="col-md-6 text-left">
@@ -78,15 +73,12 @@
                 </div>
                 <div class="col-md-6">
                     <div class="input-group">
-                        <span class="input-group-addon vozrast-icon child-icon" data-toggle="tooltip"
-                              data-placement="top" data-original-title="Выберите количество детей"></span>
-                        {{ form_widget(form.children, {'attr': {'class': 'child'}}) }}
+                        <span class="input-group-addon vozrast-icon child-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите количество детей"></span>
+                        {{ form_widget(form.children, {'attr': {'class': 'child','data-bind' : 'value: children'}}) }}
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Выбор детей -->
-        <!-- Выбор младенцев -->
         <div class="infant-block">
             <div class="row">
                 <div class="col-md-6 text-left">
@@ -96,71 +88,37 @@
                     <div class="input-group">
                         <span class="input-group-addon vozrast-icon infants-icon" data-toggle="tooltip"
                               data-placement="top" data-original-title="Выберите количество младенцев"></span>
-                        {{ form_widget(form.infant, {'attr': {'class': 'child'}}) }}
+                        {{ form_widget(form.infant, {'attr': {'class': 'child','data-bind' : 'value: infant'}}) }}
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Выбор младенцев -->
     </div>
-    <!-- Блоки с возрастом -->
-    <!-- Имя авиакомпании -->
-    <div style="height: 0;overflow: hidden;" class="avia-company">
-        <div class="form-group">
-            <div class="input-group">
-                {{ form_label(form.avia_company, '') }}
-                {{ form_widget(form.avia_company) }}
-            </div>
-        </div>
-    </div>
-    <!-- Имя авиакомпании -->
-    <!-- Класс -->
-    <div style="height: 0;overflow: hidden;" class="klass">
-        <div class="form-group">
-            <div class="row-group">
-                {{ form_label(form.class, '') }}
-                {{ form_widget(form.class) }}
-            </div>
-        </div>
-    </div>
-    <!-- Класс -->
-    <!-- Валюта -->
-    <div style="height: 0;overflow: hidden;" class="currency">
-        <div class="form-group">
-            <div class="row-group">
-                {{ form_label(form.currency, '') }}
-                {{ form_widget(form.currency) }}
-            </div>
-        </div>
-    </div>
-    <!-- Валюта -->
-    <!-- Лучшая цена -->
+
     <div class="price-best">
         <div class="form-group">
             <div class="input-group">
-                            <span class="input-group-addon">
-                                {{ form_widget(form.best_price, {'attr': {'class': 'best-price checkbox'}}) }}
-                            </span>
+                <span class="input-group-addon">
+                    {{ form_widget(form.best_price, {'attr': {'class': 'best-price checkbox','data-bind':'checked: bestPrice'}}) }}
+                </span>
                 {{ form_label(form.best_price, 'frontend.search_form.best_price'|trans, {'label_attr':{'class':'form-control'}}) }}
             </div>
         </div>
     </div>
-    <!-- Лучшая цена -->
-    <!-- Прямые рейсы -->
     <div class="reys-line">
         <div class="form-group">
             <div class="input-group">
-                            <span class="input-group-addon">
-                                {{ form_widget(form.direct_flights, {'attr': {'class': 'best-price checkbox'}}) }}
-                            </span>
+                <span class="input-group-addon">
+                    {{ form_widget(form.direct_flights, {'attr': {'class': 'best-price checkbox','data-bind':'checked: directFlights'}}) }}
+                </span>
                 {{ form_label(form.direct_flights, 'frontend.search_form.direct_flights'|trans, {'label_attr':{'class':'form-control'}}) }}
             </div>
         </div>
     </div>
-    <!-- Прямые рейсы -->
-    {{ form_widget(form) }}
+    {{ form_row(form.class,{attr: {'data-bind' : 'value: aviaClass'}}) }}
+    {{ form_row(form.avia_company,{attr: {'data-bind' : 'value: aviaCompany'}}) }}
+    {{ form_row(form.currency,{attr: {'data-bind' : 'value: currency'}}) }}
     <div class="text-right">
-        <input type="submit" class="btn-fly btn btn-success"
-               value="{% trans %}frontend.search_form.submit{% endtrans %}"/>
+        <input type="submit" class="btn-fly btn btn-success" value="{% trans %}frontend.search_form.submit{% endtrans %}"/>
     </div>
 </form>

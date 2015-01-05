@@ -28,25 +28,25 @@ class ComplexSearch
 
 module.exports = class ViewModel
   constructor: ->
-    @dateFrom = ko.observable(searchForm.dateFrom)
-    @dateTo = ko.observable(searchForm.dateTo)
+    @dateFrom = ko.observable(searchForm.date_from)
+    @dateTo = ko.observable(searchForm.date_to)
 
-    @direction = ko.observable(""+searchForm.returnWay)
-    @cityFrom = ko.observable searchForm.cityFrom
-    @cityFromCode = ko.observable searchForm.cityFromCode
+    @direction = ko.observable(""+searchForm.return_way)
+    @cityFrom = ko.observable searchForm.city_from
+    @cityFromCode = ko.observable searchForm.city_from_code
 
-    @cityTo = ko.observable searchForm.cityTo
-    @cityToCode = ko.observable searchForm.cityToCode
+    @cityTo = ko.observable searchForm.city_to
+    @cityToCode = ko.observable searchForm.city_to_code
 
     @adults = ko.observable searchForm.adults
     @children = ko.observable searchForm.children
     @infant = ko.observable searchForm.infant
 
-    @aviaCompany = ko.observable searchForm.aviaCompany
-    @aviaClass = ko.observable searchForm.aviaClass
+    @aviaCompany = ko.observable searchForm.avia_company
+    @aviaClass = ko.observable searchForm.avia_class
     @currency = ko.observable searchForm.currency
-    @bestPrice = ko.observable if searchForm.bestPrice == "" then true else searchForm.bestPrice
-    @directFlights = ko.observable searchForm.directFlights
+    @bestPrice = ko.observable if searchForm.best_price == "" then true else searchForm.best_price
+    @directFlights = ko.observable searchForm.direct_flights
     @changeDirection= ->
 
     @disableDateTo = ko.computed =>

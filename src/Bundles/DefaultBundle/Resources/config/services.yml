@@ -15,6 +15,9 @@ services:
             - merchant: "aviago.c"
               secretkey: "3+mm8|W(1?B58%g9P^4q"
               debug: 1
+    bundles_default_util_route:
+        class: Bundles\DefaultBundle\Util\RouteParams
+        arguments: ["@admin.city.manager"]
 
 
 

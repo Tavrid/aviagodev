@@ -128,11 +128,11 @@ class ApiController extends Controller
     {
         $flights = $this->get('session')->get('flights', array());
         $d = array(
-            'url' => $this->generateUrl('bundles_default_api_list', $params),
-            'formData' => $data
+            'url' => $this->generateUrl('bundles_default_api_list', $params)
         );
         $flights[$this->generateUrl('bundles_default_api_list', $params)] = $d;
         $this->get('session')->set('flights', $flights);
+        $this->get('session')->set('formData', $data);
     }
 
     public function listAction(Request $request)
@@ -151,11 +151,13 @@ class ApiController extends Controller
 
         $form->submit($data);
 
-        $this->addSearchData($request->get('_route_params'), $form->getData());
+        $this->addSearchData($request->get('_route_params'), $this->get('bundles_default_util_route')->resolveParams($request->get('_route_params')));
 
         $resp = $this->render('BundlesDefaultBundle:Api:list.html.twig', array(
             'form' => $form->createView(),
             'form_info' => $formBook->createView(),
+            'form_data' => $this->get('bundles_default_util_route')->resolveParams($request->get('_route_params'))
+
         ));
 
         return $resp;

@@ -1,24 +1,5 @@
 <script type="text/javascript">
-    var d = {{ flights|first|json_encode|raw }} || {formData: {}}
-
-    var searchForm = {
-        dateFrom: d.formData.date_from,
-        dateTo: d.formData.date_to,
-        returnWay: d.formData.return_way,
-        cityFrom: d.formData.city_from,
-        cityFromCode: d.formData.city_from_code,
-        cityTo: d.formData.city_to,
-        cityToCode: d.formData.city_to_code,
-        complexFields: d.formData.complexFields,
-        adults: d.formData.adults,
-        children: d.formData.children,
-        infant: d.formData.infant,
-        aviaCompany:d.formData.avia_company,
-        aviaClass: d.formData.class,
-        currency: d.formData.currency,
-        bestPrice: !!d.formData.best_price,
-        directFlights: !!d.formData.direct_flights
-    };
+    var searchForm = {{ form_data|json_encode|raw }};
 </script>
 
 
@@ -33,20 +14,19 @@
                     {% endfor %}
                 </div>
                 <div class="panel-body panel-blue">
-                    <!-- Город вылета прилета -->
                     <div class="row" data-bind="visible: complexSearch()">
                         {% include "BundlesDefaultBundle:Default:_complex_field.html.twig" %}
                     </div>
                     <div class="row" data-bind="visible: !complexSearch()">
                         <div class="col-md-5 col-avia">
                             <div class="input-group city-from">
-                                            <span class="input-group-addon block-img-avia" data-toggle="tooltip" data-placement="top" data-original-title="Откуда вы вылетаете?">
-                                                <img src="{{ asset('images/avia-up.png') }}" alt="">
-                                            </span>
+                                <span class="input-group-addon block-img-avia" data-toggle="tooltip" data-placement="top" data-original-title="Откуда вы вылетаете?">
+                                    <img src="{{ asset('images/avia-up.png') }}" alt="">
+                                </span>
                                 {{ form_widget(form.city_from, {'attr': {'class': 'from_city','data-bind': 'value: cityFrom,autocomplete: "cityFromCode"'}}) }}
                                 <span class="input-group-btn">
-                                                <button class="btn btn-default button-close" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Очистить поле"></button>
-                                            </span>
+                                    <button class="btn btn-default button-close" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Очистить поле"></button>
+                                </span>
                             </div>
                         </div>
                         <div class="col-md-2 text-center col-return">
@@ -56,13 +36,13 @@
                         </div>
                         <div class="col-md-5 col-avia">
                             <div class="input-group city-to">
-                                            <span class="input-group-addon block-img-avia" data-toggle="tooltip" data-placement="top" data-original-title="Куда вы летите?">
-                                                <img src="{{ asset('images/avia-down.png') }}" alt="">
-                                            </span>
+                                <span class="input-group-addon block-img-avia" data-toggle="tooltip" data-placement="top" data-original-title="Куда вы летите?">
+                                    <img src="{{ asset('images/avia-down.png') }}" alt="">
+                                </span>
                                 {{ form_widget(form.city_to, {'attr': {'class': 'to_city','data-bind': 'value: cityTo,autocomplete: "cityToCode"'}}) }}
                                 <span class="input-group-btn">
-                                                <button class="btn btn-default button-close" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Очистить поле"></button>
-                                            </span>
+                                    <button class="btn btn-default button-close" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Очистить поле"></button>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -71,7 +51,6 @@
                         <div class="col-md-6">
                             <!-- Дата вылета -->
                             <div class="date-from" data-bind="visible: !complexSearch()">
-                                {{ form_row(form.city_from_code,{attr: {'data-bind':'value: cityFromCode'}}) }}
                                 {{ form_label(form.date_from, '', {'attr': {'class': 'date_from'}}) }}
                                 <div class="input-group">
                                     {{ form_widget(form.date_from, {'attr': {'class': 'date_from','data-bind' : 'value: dateFrom'}}) }}
