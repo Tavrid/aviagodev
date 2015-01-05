@@ -5,8 +5,17 @@
         cityFromCode: "{{ form.city_from_code.vars.data }}",
         cityTo: "{{ form.city_to.vars.data }}",
         cityToCode: "{{ form.city_to_code.vars.data }}",
-        complexFields: {{ form.complex.vars.data|json_encode|raw }}
+        complexFields: {{ form.complex.vars.data|json_encode|raw }},
+        adults: "{{ form.adults.vars.data }}",
+        children: "{{ form.children.vars.data }}",
+        infant: "{{ form.infant.vars.data }}",
+        aviaCompany: "{{ form.avia_company.vars.data }}",
+        aviaClass: "{{ form.class.vars.data }}",
+        currency: "{{ form.currency.vars.data }}",
+        bestPrice: "{{ form.best_price.vars.data }}",
+        directFlights: "{{ form.direct_flights.vars.data }}"
     };
+    console.log(searchForm)
 </script>
 
 
@@ -75,7 +84,7 @@
                                     <div class="col-md-4">
                                         <div class="input-group">
                                             <span class="input-group-addon vozrast-icon adult-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите количество взрослых"></span>
-                                            {{ form_widget(form.adults, {'attr': {'class': 'adults'}}) }}
+                                            {{ form_widget(form.adults, {'attr': {'class': 'adults','data-bind' : 'value: adults'}}) }}
                                         </div>
                                         {{ form_label(form.adults, '', {'label_attr':{'class':'info-vozrast'}}) }}
                                     </div>
@@ -84,7 +93,7 @@
                                     <div class="col-md-4">
                                         <div class="input-group">
                                             <span class="input-group-addon vozrast-icon child-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите количество детей"></span>
-                                            {{ form_widget(form.children, {'attr': {'class': 'child'}}) }}
+                                            {{ form_widget(form.children, {'attr': {'class': 'child','data-bind' : 'value: children'}}) }}
                                         </div>
                                         {{ form_label(form.children, '', {'label_attr':{'class':'info-vozrast'}}) }}
                                     </div>
@@ -93,7 +102,7 @@
                                     <div class="col-md-4">
                                         <div class="input-group">
                                             <span class="input-group-addon vozrast-icon infants-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите количество младенцев"></span>
-                                            {{ form_widget(form.infant, {'attr': {'class': 'infant'}}) }}
+                                            {{ form_widget(form.infant, {'attr': {'class': 'infant','data-bind' : 'value: infant'}}) }}
                                         </div>
                                         {{ form_label(form.infant, '', {'label_attr':{'class':'info-vozrast'}}) }}
                                     </div>
@@ -106,7 +115,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         {{ form_label(form.avia_company, '') }}
-                                        {{ form_widget(form.avia_company) }}
+                                        {{ form_widget(form.avia_company,{attr: {'data-bind' : 'value: aviaCompany'}}) }}
                                     </div>
                                 </div>
                             </div>
@@ -127,11 +136,11 @@
                             <div class="row class-valuta">
                                 <div class="col-md-7 klass">
                                     {{ form_label(form.class, '') }}
-                                    {{ form_widget(form.class) }}
+                                    {{ form_widget(form.class,{attr: {'data-bind' : 'aviaClass'}}) }}
                                 </div>
                                 <div class="col-md-5 currency">
                                     {{ form_label(form.currency, '') }}
-                                    {{ form_widget(form.currency) }}
+                                    {{ form_widget(form.currency,{attr: {'data-bind' : 'currency'}}) }}
                                 </div>
                             </div>
                             <!-- Класс и валюта -->
@@ -139,17 +148,17 @@
                             <div class="row price-reys">
                                 <div class="col-md-12 price-block">
                                     <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        {{ form_widget(form.best_price, {'attr': {'class': 'best-price checkbox','checked' : true}}) }}
-                                                    </span>
+                                        <span class="input-group-addon">
+                                            {{ form_widget(form.best_price, {'attr': {'data-bind':'checked: bestPrice','class': 'best-price checkbox','checked' : true}}) }}
+                                        </span>
                                         {{ form_label(form.best_price, 'frontend.search_form.best_price'|trans, {'label_attr':{'class':'form-control'}}) }}
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        {{ form_widget(form.direct_flights, {'attr': {'class': 'best-price checkbox'}}) }}
-                                                    </span>
+                                        <span class="input-group-addon">
+                                            {{ form_widget(form.direct_flights, {'attr': {'data-bind' : 'checked: directFlights','class': 'best-price checkbox'}}) }}
+                                        </span>
                                         {{ form_label(form.direct_flights, 'frontend.search_form.direct_flights'|trans, {'label_attr':{'class':'form-control'}}) }}
                                     </div>
                                 </div>

@@ -11,8 +11,8 @@ var gutil = require('gulp-util');
 module.exports = function (gulp, argv) {
     var pat = [
         {
-            coffee: path.join(__dirname, '/js/index/index.coffee'),
-            watch: [path.join(__dirname, '/js/index/*.coffee')],
+            coffee: path.join(__dirname, '/src/js/index/index.coffee'),
+            watch: [path.join(__dirname, '/src/js/index/*.coffee')],
             outputJs: 'index.js',
             outputDist: './web/build/dist/js/index'
         }
@@ -59,7 +59,7 @@ module.exports = function (gulp, argv) {
     gulp.task('default', tasks);
 
     if (argv.dev) {
-        gulp.watch(['./src/Bundles/DefaultBundle/Resources/public/js/*.js'], ['default_bundle_index_js']);
+        gulp.watch(['./src/Bundles/DefaultBundle/Resources/public/src/js/*.js'], ['default_bundle_index_js']);
     }
 
     return tasks;

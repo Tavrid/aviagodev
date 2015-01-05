@@ -1,8 +1,12 @@
 ko = require "knockout"
 _ = require "underscore"
-require "./ko_autocomplete"
-require "./datepicker"
-require "./validate"
+resolveField = (objList) ->
+  objList = objList || [{},{}]
+  retList = []
+  _.each objList,(obj)->
+    retList.push new ComplexSearch obj
+  return retList
+
 class ComplexSearch
   constructor: (o = {}) ->
     @cityFrom = ko.observable o.cityFrom
@@ -19,15 +23,10 @@ class ComplexSearch
       @cityTo(cityFromTemp)
       @cityToCode(cityFromCodeTemp)
 
-resolveField = (objList) ->
-  objList = objList || [{},{}]
-  retList = []
-  _.each objList,(obj)->
-    retList.push new ComplexSearch obj
-  return retList
 
 
-class ViewModel
+
+module.exports = class ViewModel
   constructor: ->
     @direction = ko.observable(searchForm.returnWay)
     @cityFrom = ko.observable searchForm.cityFrom
@@ -35,7 +34,14 @@ class ViewModel
 
     @cityTo = ko.observable searchForm.cityTo
     @cityToCode = ko.observable searchForm.cityToCode
-
+    @adults = ko.observable searchForm.adults
+    @children = ko.observable searchForm.children
+    @infant = ko.observable searchForm.infant
+    @aviaCompany = ko.observable searchForm.aviaCompany
+    @aviaClass = ko.observable searchForm.aviaClass
+    @currency = ko.observable searchForm.currency
+    @bestPrice = ko.observable if searchForm.bestPrice == "" then true else searchForm.bestPrice
+    @directFlights = ko.observable searchForm.directFlights
     @changeDirection= ->
 
     @disableDateTo = ko.computed =>
@@ -50,11 +56,3 @@ class ViewModel
     @removeLocation = (o)=>
       if @complexFields().length > 2
         @complexFields.remove o
-
-
-
-
-$(->
-  vm = new ViewModel
-  ko.applyBindings vm
-)

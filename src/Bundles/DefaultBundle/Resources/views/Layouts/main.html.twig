@@ -9,7 +9,7 @@
         {% endblock %}
     </head>
     <body>
-        {% javascripts '@jquery' '@jquery_ui_js' '@front_bootstrap_js' combine=true%}
+        {% javascripts '@jquery' '@jquery_ui_js' combine=true%}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
         <header role="contentinfo">
@@ -34,7 +34,6 @@
         {% javascripts
         '@front_bootstrap_js'
         'bundles/bundlesdefault/lib/popup.js'
-        'bundles/bundlesdefault/lib/moment.js'
         'bundles/bundlesdefault/js/app.js'
         'bundles/bundlesdefault/lib/jquery_validator/dist/jquery.validate.min.js'
         'bundles/bundlesdefault/js/default/jquery.selectbox.min.js'
