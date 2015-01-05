@@ -71,26 +71,7 @@ class SearchForm extends AbstractType
         for ($i = 0; $i < 5; $i++) {
             $infant[$i] = $i;
         }
-        $builder->add('complex','sub_multi_field',array(
-            'entity' => null,
-            'label' => 'Города',
-            'need_value' => 2,
-            'field_map' => [
-                'city_from' => ['field', new Assert\NotBlank()],
-                'city_from_code' => ['field', new Assert\NotBlank()],
-                'city_to' => ['field', new Assert\NotBlank()],
-                'city_to_code' => ['field', new Assert\NotBlank()],
-                'date' => ['field', new Assert\NotBlank()],
-            ],
-            'types' => [
-                'city_from_code' => ['type' => 'hidden'],
-                'city_to_code' => ['type' => 'hidden'],
-                'city_from' => ['options' => ['attr' => ['placeholder' => 'frontend.search_form.placeholders.city']]],
-                'city_to' => ['options' => ['attr' => ['placeholder' => 'frontend.search_form.placeholders.city']]],
-                'date' => ['type' => 'date','options' => ['widget' => 'single_text','attr' => ['placeholder' => 'Дата']]]
-            ]
-        ))
-            ->add('city_from', 'text', [
+        $builder->add('city_from', 'text', [
                 'label' => 'frontend.search_form.city_from',
 //                'mapped' => false,
                 'attr' => ['placeholder' => 'frontend.search_form.placeholders.city']
