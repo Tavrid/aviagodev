@@ -1,5 +1,7 @@
 <script type="text/javascript">
     var searchForm = {
+        dateFrom: "{{ form.date_from.vars.data }}",
+        dateTo: "{{ form.date_to.vars.data }}",
         returnWay: "{{ form.return_way.vars.data }}",
         cityFrom: "{{ form.city_from.vars.data }}",
         cityFromCode: "{{ form.city_from_code.vars.data }}",
@@ -71,7 +73,7 @@
                                 {{ form_row(form.city_from_code,{attr: {'data-bind':'value: cityFromCode'}}) }}
                                 {{ form_label(form.date_from, '', {'attr': {'class': 'date_from'}}) }}
                                 <div class="input-group">
-                                    {{ form_widget(form.date_from, {'attr': {'class': 'date_from'}}) }}
+                                    {{ form_widget(form.date_from, {'attr': {'class': 'date_from','data-bind' : 'value: dateFrom'}}) }}
                                     <span class="input-group-addon date-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите дату вылета"></span>
                                 </div>
                             </div>
@@ -127,7 +129,7 @@
                                 {{ form_row(form.city_to_code,{attr: {'data-bind':'value: cityToCode'}}) }}
                                 {{ form_label(form.date_to, '', {'attr': {'class': 'date_from'}}) }}
                                 <div class="input-group">
-                                    {{ form_widget(form.date_to, {'attr': {'class': 'date_from','data-bind': 'enable:disableDateTo'}}) }}
+                                    {{ form_widget(form.date_to, {'attr': {'class': 'date_from','data-bind': 'value: dateTo,enable:disableDateTo'}}) }}
                                     <span class="input-group-addon date-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите дату прилета"></span>
                                 </div>
                             </div>
@@ -136,11 +138,11 @@
                             <div class="row class-valuta">
                                 <div class="col-md-7 klass">
                                     {{ form_label(form.class, '') }}
-                                    {{ form_widget(form.class,{attr: {'data-bind' : 'aviaClass'}}) }}
+                                    {{ form_widget(form.class,{attr: {'data-bind' : 'value: aviaClass'}}) }}
                                 </div>
                                 <div class="col-md-5 currency">
                                     {{ form_label(form.currency, '') }}
-                                    {{ form_widget(form.currency,{attr: {'data-bind' : 'currency'}}) }}
+                                    {{ form_widget(form.currency,{attr: {'data-bind' : 'value: currency'}}) }}
                                 </div>
                             </div>
                             <!-- Класс и валюта -->

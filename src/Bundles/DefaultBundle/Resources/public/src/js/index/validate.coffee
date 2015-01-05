@@ -26,38 +26,32 @@ ko.bindingHandlers.validate = init: (element, valueAccessor, allBindingsAccessor
         return
 
       submitHandler: (form) ->
-        cityCodes = []
-        date = []
-        _.each data.complexFields(), (o) ->
-          cityCodes.push "#{o.cityFromCode()}-#{o.cityToCode()}"
-          date.push o.date()
-
-        console.log Routing.generate "bundles_default_search_complex_search",
-          city: cityCodes.join "_"
-          date: date.join "_"
-          adults: data.adults()
-          children: data.children()
-          infant: data.infant()
+        params =
+          adults: parseInt data.adults()
+          children: if data.children() then parseInt data.children() else 0
+          infant: if data.infant() then parseInt data.infant() else 0
           "class" : data.aviaClass()
-          return_way: data.direction()
+          return_way: parseInt data.direction()
           currency: data.currency()
           avia_company: data.aviaCompany()
-          best_price: 0+!!data.bestPrice()
-          direct_flights: 0+!!data.directFlights()
-        console.log Routing.generate "bundles_default_api_list",
-          city_from_code: data.cityFromCode()
-          city_to_code: data.cityToCode()
-          date_from: data.dateFrom()
-          date_to: data.dateTo()
-          adults: data.adults()
-          children: data.children()
-          infant: data.infant()
-          "class" : data.aviaClass()
-          return_way: data.direction()
-          currency: data.currency()
-          avia_company: data.aviaCompany()
-          best_price: 0+!!data.bestPrice()
-          direct_flights: 0+!!data.directFlights()
+          best_price: if data.bestPrice() then 1 else 0
+          direct_flights: if data.directFlights() then 1 else 0
+        if data.complexSearch()
+          cityCodes = []
+          date = []
+          _.each data.complexFields(), (o) ->
+            cityCodes.push "#{o.cityFromCode()}-#{o.cityToCode()}"
+            date.push o.date()
+          params.city = cityCodes.join "_"
+          params.date = date.join "_"
+          url = Routing.generate "bundles_default_search_complex_search",params
+        else
+          params.city_from_code = data.cityFromCode()
+          params.city_to_code = data.cityToCode()
+          params.date_from = data.dateFrom()
+          params.date_to = data.dateTo()
+          url =  Routing.generate "bundles_default_api_list",params
+        window.location = url
         false
 
       ignore: ":hidden"

@@ -11,4 +11,5 @@ ViewModel = require "./search_form_model"
 $(->
   vm = new ViewModel
   ko.applyBindings vm
+
 )
