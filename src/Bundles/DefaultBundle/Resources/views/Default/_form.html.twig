@@ -1,6 +1,6 @@
 <script type="text/javascript">
     var d = {{ flights|first|json_encode|raw }} || {formData: {}}
-    console.log(d);
+
     var searchForm = {
         dateFrom: d.formData.date_from,
         dateTo: d.formData.date_to,
@@ -19,7 +19,6 @@
         bestPrice: !!d.formData.best_price,
         directFlights: !!d.formData.direct_flights
     };
-    console.log(searchForm)
 </script>
 
 
