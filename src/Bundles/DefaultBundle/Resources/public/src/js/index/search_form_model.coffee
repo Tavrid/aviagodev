@@ -31,7 +31,7 @@ module.exports = class ViewModel
     @dateFrom = ko.observable(searchForm.dateFrom)
     @dateTo = ko.observable(searchForm.dateTo)
 
-    @direction = ko.observable(searchForm.returnWay)
+    @direction = ko.observable(""+searchForm.returnWay)
     @cityFrom = ko.observable searchForm.cityFrom
     @cityFromCode = ko.observable searchForm.cityFromCode
 

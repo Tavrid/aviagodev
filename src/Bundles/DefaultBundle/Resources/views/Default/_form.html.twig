@@ -1,21 +1,23 @@
 <script type="text/javascript">
+    var d = {{ flights|first|json_encode|raw }} || {formData: {}}
+    console.log(d);
     var searchForm = {
-        dateFrom: "{{ form.date_from.vars.data }}",
-        dateTo: "{{ form.date_to.vars.data }}",
-        returnWay: "{{ form.return_way.vars.data }}",
-        cityFrom: "{{ form.city_from.vars.data }}",
-        cityFromCode: "{{ form.city_from_code.vars.data }}",
-        cityTo: "{{ form.city_to.vars.data }}",
-        cityToCode: "{{ form.city_to_code.vars.data }}",
-        complexFields: {{ form.complex.vars.data|json_encode|raw }},
-        adults: "{{ form.adults.vars.data }}",
-        children: "{{ form.children.vars.data }}",
-        infant: "{{ form.infant.vars.data }}",
-        aviaCompany: "{{ form.avia_company.vars.data }}",
-        aviaClass: "{{ form.class.vars.data }}",
-        currency: "{{ form.currency.vars.data }}",
-        bestPrice: "{{ form.best_price.vars.data }}",
-        directFlights: "{{ form.direct_flights.vars.data }}"
+        dateFrom: d.formData.date_from,
+        dateTo: d.formData.date_to,
+        returnWay: d.formData.return_way,
+        cityFrom: d.formData.city_from,
+        cityFromCode: d.formData.city_from_code,
+        cityTo: d.formData.city_to,
+        cityToCode: d.formData.city_to_code,
+        complexFields: d.formData.complexFields,
+        adults: d.formData.adults,
+        children: d.formData.children,
+        infant: d.formData.infant,
+        aviaCompany:d.formData.avia_company,
+        aviaClass: d.formData.class,
+        currency: d.formData.currency,
+        bestPrice: !!d.formData.best_price,
+        directFlights: !!d.formData.direct_flights
     };
     console.log(searchForm)
 </script>

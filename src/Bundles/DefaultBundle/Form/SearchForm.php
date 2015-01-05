@@ -174,16 +174,16 @@ class SearchForm extends AbstractType
         $transformer = new SearchFormTransformer();
         $builder->addModelTransformer($transformer);
 
-        if($this->session){
-            $session = $this->session;
-            $builder->addEventListener(FormEvents::PRE_SET_DATA,function(FormEvent $formEvent)use($session){
-                $flights = $session->get('flights',[]);
-                $d = array_pop($flights);
-                if(isset($d['formData'])){
-                    $formEvent->setData($d['formData']);
-                }
-            });
-        }
+//        if($this->session){
+//            $session = $this->session;
+//            $builder->addEventListener(FormEvents::PRE_SET_DATA,function(FormEvent $formEvent)use($session){
+//                $flights = $session->get('flights',[]);
+//                $d = array_pop($flights);
+//                if(isset($d['formData'])){
+//                    $formEvent->setData($d['formData']);
+//                }
+//            });
+//        }
 
     }
 

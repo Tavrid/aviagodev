@@ -12,15 +12,15 @@ class DefaultController extends Controller {
     // C330CA8C-DCDF-4CA8-A5E0-F5E4E1612440
     public function indexAction(Request $request) {
 
-        
+
         $form = $this->createForm('search_form');
 
-        $flights = $this->get('session')->get('flights', []);
+        $flights = array_reverse($this->get('session')->get('flights', []));
 
         return $this->render('BundlesDefaultBundle:Default:index.html.twig', [
-                    'form' => $form->createView(),
                     'flights' => $flights,
-                    'form_data' => json_encode($form->getData())
+                    'form' => $form->createView()
+//                    'form_data' => $flights['formData']
         ]);
     }
 
