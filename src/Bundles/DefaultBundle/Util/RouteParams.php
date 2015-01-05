@@ -36,7 +36,7 @@ class RouteParams {
             $params['city_from'] = $this->airports->getFormattedNameByIata($params['city_from_code']);
         }
         if(isset($params['city_to_code'])){
-            $params['city_to'] = $this->airports->getFormattedNameByIata($params['city_from_code']);
+            $params['city_to'] = $this->airports->getFormattedNameByIata($params['city_to_code']);
         }
         return $params;
     }

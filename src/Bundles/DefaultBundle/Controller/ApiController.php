@@ -10,6 +10,7 @@ use Bundles\ApiBundle\Api\Query\SearchByQuery;
 use Bundles\ApiBundle\Api\Query\BookInfoQuery;
 use Bundles\ApiBundle\Api\Query\BookQuery;
 use Bundles\ApiBundle\Api\Query\AviaCalendarQuery;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Bundles\DefaultBundle\Response\AjaxSearchResponse;
@@ -199,8 +200,7 @@ class ApiController extends Controller
                 'countPages' => $f->getCountPages(),
                 'hasNext' => $page < $f->getCountPages()
             );
-            $resp = new Response(json_encode($d));
-            $resp->headers->add(array('Content-Type' => 'application/json'));
+            $resp = new JsonResponse($d);
             return $resp;
         } else {
             throw $this->createNotFoundException();

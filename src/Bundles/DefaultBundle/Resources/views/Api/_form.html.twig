@@ -152,6 +152,8 @@
     {{ form_row(form.class,{attr: {'data-bind' : 'value: aviaClass'}}) }}
     {{ form_row(form.avia_company,{attr: {'data-bind' : 'value: aviaCompany'}}) }}
     {{ form_row(form.currency,{attr: {'data-bind' : 'value: currency'}}) }}
+    {{ form_row(form.city_from_code,{attr:{'data-bind' : 'cityFromCode'}}) }}
+    {{ form_row(form.city_to_code,{attr:{'data-bind' : 'cityToCode'}}) }}
     <div class="text-right">
         <input type="submit" class="btn-fly btn btn-success" value="{% trans %}frontend.search_form.submit{% endtrans %}"/>
     </div>
