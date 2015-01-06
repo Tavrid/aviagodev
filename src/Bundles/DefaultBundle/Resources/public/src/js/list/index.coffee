@@ -12,7 +12,8 @@ pager = new Paginator
 class ViewModel extends ViewModelBase
   constructor:(requestHandler) ->
     super()
-    @viewCalendar = !!@bestPrice()
+#    @viewCalendar = !!@bestPrice()
+    @viewCalendar = false
     @hasNext = ko.observable false
     @getNext = ->
       pager.getItems this, requestHandler
@@ -25,12 +26,21 @@ $(->
 
   vm = new ViewModel(requestHandler)
   ko.applyBindings vm
-  pager.getItems vm, requestHandler
-
+  setTimeout ->
+    pager.getItems vm, requestHandler
+#    if vm.viewCalendar
+#      filterForm = $("#filter-form").serializeArray()
+#      url = routeCreator.createComplexCalendar vm
+#      $.post url, filterForm, (data) ->
+#        $("#avia-calendar-box").html data
+#        return
+  , 300
   $('body').on 'change', '#filter-form', ->
     pager.clear().getItems vm, (res) ->
       vm.hasNext !!res.hasNext
       $('#result-box').html res.html
       $('#search-result-box').html res.filter_form
       _GlobalAppObject.loadingStop()
+
+#  bundles_default_api_complex_calendar
 )

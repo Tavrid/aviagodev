@@ -10,7 +10,7 @@ namespace Bundles\ApiBundle\Api\Query;
 
 use Bundles\ApiBundle\Api\Model\AviaClassMapping;
 
-class ComplexSearchByQuery extends QueryAbstract
+class AviaComplexCalendarQuery extends QueryAbstract
 {
 
     protected $params;
@@ -52,11 +52,10 @@ class ComplexSearchByQuery extends QueryAbstract
             ];
         }
 
-
         $paramsR = [
             'jsonrpc' => '2.0',
             'id' => 1,
-            'method' => 'AviaSearch',
+            'method' => 'AviaCalendar',
             'params' => [
                 [
                     'Type' => 'Site',
@@ -92,32 +91,28 @@ class ComplexSearchByQuery extends QueryAbstract
 
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getApiUrl()
     {
         return 'http://ws.demo.webservices.aero/';
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getKeyByParams()
     {
         $params = array_intersect_key($this->params, [
+            'city_from_code' => '',
+            'city_to_code' => '',
             'date_from' => '',
             'date_to' => '',
             'class' => '',
             'adults' => '',
             'children' => '',
             'infant' => '',
-            ]);
+        ]);
         foreach($this->params['complexFields'] as $field){
             $params[] = $field['cityFromCode'].$field['cityToCode'].$field['date'];
 
         }
-        $params[] = 'AviaComplexSearch';
+        $params[] = 'AviaComplexCalendar';
         return preg_replace('/[ ]+/i', '', implode(':', $params));
     }
 

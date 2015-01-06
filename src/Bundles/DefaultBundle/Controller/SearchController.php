@@ -2,8 +2,11 @@
 
 namespace Bundles\DefaultBundle\Controller;
 
+use Bundles\ApiBundle\Api\Util\Calendar;
 use Bundles\ApiBundle\Api\Model\SearchFilters;
 use Bundles\ApiBundle\Api\Model\SearchResultFilter;
+use Bundles\ApiBundle\Api\Query\AviaCalendarQuery;
+use Bundles\ApiBundle\Api\Query\AviaComplexCalendarQuery;
 use Bundles\ApiBundle\Api\Query\ComplexSearchByQuery;
 use Bundles\DefaultBundle\Form\BookInfoForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -13,9 +16,26 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SearchController extends Controller
 {
-    public function indexAction($name)
+    public function calendarAction(Request $request)
     {
-        return $this->render('', array('name' => $name));
+
+        $resp = null;
+        /** @var \Bundles\ApiBundle\Api\Api $api */
+        $api = $this->get('avia.api.manager');
+        $params = $this->get('bundles_default_util_route')
+            ->resolveParams($request->get('_route_params'));
+
+        $query = new AviaComplexCalendarQuery();
+        $query->setParams($params);
+        $output = $api->getAviaCalendarRequestor()->execute($query);
+        if (!$output->getIsError()) {
+            return $this->render('BundlesDefaultBundle:Api:_calendar.html.twig', [
+                'data' => $output,
+                'route_params' => $params,
+                'table' => Calendar::createTable($params['date_from'], $params['date_to'])
+            ]);
+        }
+        throw $this->createNotFoundException();
     }
 
     public function complexSearchAction(Request $request){

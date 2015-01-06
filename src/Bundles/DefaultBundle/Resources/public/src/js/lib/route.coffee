@@ -43,5 +43,18 @@ module.exports = class
         date.push o.date()
       params.city = cityCodes.join "_"
       params.date = date.join "_"
+
       url = Routing.generate "bundles_default_search_complex_search_items",params
     return url
+
+  createComplexCalendar: (ViewModel,routeParams = {}) ->
+    params = getDefaultParams ViewModel
+    params = _.extend(routeParams,params)
+    cityCodes = []
+    date = []
+    _.each ViewModel.complexFields(), (o) ->
+      cityCodes.push "#{o.cityFromCode()}-#{o.cityToCode()}"
+      date.push o.date()
+    params.city = cityCodes.join "_"
+    params.date = date.join "_"
+    Routing.generate "bundles_default_api_complex_calendar", params

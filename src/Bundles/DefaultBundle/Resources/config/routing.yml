@@ -52,6 +52,16 @@ bundles_default_api_calendar:
     pattern: /api/avia-calendar
     defaults: { _controller: BundlesDefaultBundle:Api:calendar}
 
+bundles_default_api_complex_calendar:
+    pattern:  /avia-calendar/{city}/{date}/{best_price}/{adults}/{return_way}/{children}/{infant}/{class}/{currency}/{avia_company}/{direct_flights}
+    defaults: { _controller: BundlesDefaultBundle:Search:calendar,adults: 1,class: Y ,children: 0,infant: 0,return_way : 2,direct_flights: 0, best_price: 1,avia_company: all, currency: usd}
+    requirements:
+          city: "[\w\-]+"
+          date: "[\d\-_]+"
+          direct_flights:  0|1
+          return_way:  0|1
+          best_price:  0|1
+
 bundles_default.api.calendar_item_info:
     pattern: /api/avia-calendar/info
     defaults: { _controller: BundlesDefaultBundle:Api:calendarItemInfo}
