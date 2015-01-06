@@ -1,0 +1,46 @@
+{% extends "BundlesDefaultBundle:Layouts:main.html.twig" %}
+{% block js %}
+    {{ parent() }}
+    <script type="application/javascript" src="{{ asset('build/dist/js/list/index.js') }}"></script>
+
+{% endblock %}
+{% block body %}
+    <script>
+        var searchForm = {{ form_data|json_encode|raw }};
+
+    </script>
+    <div class="col-md-3 filter-form">
+        <div class="well bg-gradient list-form-input">
+            {% include "BundlesDefaultBundle:Api:_form.html.twig" %}
+        </div>
+        <div class="well bg-gradient list-form-input">
+            <div id="search-result-box">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9 result-box">
+        <div class="well well-box" data-bind="visible: viewCalendar">
+            <div class="panel panel-box panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{%trans%}frontend.default.calendar.best_price{%endtrans%}</h3>
+                </div>
+                <div  id="avia-calendar-box" class="panel-body">
+                    <img alt="" src="{{ asset('bundles/bundlesdefault/img/ajax-loader.gif') }}" />
+                </div>
+            </div>
+        </div>
+        <div id="result-box">
+        </div>
+        <div class="btn btn-default hidden" id="get-next">
+            {%trans%}frontend.default.list.show_more{%endtrans%}
+        </div>
+
+    </div>
+    <div id="calendar-popup">
+
+    </div>
+
+
+
+{% endblock %}

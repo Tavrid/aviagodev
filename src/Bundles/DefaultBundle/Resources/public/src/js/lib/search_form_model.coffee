@@ -2,7 +2,7 @@ ko = require "knockout"
 _ = require "underscore"
 resolveField = (objList) ->
 #  objList = if objList instanceof Object then
-  objList = if objList.length > 0 then objList else [{},{}]
+  objList = if objList && objList.length > 0 then objList else [{},{}]
   retList = []
   _.each objList,(obj)->
     retList.push new ComplexSearch obj
@@ -32,7 +32,7 @@ module.exports = class ViewModel
     @dateFrom = ko.observable(searchForm.date_from)
     @dateTo = ko.observable(searchForm.date_to)
 
-    @direction = ko.observable(""+searchForm.return_way)
+    @direction = if searchForm.return_way then ko.observable ""+searchForm.return_way else ko.observable 1
     @cityFrom = ko.observable searchForm.city_from
     @cityFromCode = ko.observable searchForm.city_from_code
 

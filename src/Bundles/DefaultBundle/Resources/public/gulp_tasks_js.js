@@ -12,9 +12,15 @@ module.exports = function (gulp, argv) {
     var pat = [
         {
             coffee: path.join(__dirname, '/src/js/index/index.coffee'),
-            watch: [path.join(__dirname, '/src/js/index/*.coffee')],
+            watch: [path.join(__dirname, '/src/js/**/*.coffee')],
             outputJs: 'index.js',
             outputDist: './web/build/dist/js/index'
+        },
+        {
+            coffee: path.join(__dirname, '/src/js/list/index.coffee'),
+            watch: [path.join(__dirname, '/src/js/**/*.coffee')],
+            outputJs: 'index.js',
+            outputDist: './web/build/dist/js/list'
         }
     ];
     var tasks = [];
