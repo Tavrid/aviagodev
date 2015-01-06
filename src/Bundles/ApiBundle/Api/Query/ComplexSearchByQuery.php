@@ -40,21 +40,19 @@ class ComplexSearchByQuery extends QueryAbstract
     {
         //return_way
 
-        $routes = [
-            [
-                'Departure' => $this->params['city_from_code'],
-                'Arrival' => $this->params['city_to_code'],
-                'Date' => $this->params['date_from'],
-            ],
-        ];
+        $routes = [];
 
-        if ($this->params['return_way']) {
+
+
+        foreach($this->params['complexFields'] as $field){
             $routes[] = [
-                'Departure' => $this->params['city_to_code'],
-                'Arrival' => $this->params['city_from_code'],
-                'Date' => $this->params['date_to'],
+                'Departure' => $field['cityFromCode'],
+                'Arrival' => $field['cityToCode'],
+                'Date' => $field['date'],
             ];
         }
+
+
         $paramsR = [
             'jsonrpc' => '2.0',
             'id' => 1,

@@ -1,6 +1,6 @@
 _ = require "underscore"
 module.exports = class
-  createSearch: (ViewModel)->
+  getDefaultParams =(ViewModel) ->
     params =
       adults: parseInt ViewModel.adults()
       children: if ViewModel.children() then parseInt ViewModel.children() else 0
@@ -11,6 +11,9 @@ module.exports = class
       avia_company: ViewModel.aviaCompany()
       best_price: if ViewModel.bestPrice() then 1 else 0
       direct_flights: if ViewModel.directFlights() then 1 else 0
+    return params
+  createSearch: (ViewModel)->
+    params = getDefaultParams ViewModel
     if ViewModel.complexSearch()
       cityCodes = []
       date = []
@@ -26,4 +29,19 @@ module.exports = class
       params.date_from = ViewModel.dateFrom()
       params.date_to = ViewModel.dateTo()
       url =  Routing.generate "bundles_default_api_list",params
+    return url
+  createComplexSearchItems: (ViewModel,routeParams = {}) ->
+
+    params = getDefaultParams ViewModel
+    params = _.extend(routeParams,params)
+    url = null
+    if ViewModel.complexSearch()
+      cityCodes = []
+      date = []
+      _.each ViewModel.complexFields(), (o) ->
+        cityCodes.push "#{o.cityFromCode()}-#{o.cityToCode()}"
+        date.push o.date()
+      params.city = cityCodes.join "_"
+      params.date = date.join "_"
+      url = Routing.generate "bundles_default_search_complex_search_items",params
     return url

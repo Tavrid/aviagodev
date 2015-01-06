@@ -2,8 +2,12 @@
 
 namespace Bundles\DefaultBundle\Controller;
 
+use Bundles\ApiBundle\Api\Model\SearchFilters;
+use Bundles\ApiBundle\Api\Model\SearchResultFilter;
+use Bundles\ApiBundle\Api\Query\ComplexSearchByQuery;
 use Bundles\DefaultBundle\Form\BookInfoForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -29,8 +33,42 @@ class SearchController extends Controller
 
     }
 
-    public function actionGetFilteredItems(Request $request){
+    public function getFilteredItemsAction(Request $request){
+        $page = $request->get('page',1);
+        $formBook = $this->createForm(new BookInfoForm());
+        $api = $this->get('avia.api.manager');
+        $params = $this->get('bundles_default_util_route')
+            ->resolveParams($request->get('_route_params'));
 
+        $query = new ComplexSearchByQuery();
+        $query->setParams($params);
+        $output = $api->getSearchRequestor()->execute($query);
+        if (!$output->getIsError()) {
+            $filterForm = $this->createForm('filter', null, ['searchResponse' => $output]);
+            if ($request->get($filterForm->getName())) {
+                $filterForm->submit($request);
+                $filterParams = $filterForm->getData();
+            } else {
+                $filterParams = array();
+            }
+
+            $f = new SearchResultFilter($output, $this->container->getParameter('bundles_default.count_on_page'));
+            $data = $f->getData($page, SearchFilters::getFiltersByParams($filterForm->getData(), $params));
+            $d = array(
+                'html' => $this->renderView('BundlesDefaultBundle:Api:_items.html.twig', array(
+                    'data' => $data,
+                    'form_info' => $formBook->createView()
+                )),
+                'filter_form' => $this->renderView('BundlesDefaultBundle:Api:_filter_form.html.twig', ['filter_form' => $filterForm->createView()]
+                ),
+                'countPages' => $f->getCountPages(),
+                'hasNext' => $page < $f->getCountPages()
+            );
+            $resp = new JsonResponse($d);
+            return $resp;
+        } else {
+            throw $this->createNotFoundException();
+        }
     }
 
     public function addSearchData($routeParams,$data)

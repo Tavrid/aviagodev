@@ -30,6 +30,15 @@ bundles_default_search_complex_search:
           direct_flights:  0|1
           return_way:  0|1
           best_price:  0|1
+bundles_default_search_complex_search_items:
+    pattern:  /complex-search/items/{city}/{date}/{best_price}/{adults}/{return_way}/{children}/{infant}/{class}/{currency}/{avia_company}/{direct_flights}
+    defaults: { _controller: BundlesDefaultBundle:Search:getFilteredItems,adults: 1,class: Y ,children: 0,infant: 0,return_way : 2,direct_flights: 0, best_price: 1,avia_company: all, currency: usd}
+    requirements:
+          city: "[\w\-]+"
+          date: "[\d\-_]+"
+          direct_flights:  0|1
+          return_way:  0|1
+          best_price:  0|1
 
 bundles_default_api_info:
     pattern: /api/flight/info
