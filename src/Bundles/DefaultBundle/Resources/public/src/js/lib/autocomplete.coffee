@@ -5,6 +5,7 @@ delObj = new Delay()
 
 ko.bindingHandlers.autocomplete = init: (element, valueAccessor, allBindingsAccessor, data, context) ->
   el = data[valueAccessor()]
+  $(element).attr 'autocomplete', 'off'
   t = typehead element,
     source: (req, res)->
       self = this
@@ -31,6 +32,13 @@ ko.bindingHandlers.autocomplete = init: (element, valueAccessor, allBindingsAcce
       return true
 
 
+  t.show =  ->
+    self = this
+    offset = self.element.offset()
+    self.menu.css({left: "#{offset.left}px",top: "#{offset.top + self.element.outerHeight()}px"})
+    self.menu.removeClass "hidden"
+    self.shown = true
+    self
   t.select = ->
     self = this
     val = self.menu.find('.active').attr('data-value')
