@@ -28,11 +28,10 @@ ko.bindingHandlers.validate = init: (element, valueAccessor, allBindingsAccessor
         return
 
       submitHandler: (form) ->
-        window.location = routeCreator.createSearch data
+        if $(element).find('input').valid()
+          window.location = routeCreator.createSearch data
         false
-
       ignore: ":hidden"
-
 
 
   )
