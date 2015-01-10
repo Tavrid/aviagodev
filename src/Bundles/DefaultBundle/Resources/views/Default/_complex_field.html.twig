@@ -6,7 +6,7 @@
                       data-original-title="Откуда вы вылетаете?">
                     <img src="{{ asset('images/avia-up.png') }}" alt="">
                 </span>
-                <input required="true" type="text" class="form-control from_city" data-bind="value: cityFrom,autocomplete: 'cityFromCode'">
+                <input name="" value="" required="required" type="text" class="form-control from_city" data-bind="value: cityFrom,autocomplete: 'cityFromCode'">
                 <span class="input-group-btn">
                     <button class="btn btn-default button-close" type="button" data-toggle="tooltip"
                             data-placement="top" data-original-title="Очистить поле">
@@ -26,7 +26,7 @@
                       data-placement="top" data-original-title="Куда вы летите?">
                     <img src="{{ asset('images/avia-down.png') }}" alt="">
                 </span>
-                <input required="true" type="text" class="form-control to_city" data-bind="value: cityTo, autocomplete: 'cityToCode'">
+                <input name="" value="" required="required" type="text" class="form-control to_city" data-bind="value: cityTo, autocomplete: 'cityToCode'">
                 <span class="input-group-btn">
                     <button class="btn btn-default button-close" type="button"
                             data-toggle="tooltip" data-placement="top"
@@ -38,7 +38,7 @@
         <div class="col-md-5">
             <div class="date-from">
                 <div class="input-group">
-                    <input type="date" required="required" class="form-control date_from" data-bind="value: date,datepicker:date">
+                    <input value="" name="date" type="date" required="required" pattern="\d{4}\-\d{2}\-\d{2}" class="form-control date_from" data-bind="value: date,datepicker:date">
 
                     <span class="input-group-addon date-icon" data-toggle="tooltip" data-placement="top"
                           data-original-title="Выберите дату вылета">
@@ -46,7 +46,7 @@
                 </div>
             </div>
         </div>
-        <a href="" class="pull-right" data-bind="click: $root.removeLocation">Удалить</a>
+        <a href="" class="pull-right" data-bind="click: $root.removeLocation, visible: $root.viewDeleteButton()">Удалить</a>
     </div>
 </div>
 <div class="btn btn-default" data-bind="click:addLocation">Добавить</div>
