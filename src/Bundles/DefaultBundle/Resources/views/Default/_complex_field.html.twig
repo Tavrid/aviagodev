@@ -1,52 +1,59 @@
-<div class="wrap-fields" data-bind="foreach: complexFields">
-    <div class="row">
-        <div class="col-md-5 col-avia">
-            <div class="input-group city-from">
-                <span class="input-group-addon block-img-avia" data-toggle="tooltip" data-placement="top"
-                      data-original-title="Откуда вы вылетаете?">
-                    <img src="{{ asset('images/avia-up.png') }}" alt="">
-                </span>
-                <input name="" value="" required="required" type="text" class="form-control from_city" data-bind="value: cityFrom,autocomplete: 'cityFromCode'">
-                <span class="input-group-btn">
-                    <button class="btn btn-default button-close" type="button" data-toggle="tooltip"
-                            data-placement="top" data-original-title="Очистить поле">
-                    </button>
-                </span>
-            </div>
-        </div>
-        <div class="col-md-2 text-center col-return">
-            <button data-bind="click: reverseCity" type="button" class="btn btn-primary button-refresh" data-toggle="tooltip"
-                    data-placement="top" data-original-title="Поменять местами вылет и прилет">
-                <img src="{{ asset('images/refresh-white.png') }}" alt="">
-            </button>
-        </div>
-        <div class="col-md-5 col-avia">
-            <div class="input-group city-to">
-                <span class="input-group-addon block-img-avia" data-toggle="tooltip"
-                      data-placement="top" data-original-title="Куда вы летите?">
-                    <img src="{{ asset('images/avia-down.png') }}" alt="">
-                </span>
-                <input name="" value="" required="required" type="text" class="form-control to_city" data-bind="value: cityTo, autocomplete: 'cityToCode'">
-                <span class="input-group-btn">
-                    <button class="btn btn-default button-close" type="button"
-                            data-toggle="tooltip" data-placement="top"
-                            data-original-title="Очистить поле">
-                    </button>
-                </span>
-            </div>
-        </div>
-        <div class="col-md-5">
-            <div class="date-from">
-                <div class="input-group">
-                    <input value="" name="date" type="date" required="required" pattern="\d{4}\-\d{2}\-\d{2}" class="form-control date_from" data-bind="value: date,datepicker:date">
-
-                    <span class="input-group-addon date-icon" data-toggle="tooltip" data-placement="top"
-                          data-original-title="Выберите дату вылета">
+<div class="panel-body complex-search">
+    <div class="wrap-fields" data-bind="foreach: complexFields">
+        <div class="row">
+            <div class="col-md-4 complex-search-avia complex-search-avia-from">
+                <div class="input-group city-from">
+                    <!-- <span class="input-group-addon block-img-avia" data-toggle="tooltip" data-placement="top"
+                          data-original-title="Откуда вы вылетаете?">
+                        <img src="{{ asset('images/avia-up.png') }}" alt="">
+                    </span> -->
+                    <input name="" value="" required="required" type="text" class="form-control from_city" data-bind="value: cityFrom,autocomplete: 'cityFromCode'">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default button-close" type="button" data-toggle="tooltip"
+                                data-placement="top" data-original-title="Очистить поле">
+                        </button>
                     </span>
                 </div>
             </div>
+            <div class="col-md-1 text-center complex-search-return">
+                <button data-bind="click: reverseCity" type="button" class="btn btn-primary button-refresh" data-toggle="tooltip"
+                        data-placement="top" data-original-title="Поменять местами вылет и прилет">
+                    <img src="{{ asset('images/refresh-white.png') }}" alt="">
+                </button>
+            </div>
+            <div class="col-md-4 complex-search-avia complex-search-avia-to">
+                <div class="input-group city-to">
+                    <!-- <span class="input-group-addon block-img-avia" data-toggle="tooltip"
+                          data-placement="top" data-original-title="Куда вы летите?">
+                        <img src="{{ asset('images/avia-down.png') }}" alt="">
+                    </span> -->
+                    <input name="" value="" required="required" type="text" class="form-control to_city" data-bind="value: cityTo, autocomplete: 'cityToCode'">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default button-close" type="button"
+                                data-toggle="tooltip" data-placement="top"
+                                data-original-title="Очистить поле">
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-2 complex-search-date">
+                <div class="date-from">
+                    <div class="input-group">
+                        <input value="" name="date" type="date" required="required" pattern="\d{4}\-\d{2}\-\d{2}" class="form-control date_from" data-bind="value: date,datepicker:date">
+
+                        <span class="input-group-addon date-icon" data-toggle="tooltip" data-placement="top"
+                              data-original-title="Выберите дату вылета">
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1 complex-search-delete">
+                <button class="btn btn-default button-close" type="button"
+                    data-toggle="tooltip" data-placement="top"
+                    data-original-title="Удалить перелет" data-bind="click: $root.removeLocation, visible: $root.viewDeleteButton()">
+                </button>
+            </div>
         </div>
-        <a href="" class="pull-right" data-bind="click: $root.removeLocation, visible: $root.viewDeleteButton()">Удалить</a>
     </div>
+    <div class="btn btn-default" data-bind="click:addLocation">Добавить перелет</div>
 </div>
-<div class="btn btn-default" data-bind="click:addLocation">Добавить</div>

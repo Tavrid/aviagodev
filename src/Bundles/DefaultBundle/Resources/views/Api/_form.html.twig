@@ -12,42 +12,46 @@
             {% endfor %}
         </div>
     </div>
-    <div data-bind="foreach: complexFields, visible: complexSearch()">
-        <div class="city-from-block">
-            <div class="input-group city-from">
-                <span class="input-group-addon label-from" data-toggle="tooltip" data-placement="top" data-original-title="Откуда вы вылетаете?">
-                    Из
-                </span>
-                <input required="true" type="text" class="form-control from_city" data-bind="value: cityFrom,autocomplete: 'cityFromCode'">
-                <span class="input-group-btn">
-                    <button class="btn btn-default button-close button-close-i" type="button"></button>
-                </span>
+    <div class="complex-search-inner">
+        <div data-bind="foreach: complexFields, visible: complexSearch()">
+            <div class="complex-search-inner-item">
+                <div class="city-from-block">
+                    <div class="input-group city-from">
+                        <span class="input-group-addon label-from" data-toggle="tooltip" data-placement="top" data-original-title="Откуда вы вылетаете?">
+                            Из
+                        </span>
+                        <input required="true" type="text" class="form-control from_city" data-bind="value: cityFrom,autocomplete: 'cityFromCode'">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default button-close button-close-i" type="button"></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="city-from-block">
+                    <div class="input-group city-to">
+                        <span class="input-group-addon label-from" data-toggle="tooltip" data-placement="top" data-original-title="Откуда вы вылетаете?">
+                            В
+                        </span>
+                        <input required="true" type="text" class="form-control from_city" data-bind="value: cityTo,autocomplete: 'cityToCode'">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default button-close button-close-i" type="button"></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="date-from">
+                    <div class="input-group">
+                        <span class="input-group-addon label-from" data-toggle="tooltip" data-placement="top" data-original-title="Выберите дату?">
+                            Дата
+                        </span>
+                        <input type="date" required="required" class="form-control date_from" data-bind="value: date,datepicker:date">
+                        <span class="input-group-addon date-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите дату вылета">
+                    </span>
+                    </div>
+                </div>
+                <a class="close-item" href="" data-bind="click: $root.removeLocation, visible: $root.viewDeleteButton()">Удалить перелет</a>
             </div>
         </div>
-        <div class="city-from-block">
-            <div class="input-group city-to">
-                <span class="input-group-addon label-from" data-toggle="tooltip" data-placement="top" data-original-title="Откуда вы вылетаете?">
-                    В
-                </span>
-                <input required="true" type="text" class="form-control from_city" data-bind="value: cityTo,autocomplete: 'cityToCode'">
-                <span class="input-group-btn">
-                    <button class="btn btn-default button-close button-close-i" type="button"></button>
-                </span>
-            </div>
-        </div>
-        <div class="date-from">
-            <div class="input-group">
-                <span class="input-group-addon label-from" data-toggle="tooltip" data-placement="top" data-original-title="Выберите дату вылета">
-                    Дата
-                </span>
-                <input type="date" required="required" class="form-control date_from" data-bind="value: date,datepicker:date">
-                <span class="input-group-addon date-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите дату вылета">
-            </span>
-            </div>
-        </div>
-        <a href="" data-bind="click: $root.removeLocation, visible: $root.viewDeleteButton()">Удалить</a>
+        <div class="btn btn-default" data-bind="click:addLocation,visible: complexSearch()">Добавить</div>
     </div>
-    <div class="btn btn-default" data-bind="click:addLocation,visible: complexSearch()">Добавить</div>
     <div class="city-from-block"  data-bind="visible: !complexSearch()">
         <div class="input-group city-from">
             <span class="input-group-addon label-from" data-toggle="tooltip" data-placement="top" data-original-title="Откуда вы вылетаете?">

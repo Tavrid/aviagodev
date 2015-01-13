@@ -1,4 +1,4 @@
-/* Контент */
+/* Контент  */
 
 body,
 html {
@@ -1668,4 +1668,67 @@ select option {
 
 .select-passangers .panel-info {
 	margin-bottom: 0 !important;
+}
+
+
+/* Комплексный поиск */
+
+/* .complex-search-avia {
+	padding-right: 5px;
+	padding-left: 0;
+}
+*/
+.complex-search-avia-from {
+	padding-right: 5px;
+}
+
+.complex-search-avia-to {
+	padding-left: 5px;
+}
+/*
+.complex-search-return {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+*/
+.complex-search-return button {
+	margin-left: -6px;
+}
+
+
+
+.complex-search-date {
+	padding-left: 0px;
+	padding-right: 0;
+}
+
+.complex-search-date input {
+	font-size: 11px;
+}
+
+.complex-search-delete {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.complex-search-delete button {
+	margin-left: 5px; 
+}
+
+.complex-search-inner {
+	margin-bottom: 10px;
+}
+
+.complex-search-inner-item {
+	margin-bottom: 5px;
+	border-bottom: 1px dashed #fff;
+	padding-bottom: 5px;
+}
+
+.close-item {
+	color:#777;
+}
+
+.close-item:hover {
+	color:#333;
 }
