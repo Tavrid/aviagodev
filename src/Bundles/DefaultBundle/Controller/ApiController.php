@@ -63,7 +63,7 @@ class ApiController extends Controller
                 return $resp;
             }
         }
-        return new Response('', Response::HTTP_BAD_REQUEST);
+        return new Response('', 404);
     }
 
     public function bookAction(Request $request, $key)

@@ -46,7 +46,7 @@ module.exports = class ViewModel
     @aviaCompany = ko.observable searchForm.avia_company
     @aviaClass = ko.observable searchForm.avia_class
     @currency = ko.observable searchForm.currency
-    @bestPrice = ko.observable if searchForm.best_price == "" then true else searchForm.best_price
+    @bestPrice = ko.observable if searchForm.best_price == undefined then true else searchForm.best_price
     @directFlights = ko.observable searchForm.direct_flights
     @changeDirection= ->
 

@@ -2,7 +2,17 @@
 {% block js %}
     {{ parent() }}
     <script type="application/javascript" src="{{ asset('build/dist/js/list/index.js') }}"></script>
-
+    <script type="application/javascript">
+        $('body').on('submit','.book-form',function(){
+            _GlobalAppObject.loadingStart();
+            $.post($(this).attr('action'),$(this).serialize(),function(data){
+                window.location = data.url;
+            }).error(function(){
+                _GlobalAppObject.loadingStop();
+            });
+            return false;
+        });
+    </script>
 
 {% endblock %}
 {% block body %}
