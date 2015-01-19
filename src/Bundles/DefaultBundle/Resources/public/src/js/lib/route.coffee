@@ -9,7 +9,6 @@ module.exports = class
       return_way: parseInt ViewModel.direction()
       currency: ViewModel.currency()
       avia_company: ViewModel.aviaCompany()
-      best_price: if ViewModel.bestPrice() then 1 else 0
       direct_flights: if ViewModel.directFlights() then 1 else 0
     return params
   createSearch: (ViewModel)->
@@ -27,6 +26,7 @@ module.exports = class
       params.city_from_code = ViewModel.cityFromCode()
       params.city_to_code = ViewModel.cityToCode()
       params.date_from = ViewModel.dateFrom()
+      params.best_price= if ViewModel.bestPrice() then 1 else 0
       if ViewModel.dateTo() && ViewModel.dateTo()!="0"
         params.date_to =  ViewModel.dateTo()
       url =  Routing.generate "bundles_default_api_list",params

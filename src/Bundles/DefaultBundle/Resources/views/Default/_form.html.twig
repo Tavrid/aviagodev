@@ -129,7 +129,7 @@
                             <!-- Класс и валюта -->
                             <!-- Цена и рейсы -->
                             <div class="row price-reys">
-                                <div class="col-md-12 price-block">
+                                <div class="col-md-12 price-block"  data-bind="visible: !complexSearch()">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             {{ form_widget(form.best_price, {'attr': {'data-bind':'checked: bestPrice','class': 'best-price checkbox','checked' : true}}) }}
