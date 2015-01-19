@@ -30,7 +30,7 @@ class ComplexSearch
 module.exports = class ViewModel
   constructor: ->
     @dateFrom = ko.observable(searchForm.date_from)
-    @dateTo = ko.observable(searchForm.date_to)
+    @dateTo = ko.observable(if searchForm.date_to && searchForm.date_to!= "0"  then searchForm.date_to)
 
     @direction = if searchForm.return_way then ko.observable ""+searchForm.return_way else ko.observable 1
     @cityFrom = ko.observable searchForm.city_from

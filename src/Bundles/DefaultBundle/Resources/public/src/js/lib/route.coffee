@@ -27,8 +27,10 @@ module.exports = class
       params.city_from_code = ViewModel.cityFromCode()
       params.city_to_code = ViewModel.cityToCode()
       params.date_from = ViewModel.dateFrom()
-      params.date_to = ViewModel.dateTo()
+      if ViewModel.dateTo() && ViewModel.dateTo()!="0"
+        params.date_to =  ViewModel.dateTo()
       url =  Routing.generate "bundles_default_api_list",params
+
     return url
   createComplexSearchItems: (ViewModel,routeParams = {}) ->
 
@@ -46,15 +48,3 @@ module.exports = class
 
       url = Routing.generate "bundles_default_search_complex_search_items",params
     return url
-
-  createComplexCalendar: (ViewModel,routeParams = {}) ->
-    params = getDefaultParams ViewModel
-    params = _.extend(routeParams,params)
-    cityCodes = []
-    date = []
-    _.each ViewModel.complexFields(), (o) ->
-      cityCodes.push "#{o.cityFromCode()}-#{o.cityToCode()}"
-      date.push o.date()
-    params.city = cityCodes.join "_"
-    params.date = date.join "_"
-    Routing.generate "bundles_default_api_complex_calendar", params
