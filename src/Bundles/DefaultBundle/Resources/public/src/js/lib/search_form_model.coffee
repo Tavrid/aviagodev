@@ -51,7 +51,7 @@ module.exports = class ViewModel
     @changeDirection= ->
 
     @disableDateTo = ko.computed =>
-      parseInt(@direction()) != 0
+      parseInt(@direction()) == 1
 
     @complexSearch= ko.computed =>
       parseInt(@direction()) == 2

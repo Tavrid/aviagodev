@@ -83,7 +83,7 @@
             </span>
         </div>
     </div>
-    <div class="date-to"  data-bind="visible: !complexSearch()">
+    <div class="date-to"  data-bind="visible: disableDateTo()">
         {{ form_label(form.date_to, '', {'attr': {'class': 'date_to'}}) }}
         <div class="input-group">
             {{ form_widget(form.date_to, {'attr': {'class': 'date_to','data-bind': 'value: dateTo,enable:disableDateTo'}}) }}
