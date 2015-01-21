@@ -87,7 +87,9 @@
                             {% for flight in flights %}
                                 <li class="list-group-item">
                                     <a href="{{ flight.url }}">
-                                        поиск
+                                        {% if flight.name is defined %}
+                                            {{ flight.name }}
+                                        {% endif %}
                                     </a>
                                 </li>
                             {% endfor %}

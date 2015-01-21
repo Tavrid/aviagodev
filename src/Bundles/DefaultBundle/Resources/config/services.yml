@@ -18,6 +18,11 @@ services:
     bundles_default_util_route:
         class: Bundles\DefaultBundle\Util\RouteParams
         arguments: ["@admin.city.manager"]
+    bundles_default.util.previous_flight:
+        class:  Bundles\DefaultBundle\Model\Flights
+        arguments:
+          - @session
+          - @router
 
 
 

@@ -9,6 +9,7 @@
 namespace Bundles\DefaultBundle\Model;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 class Flights {
     const FLIGHT_SESSION_NAME = 'flights';
@@ -16,13 +17,25 @@ class Flights {
      * @var SessionInterface
      */
     protected $session;
+    /**
+     * @var RouterInterface
+     */
+    protected $router;
 
 
-    public function __construct(SessionInterface $session){
+    public function __construct(SessionInterface $session,RouterInterface $router){
         $this->session = $session;
+        $this->router = $router;
     }
 
-    public function addFlight($name,$url){
+    public function addFlight($params,$isComplexSearch = false){
+        if(!$isComplexSearch){
+            $url = $this->router->generate('bundles_default_api_list',$params);
+            $name = 'Простой поиск';
+        } else {
+            $url = $this->router->generate('bundles_default_search_complex_search',$params);
+            $name = 'Сложный поиск';
+        }
         $flights = $this->session->get(self::FLIGHT_SESSION_NAME, array());
         $flights[$url] = [
             'url' => $url,
@@ -32,7 +45,7 @@ class Flights {
     }
 
     public function getFlights(){
-
+        return $this->session->get(self::FLIGHT_SESSION_NAME, array());
     }
 
 } 

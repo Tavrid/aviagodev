@@ -15,7 +15,7 @@ class DefaultController extends Controller {
 
         $form = $this->createForm('search_form');
 
-        $flights = array_reverse($this->get('session')->get('flights', []));
+        $flights = $this->get('bundles_default.util.previous_flight')->getFlights();
 
         return $this->render('BundlesDefaultBundle:Default:index.html.twig', [
                     'flights' => $flights,

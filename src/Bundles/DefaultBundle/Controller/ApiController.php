@@ -127,12 +127,7 @@ class ApiController extends Controller
 
     public function addSearchData($params, $data)
     {
-        $flights = $this->get('session')->get('flights', array());
-        $d = array(
-            'url' => $this->generateUrl('bundles_default_api_list', $params)
-        );
-        $flights[$this->generateUrl('bundles_default_api_list', $params)] = $d;
-        $this->get('session')->set('flights', $flights);
+        $this->get('bundles_default.util.previous_flight')->addFlight($params);
         $this->get('session')->set('formData', $data);
     }
 
