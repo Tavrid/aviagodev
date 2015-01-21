@@ -1,4 +1,5 @@
 {% set needBook = needBook is defined ? needBook : true %}
+{% set isComplexSearch = isComplexSearch is defined ? isComplexSearch : false %}
 {% for ticket in data %}
     <div class="ticket-well well">
         <div class="price-ticket">
@@ -10,19 +11,28 @@
                 {% endif %}
                 {% for int in ticket.itineraries %}
                     {% set parent_loop = loop %}
+                        {% if isComplexSearch %}
+                            <div class="date-ticket">
+                                <div class="date-title">
+                                    {{ int.firstVariant.departureSegment.departureDate|date("d.m.Y") }} - {{ int.lastVariant.arrivalSegment.arrivalDate|date("d.m.Y") }}
+                                </div>
+                            </div>
+                        {% endif %}
                         {% for variant in int.variants %}
                             <div class="ticket-item">
-                                <div class="date-ticket">
-                                    <div class="date-title">
-                                        {% if loop.first  %}
-                                            {% if parent_loop.first %}
-                                                {{ variant.departureSegment.departureDate|date("d.m.Y") }}
-                                            {% elseif parent_loop.last %}
-                                                {{ variant.arrivalSegment.arrivalDate|date("d.m.Y") }}
+                                {% if not isComplexSearch %}
+                                    <div class="date-ticket">
+                                        <div class="date-title">
+                                            {% if loop.first  %}
+                                                {% if parent_loop.first %}
+                                                    {{ variant.departureSegment.departureDate|date("d.m.Y") }}
+                                                {% elseif parent_loop.last %}
+                                                    {{ variant.arrivalSegment.arrivalDate|date("d.m.Y") }}
+                                                {% endif %}
                                             {% endif %}
-                                        {% endif %}
+                                        </div>
                                     </div>
-                                </div>
+                                {% endif %}
                                 <div class="panel panel-info panel-ticket">
                                     <div class="panel-body panel-gradient ticket-body">
                                         <div class="col-md-1 radio-ticket">

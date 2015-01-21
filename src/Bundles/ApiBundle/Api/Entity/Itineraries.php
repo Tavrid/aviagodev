@@ -45,6 +45,18 @@ class Itineraries {
             return new Variants();
         }
     }
+    /**
+     * @return \Bundles\ApiBundle\Api\Entity\Variants
+     */
+    public function getLastVariant(){
+        $var = $this->getVariants();
+        $key = count($var) - 1;
+        if(isset($var[$key])){
+            return $var[$key];
+        } else {
+            return new Variants();
+        }
+    }
 
     /**
      * @return \Bundles\ApiBundle\Api\Entity\Variants[]
