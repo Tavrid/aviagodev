@@ -58,7 +58,10 @@ module.exports = class ViewModel
 
     @complexFields= ko.observableArray(resolveField searchForm.complexFields)
     @addLocation = ->
-      @complexFields.push new ComplexSearch
+      if @complexFields().length < global.numComplexFields
+        @complexFields.push new ComplexSearch
+    @viewAddButton = =>
+      @complexFields().length < global.numComplexFields
     @viewDeleteButton = =>
       @complexFields().length > 2
     @removeLocation = (o)=>

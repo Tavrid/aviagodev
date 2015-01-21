@@ -14,7 +14,8 @@
                         {% if isComplexSearch %}
                             <div class="date-ticket">
                                 <div class="date-title">
-                                    {{ int.firstVariant.departureSegment.departureDate|date("d.m.Y") }} - {{ int.lastVariant.arrivalSegment.arrivalDate|date("d.m.Y") }}
+                                    {{ int.firstVariant.departureSegment.departureDate|date("d.m.Y") }}
+                                    {#- {{ int.lastVariant.arrivalSegment.arrivalDate|date("d.m.Y") }}#}
                                 </div>
                             </div>
                         {% endif %}
