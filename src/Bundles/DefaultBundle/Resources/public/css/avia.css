@@ -230,13 +230,14 @@ header {
 .info-vozrast {
 	width: 100%;
 	text-transform: lowercase;
-	font-size: 12px;
+	font-size: 11px;
 	margin-bottom: -5px;
+	text-align: center;
 }
 
 .avia-company {
 	position: relative;
-	top: -3px;
+	top: -1px;
 }
 
 /* Кнопка поиска */
@@ -1063,46 +1064,33 @@ select option {
 
 /* Комплексный поиск */
 
-/* .complex-search-avia {
-	padding-right: 5px;
-	padding-left: 0;
-}
-*/
-.complex-search-avia-from {
-	padding-right: 5px;
+.complex-search {
+	padding-top: 0;
+	padding-bottom: 0;
 }
 
+.complex-search .row,
+.complex-search .date-from,
+.complex-search .date-to {
+	padding-bottom: 0;
+}
+
+.complex-search-avia-from,
 .complex-search-avia-to {
-	padding-left: 5px;
+	padding-right: 0px;
 }
-/*
-.complex-search-return {
-	padding-left: 5px;
-	padding-right: 5px;
-}
-*/
+
 .complex-search-return button {
 	margin-left: -6px;
 }
 
-
-
 .complex-search-date {
-	padding-left: 0px;
 	padding-right: 0;
-}
-
-.complex-search-date input {
-	font-size: 11px;
 }
 
 .complex-search-delete {
 	padding-left: 0;
 	padding-right: 0;
-}
-
-.complex-search-delete button {
-	margin-left: 5px; 
 }
 
 .complex-search-inner {
@@ -1123,6 +1111,13 @@ select option {
 	color:#333;
 }
 
+.price-reys {
+	margin-bottom: 4px;
+}
+
+.price-reys label {
+	margin-bottom: 0 !important;
+}
 
 /* Спрайты городов */
 

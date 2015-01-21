@@ -3,11 +3,7 @@
         <div class="row">
             <div class="col-md-4 complex-search-avia complex-search-avia-from">
                 <div class="input-group city-from">
-                    <!-- <span class="input-group-addon block-img-avia" data-toggle="tooltip" data-placement="top"
-                          data-original-title="Откуда вы вылетаете?">
-                        <img src="{{ asset('images/avia-up.png') }}" alt="">
-                    </span> -->
-                    <input name="" value="" required="required" type="text" class="form-control from_city" data-bind="value: cityFrom,autocomplete: 'cityFromCode'">
+                    <input placeholder="Откуда вылетаете?" name="" value="" required="required" type="text" class="form-control from_city" data-bind="value: cityFrom,autocomplete: 'cityFromCode'">
                     <span class="input-group-btn">
                         <button class="btn btn-default button-close" type="button" data-toggle="tooltip"
                                 data-placement="top" data-original-title="Очистить поле">
@@ -15,19 +11,9 @@
                     </span>
                 </div>
             </div>
-            <div class="col-md-1 text-center complex-search-return">
-                <button data-bind="click: reverseCity" type="button" class="btn btn-primary button-refresh" data-toggle="tooltip"
-                        data-placement="top" data-original-title="Поменять местами вылет и прилет">
-                    <img src="{{ asset('images/refresh-white.png') }}" alt="">
-                </button>
-            </div>
             <div class="col-md-4 complex-search-avia complex-search-avia-to">
                 <div class="input-group city-to">
-                    <!-- <span class="input-group-addon block-img-avia" data-toggle="tooltip"
-                          data-placement="top" data-original-title="Куда вы летите?">
-                        <img src="{{ asset('images/avia-down.png') }}" alt="">
-                    </span> -->
-                    <input name="" value="" required="required" type="text" class="form-control to_city" data-bind="value: cityTo, autocomplete: 'cityToCode'">
+                    <input placeholder="Куда вылетаете?" name="" value="" required="required" type="text" class="form-control to_city" data-bind="value: cityTo, autocomplete: 'cityToCode'">
                     <span class="input-group-btn">
                         <button class="btn btn-default button-close" type="button"
                                 data-toggle="tooltip" data-placement="top"
@@ -36,11 +22,10 @@
                     </span>
                 </div>
             </div>
-            <div class="col-md-2 complex-search-date">
+            <div class="col-md-3 complex-search-date">
                 <div class="date-from">
                     <div class="input-group">
-                        <input value="" name="date" type="date" required="required" pattern="\d{4}\-\d{2}\-\d{2}" class="form-control date_from" data-bind="value: date,datepicker:date">
-
+                        <input placeholder="Дата вылета?" value="" name="date" type="date" required="required" pattern="\d{4}\-\d{2}\-\d{2}" class="form-control date_from" data-bind="value: date,datepicker:date">
                         <span class="input-group-addon date-icon" data-toggle="tooltip" data-placement="top"
                               data-original-title="Выберите дату вылета">
                         </span>
