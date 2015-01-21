@@ -235,6 +235,11 @@ header {
 	text-align: center;
 }
 
+.vozrast-block .info-vozrast {
+	font-size: 14px;
+	text-align: left;
+}
+
 .avia-company {
 	position: relative;
 	top: -1px;
@@ -317,10 +322,12 @@ header {
 
 .col-md-3.company-info {
     width: 29%;
+    padding-left: 25px;
 }
 
 .col-md-3.company-info .img-name {
 	padding-left: 0;
+	font-size: 11px;
 }
 
 .ticket-body > div {
@@ -722,11 +729,14 @@ a:focus {
 }
 
 .ticket-body .radio-button {
-	visibility: hidden;
+	/* visibility: hidden; */
 }
 
 .radio-ticket {
-	width: 0%;
+	width: 25px;
+	position: absolute;
+	top: 50%;
+	margin-top: -10px;
 }
 
 .checked-block {
@@ -748,12 +758,13 @@ a:focus {
 	padding: 10px;
 	border: 1px solid #dadada;
 	border-radius: 8px;
+	position: relative;
 }
 
 .panel-ticket {
 	border-radius: 8px;
 	border: none;
-	margin-bottom: -3px;
+	margin-bottom: -1px;
 }
 
 .add-btn {
@@ -1117,6 +1128,18 @@ select option {
 
 .price-reys label {
 	margin-bottom: 0 !important;
+}
+
+/* Всплывающий календарь */
+
+.modal-dialog {
+	width: 730px;
+}
+
+/* Форма бронирования */
+
+.order-form {
+	margin-bottom: 20px;
 }
 
 /* Спрайты городов */
