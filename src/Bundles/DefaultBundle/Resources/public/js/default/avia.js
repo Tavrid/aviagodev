@@ -141,6 +141,7 @@ $(document).ready(function($) {
     $('.btn-transplant').popover({
     	html: true
     });
-    $('span').tooltip();
-    $('button').tooltip();
+    $("body").tooltip({ selector: '[data-toggle="tooltip"]' });
+    //$('span').tooltip();
+    //$('button').tooltip();
 });
