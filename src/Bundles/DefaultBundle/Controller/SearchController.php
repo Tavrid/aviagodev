@@ -78,7 +78,8 @@ class SearchController extends Controller
                 'html' => $this->renderView('BundlesDefaultBundle:Api:_items.html.twig', array(
                     'data' => $data,
                     'form_info' => $formBook->createView(),
-                    'isComplexSearch' => true
+                    'isComplexSearch' => true,
+                    'numPassenger' => $params['adults'] + $params['infant'] + $params['children']
                 )),
                 'filter_form' => $this->renderView('BundlesDefaultBundle:Api:_filter_form.html.twig', ['filter_form' => $filterForm->createView()]
                 ),

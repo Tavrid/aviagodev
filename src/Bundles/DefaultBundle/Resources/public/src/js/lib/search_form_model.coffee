@@ -61,7 +61,7 @@ module.exports = class ViewModel
       if @complexFields().length < global.numComplexFields
         @complexFields.push new ComplexSearch
     @viewAddButton = =>
-      @complexFields().length < global.numComplexFields
+      @complexFields().length < global.numComplexFields && parseInt(@direction()) == 2
     @viewDeleteButton = =>
       @complexFields().length > 2
     @removeLocation = (o)=>

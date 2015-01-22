@@ -1,6 +1,7 @@
 frontend:
     book:
       error_book: Ошибка бронирования
+    num_passenger: %num% человека|%num% человек|%num% человек
     times:
         night: Ночь (00-06)
         morning: Утро (06-12)
