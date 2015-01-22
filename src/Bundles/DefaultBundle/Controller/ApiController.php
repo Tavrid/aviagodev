@@ -117,11 +117,11 @@ class ApiController extends Controller
         }
         /* @var $countryManager \Acme\AdminBundle\Model\Country */
         $countryManager = $this->get('country.model.manager');
-
         return $this->render('BundlesDefaultBundle:Api:book.html.twig', [
             'form' => $form->createView(),
             'ticket' => $bookInfoResponse->getEntity()->getTicket(),
-            'masks' => json_encode($countryManager->getMasks())
+            'masks' => json_encode($countryManager->getMasks()),
+            'numPassenger' => array_sum($bookInfoResponse->getEntity()->getTicket()->getTravelers())
         ]);
     }
 
