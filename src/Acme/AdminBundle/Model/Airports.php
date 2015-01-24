@@ -27,7 +27,8 @@ class Airports extends AbstractModel {
                         'country' => $val->getCountryEng(),
                         'city' => $val->getCityEng(),
                         'code' => $val->getAirportCodeEng(),
-                        'airport' => $val->getAirportEng()
+                        'airport' => $val->getAirportEng(),
+                        'short' => $val->getNameShortEn()
                     ];
                 } else {
                     
@@ -35,7 +36,8 @@ class Airports extends AbstractModel {
                         'country' => $val->getCountryRus(),
                         'city' => $val->getCityRus(),
                         'code' => $val->getAirportCodeEng(),
-                        'airport' => $val->getAirportRus()
+                        'airport' => $val->getAirportRus(),
+                        'short' => $val->getNameShortRu()
                     ];
                 }
             }
@@ -55,7 +57,7 @@ class Airports extends AbstractModel {
                 foreach($airport as $name){
                     $r[] = array(
                         'id' => $name['code'],
-                        'name' => $name['country'].', '.$name['city'].', '.$name['airport'].' ('.$name['code'].')'
+                        'name' => !empty($name['short'])? $name['short']:$name['country'].', '.$name['city'].', '.$name['airport'].' ('.$name['code'].')'
                     );
                 }
             }
