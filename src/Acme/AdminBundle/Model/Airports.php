@@ -17,6 +17,7 @@ class Airports extends AbstractModel {
         $d =  $this->getRepository()
             ->createQuery(array('searchByToken' => array($token)))
             ->getResult();
+
         if($d){
             
             foreach ($d as $val){

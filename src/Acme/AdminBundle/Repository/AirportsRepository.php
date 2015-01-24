@@ -15,20 +15,30 @@ class AirportsRepository extends AbstractRepository {
     }
 
     public function searchByToken($token){
+        $token = trim($token);
+        if(preg_match('/^[a-zA-Z]{3}$/i',$token)){
+            $tokens = [$token];
 
-        $tokens = $this->createTokens($token);
+            $searchFields = array(
+                'cityCodeEng',
+                'airportCodeEng',
+            );
+            $count = count($searchFields);
+        } else {
+            $tokens = $this->createTokens($token);
 
-        $searchFields = array(
-            'iataRegionCode',
-            'airportRus',
-            'airportEng',
-            'cityRus',
-            'cityEng',
-//            'countryRus',
-//            'countryEng',
-            'cityCodeEng'
-        );
-        $count = count($searchFields);
+            $searchFields = array(
+                'iataRegionCode',
+                'airportRus',
+                'airportEng',
+                'cityRus',
+                'cityEng',
+    //            'countryRus',
+    //            'countryEng',
+                'cityCodeEng'
+            );
+            $count = count($searchFields);
+        }
         $xpressions = array();
         for($i = 0 ; $i <$count; $i++){
             $field = 'p.'.$searchFields[$i];
