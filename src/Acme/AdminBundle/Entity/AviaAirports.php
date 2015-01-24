@@ -158,6 +158,18 @@ class AviaAirports
      * @var string
      */
     private $timezone;
+    /**
+     * @var string
+     */
+    private $shortNameRu;
+    /**
+     * @var
+     */
+    private $shortNameEn;
+    /**
+     * @var
+     */
+    private $shortNameUk;
 
 
     /**

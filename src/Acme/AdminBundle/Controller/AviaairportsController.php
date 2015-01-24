@@ -30,55 +30,55 @@ class AviaairportsController extends ControllerBase {
                     'params' => array(
                         'columns' => array(
                             'id',
-//                            [
-//                                'name' => 'nameShortRu',
-//                                'header' => 'Подстановка(ru)',
-//                                'type' => \Stb\Bootstrap\ColumnTypes::TYPE_EDITABLE_TEXT,
-//                                'route' => ['admin.aviaairports.editshort', ['id' => 'id']],
-//                                'form' => function(AviaAirports $aviaAirports) use ($controller) {
-//                                    return $controller->createFormBuilder($aviaAirports)
-//                                        ->add('nameShortRu','text',['label' => 'Название','required' => false])
-//                                        ->add('lang','hidden',['data' => 'ru','mapped' => false])
-//                                        ->getForm()
-//                                        ->createView();
-//                                }
-//
-//                            ],
-//                            [
-//                                'name' => 'nameShortEn',
-//                                'header' => 'Подстановка(en)',
-//                                'type' => \Stb\Bootstrap\ColumnTypes::TYPE_EDITABLE_TEXT,
-//                                'route' => ['admin.aviaairports.editshort', ['id' => 'id']],
-//                                'form' => function(AviaAirports $aviaAirports) use ($controller) {
-//                                    return $controller->createFormBuilder($aviaAirports)
-//                                        ->add('nameShortEn','text',['label' => 'Название','required' => false])
-//                                        ->add('lang','hidden',['data' => 'en','mapped' => false])
-//                                        ->getForm()
-//                                        ->createView();
-//                                }
-//
-//                            ],
-//                            [
-//                                'name' => 'nameShortUk',
-//                                'header' => 'Подстановка(ua)',
-//                                'type' => \Stb\Bootstrap\ColumnTypes::TYPE_EDITABLE_TEXT,
-//                                'route' => ['admin.aviaairports.editshort', ['id' => 'id']],
-//                                'form' => function(AviaAirports $aviaAirports) use ($controller) {
-//                                    return $controller->createFormBuilder($aviaAirports)
-//                                        ->add('nameShortUk','text',['label' => 'Название','required' => false])
-//                                        ->add('lang','hidden',['data' => 'uk','mapped' => false])
-//                                        ->getForm()
-//                                        ->createView();
-//                                }
-//
-//                            ],
+                            [
+                                'name' => 'nameShortRu',
+                                'header' => 'Подстановка(ru)',
+                                'type' => \Stb\Bootstrap\ColumnTypes::TYPE_EDITABLE_TEXT,
+                                'route' => ['admin.aviaairports.editshort', ['id' => 'id']],
+                                'form' => function(AviaAirports $aviaAirports) use ($controller) {
+                                    return $controller->createFormBuilder($aviaAirports)
+                                        ->add('nameShortRu','text',['label' => 'Название','required' => false])
+                                        ->add('lang','hidden',['data' => 'ru','mapped' => false])
+                                        ->getForm()
+                                        ->createView();
+                                }
+
+                            ],
+                            [
+                                'name' => 'nameShortEn',
+                                'header' => 'Подстановка(en)',
+                                'type' => \Stb\Bootstrap\ColumnTypes::TYPE_EDITABLE_TEXT,
+                                'route' => ['admin.aviaairports.editshort', ['id' => 'id']],
+                                'form' => function(AviaAirports $aviaAirports) use ($controller) {
+                                    return $controller->createFormBuilder($aviaAirports)
+                                        ->add('nameShortEn','text',['label' => 'Название','required' => false])
+                                        ->add('lang','hidden',['data' => 'en','mapped' => false])
+                                        ->getForm()
+                                        ->createView();
+                                }
+
+                            ],
+                            [
+                                'name' => 'nameShortUk',
+                                'header' => 'Подстановка(ua)',
+                                'type' => \Stb\Bootstrap\ColumnTypes::TYPE_EDITABLE_TEXT,
+                                'route' => ['admin.aviaairports.editshort', ['id' => 'id']],
+                                'form' => function(AviaAirports $aviaAirports) use ($controller) {
+                                    return $controller->createFormBuilder($aviaAirports)
+                                        ->add('nameShortUk','text',['label' => 'Название','required' => false])
+                                        ->add('lang','hidden',['data' => 'uk','mapped' => false])
+                                        ->getForm()
+                                        ->createView();
+                                }
+
+                            ],
                             'cityCodeEng',
                             'airportCodeEng',
                             'regionRus',
-                            'regionEng',
+//                            'regionEng',
                             'countryRus',
-                            'countryEng',
-                            'cityEng',
+//                            'countryEng',
+//                            'cityEng',
                             'cityRus',
                         ),
                         'actions' => array(

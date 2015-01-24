@@ -256,26 +256,26 @@ Acme\AdminBundle\Entity\AviaAirports:
             fixed: false
             comment: ''
             default: ''
-#        nameShortRu:
-#            type: string
-#            nullable: true
-#            length: 355
-#            fixed: false
-#            comment: ''
-#            column: name_short_ru
-#        nameShortEn:
-#            type: string
-#            nullable: true
-#            length: 355
-#            fixed: false
-#            comment: ''
-#            column: name_short_en
-#        nameShortUk:
-#            type: string
-#            nullable: true
-#            length: 355
-#            fixed: false
-#            comment: ''
-#            column: name_short_uk
+        nameShortRu:
+            type: string
+            nullable: true
+            length: 355
+            fixed: false
+            comment: ''
+            column: name_short_ru
+        nameShortEn:
+            type: string
+            nullable: true
+            length: 355
+            fixed: false
+            comment: ''
+            column: name_short_en
+        nameShortUk:
+            type: string
+            nullable: true
+            length: 355
+            fixed: false
+            comment: ''
+            column: name_short_uk
 
     lifecycleCallbacks: {  }
