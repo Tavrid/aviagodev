@@ -38,6 +38,9 @@ class Segments {
     protected $isFirstSegment;
     protected $isLastSegment;
 
+    protected  $departureTerminal;
+    protected $arrivalTerminal;
+
     /**
      * @return mixed
      */
@@ -132,6 +135,44 @@ class Segments {
     protected $arrivalAirport;
 
     protected $aircraftName;
+
+    /**
+     * @return mixed
+     */
+    public function getDepartureTerminal()
+    {
+        return $this->departureTerminal;
+    }
+
+    /**
+     * @param $departureTerminal
+     * @return $this
+     */
+    public function setDepartureTerminal($departureTerminal)
+    {
+        $this->departureTerminal = $departureTerminal;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArrivalTerminal()
+    {
+        return $this->arrivalTerminal;
+    }
+
+    /**
+     * @param $arrivalTerminal
+     * @return $this
+     */
+    public function setArrivalTerminal($arrivalTerminal)
+    {
+        $this->arrivalTerminal = $arrivalTerminal;
+        return $this;
+    }
+
+
 
     /**
      * @return mixed

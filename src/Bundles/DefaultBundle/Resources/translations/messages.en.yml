@@ -2,6 +2,7 @@ frontend:
     book:
       error_book: Booking error
     num_passenger: %num% persons|%num% persons|%num% persons
+    non_return: non-return
     times:
         night: Night (00-06)
         morning: Morning (06-12)

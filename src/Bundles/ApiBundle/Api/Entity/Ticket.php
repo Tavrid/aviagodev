@@ -23,10 +23,33 @@ class Ticket {
     protected $latinRegistration;
     protected $lastTicketDate;
     protected $currency;
+    protected $refundable;
+
+
 
     public function __construct() {
         $this->itineraries = array();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getRefundable()
+    {
+        return $this->refundable != 'No';
+    }
+
+    /**
+     * @param $refundable
+     * @return $this
+     */
+    public function setRefundable($refundable)
+    {
+        $this->refundable = $refundable;
+        return $this;
+    }
+
+
     
     public function getCurrency() {
         return 'руб.';

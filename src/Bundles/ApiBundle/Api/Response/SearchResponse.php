@@ -104,8 +104,9 @@ class SearchResponse extends Response implements \Iterator,\ArrayAccess, \Counta
         $ticket = new Ticket();
         $ticket->setRequestId($requestId);
         $ticket->setTotalPrice($data['TotalPrice']['Total'])
-                ->setValidatingAirline($data['ValidatingAirline'])
-                ->setLastTicketDate($data['LastTicketDate']);
+            ->setValidatingAirline($data['ValidatingAirline'])
+            ->setLastTicketDate($data['LastTicketDate'])
+            ->setRefundable($data['Refundable']);
 
         foreach($data['Itineraries'] as $inter){
             $it = new Itineraries();
@@ -136,7 +137,8 @@ class SearchResponse extends Response implements \Iterator,\ArrayAccess, \Counta
                         ->setDepartureAirport($segment['DepartureAirport'])
                         ->setArrivalAirport($segment['ArrivalAirport'])
                         ->setAircraftName($segment['AircraftName'])
-                    ;
+                        ->setArrivalTerminal($segment['DepartureTerminal'])
+                        ->setDepartureTerminal($segment['ArrivalTerminal']);
 
                     if($i == 0){
                         $segm->setIsFirstSegment(true);

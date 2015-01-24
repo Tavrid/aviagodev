@@ -42,6 +42,9 @@
                                     </div>
                                 {% endif %}
                                 <div class="panel panel-info panel-ticket">
+                                    {% if not ticket.refundable %}
+                                        {% trans %}frontend.non_return{% endtrans %}
+                                    {% endif %}
                                     <div class="panel-body panel-gradient ticket-body">
                                         <div class="col-md-1 radio-ticket">
                                             <div class="radio-button">
@@ -71,7 +74,12 @@
                                                 <div class="time-up col-md-4">{{ variant.departureSegment.departureDate|date("H:i") }}</div>
                                                 <div class="city-aero col-md-8">
                                                     <div class="city-up">{{ variant.departureSegment.departureCityName }}</div>
-                                                    <div class="aeropot-up">{{ variant.departureSegment.departureAirportName }}</div>
+                                                    <div class="aeropot-up">
+                                                        {{ variant.departureSegment.departureAirportName }}
+                                                        {% if variant.departureSegment.departureTerminal %}
+                                                            ({{ variant.departureSegment.departureTerminal }})
+                                                        {% endif %}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -81,7 +89,12 @@
                                                 <div class="time-down col-md-4">{{ variant.arrivalSegment.arrivalDate|date("H:i") }}</div>
                                                 <div class="city-aero col-md-8">
                                                     <div class="city-down">{{ variant.arrivalSegment.arrivalCityName }}</div>
-                                                    <div class="aeropot-down">{{ variant.arrivalSegment.arrivalAirportName }}</div>
+                                                    <div class="aeropot-down">
+                                                        {{ variant.arrivalSegment.arrivalAirportName }}
+                                                        {% if variant.arrivalSegment.arrivalTerminal %}
+                                                            ({{ variant.arrivalSegment.arrivalTerminal }})
+                                                        {% endif %}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -109,7 +122,7 @@
                 <div class="row add-btn">
                     <div class="col-md-3">
                         {% if ticket.lastTicketDate %}
-                            {% trans %}frontend.flights.last_ticket_date{% endtrans %}: <strong class="text-warning buy-do">{{ ticket.lastTicketDate|date('d.m.Y') }}</strong>
+                            {% trans %}frontend.flights.last_ticket_date{% endtrans %}: <strong class="text-warning buy-do">{{ ticket.lastTicketDate|date('d.m.Y H:i:s') }}</strong>
                         {% endif %}
                     </div>
                     <div class="col-md-6"></div>
