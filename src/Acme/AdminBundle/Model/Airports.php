@@ -83,4 +83,20 @@ class Airports extends AbstractModel {
         return null;
     }
 
+    public function listItemsShowHidden($page = 1,$params = []){
+        $qb = $this->getRepository()
+            ->createQueryBuilder('p');
+        $qb ->orderBy('p.regionRus')
+            ->where($qb->expr()->andX(
+                $qb->expr()->like('p.airportCodeEng', $qb->expr()->literal('%'.$params['airport_code'].'%')),
+                $qb->expr()->like('p.cityCodeEng', $qb->expr()->literal('%'.$params['city_code'].'%')),
+                $qb->expr()->like('p.cityRus', $qb->expr()->literal('%'.$params['city_name'].'%')),
+                $qb->expr()->like('p.countryRus', $qb->expr()->literal('%'.$params['country_name'].'%'))
+//                $qb->expr()->like('p.cityRus', $qb->expr()->literal('%sip%'))
+
+            ));
+        $extPar = is_array($_GET) ? $_GET : [];
+        return $this->paginator($page, $qb, 'admin.aviaairports.index', 20,$extPar);
+    }
+
 } 

@@ -14,82 +14,86 @@ use Symfony\Component\HttpFoundation\Request;
 use Acme\AdminBundle\AcmeAdminBundleEvents as Events;
 use Acme\AdminBundle\Event\ControllerEvent;
 
+use Acme\AdminBundle\Form\Type\AviaAirportsFilter;
+
 class AviaairportsController extends ControllerBase {
 
     public function indexAction(Request $request) {
-        /* @var $manager \Acme\AdminBundle\Model\Airports */
+
         $manager = $this->get('admin.city.manager');
-        $queryBuilder = $manager->getRepository()
-                ->createQueryBuilder('p')
-                ->orderBy('p.regionRus');
-        $p = $manager->paginator($request->get('page', 1), $queryBuilder, 'admin.aviaairports.index', 20);
+        $filterForm = $this->createForm(new AviaAirportsFilter());
+        $filterForm->submit($request);
+
+        $p =$manager->listItemsShowHidden($request->get('page',1),$filterForm->getData());
         $controller = $this;
+
         return $this->render('AcmeAdminBundle:Aviaairports:index.html.twig', array(
-                    'data' => $p[0],
-                    'pagerHtml' => $p[1],
-                    'params' => array(
-                        'columns' => array(
-                            'id',
-                            [
-                                'name' => 'nameShortRu',
-                                'header' => 'Подстановка(ru)',
-                                'type' => \Stb\Bootstrap\ColumnTypes::TYPE_EDITABLE_TEXT,
-                                'route' => ['admin.aviaairports.editshort', ['id' => 'id']],
-                                'form' => function(AviaAirports $aviaAirports) use ($controller) {
-                                    return $controller->createFormBuilder($aviaAirports)
-                                        ->add('nameShortRu','text',['label' => 'Название','required' => false])
-                                        ->add('lang','hidden',['data' => 'ru','mapped' => false])
-                                        ->getForm()
-                                        ->createView();
-                                }
+            'filterForm' => $filterForm->createView(),
+            'data' => $p[0],
+            'pagerHtml' => $p[1],
+            'params' => array(
+                'columns' => array(
+                    'id',
+                    [
+                        'name' => 'nameShortRu',
+                        'header' => 'Подстановка(ru)',
+                        'type' => \Stb\Bootstrap\ColumnTypes::TYPE_EDITABLE_TEXT,
+                        'route' => ['admin.aviaairports.editshort', ['id' => 'id']],
+                        'form' => function(AviaAirports $aviaAirports) use ($controller) {
+                            return $controller->createFormBuilder($aviaAirports)
+                                ->add('nameShortRu','text',['label' => 'Название','required' => false])
+                                ->add('lang','hidden',['data' => 'ru','mapped' => false])
+                                ->getForm()
+                                ->createView();
+                        }
 
-                            ],
-                            [
-                                'name' => 'nameShortEn',
-                                'header' => 'Подстановка(en)',
-                                'type' => \Stb\Bootstrap\ColumnTypes::TYPE_EDITABLE_TEXT,
-                                'route' => ['admin.aviaairports.editshort', ['id' => 'id']],
-                                'form' => function(AviaAirports $aviaAirports) use ($controller) {
-                                    return $controller->createFormBuilder($aviaAirports)
-                                        ->add('nameShortEn','text',['label' => 'Название','required' => false])
-                                        ->add('lang','hidden',['data' => 'en','mapped' => false])
-                                        ->getForm()
-                                        ->createView();
-                                }
+                    ],
+                    [
+                        'name' => 'nameShortEn',
+                        'header' => 'Подстановка(en)',
+                        'type' => \Stb\Bootstrap\ColumnTypes::TYPE_EDITABLE_TEXT,
+                        'route' => ['admin.aviaairports.editshort', ['id' => 'id']],
+                        'form' => function(AviaAirports $aviaAirports) use ($controller) {
+                            return $controller->createFormBuilder($aviaAirports)
+                                ->add('nameShortEn','text',['label' => 'Название','required' => false])
+                                ->add('lang','hidden',['data' => 'en','mapped' => false])
+                                ->getForm()
+                                ->createView();
+                        }
 
-                            ],
-                            [
-                                'name' => 'nameShortUk',
-                                'header' => 'Подстановка(ua)',
-                                'type' => \Stb\Bootstrap\ColumnTypes::TYPE_EDITABLE_TEXT,
-                                'route' => ['admin.aviaairports.editshort', ['id' => 'id']],
-                                'form' => function(AviaAirports $aviaAirports) use ($controller) {
-                                    return $controller->createFormBuilder($aviaAirports)
-                                        ->add('nameShortUk','text',['label' => 'Название','required' => false])
-                                        ->add('lang','hidden',['data' => 'uk','mapped' => false])
-                                        ->getForm()
-                                        ->createView();
-                                }
+                    ],
+                    [
+                        'name' => 'nameShortUk',
+                        'header' => 'Подстановка(ua)',
+                        'type' => \Stb\Bootstrap\ColumnTypes::TYPE_EDITABLE_TEXT,
+                        'route' => ['admin.aviaairports.editshort', ['id' => 'id']],
+                        'form' => function(AviaAirports $aviaAirports) use ($controller) {
+                            return $controller->createFormBuilder($aviaAirports)
+                                ->add('nameShortUk','text',['label' => 'Название','required' => false])
+                                ->add('lang','hidden',['data' => 'uk','mapped' => false])
+                                ->getForm()
+                                ->createView();
+                        }
 
-                            ],
-                            'cityCodeEng',
-                            'airportCodeEng',
-                            'regionRus',
+                    ],
+                    'cityCodeEng',
+                    'airportCodeEng',
+                    'regionRus',
 //                            'regionEng',
-                            'countryRus',
+                    'countryRus',
 //                            'countryEng',
 //                            'cityEng',
-                            'cityRus',
-                        ),
-                        'actions' => array(
-                            'edit' => array(
-                                'route' => array('admin.aviaairports.edit', array('id' => 'id'))
-                            ),
-                            'delete' => array(
-                                'route' => array('admin.aviaairports.delete', array('id' => 'id'))
-                            ),
-                        )
-                    )
+                    'cityRus',
+                ),
+                'actions' => array(
+                    'edit' => array(
+                        'route' => array('admin.aviaairports.edit', array('id' => 'id'))
+                    ),
+                    'delete' => array(
+                        'route' => array('admin.aviaairports.delete', array('id' => 'id'))
+                    ),
+                )
+            )
         ));
     }
 

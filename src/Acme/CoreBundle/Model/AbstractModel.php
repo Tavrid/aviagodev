@@ -180,7 +180,7 @@ abstract class AbstractModel
      * Get results from paginator and get paginator view.
      *
      */
-    public function paginator($page,\Doctrine\ORM\QueryBuilder $queryBuilder, $url, $maxPerPage = null)
+    public function paginator($page,\Doctrine\ORM\QueryBuilder $queryBuilder, $url, $maxPerPage = null,$extUrlParams=[])
     {
 
         $adapter = new DoctrineORMAdapter($queryBuilder);
@@ -195,8 +195,8 @@ abstract class AbstractModel
         if ($pagerfanta->getNbPages() > 1) {
             // Paginator - route generator
             $me = $this;
-            $routeGenerator = function ($page) use ($me, $url) {
-                return $me->container->get('router')->generate($url, array('page' => $page));
+            $routeGenerator = function ($page) use ($me, $url,$extUrlParams) {
+                return $me->container->get('router')->generate($url, array_merge($extUrlParams,array('page' => $page)));
             };
 
             // Paginator - view
