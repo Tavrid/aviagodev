@@ -23,6 +23,16 @@
     </script>
 {% endblock %}
 {% block body %}
+    {% for itener in ticket.itineraries %}
+        {% for variant in itener.variants %}
+            {% set k = variant.departureSegment.departureCity~"-"~ variant.arrivalSegment.arrivalCity%}
+            {% for travelerId,titneraries in fareRules %}
+                {% if  itineraries[k]  is defined   %}
+                    {{ itineraries[k] |raw }}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
     <div class="col-md-3 total-price-block">
         <h3>{%trans%}frontend.default.order.order_info{%endtrans%}</h3>
         <hr />

@@ -3,6 +3,8 @@
 namespace Bundles\DefaultBundle\Controller;
 
 use Bundles\ApiBundle\Api\Api;
+use Bundles\ApiBundle\Api\Entity\Ticket;
+use Bundles\ApiBundle\Api\Query\AviaFareRulesQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Bundles\DefaultBundle\Form\BookInfoForm;
 use Bundles\DefaultBundle\Form\OrderForm;
@@ -81,6 +83,7 @@ class ApiController extends Controller
         $form = $this->createForm('order', $entity, [
             'bookInfoResponse' => $bookInfoResponse
         ]);
+
         if ($request->isMethod('post')) {
 
             $entity->setPrice($bookInfoResponse->getEntity()->getTicket()->getTotalPrice());
@@ -121,8 +124,25 @@ class ApiController extends Controller
             'form' => $form->createView(),
             'ticket' => $bookInfoResponse->getEntity()->getTicket(),
             'masks' => json_encode($countryManager->getMasks()),
-            'numPassenger' => array_sum($bookInfoResponse->getEntity()->getTicket()->getTravelers())
+            'numPassenger' => array_sum($bookInfoResponse->getEntity()->getTicket()->getTravelers()),
+            'fareRules' => json_decode($this->getAviaFareRules($bookInfoResponse->getEntity()->getTicket())->getFareRules(),true)
         ]);
+    }
+
+    private function getAviaFareRules(Ticket $ticket){
+        $query = new AviaFareRulesQuery();
+        $params = array(
+            'request_id' => $ticket->getRequestId()
+        );
+        $variants = array();
+        foreach($ticket->getItineraries() as $t){
+            foreach($t->getVariants() as $variant){
+                $variants[] = $variant->getVariantID();
+            }
+        }
+        $params['variants'] = $variants;
+        $query->setParams($params);
+        return $this->get('avia.api.manager')->getAviaFareRulesRequestor()->execute($query);
     }
 
     public function addSearchData($params, $data)
