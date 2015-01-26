@@ -932,4 +932,23 @@ class AviaAirports
     {
         return $this->nameShortUk;
     }
+
+    public function getFormattedName($locale){
+        if($locale == 'en'){
+            if($this->getNameShortEn()){
+                return $this->getNameShortEn();
+            }
+            return $this->getCountryEng().', '.$this->getCityEng().' ('.$this->getAirportCodeEng().')';
+        }else if($locale == 'ru'){
+            if($this->getNameShortRu()){
+                return $this->getNameShortRu();
+            }
+            return $this->getCountryRus().', '.$this->getCityRus().' ('.$this->getAirportCodeEng().')';
+        } else {
+            if($this->getNameShortUk()){
+                return $this->getNameShortUk();
+            }
+            return $this->getCountryRus().', '.$this->getCityRus().' ('.$this->getAirportCodeEng().')';
+        }
+    }
 }

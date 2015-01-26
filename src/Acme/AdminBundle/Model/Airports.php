@@ -74,11 +74,7 @@ class Airports extends AbstractModel {
         if($results){
             foreach($results as $val){
                 if($code == $val->getCityCodeEng() ||  $code == $val->getAirportCodeEng()){
-                    if($locale == 'en'){
-                        return $val->getCountryEng().', '.$val->getCityEng().' ('.$code.')';
-                    } else {
-                        return $val->getCountryRus().', '.$val->getCityRus().' ('.$code.')';
-                    }
+                   return $val->getFormattedName($locale);
                 }
             }
         }
