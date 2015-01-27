@@ -41,6 +41,48 @@ class Segments {
     protected  $departureTerminal;
     protected $arrivalTerminal;
 
+    protected $departureCity;
+
+    protected $arrivalCity;
+
+    /**
+     * @return mixed
+     */
+    public function getArrivalCity()
+    {
+        return $this->arrivalCity;
+    }
+
+    /**
+     * @param $arrivalCity
+     * @return $this
+     */
+    public function setArrivalCity($arrivalCity)
+    {
+        $this->arrivalCity = $arrivalCity;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDepartureCity()
+    {
+        return $this->departureCity;
+    }
+
+    /**
+     * @param $departureCity
+     * @return $this
+     */
+    public function setDepartureCity($departureCity)
+    {
+        $this->departureCity = $departureCity;
+        return $this;
+    }
+
+
+
     /**
      * @return mixed
      */

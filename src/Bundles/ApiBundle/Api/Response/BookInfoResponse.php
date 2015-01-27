@@ -54,7 +54,10 @@ class BookInfoResponse extends Response {
                         ->setDepartureCityName($segment['DepartureCityName'])
                         ->setDepartureAirportName($segment['DepartureAirportName'])
                         ->setDepartureDate($segment['DepartureDate'])
-                        ->setAvailableSeats($segment['AvailableSeats']);
+                        ->setAvailableSeats($segment['AvailableSeats'])
+                        ->setArrivalCity($segment['ArrivalCity'])
+                        ->setDepartureCity($segment['DepartureCity'])
+                    ;
                     $var->addSegment($segm);
                 }
                 $it->addVariant($var);

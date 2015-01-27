@@ -15,6 +15,7 @@ use Lsw\ApiCallerBundle\Caller\ApiCallerInterface;
 use Bundles\ApiBundle\Api\Request\CityRequest;
 use Bundles\ApiBundle\Api\Request\SearchRequest;
 use Bundles\ApiBundle\Api\Request\BookRequest;
+use Bundles\ApiBundle\Api\Request\AviaFareRulesRequest;
 
 use Bundles\ApiBundle\Api\Model\CacheInterface;
 
@@ -70,6 +71,14 @@ class Api {
      */
     public function getBookInfoRequestor(){
         $searchRequest = new BookInfoRequest($this->apiKey,$this->apiCaller);
+        $searchRequest->setLogger($this->logger);
+        return $searchRequest;
+    }
+    /**
+     * @return AviaFareRulesRequest
+     */
+    public function getAviaFareRulesRequestor(){
+        $searchRequest = new AviaFareRulesRequest($this->apiKey,$this->apiCaller);
         $searchRequest->setLogger($this->logger);
         return $searchRequest;
     }
