@@ -2,7 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: assets.yml }
-
+    - { resource: @AcmeAdminBundle/Resources/config/admin.yml }
 
 framework:
     #esi:             ~
@@ -35,7 +35,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        ['AcmeAdminBundle','AcmeMediaBundle','AcmeUserBundle', 'AcmeCoreBundle', 'BundlesDefaultBundle','StbBootstrapBundle','FOSUserBundle']
+    bundles:        ['AcmeAdminBundle','AcmeMediaBundle','AcmeUserBundle', 'AcmeCoreBundle', 'BundlesDefaultBundle','FOSUserBundle']
     #java: /usr/bin/java
     filters:
         lessphp:
@@ -113,3 +113,9 @@ parameters:
 fos_js_routing:
     routes_to_expose: [ bundles_default_api_complex_calendar,bundles_default_search_complex_search_items,bundles_default_search_complex_search,bundles_default_api_list,bundles_default_api_flights_items,bundles_default_api_calendar,bundles_default_change_locale,bundles_default_search_city ]
 
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # Enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
