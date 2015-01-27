@@ -1518,3 +1518,53 @@ select option {
 
 .IY {background-position: 0 -1050px;}
 .ZJ {background-position: -58px -1050px;}
+
+.typeahead{
+                position: absolute;
+                list-style: none;
+                padding: 0;
+                background: #ffffff;
+                z-index: 10000;
+            }
+            .typeahead > li > a{
+                padding: 5px 10px;
+                color: #333;
+                display: block;
+            }
+            .typeahead > li > a:hover{
+                background: #428bca;
+                color: #ffffff;
+                text-decoration: none;
+            }
+
+/* Реклама */
+
+.banners-reklama {
+	width: 800px;
+	height: 200px;
+	background: #bbb;
+}
+
+.banner {
+	width: 400px;
+	height: 200px;
+	float: left;
+}
+
+.displat-table {
+	display: table;
+	width: 100%;
+	text-align: center;
+}
+
+.displat-table-cell {
+	display: table-cell;
+	text-align: center;
+	height: 200px;
+	vertical-align: middle;
+}
+
+.loader {
+	text-align: center;
+	width: 100%;
+}
