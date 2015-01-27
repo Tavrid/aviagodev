@@ -1,0 +1,18 @@
+{% extends "SonataAdminBundle::standard_layout.html.twig" %}
+{% block side_bar_before_nav %}
+    <style type="text/css">
+        .main-nav{
+            background-color: #cfd1cf;
+        }
+    </style>
+    <ul class="nav nav-pills nav-stacked main-nav">
+        <li class="{% if app.request.get("_route") == "admin_acme_admin_aviaairports_list" %}active{% endif %}"><a href="{{ path("admin_acme_admin_aviaairports_list") }}">Список аэропортов</a></li>
+        <li {% if app.request.get("_route") == "admin_acme_admin_country_list" %}class="active" {% endif %}><a href="{{ path("admin_acme_admin_country_list") }}">Список стран</a></li>
+        <li {% if app.request.get("_route") == "admin_acme_admin_order_list" %}class="active" {% endif %}><a href="{{ path("admin_acme_admin_order_list") }}">Список заказов</a></li>
+
+    </ul>
+
+{% endblock %}
+{% block side_bar_after_nav %}
+    {#after bnav#}
+{% endblock %}
