@@ -554,7 +554,7 @@ a:focus {
 .nav-tabs > li.active > a, 
 .nav-tabs > li.active > a:hover, 
 .nav-tabs > li.active > a:focus {
-	background: #98d0ff;
+	background: #6ABCFF;
 	border-radius: 10px 10px 0 0;
 }
 
@@ -573,11 +573,11 @@ a:focus {
 	position: absolute;
 	bottom: -4px;
 	left: 0;
-	background: #98D0FF;
+	background: #6ABCFF;
 }
 
 .panel-default > .panel-heading {
-	background: #98d0ff;
+	background: #6ABCFF;
 	border-bottom: 1px dashed #fff;
 }
 
@@ -586,13 +586,13 @@ a:focus {
 }
 
 .panel-blue {
-	background: #98d0ff;
-	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#98d0ff), to(#d4effc));
-	background: -webkit-linear-gradient(#98d0ff, #d4effc);
-	background: -moz-linear-gradient(#98d0ff, #d4effc);
-	background: -ms-linear-gradient(#98d0ff, #d4effc);
-	background: -o-linear-gradient(#98d0ff, #d4effc);
-	background: linear-gradient(#98d0ff, #d4effc);
+	background: #6ABCFF;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#6ABCFF), to(#d4effc));
+	background: -webkit-linear-gradient(#6ABCFF, #d4effc);
+	background: -moz-linear-gradient(#6ABCFF, #d4effc);
+	background: -ms-linear-gradient(#6ABCFF, #d4effc);
+	background: -o-linear-gradient(#6ABCFF, #d4effc);
+	background: linear-gradient(#6ABCFF, #d4effc);
 }
 
 .input-group-addon {
@@ -690,13 +690,13 @@ a:focus {
 }
 
 .bg-gradient {
-	background: #98d0ff;
-	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#98d0ff), to(#d4effc));
-	background: -webkit-linear-gradient(#98d0ff, #d4effc);
-	background: -moz-linear-gradient(#98d0ff, #d4effc);
-	background: -ms-linear-gradient(#98d0ff, #d4effc);
-	background: -o-linear-gradient(#98d0ff, #d4effc);
-	background: linear-gradient(#98d0ff, #d4effc);
+	background: #6ABCFF;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#6ABCFF), to(#d4effc));
+	background: -webkit-linear-gradient(#6ABCFF, #d4effc);
+	background: -moz-linear-gradient(#6ABCFF, #d4effc);
+	background: -ms-linear-gradient(#6ABCFF, #d4effc);
+	background: -o-linear-gradient(#6ABCFF, #d4effc);
+	background: linear-gradient(#6ABCFF, #d4effc);
 }
 
 .result-box {
@@ -740,13 +740,13 @@ a:focus {
 }
 
 .checked-block {
-	/* background: #98d0ff;
-	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#98d0ff), to(#d4effc));
-	background: -webkit-linear-gradient(#98d0ff, #d4effc);
-	background: -moz-linear-gradient(#98d0ff, #d4effc);
-	background: -ms-linear-gradient(#98d0ff, #d4effc);
-	background: -o-linear-gradient(#98d0ff, #d4effc);
-	background: linear-gradient(#98d0ff, #d4effc); */
+	/* background: #6ABCFF;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#6ABCFF), to(#d4effc));
+	background: -webkit-linear-gradient(#6ABCFF, #d4effc);
+	background: -moz-linear-gradient(#6ABCFF, #d4effc);
+	background: -ms-linear-gradient(#6ABCFF, #d4effc);
+	background: -o-linear-gradient(#6ABCFF, #d4effc);
+	background: linear-gradient(#6ABCFF, #d4effc); */
 	border: 1px solid #dadada;
 	background: -webkit-linear-gradient(#f5f5f5, #dadada) repeat scroll 0 0 rgba(0, 0, 0, 0);
 	 background: -o-linear-gradient(#f5f5f5, #dadada) repeat scroll 0 0 rgba(0, 0, 0, 0);
@@ -865,9 +865,9 @@ a:focus {
 .table-calendar tr:first-of-type td, 
 .table-calendar thead th {
 	background: #EDEDEE;
-    /* background: -webkit-linear-gradient(#98d0ff, #d4effc) repeat scroll 0 0 rgba(0, 0, 0, 0);
-    background: -o-linear-gradient(#98d0ff, #d4effc) repeat scroll 0 0 rgba(0, 0, 0, 0);
-    background: linear-gradient(#98d0ff, #d4effc) repeat scroll 0 0 rgba(0, 0, 0, 0); */
+    /* background: -webkit-linear-gradient(#6ABCFF, #d4effc) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: -o-linear-gradient(#6ABCFF, #d4effc) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: linear-gradient(#6ABCFF, #d4effc) repeat scroll 0 0 rgba(0, 0, 0, 0); */
     text-align: center;
 }
 
@@ -949,13 +949,13 @@ a:focus {
 
 .book-tab .rules-tab,
 .tab-user-info .well {
-	background: #98d0ff;
-	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#98d0ff), to(#d4effc));
-	background: -webkit-linear-gradient(#98d0ff, #d4effc);
-	background: -moz-linear-gradient(#98d0ff, #d4effc);
-	background: -ms-linear-gradient(#98d0ff, #d4effc);
-	background: -o-linear-gradient(#98d0ff, #d4effc);
-	background: linear-gradient(#98d0ff, #d4effc);
+	background: #6ABCFF;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#6ABCFF), to(#d4effc));
+	background: -webkit-linear-gradient(#6ABCFF, #d4effc);
+	background: -moz-linear-gradient(#6ABCFF, #d4effc);
+	background: -ms-linear-gradient(#6ABCFF, #d4effc);
+	background: -o-linear-gradient(#6ABCFF, #d4effc);
+	background: linear-gradient(#6ABCFF, #d4effc);
 }
 
 .tab-user-info .well {
@@ -1126,7 +1126,8 @@ select option {
 	margin-bottom: 4px;
 }
 
-.price-reys label {
+.price-reys label,
+.sex-block label {
 	margin-bottom: 0 !important;
 }
 
@@ -1140,6 +1141,12 @@ select option {
 
 .order-form {
 	margin-bottom: 20px;
+}
+
+/* Подсказки */
+
+.help-block {
+	color:red;
 }
 
 /* Спрайты городов */
