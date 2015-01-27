@@ -2,10 +2,30 @@ services:
     sonata.admin.airports:
         class: Acme\AdminBundle\Admin\AirportsAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Список стран" }
+            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Список аэропортов" }
         arguments:
             - ~
             - Acme\AdminBundle\Entity\AviaAirports
-            - SonataAdminBundle:CRUD
+            - ~
+        calls:
+            - [ setTranslationDomain, [AcmeAdminBundle]]
+    sonata.admin.country:
+        class: Acme\AdminBundle\Admin\CountryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Список стран" }
+        arguments:
+            - ~
+            - Acme\AdminBundle\Entity\Country
+            - ~
+        calls:
+            - [ setTranslationDomain, [AcmeAdminBundle]]
+    sonata.admin.order:
+        class: Acme\AdminBundle\Admin\OrderAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Заказы", label: "Список заказов" }
+        arguments:
+            - ~
+            - Acme\AdminBundle\Entity\Order
+            - ~
         calls:
             - [ setTranslationDomain, [AcmeAdminBundle]]

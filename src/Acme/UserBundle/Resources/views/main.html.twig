@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}CMF{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{{ asset('logo.png') }}" />
+    {% block stylesheets %}
+        <link href="{{ asset('build/admin/dist/css/bootstrap.css') }}" rel="stylesheet" media="screen" />
+    {% endblock %}
+
+</head>
+<body>
+<div class="wrap {%block beauty%}{% endblock %}">
+    <div class="wrap-inner">
+
+        <div class="container test">
+            {% block body %}{% endblock %}
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

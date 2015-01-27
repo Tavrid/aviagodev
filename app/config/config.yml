@@ -119,3 +119,8 @@ sonata_block:
         # Enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts:   [admin]
+
+sonata_admin:
+    title: AVIAGO
+    templates:
+        user_block: AcmeAdminBundle:admin:user_block.html.twig

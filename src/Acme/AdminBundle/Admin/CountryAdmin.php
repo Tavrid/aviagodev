@@ -16,16 +16,16 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 use Knp\Menu\ItemInterface as MenuItemInterface;
 
-class AirportsAdmin extends Admin {
+class CountryAdmin extends Admin {
 
     // Fields to be shown on filter forms
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('countryRus')
-            ->add('cityRus')
-            ->add('cityCodeEng')
-            ->add('airportCodeEng')
+            ->add('name')
+            ->add('fullname')
+            ->add('code')
+            ->add('alpha2')
         ;
     }
 
@@ -34,13 +34,11 @@ class AirportsAdmin extends Admin {
     {
         $listMapper
             ->add('id')
-            ->add('cityRus')
-            ->add('countryRus')
-            ->add('cityCodeEng')
-            ->add('airportCodeEng')
-            ->add('nameShortRu',null,['editable' => true,'label' => 'Короткое название(rus)'])
-            ->add('nameShortEn',null,['editable' => true,'label' => 'Короткое название(en)'])
-            ->add('nameShortUk',null,['editable' => true,'label' => 'Короткое название(uk)'])
+            ->add('passport_mask',null,['editable' => true,'label' => 'Маска для паспорта'])
+            ->add('name')
+            ->add('fullname')
+            ->add('code')
+            ->add('alpha2')
         ;
     }
 

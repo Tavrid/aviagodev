@@ -7,6 +7,7 @@
  */
 
 namespace Acme\AdminBundle\Admin;
+use Acme\AdminBundle\Entity\Order;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -16,16 +17,16 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 use Knp\Menu\ItemInterface as MenuItemInterface;
 
-class AirportsAdmin extends Admin {
+class OrderAdmin extends Admin {
 
     // Fields to be shown on filter forms
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('countryRus')
-            ->add('cityRus')
-            ->add('cityCodeEng')
-            ->add('airportCodeEng')
+            ->add('id')
+            ->add('state')
+            ->add('phone')
+            ->add('email')
         ;
     }
 
@@ -34,13 +35,13 @@ class AirportsAdmin extends Admin {
     {
         $listMapper
             ->add('id')
-            ->add('cityRus')
-            ->add('countryRus')
-            ->add('cityCodeEng')
-            ->add('airportCodeEng')
-            ->add('nameShortRu',null,['editable' => true,'label' => 'Короткое название(rus)'])
-            ->add('nameShortEn',null,['editable' => true,'label' => 'Короткое название(en)'])
-            ->add('nameShortUk',null,['editable' => true,'label' => 'Короткое название(uk)'])
+            ->add('state','choice',['choices' => Order::$states,'editable' => true])
+            ->add('phone')
+            ->add('email')
+            ->add('date')
+            ->add('price')
+            ->add('pnr')
+            ->add('order_id')
         ;
     }
 
