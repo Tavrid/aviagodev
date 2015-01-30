@@ -8,6 +8,7 @@
 
 namespace Bundles\DefaultBundle\Controller;
 
+use Bundles\ApiBundle\Api\Entity\Ticket;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Bundles\ApiBundle\Api\Response\BookInfoResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,8 +34,21 @@ class OrderController extends Controller
         return $this->render('BundlesDefaultBundle:Order:order.html.twig', [
             'order' => $order,
             'bookInfo' => $bookInfoResponse->getEntity(),
-            'payForm' => $form->createView()
+            'payForm' => $form->createView(),
+            'numPassenger' => $this->getCountTravelers($bookInfoResponse->getEntity()->getTicket())
         ]);
+    }
+
+    /**
+     * @param Ticket $ticket
+     * @return int
+     */
+    private function getCountTravelers(Ticket $ticket){
+        $numPassenger = 0 ;
+        foreach($ticket->getTravelers() as $traveler){
+            $numPassenger+=count($traveler);
+        }
+        return $numPassenger;
     }
 
     /**
