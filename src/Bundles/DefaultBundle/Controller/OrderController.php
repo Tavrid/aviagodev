@@ -39,6 +39,17 @@ class OrderController extends Controller
         ]);
     }
 
+    public function searchPnrAction(Request $request){
+        if($request->getMethod() == 'POST'){
+            $pnr = trim($request->get('pnr'));
+            $order = $this->get('admin.order.manager')->getOrderBuPnr($pnr);
+            if(!empty($order)){
+                return $this->redirect($this->generateUrl('bundles_default_api_order',array("orderID" => $order->getOrderId())));
+            }
+        }
+        return $this->render('BundlesDefaultBundle:Order:search.html.twig');
+    }
+
     /**
      * @param Ticket $ticket
      * @return int
