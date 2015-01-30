@@ -28,7 +28,8 @@
     "Beryllium/CacheBundle": "dev-master",
     "friendsofsymfony/jsrouting-bundle": "@stable",
     "sonata-project/admin-bundle": "~2.3",
-    "sonata-project/doctrine-orm-admin-bundle": "~2.3"
+    "sonata-project/doctrine-orm-admin-bundle": "~2.3",
+    "sonata-project/core-bundle": "2.3.*@dev"
   },
   "require-dev": {
     "sensio/generator-bundle": "~2.3"

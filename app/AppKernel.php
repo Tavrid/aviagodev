@@ -44,6 +44,7 @@ class AppKernel extends Kernel {
             // it works the same with the alternatives
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
 
+
             // Then add SonataAdminBundle
             new Sonata\AdminBundle\SonataAdminBundle(),
         );

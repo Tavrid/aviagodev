@@ -35,7 +35,8 @@ class BookInfoResponse extends Response {
         $ticket->setRequestId($requestId)
             ->setTotalPrice($data['TotalPrice']['Total'])
             ->setPricing($data['Pricing'])
-            ->setTravelers($data['Travellers']);
+            ->setTravelers($data['Travellers'])
+            ->setRefundable($data['Refundable']);
         if(isset($data['LatinRegistration'])){
             $ticket->setLatinRegistration($data['LatinRegistration']);
         }
