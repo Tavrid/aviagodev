@@ -161,15 +161,15 @@ class AviaAirports
     /**
      * @var string
      */
-    private $shortNameRu;
+    private $nameShortRu;
     /**
      * @var
      */
-    private $shortNameEn;
+    private $nameShortEn;
     /**
      * @var
      */
-    private $shortNameUk;
+    private $nameShortUk;
 
 
     /**
@@ -848,22 +848,6 @@ class AviaAirports
     {
         return $this->timezone;
     }
-    /**
-     * @var string
-     */
-    private $nameShortRu;
-
-    /**
-     * @var string
-     */
-    private $nameShortEn;
-
-    /**
-     * @var string
-     */
-    private $nameShortUk;
-
-
     /**
      * Set nameShortRu
      *

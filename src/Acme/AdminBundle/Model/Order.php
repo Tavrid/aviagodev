@@ -27,4 +27,17 @@ class Order extends AbstractModel {
         ));
     }
 
+    /**
+     * @param $pnr
+     * @return null|\Acme\AdminBundle\Entity\Order
+     */
+    public function getOrderBuPnr($pnr){
+        if(empty($pnr)){
+            return null;
+        }
+        return $this->getRepository()->findOneBy(array(
+            'pnr' => $pnr
+        ));
+    }
+
 } 

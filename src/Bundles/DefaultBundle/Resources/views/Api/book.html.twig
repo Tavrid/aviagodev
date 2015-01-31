@@ -23,16 +23,8 @@
     </script>
 {% endblock %}
 {% block body %}
-    {% for itener in ticket.itineraries %}
-        {% for variant in itener.variants %}
-            {% set k = variant.departureSegment.departureCity~"-"~ variant.arrivalSegment.arrivalCity%}
-            {% for travelerId,titneraries in fareRules %}
-                {% if  itineraries[k]  is defined   %}
-                    {{ itineraries[k] |raw }}
-                {% endif %}
-            {% endfor %}
-        {% endfor %}
-    {% endfor %}
+    {% include "BundlesDefaultBundle:_Common:_avia_fare_rules.html.twig" %}
+
     <div class="col-md-3 total-price-block">
         <h3>{%trans%}frontend.default.order.order_info{%endtrans%}</h3>
         <hr />
@@ -56,8 +48,17 @@
             </ul>
             <div class="tab-content book-tab">
                 <div class="tab-pane active rules-tab" id="rules" style="padding: 15px">
+                    <div>
+                        {% if not ticket.refundable %}
+                            Возврат билета: <strong>не возвратный</strong>
+                        {% endif %}
+                    </div>
+                    <hr/>
                     <div class="">
                         Если в вашем билете несколько рейсов, при неявке на один из них авиакомпания имеет право отменить бронь на оставшиеся рейсы.
+                    </div>
+                    <div>
+                        <a href="#myModal" data-toggle="modal" data-target="#myModal">{% trans %}frontend.avia_fare.modal_link{% endtrans %}</a>
                     </div>
                     <hr />
                     <table class="table">
