@@ -1,4 +1,5 @@
 .idea/
+web/deploy.log
 web/bundles/
 web/compiled/
 web/css/

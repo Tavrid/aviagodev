@@ -15,47 +15,24 @@ if($_REQUEST['api_key'] != $key){
 $commands = array(
     'echo $PWD',
     'whoami',
-    'git pull'
+    'git pull',
+    sprintf('sh %s/../build_sf.sh',__DIR__)
 );
-
 
 // Run the commands for output
 $output = '';
+$output .= '=================='.date('Y-m-d H:i:s').'============================'."\n";
 foreach ($commands AS $command) {
     // Run it
     $tmp = shell_exec($command);
     // Output
-    $output .= "<span style=\"color: #6BE234;\">\$</span> <span style=\"color: #729FCF;\">{$command}\n</span>";
-    $output .= htmlentities(trim($tmp)) . "\n";
+    $output .= '---------------------------------------------'."\n";
+    $output .= '$ '.$command."\n";
+    $output .= htmlentities(trim($tmp)) . "\n\n";
 }
-function rrmdir($dir) {
-    if (@is_dir($dir)) {
-        $objects = scandir($dir);
-        foreach ($objects as $object) {
-            if ($object != "." && $object != "..") {
-                if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
-            }
-        }
-        reset($objects);
-        @rmdir($dir);
-    }
-}
-rrmdir(__DIR__.'/../app/cache/prod');
-// Make it pretty for manual user access (and why not?)
+$output .= "==============================================\n\n";
+file_put_contents(__DIR__.'/deploy.log',$output);
 ?>
-<!DOCTYPE HTML>
-<html lang="en-US">
-<head>
-    <meta charset="UTF-8">
-    <title>GIT DEPLOYMENT SCRIPT</title>
-</head>
-<body style="background-color: #000000; color: #FFFFFF; font-weight: bold; padding: 0 10px;">
-    <pre>
 
-
-        <?php echo $output; ?>
-    </pre>
-</body>
-</html>
 
 
