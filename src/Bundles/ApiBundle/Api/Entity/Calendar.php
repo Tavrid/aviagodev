@@ -9,6 +9,8 @@
 namespace Bundles\ApiBundle\Api\Entity;
 
 
+use Bundles\ApiBundle\Api\Util\TicketEntityCreatorInterface;
+
 class Calendar {
     /**
      * @var Calendar[]
@@ -36,7 +38,10 @@ class Calendar {
     protected $parent;
 
     protected $requestId;
-
+    /**
+     * @var TicketEntityCreatorInterface
+     */
+    protected $ticketCreator;
     /**
      * @return Calendar
      */
@@ -60,7 +65,8 @@ class Calendar {
      * @param $date
      * @param $isRoot
      */
-    public function __construct($data,$date,$isRoot = true){
+    public function __construct($data,$date,TicketEntityCreatorInterface $ticketCreator,$isRoot = true){
+        $this->ticketCreator =$ticketCreator;
         $this->data = $data;
         $this->child = array();
         $this->price = isset($data['TotalPrice']['Total']) ? $data['TotalPrice']['Total'] : null;
@@ -70,7 +76,7 @@ class Calendar {
                 if(!strtotime($de)){
                     continue;
                 }
-                $calendar = new Calendar($da,$de,false);
+                $calendar = new Calendar($da,$de,$ticketCreator,false);
                 $calendar->setParent($this);
                 $this->addChild($calendar);
             }
@@ -78,7 +84,7 @@ class Calendar {
     }
     public function getCurrency() {
         return 'руб.';
-        return $this->currency;
+//        return $this->currency;
     }
 
     public function setCurrency($currency) {
@@ -188,74 +194,28 @@ class Calendar {
         $this->price = $price;
         return $this;
     }
-    protected function createTicket(){
 
-        $data = $this->getData();
-
-        $ticket = new Ticket();
-        $ticket->setRequestId($this->getRequestId());
-        $ticket->setTotalPrice($data['TotalPrice']['Total'])
-            ->setValidatingAirline($data['ValidatingAirline']);
-
-        foreach($data['Itineraries'] as $inter){
-            $it = new Itineraries();
-            foreach($inter['Variants'] as $variants){
-
-                $var = new Variants();
-                $var->setDuration($variants['Duration'])
-                    ->setVariantID($variants['VariantID']);
-                $countSegments = count($variants['Segments']);
-                $i = 0;
-                foreach($variants['Segments'] as $segment){
-                    $segm = new Segments();
-                    $segm->setArrivalAirportName($segment['ArrivalAirportName'])
-                        ->setArrivalCountryName($segment['ArrivalCountryName'])
-                        ->setArrivalCityName($segment['ArrivalCityName'])
-                        ->setArrivalDate($segment['ArrivalDate'])
-                        ->setDepartureCountryName($segment['DepartureCountryName'])
-                        ->setDepartureCityName($segment['DepartureCityName'])
-                        ->setDepartureAirportName($segment['DepartureAirportName'])
-                        ->setDepartureDate($segment['DepartureDate'])
-                        ->setAvailableSeats($segment['AvailableSeats'])
-                        ->setMarketingAirline($segment['MarketingAirline'])
-                        ->setFlightNumber($segment['FlightNumber'])
-                        ->setFlightTime($segment['FlightTime'])
-                        ->setDepartureTimeZone($segment['DepartureTimeZone'])
-                        ->setArrivalTimeZone($segment['ArrivalTimeZone'])
-                        ->setMarketingAirlineName($segment['MarketingAirlineName'])
-                        ->setDepartureAirport($segment['DepartureAirport'])
-                        ->setArrivalAirport($segment['ArrivalAirport'])
-                        ->setAircraftName($segment['AircraftName']);
-
-                    if($i == 0){
-                        $segm->setIsFirstSegment(true);
-                    }
-                    $i++;
-                    if($countSegments == $i){
-                        $segm->setIsLastSegment(true);
-                    }
-                    $var->addSegment($segm);
-                }
-
-                $it->addVariant($var);
-            }
-
-            $ticket->addItineraries($it);
-        }
-
-
-        $this->ticket= $ticket;
-    }
 
     /**
      * @return Ticket
      */
     public function getTicket(){
         if(!$this->ticket){
-            $this->createTicket();
+            $this->ticket = $this->ticketCreator->createTicket($this->getData());
+
         }
         return $this->ticket;
     }
+//
+//    /**
+//     * @param Ticket $ticket
+//     * @return $this
+//     */
+//
+//    public function setTicket(Ticket $ticket){
+//        $this->ticket = $ticket;
+//        return $this;
+//    }
 
 
 

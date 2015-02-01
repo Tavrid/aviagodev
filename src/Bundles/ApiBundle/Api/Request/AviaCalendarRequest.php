@@ -9,6 +9,7 @@
 namespace Bundles\ApiBundle\Api\Request;
 
 use Bundles\ApiBundle\Api\Model\CacheInterface;
+use Bundles\ApiBundle\Api\Util\TicketCalendarEntityCreator;
 use Lsw\ApiCallerBundle\Caller\ApiCallerInterface;
 use Bundles\ApiBundle\Api\ApiCall;
 use Bundles\ApiBundle\Api\Query\QueryAbstract;
@@ -76,7 +77,7 @@ class AviaCalendarRequest implements Request{
      */
     public function execute(QueryAbstract $query)
     {
-        $response = new AviaCalendarResponse();
+        $response = new AviaCalendarResponse(new TicketCalendarEntityCreator());
         $data = null;
         if($this->cache){
             $data = $this->cache->get($query->getKeyByParams());

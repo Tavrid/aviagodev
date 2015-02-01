@@ -36,7 +36,6 @@ class BookInfoResponse extends Response {
             return;
         }
         $data = $this->response['result'];
-        $requestId = $data['RequestID'];
         $entity = new BookInfo();
         $entity->setTravelers($data['Travellers']);
 
