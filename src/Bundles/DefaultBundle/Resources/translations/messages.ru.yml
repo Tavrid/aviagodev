@@ -3,6 +3,9 @@ frontend:
       error_book: Ошибка бронирования
     num_passenger: %num% человека|%num% человек|%num% человек
     non_return: невозвратный
+    flights:
+        complex_name: Сложный поиск %cityFrom% - %cityFrom%
+        simple_name: %cityFrom%  %cityTo%
     avia_fare:
         modal_link: все правила тарифа на (англ. яз.)
         modal_title: Првила тарифа

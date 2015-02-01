@@ -23,6 +23,9 @@ services:
         arguments:
           - @session
           - @router
+          - @bundles_default_util_route
+          - @translator
+          - @admin.city.manager
 
 
 

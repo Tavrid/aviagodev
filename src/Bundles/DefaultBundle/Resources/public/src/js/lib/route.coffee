@@ -17,12 +17,16 @@ module.exports = class
       cityCodes = []
       date = []
       _.each ViewModel.complexFields(), (o) ->
+        if !o.cityFromCode() || !o.cityToCode()
+          throw new Exception "Error city code"
         cityCodes.push "#{o.cityFromCode()}-#{o.cityToCode()}"
         date.push o.date()
       params.city = cityCodes.join "_"
       params.date = date.join "_"
       url = Routing.generate "bundles_default_search_complex_search",params
     else
+      if !ViewModel.cityFromCode() || !ViewModel.cityToCode()
+        throw new Exception "Error city code"
       params.city_from_code = ViewModel.cityFromCode()
       params.city_to_code = ViewModel.cityToCode()
       params.date_from = ViewModel.dateFrom()

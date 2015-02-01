@@ -3,6 +3,9 @@ frontend:
       error_book: Booking error
     num_passenger: %num% persons|%num% persons|%num% persons
     non_return: non-return
+    flights:
+        complex_name: Complex search %cityFrom% - %cityFrom%
+        simple_name: %cityFrom%  %cityTo%
     avia_fare:
         modal_link: all fare rules
         modal_title: Fare rules
