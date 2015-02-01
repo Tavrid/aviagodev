@@ -8,6 +8,7 @@
 
 namespace Bundles\ApiBundle\Api\Request;
 
+use Bundles\ApiBundle\Api\Util\TicketEntityCreator;
 use Lsw\ApiCallerBundle\Caller\ApiCallerInterface;
 use Bundles\ApiBundle\Api\ApiCall;
 use Bundles\ApiBundle\Api\Query\QueryAbstract;
@@ -59,7 +60,7 @@ class AviaCheckRequest implements Request{
     */
     public function execute(QueryAbstract $query)
     {
-        $response = new Response();
+        $response = new Response(new TicketEntityCreator());
 
         $data = $this->apiCaller->call(new ApiCall($query->getApiUrl(),json_encode($query->buildParams($this->apiKey))));
         $response->setResponseData($data);
