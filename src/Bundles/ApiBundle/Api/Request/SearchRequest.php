@@ -8,6 +8,7 @@
 
 namespace Bundles\ApiBundle\Api\Request;
 
+use Bundles\ApiBundle\Api\Util\TicketSearchEntityCreator;
 use Lsw\ApiCallerBundle\Caller\ApiCallerInterface;
 use Bundles\ApiBundle\Api\ApiCall;
 use Bundles\ApiBundle\Api\Query\QueryAbstract;
@@ -77,7 +78,7 @@ class SearchRequest implements Request{
      */
     public function execute(QueryAbstract $query)
     {
-        $response = new SearchResponse();
+        $response = new SearchResponse(new TicketSearchEntityCreator());
         $data = null;
         if($this->cache){
             $data = $this->cache

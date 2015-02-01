@@ -12,13 +12,20 @@ use Bundles\ApiBundle\Api\Entity\Ticket;
 use Bundles\ApiBundle\Api\Entity\Itineraries;
 use Bundles\ApiBundle\Api\Entity\Segments;
 use Bundles\ApiBundle\Api\Entity\Variants;
+use Bundles\ApiBundle\Api\Util\TicketEntityCreatorInterface;
 
 
 class SearchResponse extends Response implements \Iterator,\ArrayAccess, \Countable{
 
     protected $position = 0;
 
-    public function __construct() {
+    /**
+     * @var TicketEntityCreatorInterface
+     */
+    protected $ticketCreator;
+
+    public function __construct(TicketEntityCreatorInterface $ticketCreator){
+        $this->ticketCreator = $ticketCreator;
         $this->position = 0;
     }
 
@@ -100,64 +107,9 @@ class SearchResponse extends Response implements \Iterator,\ArrayAccess, \Counta
      */
     protected function createEntity($pos){
         $data = $this->response['result']['Data'][$pos];
-        $requestId = $this->response['result']['RequestID'];
-        $ticket = new Ticket();
-        $ticket->setRequestId($requestId);
-        $ticket->setTotalPrice($data['TotalPrice']['Total'])
-            ->setValidatingAirline($data['ValidatingAirline'])
-            ->setLastTicketDate($data['LastTicketDate'])
-            ->setRefundable($data['Refundable']);
+        $data['RequestID'] = $this->response['result']['RequestID'];
 
-        foreach($data['Itineraries'] as $inter){
-            $it = new Itineraries();
-            foreach($inter['Variants'] as $variants){
-
-                $var = new Variants();
-                $var->setDuration($variants['Duration'])
-                    ->setVariantID($variants['VariantID']);
-                $countSegments = count($variants['Segments']);
-                $i = 0;
-                foreach($variants['Segments'] as $segment){
-                    $segm = new Segments();
-                    $segm->setArrivalAirportName($segment['ArrivalAirportName'])
-                        ->setArrivalCountryName($segment['ArrivalCountryName'])
-                        ->setArrivalCityName($segment['ArrivalCityName'])
-                        ->setArrivalDate($segment['ArrivalDate'])
-                        ->setDepartureCountryName($segment['DepartureCountryName'])
-                        ->setDepartureCityName($segment['DepartureCityName'])
-                        ->setDepartureAirportName($segment['DepartureAirportName'])
-                        ->setDepartureDate($segment['DepartureDate'])
-                        ->setAvailableSeats($segment['AvailableSeats'])
-                        ->setMarketingAirline($segment['MarketingAirline'])
-                        ->setFlightNumber($segment['FlightNumber'])
-                        ->setFlightTime($segment['FlightTime'])
-                        ->setDepartureTimeZone($segment['DepartureTimeZone'])
-                        ->setArrivalTimeZone($segment['ArrivalTimeZone'])
-                        ->setMarketingAirlineName($segment['MarketingAirlineName'])
-                        ->setDepartureAirport($segment['DepartureAirport'])
-                        ->setArrivalAirport($segment['ArrivalAirport'])
-                        ->setAircraftName($segment['AircraftName'])
-                        ->setArrivalTerminal($segment['DepartureTerminal'])
-                        ->setDepartureTerminal($segment['ArrivalTerminal']);
-
-                    if($i == 0){
-                        $segm->setIsFirstSegment(true);
-                    }
-                    $i++;
-                    if($countSegments == $i){
-                        $segm->setIsLastSegment(true);
-                    }
-                    $var->addSegment($segm);
-                }
-
-                $it->addVariant($var);
-            }
-
-            $ticket->addItineraries($it);
-        }
-
-
-        return $ticket;
+        return $this->ticketCreator->createTicket($data);
     }
 
     /**
