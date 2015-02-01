@@ -6,6 +6,7 @@ frontend:
     flights:
         complex_name: Complex search %cityFrom% - %cityFrom%
         simple_name: %cityFrom%  %cityTo%
+        last_ticket_date: Pay up
     avia_fare:
         modal_link: all fare rules
         modal_title: Fare rules
@@ -66,8 +67,6 @@ frontend:
         departure_airport: Departure airport
         arrival_airport: Arrival airport
         all: All
-    flights:
-      last_ticket_date: Pay up
     default:
         modal:
             title: Lowest price for the chosen dates

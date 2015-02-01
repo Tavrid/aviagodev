@@ -95,6 +95,7 @@ class SearchController extends Controller
 
     public function addSearchData($routeParams,$data)
     {
+
         $this->get('bundles_default.util.previous_flight')->addFlight($routeParams,true);
         $this->get('session')->set('formData', $data);
     }

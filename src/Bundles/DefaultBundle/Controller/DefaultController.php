@@ -16,17 +16,16 @@ class DefaultController extends Controller {
         $form = $this->createForm('search_form');
 
         $flights = $this->get('bundles_default.util.previous_flight')->getFlights();
-
         return $this->render('BundlesDefaultBundle:Default:index.html.twig', [
                     'flights' => $flights,
                     'form' => $form->createView(),
-                    'form_data' => $this->get('bundles_default_util_route')->resolveParams($this->get('session')->get('formData',[]))
+                    'form_data' => $this->get('session')->get('formData',[])
         ]);
     }
 
     /**
-     * 
      * @param Request $request
+     * @return Response
      */
     public function changeLocaleAction(Request $request) {
         return new Response();

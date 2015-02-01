@@ -6,6 +6,7 @@ frontend:
     flights:
         complex_name: Сложный поиск %cityFrom% - %cityFrom%
         simple_name: %cityFrom%  %cityTo%
+        last_ticket_date: Оплатить до
     avia_fare:
         modal_link: все правила тарифа на (англ. яз.)
         modal_title: Првила тарифа
@@ -66,8 +67,6 @@ frontend:
         departure_airport: Аэропорт вылета
         arrival_airport: Аэропорт прилета
         all: Все
-    flights:
-      last_ticket_date: Оплатить до
     default:
         index:
             num_passengers: Количество пассажиров:
