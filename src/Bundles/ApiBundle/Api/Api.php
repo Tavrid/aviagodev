@@ -16,6 +16,7 @@ use Bundles\ApiBundle\Api\Request\CityRequest;
 use Bundles\ApiBundle\Api\Request\SearchRequest;
 use Bundles\ApiBundle\Api\Request\BookRequest;
 use Bundles\ApiBundle\Api\Request\AviaFareRulesRequest;
+use Bundles\ApiBundle\Api\Request\AviaCheckRequest;
 
 use Bundles\ApiBundle\Api\Model\CacheInterface;
 
@@ -101,6 +102,12 @@ class Api {
         $searchRequest = new AviaCalendarRequest($this->apiKey,$this->apiCaller);
         $searchRequest->setLogger($this->logger)
             ->setCache($this->cache);
+        return $searchRequest;
+    }
+
+    public function getAviaCheckRequestor(){
+        $searchRequest = new AviaCheckRequest($this->apiKey,$this->apiCaller);
+        $searchRequest->setLogger($this->logger);
         return $searchRequest;
     }
 

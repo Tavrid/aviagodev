@@ -24,12 +24,46 @@ class Ticket {
     protected $lastTicketDate;
     protected $currency;
     protected $refundable;
+    protected $surnames;
+
 
 
 
     public function __construct() {
         $this->itineraries = array();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSurnames()
+    {
+        return $this->surnames;
+    }
+
+    /**
+     * @return bool|float|int|mixed|null|string
+     */
+    public function getSurname(){
+        if(is_array($this->surnames)){
+            return current($this->surnames);
+        } else if(is_scalar($this->surnames)){
+            return $this->surnames;
+        }
+        return null;
+    }
+
+    /**
+     * @param $surnames
+     * @return $this
+     */
+    public function setSurnames($surnames)
+    {
+        $this->surnames = $surnames;
+        return $this;
+    }
+
+
 
     /**
      * @return mixed

@@ -39,6 +39,9 @@ class BookInfoResponse extends Response {
         if(isset($data['Refundable'])){
             $ticket->setRefundable($data['Refundable']);
         }
+        if(isset($data['Surnames'])){
+            $ticket->setSurnames($data['Surnames']);
+        }
         if(isset($data['LatinRegistration'])){
             $ticket->setLatinRegistration($data['LatinRegistration']);
         }

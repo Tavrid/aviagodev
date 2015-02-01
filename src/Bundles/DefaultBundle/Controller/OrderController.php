@@ -9,6 +9,7 @@
 namespace Bundles\DefaultBundle\Controller;
 
 use Bundles\ApiBundle\Api\Entity\Ticket;
+use Bundles\ApiBundle\Api\Query\AviaCheck;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Bundles\ApiBundle\Api\Response\BookInfoResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,6 +31,14 @@ class OrderController extends Controller
         $form = $this->createForm('pay_form');
         $bookInfoResponse = new BookInfoResponse();
         $bookInfoResponse->setResponseData($order->getOrderInfo());
+
+        $query = new AviaCheck();
+        $query->setParams([
+            'pnr' => $order->getPnr(),
+            'surname' => $bookInfoResponse->getEntity()->getTicket()->getSurnames()[0]
+        ]);
+
+        $this->get('avia.api.manager')->getAviaCheckRequestor()->execute($query);
 
         return $this->render('BundlesDefaultBundle:Order:order.html.twig', [
             'order' => $order,
