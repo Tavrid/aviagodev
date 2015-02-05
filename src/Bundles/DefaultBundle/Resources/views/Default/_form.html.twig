@@ -15,10 +15,10 @@
                     {% endfor %}
                 </div>
                 <div class="panel-body panel-blue">
-                    <div class="row" data-bind="visible: complexSearch()">
+                    <div class="row row-one" data-bind="visible: complexSearch()">
                         {% include "BundlesDefaultBundle:Default:_complex_field.html.twig" %}
                     </div>
-                    <div class="row" data-bind="visible: !complexSearch()">
+                    <div class="row row-one-two" data-bind="visible: !complexSearch()">
                         <div class="col-md-5 col-avia">
                             <div class="input-group city-from">
                                 <span class="input-group-addon block-img-avia" data-toggle="tooltip" data-placement="top" data-original-title="Откуда вы вылетаете?">
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <!-- Город вылета прилета -->
-                    <div class="row">
+                    <div class="row row-complex">
                         <div class="col-md-6">
                             <!-- Дата вылета -->
                             <div class="date-from" data-bind="visible: !complexSearch()">

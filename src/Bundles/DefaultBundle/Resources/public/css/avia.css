@@ -1,3 +1,11 @@
+/* Скрывающиеся блоки */
+
+#loader,
+.complex-search,
+.row-one {
+	display: none;
+}
+
 /* Контент  */
 
 body,
@@ -1582,3 +1590,16 @@ select option {
 	font-size: 12px;
 	color:#999;
 }
+
+/* Переключатели языков */
+
+.btn.btn-default.lang {
+    padding: 6px;
+    color:#999;
+}
+
+.btn.btn-default.lang.active {
+    color: #333;
+}
+
+
