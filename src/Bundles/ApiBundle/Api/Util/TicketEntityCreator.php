@@ -40,6 +40,7 @@ class TicketEntityCreator implements TicketEntityCreatorInterface {
             $var->setDuration($variants['Duration'])
                 ->setVariantID($variants['VariantID']);
             foreach($variants['Segments'] as $segment){
+
                 $segm = new Segments();
                 $segm->setArrivalAirportName($segment['ArrivalAirportName'])
                     ->setArrivalCountryName($segment['ArrivalCountryName'])
@@ -52,6 +53,8 @@ class TicketEntityCreator implements TicketEntityCreatorInterface {
                     ->setAvailableSeats($segment['AvailableSeats'])
                     ->setArrivalCity($segment['ArrivalCity'])
                     ->setDepartureCity($segment['DepartureCity'])
+                    ->setMarketingAirline($segment['MarketingAirline'])
+                    ->setMarketingAirlineName($segment['MarketingAirlineName'])
                 ;
                 $var->addSegment($segm);
             }
