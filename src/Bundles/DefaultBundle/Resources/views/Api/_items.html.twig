@@ -13,6 +13,7 @@
                 </span>
                 <span class="end-word"></span></span>
         </div>
+        {% set view_refundable = true %}
         {% if needBook %}
             <form action="{{ path("bundles_default_api_info") }}" class="book-form">
                 {% endif %}
@@ -43,7 +44,8 @@
                                 {% endif %}
                                 <div class="panel panel-info panel-ticket">
                                     <span class="return-block">
-                                        {% if not ticket.refundable and loop.first %}
+                                        {% if not ticket.refundable and view_refundable %}
+                                            {% set view_refundable = false %}
                                             {% trans %}frontend.non_return{% endtrans %}
                                         {% endif %}
                                     </span>

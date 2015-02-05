@@ -1603,3 +1603,7 @@ select option {
 }
 
 
+#preloader{
+	display: none;
+	z-index: -100;
+}
