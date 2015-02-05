@@ -3,13 +3,26 @@
 <html>
     <head>
         <title>{% block title "Поиск дешевых авиабилетов" %}</title>
-        {% block stylesheets %}
-            <link href="{{ asset('build/dist/css/bootstrap.css') }}" rel="stylesheet" media="screen" />
-            <link href="{{ asset('build/dist/css/jquery-ui.css') }}" rel="stylesheet" media="screen" />
-            <link href="{{ asset('build/dist/css/avia.css') }}" rel="stylesheet" media="screen" />
-        {% endblock %}
+
     </head>
     <body>
+        <style type="text/css">
+            #preloader{
+                position: fixed;
+                height: 100%;
+                width: 100%;
+                z-index: 111111;
+                background-color: #f5f7fa;
+                left:0;
+                top: 0;
+            }
+            body{
+                margin: 0;
+            }
+        </style>
+        <div id="preloader">
+            <img style=" position: fixed;top: 50%;left: 50%;" src="{{ asset('bundles/bundlesdefault/img/ajax-loader.gif') }}">
+        </div>
         {% javascripts '@jquery' '@jquery_ui_js' combine=true%}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
@@ -48,30 +61,41 @@
             <img alt="" src="{{ asset('images/progress_bar.gif') }}" />
         </div>
     </div>
-    {% block js %}
-        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-        {% javascripts
-        '@front_bootstrap_js'
-        'bundles/bundlesdefault/lib/popup.js'
-        'bundles/bundlesdefault/js/app.js'
-        'bundles/bundlesdefault/lib/jquery_validator/dist/jquery.validate.min.js'
-        'bundles/bundlesdefault/js/default/jquery.selectbox.min.js'
-        'bundles/bundlesdefault/js/default/avia.js'
-        'bundles/bundlesdefault/js/default/jquery.columnhover.js'
-        combine=true%}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-        {%if app.request.locale!='en' %}
-         <script type="text/javascript" src="/bundles/bundlesdefault/lib/jquery_validator/dist/localization/messages_{{app.request.locale}}.js"></script>
-        {%endif%}
-        <script type="text/javascript">
-            $(document).ready(function(){
-                _GlobalAppObject.setLocale("{{app.request.locale}}");
 
-            });
-        </script>
+
+    {% block js %}
+        <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+        {% javascripts
+            '@front_bootstrap_js'
+            'bundles/bundlesdefault/lib/popup.js'
+            'bundles/bundlesdefault/js/app.js'
+            'bundles/bundlesdefault/lib/jquery_validator/dist/jquery.validate.min.js'
+            'bundles/bundlesdefault/js/default/jquery.selectbox.min.js'
+            'bundles/bundlesdefault/js/default/avia.js'
+            'bundles/bundlesdefault/js/default/jquery.columnhover.js'
+            combine=true%}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+            {%if app.request.locale!='en' %}
+             <script type="text/javascript" src="/bundles/bundlesdefault/lib/jquery_validator/dist/localization/messages_{{app.request.locale}}.js"></script>
+            {%endif%}
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    _GlobalAppObject.setLocale("{{app.request.locale}}");
+
+                });
+            </script>
     {% endblock %}
+    <script type="text/javascript">
+        $(function(){
+            $("head").append('<link href="{{ asset('build/dist/css/bootstrap.css') }}" rel="stylesheet" media="screen" />');
+            $("head").append('<link href="{{ asset('build/dist/css/jquery-ui.css') }}" rel="stylesheet" media="screen" />');
+            $("head").append('<link href="{{ asset('build/dist/css/avia.css') }}" rel="stylesheet" media="screen" />');
+            $("head").append('<style type="text/css">#preloader{display: none;}</style>');
+        });
+    </script>
+    {% block stylesheets %}{% endblock %}
 
 </body>
 </html>

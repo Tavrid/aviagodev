@@ -15,7 +15,7 @@
                     {% endfor %}
                 </div>
                 <div class="panel-body panel-blue">
-                    <div class="row row-one" data-bind="visible: complexSearch()">
+                    <div class="row" data-bind="visible: complexSearch()">
                         {% include "BundlesDefaultBundle:Default:_complex_field.html.twig" %}
                     </div>
                     <div class="row row-one-two" data-bind="visible: !complexSearch()">
