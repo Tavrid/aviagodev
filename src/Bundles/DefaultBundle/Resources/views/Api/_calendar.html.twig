@@ -56,9 +56,19 @@
 <script>
     $(document).ready(function($) {
 
-        $('#calendar_table').columnHover({
+        /*$('#calendar_table').columnHover({
             eachCell:true, 
             hoverClass:'betterhover'
+        });*/
+
+        $(".table-calendar td").mouseover(function() {
+            var tds = $( this ).parent().find("td"),
+            index = $.inArray( this, tds );
+            $(".table-calendar td:nth-child("+( index + 1 )+")").addClass('betterhover');
+        }).mouseout(function() {
+            var tds = $( this ).parent().find("td"),
+            index = $.inArray( this, tds );
+            $(".table-calendar td:nth-child("+( index + 1 )+")").removeClass('betterhover');
         });    
 
 
