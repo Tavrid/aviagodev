@@ -1,6 +1,5 @@
 $(function() {
 
-
     //$("#search-form").validate({
     //    highlight: function (element) {
     //        $(element).closest('.form-group').addClass('has-error');

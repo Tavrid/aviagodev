@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+
     var masks = VALID_MASCS;
     
     $.mask.definitions["d"] = "[a-zA-Zа-яА-Я]";

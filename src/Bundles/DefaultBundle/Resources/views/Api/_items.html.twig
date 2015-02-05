@@ -42,9 +42,11 @@
                                     </div>
                                 {% endif %}
                                 <div class="panel panel-info panel-ticket">
-                                    {% if not ticket.refundable and loop.first %}
-                                        {% trans %}frontend.non_return{% endtrans %}
-                                    {% endif %}
+                                    <span class="return-block">
+                                        {% if not ticket.refundable and loop.first %}
+                                            {% trans %}frontend.non_return{% endtrans %}
+                                        {% endif %}
+                                    </span>
                                     <div class="panel-body panel-gradient ticket-body">
                                         <div class="col-md-1 radio-ticket">
                                             <div class="radio-button">

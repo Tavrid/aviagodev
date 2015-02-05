@@ -1568,3 +1568,17 @@ select option {
 	text-align: center;
 	width: 100%;
 }
+
+/* Return block */
+
+.ticket-item {
+	position: relative;
+}
+
+.return-block {
+	position: absolute;
+	right: 0;
+	top: 0;
+	font-size: 12px;
+	color:#999;
+}
