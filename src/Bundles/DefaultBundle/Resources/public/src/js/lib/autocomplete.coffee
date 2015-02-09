@@ -46,7 +46,10 @@ ko.bindingHandlers.autocomplete = init: (element, valueAccessor, allBindingsAcce
     self = this
     self.menu.empty()
     _.each items, (num)->
-      self.menu.append "<li data-id='#{num.id}' data-value='#{num.formatted}' ><a href=\"\">#{self.highlighter num.name}<strong class='pull-right'>#{self.highlighter num.id}</strong><br /><small style='text text-muted'>#{num.country}</small></a></li>"
+      if !num.child && ((num.code.search new RegExp self.query, 'ig') != -1 || (num.airport.search new RegExp self.query, 'ig') != -1)
+        self.menu.append "<li data-id='#{num.code}' data-value='#{num.formatted}' ><a href=\"\">#{self.highlighter num.name}, #{self.highlighter num.airport}<strong class='pull-right'>#{self.highlighter num.code}</strong><br /><small style='text text-muted'>#{num.country}</small></a></li>"
+      else
+        self.menu.append "<li data-id='#{num.id}' data-value='#{num.formatted}' ><a href=\"\">#{self.highlighter num.name}<strong class='pull-right'>#{self.highlighter num.id}</strong><br /><small style='text text-muted'>#{num.country}</small></a></li>"
       if num.child
         _.each num.child, (ch)->
           self.menu.append "<li data-id='#{ch.code}' data-value='#{ch.formatted}' class='child'><a style='padding-left: 20px' href=\"\">#{self.highlighter ch.name}, #{self.highlighter ch.airport}<strong class='pull-right'>#{ch.code}</strong></a></li>"

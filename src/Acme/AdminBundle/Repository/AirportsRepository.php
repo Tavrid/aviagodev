@@ -13,15 +13,14 @@ class AirportsRepository extends AbstractRepository {
             'params' => ['code' => $code]
         ]);
     }
-
     public function searchByToken($token){
         $token = trim($token);
         if(preg_match('/^[a-zA-Z]{3}$/i',$token)){
             $tokens = [$token];
 
             $searchFields = array(
-                'cityCodeEng',
                 'airportCodeEng',
+                'cityCodeEng',
             );
             $count = count($searchFields);
         } else {
@@ -33,12 +32,39 @@ class AirportsRepository extends AbstractRepository {
                 'airportEng',
                 'cityRus',
                 'cityEng',
-    //            'countryRus',
-    //            'countryEng',
                 'cityCodeEng'
             );
             $count = count($searchFields);
         }
+        $this->createAndMergeScopes($searchFields,$count,$tokens);
+    }
+
+    public function searchCityByToken($token){
+        $token = trim($token);
+        if(preg_match('/^[a-zA-Z]{3}$/i',$token)){
+            $tokens = [$token];
+
+            $searchFields = array(
+                'cityCodeEng',
+            );
+            $count = count($searchFields);
+        } else {
+            $tokens = $this->createTokens($token);
+
+            $searchFields = array(
+                'iataRegionCode',
+                'cityRus',
+                'cityEng',
+                'cityCodeEng'
+            );
+            $count = count($searchFields);
+        }
+        $this->createAndMergeScopes($searchFields,$count,$tokens);
+
+
+    }
+
+    private function createAndMergeScopes($searchFields,$count,$tokens){
         $xpressions = array();
         for($i = 0 ; $i <$count; $i++){
             $field = 'p.'.$searchFields[$i];
@@ -57,11 +83,8 @@ class AirportsRepository extends AbstractRepository {
         $xpr = call_user_func_array([$this->query
             ->expr(),'orX'],$xpressions);
         $this->mergeScope(array(
-//            'setMaxResults' => 10,
             'where' => [$xpr]
         ));
-//        var_dump($this->query->getDQL());exit;
-
     }
 
     /**
