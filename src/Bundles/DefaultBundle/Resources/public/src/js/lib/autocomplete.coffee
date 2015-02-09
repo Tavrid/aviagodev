@@ -1,5 +1,6 @@
 ko = require "knockout"
 typehead = require "typeahead"
+_ = require "underscore"
 Delay = require "./delay"
 delObj = new Delay()
 
@@ -16,15 +17,7 @@ ko.bindingHandlers.autocomplete = init: (element, valueAccessor, allBindingsAcce
           data:
             q:req
           success: (data) ->
-            arr = []
-            d = []
-            $.each data,(key, val) ->
-              arr.push val.name
-              d.push val
-              return undefined
-
-            res arr.splice 0,10
-            self.data = d.splice 0,10
+            res data.splice 0,10
 
       ,300
     minLength: 3
@@ -35,18 +28,32 @@ ko.bindingHandlers.autocomplete = init: (element, valueAccessor, allBindingsAcce
   t.show =  ->
     self = this
     offset = self.element.offset()
-    self.menu.css({left: "#{offset.left}px",top: "#{offset.top + self.element.outerHeight()}px"})
+    self.menu.css({left: "#{offset.left}px",top: "#{offset.top + self.element.outerHeight()}px", width: "#{self.element.outerWidth()}px"})
     self.menu.removeClass "hidden"
     self.shown = true
     self
   t.select = ->
     self = this
     val = self.menu.find('.active').attr('data-value')
+    id = self.menu.find('.active').attr('data-id')
     self.element.value(self.updater(val)).emit('change')
 
-    index = $(self.menu.find('.active')).index()
-    el(self.data[index].id)
+    el(id)
     return undefined
+  t.sorter = (items) ->
+    return items
+  t.render = (items) ->
+    self = this
+    self.menu.empty()
+    _.each items, (num)->
+      self.menu.append "<li data-id='#{num.id}' data-value='#{num.formatted}' ><a href=\"\">#{self.highlighter num.name}<strong class='pull-right'>#{self.highlighter num.id}</strong><br /><small style='text text-muted'>#{num.country}</small></a></li>"
+      if num.child
+        _.each num.child, (ch)->
+          self.menu.append "<li data-id='#{ch.code}' data-value='#{ch.formatted}' class='child'><a style='padding-left: 20px' href=\"\">#{self.highlighter ch.name}, #{self.highlighter ch.airport}<strong class='pull-right'>#{ch.code}</strong></a></li>"
+
+    return self
+
+
   return undefined
 #  typehead.prototype.select = ->
 #    console.log this
