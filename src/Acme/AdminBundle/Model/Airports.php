@@ -28,7 +28,8 @@ class Airports extends AbstractModel {
                         'city' => $val->getCityEng(),
                         'code' => $val->getAirportCodeEng(),
                         'airport' => $val->getAirportEng(),
-                        'short' => $val->getNameShortEn()
+                        'short' => $val->getNameShortEn(),
+                        'formatted' => $val->getFormattedName($locale)
                     ];
                 } else {
                     
@@ -37,29 +38,35 @@ class Airports extends AbstractModel {
                         'city' => $val->getCityRus(),
                         'code' => $val->getAirportCodeEng(),
                         'airport' => $val->getAirportRus(),
-                        'short' => $val->getNameShortRu()
+                        'short' => $val->getNameShortRu(),
+                        'formatted' => $val->getFormattedName($locale)
                     ];
                 }
             }
+
             foreach($res as $city => $airport){
+                $f = $airport[0];
+                $tempVal = array(
+                    'id' => $city,
+                    'name' => $f['city'],
+                    'country' => $f['country'],
+                    'airport' => $f['airport'],
+                    'code' => $f['code'],
+                    'formatted' => $f['formatted'],
+                );
                 if(count($airport) > 1){
-                    $f = $airport[0];
-                    $r[] = array(
-                        'id' => $city,
-//                        'name' => $f['country'].', '.$f['city'].', Все аэропорты ('.$city.')'
-                        'name' => $translator->trans('frontend.default.all_airports',[
-                            'country' => $f['country'],
-                            'city' => $f['city'],
-                            'code' => $city
-                                ])
-                    );
+                    foreach($airport as $name){
+                        $tempVal['child'][] = array(
+                            'id' => $name['code'],
+                            'country' => $name['country'],
+                            'airport' => $name['airport'],
+                            'code' => $name['code'],
+                            'name' => !empty($name['short'])? $name['short']:$name['city'],
+                            'formatted' => $name['formatted'],
+                        );
+                    }
                 }
-                foreach($airport as $name){
-                    $r[] = array(
-                        'id' => $name['code'],
-                        'name' => !empty($name['short'])? $name['short']:$name['country'].', '.$name['city'].', '.$name['airport'].' ('.$name['code'].')'
-                    );
-                }
+                $r[] = $tempVal;
             }
         }
         return $r;
