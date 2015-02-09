@@ -8,8 +8,7 @@
 
 /* Контент  */
 
-body,
-html {
+body {
 	background: #fff;
 	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#fff), to(#E8EFF6));
 	background: -webkit-linear-gradient(#fff, #E8EFF6);
@@ -20,20 +19,28 @@ html {
 	-pie-background: linear-gradient(#fff, #E8EFF6);
 }
 
-body,
-html {
+body {
 	min-height: 100%;
+}
+
+html {
+	height: 100%;
 }
 
 /* Шапка */
 
 header {
+	border-bottom: 3px solid #6dbdfe;
+	margin-bottom: 20px;
 	padding: 20px 0;
 }
 
 .logo {
 	width: 150px;
-	float: left;
+	position: absolute;
+	left: 50%;
+	margin-left: -75px;
+	top: 5px;
 }
 
 .logo img {
@@ -487,6 +494,12 @@ a:focus {
 
 .form-control {
 	padding: 6px 7px;
+}
+
+.form-control:focus {
+	border-color: #66afe9;
+	box-shadow: 0 0 4px rgba(102, 175, 233, 1) inset;
+    outline: 0 none;
 }
 
 #filter-form .form-control {
@@ -1596,6 +1609,21 @@ select option {
 .btn.btn-default.lang {
     padding: 6px;
     color:#999;
+    background: none;
+    border: none;
+    box-shadow: none;
+    position: relative;
+}
+
+.btn.btn-default.lang:before {
+	content: '';
+	width: 1px;
+	height: 10px;
+	background: #adadad;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	margin-top: -4px;
 }
 
 .btn.btn-default.lang.active {
@@ -1606,4 +1634,34 @@ select option {
 #preloader{
 	display: none;
 	z-index: -100;
+}
+
+/* Календарь */
+
+.calendar-block .panel-success > .panel-heading {
+	background: #6dbdfe;
+}
+
+.calendar-block .panel-success > .panel-heading .panel-title {
+	color:#fff;
+}
+
+#avia-calendar-box {
+	background: #d1edfc;
+}
+
+#avia-calendar-box table {
+	background: #fff;
+}
+
+#search-form .date-to {
+	margin-bottom: 5px;
+}
+
+#search-form .vozrast-block {
+	margin-bottom: 10px;
+}
+
+#search-form .vozrast-block .row {
+	padding-bottom: 5px;
 }
