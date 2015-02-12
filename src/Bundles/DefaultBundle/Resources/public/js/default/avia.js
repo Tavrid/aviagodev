@@ -90,6 +90,14 @@ $(document).ready(function($) {
 			$("#search_form_date_from").datepicker( "option", "maxDate", selectedDate);		
 		}
 	});
+
+	$('.date-from-icon').bind('click', function() {
+		$("#search_form_date_from").datepicker('show');
+	});
+
+	$('.date-to-icon').bind('click', function() {
+		$("#search_form_date_to").datepicker('show');
+	});
 	
 
 	/*$(".return_way input[type='radio']").each(function() {
