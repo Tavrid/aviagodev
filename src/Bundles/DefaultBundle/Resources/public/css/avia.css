@@ -478,6 +478,28 @@ a:focus {
 	margin-bottom: 5px;
 }
 
+/* Лучшая цена и только прямые рейсы */
+
+.form-filter-inner .price-best *,
+.form-filter-inner .reys-line * {
+	background: none;
+	border: none;
+	box-shadow: none;
+	font-weight: normal;
+	padding: 0;
+	margin: 0;
+	height: auto;
+}
+
+.form-filter-inner .price-best input,
+.form-filter-inner .reys-line input {
+	margin-right: 10px;
+}
+
+.form-filter-inner .reys-line {
+	margin-bottom: 10px;
+}
+
 .form-filter-inner label,
 #filter-form label {
 	font-weight: normal;
