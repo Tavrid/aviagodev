@@ -90,6 +90,7 @@ $(document).ready(function($) {
 			$("#search_form_date_from").datepicker( "option", "maxDate", selectedDate);		
 		}
 	});
+	
 
 	/*$(".return_way input[type='radio']").each(function() {
         $(this).wrap("<span class='niceRadio'></span>");

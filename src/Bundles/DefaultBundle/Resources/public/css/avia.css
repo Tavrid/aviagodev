@@ -30,8 +30,11 @@ html {
 /* Шапка */
 
 header {
-	border-bottom: 3px solid #6dbdfe;
 	margin-bottom: 20px;
+}
+
+header .container {
+	border-bottom: 3px solid #6dbdfe;
 	padding: 20px 0;
 }
 
@@ -533,13 +536,8 @@ a:focus {
 	margin-top: -10px;
 }
 
-.col-avia {
-	width: 46%;
-}
-
-.col-return {
-	width: 8%;
-	padding: 0;
+#search-form .return-way-index .row {
+	padding-bottom: 0;
 }
 
 .return-way-index label,
@@ -549,14 +547,18 @@ a:focus {
 }
 
 .return-way-index label {
-	margin-right: 15px;
-	font-size: 13px;
+	/* margin-right: 15px; */
+	font-size: 12px;
 	margin-top: 9px;
 	font-weight: normal;
 }
 
 .return-way-index input {
-	margin-right: 5px;
+	/* margin-right: 5px; */
+}
+
+.complex-form-index .panel-body {
+	padding-top: 0;
 }
 
 #ui-id-1, #ui-id-2 {
@@ -618,11 +620,6 @@ a:focus {
 
 .input-group-addon {
 	background-color: #f8f8f8;
-}
-
-.now-find .panel-body {
-	height: 405px;
-	margin-top: 48px;
 }
 
 .now-find .panel-heading {
@@ -1664,4 +1661,60 @@ select option {
 
 #search-form .vozrast-block .row {
 	padding-bottom: 5px;
+}
+
+
+/* XS version */
+
+@media screen and (min-width: 768px){
+	.col-avia {
+		width: 46%;
+	}
+	.col-return {
+		width: 8%;
+		padding: 0;
+	}
+	.now-find .panel-body {
+		height: 405px;
+		margin-top: 48px;
+	}
+}
+
+@media screen and (max-width: 768px){
+	.col-avia {
+		margin-bottom: 10px;
+	}
+	.col-return {
+		margin-bottom: 10px;
+	}
+	.pay-for-booking {
+		text-align: left;
+	}
+}
+
+@media screen and (max-width: 500px){
+	.nav-tabs > li.active > a, 
+	.nav-tabs > li.active > a:focus, 
+	.nav-tabs > li.active > a:hover {
+	    border-radius: 0px 0px 0 0;
+	}
+	.nav-tabs > li {
+		width: 100%;
+		box-sizing: border-box;
+	}
+	.nav-tabs li a {
+	    font-size: 18px;
+	    position: relative;
+	}
+	.nav-tabs > li > a {
+	    border: 1px solid transparent;
+	    border-radius: 4px 4px 0 0;
+	    line-height: 1.42857;
+	    margin-right: 2px;
+	}
+	.nav > li > a {
+	    display: block;
+	    padding: 10px 15px;
+	    position: relative;
+	}
 }
