@@ -24,6 +24,7 @@ class PayForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('pay_method', 'choice', [
+            'expanded' => true,
             'choices' => $this->getPayMethods(),
             'label' => 'frontend.pay_form.pay_method'
         ]);
@@ -32,15 +33,7 @@ class PayForm extends AbstractType
     protected function getPayMethods()
     {
         return [
-            "WEBMONEY_WALLET" => "Оплата с кошелька Webmoney",
-            "WEBMONEY_CASH" => "Оплата наличными в терминале через Webmoney",
-            "PRIVAT24" => "Оплата через интернет-банкинг Приват24",
-            "PRIVATBANK" => "Оплата банковской картой ПриватБанка",
-            "CCVISAMC" => "Оплата банковской картой, с вводом данных карты на странице PayU",
-            "LIQPAY" => "Оплата с кошелька Liqpay",
-            "LIQPAY_CARD" => "Оплата банковской картой, с вводом данных карты на странице Liqpay",
-            "LIQPAY_TERMINAL" => "Оплата наличными, в любом банкомате ПриватБанка.",
-            "CASH" => "Оплата наличными курьеру при доставке."
+            "VISA_PRIVAT" => "Visa Приват"
         ];
     }
 

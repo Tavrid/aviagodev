@@ -27,6 +27,9 @@ services:
           - @translator
           - @admin.city.manager
 
+    bundles_default.privat_api:
+        class: Bundles\DefaultBundle\Model\PirvatApi
+
 
 
 

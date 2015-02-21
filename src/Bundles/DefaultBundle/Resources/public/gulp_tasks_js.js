@@ -8,6 +8,16 @@ var coffee = require('gulp-coffee');
 var path = require('path');
 var gutil = require('gulp-util');
 
+var notifier = require('node-notifier');
+
+
+var errorHandler = function(err){
+    notifier.notify({
+        'title': 'Gulp error',
+        'message': err
+    });
+};
+
 module.exports = function (gulp, argv) {
     var pat = [
         {
@@ -37,7 +47,7 @@ module.exports = function (gulp, argv) {
                     debug: true
                 })
                     .transform('coffeeify')
-                    .bundle()
+                    .bundle().on('error',errorHandler)
                     .pipe(source(paths.outputJs))
                     .pipe(gulp.dest(paths.outputDist));
             } else {
