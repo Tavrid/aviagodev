@@ -29,6 +29,9 @@ services:
 
     bundles_default.privat_api:
         class: Bundles\DefaultBundle\Model\PirvatApi
+        arguments:
+          - "%privat.merchant_id%"
+          - "%privat.password%"
 
 
 
