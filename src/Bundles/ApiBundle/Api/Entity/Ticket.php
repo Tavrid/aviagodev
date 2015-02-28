@@ -256,7 +256,7 @@ class Ticket {
     }
 
     /**
-     * @param \Bundles\ApiBundle\Api\Entity\Itineraries[] $itineraries
+     * @param Itineraries[] $itineraries
      * @return $this;
      */
     public function setItineraries($itineraries) {
@@ -265,12 +265,25 @@ class Ticket {
     }
 
     /**
-     * @return \Bundles\ApiBundle\Api\Entity\Itineraries
+     * @return Itineraries
      */
     public function getFirstItinerarie() {
         $i = $this->getItineraries();
         if (isset($i[0])) {
             return $i[0];
+        } else {
+            return new Itineraries();
+        }
+    }
+
+    /**
+     * @return Itineraries
+     */
+    public function getLastItinerarie(){
+        $i = $this->getItineraries();
+        $n = count($i) - 1;
+        if (isset($i[$n])) {
+            return $i[$n];
         } else {
             return new Itineraries();
         }

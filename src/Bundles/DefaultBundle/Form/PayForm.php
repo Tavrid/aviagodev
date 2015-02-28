@@ -33,7 +33,8 @@ class PayForm extends AbstractType
     protected function getPayMethods()
     {
         return [
-            "VISA_PRIVAT" => "Visa Приват"
+            "VISA_PRIVAT" => "Visa Приват",
+            'GENERATE_CHECK' => 'сасостоятельная оплата чезер кассу банка'
         ];
     }
 

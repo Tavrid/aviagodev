@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>{% block title "Поиск дешевых авиабилетов" %}</title>
+    <link href="{{ asset('build/dist/css/bootstrap.css') }}" rel="stylesheet" media="screen"/>
+    <link href="{{ asset('build/dist/css/avia.css') }}" rel="stylesheet" media="screen"/>
+
+</head>
+<body>
+<header role="contentinfo">
+    <div class="container" style="max-width:970px;">
+        <a href="{{ path('bundles_default_homepage') }}" class="logo"><img src="{{ asset('images/logo.png') }}" alt=""></a>
+
+    </div>
+</header>
+<center>
+    <h1>Счет</h1>
+
+    <h2>№ A{{ order.id }}, {{ order.date.format('d.m.Y') }}</h2>
+</center>
+<p>&nbsp;</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td><strong>Получатель</strong></td>
+        <td width="12"></td>
+        <td valign="bottom"><strong>Плательщик</strong></td>
+    </tr>
+    <tr>
+        <td width="50%" height="200" valign="top">
+            <div style="border:solid 1px #555555; height:200px; padding:12px;">
+                <strong>Baltic Clipper UAB</strong><br>
+                Код предприятия: 110437597<br>
+                Код плательщика НДС: LT104375917<br>
+                Адрес: Laisvės al. 61-1, LT-44304 Kaunas
+            </div>
+        </td>
+        <td width="12">
+            <div style="width:16px;"></div>
+        </td>
+        <td valign="top" height="200" width="50%">
+            <div style="border:solid 1px #555555; height:200px; padding:12px;">
+                <strong>{{ entity.ticket.surname }}</strong>
+                <br/>
+                телефон: {{ order.phone }}
+            </div>
+        </td>
+    </tr>
+</table>
+<p>Заказ № {{ order.id }}, код брони: {{ order.pnr }}</p>
+<table width="100%" border="1" bordercolor="#555555" cellspacing="0" cellpadding="3" style="border-collapse:collapse;">
+    <tr>
+        <th>№</th>
+        <th>Наименование</th>
+        <th>Ед. изм.</th>
+        <th>Кол-во</th>
+        <th>Цена</th>
+        <th>Сума</th>
+    </tr>
+    <tr>
+        <td>1.</td>
+        <td>
+            Туристические услуги: Авиабилет {{ entity.ticket.routes|join(' - ') }};
+            Вылет: {{ entity.ticket.firstItinerarie.firstVariant.departureSegment.departureDate|date('d.m.Y') }},
+            Прилет: {{ entity.ticket.lastItinerarie.lastVariant.arrivalSegment.arrivalDate|date('d.m.Y') }};
+        </td>
+        <td align="center">шт.</td>
+        <td align="center">1</td>
+        <td align="right" nowrap="nowrap">{{ order.price|number_format(2,',','') }}</td>
+        <td align="right" nowrap="nowrap">{{ order.price|number_format(2,',','') }}</td>
+    </tr>
+    <tr>
+        <td colspan="5" style="border-bottom:none; border-left:none" align="right">ИТОГО:</td>
+        <td align="right" nowrap="nowrap">{{ order.price|number_format(2,',','') }} </td>
+    </tr>
+    <tr>
+        <td colspan="5" style="border-bottom:none; border-left:none" align="right">НДС:</td>
+        <td align="right" nowrap="nowrap"> –</td>
+    </tr>
+    <tr>
+        <td colspan="5" style="border-bottom:none; border-left:none" align="right"><strong>ВСЕГО:</strong></td>
+        <td align="right" nowrap="nowrap"><strong>{{ order.price|number_format(2,',','') }}</strong></td>
+    </tr>
+</table>
+<p>Сумма словами: тринадцать тысяч тридцать семь гривен 00 копеек. Без НДС.
+
+<p>
+    <strong>Счет выписан 28.02.2015</strong> <br>
+    <strong>Счет действителен для оплаты в течение дня выписки. В случае неоплаты в установленный срок счет подлежит перевыписке.</strong>
+</p>
+
+<p class="smaller">
+    Данный счет с банковской квитанцией об оплате является одновременно актом приема-передачи
+    предоставленных услуг по заказу № 1318100 от 11.2.2015 г. на сумму 13037,00 грн. (без НДС). <br>
+    Поставщиком услуг по данному акту является ЗАО «Балтик клиппер», пр. Гядимино 64, Вильнюс, Литва (агентский договор
+    №01-UA от 01.03.2012 г.).
+</p>
+
+<p class="smaller">Перед оплатой просьба сообщить о планируемой оплате по тел. (044) 392-74-08 или по эл.почте: <a
+            href="mailto:info@aviago.com.ua">info@aviago.com.ua</a> для контроля оплаты.</p>
+<p><strong class="red">Важно:</strong> <strong>заказ должен быть оплачен (деньги должны придти на наш счет) до :
+        12.2.2015, 18:59</strong></p>
+
+<button class="btn btn-default pull-right" onClick="window.print();return false">Печать</button>
+</body>
+</html>

@@ -71,42 +71,4 @@ class OrderController extends Controller
         return $numPassenger;
     }
 
-    /**
-     * @param Request $request
-     * @param $orderID
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function createPayAction(Request $request, $orderID)
-    {
-        $orderManager = $this->get('admin.order.manager');
-        $order = $orderManager->getOrderByOrderId($orderID);
-        if (!$order) {
-            throw $this->createNotFoundException();
-        }
-        $form = $this->createForm('pay_form');
-        $form->submit($request);
-        if ($form->isValid()) {
-
-            if($form->get('pay_method')->getData() == 'VISA_PRIVAT'){
-                return $this->render('BundlesDefaultBundle:Pay:privat.html.twig',[
-                   'form' => $this->get('bundles_default.privat_api')->createForm($order)
-                ]);
-            }
-
-//            $pay = $this->get('bundels_default.payu.manager');
-//            $pay_form = $pay
-//                ->setOrderId($order->getOrderId())
-//                ->setPayMethod($form->get('pay_method')->getData())
-//                ->addName('Book')
-//                ->addCode($order->getPnr())
-//                ->addInfo(htmlspecialchars('[{"departuredate":"20130716","locationnumber":2,"locationcode1":"SVX","locationcode2":"MSQ","passengername":"TATIANA PONOMAREVA","reservationcode":"VJRVNU"}]'))
-//                ->setDate($order->getDate())
-//                ->addPrice($order->getPrice())
-//                ->createForm();
-//            return $this->render('BundlesDefaultBundle:Pay:pay.html.twig', [
-//                'pay_form' => $pay_form
-//            ]);
-        }
-        throw $this->createNotFoundException();
-    }
 } 
