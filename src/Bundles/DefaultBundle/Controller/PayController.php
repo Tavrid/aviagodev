@@ -11,6 +11,7 @@ namespace Bundles\DefaultBundle\Controller;
 use Acme\AdminBundle\Entity\Order;
 use Bundles\ApiBundle\Api\Response\BookInfoResponse;
 use Bundles\ApiBundle\Api\Util\TicketEntityCreator;
+use Bundles\DefaultBundle\Util\NumToStr;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -62,12 +63,15 @@ class PayController extends Controller{
     private function renderAndGenerateCheck(Order $order){
         $bookInfoResponse = new BookInfoResponse(new TicketEntityCreator());
         $bookInfoResponse->setResponseData($order->getOrderInfo());
-
+        $numToStr = new NumToStr();
         return $this->render('BundlesDefaultBundle:Pay:check.html.twig',[
             'order' => $order,
-            'entity' => $bookInfoResponse->getEntity()
+            'entity' => $bookInfoResponse->getEntity(),
+            'numToStr' => $numToStr
 
         ]);
     }
+
+
 
 }

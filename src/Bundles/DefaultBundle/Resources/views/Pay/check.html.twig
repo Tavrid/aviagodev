@@ -82,10 +82,10 @@
         <td align="right" nowrap="nowrap"><strong>{{ order.price|number_format(2,',','') }}</strong></td>
     </tr>
 </table>
-<p>Сумма словами: тринадцать тысяч тридцать семь гривен 00 копеек. Без НДС.
+<p>Сумма словами: {{ numToStr.num2str(order.price) }}. Без НДС.
 
 <p>
-    <strong>Счет выписан 28.02.2015</strong> <br>
+    <strong>Счет выписан {{ order.date.format('d.m.Y') }}</strong> <br>
     <strong>Счет действителен для оплаты в течение дня выписки. В случае неоплаты в установленный срок счет подлежит перевыписке.</strong>
 </p>
 
