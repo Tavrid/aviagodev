@@ -48,6 +48,8 @@
     </tr>
 </table>
 <p>Заказ № {{ order.id }}, код брони: {{ order.pnr }}</p>
+{% set ticket = entity.ticket %}
+
 <table width="100%" border="1" bordercolor="#555555" cellspacing="0" cellpadding="3" style="border-collapse:collapse;">
     <tr>
         <th>№</th>
@@ -57,18 +59,23 @@
         <th>Цена</th>
         <th>Сума</th>
     </tr>
-    <tr>
-        <td>1.</td>
-        <td>
-            Туристические услуги: Авиабилет {{ entity.ticket.routes|join(' - ') }};
-            Вылет: {{ entity.ticket.firstItinerarie.firstVariant.departureSegment.departureDate|date('d.m.Y') }},
-            Прилет: {{ entity.ticket.lastItinerarie.lastVariant.arrivalSegment.arrivalDate|date('d.m.Y') }};
-        </td>
-        <td align="center">шт.</td>
-        <td align="center">1</td>
-        <td align="right" nowrap="nowrap">{{ order.price|number_format(2,',','') }}</td>
-        <td align="right" nowrap="nowrap">{{ order.price|number_format(2,',','') }}</td>
-    </tr>
+    {% for t,travelers in ticket.travelers %}
+        {% if travelers|length >0 %}
+            {% set pricing = ticket.pricingByName(t) %}
+            <tr>
+                <td>{{ loop.index }}.</td>
+                <td>
+                    Туристические услуги: Авиабилет {{ entity.ticket.routes|join(' - ') }};
+                    Вылет: {{ entity.ticket.firstItinerarie.firstVariant.departureSegment.departureDate|date('d.m.Y') }},
+                    Прилет: {{ entity.ticket.lastItinerarie.lastVariant.arrivalSegment.arrivalDate|date('d.m.Y') }};
+                </td>
+                <td align="center">шт.</td>
+                <td align="center">{{ travelers|length }}</td>
+                <td align="right" nowrap="nowrap">({{ pricing.Base|number_format(2, ',', '')}} + {{ pricing.Tax|number_format(2, ',', '') }})</td>
+                <td align="right" nowrap="nowrap">{{ (pricing.Total*travelers|length)|number_format(2, ',', '') }}</td>
+            </tr>
+        {% endif %}
+    {% endfor %}
     <tr>
         <td colspan="5" style="border-bottom:none; border-left:none" align="right">ИТОГО:</td>
         <td align="right" nowrap="nowrap">{{ order.price|number_format(2,',','') }} </td>
