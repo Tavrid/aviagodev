@@ -1,10 +1,49 @@
-<form action="{{ path('bundles_default_api_create_pay',{orderID: order.orderId}) }}" method="post">
+<form id="pay-form" action="{{ path('bundles_default_api_create_pay',{orderID: order.orderId}) }}" method="post">
     {% for pay in payForm.pay_method %}
-        {{ form_label(pay) }}
         {{ form_widget(pay) }}
+        {{ form_label(pay) }}
         <br/>
     {% endfor %}
+    {{ form_row(payForm.invoice) }}
+    <div class="well" id="invoice_form_box">
+        {{ form_widget(payForm.invoice_data) }}
+    </div>
     <br/>
     {{ form_row(payForm._token) }}
     <input type="submit" class="btn-fly btn btn-success" value="{% trans %}frontend.pay_form.submit{% endtrans %}">
 </form>
+
+<script>
+    $(function () {
+
+        var showHideInvoice = function(){
+            if($('#pay_form_invoice').is(':checked')){
+                $('#invoice_form_box').show();
+            } else {
+                $('#invoice_form_box').hide();
+            }
+        };
+        showHideInvoice();
+        $("#pay-form").validate({
+            highlight: function (element) {
+                $(element).closest('.form-group').addClass('has-error');
+            },
+            unhighlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            errorElement: 'span',
+            errorClass: 'help-block',
+            errorPlacement: function (error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+
+        $('body').on('click','#pay_form_invoice',function(){
+            showHideInvoice();
+        });
+    });
+</script>

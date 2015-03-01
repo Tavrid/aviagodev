@@ -18,6 +18,7 @@ frontend:
     pay_form:
         submit: Pay
         pay_method: Pay method
+        invoice: Need an invoice
     order_form:
         phone: Phone
         email: Email

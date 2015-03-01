@@ -11,8 +11,10 @@ namespace Bundles\DefaultBundle\Controller;
 use Acme\AdminBundle\Entity\Order;
 use Bundles\ApiBundle\Api\Response\BookInfoResponse;
 use Bundles\ApiBundle\Api\Util\TicketEntityCreator;
+use Bundles\DefaultBundle\Form\PayForm;
 use Bundles\DefaultBundle\Util\NumToStr;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -40,9 +42,28 @@ class PayController extends Controller{
                     'form' => $this->get('bundles_default.privat_api')->createForm($order)
                 ]);
             } else if($form->get('pay_method')->getData() == 'GENERATE_CHECK'){
-                return $this->renderAndGenerateCheck($order);
+
+                return $this->renderAndGenerateCheck($order,$form);
             }
 
+        }
+        throw $this->createNotFoundException();
+    }
+
+    private function renderAndGenerateCheck(Order $order,Form $form){
+        $bookInfoResponse = new BookInfoResponse(new TicketEntityCreator());
+        $bookInfoResponse->setResponseData($order->getOrderInfo());
+        $numToStr = new NumToStr();
+        return $this->render('BundlesDefaultBundle:Pay:check.html.twig',[
+            'order' => $order,
+            'entity' => $bookInfoResponse->getEntity(),
+            'numToStr' => $numToStr,
+            'formData' => $form->getData()
+
+        ]);
+    }
+
+//TODO PAYU api
 //            $pay = $this->get('bundels_default.payu.manager');
 //            $pay_form = $pay
 //                ->setOrderId($order->getOrderId())
@@ -56,22 +77,5 @@ class PayController extends Controller{
 //            return $this->render('BundlesDefaultBundle:Pay:pay.html.twig', [
 //                'pay_form' => $pay_form
 //            ]);
-        }
-        throw $this->createNotFoundException();
-    }
-
-    private function renderAndGenerateCheck(Order $order){
-        $bookInfoResponse = new BookInfoResponse(new TicketEntityCreator());
-        $bookInfoResponse->setResponseData($order->getOrderInfo());
-        $numToStr = new NumToStr();
-        return $this->render('BundlesDefaultBundle:Pay:check.html.twig',[
-            'order' => $order,
-            'entity' => $bookInfoResponse->getEntity(),
-            'numToStr' => $numToStr
-
-        ]);
-    }
-
-
 
 }

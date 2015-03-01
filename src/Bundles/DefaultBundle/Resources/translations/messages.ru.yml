@@ -18,6 +18,15 @@ frontend:
     pay_form:
         submit: Оплатить
         pay_method: Способ оплаты
+        invoice: Нужен счет-фактура
+        invoice_field:
+          name: Название предприятия/организации
+          code: Код предприятия
+          vat: Код плательщика НДС
+          address: Адрес предприятия/ораганизации
+          zip: почтовый индекс
+          city: Город
+          country: Страна
     order_form:
         phone: Телефон
         email: Email
@@ -106,7 +115,7 @@ frontend:
             rate_taxes: Тариф + Таксы
             number_off: Количество
             in_total: Итого
-            tariff_collection: Тарифный сбор
+            tariff_collection: Сервисный сбор
             latin_registration: Все поля должны быть заполнены латиницей
             submit: Забронировать
             i_gree: Ознакомлен(а) и согласен(-на)

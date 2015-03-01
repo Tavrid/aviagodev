@@ -40,9 +40,15 @@
         </td>
         <td valign="top" height="200" width="50%">
             <div style="border:solid 1px #555555; height:200px; padding:12px;">
-                <strong>{{ entity.ticket.surname }}</strong>
-                <br/>
-                телефон: {{ order.phone }}
+                {% if formData.invoice %}
+                    <strong>{{ formData.invoice_data.name }}</strong>
+                    <br/>
+                    Адресс: {{ formData.invoice_data.address }}
+                {% else %}
+                    <strong>{{ entity.ticket.surnames|join(' ') }}</strong>
+                    <br/>
+                    телефон: {{ order.phone }}
+                {% endif %}
             </div>
         </td>
     </tr>
@@ -76,6 +82,10 @@
             </tr>
         {% endif %}
     {% endfor %}
+    <tr>
+        <td colspan="5" style="border-bottom:none; border-left:none" align="right">{%trans%}frontend.default.order.tariff_collection{%endtrans%}:</td>
+        <td align="right" nowrap="nowrap">{{ ticket.tariffCollection|number_format(2, ',', '')}}</td>
+    </tr>
     <tr>
         <td colspan="5" style="border-bottom:none; border-left:none" align="right">ИТОГО:</td>
         <td align="right" nowrap="nowrap">{{ order.price|number_format(2,',','') }} </td>

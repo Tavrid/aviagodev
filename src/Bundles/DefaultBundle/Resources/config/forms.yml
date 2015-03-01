@@ -13,6 +13,7 @@ services:
             - { name: form.type, alias: filter }
     budnels_default.form.type.pay_form:
         class: Bundles\DefaultBundle\Form\PayForm
+        arguments: [@country.model.manager]
         tags:
             - { name: form.type, alias: pay_form }
     budnels_default.form.type.order:
