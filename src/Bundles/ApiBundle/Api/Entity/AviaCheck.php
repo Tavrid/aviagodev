@@ -7,7 +7,6 @@
  */
 
 namespace Bundles\ApiBundle\Api\Entity;
-use Bundles\ApiBundle\Api\Entity\Ticket;
 
 class AviaCheck {
 
