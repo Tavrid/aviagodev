@@ -1,3 +1,22 @@
+<style>
+    .icon-obratno {
+        background-color: #fff;
+        background-position: 90% center;
+        font-size: 12px;
+        left: -9px;
+        padding: 0 7px;
+        position: absolute;
+        top: 156px;
+        width: 78px;
+        -ms-transform: rotate(-90deg); /* IE 9 */
+        -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+        transform: rotate(-90deg);
+    }
+    #avia-calendar-box {
+        padding-left: 30px;
+    }
+</style>
+<div class="icon-obratno">Обратно</div>
 {% set c = table|first %}
 <table class="table-calendar table table-bordered table-hover text-center" id="calendar_table">
     {% if c is empty %}
@@ -27,7 +46,7 @@
         {#{% endfor %}#}
     {% else %}
             <tr>
-                <td></td>
+                <td><span class="icon-tuda">Туда</span><!-- <span class="icon-obratno">Обратно</span> --></td>
                 {% for date in c %}
                     <td>{{ date|date('d.m.Y') }}</td>
                 {% endfor %}
@@ -78,5 +97,6 @@
             alert(numText);
         });*/
 
+        /*$('#calendar_table tr:first-of-type td:first-of-type').text('<span>1312312</span>');*/
     });
 </script>

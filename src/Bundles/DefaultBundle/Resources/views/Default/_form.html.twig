@@ -34,7 +34,7 @@
                                 </span> -->
                             </div>
                         </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12 text-center col-return">
+                        <div class="col-return-index col-md-2 col-sm-2 col-xs-12 text-center col-return">
                             <button id="reverse-city" type="button" class="btn btn-primary button-refresh" data-toggle="tooltip" data-placement="top" data-original-title="Поменять местами вылет и прилет">
                                 <img src="{{ asset('images/refresh-white.png') }}" alt="">
                             </button>
@@ -68,7 +68,7 @@
                                 <label for="">{% trans %}frontend.default.index.num_passengers{% endtrans %}</label>
                                 <div class="row">
                                     <!-- Выбор взрослых -->
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 col-sm-4">
                                         <div class="input-group">
                                             <span class="input-group-addon vozrast-icon adult-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите количество взрослых"></span>
                                             {{ form_widget(form.adults, {'attr': {'class': 'adults','data-bind' : 'value: adults'}}) }}
@@ -77,7 +77,7 @@
                                     </div>
                                     <!-- Выбор взрослых -->
                                     <!-- Выбор детей -->
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 col-sm-4">
                                         <div class="input-group">
                                             <span class="input-group-addon vozrast-icon child-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите количество детей"></span>
                                             {{ form_widget(form.children, {'attr': {'class': 'child','data-bind' : 'value: children'}}) }}
@@ -86,7 +86,7 @@
                                     </div>
                                     <!-- Выбор детей -->
                                     <!-- Выбор младенцев -->
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 col-sm-4">
                                         <div class="input-group">
                                             <span class="input-group-addon vozrast-icon infants-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите количество младенцев"></span>
                                             {{ form_widget(form.infant, {'attr': {'class': 'infant','data-bind' : 'value: infant'}}) }}
@@ -133,7 +133,7 @@
                             <!-- Класс и валюта -->
                             <!-- Цена и рейсы -->
                             <div class="row price-reys">
-                                <div class="col-md-12 price-block"  data-bind="visible: !complexSearch()">
+                                <div class="col-md-12 none-style price-block"  data-bind="visible: !complexSearch()">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             {{ form_widget(form.best_price, {'attr': {'data-bind':'checked: bestPrice','class': 'best-price checkbox','checked' : true}}) }}
@@ -141,7 +141,7 @@
                                         {{ form_label(form.best_price, 'frontend.search_form.best_price'|trans, {'label_attr':{'class':'form-control'}}) }}
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 none-style">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             {{ form_widget(form.direct_flights, {'attr': {'data-bind' : 'checked: directFlights','class': 'best-price checkbox'}}) }}

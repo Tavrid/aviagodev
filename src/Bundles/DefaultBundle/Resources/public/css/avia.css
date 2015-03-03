@@ -558,6 +558,14 @@ a:focus {
 	margin-top: -10px;
 }
 
+@media screen and (min-width: 992px){
+	.return-way-index .col-md-3 {
+		padding-right: 0;
+		width: 22%;
+		white-space: nowrap;
+	}
+}
+
 #search-form .return-way-index .row {
 	padding-bottom: 0;
 }
@@ -570,9 +578,10 @@ a:focus {
 
 .return-way-index label {
 	/* margin-right: 15px; */
-	font-size: 12px;
+	font-size: 14px;
 	margin-top: 9px;
 	font-weight: normal;
+	color:#666;
 }
 
 .return-way-index input {
@@ -1126,17 +1135,18 @@ select option {
 	padding-bottom: 0;
 }
 
-.complex-search-avia-from,
-.complex-search-avia-to {
-	padding-right: 0px;
+@media screen and (min-width: 992px){
+	.complex-search-avia-from,
+	.complex-search-avia-to {
+		padding-right: 0px;
+	}
+	.complex-search-date {
+		padding-right: 0;
+	}
 }
 
 .complex-search-return button {
 	margin-left: -6px;
-}
-
-.complex-search-date {
-	padding-right: 0;
 }
 
 .complex-search-delete {
@@ -1673,7 +1683,7 @@ select option {
 	background: #fff;
 }
 
-#search-form .date-to {
+#search-form.form-filter-inner .date-to {
 	margin-bottom: 5px;
 }
 
@@ -1716,16 +1726,78 @@ select option {
 	position: absolute;
 	left: 0;
 	top: 0;
+	cursor: pointer;
+}
+
+.col-return-index {
+	position: relative;
+	z-index: 9;
+}
+
+.col-return-index button {
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	border-radius: 50% 50%;
+	left: -13px;
+	top: 2px;
+	background: none;
+	border: none;
+	box-shadow: none;
+}
+
+.col-return-index button.active.focus, 
+.col-return-index button.active:focus, 
+.col-return-index button.focus, 
+.col-return-index button.focus:active, 
+.col-return-index button:active:focus, 
+.col-return-index button:focus,
+.col-return-index button:hover {
+	background: none;
+	border: none;
+	box-shadow: none;
+	outline: none;
+}
+
+.col-return-index button img {
+	height: 130%;
+    margin-left: -2px;
+    margin-top: 0;
+    width: 169%;
+}
+
+.complex-form-index .row {
+	margin-bottom: 0px;
+	padding-bottom: 5px;
+}
+
+/* Туда и обратно */
+
+.icon-tuda {
+	padding-right: 15px;
+	display: inline-block;
+	background: url('../images/tuda.png') no-repeat right center;
+}
+
+.icon-obratno {
+	display: block;
+	background: url('../images/obratno.png') no-repeat right center;
 }
 
 /* XS version */
 
 @media screen and (min-width: 768px){
 	.col-avia {
-		width: 46%;
+		width: 50%;
+	}
+	.col-avia:first-of-type {
+		padding-right: 15px;
+	}
+	.col-avia:last-of-type {
+		padding-left: 15px;
 	}
 	.col-return {
-		width: 8%;
+		width: 0%;
 		padding: 0;
 	}
 	.now-find .panel-body {
@@ -1771,4 +1843,16 @@ select option {
 	    padding: 10px 15px;
 	    position: relative;
 	}
+}
+
+/* Нет стилей */
+
+.none-style * {
+	background: none;
+	border: none;
+	box-shadow: none;
+}
+
+.price-reys .none-style {
+	height: 10px;
 }
