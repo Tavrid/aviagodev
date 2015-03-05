@@ -36,19 +36,33 @@ header {
 header .container {
 	border-bottom: 3px solid #6dbdfe;
 	padding: 20px 0;
+	position: relative;
 }
 
 .logo {
 	width: 150px;
 	position: absolute;
-	left: 50%;
-	margin-left: -75px;
+	left: 00px;/* 
+	margin-left: -75px; */
 	top: 5px;
 }
 
 .logo img {
 	width: 100%;
 	height: auto;
+}
+
+.phone {
+	font-size: 30px;
+    position: absolute;
+    right: 0px;
+    top: 30px;
+    color:#037CC1;
+}
+
+.group-lang {
+	position: relative;
+	top: -10px;
 }
 
 /* Поле прилета */
