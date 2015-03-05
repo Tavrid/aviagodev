@@ -39,7 +39,7 @@ class PayController extends Controller{
 
             if($form->get('pay_method')->getData() == 'VISA_PRIVAT'){
                 return $this->render('BundlesDefaultBundle:Pay:privat.html.twig',[
-                    'form' => $this->get('bundles_default.privat_api')->createForm($order)
+                    'form' => $this->get('bundles_default.liqupay_api')->createForm($order)
                 ]);
             } else if($form->get('pay_method')->getData() == 'GENERATE_CHECK'){
 

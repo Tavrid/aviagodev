@@ -27,12 +27,11 @@ services:
           - @translator
           - @admin.city.manager
 
-    bundles_default.privat_api:
-        class: Bundles\DefaultBundle\Model\PirvatApi
-        arguments:
-          - "%privat.merchant_id%"
-          - "%privat.password%"
-
+    bundles_default.liqupay_api:
+            class: Bundles\DefaultBundle\Model\LiqPayApi
+            arguments:
+              - "%liqupay.merchant_id%"
+              - "%liqupay.password%"
 
 
 
