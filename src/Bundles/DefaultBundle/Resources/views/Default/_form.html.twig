@@ -55,7 +55,7 @@
                     <div class="row row-complex">
                         <div class="col-md-6">
                             <!-- Дата вылета -->
-                            <div class="date-from"  style="display: none;" data-bind="visible: !complexSearch()">
+                            <div class="date-from" data-bind="visible: !complexSearch()">
                                 {{ form_label(form.date_from, '', {'attr': {'class': 'date_from'}}) }}
                                 <div class="input-group">
                                     {{ form_widget(form.date_from, {'attr': {'class': 'date_from','data-bind' : 'value: dateFrom'}}) }}
@@ -110,7 +110,7 @@
                         </div>
                         <div class="col-md-6">
                             <!-- Дата прилета -->
-                            <div class="date-to"  style="display: none;" data-bind="visible: disableDateTo()">
+                            <div class="date-to"  data-bind="visible: disableDateTo()">
                                 {{ form_row(form.city_to_code,{attr: {'data-bind':'value: cityToCode'}}) }}
                                 {{ form_label(form.date_to, '', {'attr': {'class': 'date_from'}}) }}
                                 <div class="input-group">
@@ -133,7 +133,7 @@
                             <!-- Класс и валюта -->
                             <!-- Цена и рейсы -->
                             <div class="row price-reys">
-                                <div class="col-md-12 none-style price-block"  style="display: none;"  data-bind="visible: !complexSearch()">
+                                <div class="col-md-12 none-style price-block" data-bind="visible: !complexSearch()">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             {{ form_widget(form.best_price, {'attr': {'data-bind':'checked: bestPrice','class': 'best-price checkbox','checked' : true}}) }}
