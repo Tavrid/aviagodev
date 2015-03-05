@@ -15,9 +15,8 @@
     </div>
 </header>
 <center>
-    <h1>Счет</h1>
+    <h1>Счет № A{{ order.id }}, {{ order.date.format('d.m.Y') }}</h1>
 
-    <h2>№ A{{ order.id }}, {{ order.date.format('d.m.Y') }}</h2>
 </center>
 <p>&nbsp;</p>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -29,10 +28,12 @@
     <tr>
         <td width="50%" height="200" valign="top">
             <div style="border:solid 1px #555555; height:200px; padding:12px;">
-                <strong>Baltic Clipper UAB</strong><br>
-                Код предприятия: 110437597<br>
-                Код плательщика НДС: LT104375917<br>
-                Адрес: Laisvės al. 61-1, LT-44304 Kaunas
+
+                <strong>ООО "Туристическая компания "Акватур"</strong><br/>
+                Адрес: Украина, Крым, г. Симферополь, 95006, ул. Горького, 30, офис 1
+                Тел.: (044) 392-74-08, (0652) 248-986
+                <br/>
+                Расчетный счет № 26009002018488 в АТ "Дельта Банк" г. Киев, МФО 380236, ЕДРПОУ 33267427
             </div>
         </td>
         <td width="12">
@@ -71,7 +72,7 @@
             <tr>
                 <td>{{ loop.index }}.</td>
                 <td>
-                    Туристические услуги: Авиабилет {{ entity.ticket.routes|join(' - ') }};
+                    Авиабилет {{ entity.ticket.getRoutes(false)|join(' - ') }};
                     Вылет: {{ entity.ticket.firstItinerarie.firstVariant.departureSegment.departureDate|date('d.m.Y') }},
                     Прилет: {{ entity.ticket.lastItinerarie.lastVariant.arrivalSegment.arrivalDate|date('d.m.Y') }};
                 </td>
@@ -99,24 +100,24 @@
         <td align="right" nowrap="nowrap"><strong>{{ order.price|number_format(2,',','') }}</strong></td>
     </tr>
 </table>
-<p>Сумма словами: {{ numToStr.num2str(order.price) }}. Без НДС.
+<p>Сумма словами: {{ numToStr.num2str(order.price)|capitalize }}. Без НДС.
 
 <p>
     <strong>Счет выписан {{ order.date.format('d.m.Y') }}</strong> <br>
-    <strong>Счет действителен для оплаты в течение дня выписки. В случае неоплаты в установленный срок счет подлежит перевыписке.</strong>
+    <strong>Счет действителен для оплаты в течение дня выписки.</strong>
 </p>
 
-<p class="smaller">
-    Данный счет с банковской квитанцией об оплате является одновременно актом приема-передачи
-    предоставленных услуг по заказу № 1318100 от 11.2.2015 г. на сумму {{ order.price|number_format(2,',','') }} {{ ticket.currency }} (без НДС). <br>
-    Поставщиком услуг по данному акту является ЗАО «Балтик клиппер», пр. Гядимино 64, Вильнюс, Литва (агентский договор
-    №01-UA от 01.03.2012 г.).
-</p>
 
 <p class="smaller">Перед оплатой просьба сообщить о планируемой оплате по тел. (044) 392-74-08 или по эл.почте: <a
             href="mailto:info@aviago.com.ua">info@aviago.com.ua</a> для контроля оплаты.</p>
-<p><strong class="red">Важно:</strong> <strong>заказ должен быть оплачен (деньги должны придти на наш счет) до :
-        12.2.2015, 18:59</strong></p>
+<p><strong class="red">Важно:</strong> <strong>заказ должен быть оплачен (деньги должны придти на наш счет) до:
+
+        {% if ticket.lastTicketDate %}
+            {{ ticket.lastTicketDate|date('d.m.Y H:i:s') }}
+        {% else %}
+            {{ ticket.PNRExpireDate|date('d.m.Y H:i:s') }}
+        {% endif %}
+    </strong></p>
 
 <button class="btn btn-default pull-right" onClick="window.print();return false">Печать</button>
 </body>
