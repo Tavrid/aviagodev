@@ -10,6 +10,7 @@ namespace Bundles\DefaultBundle\Model;
 
 
 use Acme\AdminBundle\Entity\Order;
+use Symfony\Component\Routing\RouterInterface;
 
 class LiqPayApi
 {
@@ -17,10 +18,13 @@ class LiqPayApi
     protected $publicKey;
     protected $privateKey;
 
-    public function __construct($publicKey, $privateKey)
+    protected $router;
+
+    public function __construct($publicKey, $privateKey,RouterInterface $router)
     {
         $this->publicKey = $publicKey;
         $this->privateKey = $privateKey;
+        $this->router = $router;
     }
 
     public function createForm(Order $order)
@@ -33,7 +37,8 @@ class LiqPayApi
             'currency' => 'RUB',
             'description' => 'Order',
             'order_id' => $order->getId(),
-            'sandbox' => 1
+            'sandbox' => 1,
+            'result_url' => $this->router->generate('bundles_default_api_order',array("orderID" => $order->getOrderId()),true)
         ));
         return $html;
     }
