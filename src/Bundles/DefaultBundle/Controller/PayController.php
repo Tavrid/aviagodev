@@ -28,11 +28,7 @@ class PayController extends Controller{
      */
     public function createPayAction(Request $request, $orderID)
     {
-        $orderManager = $this->get('admin.order.manager');
-        $order = $orderManager->getOrderByOrderId($orderID);
-        if (!$order) {
-            throw $this->createNotFoundException();
-        }
+        $order = $this->findOrder($orderID);
         $form = $this->createForm('pay_form');
         $form->submit($request);
         if ($form->isValid()) {
@@ -48,6 +44,26 @@ class PayController extends Controller{
 
         }
         throw $this->createNotFoundException();
+    }
+
+
+    public function liqpaySuccessAction(Request $request, $orderID){
+        $order = $this->findOrder($orderID);
+        $state = $this->get('bundles_default.liqupay_api')->checkStatus($order);
+
+    }
+
+    /**
+     * @param $orderID
+     * @return Order
+     */
+    private function findOrder($orderID){
+        $orderManager = $this->get('admin.order.manager');
+        $order = $orderManager->getOrderByOrderId($orderID);
+        if (!$order) {
+            throw $this->createNotFoundException();
+        }
+        return $order;
     }
 
     private function renderAndGenerateCheck(Order $order,Form $form){

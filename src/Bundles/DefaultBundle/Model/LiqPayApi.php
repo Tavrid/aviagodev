@@ -15,6 +15,9 @@ use Symfony\Component\Routing\RouterInterface;
 class LiqPayApi
 {
 
+    const SUCCESS_PAY = 'success';
+    const FAIL_PAY = 'failure';
+
     protected $publicKey;
     protected $privateKey;
 
@@ -38,9 +41,24 @@ class LiqPayApi
             'description' => 'Order',
             'order_id' => $order->getId(),
             'sandbox' => 1,
-            'result_url' => $this->router->generate('bundles_default_api_order',array("orderID" => $order->getOrderId()),true)
+            'result_url' => $this->router->generate('bundles_default_api_return_liqpay',array("orderID" => $order->getOrderId()),true)
         ));
         return $html;
+    }
+
+    public function checkStatus(Order $order){
+        $liqpay = new \LiqPay($this->publicKey, $this->privateKey);
+        $res = $liqpay->api("payment/status", array(
+            'version'       => '3',
+            'order_id'      => $order->getId()
+        ));
+        if($res){
+            if($res->order_id == $order->getId() && $res->amount == $order->getPrice() && $res->status == self::SUCCESS_PAY){
+                return true;
+            }
+        }
+        return false;
+
     }
 
 

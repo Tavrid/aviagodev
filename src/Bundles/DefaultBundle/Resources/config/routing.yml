@@ -75,7 +75,9 @@ bundles_default_api_create_pay:
     pattern: /pay-order/{orderID}
     defaults: { _controller: BundlesDefaultBundle:Pay:createPay}
     methods: POST
-    
+bundles_default_api_return_liqpay:
+    pattern: /pay/liqpay/{orderID}
+    defaults: { _controller: BundlesDefaultBundle:Pay:liqpaySuccess}
 bundles_default_change_locale:
     pattern: /locale/{_locale}
     defaults: {_controller: BundlesDefaultBundle:Default:changeLocale}
