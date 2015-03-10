@@ -25,6 +25,10 @@ class TicketEntityCreator implements TicketEntityCreatorInterface {
             ->setTotalPrice($response['TotalPrice']['Total'])
             ->setPricing($response['Pricing'])
             ->setTravelers($response['Travellers']);
+        if(isset($response['PNRExpireDate'])){
+            $ticket->setPNRExpireDate($response['PNRExpireDate']);
+        }
+
         if(isset($response['Refundable'])){
             $ticket->setRefundable($response['Refundable']);
         }

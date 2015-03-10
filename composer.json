@@ -29,7 +29,8 @@
     "friendsofsymfony/jsrouting-bundle": "@stable",
     "sonata-project/admin-bundle": "~2.3",
     "sonata-project/doctrine-orm-admin-bundle": "~2.3",
-    "sonata-project/core-bundle": "2.3.*@dev"
+    "sonata-project/core-bundle": "2.3.*@dev",
+    "liqpay/liqpay": "dev-master"
   },
   "require-dev": {
     "sensio/generator-bundle": "~2.3"

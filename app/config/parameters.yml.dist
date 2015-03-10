@@ -14,6 +14,6 @@ parameters:
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
 
-    privat.merchant_id: ~
-    privat.password: ~
+    liqupay.merchant_id: ~
+    liqupay.password: ~
 

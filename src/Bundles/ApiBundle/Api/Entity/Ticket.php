@@ -26,12 +26,34 @@ class Ticket {
     protected $refundable;
     protected $surnames;
 
+    protected $PNRExpireDate;
+
 
 
 
     public function __construct() {
         $this->itineraries = array();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPNRExpireDate()
+    {
+        return $this->PNRExpireDate;
+    }
+
+    /**
+     * @param mixed $PNRExpireDate
+     * @return $this
+     */
+    public function setPNRExpireDate($PNRExpireDate)
+    {
+        $this->PNRExpireDate = $PNRExpireDate;
+        return $this;
+    }
+
+
 
     /**
      * @return mixed
@@ -160,7 +182,7 @@ class Ticket {
         return $this;
     }
 
-    public function getRoutes() {
+    public function getRoutes($withAirportName = true) {
         $routes = array();
         foreach ($this->getItineraries() as $it) {
             foreach ($it->getVariants() as $var) {
@@ -174,8 +196,13 @@ class Ticket {
                 } else {
                     $f = $l = array_shift($segments);
                 }
-                $routes[] = $f->getDepartureCityName() . ' (' . $f->getDepartureAirportName() . ')';
-                $routes[] = $l->getArrivalCityName() . ' (' . $l->getArrivalAirportName() . ')';
+                if($withAirportName){
+                    $routes[] = $f->getDepartureCityName() . ' (' . $f->getDepartureAirportName() . ')';
+                    $routes[] = $l->getArrivalCityName() . ' (' . $l->getArrivalAirportName() . ')';
+                } else {
+                    $routes[] = $f->getDepartureCityName();
+                    $routes[] = $l->getArrivalCityName();
+                }
             }
         }
         $c = count($routes) - 1;

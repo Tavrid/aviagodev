@@ -3,7 +3,10 @@
 <html>
     <head>
         <title>{% block title "Поиск дешевых авиабилетов" %}</title>
-
+        <link href="{{ asset('build/dist/css/bootstrap.css') }}" rel="stylesheet" media="screen" />
+        <link href="{{ asset('build/dist/css/jquery-ui.css') }}" rel="stylesheet" media="screen" />
+        <link href="{{ asset('build/dist/css/avia.css') }}" rel="stylesheet" media="screen" />
+        {% block stylesheets %}{% endblock %}
     </head>
     <body>
         <style type="text/css">
@@ -59,7 +62,7 @@
         </div>
     </div>
 
-    <div id="loader" style="display: block; z-index: 10000;">
+    <div id="loader" style="display: none; z-index: 10000;">
         <div class="bg-banners"></div>
         <div class="banners-reklama">
             <div class="banner">
@@ -107,14 +110,14 @@
                 });
             </script>
     {% endblock %}
-    <script type="text/javascript">
-        $(function(){
-            $("head").append('<link href="{{ asset('build/dist/css/bootstrap.css') }}" rel="stylesheet" media="screen" />');
-            $("head").append('<link href="{{ asset('build/dist/css/jquery-ui.css') }}" rel="stylesheet" media="screen" />');
-            $("head").append('<link href="{{ asset('build/dist/css/avia.css') }}" rel="stylesheet" media="screen" />');
-        });
-    </script>
-    {% block stylesheets %}{% endblock %}
+    {#<script type="text/javascript">#}
+        {#$(function(){#}
+            {#$("head").append('<link href="{{ asset('build/dist/css/bootstrap.css') }}" rel="stylesheet" media="screen" />');#}
+            {#$("head").append('<link href="{{ asset('build/dist/css/jquery-ui.css') }}" rel="stylesheet" media="screen" />');#}
+            {#$("head").append('<link href="{{ asset('build/dist/css/avia.css') }}" rel="stylesheet" media="screen" />');#}
+        {#});#}
+    {#</script>#}
+
 
 </body>
 </html>
