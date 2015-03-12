@@ -7,6 +7,7 @@ _ = require "underscore"
 ko.bindingHandlers.datepicker = init: (element, valueAccessor, allBindingsAccessor, data, context) ->
 
   $(->
+    $(element).attr 'autocomplete', 'off'
     $(element).datepicker
       numberOfMonths: 3
       dateFormat: "yy-mm-dd"

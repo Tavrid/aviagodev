@@ -50,7 +50,13 @@ class PayController extends Controller{
     public function liqpaySuccessAction(Request $request, $orderID){
         $order = $this->findOrder($orderID);
         $state = $this->get('bundles_default.liqupay_api')->checkStatus($order);
-
+        $bookInfoResponse = new BookInfoResponse(new TicketEntityCreator());
+        $bookInfoResponse->setResponseData($order->getOrderInfo());
+        return $this->render('BundlesDefaultBundle:Pay:liqpay_state.html.twig',array(
+            'state' => $state,
+            'order' => $order,
+            'bookInfo' => $bookInfoResponse->getEntity()
+        ));
     }
 
     /**

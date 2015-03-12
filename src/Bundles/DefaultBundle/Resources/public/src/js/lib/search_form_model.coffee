@@ -16,13 +16,7 @@ class ComplexSearch
     @cityToCode = ko.observable o.cityToCode
     @date = ko.observable o.date
     @minDate = 0
-    @reverseCity = ->
-      cityFromTemp = @cityFrom()
-      cityFromCodeTemp = @cityFromCode()
-      @cityFrom(@cityTo())
-      @cityFromCode(@cityToCode())
-      @cityTo(cityFromTemp)
-      @cityToCode(cityFromCodeTemp)
+
 
 
 
@@ -67,3 +61,10 @@ module.exports = class ViewModel
     @removeLocation = (o)=>
       if @complexFields().length > 2
         @complexFields.remove o
+    @reverseCity = ->
+      cityFromTemp = @cityFrom()
+      cityFromCodeTemp = @cityFromCode()
+      @cityFrom(@cityTo())
+      @cityFromCode(@cityToCode())
+      @cityTo(cityFromTemp)
+      @cityToCode(cityFromCodeTemp)

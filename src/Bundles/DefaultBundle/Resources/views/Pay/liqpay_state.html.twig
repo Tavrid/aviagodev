@@ -1,0 +1,53 @@
+{% extends "BundlesDefaultBundle:Layouts:main.html.twig" %}
+{% block body %}
+
+    <div class="content">
+        <div class="col-md-3">
+            <h3>{%trans%}frontend.default.order.order_info{%endtrans%}</h3>
+            <hr />
+            <strong>{%trans%}frontend.default.order.total{%endtrans%}: {{ bookInfo.ticket.totalPrice|number_format(0, '.', ' ')  }} {{bookInfo.ticket.currency}}</strong>
+        </div>
+        <div class="col-md-9">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active">
+                    <a href="#rules" role="tab" data-toggle="tab">
+                        {%trans%}frontend.default.order.order_info{%endtrans%}
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#info" role="tab" data-toggle="tab">{%trans%}frontend.default.order.flight_details{%endtrans%}</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="rules" style="padding: 15px">
+                    {% if state %}
+                        <h4>Успешно оплачено</h4>
+                    {% else %}
+                        <h4 class="text text-danger">Ошибка оплаты</h4>
+                    {% endif %}
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td>{%trans%}frontend.default.order.direction{%endtrans%}:</td>
+                            <td>
+                                <strong>{{ bookInfo.ticket.routes|join(' - ') }}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{%trans%}frontend.default.order.pnr{%endtrans%}:</td>
+                            <td>
+                                <strong class="text-danger">{{ order.pnr }}</strong>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a href="{{ path('bundles_default_api_order',{orderID: order.orderId}) }}">Проверить статус брони</a>
+                </div>
+                <div class="tab-pane" id="info"  style="padding: 15px">
+                    {% include 'BundlesDefaultBundle:Api:_items.html.twig' with {data: [bookInfo.ticket],needBook: false} %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
