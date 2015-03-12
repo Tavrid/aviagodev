@@ -58,7 +58,7 @@
                             <div class="date-from" data-bind="visible: !complexSearch()">
                                 {{ form_label(form.date_from, '', {'attr': {'class': 'date_from'}}) }}
                                 <div class="input-group">
-                                    {{ form_widget(form.date_from, {'attr': {'class': 'date_from','data-bind' : 'value: dateFrom'}}) }}
+                                    {{ form_widget(form.date_from, {'attr': {'class': 'date_from','data-bind' : 'value: dateFrom','autocomplete':'off'}}) }}
                                     <span class="input-group-addon date-icon date-to-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите дату вылета"><label class="label-click" for="search_form_date_from"></span>
                                 </div>
                             </div>
@@ -114,7 +114,7 @@
                                 {{ form_row(form.city_to_code,{attr: {'data-bind':'value: cityToCode'}}) }}
                                 {{ form_label(form.date_to, '', {'attr': {'class': 'date_from'}}) }}
                                 <div class="input-group">
-                                    {{ form_widget(form.date_to, {'attr': {'class': 'date_from','data-bind': 'value: dateTo,enable:disableDateTo'}}) }}
+                                    {{ form_widget(form.date_to, {'attr': {'class': 'date_from','data-bind': 'value: dateTo,enable:disableDateTo','autocomplete':'off'}}) }}
                                     <span class="input-group-addon date-icon date-from-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите дату прилета"><label class="label-click" for="search_form_date_to"></span>
                                 </div>
                             </div>
