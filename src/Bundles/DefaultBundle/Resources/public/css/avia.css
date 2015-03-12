@@ -60,6 +60,10 @@ header .container {
     color:#037CC1;
 }
 
+.phone span {
+	font-size: 24px;
+}
+
 .group-lang {
 	position: relative;
 	top: -10px;
@@ -1830,6 +1834,7 @@ select option {
 	.pay-for-booking {
 		text-align: left;
 	}
+	
 }
 
 @media screen and (max-width: 500px){
@@ -1869,4 +1874,25 @@ select option {
 
 .price-reys .none-style {
 	height: 10px;
+}
+
+#order_info label,
+#order_info .controls {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+
+#order_info .controls {
+	position: relative;
+	top: -4px;
+}
+
+/* Подвал */
+
+footer {
+	padding-top: 10px;
+	margin-top: 20px;
+	border-top: 1px solid #999;
+	color:#555;
 }

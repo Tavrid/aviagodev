@@ -1,13 +1,17 @@
 <style>
+    #avia-calendar-box {
+        position: relative;
+    }
     .icon-obratno {
         background-color: #fff;
         background-position: 90% center;
         font-size: 12px;
-        left: -9px;
         padding: 0 7px;
         position: absolute;
-        top: 156px;
+        top: 50%;
         width: 78px;
+        left: -23px;
+        margin-top: -9px;
         -ms-transform: rotate(-90deg); /* IE 9 */
         -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
         transform: rotate(-90deg);
@@ -16,7 +20,11 @@
         padding-left: 30px;
     }
 </style>
-<div class="icon-obratno">Обратно</div>
+{% set c = table|first %}
+    {% if c is empty %}
+    {% else %}
+        <div class="icon-obratno">Обратно</div>
+{% endif %}
 {% set c = table|first %}
 <table class="table-calendar table table-bordered table-hover text-center" id="calendar_table">
     {% if c is empty %}

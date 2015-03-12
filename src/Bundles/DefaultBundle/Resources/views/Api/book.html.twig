@@ -403,8 +403,10 @@
             </div>
             {{ form_row(form._token) }}
             <div  class="form-group">
-                <div class="controls">
-                    <input type="submit" value="{% trans %}frontend.default.order.submit{% endtrans %}" class="btn btn-success">
+                <div class="row">
+                    <div class="col-md-offset-2 controls">
+                        <input type="submit" value="{% trans %}frontend.default.order.submit{% endtrans %}" class="btn btn-success">
+                    </div>
                 </div>
             </div>
         </form>
