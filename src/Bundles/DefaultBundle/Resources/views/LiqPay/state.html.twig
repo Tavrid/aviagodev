@@ -17,8 +17,19 @@
     {% block js %}
         {{ parent() }}
         <script type="text/javascript">
-            $(function(){
-               console.log('1');
+            $(function () {
+                {% if status == false %}
+                    var status = false;
+                {% else %}
+                    var status = "{{ status }}";
+                {% endif %}
+                setInterval(function () {
+                    $.getJSON('{{ path('bundles_default.liqpay.get_status',{orderID: order.orderId}) }}', function (res) {
+                        if(res.status != status){
+                            window.location.reload();
+                        }
+                    });
+                }, 5000);
             });
         </script>
     {% endblock %}

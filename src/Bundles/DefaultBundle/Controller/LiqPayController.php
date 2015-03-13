@@ -10,6 +10,7 @@ namespace Bundles\DefaultBundle\Controller;
 use Acme\AdminBundle\Entity\Order;
 use Bundles\DefaultBundle\Model\LiqPayApi;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class LiqPayController extends Controller{
@@ -26,6 +27,15 @@ class LiqPayController extends Controller{
             'statuses' => $this->get('bundles_default.liqupay_api')->getStatuses(),
             'order' => $order
         ));
+    }
+
+    public function getStatusAction(Request $request,$orderID){
+        $order = $this->findOrder($orderID);
+        $state = $this->get('bundles_default.liqupay_api')->checkStatus($order);
+        return new JsonResponse([
+            'successPay' => $state == LiqPayApi::SUCCESS_PAY,
+            'status' => $state
+        ]);
     }
 
     /**
