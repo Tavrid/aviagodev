@@ -5,7 +5,8 @@
         <div class="col-md-3">
             <h3>{%trans%}frontend.default.order.order_info{%endtrans%}</h3>
             <hr />
-            <strong>{%trans%}frontend.default.order.total{%endtrans%}: {{ bookInfo.ticket.totalPrice|number_format(0, '.', ' ')  }} {{bookInfo.ticket.currency}}</strong>
+            <strong>{%trans%}frontend.default.order.total{%endtrans%}: 
+                <div class="total-price">{{ bookInfo.ticket.totalPrice|number_format(0, '.', ' ')  }} {{bookInfo.ticket.currency}}</div></strong>
         </div>
         <div class="col-md-9">
             <ul class="nav nav-tabs" role="tablist">

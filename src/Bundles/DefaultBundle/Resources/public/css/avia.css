@@ -1906,3 +1906,7 @@ footer {
 #info .date-ticket {
 	text-align: right;
 }
+
+#invoice_form_box .col-md-6 {
+	margin-bottom: 5px;
+}
