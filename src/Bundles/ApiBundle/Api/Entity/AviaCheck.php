@@ -24,6 +24,10 @@ class AviaCheck {
 
     private $statusPay;
 
+    public function getIsPaid(){
+        return $this->getStatusPay() == 'Paid';
+    }
+
     /**
      * @return mixed
      */

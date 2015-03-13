@@ -40,11 +40,13 @@ class OrderController extends Controller
         ]);
 
         $response = $this->get('avia.api.manager')->getAviaCheckRequestor()->execute($query);
+
         return $this->render('BundlesDefaultBundle:Order:order.html.twig', [
             'order' => $order,
             'bookInfo' => $bookInfoResponse->getEntity(),
             'payForm' => $form->createView(),
-            'numPassenger' => $this->getCountTravelers($bookInfoResponse->getEntity()->getTicket())
+            'numPassenger' => $this->getCountTravelers($bookInfoResponse->getEntity()->getTicket()),
+            'status' => $response->getEntity()
         ]);
     }
 

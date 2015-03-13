@@ -111,5 +111,6 @@ frontend:
             i_gree: Aware of (a) and agree (-on)
             direction: Direction
             success: Book was successful!
+            paid: Paid!
             pnr: Booking code
             pay: Pay
