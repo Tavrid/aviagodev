@@ -1,0 +1,25 @@
+{% extends "BundlesDefaultBundle:Layouts:main.html.twig" %}
+{% block body %}
+    <div class="content">
+        {% if status == false %}
+            <h1>Пожалуйста подождите,</h1>
+            <h3>Сейчас идет проверка вашего платежа. Это может занять несколько минут.</h3>
+        {% else %}
+            Статус вашего платежа: <strong>{{ statuses[status] is defined ? statuses[status]: status }}</strong>
+        {% endif %}
+        <div>
+            <a href="{{ path('bundles_default_api_order',{orderID: order.orderId}) }}">Проверить статус брони</a>
+        </div>
+
+    </div>
+{% endblock %}
+{% if not successPay %}
+    {% block js %}
+        {{ parent() }}
+        <script type="text/javascript">
+            $(function(){
+               console.log('1');
+            });
+        </script>
+    {% endblock %}
+{% endif %}

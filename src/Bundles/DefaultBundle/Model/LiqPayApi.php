@@ -19,17 +19,33 @@ class LiqPayApi
 
     const SUCCESS_PAY = 'success';
     const FAIL_PAY = 'failure';
+    const WAIT_SECURE = 'wait_secure';
+    const PROCESSING = 'processing';
+    const SANDBOX = 'sandbox';
+    const WAIT_ACCEPT = 'wait_accept';
 
     protected $publicKey;
     protected $privateKey;
 
     protected $router;
 
-    public function __construct($publicKey, $privateKey,RouterInterface $router)
+    public function __construct($publicKey, $privateKey, RouterInterface $router)
     {
         $this->publicKey = $publicKey;
         $this->privateKey = $privateKey;
         $this->router = $router;
+    }
+
+    public function getStatuses()
+    {
+        return [
+            self::SUCCESS_PAY => 'Успешный платеж',
+            self::FAIL_PAY => 'Неуспешный платеж',
+            self::WAIT_SECURE => 'Платеж на проверке',
+            self::PROCESSING => 'Платеж обрабатывается',
+            self::WAIT_ACCEPT => 'Деньги с клиента списаны, но магазин еще не прошел проверку',
+            self::SANDBOX => 'Тестовый платеж'
+        ];
     }
 
     public function createForm(Order $order)
@@ -57,23 +73,28 @@ class LiqPayApi
                 'departureDate' => $segment->getDepartureDate()
             ]),
             'server_url' => 'http://webservices.aero/',
-            'result_url' => $this->router->generate('bundles_default_api_return_liqpay',array("orderID" => $order->getOrderId()),true)
+            'result_url' => $this->router->generate('bundles_default_api_return_liqpay', array("orderID" => $order->getOrderId()), true)
         ));
         return $html;
     }
 
-    public function checkStatus(Order $order){
+    /**
+     * @param Order $order
+     * @return bool
+     */
+    public function checkStatus(Order $order)
+    {
         $liqpay = new \LiqPay($this->publicKey, $this->privateKey);
         $res = $liqpay->api("payment/status", array(
-            'version'       => '3',
-            'order_id'      => $order->getId()
+            'version' => '3',
+            'order_id' => $order->getId()
         ));
-        if($res){
-            if($res->result == 'error'){
+        if ($res) {
+            if ($res->result == 'error') {
                 return false;
             }
-            if($res->order_id == $order->getId() && $res->amount == $order->getPrice() && $res->status == self::SUCCESS_PAY){
-                return true;
+            if ($res->order_id == $order->getId() && $res->amount == $order->getPrice()) {
+                return $res->status;
             }
         }
         return false;
