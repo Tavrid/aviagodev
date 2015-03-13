@@ -6,7 +6,36 @@
     {% endfor %}
     {{ form_row(payForm.invoice) }}
     <div class="well" id="invoice_form_box">
-        {{ form_widget(payForm.invoice_data) }}
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_label(payForm.invoice_data.name) }}
+                {{ form_widget(payForm.invoice_data.name) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_label(payForm.invoice_data.address) }}
+                {{ form_widget(payForm.invoice_data.address) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_label(payForm.invoice_data.code) }}
+                {{ form_widget(payForm.invoice_data.code) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_label(payForm.invoice_data.vat) }}
+                {{ form_widget(payForm.invoice_data.vat) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_label(payForm.invoice_data.zip) }}
+                {{ form_widget(payForm.invoice_data.zip) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_label(payForm.invoice_data.city) }}
+                {{ form_widget(payForm.invoice_data.city) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_label(payForm.invoice_data.country) }}
+                {{ form_widget(payForm.invoice_data.country) }}
+            </div>
+        </div>
     </div>
     <br/>
     {{ form_row(payForm._token) }}

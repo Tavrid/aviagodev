@@ -1896,3 +1896,13 @@ footer {
 	border-top: 1px solid #999;
 	color:#555;
 }
+
+#pay,
+#rules,
+#info {
+	background: #fff;
+}
+
+#info .date-ticket {
+	text-align: right;
+}
