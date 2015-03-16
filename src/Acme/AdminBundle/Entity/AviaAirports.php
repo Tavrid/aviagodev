@@ -706,6 +706,20 @@ class AviaAirports {
         return $this->airportEng;
     }
 
+    public function getAirportByLocale($locale){
+        if($locale == 'en'){
+            if(!empty($this->nameShortEn)){
+                return $this->nameShortEn;
+            }
+            return $this->getAirportEng();
+        } else {
+            if(!empty($this->nameShortRu)){
+                return $this->nameShortRu;
+            }
+            return $this->getAirportRus();
+        }
+    }
+
     /**
      * Set airportRus
      *
@@ -862,38 +876,38 @@ class AviaAirports {
 
     public function getFormattedNameCity($locale) {
         if ($locale == 'en') {
-//            if($this->getNameShortEn()){
-//                return $this->getNameShortEn();
-//            }
+            if($this->getNameShortEn()){
+                return $this->getNameShortEn();
+            }
             return $this->getCountryEng() . ', ' . $this->getCityEng() . ' (' . $this->getCityCodeEng() . ')';
         } else if ($locale == 'ru') {
-//            if($this->getNameShortRu()){
-//                return $this->getNameShortRu();
-//            }
+            if($this->getNameShortRu()){
+                return $this->getNameShortRu();
+            }
             return $this->getCountryRus() . ', ' . $this->getCityRus() . ' (' . $this->getCityCodeEng() . ')';
         } else {
-//            if($this->getNameShortUk()){
-//                return $this->getNameShortUk();
-//            }
+            if($this->getNameShortUk()){
+                return $this->getNameShortUk();
+            }
             return $this->getCountryRus() . ', ' . $this->getCityRus() . ' (' . $this->getCityCodeEng() . ')';
         }
     }
 
     public function getFormattedNameAirport($locale) {
         if ($locale == 'en') {
-//            if($this->getNameShortEn()){
-//                return $this->getNameShortEn();
-//            }
+            if($this->getNameShortEn()){
+                return $this->getNameShortEn();
+            }
             return $this->getCountryEng() . ', ' . $this->getCityEng() . ', ' . $this->getAirportEng() . ' (' . $this->getAirportCodeEng() . ')';
         } else if ($locale == 'ru') {
-//            if($this->getNameShortRu()){
-//                return $this->getNameShortRu();
-//            }
+            if($this->getNameShortRu()){
+                return $this->getNameShortRu();
+            }
             return $this->getCountryRus() . ', ' . $this->getCityRus() . ', ' . $this->getAirportRus() . ' (' . $this->getAirportCodeEng() . ')';
         } else {
-//            if($this->getNameShortUk()){
-//                return $this->getNameShortUk();
-//            }
+            if($this->getNameShortUk()){
+                return $this->getNameShortUk();
+            }
             return $this->getCountryRus() . ', ' . $this->getCityRus() . ', ' . $this->getAirportRus() . ' (' . $this->getAirportCodeEng() . ')';
         }
     }

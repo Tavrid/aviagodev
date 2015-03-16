@@ -27,7 +27,7 @@ class Airports extends AbstractModel
                         'country' => $val->getCountryEng(),
                         'city' => $val->getCityEng(),
                         'code' => $val->getAirportCodeEng(),
-                        'airport' => $val->getAirportEng(),
+                        'airport' => $val->getAirportByLocale($locale),
                         'short' => $val->getNameShortEn(),
                         'formatted' => $val->getFormattedName($locale,$token)
                     ];
@@ -37,7 +37,7 @@ class Airports extends AbstractModel
                         'country' => $val->getCountryRus(),
                         'city' => $val->getCityRus(),
                         'code' => $val->getAirportCodeEng(),
-                        'airport' => $val->getAirportRus(),
+                        'airport' => $val->getAirportByLocale($locale),
                         'short' => $val->getNameShortRu(),
                         'formatted' => $val->getFormattedName($locale,$token)
                     ];
