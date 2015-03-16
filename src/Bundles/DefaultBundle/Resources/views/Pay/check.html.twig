@@ -1,3 +1,32 @@
+<style>
+
+    body,
+    html {
+        height: 100%;
+        background: none !important;
+        padding: 0 20px;
+        font-size: 16px;
+    }
+
+    table td,
+    table th {
+        padding: 0;
+        padding: 5px 10px;
+    }
+    .table-recipient {
+        margin-bottom: 20px;
+    }
+    .table-recipient td,
+    .table-recipient th {
+        padding: 0;
+    }
+    .button-print {
+        position: fixed;
+        right: 40px;
+        top: 20px;
+    }
+</style>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -19,7 +48,7 @@
 
 </center>
 <p>&nbsp;</p>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<table class="table-recipient" width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
         <td><strong>Получатель</strong></td>
         <td width="12"></td>
@@ -118,7 +147,8 @@
             {{ ticket.PNRExpireDate|date('d.m.Y H:i:s') }}
         {% endif %}
     </strong></p>
-
-<button class="btn btn-default pull-right" onClick="window.print();return false">Печать</button>
+<div class="button-print">
+    <button class="btn btn-info pull-right" onClick="window.print();return false">Печать</button>
+</div>
 </body>
 </html>
