@@ -4,7 +4,9 @@
         {{ form_label(pay) }}
         <br/>
     {% endfor %}
-    {{ form_row(payForm.invoice) }}
+    <div class="num-factur">
+        {{ form_row(payForm.invoice) }}
+    </div>
     <div class="well" id="invoice_form_box">
         <div class="row">
             <div class="col-md-6">

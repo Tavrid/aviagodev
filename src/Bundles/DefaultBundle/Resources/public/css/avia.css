@@ -1910,3 +1910,13 @@ footer {
 #invoice_form_box .col-md-6 {
 	margin-bottom: 5px;
 }
+
+.num-factur .control-label,
+.num-factur .controls {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.num-factur .controls {
+	margin: -7px 0 0 10px;
+}
