@@ -9,23 +9,6 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        <style type="text/css">
-            #preloader{
-                position: fixed;
-                height: 100%;
-                width: 100%;
-                z-index: 111111;
-                background-color: #f5f7fa;
-                left:0;
-                top: 0;
-            }
-            body{
-                margin: 0;
-            }
-        </style>
-        <div id="preloader">
-            <img style=" position: fixed;top: 50%;left: 50%;" src="{{ asset('bundles/bundlesdefault/img/ajax-loader.gif') }}">
-        </div>
         {% javascripts '@jquery' '@jquery_ui_js' combine=true%}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
