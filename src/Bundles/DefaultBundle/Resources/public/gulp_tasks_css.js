@@ -16,8 +16,7 @@ module.exports = function(gulp,argv){
 
     gulp.task('default_bundle_minify-css', function() {
         gulp.src([
-            './src/Bundles/DefaultBundle/Resources/public/css/avia.css',
-            './src/Bundles/DefaultBundle/Resources/public/lib/ui-theme/css/jquery-ui.css'])
+            './src/Bundles/DefaultBundle/Resources/public/css/avia.css'])
             .pipe(minifyCSS({keepBreaks:true}))
             .pipe(gulp.dest('./web/build/dist/css'));
 
