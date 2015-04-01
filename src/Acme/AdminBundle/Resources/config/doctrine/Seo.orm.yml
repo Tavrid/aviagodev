@@ -1,0 +1,15 @@
+Acme\AdminBundle\Entity\Seo:
+    type: entity
+    table: seo_content
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        prefix:
+            type: string
+        template:
+            type: text
+
+
+

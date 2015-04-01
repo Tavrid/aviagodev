@@ -19,6 +19,17 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [AcmeAdminBundle]]
+
+    sonata.admin.seo:
+        class: Acme\AdminBundle\Admin\SeoAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Список СЕО" }
+        arguments:
+            - ~
+            - Acme\AdminBundle\Entity\Seo
+            - ~
+        calls:
+            - [ setTranslationDomain, [AcmeAdminBundle]]
     sonata.admin.order:
         class: Acme\AdminBundle\Admin\OrderAdmin
         tags:

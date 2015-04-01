@@ -1,9 +1,10 @@
 .idea/
-web/deploy.log
-web/bundles/
-web/compiled/
-web/css/
-web/js/
+web/*
+!web/images
+!web/.htaccess
+!web/*.php
+!web/*.png
+!web/*.ico
 app/bootstrap.php.cache
 app/cache/*
 app/config/parameters.yml
