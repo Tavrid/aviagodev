@@ -1,0 +1,31 @@
+{% extends 'BundlesDefaultBundle:Layouts:main.html.twig' %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-8">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#avia" data-toggle="tab">
+                        {% trans %}frontend.default.flights{% endtrans %}
+                    </a>
+                </li>
+                <li><a href="#hotels" data-toggle="tab">Гостиницы</a></li>
+                <li><a href="#auto" data-toggle="tab">Прокат авто</a></li>
+            </ul>
+            <!-- Tab panes -->
+            {% include "BundlesDefaultBundle:Default:_form.html.twig" %}
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active">
+                    <a href="#main" role="tab" data-toggle="tab">
+                        {%trans%}frontend.default.order.order_info{%endtrans%}
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="main" style="padding: 15px">
+                    {{ content|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

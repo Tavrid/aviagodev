@@ -10,6 +10,11 @@ Acme\AdminBundle\Entity\Seo:
             type: string
         template:
             type: text
+    manyToOne:
+        cityFrom:
+            targetEntity: Acme\AdminBundle\Entity\AviaAirports
+        cityTo:
+            targetEntity: Acme\AdminBundle\Entity\AviaAirports
 
 
 

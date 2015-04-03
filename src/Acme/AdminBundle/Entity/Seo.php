@@ -77,4 +77,60 @@ class Seo
     {
         return $this->template;
     }
+    /**
+     * @var \Acme\AdminBundle\Entity\AviaAirports
+     */
+    private $cityFrom;
+
+
+    /**
+     * Set cityFrom
+     *
+     * @param \Acme\AdminBundle\Entity\AviaAirports $cityFrom
+     * @return Seo
+     */
+    public function setCityFrom(\Acme\AdminBundle\Entity\AviaAirports $cityFrom = null)
+    {
+        $this->cityFrom = $cityFrom;
+
+        return $this;
+    }
+
+    /**
+     * Get cityFrom
+     *
+     * @return \Acme\AdminBundle\Entity\AviaAirports 
+     */
+    public function getCityFrom()
+    {
+        return $this->cityFrom;
+    }
+    /**
+     * @var \Acme\AdminBundle\Entity\AviaAirports
+     */
+    private $cityTo;
+
+
+    /**
+     * Set cityTo
+     *
+     * @param \Acme\AdminBundle\Entity\AviaAirports $cityTo
+     * @return Seo
+     */
+    public function setCityTo(\Acme\AdminBundle\Entity\AviaAirports $cityTo = null)
+    {
+        $this->cityTo = $cityTo;
+
+        return $this;
+    }
+
+    /**
+     * Get cityTo
+     *
+     * @return \Acme\AdminBundle\Entity\AviaAirports 
+     */
+    public function getCityTo()
+    {
+        return $this->cityTo;
+    }
 }

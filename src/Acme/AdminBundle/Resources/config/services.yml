@@ -32,3 +32,8 @@ services:
           arguments:
               - "@service_container"
               - Acme\AdminBundle\Entity\Country
+    seo.model.manager:
+          class: Acme\AdminBundle\Model\Seo
+          arguments:
+              - "@service_container"
+              - Acme\AdminBundle\Entity\Seo

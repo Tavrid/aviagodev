@@ -2,6 +2,7 @@
 
 namespace Acme\AdminBundle\Model;
 
+use Acme\AdminBundle\Entity\AviaAirports;
 use Acme\CoreBundle\Model\AbstractModel;
 
 class Airports extends AbstractModel
@@ -111,5 +112,16 @@ class Airports extends AbstractModel
         $extPar = is_array($_GET) ? $_GET : [];
         return $this->paginator($page, $qb, 'admin.aviaairports.index', 20,
                 $extPar);
+    }
+
+    /**
+     * @param $name
+     * @return AviaAirports
+     */
+    public function getByName($name)
+    {
+        return $this->getRepository()->findOneBy([
+            'cityRus' => $name
+        ]);
     }
 }
