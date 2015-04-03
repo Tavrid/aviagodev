@@ -25,6 +25,10 @@ services:
             class: Acme\CoreBundle\Form\Extension\Range
             tags:
                 - { name: form.type, alias: jquery_range }
+    html_editor.form.type:
+            class: Acme\CoreBundle\Form\Extension\HtmlEditor
+            tags:
+                - { name: form.type, alias: html_editor }
 
     sub_multi_field.form.type:
             class: Acme\CoreBundle\Form\Extension\SubMultifield

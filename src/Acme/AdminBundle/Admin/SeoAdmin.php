@@ -14,6 +14,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Validator\ErrorElement;
 
 
 class SeoAdmin extends MainAdmin {
@@ -38,9 +39,10 @@ class SeoAdmin extends MainAdmin {
     protected function configureFormFields(FormMapper $form)
     {
         $form->add('prefix')
-            ->add('h1')
-            ->add('template');
+            ->add('h1','html_editor')
+            ->add('template','html_editor');
     }
+
 
 
 }
