@@ -133,4 +133,32 @@ class Seo
     {
         return $this->cityTo;
     }
+    /**
+     * @var string
+     */
+    private $h1;
+
+
+    /**
+     * Set h1
+     *
+     * @param string $h1
+     * @return Seo
+     */
+    public function setH1($h1)
+    {
+        $this->h1 = $h1;
+
+        return $this;
+    }
+
+    /**
+     * Get h1
+     *
+     * @return string 
+     */
+    public function getH1()
+    {
+        return $this->h1;
+    }
 }

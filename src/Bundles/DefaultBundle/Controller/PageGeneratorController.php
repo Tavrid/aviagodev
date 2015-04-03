@@ -18,11 +18,17 @@ class PageGeneratorController extends Controller
             array("data" => $data)
         );
 
+        $h1 = $twig->render(
+            $data->getH1(),
+            array("data" => $data)
+        );
+
         return $this->render('BundlesDefaultBundle:PageGenerator:show.html.twig',[
             'data' => $data,
             'form_data' => [],
             'form' => $form = $this->createForm('search_form')->createView(),
-            'content' => $rendered
+            'content' => $rendered,
+            'h1' => $h1
         ]);
     }
 }

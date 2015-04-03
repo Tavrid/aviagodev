@@ -38,6 +38,7 @@ class SeoAdmin extends MainAdmin {
     protected function configureFormFields(FormMapper $form)
     {
         $form->add('prefix')
+            ->add('h1')
             ->add('template');
     }
 

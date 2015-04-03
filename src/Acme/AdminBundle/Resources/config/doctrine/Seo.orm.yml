@@ -8,6 +8,8 @@ Acme\AdminBundle\Entity\Seo:
     fields:
         prefix:
             type: string
+        h1:
+            type: text
         template:
             type: text
     manyToOne:
