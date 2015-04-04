@@ -2,16 +2,17 @@
 
 namespace Bundles\DefaultBundle\Controller;
 
+use Acme\AdminBundle\Entity\Seo;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class PageGeneratorController extends Controller
 {
-    public function indexAction(Request $request,$uri)
+    public function indexAction(Request $request, $uri)
     {
         header('Content-Type: text/html; charset=utf-8');
         $data = $this->get('seo.model.manager')->parseUri($uri);
-        if(!$data){
+        if (!$data) {
             throw $this->createNotFoundException('Error parse uri');
         }
 
@@ -26,8 +27,8 @@ class PageGeneratorController extends Controller
             'keywords' => '',
             'description' => ''
         ];
-        if(is_array($data->getMetaTags())){
-            foreach ($data->getMetaTags() as $k => $v){
+        if (is_array($data->getMetaTags())) {
+            foreach ($data->getMetaTags() as $k => $v) {
                 $metaTags[$k] = $twig->render(
                     $v,
                     array("data" => $data)
@@ -39,14 +40,28 @@ class PageGeneratorController extends Controller
             $data->getH1(),
             array("data" => $data)
         );
+        $formData = $this->buildFormData($request,$data);
 
-        return $this->render('BundlesDefaultBundle:PageGenerator:show.html.twig',[
+        return $this->render('BundlesDefaultBundle:PageGenerator:show.html.twig', [
             'data' => $data,
-            'form_data' => [],
+            'form_data' => $formData,
             'form' => $form = $this->createForm('search_form')->createView(),
             'content' => $rendered,
             'h1' => $h1,
             'metaTags' => $metaTags
         ]);
+    }
+
+    protected function buildFormData(Request $request, Seo $seo)
+    {
+        $formData = [
+            'city_from_code' => $seo->getCityFrom()->getCityCodeEng(),
+            'city_from' => $seo->getCityFrom()->getFormattedNameCity($request->getLocale()),
+            'city_to_code' => $seo->getCityTo()->getCityCodeEng(),
+            'city_to' => $seo->getCityTo()->getFormattedNameCity($request->getLocale()),
+            'date_from' => date('Y-m-d'),
+            'return_way' => 0
+        ];
+        return $formData;
     }
 }

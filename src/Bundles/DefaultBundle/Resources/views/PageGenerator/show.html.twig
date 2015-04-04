@@ -2,6 +2,17 @@
 {% block title metaTags.title %}
 {% block meta_description metaTags.description %}
 {% block meta_keywords metaTags.keywords %}
+{% block js %}
+    {{ parent() }}
+    <script type="application/javascript" src="{{ asset('build/dist/js/index/index.js') }}"></script>
+    {% javascripts
+    'bundles/bundlesdefault/js/default/index.js'
+    'bundles/bundlesdefault/js/default/jquery.selectbox.min.js'
+    'bundles/bundlesdefault/js/default/avia.js'
+    combine=true%}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
 {% block body %}
     <div class="row">
         <div class="col-md-8">
