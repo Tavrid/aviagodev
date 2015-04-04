@@ -35,7 +35,7 @@ class Seo extends AbstractModel
             }
             $seoData = null;
 
-            if(!$cityFrom && !$cityFrom){
+            if(!$cityFrom || !$cityTo){
                 return null;
             }
 
