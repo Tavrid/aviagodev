@@ -172,6 +172,11 @@ class AviaAirports {
      */
     private $nameShortUk;
 
+    public function __toString()
+    {
+        return $this->getCityRus();
+    }
+
     /**
      * Get id
      *

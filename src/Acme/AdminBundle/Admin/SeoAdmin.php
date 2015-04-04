@@ -32,7 +32,9 @@ class SeoAdmin extends MainAdmin {
     {
         $listMapper
             ->addIdentifier('id')
-            ->add('prefix')
+            ->add('prefix','text',['editable' => true])
+            ->add('cityFrom')
+            ->add('cityTo')
         ;
     }
 
