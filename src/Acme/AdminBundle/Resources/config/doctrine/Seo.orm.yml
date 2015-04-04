@@ -12,6 +12,8 @@ Acme\AdminBundle\Entity\Seo:
             type: text
         template:
             type: text
+        meta_tags:
+            type: json_array
     manyToOne:
         cityFrom:
             targetEntity: Acme\AdminBundle\Entity\AviaAirports

@@ -40,31 +40,57 @@ class SeoAdmin extends MainAdmin {
 
     protected function configureFormFields(FormMapper $form)
     {
-        $form->add('prefix')
-            ->add('cityFrom','sonata_type_model_autocomplete',[
-                'property' => 'cityRus',
-                'class' =>'Acme\AdminBundle\Entity\AviaAirports',
-                'attr' => [
-                    'style' => 'width:400px',
-                ],
-                'to_string_callback' => function($entity, $property) {
-                    return sprintf('%d - %s (%s, %s)',$entity->getId(),$entity->getCityRus(),$entity->getCityCodeEng(),$entity->getAirportCodeEng());
-                },
-            ])
-            ->add('cityTo','sonata_type_model_autocomplete',[
-                'property' => 'cityRus',
-                'class' =>'Acme\AdminBundle\Entity\AviaAirports',
-                'attr' => [
-                    'style' => 'width:400px',
-                ],
-                'to_string_callback' => function($entity, $property) {
-                    return sprintf('%d - %s (%s, %s)',$entity->getId(),$entity->getCityRus(),$entity->getCityCodeEng(),$entity->getAirportCodeEng());
-                },
-            ])
-            ->add('h1','html_editor',[
-                'width' => 50
-            ])
-            ->add('template','html_editor');
+        $form->tab('Основная информация')
+                ->with(null)
+                    ->add('prefix')
+                    ->add('cityFrom','sonata_type_model_autocomplete',[
+                        'required' => false,
+                        'property' => 'cityRus',
+                        'class' =>'Acme\AdminBundle\Entity\AviaAirports',
+                        'attr' => [
+                            'style' => 'width:400px',
+                        ],
+                        'to_string_callback' => function($entity, $property) {
+                            return sprintf('%d - %s (%s, %s)',$entity->getId(),$entity->getCityRus(),$entity->getCityCodeEng(),$entity->getAirportCodeEng());
+                        },
+                    ])
+                    ->add('cityTo','sonata_type_model_autocomplete',[
+                        'required' => false,
+                        'property' => 'cityRus',
+                        'class' =>'Acme\AdminBundle\Entity\AviaAirports',
+                        'attr' => [
+                            'style' => 'width:400px',
+                        ],
+                        'to_string_callback' => function($entity, $property) {
+                            return sprintf('%d - %s (%s, %s)',$entity->getId(),$entity->getCityRus(),$entity->getCityCodeEng(),$entity->getAirportCodeEng());
+                        },
+                    ])
+                ->end()
+                ->with('Шаблоны автогенирации')
+                    ->add('h1','html_editor',[
+                        'width' => 50
+                    ])
+                    ->add('template','html_editor')
+                ->end()
+            ->end()
+            ->tab('Мета тэги')
+                ->with(null)
+                    ->add('metaTags','multi_field',[
+                        'label' => 'Мета тэги',
+                        'entity' => 'Acme\AdminBundle\Entity\Seo',
+                        'field_map' => [
+                            'title' => ['field'],
+                            'description' => ['field'],
+                            'keywords' => ['field'],
+                        ],
+                        'types' => [
+                            'title' => ['type'=>'html_editor','options' => ['width' => 100]],
+                            'description' => ['type'=>'html_editor','options' => ['width' => 150]],
+                            'keywords' => ['type'=>'html_editor','options' => ['width' => 150]],
+                        ]
+                    ])
+                ->end()
+            ->end();
     }
 
 

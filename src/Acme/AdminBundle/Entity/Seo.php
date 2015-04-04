@@ -35,6 +35,10 @@ class Seo
      * @var string
      */
     private $h1;
+    /**
+     * @var array
+     */
+    private $meta_tags;
 
 
     /**
@@ -166,5 +170,30 @@ class Seo
     public function getH1()
     {
         return $this->h1;
+    }
+
+
+
+    /**
+     * Set meta_tags
+     *
+     * @param array $metaTags
+     * @return Seo
+     */
+    public function setMetaTags($metaTags)
+    {
+        $this->meta_tags = $metaTags;
+
+        return $this;
+    }
+
+    /**
+     * Get meta_tags
+     *
+     * @return array 
+     */
+    public function getMetaTags()
+    {
+        return $this->meta_tags;
     }
 }
