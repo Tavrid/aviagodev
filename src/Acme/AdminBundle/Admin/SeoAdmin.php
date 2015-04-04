@@ -59,7 +59,9 @@ class SeoAdmin extends MainAdmin {
                     return sprintf('%d - %s (%s, %s)',$entity->getId(),$entity->getCityRus(),$entity->getCityCodeEng(),$entity->getAirportCodeEng());
                 },
             ])
-            ->add('h1','html_editor')
+            ->add('h1','html_editor',[
+                'width' => 50
+            ])
             ->add('template','html_editor');
     }
 

@@ -21,6 +21,21 @@ class Seo
      */
     private $template;
 
+    /**
+     * @var AviaAirports
+     */
+    private $cityTo;
+
+    /**
+     * @var AviaAirports
+     */
+    private $cityFrom;
+
+    /**
+     * @var string
+     */
+    private $h1;
+
 
     /**
      * Get id
@@ -77,19 +92,16 @@ class Seo
     {
         return $this->template;
     }
-    /**
-     * @var \Acme\AdminBundle\Entity\AviaAirports
-     */
-    private $cityFrom;
+
 
 
     /**
      * Set cityFrom
      *
-     * @param \Acme\AdminBundle\Entity\AviaAirports $cityFrom
+     * @param AviaAirports $cityFrom
      * @return Seo
      */
-    public function setCityFrom(\Acme\AdminBundle\Entity\AviaAirports $cityFrom = null)
+    public function setCityFrom(AviaAirports $cityFrom = null)
     {
         $this->cityFrom = $cityFrom;
 
@@ -99,25 +111,22 @@ class Seo
     /**
      * Get cityFrom
      *
-     * @return \Acme\AdminBundle\Entity\AviaAirports 
+     * @return AviaAirports
      */
     public function getCityFrom()
     {
         return $this->cityFrom;
     }
-    /**
-     * @var \Acme\AdminBundle\Entity\AviaAirports
-     */
-    private $cityTo;
+
 
 
     /**
      * Set cityTo
      *
-     * @param \Acme\AdminBundle\Entity\AviaAirports $cityTo
+     * @param AviaAirports
      * @return Seo
      */
-    public function setCityTo(\Acme\AdminBundle\Entity\AviaAirports $cityTo = null)
+    public function setCityTo(AviaAirports $cityTo = null)
     {
         $this->cityTo = $cityTo;
 
@@ -127,16 +136,13 @@ class Seo
     /**
      * Get cityTo
      *
-     * @return \Acme\AdminBundle\Entity\AviaAirports 
+     * @return AviaAirports
      */
     public function getCityTo()
     {
         return $this->cityTo;
     }
-    /**
-     * @var string
-     */
-    private $h1;
+
 
 
     /**

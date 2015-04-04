@@ -430,7 +430,7 @@
 
 {% block html_editor_widget %}
     {% spaceless %}
-        <div id="{{ id }}_box" style="height: 300px;"></div>
+        <div id="{{ id }}_box" style="height: {{ width }}px;"></div>
         {{ block('textarea_widget') }}
         <script type="text/javascript" src="{{ asset('bundles/acmecore/vendor/ace-builds/src-min/ace.js') }}"></script>
         <script>
