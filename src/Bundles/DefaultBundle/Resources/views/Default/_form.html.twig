@@ -28,7 +28,9 @@
                                 <span class="input-group-addon block-img-avia" data-toggle="tooltip" data-placement="top" data-original-title="Откуда вы вылетаете?">
                                     <img src="{{ asset('images/avia-up.png') }}" alt="">
                                 </span>
+
                                 {{ form_widget(form.city_from, {'attr': {'class': 'from_city','data-bind': 'value: cityFrom,autocomplete: "cityFromCode"'}}) }}
+                                {{ form_row(form.city_from_code,{attr: {'data-bind':'value: cityFromCode'}}) }}
                                 <!-- <span class="input-group-btn">
                                     <button class="btn btn-default button-close" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Очистить поле"></button>
                                 </span> -->
@@ -45,6 +47,7 @@
                                     <img src="{{ asset('images/avia-down.png') }}" alt="">
                                 </span>
                                 {{ form_widget(form.city_to, {'attr': {'class': 'to_city','data-bind': 'value: cityTo,autocomplete: "cityToCode"'}}) }}
+                                {{ form_row(form.city_to_code,{attr: {'data-bind':'value: cityToCode'}}) }}
                                 <!-- <span class="input-group-btn">
                                     <button class="btn btn-default button-close" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Очистить поле"></button>
                                 </span> -->
@@ -111,7 +114,7 @@
                         <div class="col-md-6">
                             <!-- Дата прилета -->
                             <div class="date-to"  data-bind="visible: disableDateTo()">
-                                {{ form_row(form.city_to_code,{attr: {'data-bind':'value: cityToCode'}}) }}
+
                                 {{ form_label(form.date_to, '', {'attr': {'class': 'date_from'}}) }}
                                 <div class="input-group">
                                     {{ form_widget(form.date_to, {'attr': {'class': 'date_from','data-bind': 'value: dateTo,enable:disableDateTo','autocomplete':'off'}}) }}

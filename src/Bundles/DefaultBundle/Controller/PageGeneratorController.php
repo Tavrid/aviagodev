@@ -59,9 +59,11 @@ class PageGeneratorController extends Controller
             'city_from' => $seo->getCityFrom()->getFormattedNameCity($request->getLocale()),
             'city_to_code' => $seo->getCityTo()->getCityCodeEng(),
             'city_to' => $seo->getCityTo()->getFormattedNameCity($request->getLocale()),
-            'date_from' => date('Y-m-d'),
-            'return_way' => 0
+            'date_from' => date('Y-m-d',mktime(0,0,0,date('m'),date('d')+7,date('Y'))),
+            'date_to' => date('Y-m-d',mktime(0,0,0,date('m'),date('d')+14,date('Y'))),
+            'return_way' => 1
         ];
+
         return $formData;
     }
 }
