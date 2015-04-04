@@ -11,6 +11,9 @@ class PageGeneratorController extends Controller
     {
         header('Content-Type: text/html; charset=utf-8');
         $data = $this->get('seo.model.manager')->parseUri($uri);
+        if(!$data){
+            throw $this->createNotFoundException('Error parse uri');
+        }
         $twig = clone $this->get('twig');
         $twig->setLoader(new \Twig_Loader_String());
         $rendered = $twig->render(

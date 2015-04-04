@@ -11,59 +11,50 @@ use Acme\CoreBundle\Model\AbstractModel;
 
 class Seo extends AbstractModel
 {
+
     /**
      * @param $uri
-     * @return \Acme\AdminBundle\Entity\Seo|null|object
+     * @return \Acme\AdminBundle\Entity\Seo|null
      */
     public function parseUri($uri)
     {
-        $seoData = $this->getSeoDataByUri($uri);
-        if(!$seoData){
-            return null;
-        }
-        $prefix = $seoData->getPrefix();
-        $cit = trim(str_replace($prefix,'',$uri),'/,-');
-        $citArray = explode('–',$cit);
-        $cityFrom = $this->container->get('admin.city.manager')
-            ->getByName($citArray[0]);
-        if(!$cityFrom){
-            return null;
-        }
-        $cityTo = null;
-        if(isset($citArray[1])){
-            $cityTo = $this->container->get('admin.city.manager')
-                ->getByName($citArray[1]);
-        }
-        $res = $this->getRepository()->findOneBy(array(
-            'prefix' => $prefix,
-            'cityFrom' => $cityFrom->getId(),
-            'cityTo' => $cityTo ? $cityTo->getId() : null
-        ));
-        if(!$res){
-            $seoData->setCityFrom($cityFrom);
-            if($cityTo){
-                $seoData->setCityTo($cityTo);
+        preg_match('#(.+?)[A-Я]{1}#u',$uri,$mathes);
+        if(isset($mathes[1])){
+            $prefix = $mathes[1];
+            $cit = trim(str_replace($prefix,'',$uri),'/,-');
+            $citArray = explode('–',$cit);
+            $cityFrom = $this->container->get('admin.city.manager')
+                ->getByName($citArray[0]);
+            if(!$cityFrom){
+                return null;
             }
-            $res = $seoData;
-        }
-
-        return $res;
-
-    }
-
-    /**
-     * @param $uri
-     * @return \Acme\AdminBundle\Entity\Seo
-     */
-    public function getSeoDataByUri($uri)
-    {
-        /** @var \Acme\AdminBundle\Entity\Seo[] $seoData */
-        $seoData = $this->getRepository()->findAll();
-        foreach ($seoData as $seo){
-
-            if(strpos($uri,$seo->getPrefix(),0) !== false){
-                return $seo;
+            $cityTo = null;
+            if(isset($citArray[1])){
+                $cityTo = $this->container->get('admin.city.manager')
+                    ->getByName($citArray[1]);
             }
+            $seoData = null;
+
+            if(!$cityFrom && !$cityFrom){
+                return null;
+            }
+
+            /** @var \Acme\AdminBundle\Entity\Seo $seoData */
+            $seoData = $this->getRepository()->findOneBy(array(
+                'prefix' => $prefix,
+                'cityFrom' => $cityFrom,
+                'cityTo' => $cityTo
+            ));
+            if(!$seoData){
+                $seoData = $this->getRepository()->findOneBy(array(
+                    'prefix' => $prefix,
+                    'cityFrom' => null,
+                    'cityTo' => null
+                ));
+                $seoData->setCityFrom($cityFrom)
+                    ->setCityTo($cityTo);
+            }
+            return $seoData;
         }
         return null;
     }
