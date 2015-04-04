@@ -39,6 +39,26 @@ class SeoAdmin extends MainAdmin {
     protected function configureFormFields(FormMapper $form)
     {
         $form->add('prefix')
+            ->add('cityFrom','sonata_type_model_autocomplete',[
+                'property' => 'cityRus',
+                'class' =>'Acme\AdminBundle\Entity\AviaAirports',
+                'attr' => [
+                    'style' => 'width:400px',
+                ],
+                'to_string_callback' => function($entity, $property) {
+                    return sprintf('%d - %s (%s, %s)',$entity->getId(),$entity->getCityRus(),$entity->getCityCodeEng(),$entity->getAirportCodeEng());
+                },
+            ])
+            ->add('cityTo','sonata_type_model_autocomplete',[
+                'property' => 'cityRus',
+                'class' =>'Acme\AdminBundle\Entity\AviaAirports',
+                'attr' => [
+                    'style' => 'width:400px',
+                ],
+                'to_string_callback' => function($entity, $property) {
+                    return sprintf('%d - %s (%s, %s)',$entity->getId(),$entity->getCityRus(),$entity->getCityCodeEng(),$entity->getAirportCodeEng());
+                },
+            ])
             ->add('h1','html_editor')
             ->add('template','html_editor');
     }
