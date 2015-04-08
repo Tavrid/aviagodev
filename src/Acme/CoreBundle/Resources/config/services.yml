@@ -43,6 +43,12 @@ services:
             - "@service_container"
         tags:
             - { name: twig.extension }
+    acme.twig.morphy_extension:
+            class: Acme\CoreBundle\Twig\Morphy
+            arguments:
+                - "%kernel.root_dir%"
+            tags:
+                - { name: twig.extension }
     acme.core.twig.seconds_to_time:
             class: Acme\CoreBundle\Twig\SecondsToTime
             tags:

@@ -16,8 +16,11 @@ class PageGeneratorController extends Controller
             throw $this->createNotFoundException('Error parse uri');
         }
 
+
         $twig = clone $this->get('twig');
+//        var_dump($twig->getExtensions()); exit;
         $twig->setLoader(new \Twig_Loader_String());
+
         $rendered = $twig->render(
             $data->getTemplate(),
             array("data" => $data)
@@ -40,7 +43,7 @@ class PageGeneratorController extends Controller
             $data->getH1(),
             array("data" => $data)
         );
-        $formData = $this->buildFormData($request,$data);
+        $formData = $this->buildFormData($request, $data);
 
         return $this->render('BundlesDefaultBundle:PageGenerator:show.html.twig', [
             'data' => $data,
@@ -59,8 +62,8 @@ class PageGeneratorController extends Controller
             'city_from' => $seo->getCityFrom()->getFormattedNameCity($request->getLocale()),
             'city_to_code' => $seo->getCityTo()->getCityCodeEng(),
             'city_to' => $seo->getCityTo()->getFormattedNameCity($request->getLocale()),
-            'date_from' => date('Y-m-d',mktime(0,0,0,date('m'),date('d')+7,date('Y'))),
-            'date_to' => date('Y-m-d',mktime(0,0,0,date('m'),date('d')+14,date('Y'))),
+            'date_from' => date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 7, date('Y'))),
+            'date_to' => date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 14, date('Y'))),
             'return_way' => 1
         ];
 
