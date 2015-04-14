@@ -28,6 +28,9 @@ class TicketEntityCreator implements TicketEntityCreatorInterface {
         if(isset($response['PNRExpireDate'])){
             $ticket->setPNRExpireDate($response['PNRExpireDate']);
         }
+        if(isset($response['LastTicketDate'])){
+            $ticket->setLastTicketDate($response['LastTicketDate']);
+        }
 
         if(isset($response['Refundable'])){
             $ticket->setRefundable($response['Refundable']);

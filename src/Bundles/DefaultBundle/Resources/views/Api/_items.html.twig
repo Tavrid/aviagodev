@@ -126,7 +126,7 @@
                 <div class="row add-btn">
                     <div class="col-md-3">
                         {% if ticket.lastTicketDate %}
-                            {% trans %}frontend.flights.last_ticket_date{% endtrans %}: <strong class="text-warning buy-do">{{ ticket.lastTicketDate|date('d.m.Y H:i:s') }}</strong>
+                            {% trans %}frontend.flights.last_ticket_date{% endtrans %}: <strong class="text-warning buy-do">{{ ticket.lastTicketDate|date('d.m.Y H:i') }}</strong>
                         {% endif %}
                     </div>
                     <div class="col-md-6"></div>
@@ -135,6 +135,14 @@
                     </div>
                 </div>
             </form>
+        {% else %}
+            <div class="row add-btn">
+                <div class="col-md-3">
+                    {% if ticket.lastTicketDate %}
+                        {% trans %}frontend.flights.last_ticket_date{% endtrans %}: <strong class="text-warning buy-do">{{ ticket.lastTicketDate|date('d.m.Y H:i') }}</strong>
+                    {% endif %}
+                </div>
+            </div>
         {% endif %}
     </div>
 {%else%}
