@@ -58,6 +58,8 @@ class TicketEntityCreator implements TicketEntityCreatorInterface {
                     ->setDepartureAirportName($segment['DepartureAirportName'])
                     ->setDepartureDate($segment['DepartureDate'])
                     ->setAvailableSeats($segment['AvailableSeats'])
+                    ->setFlightNumber($segment['FlightNumber'])
+                    ->setFlightTime($segment['FlightTime'])
                     ->setArrivalCity($segment['ArrivalCity'])
                     ->setDepartureCity($segment['DepartureCity'])
                     ->setMarketingAirline($segment['MarketingAirline'])

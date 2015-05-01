@@ -26,6 +26,9 @@ class TicketCalendarEntityCreator implements TicketEntityCreatorInterface {
         if(isset($response['RequestID'])){
             $ticket->setRequestId($response['RequestID']);
         }
+        if(isset($response['Travellers'])){
+            $ticket->setTravelers($response['Travellers']);
+        }
         $ticket->setTotalPrice($response['TotalPrice']['Total'])
             ->setValidatingAirline($response['ValidatingAirline']);
 
