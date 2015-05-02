@@ -13,9 +13,9 @@ class Airports extends AbstractModel
         $locale = $this->container->get('request')->getLocale();
 
         $res = array();
-        $r   = array();
+        $r = array();
         /* @var $d \Acme\AdminBundle\Entity\AviaAirports[] */
-        $d   = $this->getRepository()
+        $d = $this->getRepository()
             ->createQuery(array('searchByToken' => array($token)))
             ->getResult();
 
@@ -30,7 +30,7 @@ class Airports extends AbstractModel
                         'code' => $val->getAirportCodeEng(),
                         'airport' => $val->getAirportByLocale($locale),
                         'short' => $val->getNameShortEn(),
-                        'formatted' => $val->getFormattedName($locale,$token)
+                        'formatted' => $val->getFormattedName($locale, $token)
                     ];
                 } else {
 
@@ -40,13 +40,13 @@ class Airports extends AbstractModel
                         'code' => $val->getAirportCodeEng(),
                         'airport' => $val->getAirportByLocale($locale),
                         'short' => $val->getNameShortRu(),
-                        'formatted' => $val->getFormattedName($locale,$token)
+                        'formatted' => $val->getFormattedName($locale, $token)
                     ];
                 }
             }
 
             foreach ($res as $city => $airport) {
-                $f       = $airport[0];
+                $f = $airport[0];
                 $tempVal = array(
                     'id' => $city,
                     'name' => $f['city'],
@@ -78,7 +78,7 @@ class Airports extends AbstractModel
         $locale = $this->container->get('request')->getLocale();
 
         $results = $this->getRepository()
-                ->createQuery(['getByCode' => $code])->getResult();
+            ->createQuery(['getByCode' => $code])->getResult();
 
         if ($results) {
             /* @var $val \Acme\AdminBundle\Entity\AviaAirports */
@@ -95,23 +95,23 @@ class Airports extends AbstractModel
 
     public function listItemsShowHidden($page = 1, $params = [])
     {
-        $qb     = $this->getRepository()
+        $qb = $this->getRepository()
             ->createQueryBuilder('p');
         $qb->orderBy('p.regionRus')
             ->where($qb->expr()->andX(
-                    $qb->expr()->like('p.airportCodeEng',
-                        $qb->expr()->literal('%'.$params['airport_code'].'%')),
-                    $qb->expr()->like('p.cityCodeEng',
-                        $qb->expr()->literal('%'.$params['city_code'].'%')),
-                    $qb->expr()->like('p.cityRus',
-                        $qb->expr()->literal('%'.$params['city_name'].'%')),
-                    $qb->expr()->like('p.countryRus',
-                        $qb->expr()->literal('%'.$params['country_name'].'%'))
+                $qb->expr()->like('p.airportCodeEng',
+                    $qb->expr()->literal('%' . $params['airport_code'] . '%')),
+                $qb->expr()->like('p.cityCodeEng',
+                    $qb->expr()->literal('%' . $params['city_code'] . '%')),
+                $qb->expr()->like('p.cityRus',
+                    $qb->expr()->literal('%' . $params['city_name'] . '%')),
+                $qb->expr()->like('p.countryRus',
+                    $qb->expr()->literal('%' . $params['country_name'] . '%'))
 //                $qb->expr()->like('p.cityRus', $qb->expr()->literal('%sip%'))
-        ));
+            ));
         $extPar = is_array($_GET) ? $_GET : [];
         return $this->paginator($page, $qb, 'admin.aviaairports.index', 20,
-                $extPar);
+            $extPar);
     }
 
     /**

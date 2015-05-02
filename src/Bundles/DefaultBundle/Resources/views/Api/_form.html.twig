@@ -14,6 +14,14 @@
 
     });
 </script>
+<style>
+    .auto-code{
+        position: absolute;
+        z-index: 10000;
+        top: 7px;
+        right: 6px;
+    }
+</style>
 
 <form id="search-form" class="form-filter-inner" action="{{ path('bundles_default_search') }}" method="post" data-bind="validate">
     <div class="return-way-block return-way-inner">
@@ -34,6 +42,7 @@
                             Из
                         </span>
                         <input required="true" type="text" class="form-control from_city" data-bind="value: cityFrom,autocomplete: 'cityFromCode'">
+                        <span class="auto-code text-muted"></span>
                     </div>
                 </div>
                 <div class="city-from-block">
@@ -42,6 +51,7 @@
                             В
                         </span>
                         <input required="true" type="text" class="form-control from_city" data-bind="value: cityTo,autocomplete: 'cityToCode'">
+                        <span class="auto-code text-muted"></span>
                     </div>
                 </div>
                 <div class="date-from">
@@ -65,6 +75,7 @@
                 {{ form_label(form.city_from) }}
             </span>
             {{ form_widget(form.city_from, {'attr': {'class': 'from_city','data-bind' : 'value: cityFrom,autocomplete: "cityFromCode"'}}) }}
+            <span class="auto-code text-muted"></span>
         </div>
     </div>
     <div class="city-to-block"  data-bind="visible: !complexSearch()">
@@ -73,6 +84,7 @@
                 {{ form_label(form.city_to) }}
             </span>
             {{ form_widget(form.city_to, {'attr': {'class': 'to_city','data-bind' : 'value: cityTo,autocomplete: "cityToCode"'}}) }}
+            <span class="auto-code text-muted"></span>
         </div>
     </div>
     <div class="date-from"  data-bind="visible: !complexSearch()">
