@@ -93,7 +93,14 @@
                                         <div class="col-md-3 time-down-avia">
                                             <p>{%trans%}frontend.default.list.item.arrival_time{%endtrans%}:</p>
                                             <div class="row">
-                                                <div class="time-down col-md-4">{{ variant.arrivalSegment.arrivalDate|date("H:i") }}</div>
+                                                <div class="time-down col-md-4">
+                                                    {{ variant.arrivalSegment.arrivalDate|date("H:i") }}
+                                                </div>
+                                                    {% if variant.diffDay > 0 %}
+                                                        {% transchoice variant.countTransplant with {'%num%':  variant.diffDay} %}
+                                                            frontend.default.list.diff_day
+                                                        {% endtranschoice %}
+                                                    {% endif %}
                                                 <div class="city-aero col-md-8">
                                                     <div class="city-down">{{ variant.arrivalSegment.arrivalCityName }}</div>
                                                     <div class="aeropot-down">

@@ -82,6 +82,7 @@ frontend:
         list:
             search_not_found: Flights not found
             show_more: Show more
+            diff_day: (+%num% d.)
             item:
                 departure_time: Departure time
                 arrival_time: Arrival time

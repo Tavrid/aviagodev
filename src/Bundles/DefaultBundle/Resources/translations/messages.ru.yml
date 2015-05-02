@@ -90,6 +90,7 @@ frontend:
         calendar:
             best_price: Лучшие цены в пределах +/- 3 дней
         list:
+            diff_day: (+%num% д.)
             search_not_found: Не найдены варианты перелёта, соответствующие вашим критериям
             show_more: Показать еще
             item:

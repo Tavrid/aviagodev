@@ -180,5 +180,14 @@ class Variants
         return $ret;
     }
 
+    public function getDiffDay(){
+        $diff =0;
+        $duration = $this->getDuration();
+        if(($duration/3600)>24){
+            $diff = floor(($duration/3600)/24);
+        }
+        return $diff;
+    }
+
 
 } 
