@@ -298,8 +298,8 @@ class Segments {
      */
     public function getFlightTime()
     {
-        return $this->arrivalDate - $this->departureDate;
-//        return $this->flightTime;
+//        return $this->arrivalDate - $this->departureDate;
+        return $this->flightTime;
     }
 
     /**

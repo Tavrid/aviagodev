@@ -5,13 +5,16 @@
     <div class="ticket-well well">
         <div class="price-ticket">
             <h2>{{ ticket.totalPrice|number_format(0,'.',' ') }} {{ticket.currency}} </h2>
-            <span class="col-block"> - за
-                <span class="col-user">
-                    {% transchoice numPassenger with {'%num%':  numPassenger} %}
-                        frontend.num_passenger
-                    {% endtranschoice %}
+            {% if numPassenger > 0 %}
+                <span class="col-block"> - за
+                    <span class="col-user">
+                        {% transchoice numPassenger with {'%num%':  numPassenger} %}
+                            frontend.num_passenger
+                        {% endtranschoice %}
+                    </span>
+                    <span class="end-word"></span>
                 </span>
-                <span class="end-word"></span></span>
+            {% endif %}
         </div>
         {% set view_refundable = true %}
         {% if needBook %}

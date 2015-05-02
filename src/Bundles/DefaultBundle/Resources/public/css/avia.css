@@ -1923,7 +1923,7 @@ footer {
 
 .auto-code{
     position: absolute;
-    z-index: 1000;
+    z-index: 3;
     top: 5px;
     right: 6px;
     background: none repeat scroll 0 0 #f7f7f7;
