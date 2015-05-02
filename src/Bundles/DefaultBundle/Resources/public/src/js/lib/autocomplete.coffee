@@ -7,13 +7,15 @@ delObj = new Delay()
 ko.bindingHandlers.autocomplete = init: (element, valueAccessor, allBindingsAccessor, data, context) ->
   el = data[valueAccessor()]
   $(element).attr 'autocomplete', 'off'
-  codeContainer = $(element).siblings ".auto-code"
+#  codeContainer = $(element).siblings ".auto-code"
 #  $(element).on 'keyup', ->
 #    codeContainer.html ''
   t = typehead element,
     source: (req, res)->
       self = this
-      codeContainer.html ''
+#      codeContainer.html ''
+#        .hide()
+      el null
       delObj.setTimeout ->
         $.ajax
           url: Routing.generate "bundles_default_search_city"
@@ -41,7 +43,8 @@ ko.bindingHandlers.autocomplete = init: (element, valueAccessor, allBindingsAcce
     val = self.menu.find('.active').attr('data-value')
     id = self.menu.find('.active').attr('data-id')
     self.element.value(self.updater(val)).emit('change')
-    codeContainer.html id
+#    codeContainer.html id
+#      .show()
     el(id)
     return undefined
   t.sorter = (items) ->
