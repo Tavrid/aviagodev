@@ -7,6 +7,7 @@ frontend:
         complex_name: Complex search %cityFrom% - %cityFrom%
         simple_name: %cityFrom%  %cityTo%
         last_ticket_date: Pay up
+        pay_booking: Оплатить во время бронирования
     avia_fare:
         modal_link: all fare rules
         modal_title: Fare rules
