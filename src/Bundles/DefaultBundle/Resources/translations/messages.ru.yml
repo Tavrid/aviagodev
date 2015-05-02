@@ -1,6 +1,7 @@
 frontend:
     book:
       error_book: Ошибка бронирования
+    num_passenger_prefix: за
     num_passenger: %num% человека|%num% человек|%num% человек
     non_return: невозвратный
     flights:

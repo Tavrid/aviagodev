@@ -1,7 +1,8 @@
 frontend:
     book:
       error_book: Booking error
-    num_passenger: %num% persons|%num% persons|%num% persons
+    num_passenger_prefix: from
+    num_passenger: %num% person|%num% persons|%num% persons
     non_return: non-return
     flights:
         complex_name: Complex search %cityFrom% - %cityFrom%

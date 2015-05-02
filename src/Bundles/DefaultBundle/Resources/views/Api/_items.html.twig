@@ -6,7 +6,7 @@
         <div class="price-ticket">
             <h2>{{ ticket.totalPrice|number_format(0,'.',' ') }} {{ticket.currency}} </h2>
             {% if numPassenger > 0 %}
-                <span class="col-block"> - за
+                <span class="col-block"> - {% trans %}frontend.num_passenger_prefix{% endtrans %}
                     <span class="col-user">
                         {% transchoice numPassenger with {'%num%':  numPassenger} %}
                             frontend.num_passenger
