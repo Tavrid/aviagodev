@@ -1,3 +1,8 @@
+seconds_to_time:
+  format:
+    days: %num% д.
+    hours: %num% ч.
+    minutes: %num% мин.
 frontend:
     book:
       error_book: Ошибка бронирования

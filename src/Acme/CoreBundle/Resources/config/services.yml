@@ -51,6 +51,7 @@ services:
                 - { name: twig.extension }
     acme.core.twig.seconds_to_time:
             class: Acme\CoreBundle\Twig\SecondsToTime
+            arguments: [@translator]
             tags:
                 - { name: twig.extension }
 
