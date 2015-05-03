@@ -1,7 +1,6 @@
 <script type="text/javascript">
     var searchForm = {{ form_data|json_encode|raw }};
     var numComplexFields = 4;
-    console.log(searchForm);
 </script>
 <form action="{{ path('bundles_default_search') }}" method="post" id="search-form" data-bind="validate">
     <div class="tab-content">
