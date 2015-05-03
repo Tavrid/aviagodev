@@ -1,9 +1,18 @@
 frontend:
     book:
       error_book: Booking error
+      return_ticket: Return ticket
+      form:
+          title: Information for booking passengers
+          placeholder:
+              name: Enter your name
+              surname: Enter your surname
+              gender: Select your gender
+              birthday: Enter your birthday
+              email: Enter your email
     num_passenger_prefix: from
     num_passenger: %num% person|%num% persons|%num% persons
-    non_return: non-return
+    non_return: non refundable
     flights:
         complex_name: Complex search %cityFrom% - %cityFrom%
         simple_name: %cityFrom%  %cityTo%

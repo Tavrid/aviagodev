@@ -50,7 +50,7 @@
                 <div class="tab-pane active rules-tab" id="rules" style="padding: 15px">
                     <div>
                         {% if not ticket.refundable %}
-                            Возврат билета: <strong>не возвратный</strong>
+                            {% trans %}frontend.book.return_ticket{% endtrans %}: <strong>{% trans %}frontend.non_return{% endtrans %}</strong>
                         {% endif %}
                     </div>
                     <hr/>
@@ -146,25 +146,25 @@
                                     <div class="well">
 
         <div class="panel panel-info">
-            <div class="panel-heading">Информация для бронирования пассажира</div>
+            <div class="panel-heading">{% trans %}frontend.book.form.title{% endtrans %}</div>
             <div class="panel-body">
                 <!-- Имя и фамилию -->
                 <div class="row">
                     <div class="col-md-6">
                         {#{{ form_label(add.Name) }}#}
-                        {{ form_row(add.Name, {'attr': {'placeholder': 'Введите имя'}}) }}
+                        {{ form_row(add.Name, {'attr': {'placeholder': 'frontend.book.form.placeholder.name'|trans}}) }}
                         {#{{ form_errors(add.Name) }}#}
                     </div>
                     <div class="col-md-6">
                         {#{{ form_label(add.Surname) }}#}
-                        {{ form_row(add.Surname, {'attr': {'placeholder': 'Введите фамилию'}}) }}
+                        {{ form_row(add.Surname, {'attr': {'placeholder': 'frontend.book.form.placeholder.surname' | trans}}) }}
                     </div>
                 </div>
                 <!-- Имя и фамилию -->
                 <!-- Дата рождения и выбор пола -->
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="#">Выберите пол</label>
+                        <label for="#">{% trans %}frontend.book.form.placeholder.gender{% endtrans %}</label>
                         <div class="row">
                             <div class="col-md-6 sex-block">
                                 <div class="input-group">
@@ -186,7 +186,7 @@
                     </div>
                     <div class="col-md-6">
                                 {#{{ form_label(add.Birthday) }}#}
-                                {{ form_row(add.Birthday, {'attr': {'placeholder': 'Введите дату рождения'}}) }}
+                                {{ form_row(add.Birthday, {'attr': {'placeholder': 'frontend.book.form.placeholder.birthday' | trans}}) }}
                     </div>
                 </div>
                 <!-- Дата рождения и выбор пола -->
@@ -195,7 +195,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         {#{{ form_label(form.email) }}#}
-                        {{ form_row(form.email, {'attr': {'placeholder': 'Введите email'}}) }}
+                        {{ form_row(form.email, {'attr': {'placeholder': 'frontend.book.form.placeholder.email' | trans}}) }}
                     </div>
                     <div class="col-md-6">
                         {#{{ form_label(form.phone) }} <br/>#}

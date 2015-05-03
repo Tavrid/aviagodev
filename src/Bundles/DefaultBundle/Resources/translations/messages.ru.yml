@@ -1,6 +1,15 @@
 frontend:
     book:
       error_book: Ошибка бронирования
+      return_ticket: Возврат билета
+      form:
+        title: Информация для бронирования пассажира
+        placeholder:
+          name: Введите имя
+          surname: Введите фамилию
+          gneder: Выберите пол
+          birthday: Введите дату рождения
+          email: Введите email
     num_passenger_prefix: за
     num_passenger: %num% человека|%num% человек|%num% человек
     non_return: невозвратный
