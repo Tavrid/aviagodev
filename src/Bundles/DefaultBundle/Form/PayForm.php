@@ -17,6 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class PayForm extends AbstractType
 {
@@ -26,8 +27,11 @@ class PayForm extends AbstractType
      */
     protected $countryModel;
 
-    public function __construct(AbstractModel $countryModel) {
+    protected $translator;
+
+    public function __construct(AbstractModel $countryModel, TranslatorInterface $translator) {
         $this->countryModel = $countryModel;
+        $this->translator = $translator;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -62,8 +66,8 @@ class PayForm extends AbstractType
     protected function getPayMethods()
     {
         return [
-            "VISA_PRIVAT" => "Visa Приват",
-            'GENERATE_CHECK' => 'Сасостоятельная оплата чезер кассу банка'
+            "VISA_PRIVAT" => $this->translator->trans('frontend.pay_form.pay_type.privat'),
+            'GENERATE_CHECK' => $this->translator->trans('frontend.pay_form.pay_type.main_check')
         ];
     }
 
