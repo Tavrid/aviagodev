@@ -61,7 +61,7 @@ class PayController extends Controller{
     }
 
     private function renderAndGenerateCheck(Order $order,Form $form){
-        $bookInfoResponse = new BookInfoResponse(new TicketEntityCreator());
+        $bookInfoResponse = new BookInfoResponse(new TicketEntityCreator($this->get('avia.api.traslator')));
         $bookInfoResponse->setResponseData($order->getOrderInfo());
         $numToStr = new NumToStr();
         return $this->render('BundlesDefaultBundle:Pay:check.html.twig',[

@@ -76,7 +76,7 @@ class ResponseTranslator implements ResponseTranslatorInterface
      */
     public function getCountryName($countryCode, $defaultValue)
     {
-        // TODO: Implement getCountryName() method.
+        return $defaultValue;
     }
 
 

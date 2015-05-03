@@ -87,7 +87,8 @@ class Api {
      */
     public function getBookInfoRequestor(){
         $searchRequest = new BookInfoRequest($this->apiKey,$this->apiCaller);
-        $searchRequest->setLogger($this->logger);
+        $searchRequest->setLogger($this->logger)
+            ->setResponseTranslator($this->responseTranslator);
         return $searchRequest;
     }
     /**

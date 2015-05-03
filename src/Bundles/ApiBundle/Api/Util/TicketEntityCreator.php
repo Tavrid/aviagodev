@@ -13,8 +13,21 @@ use Bundles\ApiBundle\Api\Entity\Ticket;
 use Bundles\ApiBundle\Api\Entity\Itineraries;
 use Bundles\ApiBundle\Api\Entity\Segments;
 use Bundles\ApiBundle\Api\Entity\Variants;
+use Bundles\ApiBundle\Api\Model\ResponseTranslatorInterface;
 
 class TicketEntityCreator implements TicketEntityCreatorInterface {
+
+    /**
+     * @var ResponseTranslatorInterface
+     */
+    protected $responseTranslator;
+
+    /**
+     * @param ResponseTranslatorInterface $responseTranslator
+     */
+    public function __construct(ResponseTranslatorInterface $responseTranslator){
+        $this->responseTranslator = $responseTranslator;
+    }
     /**
      * @inheritdoc
      */
@@ -49,19 +62,21 @@ class TicketEntityCreator implements TicketEntityCreatorInterface {
             foreach($variants['Segments'] as $segment){
 
                 $segm = new Segments();
-                $segm->setArrivalAirportName($segment['ArrivalAirportName'])
+                $segm->setArrivalAirportName($this->responseTranslator->getAirportName($segment['ArrivalAirport'],$segment['ArrivalAirportName']))
                     ->setArrivalCountryName($segment['ArrivalCountryName'])
-                    ->setArrivalCityName($segment['ArrivalCityName'])
+                    ->setArrivalCityName($this->responseTranslator->getCityName($segment['ArrivalCity'],$segment['ArrivalCityName']))
+                    ->setArrivalCity($segment['ArrivalCity'])
                     ->setArrivalDate($segment['ArrivalDate'])
+
                     ->setDepartureCountryName($segment['DepartureCountryName'])
-                    ->setDepartureCityName($segment['DepartureCityName'])
-                    ->setDepartureAirportName($segment['DepartureAirportName'])
+                    ->setDepartureCityName($this->responseTranslator->getCityName($segment['DepartureCity'],$segment['DepartureCityName']))
+                    ->setDepartureAirportName($this->responseTranslator->getAirportName($segment['DepartureAirport'],$segment['DepartureAirportName']))
                     ->setDepartureDate($segment['DepartureDate'])
+                    ->setDepartureCity($segment['DepartureCity'])
+
                     ->setAvailableSeats($segment['AvailableSeats'])
                     ->setFlightNumber($segment['FlightNumber'])
                     ->setFlightTime($segment['FlightTime'])
-                    ->setArrivalCity($segment['ArrivalCity'])
-                    ->setDepartureCity($segment['DepartureCity'])
                     ->setMarketingAirline($segment['MarketingAirline'])
                     ->setMarketingAirlineName($segment['MarketingAirlineName'])
                 ;

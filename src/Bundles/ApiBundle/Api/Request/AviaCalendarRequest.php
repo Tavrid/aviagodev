@@ -36,6 +36,8 @@ class AviaCalendarRequest implements Request{
      */
     protected $cache;
 
+
+
     /**
      * @return CacheInterface
      */

@@ -10,6 +10,7 @@ namespace Bundles\DefaultBundle\Model;
 
 
 use Acme\AdminBundle\Entity\Order;
+use Bundles\ApiBundle\Api\Model\ResponseTranslatorInterface;
 use Bundles\ApiBundle\Api\Response\BookInfoResponse;
 use Bundles\ApiBundle\Api\Util\TicketEntityCreator;
 use Symfony\Component\Routing\RouterInterface;
@@ -29,11 +30,14 @@ class LiqPayApi
 
     protected $router;
 
-    public function __construct($publicKey, $privateKey, RouterInterface $router)
+    protected $responseTranslator;
+
+    public function __construct($publicKey, $privateKey, RouterInterface $router,ResponseTranslatorInterface $responseTranslator)
     {
         $this->publicKey = $publicKey;
         $this->privateKey = $privateKey;
         $this->router = $router;
+        $this->responseTranslator = $responseTranslator;
     }
 
     public function getStatuses()
@@ -51,7 +55,7 @@ class LiqPayApi
     public function createForm(Order $order)
     {
         //{"originCity":"DP","destinationCity":"NY","departureDate":"100514"}
-        $bookInfoResponse = new BookInfoResponse(new TicketEntityCreator());
+        $bookInfoResponse = new BookInfoResponse(new TicketEntityCreator($this->responseTranslator));
         $bookInfoResponse->setResponseData($order->getOrderInfo());
         $ticket = $bookInfoResponse->getEntity()->getTicket();
         $segment = $ticket->getFirstItinerarie()->getFirstVariant()->getDepartureSegment();

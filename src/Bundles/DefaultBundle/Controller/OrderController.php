@@ -30,7 +30,7 @@ class OrderController extends Controller
         $orderManager = $this->get('admin.order.manager');
         $order = $orderManager->getOrderByOrderId($orderID);
         $form = $this->createForm('pay_form');
-        $bookInfoResponse = new BookInfoResponse(new TicketEntityCreator());
+        $bookInfoResponse = new BookInfoResponse(new TicketEntityCreator($this->get('avia.api.traslator')));
         $bookInfoResponse->setResponseData($order->getOrderInfo());
 
         $query = new AviaCheck();

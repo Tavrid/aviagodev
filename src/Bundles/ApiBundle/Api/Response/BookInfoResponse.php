@@ -24,12 +24,12 @@ class BookInfoResponse extends Response {
      * @var TicketEntityCreatorInterface
      */
     protected $ticketCreator;
+    protected $entity;
 
     public function __construct(TicketEntityCreatorInterface $ticketCreator){
         $this->ticketCreator = $ticketCreator;
     }
 
-    protected $entity;
 
     protected function createEntity(){
         if(!isset($this->response['result'])){
