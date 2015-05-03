@@ -16,6 +16,8 @@ use Bundles\ApiBundle\Api\Response\SearchResponse;
 use Acme\CoreBundle\Model\AbstractModel;
 use Bundles\ApiBundle\Api\Model\CacheInterface;
 
+use Bundles\ApiBundle\Api\Model\ResponseTranslatorInterface;
+
 class SearchRequest implements Request{
     /**
      * @var string
@@ -26,6 +28,28 @@ class SearchRequest implements Request{
      * @var CacheInterface
      */
     protected $cache;
+    /**
+     * @var ResponseTranslatorInterface
+     */
+    protected $responseTranslator;
+
+    /**
+     * @return ResponseTranslatorInterface
+     */
+    public function getResponseTranslator()
+    {
+        return $this->responseTranslator;
+    }
+
+    /**
+     * @param ResponseTranslatorInterface $responseTranslator
+     * @return $this
+     */
+    public function setResponseTranslator($responseTranslator)
+    {
+        $this->responseTranslator = $responseTranslator;
+        return $this;
+    }
 
     /**
      * @return CacheInterface
@@ -37,10 +61,12 @@ class SearchRequest implements Request{
 
     /**
      * @param CacheInterface $cache
+     * @return $this
      */
     public function setCache(CacheInterface $cache)
     {
         $this->cache = $cache;
+        return $this;
     }
 
     /**
@@ -78,7 +104,7 @@ class SearchRequest implements Request{
      */
     public function execute(QueryAbstract $query)
     {
-        $response = new SearchResponse(new TicketSearchEntityCreator());
+        $response = new SearchResponse(new TicketSearchEntityCreator($this->responseTranslator));
         $data = null;
         if($this->cache){
             $data = $this->cache

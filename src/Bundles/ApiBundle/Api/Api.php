@@ -22,6 +22,8 @@ use Bundles\ApiBundle\Api\Model\CacheInterface;
 
 use Acme\CoreBundle\Model\AbstractModel;
 
+use Bundles\ApiBundle\Api\Model\ResponseTranslatorInterface;
+
 
 class Api {
 
@@ -41,12 +43,24 @@ class Api {
      * @var \Acme\AdminBundle\Model\Log
      */
     protected $logger;
-    public function __construct($key,ApiCallerInterface $apiCaller,CacheInterface $cacheInterface = null,AbstractModel $logger){
+    /**
+     * @var ResponseTranslatorInterface
+     */
+    protected $responseTranslator;
+
+    /**
+     * @param $key
+     * @param ApiCallerInterface $apiCaller
+     * @param ResponseTranslatorInterface $responseTranslator
+     * @param CacheInterface $cacheInterface
+     * @param AbstractModel $logger
+     */
+    public function __construct($key,ApiCallerInterface $apiCaller, ResponseTranslatorInterface $responseTranslator,CacheInterface $cacheInterface = null,AbstractModel $logger){
         $this->apiKey = $key;
         $this->apiCaller = $apiCaller;
         $this->cache = $cacheInterface;
         $this->logger = $logger;
-
+        $this->responseTranslator = $responseTranslator;
     }
 
     /**
@@ -63,7 +77,8 @@ class Api {
     public function getSearchRequestor(){
         $searchRequest = new SearchRequest($this->apiKey,$this->apiCaller);
         $searchRequest->setCache($this->cache);
-        $searchRequest->setLogger($this->logger);
+        $searchRequest->setLogger($this->logger)
+            ->setResponseTranslator($this->responseTranslator);
         return $searchRequest;
     }
 

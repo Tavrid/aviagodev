@@ -115,6 +115,27 @@ class Airports extends AbstractModel
     }
 
     /**
+     * @param $code
+     * @return AviaAirports
+     */
+    public function getByCityCode($code)
+    {
+        return $this->getRepository()->findOneBy([
+            'cityCodeEng' => $code
+        ]);
+    }
+    /**
+     * @param $code
+     * @return AviaAirports
+     */
+    public function getByAirportCode($code)
+    {
+        return $this->getRepository()->findOneBy([
+            'airportCodeEng' => $code
+        ]);
+    }
+
+    /**
      * @param $name
      * @return AviaAirports
      */
