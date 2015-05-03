@@ -8,6 +8,7 @@
 
 namespace Bundles\ApiBundle\Api\Request;
 
+use Bundles\ApiBundle\Api\Model\ResponseTranslatorInterface;
 use Bundles\ApiBundle\Api\Util\TicketEntityCreator;
 use Lsw\ApiCallerBundle\Caller\ApiCallerInterface;
 use Bundles\ApiBundle\Api\ApiCall;
@@ -33,12 +34,33 @@ class AviaCheckRequest implements Request{
     protected $apiCaller;
 
     /**
+     * @var ResponseTranslatorInterface
+     */
+    protected $responseTranslator;
+    /**
      * @param $key
      * @param ApiCallerInterface $apiCaller
      */
     public function __construct($key ,ApiCallerInterface $apiCaller){
         $this->apiKey = $key;
         $this->apiCaller = $apiCaller;
+    }
+
+    /**
+     * @param ResponseTranslatorInterface $responseTranslator
+     * @return $this
+     */
+    public function setResponseTranslator($responseTranslator)
+    {
+        $this->responseTranslator = $responseTranslator;
+        return $this;
+    }
+    /**
+     * @return ResponseTranslatorInterface
+     */
+    public function getResponseTranslator()
+    {
+        return $this->responseTranslator;
     }
 
     /**
@@ -60,7 +82,7 @@ class AviaCheckRequest implements Request{
     */
     public function execute(QueryAbstract $query)
     {
-        $response = new Response(new TicketEntityCreator());
+        $response = new Response(new TicketEntityCreator($this->responseTranslator));
 
         $data = $this->apiCaller->call(new ApiCall($query->getApiUrl(),json_encode($query->buildParams($this->apiKey))));
         $response->setResponseData($data);

@@ -117,13 +117,15 @@ class Api {
     public function getAviaCalendarRequestor(){
         $searchRequest = new AviaCalendarRequest($this->apiKey,$this->apiCaller);
         $searchRequest->setLogger($this->logger)
-            ->setCache($this->cache);
+            ->setCache($this->cache)
+            ->setResponseTranslator($this->responseTranslator);
         return $searchRequest;
     }
 
     public function getAviaCheckRequestor(){
         $searchRequest = new AviaCheckRequest($this->apiKey,$this->apiCaller);
-        $searchRequest->setLogger($this->logger);
+        $searchRequest->setLogger($this->logger)
+            ->setResponseTranslator($this->responseTranslator);
         return $searchRequest;
     }
 

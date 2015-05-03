@@ -9,6 +9,7 @@
 namespace Bundles\ApiBundle\Api\Request;
 
 use Bundles\ApiBundle\Api\Model\CacheInterface;
+use Bundles\ApiBundle\Api\Model\ResponseTranslatorInterface;
 use Bundles\ApiBundle\Api\Util\TicketCalendarEntityCreator;
 use Lsw\ApiCallerBundle\Caller\ApiCallerInterface;
 use Bundles\ApiBundle\Api\ApiCall;
@@ -36,6 +37,39 @@ class AviaCalendarRequest implements Request{
      */
     protected $cache;
 
+    /**
+     * @var ResponseTranslatorInterface
+     */
+    protected $responseTranslator;
+
+    /**
+     * @param $key
+     * @param ApiCallerInterface $apiCaller
+     */
+    public function __construct($key ,ApiCallerInterface $apiCaller){
+        $this->apiKey = $key;
+        $this->apiCaller = $apiCaller;
+    }
+
+    /**
+     * @return ResponseTranslatorInterface
+     */
+    public function getResponseTranslator()
+    {
+        return $this->responseTranslator;
+    }
+
+    /**
+     * @param ResponseTranslatorInterface $responseTranslator
+     * @return $this
+     */
+    public function setResponseTranslator($responseTranslator)
+    {
+        $this->responseTranslator = $responseTranslator;
+        return $this;
+    }
+
+
 
 
     /**
@@ -48,20 +82,15 @@ class AviaCalendarRequest implements Request{
 
     /**
      * @param CacheInterface $cache
+     * @return $this
      */
     public function setCache(CacheInterface $cache)
     {
         $this->cache = $cache;
+        return $this;
     }
 
-    /**
-     * @param $key
-     * @param ApiCallerInterface $apiCaller
-     */
-    public function __construct($key ,ApiCallerInterface $apiCaller){
-        $this->apiKey = $key;
-        $this->apiCaller = $apiCaller;
-    }
+
 
     /**
      * @param \Acme\AdminBundle\Model\Log $logger
@@ -79,7 +108,7 @@ class AviaCalendarRequest implements Request{
      */
     public function execute(QueryAbstract $query)
     {
-        $response = new AviaCalendarResponse(new TicketCalendarEntityCreator());
+        $response = new AviaCalendarResponse(new TicketCalendarEntityCreator($this->responseTranslator));
         $data = null;
         if($this->cache){
             $data = $this->cache->get($query->getKeyByParams());

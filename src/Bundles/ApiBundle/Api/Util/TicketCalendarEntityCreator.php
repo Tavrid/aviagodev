@@ -13,8 +13,22 @@ use Bundles\ApiBundle\Api\Entity\Ticket;
 use Bundles\ApiBundle\Api\Entity\Itineraries;
 use Bundles\ApiBundle\Api\Entity\Segments;
 use Bundles\ApiBundle\Api\Entity\Variants;
+use Bundles\ApiBundle\Api\Model\ResponseTranslatorInterface;
 
 class TicketCalendarEntityCreator implements TicketEntityCreatorInterface {
+
+    /**
+     * @var ResponseTranslatorInterface
+     */
+    protected $responseTranslator;
+
+    /**
+     * @param ResponseTranslatorInterface $responseTranslator
+     */
+    public function __construct(ResponseTranslatorInterface $responseTranslator){
+        $this->responseTranslator = $responseTranslator;
+    }
+
     /**
      * @param $response
      * @return Ticket
@@ -43,23 +57,25 @@ class TicketCalendarEntityCreator implements TicketEntityCreatorInterface {
                 $i = 0;
                 foreach($variants['Segments'] as $segment){
                     $segm = new Segments();
-                    $segm->setArrivalAirportName($segment['ArrivalAirportName'])
+                    $segm->setArrivalAirportName($this->responseTranslator->getAirportName($segment['ArrivalAirport'],$segment['ArrivalAirportName']))
+                        ->setArrivalCityName($this->responseTranslator->getCityName($segment['ArrivalCity'],$segment['ArrivalCityName']))
                         ->setArrivalCountryName($segment['ArrivalCountryName'])
-                        ->setArrivalCityName($segment['ArrivalCityName'])
+                        ->setArrivalTimeZone($segment['ArrivalTimeZone'])
                         ->setArrivalDate($segment['ArrivalDate'])
+                        ->setArrivalAirport($segment['ArrivalAirport'])
+
                         ->setDepartureCountryName($segment['DepartureCountryName'])
-                        ->setDepartureCityName($segment['DepartureCityName'])
-                        ->setDepartureAirportName($segment['DepartureAirportName'])
+                        ->setDepartureCityName($this->responseTranslator->getCityName($segment['DepartureCity'],$segment['DepartureCityName']))
+                        ->setDepartureAirportName($this->responseTranslator->getAirportName($segment['DepartureAirport'],$segment['DepartureAirportName']))
                         ->setDepartureDate($segment['DepartureDate'])
+                        ->setDepartureTimeZone($segment['DepartureTimeZone'])
+                        ->setDepartureAirport($segment['DepartureAirport'])
+
                         ->setAvailableSeats($segment['AvailableSeats'])
                         ->setMarketingAirline($segment['MarketingAirline'])
                         ->setFlightNumber($segment['FlightNumber'])
                         ->setFlightTime($segment['FlightTime'])
-                        ->setDepartureTimeZone($segment['DepartureTimeZone'])
-                        ->setArrivalTimeZone($segment['ArrivalTimeZone'])
                         ->setMarketingAirlineName($segment['MarketingAirlineName'])
-                        ->setDepartureAirport($segment['DepartureAirport'])
-                        ->setArrivalAirport($segment['ArrivalAirport'])
                         ->setAircraftName($segment['AircraftName']);
 
                     if($i == 0){
