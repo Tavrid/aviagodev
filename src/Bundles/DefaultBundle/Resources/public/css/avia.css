@@ -628,6 +628,7 @@ a:focus {
 .nav-tabs > li.active > a:focus {
 	background: #6ABCFF;
 	border-radius: 10px 10px 0 0;
+	color:#fff;
 }
 
 .nav-tabs > li.active > a {
