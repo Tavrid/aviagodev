@@ -68,10 +68,11 @@
                             <!-- Дата вылета -->
                             <!-- Возраст -->
                             <div class="vozrast">
-                                <label for="">{% trans %}frontend.default.index.num_passengers{% endtrans %}</label>
+                                <!-- <label for="">{% trans %}frontend.default.index.num_passengers{% endtrans %}</label> -->
                                 <div class="row">
                                     <!-- Выбор взрослых -->
                                     <div class="col-md-4 col-sm-4">
+                                        <div class="type-people">Взрослых:</div>
                                         <div class="input-group">
                                             <span class="input-group-addon vozrast-icon adult-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите количество взрослых"></span>
                                             {{ form_widget(form.adults, {'attr': {'class': 'adults','data-bind' : 'value: adults'}}) }}
@@ -81,6 +82,7 @@
                                     <!-- Выбор взрослых -->
                                     <!-- Выбор детей -->
                                     <div class="col-md-4 col-sm-4">
+                                        <div class="type-people">Детей:</div>
                                         <div class="input-group">
                                             <span class="input-group-addon vozrast-icon child-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите количество детей"></span>
                                             {{ form_widget(form.children, {'attr': {'class': 'child','data-bind' : 'value: children'}}) }}
@@ -90,6 +92,7 @@
                                     <!-- Выбор детей -->
                                     <!-- Выбор младенцев -->
                                     <div class="col-md-4 col-sm-4">
+                                        <div class="type-people">Младенцев:</div>
                                         <div class="input-group">
                                             <span class="input-group-addon vozrast-icon infants-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите количество младенцев"></span>
                                             {{ form_widget(form.infant, {'attr': {'class': 'infant','data-bind' : 'value: infant'}}) }}

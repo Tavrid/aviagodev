@@ -263,6 +263,19 @@ header .container {
 	margin-left: 0;
 }
 
+.vozrast .row .col-md-4:nth-child(2) {
+	padding-right: 13px;
+	padding-left: 12px;
+}
+
+.vozrast .row .col-md-4:last-of-type {
+	padding-left: 10px;
+}
+
+.vozrast .row .col-md-4:first-of-type {
+	padding-right: 10px;
+}
+
 .info-vozrast {
 	width: 100%;
 	text-transform: lowercase;
@@ -432,6 +445,10 @@ header .container {
 	
 }
 
+.price-reys {
+	padding-bottom: 56px !important;
+}
+
 /* Заголовок календаря */
 
 .panel-success > .panel-heading {
@@ -464,7 +481,7 @@ a:focus {
 }
 
 .vozrast-icon {
-	padding: 2px 9px;
+	padding: 2px 11px;
 }
 
 .button-refresh {
@@ -570,6 +587,16 @@ a:focus {
 
 .vozrast > div select {
 	height: 33px;
+	padding: 6px 7px 6px 0;
+	text-align: center;
+}
+
+.vozrast > div select option {
+	text-align: left;
+}
+
+.type-people {
+    margin-bottom: 2px;
 }
 
 .btn-fly {
@@ -739,15 +766,15 @@ a:focus {
 }
 
 .adult-icon {
-	background: #f8f8f8 url('../images/adults-min-blue.png') no-repeat center center;
+	background: #e7e7e7 url('../images/adults-min-blue.png') no-repeat center 80%;
 }
 
 .child-icon {
-	background: #f8f8f8 url('../images/child-blue.png') no-repeat center center;
+	background: #e7e7e7 url('../images/child-blue.png') no-repeat center 80%;
 }
 
 .infants-icon {
-	background: #f8f8f8 url('../images/infant-blue.png') no-repeat center center;
+	background: #e7e7e7 url('../images/infant-blue.png') no-repeat center 80%;
 }
 
 .filter-form {

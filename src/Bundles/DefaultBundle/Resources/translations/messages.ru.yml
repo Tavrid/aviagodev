@@ -65,9 +65,9 @@ frontend:
         city_to: В
         date_from: Дата вылета
         date_to: Дата прилета
-        adults: Взрослых (12+ лет)
-        child: Детей (2...<12 лет)
-        infant: Младенцев
+        adults: (12+ лет)
+        child: (2...<12 лет)
+        infant: (от 2-х лет)
         airline: Авиакомпания
         currency: Валюта
         best_price: Лучшая цена ±3 дня
