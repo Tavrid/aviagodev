@@ -30,6 +30,8 @@ twig:
         resources:
               - 'AcmeCoreBundle:Form:form_layout.html.twig'
               - 'AcmeCoreBundle:Form:multifield.html.twig'
+    globals:
+        controller_formatter: @bundle_default.controller_formatter
 
 # Assetic Configuration
 assetic:

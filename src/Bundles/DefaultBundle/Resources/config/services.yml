@@ -4,6 +4,10 @@ parameters:
 #    bundles_default.example.class: Bundles\DefaultBundle\Example
 
 services:
+    bundle_default.controller_formatter:
+        class: Bundles\DefaultBundle\Util\ControllerFormatter
+        arguments: [@request_stack]
+
     budnels_default.locale_listener:
         class: Bundles\DefaultBundle\EventListener\LocaleListener
         arguments: ["%kernel.default_locale%"]
