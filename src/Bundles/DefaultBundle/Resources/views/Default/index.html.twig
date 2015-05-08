@@ -13,8 +13,9 @@
 
 {% block body %}
 
-    <div class="row">
-        <div class="col-md-8">
+    <div class="index-wrap row">
+        <div class="bg-wrap"><div class="bg"></div></div>
+        <div class="col-md-9 form-index-wrap">
             <ul class="nav nav-tabs">
                 <li class="active">
                     <a href="#avia" data-toggle="tab">
@@ -27,7 +28,7 @@
             <!-- Tab panes -->
             {% include "BundlesDefaultBundle:Default:_form.html.twig" %}
         </div>
-        <div class="col-md-4 now-find">
+        <div class="col-md-3 now-find">
             <div class="panel-body panel-blue">
                 <!-- Default panel contents -->
                 <div class="panel-heading text-center">Сейчас на сайте находят</div>
@@ -50,7 +51,7 @@
                     </ul>
                 </div>
                 <div class="row group-info">
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="form-group">
                             <button type="button" class="form-inline btn-info btn btn-default" data-toggle="tooltip" data-placement="top" title="Наше время работы с 00:00 до 24:00">
                                 <span class="form-group glyphicon glyphicon-times"></span> 
@@ -70,7 +71,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="pay-for-booking col-md-6 col-sm-6 col-xs-12 text-right">
+                    <div class="pay-for-booking col-md-6 col-sm-12 col-xs-12">
                         <a href="{{ path('bundles_default.order.search') }}" class="btn btn-lg btn-primary">Оплатить <br/> бронь</a>
                     </div>
                 </div>

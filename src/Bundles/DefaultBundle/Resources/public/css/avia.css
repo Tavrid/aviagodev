@@ -34,7 +34,7 @@ header {
 }
 
 header .container {
-	border-bottom: 3px solid #6dbdfe;
+	/* border-bottom: 3px solid #6dbdfe; */
 	padding: 20px 0;
 	position: relative;
 }
@@ -44,7 +44,7 @@ header .container {
 	position: absolute;
 	left: 00px;/* 
 	margin-left: -75px; */
-	top: 5px;
+	top: 13px;
 }
 
 .logo img {
@@ -52,11 +52,16 @@ header .container {
 	height: auto;
 }
 
+.lang-phone-wrap {
+	margin-right: 102px;
+	position: relative;
+}
+
 .phone {
 	font-size: 30px;
     position: absolute;
     right: 0px;
-    top: 30px;
+    top: 10px;
     color:#037CC1;
 }
 
@@ -67,6 +72,30 @@ header .container {
 .group-lang {
 	position: relative;
 	top: -10px;
+}
+
+/* Самолет */
+
+.wing-aircraft-wrap {
+	height: 0px;
+	max-width: 970px;
+	margin: 0 auto;
+}
+
+.wing {
+	background: url("../images/wing.png") no-repeat scroll 0 0 / cover rgba(0, 0, 0, 0);
+    bottom: 0;
+    height: 115px;
+    position: absolute;
+    right: 0;
+    width: 180px;
+}
+
+.wing-aircraft {
+	border-radius: 10px 10px 0 0;
+	background: #d8dadc;
+	height: 40px;
+	position: relative;
 }
 
 /* Поле прилета */
@@ -600,7 +629,7 @@ a:focus {
 }
 
 .btn-fly {
-	margin-top: -10px;
+	margin-top: -40px;
 }
 
 @media screen and (min-width: 992px){
@@ -699,7 +728,7 @@ a:focus {
 }
 
 .now-find .panel-heading {
-	padding: 0px 15px 10px;
+	padding: 0px 10px 10px;
 }
 
 .panel-body {
@@ -712,9 +741,13 @@ a:focus {
 }
 
 .list-now-find {
-	height: 205px;
+	height: 146px;
 	overflow: hidden;
 	margin-bottom: 10px;
+}
+
+.list-now-find .list-group-item {
+	padding: 4px 10px;
 }
 
 .glyphicon-times,
@@ -781,6 +814,7 @@ a:focus {
 	width: 24%;
 	padding-left: 0;
 	padding-right: 0;
+	margin-top: 38px;
 }
 
 .bg-gradient {
@@ -796,6 +830,7 @@ a:focus {
 .result-box {
 	width: 76%;
 	padding-right: 0;
+	margin-top: 38px;
 }
 
 .well {
@@ -1743,7 +1778,9 @@ select option {
 /* Блок Из, В */
 
 .name-avia-block {
-	padding: 0;
+	padding: 0 5px;
+	max-width: 25px;
+	text-align: center;
 }
 
 .name-avia-block label {
@@ -1846,7 +1883,7 @@ select option {
 		padding: 0;
 	}
 	.now-find .panel-body {
-		height: 405px;
+		/* height: 405px; */
 		margin-top: 48px;
 	}
 }
@@ -1956,4 +1993,111 @@ footer {
     background: none repeat scroll 0 0 #f7f7f7;
     padding: 2px 4px;
     /*display: none;*/
+}
+
+/* Табы */
+
+.nav.nav-tabs {
+    margin-left: 2px;
+}
+
+.index-wrap.row {
+    padding-bottom: 0px;
+    margin-bottom: 20px;
+}
+
+.nav-tabs > li.active > a, 
+.now-find .panel-body {
+    box-shadow: 0 0 1px 0 #999;
+}
+.nav-tabs > li.active > a, 
+.nav-tabs > li.active > a:focus, 
+.nav-tabs > li.active > a:hover {
+	border-right: none;
+	border-left: none;
+}
+
+.nav > li > a {
+    padding: 8px 15px 5px;
+    box-shadow: 2px 0 0 0 #999;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: bold;
+    font-style: italic;
+    border-radius: 10px 10px 0 0;
+}
+
+.nav-tabs {
+	border-bottom: none;
+}
+
+#avia,
+#avia .panel,
+.now-find .panel-body,
+#avia .panel-default > .panel-heading {
+	box-shadow: none;
+	border: none;
+	background: none;
+}
+
+#avia .panel-blue,
+.now-find .panel-blue {
+	background: none;
+}
+
+.now-find {
+	position: relative;
+}
+
+.col-md-9.form-index-wrap {
+	width: 65%;
+}
+
+.col-md-3.now-find {
+	width: 35%;
+}
+
+.now-find:after {
+	content: '';
+	border-right: 1px dashed #fff;
+    height: 310px;
+    left: 0;
+    position: absolute;
+    top: 69px;
+    width: 1px;
+}
+
+.index-wrap {
+	position: relative;
+}
+
+.index-wrap .bg-wrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	padding: 40px 16px 0px;
+}
+
+.index-wrap .bg-wrap .bg {
+	width: 100%;
+	height: 100%;
+	background: -webkit-linear-gradient(#6abcff, #d4effc) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: -o-linear-gradient(#6abcff, #d4effc) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: linear-gradient(#6abcff, #d4effc) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	box-shadow: 0 0 3px 0 #999;
+}
+
+#hotels,
+#hotels .panel,
+#hotels .panel-blue,
+#hotels .panel-default > .panel-heading,
+#auto,
+#auto .panel,
+#auto .panel-blue,
+#auto .panel-default > .panel-heading {
+	box-shadow: none;
+	border: none;
+	background: none;
 }
