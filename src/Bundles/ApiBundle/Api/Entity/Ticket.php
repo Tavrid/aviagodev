@@ -108,7 +108,7 @@ class Ticket {
 
     
     public function getCurrency() {
-        return 'руб.';
+//        return 'руб.';
         return $this->currency;
     }
 

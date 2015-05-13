@@ -15,7 +15,8 @@ use Bundles\ApiBundle\Api\Entity\Variants;
 use Bundles\ApiBundle\Api\Util\TicketEntityCreatorInterface;
 
 
-class SearchResponse extends Response implements \Iterator,\ArrayAccess, \Countable{
+class SearchResponse extends Response implements \Iterator, \ArrayAccess, \Countable
+{
 
     protected $position = 0;
 
@@ -24,7 +25,8 @@ class SearchResponse extends Response implements \Iterator,\ArrayAccess, \Counta
      */
     protected $ticketCreator;
 
-    public function __construct(TicketEntityCreatorInterface $ticketCreator){
+    public function __construct(TicketEntityCreatorInterface $ticketCreator)
+    {
         $this->ticketCreator = $ticketCreator;
         $this->position = 0;
     }
@@ -94,7 +96,7 @@ class SearchResponse extends Response implements \Iterator,\ArrayAccess, \Counta
 
     public function getIsError()
     {
-        if(isset($this->response->errors)){
+        if (isset($this->response->errors)) {
 
             return count($this->response->errors);
         }
@@ -105,7 +107,8 @@ class SearchResponse extends Response implements \Iterator,\ArrayAccess, \Counta
      * @param $pos
      * @return Ticket
      */
-    protected function createEntity($pos){
+    protected function createEntity($pos)
+    {
         $data = $this->response['result']['Data'][$pos];
         $data['RequestID'] = $this->response['result']['RequestID'];
 
@@ -124,7 +127,7 @@ class SearchResponse extends Response implements \Iterator,\ArrayAccess, \Counta
     public function count()
     {
         $data = $this->getResponseData();
-        if(isset($data['result']['Data'])){
+        if (isset($data['result']['Data'])) {
             return count($data['result']['Data']);
         } else {
             return 0;
