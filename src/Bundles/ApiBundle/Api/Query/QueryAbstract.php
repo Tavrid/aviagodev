@@ -32,6 +32,14 @@ abstract class QueryAbstract {
         return $this->params;
     }
 
+    public function getParam($name,$default = null)
+    {
+        if(isset($this->params[$name])){
+            $default = $this->params[$name];
+        }
+        return $default;
+    }
+
     /**
      * @return string return uniq key by request params
      */

@@ -14,6 +14,7 @@ use Bundles\ApiBundle\Api\Entity\Itineraries;
 use Bundles\ApiBundle\Api\Entity\Segments;
 use Bundles\ApiBundle\Api\Entity\Variants;
 use Bundles\ApiBundle\Api\Model\ResponseTranslatorInterface;
+use Bundles\ApiBundle\Api\Query\QueryAbstract;
 
 class TicketSearchEntityCreator implements TicketEntityCreatorInterface {
     /**
@@ -22,11 +23,37 @@ class TicketSearchEntityCreator implements TicketEntityCreatorInterface {
     protected $responseTranslator;
 
     /**
+     * @var null|QueryAbstract
+     */
+    protected $query;
+
+    /**
      * @param ResponseTranslatorInterface $responseTranslator
      */
     public function __construct(ResponseTranslatorInterface $responseTranslator){
         $this->responseTranslator = $responseTranslator;
     }
+
+    /**
+     * @return QueryAbstract|null
+     */
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
+    /**
+     * @param QueryAbstract $query
+     * @return $this
+     */
+    public function setQuery(QueryAbstract $query)
+    {
+        $this->query = $query;
+        return $this;
+    }
+
+
+
     /**
      * @param $response
      * @return Ticket
