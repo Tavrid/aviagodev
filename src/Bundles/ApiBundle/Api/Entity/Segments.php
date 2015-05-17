@@ -245,6 +245,7 @@ class Segments {
 
     /**
      * @param mixed $arrivalAirport
+     * @return $this
      */
     public function setArrivalAirport($arrivalAirport)
     {
@@ -432,7 +433,6 @@ class Segments {
     }
 
     /**
-     * @param string $format
      * @return mixed
      */
     public function getArrivalDate()

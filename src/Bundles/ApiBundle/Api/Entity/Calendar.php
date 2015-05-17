@@ -59,11 +59,11 @@ class Calendar {
     }
 
 
-
     /**
      * @param $data
      * @param $date
-     * @param $isRoot
+     * @param TicketEntityCreatorInterface $ticketCreator
+     * @param bool $isRoot
      */
     public function __construct($data,$date,TicketEntityCreatorInterface $ticketCreator,$isRoot = true){
         $this->ticketCreator =$ticketCreator;

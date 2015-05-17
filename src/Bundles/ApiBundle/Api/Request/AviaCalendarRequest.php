@@ -15,6 +15,7 @@ use Lsw\ApiCallerBundle\Caller\ApiCallerInterface;
 use Bundles\ApiBundle\Api\ApiCall;
 use Bundles\ApiBundle\Api\Query\QueryAbstract;
 use Bundles\ApiBundle\Api\Response\AviaCalendarResponse;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
 class AviaCalendarRequest implements Request{
@@ -41,15 +42,23 @@ class AviaCalendarRequest implements Request{
      * @var ResponseTranslatorInterface
      */
     protected $responseTranslator;
+    /**
+     * @var ContainerInterface
+     */
+    protected $serviceContainer;
 
     /**
      * @param $key
      * @param ApiCallerInterface $apiCaller
+     * @param ContainerInterface $container
      */
-    public function __construct($key ,ApiCallerInterface $apiCaller){
+    public function __construct($key ,ApiCallerInterface $apiCaller, ContainerInterface $container){
         $this->apiKey = $key;
         $this->apiCaller = $apiCaller;
+        $this->serviceContainer = $container;
     }
+
+
 
     /**
      * @return ResponseTranslatorInterface
@@ -91,9 +100,9 @@ class AviaCalendarRequest implements Request{
     }
 
 
-
     /**
-     * @param \Acme\AdminBundle\Model\Log $logger
+     * @param \Acme\CoreBundle\Model\AbstractModel $logger
+     * @return $this
      */
     public function setLogger(\Acme\CoreBundle\Model\AbstractModel $logger)
     {
@@ -108,7 +117,8 @@ class AviaCalendarRequest implements Request{
      */
     public function execute(QueryAbstract $query)
     {
-        $response = new AviaCalendarResponse(new TicketCalendarEntityCreator($this->responseTranslator));
+        $response = new AviaCalendarResponse($this->serviceContainer->get('avia.api.ticket_calendar_entity_creator'));
+        $response->setServiceContainer($this->serviceContainer);
         $data = null;
         if($this->cache){
             $data = $this->cache->get($query->getKeyByParams());
