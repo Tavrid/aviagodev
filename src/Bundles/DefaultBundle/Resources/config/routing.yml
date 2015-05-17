@@ -1,6 +1,11 @@
 bundles_default_homepage:
     pattern:  /
     defaults: { _controller: BundlesDefaultBundle:Default:index }
+
+bundles_default.currency.change_currency:
+    pattern: /currency/change-currency/{currency}
+    defaults: { _controller: BundlesDefaultBundle:Currency:index}
+
 bundles_default_search_city:
     pattern:  /api/city/search
     defaults: { _controller: BundlesDefaultBundle:Api:searchCity }

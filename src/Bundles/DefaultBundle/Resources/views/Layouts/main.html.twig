@@ -28,7 +28,7 @@
                 </div>
                 <div class="btn-group" style="margin-left: 253px;">
                     {% for currency in currency_manager.currencyList %}
-                        <button data-value="ru"  type="button" class="btn btn-default currency {{currency_manager.currency == currency ? 'active':''}}">{{ currency }}</button>
+                        <button data-value="{{ currency }}"  type="button" class="btn change_currency btn-default currency {{currency_manager.currency == currency ? 'active':''}}">{{ currency }}</button>
                     {% endfor %}
                 </div>
             </div>
