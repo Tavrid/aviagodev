@@ -77,7 +77,9 @@ class Calendar {
         $this->query = $query;
         $this->data = $data;
         $this->child = array();
-        $this->price = isset($data['TotalPrice']['Total']) ? $data['TotalPrice']['Total'] : null;
+        $price = $ticketCreator->getPriceResolver()->resolve($query, $data);
+        $this->price = $price['price']['Total'];
+        $this->currency = $price['currency'];
         $this->date = strtotime($date);
         if($isRoot){
             foreach($data as $de => $da){
@@ -91,8 +93,7 @@ class Calendar {
         }
     }
     public function getCurrency() {
-        return 'руб.';
-//        return $this->currency;
+        return $this->currency;
     }
 
     public function setCurrency($currency) {

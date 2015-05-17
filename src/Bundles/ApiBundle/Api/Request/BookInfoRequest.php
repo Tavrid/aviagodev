@@ -92,7 +92,7 @@ class BookInfoRequest implements Request{
      */
     public function execute(QueryAbstract $query)
     {
-        $response = new BookInfoResponse($this->serviceContainer->get('avia.api.ticket_entity_creator'));
+        $response = new BookInfoResponse($this->serviceContainer->get('avia.api.ticket_entity_creator'),$query);
         $response->setServiceContainer($this->serviceContainer);
         $data = $this->apiCaller->call(new ApiCall($query->getApiUrl(),json_encode($query->buildParams($this->apiKey))));
         $response->setResponseData($data);

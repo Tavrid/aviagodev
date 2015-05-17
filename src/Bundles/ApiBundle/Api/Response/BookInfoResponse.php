@@ -15,6 +15,7 @@ use Bundles\ApiBundle\Api\Entity\Ticket;
 use Bundles\ApiBundle\Api\Entity\Itineraries;
 use Bundles\ApiBundle\Api\Entity\Segments;
 use Bundles\ApiBundle\Api\Entity\Variants;
+use Bundles\ApiBundle\Api\Query\QueryAbstract;
 use Bundles\ApiBundle\Api\Util\TicketEntityCreatorInterface;
 
 
@@ -24,10 +25,18 @@ class BookInfoResponse extends Response {
      * @var TicketEntityCreatorInterface
      */
     protected $ticketCreator;
+    /**
+     * @var
+     */
     protected $entity;
+    /**
+     * @var QueryAbstract
+     */
+    protected $query;
 
-    public function __construct(TicketEntityCreatorInterface $ticketCreator){
+    public function __construct(TicketEntityCreatorInterface $ticketCreator,QueryAbstract $query){
         $this->ticketCreator = $ticketCreator;
+        $this->query = $query;
     }
 
 
@@ -39,7 +48,7 @@ class BookInfoResponse extends Response {
         $entity = new BookInfo();
         $entity->setTravelers($data['Travellers']);
 
-        $ticket = $this->ticketCreator->createTicket($data);
+        $ticket = $this->ticketCreator->createTicket($data,$this->query);
         $entity->setTicket($ticket)
             ->setBookId($data['BookID']);
         $this->entity = $entity;

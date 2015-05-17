@@ -23,7 +23,9 @@ class AviaCalendarResponse extends Response implements \Iterator,\ArrayAccess, \
      * @var TicketEntityCreatorInterface
      */
     protected $ticketCreator;
-
+    /**
+     * @var QueryAbstract
+     */
     protected $query;
 
     public function __construct(TicketEntityCreatorInterface $ticketCreator, QueryAbstract $query){

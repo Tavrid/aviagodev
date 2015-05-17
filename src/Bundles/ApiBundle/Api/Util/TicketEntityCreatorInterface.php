@@ -10,6 +10,7 @@ namespace Bundles\ApiBundle\Api\Util;
 
 
 use Bundles\ApiBundle\Api\Entity\Ticket;
+use Bundles\ApiBundle\Api\Price\PriceResolverInterface;
 use Bundles\ApiBundle\Api\Query\QueryAbstract;
 
 interface TicketEntityCreatorInterface {
@@ -19,5 +20,10 @@ interface TicketEntityCreatorInterface {
      * @return Ticket
      */
     public function createTicket($response, QueryAbstract $query);
+
+    /**
+     * @return PriceResolverInterface
+     */
+    public function getPriceResolver();
 
 }

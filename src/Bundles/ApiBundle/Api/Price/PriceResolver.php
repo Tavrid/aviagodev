@@ -17,18 +17,27 @@ class PriceResolver implements PriceResolverInterface
     /**
      * @inheritdoc
      */
-    public function resolve(Ticket $ticket, QueryAbstract $query, $response)
+    public function resolve(QueryAbstract $query, $response)
     {
         $currency = strtoupper($query->getParam('currency'));
-        $prices = [$response['TotalPrice']['Currency'] => $response['TotalPrice']];
-        foreach ($response['TotalPriceConverted'] as $price) {
-            $prices[$price['Currency']] = $price;
+        $prices = [];
+        if(isset($response['TotalPrice'])){
+            $prices[$response['TotalPrice']['Currency']] = $response['TotalPrice'];
+        } else {
+            $prices['RUB'] = ['Total' => null];
         }
+
+        if(isset($response['TotalPriceConverted'])){
+            foreach ($response['TotalPriceConverted'] as $price) {
+                $prices[$price['Currency']] = $price;
+            }
+        }
+
         if(!isset($prices[$currency])){
             $currency = 'RUB';
         }
-        $ticket->setTotalPrice($prices[$currency]['Total'])
-            ->setCurrency($currency);
+
+        return ['price' => $prices[$currency],'currency' => $currency];
 
     }
 

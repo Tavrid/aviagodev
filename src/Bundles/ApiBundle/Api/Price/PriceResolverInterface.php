@@ -13,7 +13,11 @@ use Bundles\ApiBundle\Api\Entity\Ticket;
 use Bundles\ApiBundle\Api\Query\QueryAbstract;
 
 interface PriceResolverInterface {
-
-    public function resolve(Ticket $ticket, QueryAbstract $query,$response);
+    /**
+     * @param QueryAbstract $query
+     * @param $response
+     * @return array()
+     */
+    public function resolve(QueryAbstract $query,$response);
 
 }
