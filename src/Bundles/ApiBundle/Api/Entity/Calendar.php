@@ -72,12 +72,12 @@ class Calendar {
      * @param QueryAbstract $query
      * @param bool $isRoot
      */
-    public function __construct($data,$date,TicketEntityCreatorInterface $ticketCreator,QueryAbstract $query,$isRoot = true){
+    public function __construct($data,$date,TicketEntityCreatorInterface $ticketCreator,QueryAbstract $query = null,$isRoot = true){
         $this->ticketCreator =$ticketCreator;
         $this->query = $query;
         $this->data = $data;
         $this->child = array();
-        $price = $ticketCreator->getPriceResolver()->resolve($query, $data);
+        $price = $ticketCreator->getPriceResolver()->resolve($data, $query);
         $this->price = $price['price']['Total'];
         $this->currency = $price['currency'];
         $this->date = strtotime($date);

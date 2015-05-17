@@ -17,9 +17,12 @@ class PriceResolver implements PriceResolverInterface
     /**
      * @inheritdoc
      */
-    public function resolve(QueryAbstract $query, $response)
+    public function resolve($response,QueryAbstract $query = null)
     {
-        $currency = strtoupper($query->getParam('currency'));
+        $currency = 'RUB';
+        if(!is_null($query)){
+            $currency = strtoupper($query->getParam('currency'));
+        }
         $prices = [];
         if(isset($response['TotalPrice'])){
             $prices[$response['TotalPrice']['Currency']] = $response['TotalPrice'];

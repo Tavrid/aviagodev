@@ -48,7 +48,7 @@ class TicketSearchEntityCreator implements TicketEntityCreatorInterface {
     /**
      * @inheritdoc
      */
-    public function createTicket($response, QueryAbstract $query)
+    public function createTicket($response, QueryAbstract $query = null)
     {
 
         $ticket = new Ticket();
@@ -107,7 +107,7 @@ class TicketSearchEntityCreator implements TicketEntityCreatorInterface {
             $ticket->addItineraries($it);
         }
 
-        $price = $this->priceResolver->resolve($query,$response);
+        $price = $this->priceResolver->resolve($response,$query);
         $ticket->setTotalPrice($price['price']['Total'])->setCurrency($price['currency']);
 
         return $ticket;

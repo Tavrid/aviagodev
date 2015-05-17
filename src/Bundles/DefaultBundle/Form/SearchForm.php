@@ -126,10 +126,6 @@ class SearchForm extends AbstractType
                 'label' => 'frontend.search_form.airline',
                 'choices' => $this->getAviaCompany()
             ])
-            ->add('currency', 'choice', [
-                'label' => 'frontend.search_form.currency',
-                'choices' => ['rub' => 'RUB','usd' => 'USD', 'uah' => 'UAH', 'eur' => 'EUR']
-            ])
             ->add('best_price', 'checkbox', [
                 'label' => 'frontend.search_form.best_price',
                 'required' => false,

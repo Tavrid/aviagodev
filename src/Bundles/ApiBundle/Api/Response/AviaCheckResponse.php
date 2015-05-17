@@ -24,7 +24,11 @@ class AviaCheckResponse extends Response {
      */
     protected $query;
 
-    public function __construct(TicketEntityCreatorInterface $ticketCreator,QueryAbstract $query){
+    /**
+     * @param TicketEntityCreatorInterface $ticketCreator
+     * @param QueryAbstract $query
+     */
+    public function __construct(TicketEntityCreatorInterface $ticketCreator,QueryAbstract $query = null){
         $this->ticketCreator = $ticketCreator;
         $this->query = $query;
     }
@@ -47,7 +51,7 @@ class AviaCheckResponse extends Response {
             ->setPnrExpireDate($data['PNRExpireDate'])
             ->setStatusPay($data['StatusPay']);
         $price = $this->ticketCreator->getPriceResolver()
-            ->resolve($this->query, $data);
+            ->resolve($data,$this->query);
         $entity->setTotalPrice($price['price']['Total']);
         $ticket = $this->ticketCreator->createTicket($data,$this->query);
 

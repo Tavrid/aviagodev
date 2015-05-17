@@ -49,7 +49,7 @@ class TicketEntityCreator implements TicketEntityCreatorInterface
     /**
      * @inheritdoc
      */
-    public function createTicket($response, QueryAbstract $query)
+    public function createTicket($response, QueryAbstract $query = null)
     {
         $ticket = new Ticket();
         $ticket->setRequestId($response['RequestID'])
@@ -103,7 +103,7 @@ class TicketEntityCreator implements TicketEntityCreatorInterface
             $it->addVariant($var);
             $ticket->addItineraries($it);
         }
-        $price = $this->priceResolver->resolve($query, $response);
+        $price = $this->priceResolver->resolve($response,$query);
         $ticket->setTotalPrice($price['price']['Total'])->setCurrency($price['currency']);
 
         return $ticket;

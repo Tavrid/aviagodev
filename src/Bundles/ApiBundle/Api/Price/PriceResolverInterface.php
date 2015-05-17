@@ -18,6 +18,6 @@ interface PriceResolverInterface {
      * @param $response
      * @return array()
      */
-    public function resolve(QueryAbstract $query,$response);
+    public function resolve($response,QueryAbstract $query = null);
 
 }

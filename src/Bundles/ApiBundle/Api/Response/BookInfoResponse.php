@@ -28,7 +28,11 @@ class BookInfoResponse extends Response {
      */
     protected $query;
 
-    public function __construct(TicketEntityCreatorInterface $ticketCreator,QueryAbstract $query){
+    /**
+     * @param TicketEntityCreatorInterface $ticketCreator
+     * @param QueryAbstract $query
+     */
+    public function __construct(TicketEntityCreatorInterface $ticketCreator,QueryAbstract $query = null){
         $this->ticketCreator = $ticketCreator;
         $this->query = $query;
     }

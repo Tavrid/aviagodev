@@ -19,7 +19,7 @@ interface TicketEntityCreatorInterface {
      * @param QueryAbstract $query
      * @return Ticket
      */
-    public function createTicket($response, QueryAbstract $query);
+    public function createTicket($response, QueryAbstract $query = null);
 
     /**
      * @return PriceResolverInterface
