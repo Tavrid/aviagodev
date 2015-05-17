@@ -8,7 +8,6 @@
 
 namespace Bundles\ApiBundle\Api\Request;
 
-use Bundles\ApiBundle\Api\Util\TicketSearchEntityCreator;
 use Lsw\ApiCallerBundle\Caller\ApiCallerInterface;
 use Bundles\ApiBundle\Api\ApiCall;
 use Bundles\ApiBundle\Api\Query\QueryAbstract;

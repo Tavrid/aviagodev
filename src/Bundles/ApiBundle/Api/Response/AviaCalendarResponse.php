@@ -12,7 +12,7 @@ use Bundles\ApiBundle\Api\Entity\Ticket;
 
 use Bundles\ApiBundle\Api\Entity\Calendar;
 use Bundles\ApiBundle\Api\Query\QueryAbstract;
-use Bundles\ApiBundle\Api\Util\TicketEntityCreatorInterface;
+use Bundles\ApiBundle\Api\EntityCreator\TicketEntityCreatorInterface;
 
 
 class AviaCalendarResponse extends Response implements \Iterator,\ArrayAccess, \Countable{

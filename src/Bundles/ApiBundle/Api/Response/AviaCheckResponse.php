@@ -9,15 +9,9 @@
 namespace Bundles\ApiBundle\Api\Response;
 
 use Bundles\ApiBundle\Api\Entity\AviaCheck;
-use Bundles\ApiBundle\Api\Entity\BookInfo;
 
-
-use Bundles\ApiBundle\Api\Entity\Ticket;
-use Bundles\ApiBundle\Api\Entity\Itineraries;
-use Bundles\ApiBundle\Api\Entity\Segments;
-use Bundles\ApiBundle\Api\Entity\Variants;
 use Bundles\ApiBundle\Api\Query\QueryAbstract;
-use Bundles\ApiBundle\Api\Util\TicketEntityCreatorInterface;
+use Bundles\ApiBundle\Api\EntityCreator\TicketEntityCreatorInterface;
 
 
 class AviaCheckResponse extends Response {

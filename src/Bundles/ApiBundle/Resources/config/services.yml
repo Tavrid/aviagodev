@@ -19,12 +19,12 @@ services:
         class: Bundles\ApiBundle\Api\Price\PriceResolver
 
     avia.api.search_entity_creator:
-        class: Bundles\ApiBundle\Api\Util\TicketSearchEntityCreator
+        class: Bundles\ApiBundle\Api\EntityCreator\TicketSearchEntityCreator
         arguments: [@avia.api.traslator,@avia.api.price_resolver]
     avia.api.ticket_entity_creator:
-        class: Bundles\ApiBundle\Api\Util\TicketEntityCreator
+        class: Bundles\ApiBundle\Api\EntityCreator\TicketEntityCreator
         arguments: [@avia.api.traslator,@avia.api.price_resolver]
     avia.api.ticket_calendar_entity_creator:
-        class: Bundles\ApiBundle\Api\Util\TicketCalendarEntityCreator
+        class: Bundles\ApiBundle\Api\EntityCreator\TicketCalendarEntityCreator
         arguments: [@avia.api.traslator,@avia.api.price_resolver]
 

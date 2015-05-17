@@ -6,7 +6,7 @@
  * Time: 14:44
  */
 
-namespace Bundles\ApiBundle\Api\Util;
+namespace Bundles\ApiBundle\Api\EntityCreator;
 
 
 use Bundles\ApiBundle\Api\Entity\Ticket;

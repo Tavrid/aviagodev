@@ -10,7 +10,7 @@ namespace Bundles\ApiBundle\Api\Entity;
 
 
 use Bundles\ApiBundle\Api\Query\QueryAbstract;
-use Bundles\ApiBundle\Api\Util\TicketEntityCreatorInterface;
+use Bundles\ApiBundle\Api\EntityCreator\TicketEntityCreatorInterface;
 
 class Calendar {
     /**
