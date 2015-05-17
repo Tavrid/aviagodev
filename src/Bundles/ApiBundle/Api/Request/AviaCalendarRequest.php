@@ -117,7 +117,7 @@ class AviaCalendarRequest implements Request{
      */
     public function execute(QueryAbstract $query)
     {
-        $response = new AviaCalendarResponse($this->serviceContainer->get('avia.api.ticket_calendar_entity_creator'));
+        $response = new AviaCalendarResponse($this->serviceContainer->get('avia.api.ticket_calendar_entity_creator'),$query);
         $response->setServiceContainer($this->serviceContainer);
         $data = null;
         if($this->cache){

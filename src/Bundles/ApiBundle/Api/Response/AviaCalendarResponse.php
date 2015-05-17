@@ -11,6 +11,7 @@ namespace Bundles\ApiBundle\Api\Response;
 use Bundles\ApiBundle\Api\Entity\Ticket;
 
 use Bundles\ApiBundle\Api\Entity\Calendar;
+use Bundles\ApiBundle\Api\Query\QueryAbstract;
 use Bundles\ApiBundle\Api\Util\TicketEntityCreatorInterface;
 
 
@@ -23,9 +24,12 @@ class AviaCalendarResponse extends Response implements \Iterator,\ArrayAccess, \
      */
     protected $ticketCreator;
 
-    public function __construct(TicketEntityCreatorInterface $ticketCreator){
+    protected $query;
+
+    public function __construct(TicketEntityCreatorInterface $ticketCreator, QueryAbstract $query){
         $this->ticketCreator = $ticketCreator;
         $this->data = array();
+        $this->query = $query;
     }
 
     /**
@@ -119,7 +123,7 @@ class AviaCalendarResponse extends Response implements \Iterator,\ArrayAccess, \
     protected function createEntity($pos){
         $data = $this->response['result']['Data'][$pos];
         
-        $calendar =  new Calendar($data,$pos,$this->ticketCreator);
+        $calendar =  new Calendar($data,$pos,$this->ticketCreator,$this->query);
         $calendar->setRequestId($this->response['result']['RequestID']);
         return $calendar;
     }

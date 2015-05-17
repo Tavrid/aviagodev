@@ -14,6 +14,7 @@ use Bundles\ApiBundle\Api\Entity\Itineraries;
 use Bundles\ApiBundle\Api\Entity\Segments;
 use Bundles\ApiBundle\Api\Entity\Variants;
 use Bundles\ApiBundle\Api\Model\ResponseTranslatorInterface;
+use Bundles\ApiBundle\Api\Price\PriceResolverInterface;
 use Bundles\ApiBundle\Api\Query\QueryAbstract;
 
 class TicketSearchEntityCreator implements TicketEntityCreatorInterface {
@@ -23,48 +24,30 @@ class TicketSearchEntityCreator implements TicketEntityCreatorInterface {
     protected $responseTranslator;
 
     /**
-     * @var null|QueryAbstract
+     * @var PriceResolverInterface
      */
-    protected $query;
+    protected $priceResolver;
 
     /**
      * @param ResponseTranslatorInterface $responseTranslator
      */
-    public function __construct(ResponseTranslatorInterface $responseTranslator){
+    public function __construct(ResponseTranslatorInterface $responseTranslator, PriceResolverInterface $priceResolver){
         $this->responseTranslator = $responseTranslator;
-    }
-
-    /**
-     * @return QueryAbstract|null
-     */
-    public function getQuery()
-    {
-        return $this->query;
-    }
-
-    /**
-     * @param QueryAbstract $query
-     * @return $this
-     */
-    public function setQuery(QueryAbstract $query)
-    {
-        $this->query = $query;
-        return $this;
+        $this->priceResolver = $priceResolver;
     }
 
 
 
+
     /**
-     * @param $response
-     * @return Ticket
+     * @inheritdoc
      */
-    public function createTicket($response)
+    public function createTicket($response, QueryAbstract $query)
     {
 
         $ticket = new Ticket();
         $ticket->setRequestId($response['RequestID']);
-        $ticket->setTotalPrice($response['TotalPrice']['Total'])
-            ->setValidatingAirline($response['ValidatingAirline'])
+        $ticket->setValidatingAirline($response['ValidatingAirline'])
             ->setLastTicketDate($response['LastTicketDate'])
             ->setRefundable($response['Refundable']);
 
@@ -118,6 +101,7 @@ class TicketSearchEntityCreator implements TicketEntityCreatorInterface {
             $ticket->addItineraries($it);
         }
 
+        $this->priceResolver->resolve($ticket,$query,$response);
 
         return $ticket;
     }

@@ -12,6 +12,7 @@ use Bundles\ApiBundle\Api\Entity\Ticket;
 use Bundles\ApiBundle\Api\Entity\Itineraries;
 use Bundles\ApiBundle\Api\Entity\Segments;
 use Bundles\ApiBundle\Api\Entity\Variants;
+use Bundles\ApiBundle\Api\Query\QueryAbstract;
 use Bundles\ApiBundle\Api\Util\TicketEntityCreatorInterface;
 
 
@@ -24,11 +25,16 @@ class SearchResponse extends Response implements \Iterator, \ArrayAccess, \Count
      * @var TicketEntityCreatorInterface
      */
     protected $ticketCreator;
+    /**
+     * @var QueryAbstract
+     */
+    protected $query;
 
-    public function __construct(TicketEntityCreatorInterface $ticketCreator)
+    public function __construct(TicketEntityCreatorInterface $ticketCreator,QueryAbstract $query)
     {
         $this->ticketCreator = $ticketCreator;
         $this->position = 0;
+        $this->query = $query;
     }
 
     /**
@@ -112,7 +118,7 @@ class SearchResponse extends Response implements \Iterator, \ArrayAccess, \Count
         $data = $this->response['result']['Data'][$pos];
         $data['RequestID'] = $this->response['result']['RequestID'];
 
-        return $this->ticketCreator->createTicket($data);
+        return $this->ticketCreator->createTicket($data,$this->query);
     }
 
     /**

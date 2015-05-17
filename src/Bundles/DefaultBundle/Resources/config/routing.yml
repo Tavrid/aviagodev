@@ -13,7 +13,7 @@ bundles_default.order.search:
 
 bundles_default_api_list:
     pattern:  /flights/{city_from_code}/{city_to_code}/{date_from}/{date_to}/{best_price}/{adults}/{return_way}/{children}/{infant}/{class}/{currency}/{avia_company}/{direct_flights}
-    defaults: { _controller: BundlesDefaultBundle:Api:list,adults: 1,class: Y,date_to: 0 ,children: 0,infant: 0,return_way : 1,direct_flights: 0, best_price: 1,avia_company: all, currency: usd}
+    defaults: { _controller: BundlesDefaultBundle:Api:list,adults: 1,class: Y,date_to: 0 ,children: 0,infant: 0,return_way : 1,direct_flights: 0, best_price: 1,avia_company: all, currency: rub}
     requirements:
           date_to: "[\d\-]*"
           date_from: "[\d\-]*"
@@ -23,7 +23,7 @@ bundles_default_api_list:
 
 bundles_default_search_complex_search:
     pattern:  /complex-search/{city}/{date}/{adults}/{return_way}/{children}/{infant}/{class}/{currency}/{avia_company}/{direct_flights}
-    defaults: { _controller: BundlesDefaultBundle:Search:complexSearch,adults: 1,class: Y ,children: 0,infant: 0,return_way : 2,direct_flights: 0, avia_company: all, currency: usd}
+    defaults: { _controller: BundlesDefaultBundle:Search:complexSearch,adults: 1,class: Y ,children: 0,infant: 0,return_way : 2,direct_flights: 0, avia_company: all, currency: rub}
     requirements:
           city: "[\w\-]+"
           date: "[\d\-_]+"
@@ -32,7 +32,7 @@ bundles_default_search_complex_search:
           adults: \d
 bundles_default_search_complex_search_items:
     pattern:  /complex-search/items/{city}/{date}/{adults}/{return_way}/{children}/{infant}/{class}/{currency}/{avia_company}/{direct_flights}
-    defaults: { _controller: BundlesDefaultBundle:Search:getFilteredItems,adults: 1,class: Y ,children: 0,infant: 0,return_way : 2,direct_flights: 0,avia_company: all, currency: usd}
+    defaults: { _controller: BundlesDefaultBundle:Search:getFilteredItems,adults: 1,class: Y ,children: 0,infant: 0,return_way : 2,direct_flights: 0,avia_company: all, currency: rub}
     requirements:
           city: "[\w\-]+"
           date: "[\d\-_]+"
@@ -53,7 +53,7 @@ bundles_default_api_calendar:
 
 bundles_default_api_complex_calendar:
     pattern:  /avia-calendar/{city}/{date}/{best_price}/{adults}/{return_way}/{children}/{infant}/{class}/{currency}/{avia_company}/{direct_flights}
-    defaults: { _controller: BundlesDefaultBundle:Search:calendar,adults: 1,class: Y ,children: 0,infant: 0,return_way : 2,direct_flights: 0, best_price: 1,avia_company: all, currency: usd}
+    defaults: { _controller: BundlesDefaultBundle:Search:calendar,adults: 1,class: Y ,children: 0,infant: 0,return_way : 2,direct_flights: 0, best_price: 1,avia_company: all, currency: rub}
     requirements:
           city: "[\w\-]+"
           date: "[\d\-_]+"

@@ -14,6 +14,8 @@ use Bundles\ApiBundle\Api\Entity\Itineraries;
 use Bundles\ApiBundle\Api\Entity\Segments;
 use Bundles\ApiBundle\Api\Entity\Variants;
 use Bundles\ApiBundle\Api\Model\ResponseTranslatorInterface;
+use Bundles\ApiBundle\Api\Price\PriceResolverInterface;
+use Bundles\ApiBundle\Api\Query\QueryAbstract;
 
 class TicketCalendarEntityCreator implements TicketEntityCreatorInterface {
 
@@ -21,19 +23,23 @@ class TicketCalendarEntityCreator implements TicketEntityCreatorInterface {
      * @var ResponseTranslatorInterface
      */
     protected $responseTranslator;
+    /**
+     * @var PriceResolverInterface
+     */
+    protected $priceResolver;
 
     /**
      * @param ResponseTranslatorInterface $responseTranslator
      */
-    public function __construct(ResponseTranslatorInterface $responseTranslator){
+    public function __construct(ResponseTranslatorInterface $responseTranslator,PriceResolverInterface $priceResolver){
         $this->responseTranslator = $responseTranslator;
+        $this->priceResolver = $priceResolver;
     }
 
     /**
-     * @param $response
-     * @return Ticket
+     * @inheritdoc
      */
-    public function createTicket($response)
+    public function createTicket($response,QueryAbstract $query)
     {
 
         $ticket = new Ticket();
@@ -43,8 +49,7 @@ class TicketCalendarEntityCreator implements TicketEntityCreatorInterface {
         if(isset($response['Travellers'])){
             $ticket->setTravelers($response['Travellers']);
         }
-        $ticket->setTotalPrice($response['TotalPrice']['Total'])
-            ->setValidatingAirline($response['ValidatingAirline']);
+        $ticket->setValidatingAirline($response['ValidatingAirline']);
 
         foreach($response['Itineraries'] as $inter){
             $it = new Itineraries();
@@ -93,6 +98,8 @@ class TicketCalendarEntityCreator implements TicketEntityCreatorInterface {
 
             $ticket->addItineraries($it);
         }
+
+        $this->priceResolver->resolve($ticket, $query,$response);
         return $ticket;
 
     }

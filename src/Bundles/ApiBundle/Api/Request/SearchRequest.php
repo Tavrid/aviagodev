@@ -111,7 +111,7 @@ class SearchRequest implements Request{
      */
     public function execute(QueryAbstract $query)
     {
-        $response = new SearchResponse($this->serviceContainer->get('avia.api.search_entity_creator'));
+        $response = new SearchResponse($this->serviceContainer->get('avia.api.search_entity_creator'),$query);
         $response->setServiceContainer($this->serviceContainer);
         $data = null;
         if($this->cache){

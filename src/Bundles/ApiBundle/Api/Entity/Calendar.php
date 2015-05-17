@@ -9,6 +9,7 @@
 namespace Bundles\ApiBundle\Api\Entity;
 
 
+use Bundles\ApiBundle\Api\Query\QueryAbstract;
 use Bundles\ApiBundle\Api\Util\TicketEntityCreatorInterface;
 
 class Calendar {
@@ -36,8 +37,13 @@ class Calendar {
      * @var Calendar
      */
     protected $parent;
-
+    /**
+     * @var string
+     */
     protected $requestId;
+
+
+    protected $query;
     /**
      * @var TicketEntityCreatorInterface
      */
@@ -63,10 +69,12 @@ class Calendar {
      * @param $data
      * @param $date
      * @param TicketEntityCreatorInterface $ticketCreator
+     * @param QueryAbstract $query
      * @param bool $isRoot
      */
-    public function __construct($data,$date,TicketEntityCreatorInterface $ticketCreator,$isRoot = true){
+    public function __construct($data,$date,TicketEntityCreatorInterface $ticketCreator,QueryAbstract $query,$isRoot = true){
         $this->ticketCreator =$ticketCreator;
+        $this->query = $query;
         $this->data = $data;
         $this->child = array();
         $this->price = isset($data['TotalPrice']['Total']) ? $data['TotalPrice']['Total'] : null;
@@ -76,7 +84,7 @@ class Calendar {
                 if(!strtotime($de)){
                     continue;
                 }
-                $calendar = new Calendar($da,$de,$ticketCreator,false);
+                $calendar = new Calendar($da,$de,$ticketCreator,$query,false);
                 $calendar->setParent($this);
                 $this->addChild($calendar);
             }
@@ -201,7 +209,7 @@ class Calendar {
      */
     public function getTicket(){
         if(!$this->ticket){
-            $this->ticket = $this->ticketCreator->createTicket($this->getData());
+            $this->ticket = $this->ticketCreator->createTicket($this->getData(),$this->query);
 
         }
         return $this->ticket;

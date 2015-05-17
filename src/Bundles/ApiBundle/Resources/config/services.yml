@@ -15,13 +15,16 @@ services:
         class: Bundles\ApiBundle\Api\Model\ResponseTranslator
         arguments: [@service_container]
 
+    avia.api.price_resolver:
+        class: Bundles\ApiBundle\Api\Price\PriceResolver
+
     avia.api.search_entity_creator:
         class: Bundles\ApiBundle\Api\Util\TicketSearchEntityCreator
-        arguments: [@avia.api.traslator]
+        arguments: [@avia.api.traslator,@avia.api.price_resolver]
     avia.api.ticket_entity_creator:
         class: Bundles\ApiBundle\Api\Util\TicketEntityCreator
-        arguments: [@avia.api.traslator]
+        arguments: [@avia.api.traslator,@avia.api.price_resolver]
     avia.api.ticket_calendar_entity_creator:
         class: Bundles\ApiBundle\Api\Util\TicketCalendarEntityCreator
-        arguments: [@avia.api.traslator]
+        arguments: [@avia.api.traslator,@avia.api.price_resolver]
 
