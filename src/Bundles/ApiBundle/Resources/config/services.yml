@@ -17,6 +17,7 @@ services:
 
     avia.api.price_resolver:
         class: Bundles\ApiBundle\Api\Price\PriceResolver
+        arguments: [@bundle_default.currency_manager]
 
     avia.api.search_entity_creator:
         class: Bundles\ApiBundle\Api\EntityCreator\TicketSearchEntityCreator

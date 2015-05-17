@@ -31,6 +31,10 @@ services:
           - @translator
           - @admin.city.manager
 
+    bundle_default.currency_manager:
+        class: Bundles\DefaultBundle\Util\CurrencyManager
+        arguments: [@session]
+
     bundles_default.liqupay_api:
             class: Bundles\DefaultBundle\Model\LiqPayApi
             arguments:
