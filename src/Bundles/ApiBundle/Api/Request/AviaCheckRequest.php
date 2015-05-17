@@ -95,7 +95,7 @@ class AviaCheckRequest implements Request
      */
     public function execute(QueryAbstract $query)
     {
-        $response = new Response($this->serviceContainer->get('avia.api.ticket_entity_creator'));
+        $response = new Response($this->serviceContainer->get('avia.api.ticket_entity_creator'),$query);
         $response->setServiceContainer($this->serviceContainer);
 
         $data = $this->apiCaller->call(new ApiCall($query->getApiUrl(),

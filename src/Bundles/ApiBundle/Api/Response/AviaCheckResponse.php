@@ -16,6 +16,7 @@ use Bundles\ApiBundle\Api\Entity\Ticket;
 use Bundles\ApiBundle\Api\Entity\Itineraries;
 use Bundles\ApiBundle\Api\Entity\Segments;
 use Bundles\ApiBundle\Api\Entity\Variants;
+use Bundles\ApiBundle\Api\Query\QueryAbstract;
 use Bundles\ApiBundle\Api\Util\TicketEntityCreatorInterface;
 
 
@@ -24,9 +25,14 @@ class AviaCheckResponse extends Response {
      * @var TicketEntityCreatorInterface
      */
     protected $ticketCreator;
+    /**
+     * @var QueryAbstract
+     */
+    protected $query;
 
-    public function __construct(TicketEntityCreatorInterface $ticketCreator){
+    public function __construct(TicketEntityCreatorInterface $ticketCreator,QueryAbstract $query){
         $this->ticketCreator = $ticketCreator;
+        $this->query = $query;
     }
 
     public function getPnr() {
@@ -45,10 +51,11 @@ class AviaCheckResponse extends Response {
             ->setBookId($data['BookID'])
             ->setPnr($data['PNR'])
             ->setPnrExpireDate($data['PNRExpireDate'])
-            ->setTotalPrice($data['TotalPrice'])
             ->setStatusPay($data['StatusPay']);
-
-        $ticket = $this->ticketCreator->createTicket($data);
+        $price = $this->ticketCreator->getPriceResolver()
+            ->resolve($this->query, $data);
+        $entity->setTotalPrice($price['price']['Total']);
+        $ticket = $this->ticketCreator->createTicket($data,$this->query);
 
         $entity->setTicket($ticket)
             ->setBookId($data['BookID']);

@@ -10,6 +10,7 @@ namespace Bundles\DefaultBundle\Controller;
 
 use Bundles\ApiBundle\Api\Entity\Ticket;
 use Bundles\ApiBundle\Api\Query\AviaCheck;
+use Bundles\ApiBundle\Api\Query\BookInfoQuery;
 use Bundles\ApiBundle\Api\Util\TicketEntityCreator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Bundles\ApiBundle\Api\Response\BookInfoResponse;
@@ -30,7 +31,7 @@ class OrderController extends Controller
         $orderManager = $this->get('admin.order.manager');
         $order = $orderManager->getOrderByOrderId($orderID);
         $form = $this->createForm('pay_form');
-        $bookInfoResponse = new BookInfoResponse(new TicketEntityCreator($this->get('avia.api.traslator')));
+        $bookInfoResponse = new BookInfoResponse($this->get('avia.api.ticket_entity_creator'),new BookInfoQuery());
         $bookInfoResponse->setResponseData($order->getOrderInfo());
 
         $query = new AviaCheck();
