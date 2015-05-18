@@ -70,6 +70,13 @@ jQuery(function ($) {
             window.location.reload();
         });
     });
+
+
+    $('body').on('click','.change_currency',function(){
+        $.get(Routing.generate('bundles_default.currency.change_currency',{currency: $(this).attr('data-value')}),function(){
+            window.location.reload();
+        });
+    });
     
     $.validator.setDefaults({
         ignore: []

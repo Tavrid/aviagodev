@@ -1,10 +1,5 @@
 $(document).ready(function($) {
 
-    $('body').on('click','.change_currency',function(){
-        $.get(Routing.generate('bundles_default.currency.change_currency',{currency: $(this).attr('data-value')}),function(){
-            window.location.reload();
-        });
-    });
 
 	/*$('#search_form_return_way').on('click','input[type=radio]',function(){
         var val = $('#search_form_return_way input[type=radio]:checked').val();
