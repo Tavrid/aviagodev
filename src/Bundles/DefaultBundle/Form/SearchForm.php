@@ -86,12 +86,12 @@ class SearchForm extends AbstractType
 
             ->add('date_from', 'date', [
                 'label' => 'frontend.search_form.date_from',
-                'attr' => ['readonly' => true,'placeholder' => 'frontend.search_form.placeholders.date'],
+                'attr' => ['placeholder' => 'frontend.search_form.placeholders.date'],
                 'widget' => 'single_text',
             ])
             ->add('date_to', 'date', [
                 'label' => 'frontend.search_form.date_to',
-                'attr' => ['readonly' => true,'placeholder' => 'frontend.search_form.placeholders.date'],
+                'attr' => ['placeholder' => 'frontend.search_form.placeholders.date'],
                 'widget' => 'single_text'
             ])
             ->add('return_way','choice',[
