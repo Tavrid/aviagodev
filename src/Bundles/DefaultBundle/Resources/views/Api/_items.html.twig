@@ -94,13 +94,16 @@
                                             <p>{%trans%}frontend.default.list.item.arrival_time{%endtrans%}:</p>
                                             <div class="row">
                                                 <div class="time-down col-md-4">
-                                                    {{ variant.arrivalSegment.arrivalDate|date("H:i") }}
+                                                    <span class="span">{{ variant.arrivalSegment.arrivalDate|date("H:i") }}</span>
+                                                    <br/>
+                                                    <span class="nowrap">
+                                                        {% if variant.diffDay > 0 %}
+                                                            {% transchoice variant.countTransplant with {'%num%':  variant.diffDay} %}
+                                                                frontend.default.list.diff_day
+                                                            {% endtranschoice %}
+                                                        {% endif %}
+                                                    </span>
                                                 </div>
-                                                    {% if variant.diffDay > 0 %}
-                                                        {% transchoice variant.countTransplant with {'%num%':  variant.diffDay} %}
-                                                            frontend.default.list.diff_day
-                                                        {% endtranschoice %}
-                                                    {% endif %}
                                                 <div class="city-aero col-md-8">
                                                     <div class="city-down">{{ variant.arrivalSegment.arrivalCityName }}</div>
                                                     <div class="aeropot-down">
@@ -117,13 +120,18 @@
                                             <div class="time-duration">{{ variant.duration|secondToTime }}</div>
                                             <div class="transplant">
                                                 {% if variant.countTransplant %}
-                                                    <button type="button" class="btn-transplant btn btn-xs" data-container="body" data-toggle="popover" data-placement="top" data-content="{% for a in variant.transplantAirports %}
+                                                    {% for a in variant.transplantAirports %}
+                                                            <div class='list-transplant'>
+                                                            <strong>{{ a.name }}</strong><!-- <br/> --><small><!--{%trans%}frontend.default.list.item.between_flights{%endtrans%}-->: {{ a.time|secondToTime }}</small>
+                                                        </div>
+                                                        {% endfor %}
+                                                    <!--<button type="button" class="btn-transplant btn btn-xs" data-container="body" data-toggle="popover" data-placement="top" data-content="{% for a in variant.transplantAirports %}
                                                             <div class='list-transplant'>
                                                             <strong>{{ a.name }}</strong><br/> <small>{%trans%}frontend.default.list.item.between_flights{%endtrans%}:{{ a.time|secondToTime }}</small>
                                                         </div>
                                                         {% endfor %}">{% transchoice variant.countTransplant with {'%count%':  variant.countTransplant} %}
                                                                 frontend.default.list.item.transplant
-                                                            {% endtranschoice %}</button>
+                                                            {% endtranschoice %}</button>-->
                                                 {% endif %}
                                             </div>
                                         </div>

@@ -68,4 +68,15 @@ $(document).ready(function () {
         'preferredCountries': ['ua', 'ru'],
         'utilsScript': '/bundles/bundlesdefault/lib/intl-tel-input-master/lib/libphonenumber/build/utils.js'
     });
+
+    $('.list-passenjers li').each(function() {
+        var linkTab = $(this).find('.show-form-pass');
+        var contentTab = $(this).find('.form-pass');
+        linkTab.bind('click', function(event) {
+            $('.list-passenjers li').slideUp().removeClass('active');
+            $(this).parent().slideDown().addClass('active');
+        });
+    });
+
+
 });

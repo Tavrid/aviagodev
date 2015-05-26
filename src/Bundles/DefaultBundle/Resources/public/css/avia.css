@@ -29,6 +29,12 @@ a:focus {
     outline: none;
 }
 
+/* Дополнительные стили */
+
+.nowrap {
+    white-space: nowrap;
+}
+
 /* Общие классы */
 
 .first-element {
@@ -59,6 +65,8 @@ a:focus {
 
 header {
     margin-bottom: 20px;
+    position: relative;
+    z-index: 9;
 }
 
 header .container {
@@ -67,10 +75,10 @@ header .container {
 }
 
 header .logo {
-    width: 150px;
+    left: 0;
     position: absolute;
-    left: 0px;
-    top: 13px;
+    top: 14px;
+    width: 240px;
 }
 
 header .logo img {
@@ -106,6 +114,10 @@ header .group-lang {
 
 /* Самолет */
 
+.api-book .wing-aircraft-wrap {
+    display: none;
+}
+
 .wing-aircraft-wrap {
     height: 0px;
     max-width: 970px;
@@ -129,19 +141,23 @@ header .group-lang {
 }
 /* Шапка на внутренних страницах */
 
-.api-list .wing-aircraft-wrap {
+.api-list .wing-aircraft-wrap,
+.api-book .wing-aircraft-wrap {
     display: none;
 }
 
-.api-list header .lang-phone-wrap {
+.api-list header .lang-phone-wrap,
+.api-book header .lang-phone-wrap {
     margin-right: 0 !important;
 }
 
-.api-list header .logo {
-    width: 120px;
+.api-list header .logo,
+.api-book header .logo {
+    width: 240px;
 }
 
-.api-list header .container {
+.api-list header .container,
+.api-book header .container {
     padding: 10px 0;
 }
 
@@ -303,6 +319,10 @@ header .btn.btn-default.lang.active {
     padding: 6px 4px 2px;
 }
 
+.input-group-addon.block-img-avia > img {
+    width: 35px !important;
+}
+
 .auto-code {
     position: absolute;
     z-index: 3;
@@ -420,12 +440,22 @@ header .btn.btn-default.lang.active {
     margin-bottom: 0;
 }
 
+.time-duration-avia {
+    padding-right: 0;
+}
+
 .time-up,
-.time-down {
+.time-down .span {
     font-size: 20px;
     font-weight: bold;
     color: #ff9000;
     margin-top: -3px;
+}
+
+.time-down .nowrap {
+    font-size: 11px;
+    display: block;
+    margin-top: -5px;
 }
 
 .search_form_date_to {
@@ -616,6 +646,10 @@ header .btn.btn-default.lang.active {
     margin-bottom: 2px;
 }
 
+.vozrast-block .type-people {
+    margin-bottom: 0;
+}
+
 .info-vozrast {
     width: 100%;
     text-transform: lowercase;
@@ -641,7 +675,6 @@ header .btn.btn-default.lang.active {
 }
 
 .vozrast-block .info-vozrast {
-    font-size: 14px;
     text-align: left;
 }
 
@@ -936,7 +969,7 @@ header .btn.btn-default.lang.active {
 .date-ticket .date-title {
     width: 168px;
     display: inline-block;
-    background: url('../images/avia-up.png') no-repeat 3px 9px;
+    background: url('../images/avia-up.svg') no-repeat 3px 9px;
     text-align: left;
     padding-left: 45px;
     font-size: 18px;
@@ -1014,6 +1047,12 @@ header .btn.btn-default.lang.active {
 .buy-ticket.active,
 .buy-ticket:focus {
     background: #D95C23;
+}
+
+/* Пересадки */
+
+.list-transplant {
+    white-space: nowrap;
 }
 
 /* Остальное разсортировать */
@@ -2141,4 +2180,60 @@ footer {
     background: -o-linear-gradient(#6abcff, #d4effc) repeat scroll 0 0 rgba(0, 0, 0, 0);
     background: linear-gradient(#6abcff, #d4effc) repeat scroll 0 0 rgba(0, 0, 0, 0);
     box-shadow: 0 0 3px 0 #999;
+}
+
+@media screen and (max-width: 1200px){
+    .wing-aircraft-wrap {
+        max-width: 940px;
+    }
+}
+
+@media screen and (max-width: 1010px){
+    .wing-aircraft-wrap {
+        max-width: 100%;
+    }
+}
+
+/* Список пассажиров */
+
+.list-passenjers-wrap .panel,
+.list-passenjers-wrap .well {
+    margin-bottom: 0 !important;
+}
+
+.list-passenjers-wrap .well {
+    border-radius: 0;
+    border: 1px solid #61b5fc;
+    box-shadow: none;
+}
+
+.list-passenjers {
+    list-style-type: none;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    padding-top: 20px;
+}
+
+.list-passenjers .show-form-pass {
+    display: block;
+    background: #61b5fc;
+    color:#fff;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+.list-passenjers li {
+    margin-bottom: 1px;
+}
+
+.list-passenjers .form-pass {
+    display: none;
+}
+
+.list-passenjers .active .form-pass {
+    display: block;
+}
+
+.container-group {
+    padding: 10px;
 }

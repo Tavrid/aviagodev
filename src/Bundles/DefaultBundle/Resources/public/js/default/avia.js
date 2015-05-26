@@ -11,6 +11,15 @@ $(document).ready(function($) {
         }
     });*/
 
+	$('.list-passenjers li').each(function() {
+		var linkTab = $(this).find('.show-form-pass');
+		var contentTab = $(this).find('.form-pass');
+		linkTab.bind('click', function(event) {
+			$('.list-passenjers li').slideUp().removeClass('active');
+			$(this).parent().slideDown().addClass('active');
+		});
+	});
+
 	$("#ui-id-1").prependTo(".city-from");
 	$("#ui-id-2").prependTo(".city-to");
 
