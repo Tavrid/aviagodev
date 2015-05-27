@@ -135,64 +135,72 @@
                                         <div class="form-pass" id="adult{{ loop.index }}">
                                             <div class="well">
                                                 <div class="panel panel-info">
-                                                    <div class="panel-heading">{% trans %}frontend.book.form.title{% endtrans %}</div>
+                                                    <!-- <div class="panel-heading">{% trans %}frontend.book.form.title{% endtrans %}</div> -->
                                                     <div class="panel-body">
-                                                        <!-- Имя и фамилию -->
                                                         <div class="row">
                                                             <div class="col-md-6">
-                                                                {#{{ form_label(add.Name) }}#}
-                                                                {{ form_row(add.Name, {'attr': {'placeholder': 'frontend.book.form.placeholder.name'|trans}}) }}
-                                                                {#{{ form_errors(add.Name) }}#}
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                {#{{ form_label(add.Surname) }}#}
-                                                                {{ form_row(add.Surname, {'attr': {'placeholder': 'frontend.book.form.placeholder.surname' | trans}}) }}
-                                                            </div>
-                                                        </div>
-                                                        <!-- Имя и фамилию -->
-                                                        <!-- Дата рождения и выбор пола -->
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <label for="#">{% trans %}frontend.book.form.placeholder.gender{% endtrans %}</label>
-
+                                                                <!-- Имя и фамилию -->
                                                                 <div class="row">
-                                                                    <div class="col-md-6 sex-block">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon">
-                                                                                {{ form_widget(add.Sex.0) }}
-                                                                            </span>
-                                                                            {{ form_label(add.Sex.0, '', {'label_attr':{'class':'form-control'}}) }}
-                                                                        </div>
+                                                                    <div class="col-md-6">
+                                                                        {#{{ form_label(add.Name) }}#}
+                                                                        {{ form_row(add.Name, {'attr': {'placeholder': 'frontend.book.form.placeholder.name'|trans}}) }}
+                                                                        {#{{ form_errors(add.Name) }}#}
                                                                     </div>
-                                                                    <div class="col-md-6 sex-block">
-                                                                        <div class="input-group">
-                                                                            <span class="input-group-addon">
-                                                                                {{ form_widget(add.Sex.1) }}
-                                                                            </span>
-                                                                            {{ form_label(add.Sex.1, '', {'label_attr':{'class':'form-control'}}) }}
-                                                                        </div>
+                                                                    <div class="col-md-6">
+                                                                        {#{{ form_label(add.Surname) }}#}
+                                                                        {{ form_row(add.Surname, {'attr': {'placeholder': 'frontend.book.form.placeholder.surname' | trans}}) }}
                                                                     </div>
                                                                 </div>
+                                                                <!-- Имя и фамилию -->
+                                                                <!-- Дата рождения и выбор пола -->
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <label for="#">
+                                                                            Выберите пол
+                                                                            <!-- {% trans %}frontend.book.form.placeholder.gender{% endtrans %} --></label>
+                                                                        <div class="row">
+                                                                            <div class="col-md-6 sex-block">
+                                                                                <div class="input-group">
+                                                                                    <span class="input-group-addon">
+                                                                                        {{ form_widget(add.Sex.0) }}
+                                                                                    </span>
+                                                                                    {{ form_label(add.Sex.0, '', {'label_attr':{'class':'form-control'}}) }}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6 sex-block">
+                                                                                <div class="input-group">
+                                                                                    <span class="input-group-addon">
+                                                                                        {{ form_widget(add.Sex.1) }}
+                                                                                    </span>
+                                                                                    {{ form_label(add.Sex.1, '', {'label_attr':{'class':'form-control'}}) }}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        {#{{ form_label(add.Birthday) }}#}
+                                                                        {{ form_row(add.Birthday, {'attr': {'placeholder': 'frontend.book.form.placeholder.birthday' | trans}}) }}
+                                                                    </div>
+                                                                </div>
+                                                                <!-- Дата рождения и выбор пола -->
                                                             </div>
                                                             <div class="col-md-6">
-                                                                {#{{ form_label(add.Birthday) }}#}
-                                                                {{ form_row(add.Birthday, {'attr': {'placeholder': 'frontend.book.form.placeholder.birthday' | trans}}) }}
+                                                                <!-- Контакты -->
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        {#{{ form_label(form.email) }}#}
+                                                                        {{ form_row(form.email, {'attr': {'placeholder': 'frontend.book.form.placeholder.email' | trans}}) }}
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        {#{{ form_label(form.phone) }} <br/>#}
+                                                                        {{ form_row(form.phone) }}
+                                                                    </div>
+                                                                </div>
+                                                                <!-- Контакты -->
                                                             </div>
                                                         </div>
-                                                        <!-- Дата рождения и выбор пола -->
                                                         {% if loop.first %}
-                                                            <!-- Контакты -->
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    {#{{ form_label(form.email) }}#}
-                                                                    {{ form_row(form.email, {'attr': {'placeholder': 'frontend.book.form.placeholder.email' | trans}}) }}
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    {#{{ form_label(form.phone) }} <br/>#}
-                                                                    {{ form_row(form.phone) }}
-                                                                </div>
-                                                            </div>
-                                                            <!-- Контакты -->
+                                                            
                                                             <!-- Паспорт, гражданство -->
                                                             <div class="row">
                                                                 <div class="col-md-6">
