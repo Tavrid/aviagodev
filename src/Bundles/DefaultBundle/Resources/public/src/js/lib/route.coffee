@@ -7,7 +7,6 @@ module.exports = class
       infant: if ViewModel.infant() then parseInt ViewModel.infant() else 0
       "class" : ViewModel.aviaClass()
       return_way: parseInt ViewModel.direction()
-      currency: ViewModel.currency()
       avia_company: ViewModel.aviaCompany()
       direct_flights: if ViewModel.directFlights() then 1 else 0
     return params

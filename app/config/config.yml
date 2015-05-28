@@ -16,7 +16,7 @@ framework:
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
-        assets_version: 8
+        assets_version: 10
     default_locale:  "%locale%"
     trusted_proxies: ~
     session:         ~
@@ -32,6 +32,7 @@ twig:
               - 'AcmeCoreBundle:Form:multifield.html.twig'
     globals:
         controller_formatter: @bundle_default.controller_formatter
+        currency_manager: @bundle_default.currency_manager
 
 # Assetic Configuration
 assetic:
@@ -113,7 +114,7 @@ parameters:
 #        fresh_connect: false  # set to true to force full reconnect every call.
 
 fos_js_routing:
-    routes_to_expose: [ bundles_default_api_complex_calendar,bundles_default_search_complex_search_items,bundles_default_search_complex_search,bundles_default_api_list,bundles_default_api_flights_items,bundles_default_api_calendar,bundles_default_change_locale,bundles_default_search_city ]
+    routes_to_expose: [bundles_default.currency.change_currency,bundles_default_api_complex_calendar,bundles_default_search_complex_search_items,bundles_default_search_complex_search,bundles_default_api_list,bundles_default_api_flights_items,bundles_default_api_calendar,bundles_default_change_locale,bundles_default_search_city ]
 
 sonata_block:
     default_contexts: [cms]

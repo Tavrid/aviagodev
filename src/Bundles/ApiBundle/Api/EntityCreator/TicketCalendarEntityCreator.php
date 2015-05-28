@@ -3,10 +3,10 @@
  * Created by PhpStorm.
  * User: ablyakim
  * Date: 01.02.15
- * Time: 15:18
+ * Time: 14:44
  */
 
-namespace Bundles\ApiBundle\Api\Util;
+namespace Bundles\ApiBundle\Api\EntityCreator;
 
 
 use Bundles\ApiBundle\Api\Entity\Ticket;
@@ -14,60 +14,81 @@ use Bundles\ApiBundle\Api\Entity\Itineraries;
 use Bundles\ApiBundle\Api\Entity\Segments;
 use Bundles\ApiBundle\Api\Entity\Variants;
 use Bundles\ApiBundle\Api\Model\ResponseTranslatorInterface;
+use Bundles\ApiBundle\Api\Price\PriceResolverInterface;
+use Bundles\ApiBundle\Api\Query\QueryAbstract;
 
-class TicketSearchEntityCreator implements TicketEntityCreatorInterface {
+class TicketCalendarEntityCreator implements TicketEntityCreatorInterface
+{
+
     /**
      * @var ResponseTranslatorInterface
      */
     protected $responseTranslator;
+    /**
+     * @var PriceResolverInterface
+     */
+    protected $priceResolver;
 
     /**
      * @param ResponseTranslatorInterface $responseTranslator
+     * @param PriceResolverInterface $priceResolver
      */
-    public function __construct(ResponseTranslatorInterface $responseTranslator){
+    public function __construct(ResponseTranslatorInterface $responseTranslator, PriceResolverInterface $priceResolver)
+    {
         $this->responseTranslator = $responseTranslator;
+        $this->priceResolver = $priceResolver;
     }
+
     /**
-     * @param $response
-     * @return Ticket
+     * @inheritdoc
      */
-    public function createTicket($response)
+    public function getPriceResolver()
+    {
+        return $this->priceResolver;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function createTicket($response, QueryAbstract $query = null)
     {
 
         $ticket = new Ticket();
-        $ticket->setRequestId($response['RequestID']);
-        $ticket->setTotalPrice($response['TotalPrice']['Total'])
-            ->setValidatingAirline($response['ValidatingAirline'])
-            ->setLastTicketDate($response['LastTicketDate'])
-            ->setRefundable($response['Refundable']);
+        if (isset($response['RequestID'])) {
+            $ticket->setRequestId($response['RequestID']);
+        }
+        if (isset($response['Travellers'])) {
+            $ticket->setTravelers($response['Travellers']);
+        }
+        $ticket->setValidatingAirline($response['ValidatingAirline']);
 
-        foreach($response['Itineraries'] as $inter){
+        foreach ($response['Itineraries'] as $inter) {
             $it = new Itineraries();
-            foreach($inter['Variants'] as $variants){
+            foreach ($inter['Variants'] as $variants) {
 
                 $var = new Variants();
                 $var->setDuration($variants['Duration'])
                     ->setVariantID($variants['VariantID']);
                 $countSegments = count($variants['Segments']);
                 $i = 0;
-                foreach($variants['Segments'] as $segment){
+                foreach ($variants['Segments'] as $segment) {
                     $segm = new Segments();
-                    $segm->setArrivalAirportName($this->responseTranslator->getAirportName($segment['ArrivalAirport'],$segment['ArrivalAirportName']))
+                    $segm->setArrivalAirportName($this->responseTranslator->getAirportName($segment['ArrivalAirport'],
+                        $segment['ArrivalAirportName']))
+                        ->setArrivalCityName($this->responseTranslator->getCityName($segment['ArrivalCity'],
+                            $segment['ArrivalCityName']))
                         ->setArrivalCountryName($segment['ArrivalCountryName'])
-                        ->setArrivalCityName($this->responseTranslator->getCityName($segment['ArrivalCity'],$segment['ArrivalCityName']))
-                        ->setArrivalDate($segment['ArrivalDate'])
                         ->setArrivalTimeZone($segment['ArrivalTimeZone'])
+                        ->setArrivalDate($segment['ArrivalDate'])
                         ->setArrivalAirport($segment['ArrivalAirport'])
-                        ->setArrivalTerminal($segment['DepartureTerminal'])
-
                         ->setDepartureCountryName($segment['DepartureCountryName'])
-                        ->setDepartureCityName($this->responseTranslator->getCityName($segment['DepartureCity'],$segment['DepartureCityName']))
-                        ->setDepartureAirportName($this->responseTranslator->getAirportName($segment['DepartureAirport'],$segment['DepartureAirportName']))
+                        ->setDepartureCityName($this->responseTranslator->getCityName($segment['DepartureCity'],
+                            $segment['DepartureCityName']))
+                        ->setDepartureAirportName($this->responseTranslator->getAirportName($segment['DepartureAirport'],
+                            $segment['DepartureAirportName']))
                         ->setDepartureDate($segment['DepartureDate'])
                         ->setDepartureTimeZone($segment['DepartureTimeZone'])
                         ->setDepartureAirport($segment['DepartureAirport'])
-                        ->setDepartureTerminal($segment['ArrivalTerminal'])
-
                         ->setAvailableSeats($segment['AvailableSeats'])
                         ->setMarketingAirline($segment['MarketingAirline'])
                         ->setFlightNumber($segment['FlightNumber'])
@@ -75,11 +96,11 @@ class TicketSearchEntityCreator implements TicketEntityCreatorInterface {
                         ->setMarketingAirlineName($segment['MarketingAirlineName'])
                         ->setAircraftName($segment['AircraftName']);
 
-                    if($i == 0){
+                    if ($i == 0) {
                         $segm->setIsFirstSegment(true);
                     }
                     $i++;
-                    if($countSegments == $i){
+                    if ($countSegments == $i) {
                         $segm->setIsLastSegment(true);
                     }
                     $var->addSegment($segm);
@@ -91,8 +112,11 @@ class TicketSearchEntityCreator implements TicketEntityCreatorInterface {
             $ticket->addItineraries($it);
         }
 
+        $price = $this->priceResolver->resolve($response,$query);
+        $ticket->setTotalPrice($price['price']['Total'])->setCurrency($price['currency']);
 
         return $ticket;
+
     }
 
 

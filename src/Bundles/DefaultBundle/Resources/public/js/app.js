@@ -70,6 +70,15 @@ jQuery(function ($) {
             window.location.reload();
         });
     });
+
+
+    console.log('v10');
+    $('body').on('click','.change_currency',function(){
+        console.log('change currency');
+        $.get(Routing.generate('bundles_default.currency.change_currency',{currency: $(this).attr('data-value')}),function(){
+            window.location.reload();
+        });
+    });
     
     $.validator.setDefaults({
         ignore: []

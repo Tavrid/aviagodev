@@ -26,6 +26,11 @@
                         <button data-value="uk" type="button" class="btn btn-default lang {{app.request.locale == 'uk' ? 'active':''}}">ua</button>
                     </div>
                 </div>
+                <div class="btn-group" style="margin-left: 253px;">
+                    {% for currency in currency_manager.currencyList %}
+                        <button data-value="{{ currency }}"  type="button" class="btn change_currency btn-default currency {{currency_manager.currency == currency ? 'active':''}}">{{ currency }}</button>
+                    {% endfor %}
+                </div>
             </div>
         </header>
         <div class="wing-aircraft-wrap">

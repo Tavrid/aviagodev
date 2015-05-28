@@ -70,7 +70,7 @@ class ApiController extends Controller
     public function bookAction(Request $request, $key)
     {
         $memcache = $this->get('main.cache');
-        $bookInfoResponse = new BookInfoResponse(new TicketEntityCreator($this->get('avia.api.traslator')));
+        $bookInfoResponse = new BookInfoResponse($this->get('avia.api.ticket_entity_creator'));
         $d = $memcache->get($key);
         if (empty($d)) {
             throw $this->createNotFoundException();

@@ -8,7 +8,6 @@
 
 namespace Bundles\ApiBundle\Api\Request;
 
-use Bundles\ApiBundle\Api\Util\TicketSearchEntityCreator;
 use Lsw\ApiCallerBundle\Caller\ApiCallerInterface;
 use Bundles\ApiBundle\Api\ApiCall;
 use Bundles\ApiBundle\Api\Query\QueryAbstract;
@@ -17,6 +16,7 @@ use Acme\CoreBundle\Model\AbstractModel;
 use Bundles\ApiBundle\Api\Model\CacheInterface;
 
 use Bundles\ApiBundle\Api\Model\ResponseTranslatorInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class SearchRequest implements Request{
     /**
@@ -77,18 +77,24 @@ class SearchRequest implements Request{
      * @var \Acme\AdminBundle\Model\Log
      */
     protected $logger;
+    /**
+     * @var ContainerInterface
+     */
+    protected $serviceContainer;
 
     /**
      * @param $key
      * @param ApiCallerInterface $apiCaller
      */
-    public function __construct($key ,ApiCallerInterface $apiCaller){
+    public function __construct($key ,ApiCallerInterface $apiCaller,ContainerInterface $container){
         $this->apiKey = $key;
         $this->apiCaller = $apiCaller;
+        $this->serviceContainer = $container;
     }
 
+
     /**
-     * @param \Acme\AdminBundle\Model\Log $logger
+     * @param AbstractModel $logger
      * @return $this
      */
     public function setLogger(AbstractModel $logger)
@@ -104,7 +110,8 @@ class SearchRequest implements Request{
      */
     public function execute(QueryAbstract $query)
     {
-        $response = new SearchResponse(new TicketSearchEntityCreator($this->responseTranslator));
+        $response = new SearchResponse($this->serviceContainer->get('avia.api.search_entity_creator'),$query);
+        $response->setServiceContainer($this->serviceContainer);
         $data = null;
         if($this->cache){
             $data = $this->cache

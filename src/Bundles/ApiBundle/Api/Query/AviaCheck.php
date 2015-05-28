@@ -61,7 +61,7 @@ class AviaCheck extends QueryAbstract {
                     'Format' => 'Combined',
                     'Return' => '',
 //                    'Return' => 'ByTimelimit',
-                    'Currency' => array('RUB','USD','EUR'),
+                    'Currency' => array('RUB','USD','EUR','UAH'),
 
                     'Language' => 'RU'
                 ]

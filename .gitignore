@@ -15,6 +15,5 @@ build/
 vendor/
 bin/
 composer.phar
-composer.lock
 node_modules
 bower_components

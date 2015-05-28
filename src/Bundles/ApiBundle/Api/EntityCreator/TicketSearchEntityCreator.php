@@ -3,10 +3,10 @@
  * Created by PhpStorm.
  * User: ablyakim
  * Date: 01.02.15
- * Time: 14:44
+ * Time: 15:18
  */
 
-namespace Bundles\ApiBundle\Api\Util;
+namespace Bundles\ApiBundle\Api\EntityCreator;
 
 
 use Bundles\ApiBundle\Api\Entity\Ticket;
@@ -14,37 +14,48 @@ use Bundles\ApiBundle\Api\Entity\Itineraries;
 use Bundles\ApiBundle\Api\Entity\Segments;
 use Bundles\ApiBundle\Api\Entity\Variants;
 use Bundles\ApiBundle\Api\Model\ResponseTranslatorInterface;
+use Bundles\ApiBundle\Api\Price\PriceResolverInterface;
+use Bundles\ApiBundle\Api\Query\QueryAbstract;
 
-class TicketCalendarEntityCreator implements TicketEntityCreatorInterface {
-
+class TicketSearchEntityCreator implements TicketEntityCreatorInterface {
     /**
      * @var ResponseTranslatorInterface
      */
     protected $responseTranslator;
 
     /**
+     * @var PriceResolverInterface
+     */
+    protected $priceResolver;
+
+    /**
      * @param ResponseTranslatorInterface $responseTranslator
      */
-    public function __construct(ResponseTranslatorInterface $responseTranslator){
+    public function __construct(ResponseTranslatorInterface $responseTranslator, PriceResolverInterface $priceResolver){
         $this->responseTranslator = $responseTranslator;
+        $this->priceResolver = $priceResolver;
     }
 
     /**
-     * @param $response
-     * @return Ticket
+     * @inheritdoc
      */
-    public function createTicket($response)
+    public function getPriceResolver()
+    {
+        return $this->priceResolver;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function createTicket($response, QueryAbstract $query = null)
     {
 
         $ticket = new Ticket();
-        if(isset($response['RequestID'])){
-            $ticket->setRequestId($response['RequestID']);
-        }
-        if(isset($response['Travellers'])){
-            $ticket->setTravelers($response['Travellers']);
-        }
-        $ticket->setTotalPrice($response['TotalPrice']['Total'])
-            ->setValidatingAirline($response['ValidatingAirline']);
+        $ticket->setRequestId($response['RequestID']);
+        $ticket->setValidatingAirline($response['ValidatingAirline'])
+            ->setLastTicketDate($response['LastTicketDate'])
+            ->setRefundable($response['Refundable']);
 
         foreach($response['Itineraries'] as $inter){
             $it = new Itineraries();
@@ -58,11 +69,12 @@ class TicketCalendarEntityCreator implements TicketEntityCreatorInterface {
                 foreach($variants['Segments'] as $segment){
                     $segm = new Segments();
                     $segm->setArrivalAirportName($this->responseTranslator->getAirportName($segment['ArrivalAirport'],$segment['ArrivalAirportName']))
-                        ->setArrivalCityName($this->responseTranslator->getCityName($segment['ArrivalCity'],$segment['ArrivalCityName']))
                         ->setArrivalCountryName($segment['ArrivalCountryName'])
-                        ->setArrivalTimeZone($segment['ArrivalTimeZone'])
+                        ->setArrivalCityName($this->responseTranslator->getCityName($segment['ArrivalCity'],$segment['ArrivalCityName']))
                         ->setArrivalDate($segment['ArrivalDate'])
+                        ->setArrivalTimeZone($segment['ArrivalTimeZone'])
                         ->setArrivalAirport($segment['ArrivalAirport'])
+                        ->setArrivalTerminal($segment['DepartureTerminal'])
 
                         ->setDepartureCountryName($segment['DepartureCountryName'])
                         ->setDepartureCityName($this->responseTranslator->getCityName($segment['DepartureCity'],$segment['DepartureCityName']))
@@ -70,6 +82,7 @@ class TicketCalendarEntityCreator implements TicketEntityCreatorInterface {
                         ->setDepartureDate($segment['DepartureDate'])
                         ->setDepartureTimeZone($segment['DepartureTimeZone'])
                         ->setDepartureAirport($segment['DepartureAirport'])
+                        ->setDepartureTerminal($segment['ArrivalTerminal'])
 
                         ->setAvailableSeats($segment['AvailableSeats'])
                         ->setMarketingAirline($segment['MarketingAirline'])
@@ -93,8 +106,11 @@ class TicketCalendarEntityCreator implements TicketEntityCreatorInterface {
 
             $ticket->addItineraries($it);
         }
-        return $ticket;
 
+        $price = $this->priceResolver->resolve($response,$query);
+        $ticket->setTotalPrice($price['price']['Total'])->setCurrency($price['currency']);
+
+        return $ticket;
     }
 
 

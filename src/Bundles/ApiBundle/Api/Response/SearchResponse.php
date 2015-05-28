@@ -9,13 +9,12 @@
 namespace Bundles\ApiBundle\Api\Response;
 
 use Bundles\ApiBundle\Api\Entity\Ticket;
-use Bundles\ApiBundle\Api\Entity\Itineraries;
-use Bundles\ApiBundle\Api\Entity\Segments;
-use Bundles\ApiBundle\Api\Entity\Variants;
-use Bundles\ApiBundle\Api\Util\TicketEntityCreatorInterface;
+use Bundles\ApiBundle\Api\Query\QueryAbstract;
+use Bundles\ApiBundle\Api\EntityCreator\TicketEntityCreatorInterface;
 
 
-class SearchResponse extends Response implements \Iterator,\ArrayAccess, \Countable{
+class SearchResponse extends Response implements \Iterator, \ArrayAccess, \Countable
+{
 
     protected $position = 0;
 
@@ -23,10 +22,20 @@ class SearchResponse extends Response implements \Iterator,\ArrayAccess, \Counta
      * @var TicketEntityCreatorInterface
      */
     protected $ticketCreator;
+    /**
+     * @var QueryAbstract
+     */
+    protected $query;
 
-    public function __construct(TicketEntityCreatorInterface $ticketCreator){
+    /**
+     * @param TicketEntityCreatorInterface $ticketCreator
+     * @param QueryAbstract $query
+     */
+    public function __construct(TicketEntityCreatorInterface $ticketCreator,QueryAbstract $query = null)
+    {
         $this->ticketCreator = $ticketCreator;
         $this->position = 0;
+        $this->query = $query;
     }
 
     /**
@@ -94,7 +103,7 @@ class SearchResponse extends Response implements \Iterator,\ArrayAccess, \Counta
 
     public function getIsError()
     {
-        if(isset($this->response->errors)){
+        if (isset($this->response->errors)) {
 
             return count($this->response->errors);
         }
@@ -105,11 +114,12 @@ class SearchResponse extends Response implements \Iterator,\ArrayAccess, \Counta
      * @param $pos
      * @return Ticket
      */
-    protected function createEntity($pos){
+    protected function createEntity($pos)
+    {
         $data = $this->response['result']['Data'][$pos];
         $data['RequestID'] = $this->response['result']['RequestID'];
 
-        return $this->ticketCreator->createTicket($data);
+        return $this->ticketCreator->createTicket($data,$this->query);
     }
 
     /**
@@ -124,7 +134,7 @@ class SearchResponse extends Response implements \Iterator,\ArrayAccess, \Counta
     public function count()
     {
         $data = $this->getResponseData();
-        if(isset($data['result']['Data'])){
+        if (isset($data['result']['Data'])) {
             return count($data['result']['Data']);
         } else {
             return 0;
