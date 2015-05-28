@@ -10,10 +10,14 @@
 namespace Acme\CoreBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class SecondsToTime extends \Twig_Extension
 {
-
+    protected $translator;
+    public function __construct(TranslatorInterface $translator){
+        $this->translator = $translator;
+    }
 
     public function getFilters()
     {
@@ -34,19 +38,19 @@ class SecondsToTime extends \Twig_Extension
             if($seconds >= (60*60*24)){
                 $days = floor($seconds/(60*60*24));
                 $seconds -= $days*(60*60*24);
-                $params['%d%'] = $days.' д.';
+                $params['%d%'] = $this->translator->trans('seconds_to_time.format.days', ['%num%' => $days]);
             }
 
             if($seconds>=60*60){
                 $hours = floor($seconds/(60*60));
                 $seconds -= $hours*(60*60);
-                $params['%h%'] = ' '.$hours.' ч.';
+                $params['%h%'] = $this->translator->trans('seconds_to_time.format.hours', ['%num%' => $hours]);
             }
 
             if($seconds>=60){
                 $min = floor($seconds/60);
                 $seconds -= $min*60;
-                $params['%m%'] = ' '.$min.' мин.';
+                $params['%m%'] = $this->translator->trans('seconds_to_time.format.minutes', ['%num%' => $min]);
             }
 
             return str_replace(array_keys($params),$params,'%d%%h%%m%');

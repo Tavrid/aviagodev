@@ -4,9 +4,28 @@ parameters:
 services:
     avia.api.manager:
         class: Bundles\ApiBundle\Api\Api
-        arguments: ["C330CA8C-DCDF-4CA8-A5E0-F5E4E1612440", @api_caller,@main.cache,@main.log.manager]
+        arguments: ["C330CA8C-DCDF-4CA8-A5E0-F5E4E1612440", @service_container]
 
     main.cache:
         class: Bundles\ApiBundle\Api\Model\Cache
         arguments:
           - @beryllium_cache
+
+    avia.api.traslator:
+        class: Bundles\ApiBundle\Api\Model\ResponseTranslator
+        arguments: [@service_container]
+
+    avia.api.price_resolver:
+        class: Bundles\ApiBundle\Api\Price\PriceResolver
+        arguments: [@bundle_default.currency_manager]
+
+    avia.api.search_entity_creator:
+        class: Bundles\ApiBundle\Api\EntityCreator\TicketSearchEntityCreator
+        arguments: [@avia.api.traslator,@avia.api.price_resolver]
+    avia.api.ticket_entity_creator:
+        class: Bundles\ApiBundle\Api\EntityCreator\TicketEntityCreator
+        arguments: [@avia.api.traslator,@avia.api.price_resolver]
+    avia.api.ticket_calendar_entity_creator:
+        class: Bundles\ApiBundle\Api\EntityCreator\TicketCalendarEntityCreator
+        arguments: [@avia.api.traslator,@avia.api.price_resolver]
+

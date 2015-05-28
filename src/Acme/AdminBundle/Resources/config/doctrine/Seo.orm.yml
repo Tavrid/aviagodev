@@ -1,0 +1,24 @@
+Acme\AdminBundle\Entity\Seo:
+    type: entity
+    table: seo_content
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        prefix:
+            type: string
+        h1:
+            type: text
+        template:
+            type: text
+        meta_tags:
+            type: json_array
+    manyToOne:
+        cityFrom:
+            targetEntity: Acme\AdminBundle\Entity\AviaAirports
+        cityTo:
+            targetEntity: Acme\AdminBundle\Entity\AviaAirports
+
+
+

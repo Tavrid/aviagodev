@@ -30,7 +30,8 @@
     "sonata-project/admin-bundle": "~2.3",
     "sonata-project/doctrine-orm-admin-bundle": "~2.3",
     "sonata-project/core-bundle": "2.3.*@dev",
-    "liqpay/liqpay": "dev-master"
+    "liqpay/liqpay": "dev-master",
+    "nqxcode/phpmorphy": "~1.0"
   },
   "require-dev": {
     "sensio/generator-bundle": "~2.3"

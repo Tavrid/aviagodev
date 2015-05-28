@@ -67,6 +67,15 @@ class Variants
      */
     public function getDuration()
     {
+        if ($this->duration == 0) {
+            $segments = $this->getSegments();
+            foreach ($segments as $i => $segment) {
+                $this->duration+=$segment->getFlightTime();
+                if(isset($segments[$i+1])){
+                    $this->duration+=$segment->getTransplantTime($segments[$i+1]);
+                }
+            }
+        }
         return $this->duration;
     }
 
@@ -130,7 +139,7 @@ class Variants
     public function getDepartureSegment()
     {
         $segments = $this->getSegments();
-        if(!isset($segments[0])){
+        if (!isset($segments[0])) {
             return new Segments();
         }
         return $segments[0];
@@ -144,11 +153,11 @@ class Variants
     {
         $segments = $this->getSegments();
         $count = count($segments);
-        if(!$count){
+        if (!$count) {
             return new Segments();
         }
         if ($count > 1) {
-            return $segments[$count-1];
+            return $segments[$count - 1];
         } else {
             return $segments[0];
         }
@@ -161,14 +170,23 @@ class Variants
         $segments = $this->getSegments();
         $count = count($segments);
         if ($count > 1) {
-            for($i =0; $i < ($count-1); $i++){
+            for ($i = 0; $i < ($count - 1); $i++) {
                 $ret[] = [
                     'name' => $segments[$i]->getArrivalCityName(),
-                    'time' => $segments[$i]->getTransplantTime($segments[$i+1])
+                    'time' => $segments[$i]->getTransplantTime($segments[$i + 1])
                 ];
             }
         }
         return $ret;
+    }
+
+    public function getDiffDay(){
+        $diff =0;
+        $duration = $this->getDuration();
+        if(($duration/3600)>24){
+            $diff = floor(($duration/3600)/24);
+        }
+        return $diff;
     }
 
 

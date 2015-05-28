@@ -9,6 +9,7 @@
 namespace Bundles\DefaultBundle\Controller;
 
 use Acme\AdminBundle\Entity\Order;
+use Bundles\ApiBundle\Api\Query\BookInfoQuery;
 use Bundles\ApiBundle\Api\Response\BookInfoResponse;
 use Bundles\ApiBundle\Api\Util\TicketEntityCreator;
 use Bundles\DefaultBundle\Form\PayForm;
@@ -61,7 +62,7 @@ class PayController extends Controller{
     }
 
     private function renderAndGenerateCheck(Order $order,Form $form){
-        $bookInfoResponse = new BookInfoResponse(new TicketEntityCreator());
+        $bookInfoResponse = new BookInfoResponse($this->get('avia.api.ticket_entity_creator'));
         $bookInfoResponse->setResponseData($order->getOrderInfo());
         $numToStr = new NumToStr();
         return $this->render('BundlesDefaultBundle:Pay:check.html.twig',[

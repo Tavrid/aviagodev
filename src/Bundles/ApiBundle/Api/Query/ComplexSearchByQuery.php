@@ -83,7 +83,7 @@ class ComplexSearchByQuery extends QueryAbstract
                     'Timelimit' => 180,
 //                    'Return' => '',
                     'Return' => 'ByTimelimit',
-                    'Currency' => array('RUB', 'USD', 'EUR'),
+                    'Currency' => array('RUB', 'USD', 'EUR','UAH'),
                     'Language' => 'RU'
                 ]
             ]

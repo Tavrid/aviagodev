@@ -21,12 +21,21 @@ acme_user:
     resource: "@AcmeUserBundle/Resources/config/routing.yml"
     prefix:   /
 
-AcmeAdminBundle_Extra:
-    resource: .
-    type: extra
-    prefix:   /admin
+#AcmeAdminBundle_Extra:
+#    resource: .
+#    type: extra
+#    prefix:   /admin
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+bundles_defaul.page_generator:
+    path: /{uri}
+    defaults:
+      _controller: BundlesDefaultBundle:PageGenerator:index
+    requirements:
+        uri: ".+\/{1}$"
+    methods: [GET]
+
 #
 #_imagine:
 #    resource: .

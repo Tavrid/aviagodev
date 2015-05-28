@@ -1,12 +1,29 @@
+seconds_to_time:
+  format:
+    days: %num% d.
+    hours: %num% h.
+    minutes: %num% min.
+
 frontend:
     book:
       error_book: Booking error
-    num_passenger: %num% persons|%num% persons|%num% persons
-    non_return: non-return
+      return_ticket: Return ticket
+      form:
+          title: Information for booking passengers
+          placeholder:
+              name: Enter your name
+              surname: Enter your surname
+              gender: Select your gender
+              birthday: Enter your birthday
+              email: Enter your email
+    num_passenger_prefix: from
+    num_passenger: %num% person|%num% persons|%num% persons
+    non_return: non refundable
     flights:
         complex_name: Complex search %cityFrom% - %cityFrom%
         simple_name: %cityFrom%  %cityTo%
         last_ticket_date: Pay up
+        pay_booking: Оплатить во время бронирования
     avia_fare:
         modal_link: all fare rules
         modal_title: Fare rules
@@ -19,6 +36,17 @@ frontend:
         submit: Pay
         pay_method: Pay method
         invoice: Need an invoice
+        invoice_field:
+              name: Company name / organization
+              code: Company code
+              vat: Code VAT
+              address: Company address / oraganizatsii
+              zip: Postcode
+              city: City
+              country: Country
+        pay_type:
+              privat: Visa Privat
+              main_check: Self payment through bank office
     order_form:
         phone: Phone
         email: Email
@@ -81,6 +109,7 @@ frontend:
         list:
             search_not_found: Flights not found
             show_more: Show more
+            diff_day: (+%num% d.)
             item:
                 departure_time: Departure time
                 arrival_time: Arrival time

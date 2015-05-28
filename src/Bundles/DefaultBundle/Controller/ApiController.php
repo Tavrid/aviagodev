@@ -5,6 +5,7 @@ namespace Bundles\DefaultBundle\Controller;
 use Bundles\ApiBundle\Api\Api;
 use Bundles\ApiBundle\Api\Entity\Ticket;
 use Bundles\ApiBundle\Api\Query\AviaFareRulesQuery;
+use Bundles\ApiBundle\Api\Util\TicketEntityCreator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Bundles\DefaultBundle\Form\BookInfoForm;
 use Bundles\DefaultBundle\Form\OrderForm;
@@ -57,11 +58,9 @@ class ApiController extends Controller
                 $str = implode(':', $data['variants']);
 
                 $key = md5($str);
-
                 $memcache = $this->get('main.cache');
-                $memcache->set($key, $output, 3600);
-                $resp = new Response(json_encode(['url' => $this->generateUrl('bundles_default_api_book', ['key' => $key])]));
-                $resp->headers->add(array('Content-Type' => 'application/json'));
+                $memcache->set($key, $output->getResponseData(), 3600);
+                $resp = new JsonResponse(['url' => $this->generateUrl('bundles_default_api_book', ['key' => $key])]);
                 return $resp;
             }
         }
@@ -71,11 +70,12 @@ class ApiController extends Controller
     public function bookAction(Request $request, $key)
     {
         $memcache = $this->get('main.cache');
-
-        $bookInfoResponse = $memcache->get($key);
-        if (empty($bookInfoResponse)) {
+        $bookInfoResponse = new BookInfoResponse($this->get('avia.api.ticket_entity_creator'));
+        $d = $memcache->get($key);
+        if (empty($d)) {
             throw $this->createNotFoundException();
         }
+        $bookInfoResponse->setResponseData($d);
 
         $orderManager = $this->get('admin.order.manager');
         $entity = $orderManager->getEntity();

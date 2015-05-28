@@ -34,6 +34,14 @@ $(document).ready(function(){
             var url =  Routing.generate('bundles_default_api_calendar');
             $.post(url,data,function(data){
                 $('#avia-calendar-box').html(data);
+                $('#avia-calendar-box tr').each(function(){
+                    if($(this).find('.calendar-item:empty').length == 7){
+                        $(this).remove();
+                    }
+                });
+                if($('#avia-calendar-box tr').length == 1){
+                    $('#avia-calendar-box').parents('.calendar-box').remove();
+                }
             });
         }
     },100);

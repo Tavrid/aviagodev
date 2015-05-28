@@ -4,22 +4,24 @@
             <div class="col-md-4 complex-search-avia complex-search-avia-from">
                 <div class="input-group city-from">
                     <input placeholder="Откуда вылетаете?" name="" value="" required="required" type="text" class="form-control from_city" data-bind="value: cityFrom,autocomplete: 'cityFromCode'">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default button-close" type="button" data-toggle="tooltip"
-                                data-placement="top" data-original-title="Очистить поле">
-                        </button>
-                    </span>
+                    <span class="auto-code text-muted" data-bind="text: cityFromCode, visible: cityFromCode"></span>
+                    {#<span class="input-group-btn">#}
+                        {#<button class="btn btn-default button-close" type="button" data-toggle="tooltip"#}
+                                {#data-placement="top" data-original-title="Очистить поле">#}
+                        {#</button>#}
+                    {#</span>#}
                 </div>
             </div>
             <div class="col-md-4 complex-search-avia complex-search-avia-to">
                 <div class="input-group city-to">
                     <input placeholder="Куда вылетаете?" name="" value="" required="required" type="text" class="form-control to_city" data-bind="value: cityTo, autocomplete: 'cityToCode'">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default button-close" type="button"
-                                data-toggle="tooltip" data-placement="top"
-                                data-original-title="Очистить поле">
-                        </button>
-                    </span>
+                    <span class="auto-code text-muted" data-bind="text: cityToCode, visible: cityToCode"></span>
+                    {#<span class="input-group-btn">#}
+                        {#<button class="btn btn-default button-close" type="button"#}
+                                {#data-toggle="tooltip" data-placement="top"#}
+                                {#data-original-title="Очистить поле">#}
+                        {#</button>#}
+                    {#</span>#}
                 </div>
             </div>
             <div class="col-md-3 complex-search-date">

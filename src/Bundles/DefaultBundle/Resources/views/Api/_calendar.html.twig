@@ -39,15 +39,17 @@
                 {% if data[date|date('Y-m-d')] is defined %}
                     {% set p = data[date|date('Y-m-d')] %}
                     <td>
-                        <span class="text-warning">
+                        {% spaceless %}
+                        <span class="text-warning calendar-item">
                             {% set route_params = route_params|merge({'new_date_from' : date,'new_date_to' : 0}) %}
                             <a class="calendar-item" href="{{ path('bundles_default.api.calendar_item_info',route_params) }}">
                                 {{ p.price|number_format(0,' ',' ') }} {{p.currency}}
                             </a>
                         </span>
+                        {% endspaceless %}
                     </td>
                 {% else %}
-                    <td></td>
+                    <td><span class="calendar-item"></span></td>
                 {% endif %}
             {% endfor %}
         </tr>
@@ -64,16 +66,18 @@
                 <td>{{ date|date('d.m.Y') }}</td>
                 {% for d,v in val %}
                     <td>
-                        <span class="text-warning">
-                            {% for item in data %}
-                                {% if item.date == date and item.findChild(d) %}
-                                    {% set route_params = route_params|merge({'new_date_from' : item.date,'new_date_to' : d}) %}
-                                    <a class="calendar-item" href="{{ path('bundles_default.api.calendar_item_info',route_params) }}">
-                                        {{ item.findChild(d).price|number_format(0,' ',' ') }} {{item.findChild(d).currency}}
-                                    </a>
-                                {% endif %}
-                            {% endfor %}
-                        </span>
+                        {% spaceless %}
+                            <span class="text-warning calendar-item">
+                                {% for item in data %}
+                                    {% if item.date == date and item.findChild(d) %}
+                                        {% set route_params = route_params|merge({'new_date_from' : item.date,'new_date_to' : d}) %}
+                                        <a class="calendar-item" href="{{ path('bundles_default.api.calendar_item_info',route_params) }}">
+                                            {{ item.findChild(d).price|number_format(0,' ',' ') }} {{item.findChild(d).currency}}
+                                        </a>
+                                    {% endif %}
+                                {% endfor %}
+                            </span>
+                        {% endspaceless %}
                     </td>
                 {% endfor %}
             </tr>

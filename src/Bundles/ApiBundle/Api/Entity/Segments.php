@@ -245,6 +245,7 @@ class Segments {
 
     /**
      * @param mixed $arrivalAirport
+     * @return $this
      */
     public function setArrivalAirport($arrivalAirport)
     {
@@ -298,8 +299,8 @@ class Segments {
      */
     public function getFlightTime()
     {
-        return $this->arrivalDate - $this->departureDate;
-//        return $this->flightTime;
+//        return $this->arrivalDate - $this->departureDate;
+        return $this->flightTime;
     }
 
     /**
@@ -432,7 +433,6 @@ class Segments {
     }
 
     /**
-     * @param string $format
      * @return mixed
      */
     public function getArrivalDate()

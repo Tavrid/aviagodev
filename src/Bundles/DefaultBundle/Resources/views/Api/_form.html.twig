@@ -1,18 +1,6 @@
 <script type="text/javascript">
     var searchForm = {{ form_data|json_encode|raw }};
     var numComplexFields = 4;
-    $(document).ready(function($) {
-        
-        /*alert();
-        $('.date-from-icon').bind('click', function() {
-            $("#search_form_date_from").datepicker('show');
-        });
-
-        $('.date-to-icon').bind('click', function() {
-            $("#search_form_date_to").datepicker('show');
-        });*/
-
-    });
 </script>
 
 <form id="search-form" class="form-filter-inner" action="{{ path('bundles_default_search') }}" method="post" data-bind="validate">
@@ -34,6 +22,7 @@
                             Из
                         </span>
                         <input required="true" type="text" class="form-control from_city" data-bind="value: cityFrom,autocomplete: 'cityFromCode'">
+                        <span class="auto-code text-muted"  data-bind="text: cityFromCode, visible: cityFromCode"></span>
                     </div>
                 </div>
                 <div class="city-from-block">
@@ -42,6 +31,7 @@
                             В
                         </span>
                         <input required="true" type="text" class="form-control from_city" data-bind="value: cityTo,autocomplete: 'cityToCode'">
+                        <span class="auto-code text-muted"  data-bind="text: cityToCode, visible: cityToCode"></span>
                     </div>
                 </div>
                 <div class="date-from">
@@ -65,6 +55,7 @@
                 {{ form_label(form.city_from) }}
             </span>
             {{ form_widget(form.city_from, {'attr': {'class': 'from_city','data-bind' : 'value: cityFrom,autocomplete: "cityFromCode"'}}) }}
+            <span class="auto-code text-muted"  data-bind="text: cityFromCode, visible: cityFromCode"></span>
         </div>
     </div>
     <div class="city-to-block"  data-bind="visible: !complexSearch()">
@@ -73,6 +64,7 @@
                 {{ form_label(form.city_to) }}
             </span>
             {{ form_widget(form.city_to, {'attr': {'class': 'to_city','data-bind' : 'value: cityTo,autocomplete: "cityToCode"'}}) }}
+            <span class="auto-code text-muted"  data-bind="text: cityToCode, visible: cityToCode"></span>
         </div>
     </div>
     <div class="date-from"  data-bind="visible: !complexSearch()">
@@ -158,7 +150,6 @@
     {{ form_row(form.avia_company,{attr: {'data-bind' : 'value: aviaCompany'}}) }}
     <div class="row">
         <div class="col-md-6">{{ form_row(form.class,{attr: {'data-bind' : 'value: aviaClass'}}) }}</div>
-        <div class="col-md-6">{{ form_row(form.currency,{attr: {'data-bind' : 'value: currency'}}) }}</div>
     </div>
     {{ form_row(form.city_from_code,{attr:{'data-bind' : 'cityFromCode'}}) }}
     {{ form_row(form.city_to_code,{attr:{'data-bind' : 'cityToCode'}}) }}

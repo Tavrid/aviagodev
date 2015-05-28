@@ -139,7 +139,7 @@ abstract class AbstractModel
         if (!$entity) {
             throw new \Exception('Unable to find GoodsItems entity.');
         }
-        /** @var  $form  Symfony\Component\Form\Form*/
+
         $form = $this->container->get('form.factory')
             ->createBuilder('form', $entity, array(
                 'csrf_protection' => true,

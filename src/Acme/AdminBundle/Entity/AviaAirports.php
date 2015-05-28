@@ -5,7 +5,8 @@ namespace Acme\AdminBundle\Entity;
 /**
  * AviaAirports
  */
-class AviaAirports {
+class AviaAirports
+{
 
     /**
      * @var integer
@@ -172,12 +173,18 @@ class AviaAirports {
      */
     private $nameShortUk;
 
+    public function __toString()
+    {
+        return $this->getCityRus();
+    }
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -187,7 +194,8 @@ class AviaAirports {
      * @param boolean $favorite
      * @return AviaAirports
      */
-    public function setFavorite($favorite) {
+    public function setFavorite($favorite)
+    {
         $this->favorite = $favorite;
 
         return $this;
@@ -196,9 +204,10 @@ class AviaAirports {
     /**
      * Get favorite
      *
-     * @return boolean 
+     * @return boolean
      */
-    public function getFavorite() {
+    public function getFavorite()
+    {
         return $this->favorite;
     }
 
@@ -208,7 +217,8 @@ class AviaAirports {
      * @param string $iataRegionCode
      * @return AviaAirports
      */
-    public function setIataRegionCode($iataRegionCode) {
+    public function setIataRegionCode($iataRegionCode)
+    {
         $this->iataRegionCode = $iataRegionCode;
 
         return $this;
@@ -217,9 +227,10 @@ class AviaAirports {
     /**
      * Get iataRegionCode
      *
-     * @return string 
+     * @return string
      */
-    public function getIataRegionCode() {
+    public function getIataRegionCode()
+    {
         return $this->iataRegionCode;
     }
 
@@ -229,7 +240,8 @@ class AviaAirports {
      * @param string $iataTcCode
      * @return AviaAirports
      */
-    public function setIataTcCode($iataTcCode) {
+    public function setIataTcCode($iataTcCode)
+    {
         $this->iataTcCode = $iataTcCode;
 
         return $this;
@@ -238,9 +250,10 @@ class AviaAirports {
     /**
      * Get iataTcCode
      *
-     * @return string 
+     * @return string
      */
-    public function getIataTcCode() {
+    public function getIataTcCode()
+    {
         return $this->iataTcCode;
     }
 
@@ -250,7 +263,8 @@ class AviaAirports {
      * @param string $regionCode
      * @return AviaAirports
      */
-    public function setRegionCode($regionCode) {
+    public function setRegionCode($regionCode)
+    {
         $this->regionCode = $regionCode;
 
         return $this;
@@ -259,9 +273,10 @@ class AviaAirports {
     /**
      * Get regionCode
      *
-     * @return string 
+     * @return string
      */
-    public function getRegionCode() {
+    public function getRegionCode()
+    {
         return $this->regionCode;
     }
 
@@ -271,7 +286,8 @@ class AviaAirports {
      * @param string $regionCodeRus
      * @return AviaAirports
      */
-    public function setRegionCodeRus($regionCodeRus) {
+    public function setRegionCodeRus($regionCodeRus)
+    {
         $this->regionCodeRus = $regionCodeRus;
 
         return $this;
@@ -280,9 +296,10 @@ class AviaAirports {
     /**
      * Get regionCodeRus
      *
-     * @return string 
+     * @return string
      */
-    public function getRegionCodeRus() {
+    public function getRegionCodeRus()
+    {
         return $this->regionCodeRus;
     }
 
@@ -292,7 +309,8 @@ class AviaAirports {
      * @param string $regionEng
      * @return AviaAirports
      */
-    public function setRegionEng($regionEng) {
+    public function setRegionEng($regionEng)
+    {
         $this->regionEng = $regionEng;
 
         return $this;
@@ -301,9 +319,10 @@ class AviaAirports {
     /**
      * Get regionEng
      *
-     * @return string 
+     * @return string
      */
-    public function getRegionEng() {
+    public function getRegionEng()
+    {
         return $this->regionEng;
     }
 
@@ -313,7 +332,8 @@ class AviaAirports {
      * @param string $regionRus
      * @return AviaAirports
      */
-    public function setRegionRus($regionRus) {
+    public function setRegionRus($regionRus)
+    {
         $this->regionRus = $regionRus;
 
         return $this;
@@ -322,9 +342,10 @@ class AviaAirports {
     /**
      * Get regionRus
      *
-     * @return string 
+     * @return string
      */
-    public function getRegionRus() {
+    public function getRegionRus()
+    {
         return $this->regionRus;
     }
 
@@ -334,7 +355,8 @@ class AviaAirports {
      * @param string $countryCode
      * @return AviaAirports
      */
-    public function setCountryCode($countryCode) {
+    public function setCountryCode($countryCode)
+    {
         $this->countryCode = $countryCode;
 
         return $this;
@@ -343,9 +365,10 @@ class AviaAirports {
     /**
      * Get countryCode
      *
-     * @return string 
+     * @return string
      */
-    public function getCountryCode() {
+    public function getCountryCode()
+    {
         return $this->countryCode;
     }
 
@@ -355,7 +378,8 @@ class AviaAirports {
      * @param string $countryCodeRus
      * @return AviaAirports
      */
-    public function setCountryCodeRus($countryCodeRus) {
+    public function setCountryCodeRus($countryCodeRus)
+    {
         $this->countryCodeRus = $countryCodeRus;
 
         return $this;
@@ -364,9 +388,10 @@ class AviaAirports {
     /**
      * Get countryCodeRus
      *
-     * @return string 
+     * @return string
      */
-    public function getCountryCodeRus() {
+    public function getCountryCodeRus()
+    {
         return $this->countryCodeRus;
     }
 
@@ -376,7 +401,8 @@ class AviaAirports {
      * @param string $countryEng
      * @return AviaAirports
      */
-    public function setCountryEng($countryEng) {
+    public function setCountryEng($countryEng)
+    {
         $this->countryEng = $countryEng;
 
         return $this;
@@ -385,9 +411,10 @@ class AviaAirports {
     /**
      * Get countryEng
      *
-     * @return string 
+     * @return string
      */
-    public function getCountryEng() {
+    public function getCountryEng()
+    {
         return $this->countryEng;
     }
 
@@ -397,7 +424,8 @@ class AviaAirports {
      * @param string $countryRus
      * @return AviaAirports
      */
-    public function setCountryRus($countryRus) {
+    public function setCountryRus($countryRus)
+    {
         $this->countryRus = $countryRus;
 
         return $this;
@@ -406,9 +434,10 @@ class AviaAirports {
     /**
      * Get countryRus
      *
-     * @return string 
+     * @return string
      */
-    public function getCountryRus() {
+    public function getCountryRus()
+    {
         return $this->countryRus;
     }
 
@@ -418,7 +447,8 @@ class AviaAirports {
      * @param string $stateCode
      * @return AviaAirports
      */
-    public function setStateCode($stateCode) {
+    public function setStateCode($stateCode)
+    {
         $this->stateCode = $stateCode;
 
         return $this;
@@ -427,9 +457,10 @@ class AviaAirports {
     /**
      * Get stateCode
      *
-     * @return string 
+     * @return string
      */
-    public function getStateCode() {
+    public function getStateCode()
+    {
         return $this->stateCode;
     }
 
@@ -439,7 +470,8 @@ class AviaAirports {
      * @param string $stateCodeRus
      * @return AviaAirports
      */
-    public function setStateCodeRus($stateCodeRus) {
+    public function setStateCodeRus($stateCodeRus)
+    {
         $this->stateCodeRus = $stateCodeRus;
 
         return $this;
@@ -448,9 +480,10 @@ class AviaAirports {
     /**
      * Get stateCodeRus
      *
-     * @return string 
+     * @return string
      */
-    public function getStateCodeRus() {
+    public function getStateCodeRus()
+    {
         return $this->stateCodeRus;
     }
 
@@ -460,7 +493,8 @@ class AviaAirports {
      * @param string $stateEng
      * @return AviaAirports
      */
-    public function setStateEng($stateEng) {
+    public function setStateEng($stateEng)
+    {
         $this->stateEng = $stateEng;
 
         return $this;
@@ -469,9 +503,10 @@ class AviaAirports {
     /**
      * Get stateEng
      *
-     * @return string 
+     * @return string
      */
-    public function getStateEng() {
+    public function getStateEng()
+    {
         return $this->stateEng;
     }
 
@@ -481,7 +516,8 @@ class AviaAirports {
      * @param string $stateRus
      * @return AviaAirports
      */
-    public function setStateRus($stateRus) {
+    public function setStateRus($stateRus)
+    {
         $this->stateRus = $stateRus;
 
         return $this;
@@ -490,9 +526,10 @@ class AviaAirports {
     /**
      * Get stateRus
      *
-     * @return string 
+     * @return string
      */
-    public function getStateRus() {
+    public function getStateRus()
+    {
         return $this->stateRus;
     }
 
@@ -502,7 +539,8 @@ class AviaAirports {
      * @param string $cityCodeEng
      * @return AviaAirports
      */
-    public function setCityCodeEng($cityCodeEng) {
+    public function setCityCodeEng($cityCodeEng)
+    {
         $this->cityCodeEng = $cityCodeEng;
 
         return $this;
@@ -511,9 +549,10 @@ class AviaAirports {
     /**
      * Get cityCodeEng
      *
-     * @return string 
+     * @return string
      */
-    public function getCityCodeEng() {
+    public function getCityCodeEng()
+    {
         return $this->cityCodeEng;
     }
 
@@ -523,7 +562,8 @@ class AviaAirports {
      * @param string $cityCodeRus
      * @return AviaAirports
      */
-    public function setCityCodeRus($cityCodeRus) {
+    public function setCityCodeRus($cityCodeRus)
+    {
         $this->cityCodeRus = $cityCodeRus;
 
         return $this;
@@ -532,9 +572,10 @@ class AviaAirports {
     /**
      * Get cityCodeRus
      *
-     * @return string 
+     * @return string
      */
-    public function getCityCodeRus() {
+    public function getCityCodeRus()
+    {
         return $this->cityCodeRus;
     }
 
@@ -544,7 +585,8 @@ class AviaAirports {
      * @param string $cityEng
      * @return AviaAirports
      */
-    public function setCityEng($cityEng) {
+    public function setCityEng($cityEng)
+    {
         $this->cityEng = $cityEng;
 
         return $this;
@@ -553,9 +595,10 @@ class AviaAirports {
     /**
      * Get cityEng
      *
-     * @return string 
+     * @return string
      */
-    public function getCityEng() {
+    public function getCityEng()
+    {
         return $this->cityEng;
     }
 
@@ -565,7 +608,8 @@ class AviaAirports {
      * @param string $cityRus
      * @return AviaAirports
      */
-    public function setCityRus($cityRus) {
+    public function setCityRus($cityRus)
+    {
         $this->cityRus = $cityRus;
 
         return $this;
@@ -574,9 +618,10 @@ class AviaAirports {
     /**
      * Get cityRus
      *
-     * @return string 
+     * @return string
      */
-    public function getCityRus() {
+    public function getCityRus()
+    {
         return $this->cityRus;
     }
 
@@ -586,7 +631,8 @@ class AviaAirports {
      * @param float $cityLat
      * @return AviaAirports
      */
-    public function setCityLat($cityLat) {
+    public function setCityLat($cityLat)
+    {
         $this->cityLat = $cityLat;
 
         return $this;
@@ -595,9 +641,10 @@ class AviaAirports {
     /**
      * Get cityLat
      *
-     * @return float 
+     * @return float
      */
-    public function getCityLat() {
+    public function getCityLat()
+    {
         return $this->cityLat;
     }
 
@@ -607,7 +654,8 @@ class AviaAirports {
      * @param float $cityLng
      * @return AviaAirports
      */
-    public function setCityLng($cityLng) {
+    public function setCityLng($cityLng)
+    {
         $this->cityLng = $cityLng;
 
         return $this;
@@ -616,9 +664,10 @@ class AviaAirports {
     /**
      * Get cityLng
      *
-     * @return float 
+     * @return float
      */
-    public function getCityLng() {
+    public function getCityLng()
+    {
         return $this->cityLng;
     }
 
@@ -628,7 +677,8 @@ class AviaAirports {
      * @param string $cityTimezone
      * @return AviaAirports
      */
-    public function setCityTimezone($cityTimezone) {
+    public function setCityTimezone($cityTimezone)
+    {
         $this->cityTimezone = $cityTimezone;
 
         return $this;
@@ -637,9 +687,10 @@ class AviaAirports {
     /**
      * Get cityTimezone
      *
-     * @return string 
+     * @return string
      */
-    public function getCityTimezone() {
+    public function getCityTimezone()
+    {
         return $this->cityTimezone;
     }
 
@@ -649,7 +700,8 @@ class AviaAirports {
      * @param string $airportCodeEng
      * @return AviaAirports
      */
-    public function setAirportCodeEng($airportCodeEng) {
+    public function setAirportCodeEng($airportCodeEng)
+    {
         $this->airportCodeEng = $airportCodeEng;
 
         return $this;
@@ -658,9 +710,10 @@ class AviaAirports {
     /**
      * Get airportCodeEng
      *
-     * @return string 
+     * @return string
      */
-    public function getAirportCodeEng() {
+    public function getAirportCodeEng()
+    {
         return $this->airportCodeEng;
     }
 
@@ -670,7 +723,8 @@ class AviaAirports {
      * @param string $airportCodeRus
      * @return AviaAirports
      */
-    public function setAirportCodeRus($airportCodeRus) {
+    public function setAirportCodeRus($airportCodeRus)
+    {
         $this->airportCodeRus = $airportCodeRus;
 
         return $this;
@@ -679,9 +733,10 @@ class AviaAirports {
     /**
      * Get airportCodeRus
      *
-     * @return string 
+     * @return string
      */
-    public function getAirportCodeRus() {
+    public function getAirportCodeRus()
+    {
         return $this->airportCodeRus;
     }
 
@@ -691,7 +746,8 @@ class AviaAirports {
      * @param string $airportEng
      * @return AviaAirports
      */
-    public function setAirportEng($airportEng) {
+    public function setAirportEng($airportEng)
+    {
         $this->airportEng = $airportEng;
 
         return $this;
@@ -700,20 +756,22 @@ class AviaAirports {
     /**
      * Get airportEng
      *
-     * @return string 
+     * @return string
      */
-    public function getAirportEng() {
+    public function getAirportEng()
+    {
         return $this->airportEng;
     }
 
-    public function getAirportByLocale($locale){
-        if($locale == 'en'){
-            if(!empty($this->nameShortEn)){
+    public function getAirportByLocale($locale)
+    {
+        if ($locale == 'en') {
+            if (!empty($this->nameShortEn)) {
                 return $this->nameShortEn;
             }
             return $this->getAirportEng();
         } else {
-            if(!empty($this->nameShortRu)){
+            if (!empty($this->nameShortRu)) {
                 return $this->nameShortRu;
             }
             return $this->getAirportRus();
@@ -726,7 +784,8 @@ class AviaAirports {
      * @param string $airportRus
      * @return AviaAirports
      */
-    public function setAirportRus($airportRus) {
+    public function setAirportRus($airportRus)
+    {
         $this->airportRus = $airportRus;
 
         return $this;
@@ -735,9 +794,10 @@ class AviaAirports {
     /**
      * Get airportRus
      *
-     * @return string 
+     * @return string
      */
-    public function getAirportRus() {
+    public function getAirportRus()
+    {
         return $this->airportRus;
     }
 
@@ -747,7 +807,8 @@ class AviaAirports {
      * @param float $airportLat
      * @return AviaAirports
      */
-    public function setAirportLat($airportLat) {
+    public function setAirportLat($airportLat)
+    {
         $this->airportLat = $airportLat;
 
         return $this;
@@ -756,9 +817,10 @@ class AviaAirports {
     /**
      * Get airportLat
      *
-     * @return float 
+     * @return float
      */
-    public function getAirportLat() {
+    public function getAirportLat()
+    {
         return $this->airportLat;
     }
 
@@ -768,7 +830,8 @@ class AviaAirports {
      * @param float $airportLng
      * @return AviaAirports
      */
-    public function setAirportLng($airportLng) {
+    public function setAirportLng($airportLng)
+    {
         $this->airportLng = $airportLng;
 
         return $this;
@@ -777,9 +840,10 @@ class AviaAirports {
     /**
      * Get airportLng
      *
-     * @return float 
+     * @return float
      */
-    public function getAirportLng() {
+    public function getAirportLng()
+    {
         return $this->airportLng;
     }
 
@@ -789,7 +853,8 @@ class AviaAirports {
      * @param string $timezone
      * @return AviaAirports
      */
-    public function setTimezone($timezone) {
+    public function setTimezone($timezone)
+    {
         $this->timezone = $timezone;
 
         return $this;
@@ -798,9 +863,10 @@ class AviaAirports {
     /**
      * Get timezone
      *
-     * @return string 
+     * @return string
      */
-    public function getTimezone() {
+    public function getTimezone()
+    {
         return $this->timezone;
     }
 
@@ -810,7 +876,8 @@ class AviaAirports {
      * @param string $nameShortRu
      * @return AviaAirports
      */
-    public function setNameShortRu($nameShortRu) {
+    public function setNameShortRu($nameShortRu)
+    {
         $this->nameShortRu = $nameShortRu;
 
         return $this;
@@ -819,9 +886,10 @@ class AviaAirports {
     /**
      * Get nameShortRu
      *
-     * @return string 
+     * @return string
      */
-    public function getNameShortRu() {
+    public function getNameShortRu()
+    {
         return $this->nameShortRu;
     }
 
@@ -831,7 +899,8 @@ class AviaAirports {
      * @param string $nameShortEn
      * @return AviaAirports
      */
-    public function setNameShortEn($nameShortEn) {
+    public function setNameShortEn($nameShortEn)
+    {
         $this->nameShortEn = $nameShortEn;
 
         return $this;
@@ -840,9 +909,10 @@ class AviaAirports {
     /**
      * Get nameShortEn
      *
-     * @return string 
+     * @return string
      */
-    public function getNameShortEn() {
+    public function getNameShortEn()
+    {
         return $this->nameShortEn;
     }
 
@@ -852,7 +922,8 @@ class AviaAirports {
      * @param string $nameShortUk
      * @return AviaAirports
      */
-    public function setNameShortUk($nameShortUk) {
+    public function setNameShortUk($nameShortUk)
+    {
         $this->nameShortUk = $nameShortUk;
 
         return $this;
@@ -861,54 +932,58 @@ class AviaAirports {
     /**
      * Get nameShortUk
      *
-     * @return string 
+     * @return string
      */
-    public function getNameShortUk() {
+    public function getNameShortUk()
+    {
         return $this->nameShortUk;
     }
 
-    public function getFormattedName($locale,$token = null) {
-        if(trim(strtoupper($token)) == $this->getAirportCodeEng()){
+    public function getFormattedName($locale, $token = null)
+    {
+        if (trim(strtoupper($token)) == $this->getAirportCodeEng()) {
             return $this->getFormattedNameAirport($locale);
         }
         return $this->getFormattedNameCity($locale);
     }
 
-    public function getFormattedNameCity($locale) {
+    public function getFormattedNameCity($locale)
+    {
         if ($locale == 'en') {
-            if($this->getNameShortEn()){
+            if ($this->getNameShortEn()) {
                 return $this->getNameShortEn();
             }
-            return $this->getCountryEng() . ', ' . $this->getCityEng() . ' (' . $this->getCityCodeEng() . ')';
+            return $this->getCityEng() . ', ' . $this->getCountryEng();
         } else if ($locale == 'ru') {
-            if($this->getNameShortRu()){
+            if ($this->getNameShortRu()) {
                 return $this->getNameShortRu();
             }
-            return $this->getCountryRus() . ', ' . $this->getCityRus() . ' (' . $this->getCityCodeEng() . ')';
+            return $this->getCityRus() . ', ' . $this->getCountryRus();
         } else {
-            if($this->getNameShortUk()){
+            if ($this->getNameShortUk()) {
                 return $this->getNameShortUk();
             }
-            return $this->getCountryRus() . ', ' . $this->getCityRus() . ' (' . $this->getCityCodeEng() . ')';
+            return $this->getCityRus() . ', ' . $this->getCountryRus();
         }
     }
 
-    public function getFormattedNameAirport($locale) {
+    public function getFormattedNameAirport($locale)
+    {
         if ($locale == 'en') {
-            if($this->getNameShortEn()){
+            if ($this->getNameShortEn()) {
                 return $this->getNameShortEn();
             }
-            return $this->getCountryEng() . ', ' . $this->getCityEng() . ', ' . $this->getAirportEng() . ' (' . $this->getAirportCodeEng() . ')';
+            return $this->getAirportEng() . ', ' . $this->getCityEng();
         } else if ($locale == 'ru') {
-            if($this->getNameShortRu()){
+            if ($this->getNameShortRu()) {
                 return $this->getNameShortRu();
             }
-            return $this->getCountryRus() . ', ' . $this->getCityRus() . ', ' . $this->getAirportRus() . ' (' . $this->getAirportCodeEng() . ')';
+            return $this->getAirportRus() . ', ' . $this->getCityRus();
         } else {
-            if($this->getNameShortUk()){
+            if ($this->getNameShortUk()) {
                 return $this->getNameShortUk();
             }
-            return $this->getCountryRus() . ', ' . $this->getCityRus() . ', ' . $this->getAirportRus() . ' (' . $this->getAirportCodeEng() . ')';
+            return $this->getAirportRus() . ', ' . $this->getCityRus();
         }
     }
 

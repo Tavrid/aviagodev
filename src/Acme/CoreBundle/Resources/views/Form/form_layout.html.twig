@@ -427,3 +427,26 @@
         {% include 'AcmeCoreBundle:Form:jquery_range.html.twig' %}
     {% endspaceless %}
 {% endblock jquery_range_widget%}
+
+{% block html_editor_widget %}
+    {% spaceless %}
+        <div id="{{ id }}_box" style="height: {{ width }}px;"></div>
+        {{ block('textarea_widget') }}
+        <script type="text/javascript" src="{{ asset('bundles/acmecore/vendor/ace-builds/src-min/ace.js') }}"></script>
+        <script>
+            $(function(){
+                var textarea = $('#{{ id }}');
+                textarea.hide();
+                var editor = ace.edit("{{ id }}_box");
+                editor.setOptions({
+                    fontSize: "16px"
+                });
+                editor.getSession().setMode("ace/mode/twig");
+                editor.session.setValue(textarea.val());
+                editor.getSession().on('change', function(e) {
+                    textarea.val(editor.getSession().getValue());
+                });
+            });
+        </script>
+    {% endspaceless %}
+{% endblock html_editor_widget%}

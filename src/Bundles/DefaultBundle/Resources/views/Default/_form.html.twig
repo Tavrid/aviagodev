@@ -2,8 +2,6 @@
     var searchForm = {{ form_data|json_encode|raw }};
     var numComplexFields = 4;
 </script>
-
-
 <form action="{{ path('bundles_default_search') }}" method="post" id="search-form" data-bind="validate">
     <div class="tab-content">
         <div class="tab-pane fade in active" id="avia">
@@ -24,11 +22,14 @@
                     </div>
                     <div class="row row-one-two" data-bind="visible: !complexSearch()">
                         <div class="col-md-5 col-sm-5 col-xs-12 col-avia">
-                            <div class="input-group city-from">
+                            <div class="input-group city-from" style="position: relative;">
                                 <span class="input-group-addon block-img-avia" data-toggle="tooltip" data-placement="top" data-original-title="Откуда вы вылетаете?">
                                     <img src="{{ asset('images/avia-up.png') }}" alt="">
                                 </span>
+
                                 {{ form_widget(form.city_from, {'attr': {'class': 'from_city','data-bind': 'value: cityFrom,autocomplete: "cityFromCode"'}}) }}
+                                {{ form_row(form.city_from_code,{attr: {'data-bind':'value: cityFromCode'}}) }}
+                                <span class="auto-code text-muted" data-bind="text: cityFromCode, visible: cityFromCode"></span>
                                 <!-- <span class="input-group-btn">
                                     <button class="btn btn-default button-close" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Очистить поле"></button>
                                 </span> -->
@@ -45,6 +46,8 @@
                                     <img src="{{ asset('images/avia-down.png') }}" alt="">
                                 </span>
                                 {{ form_widget(form.city_to, {'attr': {'class': 'to_city','data-bind': 'value: cityTo,autocomplete: "cityToCode"'}}) }}
+                                {{ form_row(form.city_to_code,{attr: {'data-bind':'value: cityToCode'}}) }}
+                                <span class="auto-code text-muted" data-bind="text: cityToCode, visible: cityToCode"></span>
                                 <!-- <span class="input-group-btn">
                                     <button class="btn btn-default button-close" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Очистить поле"></button>
                                 </span> -->
@@ -65,10 +68,11 @@
                             <!-- Дата вылета -->
                             <!-- Возраст -->
                             <div class="vozrast">
-                                <label for="">{% trans %}frontend.default.index.num_passengers{% endtrans %}</label>
+                                <!-- <label for="">{% trans %}frontend.default.index.num_passengers{% endtrans %}</label> -->
                                 <div class="row">
                                     <!-- Выбор взрослых -->
                                     <div class="col-md-4 col-sm-4">
+                                        <div class="type-people">Взрослых:</div>
                                         <div class="input-group">
                                             <span class="input-group-addon vozrast-icon adult-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите количество взрослых"></span>
                                             {{ form_widget(form.adults, {'attr': {'class': 'adults','data-bind' : 'value: adults'}}) }}
@@ -78,6 +82,7 @@
                                     <!-- Выбор взрослых -->
                                     <!-- Выбор детей -->
                                     <div class="col-md-4 col-sm-4">
+                                        <div class="type-people">Детей:</div>
                                         <div class="input-group">
                                             <span class="input-group-addon vozrast-icon child-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите количество детей"></span>
                                             {{ form_widget(form.children, {'attr': {'class': 'child','data-bind' : 'value: children'}}) }}
@@ -87,6 +92,7 @@
                                     <!-- Выбор детей -->
                                     <!-- Выбор младенцев -->
                                     <div class="col-md-4 col-sm-4">
+                                        <div class="type-people">Младенцев:</div>
                                         <div class="input-group">
                                             <span class="input-group-addon vozrast-icon infants-icon" data-toggle="tooltip" data-placement="top" data-original-title="Выберите количество младенцев"></span>
                                             {{ form_widget(form.infant, {'attr': {'class': 'infant','data-bind' : 'value: infant'}}) }}
@@ -111,7 +117,7 @@
                         <div class="col-md-6">
                             <!-- Дата прилета -->
                             <div class="date-to"  data-bind="visible: disableDateTo()">
-                                {{ form_row(form.city_to_code,{attr: {'data-bind':'value: cityToCode'}}) }}
+
                                 {{ form_label(form.date_to, '', {'attr': {'class': 'date_from'}}) }}
                                 <div class="input-group">
                                     {{ form_widget(form.date_to, {'attr': {'class': 'date_from','data-bind': 'value: dateTo,enable:disableDateTo','autocomplete':'off'}}) }}
@@ -124,10 +130,6 @@
                                 <div class="col-md-7 klass">
                                     {{ form_label(form.class, '') }}
                                     {{ form_widget(form.class,{attr: {'data-bind' : 'value: aviaClass'}}) }}
-                                </div>
-                                <div class="col-md-5 currency">
-                                    {{ form_label(form.currency, '') }}
-                                    {{ form_widget(form.currency,{attr: {'data-bind' : 'value: currency'}}) }}
                                 </div>
                             </div>
                             <!-- Класс и валюта -->

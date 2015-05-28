@@ -3,43 +3,41 @@
 <html>
     <head>
         <title>{% block title "Поиск дешевых авиабилетов" %}</title>
+        <meta name="Description" content="{% block meta_description 'Поиск дешевых авиабилетов' %}">
+        <meta name="Keywords" content="{% block meta_keywords 'Поиск дешевых авиабилетов' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <link href="{{ asset('build/dist/css/bootstrap.css') }}" rel="stylesheet" media="screen" />
-        <link href="{{ asset('build/dist/css/jquery-ui.css') }}" rel="stylesheet" media="screen" />
+        <link href="{{ asset('bundles/bundlesdefault/lib/ui-theme/css/jquery-ui.css') }}" rel="stylesheet" media="screen" />
         <link href="{{ asset('build/dist/css/avia.css') }}" rel="stylesheet" media="screen" />
         {% block stylesheets %}{% endblock %}
     </head>
-    <body>
-        <style type="text/css">
-            #preloader{
-                position: fixed;
-                height: 100%;
-                width: 100%;
-                z-index: 111111;
-                background-color: #f5f7fa;
-                left:0;
-                top: 0;
-            }
-            body{
-                margin: 0;
-            }
-        </style>
-        <div id="preloader">
-            <img style=" position: fixed;top: 50%;left: 50%;" src="{{ asset('bundles/bundlesdefault/img/ajax-loader.gif') }}">
-        </div>
+    <body class="{{ controller_formatter.formattedName }}">
         {% javascripts '@jquery' '@jquery_ui_js' combine=true%}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
         <header role="contentinfo">
             <div class="container" style="max-width:970px;">
                 <a href="{{ path('bundles_default_homepage') }}" class="logo"><img src="{{ asset('images/logo.png') }}" alt=""></a>
-                <div class="phone"><span>+38 (044)</span> <b>392-74-08</b></div>
-                <div class="group-lang btn-group pull-right row">
-                    <button data-value="ru"  type="button" class="btn btn-default lang {{app.request.locale == 'ru' ? 'active':''}}">ru</button>
-                    <button data-value="en" type="button" class="btn btn-default lang {{app.request.locale == 'en' ? 'active':''}}">en</button>
-                    <button data-value="uk" type="button" class="btn btn-default lang {{app.request.locale == 'uk' ? 'active':''}}">ua</button>
+                <div class="lang-phone-wrap">
+                    <div class="phone"><span>+38 (044)</span> <b>392-74-08</b></div>
+                    <div class="group-lang btn-group pull-right row">
+                        <button data-value="ru"  type="button" class="btn btn-default lang {{app.request.locale == 'ru' ? 'active':''}}">ru</button>
+                        <button data-value="en" type="button" class="btn btn-default lang {{app.request.locale == 'en' ? 'active':''}}">en</button>
+                        <button data-value="uk" type="button" class="btn btn-default lang {{app.request.locale == 'uk' ? 'active':''}}">ua</button>
+                    </div>
+                </div>
+                <div class="btn-group" style="margin-left: 253px;">
+                    {% for currency in currency_manager.currencyList %}
+                        <button data-value="{{ currency }}"  type="button" class="btn change_currency btn-default currency {{currency_manager.currency == currency ? 'active':''}}">{{ currency }}</button>
+                    {% endfor %}
                 </div>
             </div>
         </header>
+        <div class="wing-aircraft-wrap">
+            <div class="wing-aircraft">
+                <div class="wing"></div>
+            </div>
+        </div>
         <div class="container" style="max-width:1000px;">
         {% block body %}{% endblock %}
     </div>

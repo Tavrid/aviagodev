@@ -8,14 +8,16 @@
 
 namespace Bundles\ApiBundle\Api\Request;
 
-use Bundles\ApiBundle\Api\Util\TicketEntityCreator;
+use Bundles\ApiBundle\Api\Model\ResponseTranslatorInterface;
 use Lsw\ApiCallerBundle\Caller\ApiCallerInterface;
 use Bundles\ApiBundle\Api\ApiCall;
 use Bundles\ApiBundle\Api\Query\QueryAbstract;
 use Bundles\ApiBundle\Api\Response\AviaCheckResponse as Response;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
-class AviaCheckRequest implements Request{
+class AviaCheckRequest implements Request
+{
     /**
      * @var string
      */
@@ -33,42 +35,77 @@ class AviaCheckRequest implements Request{
     protected $apiCaller;
 
     /**
+     * @var ResponseTranslatorInterface
+     */
+    protected $responseTranslator;
+
+    /**
+     * @var ContainerInterface
+     */
+    protected $serviceContainer;
+
+    /**
      * @param $key
      * @param ApiCallerInterface $apiCaller
+     * @param ContainerInterface $container
      */
-    public function __construct($key ,ApiCallerInterface $apiCaller){
+    public function __construct($key, ApiCallerInterface $apiCaller, ContainerInterface $container)
+    {
         $this->apiKey = $key;
         $this->apiCaller = $apiCaller;
+        $this->serviceContainer = $container;
     }
 
     /**
-     * @param \Acme\AdminBundle\Model\Log $logger
+     * @param ResponseTranslatorInterface $responseTranslator
+     * @return $this
+     */
+    public function setResponseTranslator($responseTranslator)
+    {
+        $this->responseTranslator = $responseTranslator;
+
+        return $this;
+    }
+
+    /**
+     * @return ResponseTranslatorInterface
+     */
+    public function getResponseTranslator()
+    {
+        return $this->responseTranslator;
+    }
+
+    /**
+     * @param \Acme\CoreBundle\Model\AbstractModel $logger
      * @return $this
      */
     public function setLogger(\Acme\CoreBundle\Model\AbstractModel $logger)
     {
         $this->logger = $logger;
+
         return $this;
     }
 
 
-
-   /**
-    *
-    * @param QueryAbstract $query
-    * @return Response
-    */
+    /**
+     *
+     * @param QueryAbstract $query
+     * @return Response
+     */
     public function execute(QueryAbstract $query)
     {
-        $response = new Response(new TicketEntityCreator());
+        $response = new Response($this->serviceContainer->get('avia.api.ticket_entity_creator'),$query);
+        $response->setServiceContainer($this->serviceContainer);
 
-        $data = $this->apiCaller->call(new ApiCall($query->getApiUrl(),json_encode($query->buildParams($this->apiKey))));
+        $data = $this->apiCaller->call(new ApiCall($query->getApiUrl(),
+            json_encode($query->buildParams($this->apiKey))));
         $response->setResponseData($data);
         $logParams = [
             'query' => $query->buildParams($this->apiKey),
             'result' => $data
         ];
         $this->logger->addLog($logParams);
+
 //        file_put_contents(__DIR__.'/../Examples/book_info.json',json_encode($data));
         return $response;
     }

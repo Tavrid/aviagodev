@@ -5,13 +5,16 @@
     <div class="ticket-well well">
         <div class="price-ticket">
             <h2>{{ ticket.totalPrice|number_format(0,'.',' ') }} {{ticket.currency}} </h2>
-            <span class="col-block"> - за
-                <span class="col-user">
-                    {% transchoice numPassenger with {'%num%':  numPassenger} %}
-                        frontend.num_passenger
-                    {% endtranschoice %}
+            {% if numPassenger > 0 %}
+                <span class="col-block"> - {% trans %}frontend.num_passenger_prefix{% endtrans %}
+                    <span class="col-user">
+                        {% transchoice numPassenger with {'%num%':  numPassenger} %}
+                            frontend.num_passenger
+                        {% endtranschoice %}
+                    </span>
+                    <span class="end-word"></span>
                 </span>
-                <span class="end-word"></span></span>
+            {% endif %}
         </div>
         {% set view_refundable = true %}
         {% if needBook %}
@@ -90,7 +93,14 @@
                                         <div class="col-md-3 time-down-avia">
                                             <p>{%trans%}frontend.default.list.item.arrival_time{%endtrans%}:</p>
                                             <div class="row">
-                                                <div class="time-down col-md-4">{{ variant.arrivalSegment.arrivalDate|date("H:i") }}</div>
+                                                <div class="time-down col-md-4">
+                                                    {{ variant.arrivalSegment.arrivalDate|date("H:i") }}
+                                                </div>
+                                                    {% if variant.diffDay > 0 %}
+                                                        {% transchoice variant.countTransplant with {'%num%':  variant.diffDay} %}
+                                                            frontend.default.list.diff_day
+                                                        {% endtranschoice %}
+                                                    {% endif %}
                                                 <div class="city-aero col-md-8">
                                                     <div class="city-down">{{ variant.arrivalSegment.arrivalCityName }}</div>
                                                     <div class="aeropot-down">
@@ -126,7 +136,10 @@
                 <div class="row add-btn">
                     <div class="col-md-3">
                         {% if ticket.lastTicketDate %}
-                            {% trans %}frontend.flights.last_ticket_date{% endtrans %}: <strong class="text-warning buy-do">{{ ticket.lastTicketDate|date('d.m.Y H:i:s') }}</strong>
+                            {% trans %}frontend.flights.last_ticket_date{% endtrans %}: <strong class="text-warning buy-do">{{ ticket.lastTicketDate|date('d.m.Y H:i') }}</strong>
+                        {% else %}
+                            {% trans %}frontend.flights.pay_booking{% endtrans %}
+
                         {% endif %}
                     </div>
                     <div class="col-md-6"></div>
@@ -135,6 +148,16 @@
                     </div>
                 </div>
             </form>
+        {% else %}
+            <div class="row add-btn">
+                <div class="col-md-3">
+                    {% if ticket.lastTicketDate %}
+                        {% trans %}frontend.flights.last_ticket_date{% endtrans %}: <strong class="text-warning buy-do">{{ ticket.lastTicketDate|date('d.m.Y H:i') }}</strong>
+                    {% else %}
+                        {% trans %}frontend.flights.pay_booking{% endtrans %}
+                    {% endif %}
+                </div>
+            </div>
         {% endif %}
     </div>
 {%else%}

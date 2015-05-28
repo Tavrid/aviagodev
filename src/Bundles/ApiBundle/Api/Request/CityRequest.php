@@ -12,9 +12,11 @@ use Lsw\ApiCallerBundle\Caller\ApiCallerInterface;
 use Bundles\ApiBundle\Api\ApiCall;
 use Bundles\ApiBundle\Api\Query\QueryAbstract;
 use Bundles\ApiBundle\Api\Response\CityResponse;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
-class CityRequest implements Request{
+class CityRequest implements Request
+{
     /**
      * @var string
      */
@@ -23,10 +25,18 @@ class CityRequest implements Request{
      * @var ApiCallerInterface
      */
     protected $apiCaller;
-    public function __construct($key ,ApiCallerInterface $apiCaller){
+    /**
+     * @var ContainerInterface
+     */
+    protected $container;
+
+    public function __construct($key, ApiCallerInterface $apiCaller, ContainerInterface $container)
+    {
         $this->apiKey = $key;
         $this->apiCaller = $apiCaller;
+        $this->container = $container;
     }
+
 
     /**
      * @inheritdoc
@@ -34,8 +44,11 @@ class CityRequest implements Request{
     public function execute(QueryAbstract $query)
     {
         $response = new CityResponse();
-        $data = $this->apiCaller->call(new ApiCall($query->getApiUrl(),json_encode($query->buildParams($this->apiKey))));
+        $response->setServiceContainer($this->container);
+        $data = $this->apiCaller->call(new ApiCall($query->getApiUrl(),
+            json_encode($query->buildParams($this->apiKey))));
         $response->setResponseData($data);
+
         return $response;
     }
 }

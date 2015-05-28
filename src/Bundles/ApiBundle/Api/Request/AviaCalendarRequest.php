@@ -9,11 +9,12 @@
 namespace Bundles\ApiBundle\Api\Request;
 
 use Bundles\ApiBundle\Api\Model\CacheInterface;
-use Bundles\ApiBundle\Api\Util\TicketCalendarEntityCreator;
+use Bundles\ApiBundle\Api\Model\ResponseTranslatorInterface;
 use Lsw\ApiCallerBundle\Caller\ApiCallerInterface;
 use Bundles\ApiBundle\Api\ApiCall;
 use Bundles\ApiBundle\Api\Query\QueryAbstract;
 use Bundles\ApiBundle\Api\Response\AviaCalendarResponse;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
 class AviaCalendarRequest implements Request{
@@ -37,6 +38,49 @@ class AviaCalendarRequest implements Request{
     protected $cache;
 
     /**
+     * @var ResponseTranslatorInterface
+     */
+    protected $responseTranslator;
+    /**
+     * @var ContainerInterface
+     */
+    protected $serviceContainer;
+
+    /**
+     * @param $key
+     * @param ApiCallerInterface $apiCaller
+     * @param ContainerInterface $container
+     */
+    public function __construct($key ,ApiCallerInterface $apiCaller, ContainerInterface $container){
+        $this->apiKey = $key;
+        $this->apiCaller = $apiCaller;
+        $this->serviceContainer = $container;
+    }
+
+
+
+    /**
+     * @return ResponseTranslatorInterface
+     */
+    public function getResponseTranslator()
+    {
+        return $this->responseTranslator;
+    }
+
+    /**
+     * @param ResponseTranslatorInterface $responseTranslator
+     * @return $this
+     */
+    public function setResponseTranslator($responseTranslator)
+    {
+        $this->responseTranslator = $responseTranslator;
+        return $this;
+    }
+
+
+
+
+    /**
      * @return CacheInterface
      */
     public function getCache()
@@ -46,23 +90,18 @@ class AviaCalendarRequest implements Request{
 
     /**
      * @param CacheInterface $cache
+     * @return $this
      */
     public function setCache(CacheInterface $cache)
     {
         $this->cache = $cache;
+        return $this;
     }
 
-    /**
-     * @param $key
-     * @param ApiCallerInterface $apiCaller
-     */
-    public function __construct($key ,ApiCallerInterface $apiCaller){
-        $this->apiKey = $key;
-        $this->apiCaller = $apiCaller;
-    }
 
     /**
-     * @param \Acme\AdminBundle\Model\Log $logger
+     * @param \Acme\CoreBundle\Model\AbstractModel $logger
+     * @return $this
      */
     public function setLogger(\Acme\CoreBundle\Model\AbstractModel $logger)
     {
@@ -77,7 +116,8 @@ class AviaCalendarRequest implements Request{
      */
     public function execute(QueryAbstract $query)
     {
-        $response = new AviaCalendarResponse(new TicketCalendarEntityCreator());
+        $response = new AviaCalendarResponse($this->serviceContainer->get('avia.api.ticket_calendar_entity_creator'),$query);
+        $response->setServiceContainer($this->serviceContainer);
         $data = null;
         if($this->cache){
             $data = $this->cache->get($query->getKeyByParams());

@@ -9,8 +9,39 @@
 namespace Bundles\ApiBundle\Api\Response;
 
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 abstract class Response {
+    /**
+     * @var ContainerInterface
+     */
+    protected $serviceContainer;
+    /**
+     * @var
+     */
     protected $response;
+
+    /**
+     * @return ContainerInterface
+     */
+    public function getServiceContainer()
+    {
+        return $this->serviceContainer;
+    }
+
+    /**
+     * @param ContainerInterface $serviceContainer
+     * @return $this
+     */
+    public function setServiceContainer(ContainerInterface $serviceContainer)
+    {
+        $this->serviceContainer = $serviceContainer;
+        return $this;
+    }
+
+
+
+
     /**
      * @param $data
      * @return mixed

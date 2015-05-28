@@ -22,6 +22,10 @@ use Bundles\ApiBundle\Api\Model\CacheInterface;
 
 use Acme\CoreBundle\Model\AbstractModel;
 
+use Bundles\ApiBundle\Api\Model\ResponseTranslatorInterface;
+
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 
 class Api {
 
@@ -41,12 +45,22 @@ class Api {
      * @var \Acme\AdminBundle\Model\Log
      */
     protected $logger;
-    public function __construct($key,ApiCallerInterface $apiCaller,CacheInterface $cacheInterface = null,AbstractModel $logger){
-        $this->apiKey = $key;
-        $this->apiCaller = $apiCaller;
-        $this->cache = $cacheInterface;
-        $this->logger = $logger;
 
+    /**
+     * @var ContainerInterface
+     */
+    protected $serviceContainer;
+
+    /**
+     * @param $key
+     * @param ContainerInterface $container
+     */
+    public function __construct($key,ContainerInterface $container){
+        $this->apiKey = $key;
+        $this->apiCaller = $container->get('api_caller');
+        $this->cache = $container->get('main.cache');
+        $this->logger = $container->get('main.log.manager');
+        $this->serviceContainer = $container;
     }
 
     /**
@@ -54,14 +68,14 @@ class Api {
      */
 
     public function getCityRequestor(){
-        return new CityRequest($this->apiKey,$this->apiCaller);
+        return new CityRequest($this->apiKey,$this->apiCaller,$this->serviceContainer);
     }
 
     /**
      * @return SearchRequest
      */
     public function getSearchRequestor(){
-        $searchRequest = new SearchRequest($this->apiKey,$this->apiCaller);
+        $searchRequest = new SearchRequest($this->apiKey,$this->apiCaller,$this->serviceContainer);
         $searchRequest->setCache($this->cache);
         $searchRequest->setLogger($this->logger);
         return $searchRequest;
@@ -71,7 +85,7 @@ class Api {
      * @return BookInfoRequest
      */
     public function getBookInfoRequestor(){
-        $searchRequest = new BookInfoRequest($this->apiKey,$this->apiCaller);
+        $searchRequest = new BookInfoRequest($this->apiKey,$this->apiCaller,$this->serviceContainer);
         $searchRequest->setLogger($this->logger);
         return $searchRequest;
     }
@@ -99,14 +113,14 @@ class Api {
      */
 
     public function getAviaCalendarRequestor(){
-        $searchRequest = new AviaCalendarRequest($this->apiKey,$this->apiCaller);
+        $searchRequest = new AviaCalendarRequest($this->apiKey,$this->apiCaller,$this->serviceContainer);
         $searchRequest->setLogger($this->logger)
             ->setCache($this->cache);
         return $searchRequest;
     }
 
     public function getAviaCheckRequestor(){
-        $searchRequest = new AviaCheckRequest($this->apiKey,$this->apiCaller);
+        $searchRequest = new AviaCheckRequest($this->apiKey,$this->apiCaller,$this->serviceContainer);
         $searchRequest->setLogger($this->logger);
         return $searchRequest;
     }

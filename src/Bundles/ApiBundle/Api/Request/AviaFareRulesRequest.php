@@ -41,7 +41,8 @@ class AviaFareRulesRequest implements Request{
     }
 
     /**
-     * @param \Acme\AdminBundle\Model\Log $logger
+     * @param \Acme\CoreBundle\Model\AbstractModel $logger
+     * @return $this
      */
     public function setLogger(\Acme\CoreBundle\Model\AbstractModel $logger)
     {
