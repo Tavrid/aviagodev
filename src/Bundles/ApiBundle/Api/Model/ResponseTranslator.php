@@ -35,6 +35,7 @@ class ResponseTranslator implements ResponseTranslatorInterface
      */
     public function getAirportName($airportCode, $defaultValue)
     {
+        return $defaultValue;
         $data = $this->airports->getByAirportCode($airportCode);
         if($data){
             $locale = $this->container->get('request')->getLocale();
@@ -55,7 +56,7 @@ class ResponseTranslator implements ResponseTranslatorInterface
      */
     public function getCityName($cityCode, $defaultValue)
     {
-
+        return $defaultValue;
         $data = $this->airports->getByCityCode($cityCode);
         if($data){
             $locale = $this->container->get('request')->getLocale();

@@ -108,6 +108,7 @@ frontend:
         calendar:
             best_price: Лучшие цены в пределах +/- 3 дней
         list:
+            transplant: "Смена самолетов; между рейсами: %time%"
             diff_day: (+%num% д.)
             search_not_found: Не найдены варианты перелёта, соответствующие вашим критериям
             show_more: Показать еще

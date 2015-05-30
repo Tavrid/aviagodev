@@ -107,6 +107,7 @@ frontend:
         calendar:
             best_price: Best prices within +/- 3 days
         list:
+            transplant: "Смена самолетов; между рейсами: %time%"
             search_not_found: Flights not found
             show_more: Show more
             diff_day: (+%num% d.)

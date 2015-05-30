@@ -1,0 +1,28 @@
+{% set expanded = expanded is defined ? expanded: false %}
+<div class="ticket-item">
+    {% if not isComplexSearch %}
+        <div class="date-ticket">
+            <div class="date-title">
+                {% if loop.first  %}
+                    {% if parent_loop.first %}
+                        {{ variant.departureSegment.departureDate|date("d.m.Y") }}
+                    {% elseif parent_loop.last %}
+                        {{ variant.arrivalSegment.arrivalDate|date("d.m.Y") }}
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+    {% if not expanded %}
+        {% include "BundlesDefaultBundle:Api/Partial:segment.html.twig" with {departureSegment: variant.departureSegment,arrivalSegment: variant.arrivalSegment} %}
+    {% else %}
+        {% for segment in variant.segments %}
+            {% include "BundlesDefaultBundle:Api/Partial:segment.html.twig" with {departureSegment: segment,arrivalSegment: segment} %}
+            {% if variant.segments[loop.index] is defined %}
+                {% transchoice variant.countTransplant with {'%time%':  segment.transplantTime(variant.segments[loop.index])|secondToTime} %}
+                frontend.default.list.transplant
+                {% endtranschoice %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</div>
