@@ -45,7 +45,7 @@
                     </table>
                 </div>
                 <div class="tab-pane" id="info"  style="padding: 15px">
-                    {% include 'BundlesDefaultBundle:Api:_items.html.twig' with {data: [bookInfo.ticket],needBook: false} %}
+                    {% include 'BundlesDefaultBundle:Api:_items.html.twig' with {data: [bookInfo.ticket],needBook: false,expanded: true} %}
                 </div>
             </div>
             {% if not status.isPaid %}

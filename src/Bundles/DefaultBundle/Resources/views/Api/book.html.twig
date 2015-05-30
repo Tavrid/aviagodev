@@ -96,7 +96,7 @@
             </tbody>
         </table>
     </div>
-    {% include 'BundlesDefaultBundle:Api:_items.html.twig' with {data: [ticket],needBook: false} %}
+    {% include 'BundlesDefaultBundle:Api:_items.html.twig' with {data: [ticket],needBook: false,expanded: true} %}
     {% if ticket.latinRegistration %}
         {% trans %} frontend.default.order.latin_registration{% endtrans %}
     {% endif %}

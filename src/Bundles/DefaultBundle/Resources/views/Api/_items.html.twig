@@ -19,128 +19,21 @@
         {% set view_refundable = true %}
         {% if needBook %}
             <form action="{{ path("bundles_default_api_info") }}" class="book-form">
-                {% endif %}
+        {% endif %}
                 {% for int in ticket.itineraries %}
                     {% set parent_loop = loop %}
                         {% if isComplexSearch %}
                             <div class="date-ticket">
                                 <div class="date-title">
                                     {{ int.firstVariant.departureSegment.departureDate|date("d.m.Y") }}
-                                    {#- {{ int.lastVariant.arrivalSegment.arrivalDate|date("d.m.Y") }}#}
                                 </div>
                             </div>
                         {% endif %}
                         {% for variant in int.variants %}
-                            <div class="ticket-item">
-                                {% if not isComplexSearch %}
-                                    <div class="date-ticket">
-                                        <div class="date-title">
-                                            {% if loop.first  %}
-                                                {% if parent_loop.first %}
-                                                    {{ variant.departureSegment.departureDate|date("d.m.Y") }}
-                                                {% elseif parent_loop.last %}
-                                                    {{ variant.arrivalSegment.arrivalDate|date("d.m.Y") }}
-                                                {% endif %}
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                {% endif %}
-                                <div class="panel panel-info panel-ticket">
-                                    <span class="return-block">
-                                        {% if not ticket.refundable and view_refundable %}
-                                            {% set view_refundable = false %}
-                                            {% trans %}frontend.non_return{% endtrans %}
-                                        {% endif %}
-                                    </span>
-                                    <div class="panel-body panel-gradient ticket-body">
-                                        <div class="col-md-1 radio-ticket">
-                                            <div class="radio-button">
-                                                <input value="{{ variant.variantID }}" type="radio" {% if loop.first %} checked="checked" {% endif %} name="info[variants][{{ parent_loop.index-1 }}]"/>
-                                                <input type="hidden" name="info[request_id]" value="{{ ticket.requestId }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 company-info">
-                                            <div class="row">
-                                                <div class="img-company col-md-5">
-                                                    <span class="city-logo {{ variant.departureSegment.marketingAirline}}"></span>
-                                                </div>
-                                                <div class="img-name col-md-7">
-                                                    <div class="name-company">{{ variant.departureSegment.marketingAirlineName }}</div>
-                                                    <div class="num-company">{{ variant.departureSegment.aircraftName }}</div>
-                                                    <div class="free-mest">
-                                                        {% for segment in variant.segments %}
-                                                            {{ segment.marketingAirline }}{{ segment.flightNumber }}{% if not loop.last %}/{% endif %}
-                                                        {% endfor %}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 time-up-avia">
-                                            <p>{%trans%}frontend.default.list.item.departure_time{%endtrans%}:</p>
-                                            <div class="row">
-                                                <div class="time-up col-md-4">{{ variant.departureSegment.departureDate|date("H:i") }}</div>
-                                                <div class="city-aero col-md-8">
-                                                    <div class="city-up">{{ variant.departureSegment.departureCityName }}</div>
-                                                    <div class="aeropot-up">
-                                                        {{ variant.departureSegment.departureAirportName }}
-                                                        {% if variant.departureSegment.departureTerminal %}
-                                                            ({{ variant.departureSegment.departureTerminal }})
-                                                        {% endif %}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 time-down-avia">
-                                            <p>{%trans%}frontend.default.list.item.arrival_time{%endtrans%}:</p>
-                                            <div class="row">
-                                                <div class="time-down col-md-4">
-                                                    <span class="span">{{ variant.arrivalSegment.arrivalDate|date("H:i") }}</span>
-                                                    <br/>
-                                                    <span class="nowrap">
-                                                        {% if variant.diffDay > 0 %}
-                                                            {% transchoice variant.countTransplant with {'%num%':  variant.diffDay} %}
-                                                                frontend.default.list.diff_day
-                                                            {% endtranschoice %}
-                                                        {% endif %}
-                                                    </span>
-                                                </div>
-                                                <div class="city-aero col-md-8">
-                                                    <div class="city-down">{{ variant.arrivalSegment.arrivalCityName }}</div>
-                                                    <div class="aeropot-down">
-                                                        {{ variant.arrivalSegment.arrivalAirportName }}
-                                                        {% if variant.arrivalSegment.arrivalTerminal %}
-                                                            ({{ variant.arrivalSegment.arrivalTerminal }})
-                                                        {% endif %}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2 time-duration-avia">
-                                            <p>{%trans%}frontend.default.list.item.duration{%endtrans%}:</p>
-                                            <div class="time-duration">{{ variant.duration|secondToTime }}</div>
-                                            <div class="transplant">
-                                                {% if variant.countTransplant %}
-                                                    {% for a in variant.transplantAirports %}
-                                                            <div class='list-transplant'>
-                                                            <strong>{{ a.name }}</strong><!-- <br/> --><small><!--{%trans%}frontend.default.list.item.between_flights{%endtrans%}-->: {{ a.time|secondToTime }}</small>
-                                                        </div>
-                                                        {% endfor %}
-                                                    <!--<button type="button" class="btn-transplant btn btn-xs" data-container="body" data-toggle="popover" data-placement="top" data-content="{% for a in variant.transplantAirports %}
-                                                            <div class='list-transplant'>
-                                                            <strong>{{ a.name }}</strong><br/> <small>{%trans%}frontend.default.list.item.between_flights{%endtrans%}:{{ a.time|secondToTime }}</small>
-                                                        </div>
-                                                        {% endfor %}">{% transchoice variant.countTransplant with {'%count%':  variant.countTransplant} %}
-                                                                frontend.default.list.item.transplant
-                                                            {% endtranschoice %}</button>-->
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            {% include "BundlesDefaultBundle:Api/Partial:variant.html.twig" %}
                         {% endfor %}
                 {% endfor %}
-                {% if needBook %}
+        {% if needBook %}
                 <div class="row add-btn">
                     <div class="col-md-3">
                         {% if ticket.lastTicketDate %}
