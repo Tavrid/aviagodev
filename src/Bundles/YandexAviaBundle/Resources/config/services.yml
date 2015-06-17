@@ -1,0 +1,7 @@
+services:
+#    bundles_yandex_avia.example:
+#        class: Bundles\YandexAviaBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+  yandex_avia.routes_generator:
+      class: Bundles\YandexAviaBundle\Model\RoutesGenerator
+      arguments: [@router]
