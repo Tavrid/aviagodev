@@ -12,6 +12,7 @@ Building
 
 	$ npm i gulp -g
 	$ npm i bower -g
+	$ npm i gulp-less -g
 	$ npm update
 	$ bower install
 	$ gulp
