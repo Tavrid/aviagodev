@@ -24,12 +24,10 @@ class AppKernel extends Kernel {
 
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
             new Acme\AdminBundle\AcmeAdminBundle(),
-            new Acme\MediaBundle\AcmeMediaBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Acme\UserBundle\AcmeUserBundle(),
             new Bundles\DefaultBundle\BundlesDefaultBundle(),
             new Acme\CoreBundle\AcmeCoreBundle(),
-            new Acme\SocialBundle\AcmeSocialBundle(),
             new Lsw\ApiCallerBundle\LswApiCallerBundle(),
             new Bundles\ApiBundle\BundlesApiBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),

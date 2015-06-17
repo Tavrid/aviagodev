@@ -1,6 +1,4 @@
-acme_social:
-    resource: "@AcmeSocialBundle/Resources/config/routing.yml"
-    prefix:   /
+
 
 bundles_default:
     resource: "@BundlesDefaultBundle/Resources/config/routing.yml"
@@ -10,10 +8,6 @@ acme_core:
     resource: "@AcmeCoreBundle/Resources/config/routing.yml"
     prefix:   /admin
 
-  
-acme_media:
-    resource: "@AcmeMediaBundle/Resources/config/routing.yml"
-    prefix:   /media
 acme_admin:
     resource: "@AcmeAdminBundle/Resources/config/routing.yml"
     prefix:   /admin

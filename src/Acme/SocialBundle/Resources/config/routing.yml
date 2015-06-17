@@ -1,3 +1,0 @@
-acme_social_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: AcmeSocialBundle:Default:index }

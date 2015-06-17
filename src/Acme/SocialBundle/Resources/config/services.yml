@@ -1,7 +1,0 @@
-parameters:
-#    acme_social.example.class: Acme\SocialBundle\Example
-
-services:
-#    acme_social.example:
-#        class: %acme_social.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
