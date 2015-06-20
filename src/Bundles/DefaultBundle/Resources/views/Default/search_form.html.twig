@@ -1,0 +1,167 @@
+<div class="tab-content-services" ng-controller="SearchFormCtrl">
+    <div class="act-tab tab">
+        <div class="form-search-wrap">
+            <fieldset class="tab-direction">
+                <div class="input-group">
+                    <input id="one-direction" type="radio" ng-model="searchForm.direction" value="1" name="direction" required="required" class="radio-button"/>
+                    <label for="one-direction">В одну сторону</label>
+                </div>
+                <div class="input-group">
+                    <input id="one-two-direction" checked="checked" ng-model="searchForm.direction" value="2" type="radio" name="direction" class="radio-button"/>
+                    <label for="one-two-direction">В обе стороны</label>
+                </div>
+                <div class="input-group">
+                    <input id="multiple-direction" type="radio" ng-model="searchForm.direction" value="3" name="direction" class="radio-button"/>
+                    <label for="multiple-direction">Сложный маршрут</label>
+                </div>
+            </fieldset>
+            <fieldset class="form-group">
+                <div ng-hide="searchForm.direction==3" class="simple-search">
+                    <div class="departure-from input-group">
+                        <label for="#from-avia">Вылет из:</label>
+                        <div class="input">
+                            <input id="from-avia" type="text" placeholder="Город или аэропорт" ng-model="searchFrom.departureAirport"/><span class="icon"><i class="icon-metka"></i></span>
+                        </div>
+                    </div>
+                    <div ng-hide="searchForm.direction == 1" class="input-group refresh"><a href="#"><i class="icon-refresh"></i></a></div>
+                    <div ng-hide="searchForm.direction == 1" class="arriving-in input-group">
+                        <label for="#down-avia">Прилет в:</label>
+                        <div class="input">
+                            <input id="down-avia" type="text" placeholder="Город или аэропорт" ng-model="searchFrom.arrivalAirport"/><span class="icon"><i class="icon-metka"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="searchForm.direction==3" class="complex-search-avia">
+                    <div class="list-name-field">
+                        <div class="departure-from input-group">
+                            <label>Вылет из:</label>
+                        </div>
+                        <div class="arriving-in input-group">
+                            <label>Прилет в:</label>
+                        </div>
+                        <div class="up-date input-group">
+                            <label>Дата вылета:</label>
+                        </div>
+                    </div>
+                    <div ng-repeat="inputGropu in searchForm.complexFields" class="group">
+                        <div class="departure-from input-group">
+                            <div class="input">
+                                <input id="from-avia-1" type="text" placeholder="Город или аэропорт"/><span class="icon"><i class="icon-metka"></i></span>
+                            </div>
+                        </div>
+                        <div class="arriving-in input-group">
+                            <div class="input">
+                                <input id="down-avia-1" type="text" placeholder="Город или аэропорт"/><span class="icon"><i class="icon-metka"></i></span>
+                            </div>
+                        </div>
+                        <div class="up-date input-group">
+                            <div class="input">
+                                <input id="up-date-1" type="text" placeholder="Выберите дату"/><span class="icon"><i class="icon-date"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttton-add-group">
+                        <button ng-click="searchForm.addComplexField()" class="button buttton-add"><i class="icon-add"></i><span>Добавить</span></button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="form-group">
+                <div class="date-simple up-date input-group">
+                    <label for="#up-date">Дата вылета:</label>
+                    <div class="input">
+                        <input id="up-date" type="text" placeholder="Выберите дату"/><span class="icon"><i class="icon-date"></i></span>
+                    </div>
+                </div>
+                <div class="date-simple down-date input-group">
+                    <label for="#down-date">Дата возврата:</label>
+                    <div class="input">
+                        <input id="down-date" type="text" placeholder="Выберите дату"/><span class="icon"><i class="icon-date"></i></span>
+                    </div>
+                </div>
+                <div class="adults input-group">
+                    <label for="#adults">Взрослые (12+)</label>
+                    <div class="select">
+                        <select id="adults" name="adults">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="children input-group">
+                    <label for="#children">Дети (2-11)</label>
+                    <div class="select">
+                        <select id="children" name="children">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div><a href="#" class="age-rule-link">Правила перевозки детей<i class="icon-window"></i></a>
+                </div>
+                <div class="infant input-group">
+                    <label for="#infant">Младенцы (0-1)</label>
+                    <div class="select">
+                        <select id="infant" name="infant">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="form-group">
+                <div class="button-buy-wrap">
+                    <button type="submit" ng-click="searchForm.search()" class="button button-buy">Купить</button>
+                </div>
+                <div class="additional-options">
+                    <div class="additional-text"><a href="#" ng-click="searhForm.viewAdditionalFields= !searhForm.viewAdditionalFields">Дополнительные параметры<i class="icon-down"></i></a></div>
+                    <div ng-show="searhForm.viewAdditionalFields" class="additional-wrap">
+                        <div class="form-group">
+                            <div class="checkbox-input input-group">
+                                <input id="only-one-direction" type="checkbox" name="only-one-direction" class="checkbox-button"/>
+                                <label for="only-one-direction">Только прямые рейсы</label>
+                            </div>
+                            <div class="checkbox-input input-group">
+                                <input id="best-price-three-day" type="checkbox" name="best-price-three-day" class="checkbox-button"/>
+                                <label for="best-price-three-day">Лучшая цена +3 дня</label>
+                            </div>
+                            <div class="checkbox-input input-group">
+                                <input id="refundable" type="checkbox" name="refundable" class="checkbox-button"/>
+                                <label for="refundable">Отменяемый тариф</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="aviacompany input-group">
+                                <label for="#aviacompany">Выбор авиакомпании</label>
+                                <div class="select">
+                                    <select id="aviacompany" name="aviacompany">
+                                        <option value="0">Любая</option>
+                                        <option value="1">Любая 1</option>
+                                        <option value="2">Любая 2</option>
+                                        <option value="3">Любая 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="class-service input-group">
+                                <label for="#class-service">Класс обслуживания</label>
+                                <div class="select">
+                                    <select id="class-service" name="class-service">
+                                        <option value="0">Эконом</option>
+                                        <option value="1">Эконом 1</option>
+                                        <option value="2">Эконом 2</option>
+                                        <option value="3">Эконом 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <div id="hotels" class="tab"></div>
+    <div id="car-rental" class="tab"></div>
+</div>
