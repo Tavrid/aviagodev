@@ -1,0 +1,64 @@
+<div ng-switch="workedController">
+    <section class="we-better" ng-switch-when="index">
+        <div class="container">
+            <h2>Почему вам надо выбрать нас?</h2>
+
+            <div class="item">
+                <i class="icon-best"></i>
+
+                <div class="text">
+                    <!-- <h3>Низкие цены</h3> -->
+                    <p>Поиск по <b>510000 отелей</b> и <b>400 авиакомпаний по всему миру</b></p>
+                </div>
+            </div>
+            <div class="item">
+                <i class="icon-best"></i>
+
+                <div class="text">
+                    <!-- <h3>Надёжность</h3> -->
+                    <p>Secure incredible value with Expedia’s <b>Best Price Guarantee</b></p>
+                </div>
+            </div>
+            <div class="item">
+                <i class="icon-best"></i>
+
+                <div class="text">
+                    <!-- <h3>Круглосуточная поддержка</h3> -->
+                    <p><b>No Expedia cancellation fee</b> to change or cancel almost any hotel reservation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="banners"  ng-switch-when="index">
+        <div class="container">
+            <figure>
+                <a href="#"><img src="{{ asset('/bundles/bundlesdefault/images/image-1.jpg') }}" alt=""></a>
+                <figcaption>
+                    <a href="#">
+                        <span class="name">Баннер</span>
+                        <span class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni ad itaque, ipsum ducimus! Expedita, soluta ratione hic quod error nobis magnam optio recusandae aliquid necessitatibus minus dolores odio provident facilis.</span>
+                    </a>
+                </figcaption>
+            </figure>
+            <figure>
+                <a href="#"><img src="{{ asset('/bundles/bundlesdefault/images/image-1.jpg') }}" alt=""></a>
+                <figcaption>
+                    <a href="#">
+                        <span class="name">Баннер</span>
+                        <span class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni ad itaque, ipsum ducimus! Expedita, soluta ratione hic quod error nobis magnam optio recusandae aliquid necessitatibus minus dolores odio provident facilis.</span>
+                    </a>
+                </figcaption>
+            </figure>
+            <figure>
+                <a href="#"><img src="{{ asset('/bundles/bundlesdefault/images/image-1.jpg') }}" alt=""></a>
+                <figcaption>
+                    <a href="#">
+                        <span class="name">Баннер</span>
+                        <span class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni ad itaque, ipsum ducimus! Expedita, soluta ratione hic quod error nobis magnam optio recusandae aliquid necessitatibus minus dolores odio provident facilis.</span>
+                    </a>
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+    <div class="empty"  ng-switch-when="index"></div>
+</div>

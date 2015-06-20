@@ -21,17 +21,17 @@ var errorHandler = function(err){
 module.exports = function (gulp, argv) {
     var pat = [
         {
-            coffee: path.join(__dirname, '/src/js/index/index.coffee'),
+            coffee: path.join(__dirname, '/src/js/app.coffee'),
             watch: [path.join(__dirname, '/src/js/**/*.coffee')],
             outputJs: 'index.js',
             outputDist: './web/build/dist/js/index'
-        },
-        {
-            coffee: path.join(__dirname, '/src/js/list/index.coffee'),
-            watch: [path.join(__dirname, '/src/js/**/*.coffee')],
-            outputJs: 'index.js',
-            outputDist: './web/build/dist/js/list'
         }
+        //{
+        //    coffee: path.join(__dirname, '/src/js/list/index.coffee'),
+        //    watch: [path.join(__dirname, '/src/js/**/*.coffee')],
+        //    outputJs: 'index.js',
+        //    outputDist: './web/build/dist/js/list'
+        //}
     ];
     var tasks = [];
 
@@ -70,8 +70,6 @@ module.exports = function (gulp, argv) {
         tasks.push('coffee_' + index);
         //tasks.push('js_'+index);
     }
-
-    console.log(tasks);
     gulp.task('default', tasks);
 
     if (argv.dev) {

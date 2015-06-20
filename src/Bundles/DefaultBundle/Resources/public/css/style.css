@@ -696,7 +696,7 @@ fieldset.form-group:last-of-type {
 }
 
 .additional-wrap {
-	display: none;
+	/*display: none;*/
 }
 
 .additional-wrap .checkbox-input {
@@ -744,7 +744,7 @@ fieldset.form-group:last-of-type {
 /* Сложный поиск */
 
 .complex-search-avia {
-	display: none;
+	/*display: none;*/
 }
 
 .list-name-field .input-group {

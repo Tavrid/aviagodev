@@ -1,6 +1,6 @@
 require "angular"
 require "angular-ui-router"
-IndexController = require('./controller/IndexController')
+IndexController = require('./index/controller/IndexController')
 #$ ->
 App = angular.module "MainApp", ['ui.router']
 

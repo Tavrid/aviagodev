@@ -2,32 +2,32 @@ div(class="act-tab tab")
     .form-search-wrap
         fieldset.tab-direction
             .input-group
-                input#one-direction.radio-button(type='radio', name='direction')
+                input#one-direction.radio-button(type='radio', ng-model="searchForm.direction" value="1" name='direction' required)
                 label(for='one-direction') В одну сторону
             .input-group
-                input#one-two-direction.radio-button(checked='checked', type='radio', name='direction')
+                input#one-two-direction.radio-button(checked='checked',ng-model="searchForm.direction" value="2" type='radio', name='direction')
                 label(for='one-two-direction') В обе стороны
             .input-group
-                input#multiple-direction.radio-button(type='radio', name='direction')
+                input#multiple-direction.radio-button(type='radio',ng-model="searchForm.direction" value="3" name='direction')
                 label(for='multiple-direction') Сложный маршрут
         fieldset.form-group
-            .simple-search
+            div(class="simple-search" ng-hide="searchForm.direction==3")
                 .departure-from.input-group
                     label(for='#from-avia') Вылет из:
                     .input
-                        input#from-avia(type='text', placeholder='Город или аэропорт')
+                        input#from-avia(type='text', placeholder='Город или аэропорт' ng-model="searchFrom.departureAirport")
                         span.icon
                             i.icon-metka
-                .input-group.refresh
+                div(ng-hide="searchForm.direction == 1" class="input-group refresh")
                     a(href='#')
                         i.icon-refresh
-                .arriving-in.input-group
+                div(class="arriving-in input-group" ng-hide="searchForm.direction == 1")
                     label(for='#down-avia') Прилет в:
                     .input
-                        input#down-avia(type='text', placeholder='Город или аэропорт')
+                        input#down-avia(type='text', placeholder='Город или аэропорт' ng-model="searchFrom.arrivalAirport")
                         span.icon
                             i.icon-metka
-            .complex-search-avia
+            div(class="complex-search-avia" ng-show="searchForm.direction==3")
                 .list-name-field
                     .departure-from.input-group
                         label Вылет из:
@@ -35,7 +35,7 @@ div(class="act-tab tab")
                         label Прилет в:
                     .up-date.input-group
                         label Дата вылета:
-                .group
+                div(class="group" ng-repeat="inputGropu in searchForm.complexFields")
                     .departure-from.input-group
                         .input
                             input#from-avia-1(type='text', placeholder='Город или аэропорт')
@@ -51,24 +51,9 @@ div(class="act-tab tab")
                             input#up-date-1(type='text', placeholder='Выберите дату')
                             span.icon
                                 i.icon-date
-                .group
-                    .departure-from.input-group
-                        .input
-                            input#from-avia-1(type='text', placeholder='Город или аэропорт')
-                            span.icon
-                                i.icon-metka
-                    .arriving-in.input-group
-                        .input
-                            input#down-avia-1(type='text', placeholder='Город или аэропорт')
-                            span.icon
-                                i.icon-metka
-                    .up-date.input-group
-                        .input
-                            input#up-date-1(type='text', placeholder='Выберите дату')
-                            span.icon
-                                i.icon-date
+
                 .buttton-add-group
-                    button.button.buttton-add
+                    button(ng-click="searchForm.addComplexField()" class="button buttton-add")
                         i.icon-add
                         span Добавить
         fieldset.form-group
@@ -113,13 +98,13 @@ div(class="act-tab tab")
                         option(value='3') 3
         fieldset.form-group
             .button-buy-wrap
-                button.button.button-buy(type='submit') Купить
+                button.button.button-buy(type='submit' ng-click="searchForm.search()") Купить
             .additional-options
                 .additional-text
-                    a(href='#', onclick="openBlock('additional-wrap')")
+                    a(href='#' ng-click="searhForm.viewAdditionalFields= !searhForm.viewAdditionalFields")
                         | Дополнительные параметры
                         i.icon-down
-                .additional-wrap
+                div(class="additional-wrap" ng-show="searhForm.viewAdditionalFields")
                     .form-group
                         .checkbox-input.input-group
                             input#only-one-direction.checkbox-button(type='checkbox', name='only-one-direction')
