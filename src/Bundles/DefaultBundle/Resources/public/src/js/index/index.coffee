@@ -1,11 +1,28 @@
-ko = require "knockout"
-_ = require "underscore"
-require "./../lib/autocomplete"
-require "./../lib/datepicker"
-require "./../lib/validate"
-ViewModel = require "./../lib/search_form_model"
+require "angular"
+require "angular-ui-router"
+IndexController = require('./controller/IndexController')
+#$ ->
+App = angular.module "MainApp", ['ui.router']
 
-$(->
-  vm = new ViewModel
-  ko.applyBindings vm
-)
+#  console.log(scope)
+
+#App.controller 'searchForm', SearchFormController
+
+App.config [
+  '$stateProvider'
+  '$locationProvider'
+  ($stateProvider,$locationProvider) ->
+    $locationProvider.html5Mode(true)
+    $stateProvider.state('searchForm',
+      templateUrl: '/build/view/index/index.html'
+      controller: IndexController
+      url: '/'
+    )
+    $stateProvider.state('searchList',
+      templateUrl: '/build/view/index/index.html'
+      url: '/flights/*path'
+      controller: ->
+        console.log 'search controller'
+    )
+    return
+]

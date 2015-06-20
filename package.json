@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Symfony Standard Edition ========================",
   "dependencies": {
+    "angular": "^1.4.1",
+    "angular-route": "^1.4.1",
+    "angular-ui-router": "^0.2.15",
     "bloodhound": "^1.0.0",
     "knockout": "3.2.0",
     "node-notifier": "^4.1.1",
@@ -18,6 +21,7 @@
     "gulp": "^3.9.0",
     "gulp-coffee": "^2.3.1",
     "gulp-concat-css": "^2.2.0",
+    "gulp-jade": "^1.0.1",
     "gulp-less": "^3.0.3",
     "gulp-minify-css": "^0.3.11",
     "gulp-rename": "^1.2.0",

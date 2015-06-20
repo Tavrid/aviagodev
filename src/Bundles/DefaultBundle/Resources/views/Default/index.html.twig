@@ -1,118 +1,75 @@
 {% extends "BundlesDefaultBundle:Layouts:main.html.twig" %}
+{% block content %}
+    <section class="container" role="contentinfo" ui-view>
+
+    </section>
+    <div ng-switch="workedController">
+        <section class="we-better" ng-switch-when="index">
+            <div class="container">
+                <h2>Почему вам надо выбрать нас?</h2>
+
+                <div class="item">
+                    <i class="icon-best"></i>
+
+                    <div class="text">
+                        <!-- <h3>Низкие цены</h3> -->
+                        <p>Поиск по <b>510000 отелей</b> и <b>400 авиакомпаний по всему миру</b></p>
+                    </div>
+                </div>
+                <div class="item">
+                    <i class="icon-best"></i>
+
+                    <div class="text">
+                        <!-- <h3>Надёжность</h3> -->
+                        <p>Secure incredible value with Expedia’s <b>Best Price Guarantee</b></p>
+                    </div>
+                </div>
+                <div class="item">
+                    <i class="icon-best"></i>
+
+                    <div class="text">
+                        <!-- <h3>Круглосуточная поддержка</h3> -->
+                        <p><b>No Expedia cancellation fee</b> to change or cancel almost any hotel reservation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="banners"  ng-switch-when="index">
+            <div class="container">
+                <figure>
+                    <a href="#"><img src="{{ asset('/bundles/bundlesdefault/images/image-1.jpg') }}" alt=""></a>
+                    <figcaption>
+                        <a href="#">
+                            <span class="name">Баннер</span>
+                            <span class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni ad itaque, ipsum ducimus! Expedita, soluta ratione hic quod error nobis magnam optio recusandae aliquid necessitatibus minus dolores odio provident facilis.</span>
+                        </a>
+                    </figcaption>
+                </figure>
+                <figure>
+                    <a href="#"><img src="{{ asset('/bundles/bundlesdefault/images/image-1.jpg') }}" alt=""></a>
+                    <figcaption>
+                        <a href="#">
+                            <span class="name">Баннер</span>
+                            <span class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni ad itaque, ipsum ducimus! Expedita, soluta ratione hic quod error nobis magnam optio recusandae aliquid necessitatibus minus dolores odio provident facilis.</span>
+                        </a>
+                    </figcaption>
+                </figure>
+                <figure>
+                    <a href="#"><img src="{{ asset('/bundles/bundlesdefault/images/image-1.jpg') }}" alt=""></a>
+                    <figcaption>
+                        <a href="#">
+                            <span class="name">Баннер</span>
+                            <span class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni ad itaque, ipsum ducimus! Expedita, soluta ratione hic quod error nobis magnam optio recusandae aliquid necessitatibus minus dolores odio provident facilis.</span>
+                        </a>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+        <div class="empty"  ng-switch-when="index"></div>
+    </div>
+{% endblock %}
+
 {% block js %}
     {{ parent() }}
-    <script type="application/javascript" src="{{ asset('build/dist/js/index/index.js') }}"></script>
-    {% javascripts
-    'bundles/bundlesdefault/js/default/index.js'
-    'bundles/bundlesdefault/js/default/jquery.selectbox.min.js'
-    'bundles/bundlesdefault/js/default/avia.js'
-    combine=true%}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    <script src="{{ asset('/build/dist/js/index/index.js') }}" type="text/javascript"></script>
 {% endblock %}
-
-{% block body %}
-
-    <div class="index-wrap row">
-        <div class="bg-wrap"><div class="bg"></div></div>
-        <div class="col-md-9 form-index-wrap">
-            <ul class="nav nav-tabs">
-                <li class="active">
-                    <a href="#avia" data-toggle="tab">
-                        {% trans %}frontend.default.flights{% endtrans %}
-                    </a>
-                </li>
-                <li><a href="#hotels" data-toggle="tab">Гостиницы</a></li>
-                <li><a href="#auto" data-toggle="tab">Прокат авто</a></li>
-            </ul>
-            <!-- Tab panes -->
-            {% include "BundlesDefaultBundle:Default:_form.html.twig" %}
-        </div>
-        <div class="col-md-3 now-find">
-            <div class="panel-body panel-blue">
-                <!-- Default panel contents -->
-                <div class="panel-heading text-center">Сейчас на сайте находят</div>
-                <!-- List group -->
-                <div class="list-now-find">
-                    <ul class="list-group">
-                        <li class="list-group-item"><a href="#">Киев–Прага 5726 грн.</a></li>
-                        <li class="list-group-item"><a href="#">Киев–Дрезден 4891 грн.</a></li>
-                        <li class="list-group-item"><a href="#">Вильнюс–Мюнхен 5511 грн</a></li>
-                        <li class="list-group-item"><a href="#">Киев–Прага 5726 грн.</a></li>
-                        <li class="list-group-item"><a href="#">Киев–Дрезден 4891 грн.</a></li>
-                        <li class="list-group-item"><a href="#">Вильнюс–Мюнхен 5511 грн</a></li>
-                        <li class="list-group-item"><a href="#">Киев–Прага 5726 грн.</a></li>
-                        <li class="list-group-item"><a href="#">Киев–Дрезден 4891 грн.</a></li>
-                        <li class="list-group-item"><a href="#">Вильнюс–Мюнхен 5511 грн</a></li>
-                        <li class="list-group-item"><a href="#">Вильнюс–Мюнхен 5511 грн</a></li>
-                        <li class="list-group-item"><a href="#">Вильнюс–Мюнхен 5511 грн</a></li>
-                        <li class="list-group-item"><a href="#">Вильнюс–Мюнхен 5511 грн</a></li>
-                        <li class="list-group-item"><a href="#">Вильнюс–Мюнхен 5511 грн</a></li>
-                    </ul>
-                </div>
-                <div class="row group-info">
-                    <div class="col-md-6 col-sm-12 col-xs-12">
-                        <div class="form-group">
-                            <button type="button" class="form-inline btn-info btn btn-default" data-toggle="tooltip" data-placement="top" title="Наше время работы с 00:00 до 24:00">
-                                <span class="form-group glyphicon glyphicon-times"></span> 
-                                <span class="form-group">Время работы</span>
-                            </button>
-                        </div>
-                        <div class="form-group">
-                            <button type="button" data-toggle="modal" data-target="#myModal" class="form-inline btn-info btn btn-default">
-                                <span class="form-group glyphicon glyphicon-help"></span> 
-                                <span class="form-group">Помощь</span>
-                            </button>
-                        </div>
-                        <div class="form-group">
-                            <a href="skype:echo123?call" class="form-inline btn-info btn btn-default">
-                                <span class="form-group glyphicon glyphicon-skype"></span> 
-                                <span class="form-group">Свяжитесь</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="pay-for-booking col-md-6 col-sm-12 col-xs-12">
-                        <a href="{{ path('bundles_default.order.search') }}" class="btn btn-lg btn-primary">Оплатить <br/> бронь</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% if flights %}
-        <div class="row">
-            <div class="col-md-8">
-                <div class="panel-body panel-blue">
-                    {% if flights %}
-                        <h4>{%trans%}frontend.default.previous_searches{%endtrans%}</h4>
-                        <ul class="list-group">
-                            {% for flight in flights %}
-                                <li class="list-group-item">
-                                    <a href="{{ flight.url }}">
-                                        {% if flight.name is defined %}
-                                            {{ flight.name }}
-                                        {% endif %}
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    {% endif %}
-    
-    <footer>
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-6">
-                <p><b>Телефон:</b> +38(0652) 248-986<br/>
-                <b>Email:</b> info@aquatour.com.ua<br/>
-                <b>Адрес:</b> Крым, г. Симферополь, ул. Горького, 30</p>
-            </div>
-            <div align="right" class="col-md-6 col-sm-6 col-xs-6">
-                <div class="h5 info-color">&copy; Акватур, 2004</div>
-            </div>
-        </div>
-    </footer>
-
-{% endblock %}
-

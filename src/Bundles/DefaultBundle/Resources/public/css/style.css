@@ -1,0 +1,933 @@
+/* Основные стили сайта */
+
+.container {
+	width: 1000px;
+	margin: 0 auto;
+	position: relative;
+}
+
+/* Основные стили сайта */
+
+body {
+	font-family: Tahoma;
+	min-width: 1100px;
+}
+
+.wrapper {
+	background: url('../images/bg-1.jpg') no-repeat center top;
+	-webkit-background-size: cover;
+	background-size: cover;
+/* 	-webkit-background-size: cover;
+background-size: cover; */
+}
+
+/* Поля ввода */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+	width: 100%;
+	font-size: 14px;
+	line-height: 19px;
+	background: none;
+	padding: 0.533333em 0.8em;
+	border: none;
+	background: #fff;
+	font-family: Tahoma;
+	border-radius: 3px;
+	box-shadow: 0 0.0666667em 0 rgba(0, 0, 0, 0.1) inset, 0 0.0666667em 0.0666667em rgba(0, 0, 0, 0.05) inset;
+	transition: box-shadow .4s, color .4s;
+	border-color: #858585 #c2c2c2 #c2c2c2;
+    border-image: none;
+	border-style: solid;
+    border-width: 1px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+	padding: 0.533333em 0.8em 0.533333em 2em;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+	box-shadow: inset 0 0 5px 0 rgba(0,0,0,.5);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+	color:#09F;
+}
+
+input[type="text"]:focus + .icon i:before,
+input[type="email"]:focus + .icon i:before,
+input[type="password"]:focus + .icon i:before {
+	filter: none;
+}
+
+/* Чекбоксы */
+
+.checkbox-input.input-group input,
+.checkbox-input.input-group label {
+	display: inline-block;
+	vertical-align: middle;
+} 
+
+/* Кнопки */
+
+.button {
+	background: none;
+	border: none;
+}
+
+/* Крыло самолета */
+
+.wing-image {
+	background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzciIGhlaWdodD0iMTEyIiBzaGFwZS1yZW5kZXJpbmc9Imdlb21ldHJpY1ByZWNpc2lvbiIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIHZpZXdCb3g9IjAgMCAyOC40MjA1IDE4LjAwNzYiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iYSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIuMjg0IiB5MT0iOC45OTEiIHgyPSIyOC4xMzYiIHkyPSI4Ljk5MSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjNkNGIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDZDIi8+PC9saW5lYXJHcmFkaWVudD48cmFkaWFsR3JhZGllbnQgaWQ9ImIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiBjeD0iMjEuOTY4IiBjeT0iOC40MzciIHI9IjUuNzUxIiBmeD0iMjEuOTY4IiBmeT0iOC40MzciPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzlDRiIvPjxzdG9wIG9mZnNldD0iLjQiIHN0b3AtY29sb3I9IiMzNjkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM5Q0YiLz48L3JhZGlhbEdyYWRpZW50PjwvZGVmcz48cGF0aCBmaWxsPSJ1cmwoI2EpIiBkPSJNMCAxOC4wMDhoMjMuODM3TDI4LjQyLjAyNGMtMi4yOS0uMDUtNS4yLS4wNDItNy4zOC4yMjJMOS44NCAxMy43QzcuNjA2IDE2LjM4IDUuMzkyIDE2LjIgMCAxOC4wMDd6Ii8+PHBhdGggZmlsbD0idXJsKCNiKSIgc3Ryb2tlPSIjRkZGIiBzdHJva2Utd2lkdGg9Ii4zMjEiIGQ9Ik0yMC4xMiA1LjM5YzIuNTUgMCA0LjYxOCAyLjA2NyA0LjYxOCA0LjYxN3MtMi4wNjcgNC42MTctNC42MTcgNC42MTctNC42MTYtMi4wNjctNC42MTYtNC42MTdTMTcuNTcgNS4zOSAyMC4xMiA1LjM5eiIvPjxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik0xNy45OSAxNC4xMzJjLS4yOS0uMTQtLjU1Mi0uMzE3LS44MDItLjUwNi40OS0uMzczIDEuMDIyLS44OCAxLjAxLTEuNzktLjAxLS43Mi0uNTI2LTEuMzQtMS4wODMtMS43MjItLjIyMy0uMTU0LS4yNjQtLjQ5NC4wMDMtLjcyNyAxLjg0Ni0xLjY2MiA1LjIxNC0zLjMzNiA5LjA5Mi0zLjItLjAxNy4zMTYtLjc1MiAxLjAxLTEuMTI4IDEuMDYyLTIuNDc4LjA4My00LjY2LjkyNC02Ljk4MiAyLjYzNi42MS4zNzMuOTI2IDEuMTguOTQyIDEuOTYuMDIgMS4wNDUtLjQ1IDEuODE1LTEuMDUzIDIuMjg2em0uNjA1LTQuMTY3YzEuNDA0LTEuMDA0IDMuMzkzLTEuOTkgNS40ODctMi4yNy0uNDc3LjQtMS4wMjcgMS4xNDMtMS42MTggMS4zNDQtMS4yMjguNDE3LTIuMzIgMS4wMi0zLjM4IDEuNzA3LS4xMy0uMzgtLjI2NS0uNTU3LS40OS0uNzgyem0uNTggMS4wOWMuOTA4LS42MDcgMi4yMTYtMS4zMTIgMy4zMi0xLjY4NC0uMzQzLjU1Mi0uNjc4IDEuMjc0LTEuMDU4IDEuNDQyLS43MjguMzIzLTEuMS41Mi0yLjE2IDEuMjA3LjAxOC0uNDAzLS4wMDYtLjY2LS4xMDMtLjk2NXptLjA5MiAxLjMyOGMuNzU4LS40OTcgMS4yNzItLjgxNyAyLjE1LTEuMjQtLjIxLjUyMy0uNDUzIDEuMDM1LS43ODYgMS4yOC0uNDQ0LjMzLS44Ny41My0xLjcxLjk4LjIyLS4zMi4zMS0uNy4zNDctMS4wMnoiLz48L3N2Zz4=") no-repeat center top / cover ;
+    height: 134px;
+    position: absolute;
+    right: 0;
+    top: -134px;
+    width: 210px;
+}
+
+/* Иконки */
+
+i {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+i:before {
+	transition: opacity .4s, filter .4s;
+}
+
+.icon-metka:before,
+.icon-date:before {  
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);	  
+    -ms-filter: grayscale(100%);
+	-o-filter: grayscale(100%);	
+	filter: grayscale(100%);
+} 
+
+.icon-refresh:before {
+	content: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMSIgaGVpZ2h0PSIyMyIgdmlld0JveD0iMCAwIDEuMTUyOTQgMS4yNzQ3NiIgc2hhcGUtcmVuZGVyaW5nPSJnZW9tZXRyaWNQcmVjaXNpb24iPjxnIHN0cm9rZT0iI0ZGRiIgc3Ryb2tlLXdpZHRoPSIuMTEiPjxwYXRoIGQ9Ik0uMzc3LjYzN2wtLjMtLjMuMy0uMjk4TS4wNzguMzM4aC45OTdNLjc3Ni42MzdsLjMuMy0uMy4zTTEuMDc1LjkzN0guMDc4Ii8+PC9nPjwvc3ZnPg==');
+	width: 25px;
+	height: 31px;
+	opacity: .7;
+}
+
+.icon-refresh:hover:before {
+	opacity: 1;
+}
+
+.icon-metka:before {
+	content: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxOSIgdmlld0JveD0iMCAwIDAuMTM3ODg5IDAuMjA5ODMiIHNoYXBlLXJlbmRlcmluZz0iZ2VvbWV0cmljUHJlY2lzaW9uIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCI+PHBhdGggZmlsbD0iIzAwQTZFOCIgY2xhc3M9ImZpbDAiIGQ9Ik0uMDcgMGMuMDM3IDAgLjA2OC4wMy4wNjguMDdDLjEzOC4xMDYuMS4xNTQuMDY4LjIxLjA0LjE2IDAgLjEwNyAwIC4wNyAwIC4wMy4wMyAwIC4wNyAwem0wIC4wMzZDLjA4Ni4wMzYuMS4wNS4xLjA3LjEwMi4wODYuMDg3LjEuMDcuMS4wNS4xMDIuMDM1LjA4Ny4wMzUuMDcuMDM2LjA1LjA1LjAzNS4wNy4wMzV6Ii8+PC9zdmc+');
+	width: 13px;
+	height: 18px;
+}
+
+.icon-date:before {
+	content: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNyIgdmlld0JveD0iMCAwIDAuMzY4ODA1IDAuMzY4ODA1IiBzaGFwZS1yZW5kZXJpbmc9Imdlb21ldHJpY1ByZWNpc2lvbiIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGw9IiMwMEE2RTgiIGNsYXNzPSJmaWwwIiBkPSJNLjAzIDBoLjMxYy4wMTUgMCAuMDMuMDE0LjAzLjAzdi4zMUMuMzcuMzU0LjM1NC4zNy4zNC4zN0guMDNDLjAxNC4zNyAwIC4zNTQgMCAuMzRWLjAzQzAgLjAxNC4wMTQgMCAuMDMgMHptLjAwOC4xMDVILjMzVi4zM0guMDRWLjEwNnpNLjI5NC4yMXYuMDg0SC4yMUwuMjk1LjIxeiIvPjwvc3ZnPg==');
+	width: 17px;
+	height: 18px;
+}
+
+.icon-down:before {
+	content: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjkiIHNoYXBlLXJlbmRlcmluZz0iZ2VvbWV0cmljUHJlY2lzaW9uIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgdmlld0JveD0iMCAwIDAuMDg4OTcgMC4xMDI0NDMiPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzA5RiIgc3Ryb2tlLXdpZHRoPSIuMDIiPjxwYXRoIGQ9Ik0uMDA4LjA1NGwuMDM2LjAzM0wuMDguMDU0TS4wMDguMDA4bC4wMzYuMDM0TC4wOC4wMDgiLz48L2c+PC9zdmc+');
+	width: 11px;
+	height: 11px;
+}
+
+.icon-airlines:before {
+	content: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgc2hhcGUtcmVuZGVyaW5nPSJnZW9tZXRyaWNQcmVjaXNpb24iIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiB2aWV3Qm94PSIwIDAgMS43MjU0MiAxLjY4ODE4Ij48cGF0aCBmaWxsPSIjMDlGIiBkPSJNLjI2IDEuNDY2bC4wNzQtLjEzM0wwIDEuMjIzbC4xNDgtLjE0Ny4zMS4wNDguNC0uNC0uODMtLjI2Ni4xNjQtLjEzM0wxLjIwNC4zNiAxLjM4LjE4NmMuMTQtLjEzNi4yNy0uMjEzLjMzNy0uMTc2LjAzNy4wNjYtLjA1NS4xODMtLjE5LjMyMkwxLjM1LjUwOGwuMTQuOTk3LS4xMzMuMTYzLS4zNTUtLjgtLjQuNC4wODcuMjcyLS4xNS4xNDgtLjE0Ny0uMjk2LS4xMzMuMDc0eiIvPjwvc3ZnPg==');
+	width: 16px;
+	height: 16px;
+}
+
+.icon-window:before {
+	content: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5IiBoZWlnaHQ9IjkiIHNoYXBlLXJlbmRlcmluZz0iZ2VvbWV0cmljUHJlY2lzaW9uIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgdmlld0JveD0iMCAwIDAuMDkwMzk5OSAwLjA5MDE5NDkiPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzA5RiI+PHBhdGggc3Ryb2tlLXdpZHRoPSIuMDIiIGQ9Ik0uMDMuMDFoLjA1di4wNUguMDN6Ii8+PHBhdGggc3Ryb2tlLXdpZHRoPSIuMDEiIGQ9Ik0uMDY1LjA4NWgtLjA2di0uMDYiLz48L2c+PC9zdmc+');
+	width: 9px;
+	height: 9px;
+}
+
+.icon-best:before {
+	content: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNnB4IiBoZWlnaHQ9IjM2cHgiIHNoYXBlLXJlbmRlcmluZz0iZ2VvbWV0cmljUHJlY2lzaW9uIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgdmlld0JveD0iMCAwIDEuMDIyMDggMS4wMjIwOCI+PGNpcmNsZSBmaWxsPSIjMDlGIiBjeD0iMC41IiBjeT0iMC41IiByPSIwLjUiLz48cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ5ZWxsb3ciIHN0cm9rZS13aWR0aD0iMC4xNyIgcG9pbnRzPSIwLjgsMC4zNSAwLjQ1LDAuNjggMC4yNSwwLjQ4Ii8+PC9zdmc+');
+	width: 36px;
+	height: 36px;
+}
+
+.icon-add {
+	position: relative;
+	width: 10px;
+	height: 10px;
+	top: -1px;
+}
+
+.icon-add:after,
+.icon-add:before {
+	content: '';
+	background: #fff;
+	position: absolute;
+}
+
+.icon-add:after {
+	width: 10px;
+	height: 2px;
+	left: 0;
+	top: 4px;
+}
+
+.icon-add:before {
+	width: 2px;
+	height: 10px;
+	top: 0;
+	left: 4px;
+}
+
+.icon-time:before {
+	content: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc2hhcGUtcmVuZGVyaW5nPSJnZW9tZXRyaWNQcmVjaXNpb24iIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiB2aWV3Qm94PSIwIDAgMC4yOTUzMTcgMC4yOTUzMTciPjxjaXJjbGUgZmlsbD0iI0ZGRiIgY3g9IjAuMTQ3NjU3IiBjeT0iMC4xNDc2NTkiIHI9IjAuMTQ3NjU5Ii8+PHBhdGggZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDlGIiBzdHJva2Utd2lkdGg9IjAuMDE1IiBkPSJNMC4yNzUwMDMgMC4xNDc2NjFsLTAuMTI3MzQ4IDAgMCAtMC4wNzAzMTM4bS0wLjEyNjU2MSAwLjA3MDMxMzhsMC4wNDIxODUgMG0wLjA4NDc2OSAwLjA4NDc2MzVsMCAwLjA0MjE4NW0tMC4xMDk5NDEgLTAuMTkwNDI2bDAuMDM2NTM0MSAwLjAyMTA4OThtMC4xNDY4MiAwLjA4NDc2OWwwLjAzNjUzNDEgMC4wMjEwODk4bS0wLjA0NjQ2OTcgLTAuMTczNDE4bC0wLjAyMTA5NTIgMC4wMzY1MzQxbS0wLjA4NDc2MzUgMC4xNDY4MmwtMC4wMjEwOTUyIDAuMDM2NTM0MW0wIC0wLjIxOTg4OGwwLjAyMTA5NTIgMC4wMzY1Mjg3bTAuMDg0NzY5IDAuMTQ2ODI1bDAuMDIxMDg5OCAwLjAzNjUzNDFtMC4wNDY0Njk3IC0wLjE3MzQxOGwtMC4wMzY1MzQxIDAuMDIxMDg5OG0tMC4xNDY4MiAwLjA4NDc3NDVsLTAuMDM2NTM0MSAwLjAyMTA4NDNtMC4xMDk5NTIgLTAuMTkwNDE1bDAgMC4wNDIxODUiLz48L3N2Zz4=');
+	width: 18px;
+	height: 18px;
+}
+
+.icon-help:before {
+	content: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgc2hhcGUtcmVuZGVyaW5nPSJnZW9tZXRyaWNQcmVjaXNpb24iIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiB2aWV3Qm94PSIwIDAgMC4yODgwODcgMC4yODgwODciPjxjaXJjbGUgZmlsbD0iI0ZGRiIgY3g9IjAuMTQ0MDQyIiBjeT0iMC4xNDQwNDIiIHI9IjAuMTQ0MDQ0Ii8+PHBhdGggZmlsbD0iIzA5RiIgZmlsbC1ydWxlPSJub256ZXJvIiBkPSJNMC4xMjYzNDIgMC4xOTExMmMtMC4wMDA5NjczMjEsLTAuMDUwMzkzNiAwLjA0MDYwMDIsLTAuMDQ4ODA4NyAwLjA0MjIyMzMsLTAuMDc5MDU4IDAuMDAwODkwODEsLTAuMDE2NDg4MiAtMC4wMTQwMzQ0LC0wLjAyNTQ2MTkgLTAuMDI1NTAwMSwtMC4wMjU0NjE5IC0wLjAyMjA4NDQsMCAtMC4wMjQ1NzY1LDAuMDE2MTI3NSAtMC4wMjQ4NjYyLDAuMDMxODM0MWwtMC4wMzY4MDc0IDBjLTAuMDAwOTk0NjQ2LC0wLjAzOTc5MTMgMC4wMjM1NDkxLC0wLjA2NTY1MjEgMC4wNjI2NjgyLC0wLjA2NTY1MjEgMC4wMzQ4NzgyLDAgMC4wNjI2NzM3LDAuMDIyODc2OSAwLjA2MjY3MzcsMC4wNTc2OTUgMCwwLjA0Mjc3NTMgLTAuMDQyMTU3NywwLjAzOTgyNDEgLTAuMDQ0NzY0NiwwLjA4MTU3MTlsLTAuMDM1NjI2OSAtMC4wMDA5MjkwNjV6Ii8+PGNpcmNsZSBmaWxsPSIjMDlGIiBjeD0iMC4xNDQyMjYiIGN5PSIwLjIyOTQ4NiIgcj0iMC4wMjA4OTA0Ii8+PC9zdmc+');
+	width: 18px;
+	height: 18px;
+}
+
+.icon-skype:before {
+	content: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgc2hhcGUtcmVuZGVyaW5nPSJnZW9tZXRyaWNQcmVjaXNpb24iIHRleHQtcmVuZGVyaW5nPSJnZW9tZXRyaWNQcmVjaXNpb24iIGltYWdlLXJlbmRlcmluZz0ib3B0aW1pemVRdWFsaXR5IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgdmlld0JveD0iMCAwIDAuMzAzNzA1IDAuMzAzNzA1Ij48cGF0aCBmaWxsPSIjRkZGIiBkPSJNMC4xNTE4NTUgMC4yMzEzOTJjLTAuMDc1OTMwNSwwIC0wLjE1MTg1NSwtMC4wMjg5MjI2IC0wLjE1MTg1NSwtMC4xMTU2OTYgMCwtMC4wODY3Njc4IDAuMDY5NTk4NiwtMC4xMTU2OTYgMC4xNTE4NTUsLTAuMTE1Njk2IDAuMDgyMjUwOCwwIDAuMTUxODQ5LDAuMDI4OTI4NCAwLjE1MTg0OSwwLjExNTY5NiAwLDAuMDg2NzczNiAtMC4wODIyNTA4LDAuMTMwMTU4IC0wLjE1MTg0OSwwLjE4ODAwOWwwIC0wLjA3MjMxMjN6Ii8+PHBhdGggZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDlGIiBzdHJva2Utd2lkdGg9IjAuMDE1MjQ0OSIgZD0iTTAuMDcyMzEyMyAwLjA4Njc3MzZsMC4xNzM1NDcgMG0tMC4xNzM1NDcgMC4wNTg0MTU2bDAuMTMwMTU4IDAiLz48L3N2Zz4=');
+	width: 18px;
+	height: 18px;
+}
+
+/* Навигационный сайдбар на шапкой */
+
+.nav-bar {
+	height: 10px;
+	background: transparent;
+}
+
+/* Шапка */
+
+header {
+	height: 110px;
+	margin-bottom: 16px;
+	background: #fff;
+}
+
+/* Логотип */
+
+header .logo {
+	position: absolute;
+	left: 0;
+	top: 16px;
+	width: 200px;
+}
+
+header .logo img {
+	max-width: 100%;
+	height: auto;
+}
+
+/* Языки */
+
+header .lang-wrap {
+	position: absolute;
+	right: 123px;
+    top: 7px;
+    z-index: 9;
+    height: 20px;
+}
+
+.lang-wrap a {
+	font-size: 12px;
+	color:#5ba6d7;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.open-currency-lang .lang-name-block,
+.lang-wrap:hover .lang-name-block {
+	background: #48C8FF;
+	color:#fff;
+}
+
+.open-currency-lang .lang-name-block:after,
+.lang-wrap:hover .lang-name-block:after {
+	border-color: #fff transparent transparent transparent;
+}
+
+.lang-name-block {
+	font-size: 12px;
+	color:#555;
+	position: relative;
+	cursor: pointer;
+	padding:4px 14px 4px 4px;
+}
+
+.lang-name-block:after {
+	content: '';
+	position: absolute;
+	top: 10px;
+	right: 4px;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 5px 3.5px 0 3.5px;
+	border-color: #555555 transparent transparent transparent;
+}
+
+.current-lang-course i,
+.current-lang-course div,
+.current-lang-course span,
+.lang-name-block i,
+.lang-name-block div,
+.lang-name-block span {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.select-lang-currency {
+	display: none;
+	position: absolute;
+	top: 22px;
+	left: -11px;
+	background: #fff;
+	padding: 10px 15px 20px;
+	width: 162px;
+	box-shadow: 0 0 5px 0 rgba(0,0,0,.5);
+	border-radius: 5px;
+}
+
+.open-currency-lang .select-lang-currency {
+	display: block;
+}
+
+.current-lang-course {
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+
+.select-lang-currency .lang-select {
+	margin-bottom: 10px;
+}
+
+.select-lang-currency label {
+	font-size: 12px;
+	display: block;
+	margin-bottom: 5px;
+}
+
+/* Телефон */
+
+header .phone {
+	position: absolute;
+	right: 120px;
+    top: 30px;
+	color:#0b7bc2;
+	font-weight: bold;
+	font-size: 32px;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+header .phone span {
+	font-size: 24px;
+	font-weight: normal;
+}
+
+/* Форма поиска на главной */
+
+.index-wrap {
+	position: relative;
+	padding-bottom: 20px;
+}
+
+/* Переключатель сервисов */
+
+.tabs-services {
+	position: absolute;
+	left: 0;
+	top: 76px;
+}
+
+.tabs-services a {
+	display: inline-block;
+	vertical-align: bottom;
+	margin-right: -5px;
+	color: #008ED5; 
+	padding: 10px 16px;
+	font-size: 14px;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.tabs-services a.act-link {
+	color:#fff;
+	background: #008ED5;
+}
+
+/* Контент сервисов */
+
+.tab-content-services,
+.info-wrap {
+	display: inline-block;
+	vertical-align: top;
+	margin-right: -5px;
+	white-space: nowrap;
+}
+
+.tab-content-services {
+	width: 690px; 
+	background: rgba(0, 23, 47, .8);
+	border-radius: 10px;
+	padding: 1.41176em;
+	position: relative;
+	z-index: 2;
+	margin-right: 10px;
+}
+
+/* Табы */
+
+.tab {
+	display: none;
+}
+
+.act-tab {
+	display: block;
+}
+
+/* Информационный блок */
+
+.info-wrap {
+	width: 300px;
+	padding: 20px 20px 20px 20px;
+	background: rgba(26,189,255, .8);
+	z-index: 1;
+	border-radius: 10px;
+	color:#fff;
+}
+
+/* Сейчас на сайте находят */
+
+.now-find-wrap {
+	background: rgba(80, 103, 127, 0.45) none repeat;
+	border-radius: 5px;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.now-find-wrap .title {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.list-now-flights .item {
+	background: #fff;
+	color:#555;
+	font-size: 12px;
+	padding: 10px 10px 10px 30px;
+	margin-bottom: 1px;
+	position: relative;
+	white-space: nowrap;
+}
+
+.list-now-flights .item i {
+	position: absolute;
+	left: 7px;
+    top: 9px;
+}
+
+.list-now-flights .item i,
+.list-now-flights .item .info-flight,
+.list-now-flights .item .price-flight {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.list-now-flights .item .info-flight {
+	width: 145px;
+}
+
+.list-now-flights .item .price-flight {
+	width: 50px;
+}
+
+/* Кнопки помощи */
+
+.services-button {
+	width: 50%;
+}
+
+.services-button a {
+	display: block;
+	text-decoration: none;
+	color:#fff;
+	margin-bottom: 10px;
+	font-size: 14px;
+}
+
+.services-button a:last-of-type {
+	margin-bottom: 0;
+}
+
+.services-button i {
+	margin-right: 2px;
+}
+
+.services-button span {
+	text-decoration: underline;
+}
+
+.services-button a:hover span {
+	text-decoration: none;
+}
+
+/* Оплатить бронь */
+
+.services-button,
+.pay-for-booking {
+	display: inline-block;
+	vertical-align: top;
+	margin-right: -5px;
+}
+
+.pay-for-booking {
+	width: 50%;
+}
+
+/* Переключатели перелетов */
+
+.tab-direction {
+	margin-bottom: 20px;
+	background: rgba(80, 103, 127, 0.45);
+	display: inline-block;
+	border-radius: 3px;
+	padding-right: 5px;
+}
+
+.tab-direction .input-group {
+	display: inline-block;
+	vertical-align: top;
+	margin-right: -5px;
+}
+
+.tab-direction .input-group label {
+	color:#fff;
+	padding: 12px 15px;
+	font-size: 14px;
+	cursor: pointer;
+	display: block;
+	transition: background .4s;
+}
+
+.radio-button {
+	display: none;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	opacity: 0;
+}
+
+.input-group .radio-button:checked + label {
+	background: #0065B8;
+	border-radius: 3px;
+}
+
+/* Группа форма */
+
+fieldset {
+	border: 0 none;
+}
+
+fieldset.form-group:last-of-type {
+	margin-bottom: 0;
+}
+
+.form-group {
+	margin-bottom: 15px;
+}
+
+.form-group .input-group {
+	display: inline-block;
+	vertical-align: top;
+	margin-bottom: 10px;
+	position: relative;
+}
+
+.form-group label {
+	font-size: 13px;
+	color:#fff;
+	margin-bottom: 7px;
+	display: block;
+}
+
+.input {
+	position: relative;
+}
+
+.input .icon {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 30px;
+	height: 30px;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.input .icon:before {
+	content: '';
+	display: table;
+	width: 100%;
+	height: 10px;
+}
+
+/* Размеры полей ввода */
+
+.departure-from.input-group,
+.arriving-in.input-group {
+	width: 306px;
+}
+
+.complex-search-avia .departure-from.input-group,
+.complex-search-avia .arriving-in.input-group {
+	width: 231px;
+	margin-right: 12px;
+}
+
+.departure-from.input-group input,
+.arriving-in.input-group input,
+.up-date.input-group input,
+.down-date.input-group input {
+	padding-left: 30px;
+}
+
+.up-date.input-group,
+.down-date.input-group {
+	width: 144px;
+	margin-right: 12px;
+}
+
+.adults.input-group,
+.children.input-group,
+.infant.input-group {
+	width: 95px;
+	margin-right: 12px;    
+}
+
+.infant.input-group {
+	margin-right: 0;
+}
+
+.aviacompany.input-group {
+	width: 215px;
+	margin-right: 12px;
+}
+
+.class-service {
+	width: 135px;
+}
+
+/* Переставить перелеты */
+
+.refresh {
+	margin-top: 29px;
+}
+
+/* Возрастные правила авиакомпаний */
+
+.age-rule-link {
+	color: #57b3ff;
+	font-size: 0.764706em;
+	text-decoration: none;
+	border-bottom: 1px solid #57b3ff;
+	padding-bottom: 1px;
+	display: none;
+}
+
+.age-rule-link:hover {
+	border-bottom: 1px solid transparent;
+}
+
+.children {
+	position: relative;
+}
+
+.age-rule-link {
+	position: absolute;
+	bottom: -20px;
+	left: 0;
+}
+
+/* Кнопка купить */
+
+.button-buy-wrap {
+	float: right;
+	margin-top: 20px;
+}
+
+/* Дополнительные параметры */
+
+.additional-text {
+	padding-bottom: 10px;
+}
+
+.additional-text a {
+	font-size: 13px;
+	text-decoration: none;
+	color:#038DE8;
+}
+
+.additional-text a.open-block i {
+	-ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
+}
+
+.additional-wrap {
+	display: none;
+}
+
+.additional-wrap .checkbox-input {
+	margin-right: 20px;
+}
+
+.additional-wrap .checkbox-input label {
+	margin-bottom: 0;
+	cursor: pointer;
+}
+
+.additional-wrap .form-group:last-of-type {
+	margin-bottom: 0;
+}
+
+/* Кнопка купить */
+
+.button-buy {
+	background: rgba(0, 0, 0, 0) -webkit-linear-gradient(bottom, #ffbe00 0%, #ffcb00 100%) repeat scroll 0 0;
+	background: rgba(0, 0, 0, 0) -o-linear-gradient(bottom, #ffbe00 0%, #ffcb00 100%) repeat scroll 0 0;
+	background: rgba(0, 0, 0, 0) linear-gradient(to top, #ffbe00 0%, #ffcb00 100%) repeat scroll 0 0;
+    border-color: #d4a900 #aa8700 #aa8700;
+    color: #3d3100;
+	padding: 0.588235em 1.05882em 0.647059em;
+    border-radius: 0.235294em;
+    border-style: solid;
+    border-width: 1px 1px 2px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    line-height: 1;
+    border-color: #b89300 #8a6e00 #8a6e00;
+}
+
+.button-buy:hover {
+    background: #ffcb00 none repeat scroll 0 0;
+}
+
+/* Простой поиск */
+
+.simple-search {
+	
+}
+
+/* Сложный поиск */
+
+.complex-search-avia {
+	display: none;
+}
+
+.list-name-field .input-group {
+	margin-bottom: 0;
+}
+
+/* Добавить перелет */
+
+.buttton-add {
+	color:#fff;
+}
+
+.buttton-add span {
+	border-bottom: 1px solid #fff;
+}
+
+.buttton-add:hover span {
+	border: none;
+}
+
+/* Почему вам надо выбрать нас */
+
+.we-better {
+	text-align: center;
+	background: rgba(256,256,256,.8);
+	padding: 30px;
+	color:#333;
+	white-space: nowrap;
+}
+
+.we-better h2 {
+	margin-bottom: 20px;
+	font-size: 24px;
+}
+
+.we-better .item {
+	display: inline-block;
+	vertical-align: top;
+	width: 31%;
+	margin-right: 3%;
+	text-align: left;
+	font-size: 14px;
+	line-height: 18px;
+	padding-left: 45px;
+	position: relative;
+	min-height: 30px;
+}
+
+.we-better .item i {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.we-better .item .text {
+	white-space: normal;
+}
+
+.we-better .item p {
+	padding-right: 50px;
+}
+
+.we-better .item h3 {
+	margin-bottom: 10px;
+	font-size: 16px;
+	text-transform: uppercase;
+}
+
+/* Баннеры */
+
+.banners {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	white-space: nowrap;
+	background: #ccc;
+}
+
+.banners figure {
+	width: 31%;
+	display: inline-block;
+	vertical-align: top;
+	margin-right: 3%;
+	box-shadow: 0 0 10px 0 rgba(0,0,0,.7);
+	transition: box-shadow .2s;
+}
+
+.banners figure:hover {
+	box-shadow: 0 0 5px 0 rgba(0,0,0,.5);
+}
+
+.banners figure img {
+	max-width: 100%;
+	height: auto;
+}
+
+.banners figure figcaption {
+	background: #fff;
+	padding: 15px;
+	white-space: normal
+}
+
+.banners figure a {
+	text-decoration: none;
+}
+
+.banners figure .name {
+	color: #0066CC;
+	font-size: 13px;
+	display: block;
+	margin-bottom: 5px;
+}
+
+.banners figure .description {
+	color: #555;
+	display: block;
+	font-size: 12px;
+	line-height: 16px;
+} 
+
+/* Подвал */
+
+footer {
+	font-size: 13px;
+	padding: 20px 0;
+	position: relative;
+	background: #fff;
+}
+
+/* Основное меню в подвале */
+
+footer .main-menu {
+	margin-bottom: 10px;
+}
+
+footer .main-menu ul {
+    text-align: justify;
+    line-height: 0;
+    font-size: 1px;
+    text-justify: newspaper;
+    zoom:1;
+    text-align-last: justify;
+}
+
+footer .main-menu ul:after {
+    width: 100%;
+    height: 0px;
+    visibility: hidden;
+    overflow: hidden;
+    content: '';
+    display: inline-block;
+}
+
+footer .main-menu ul li {
+    display: inline-block;
+    text-align: left;
+    line-height: normal;
+    vertical-align: top;
+    //display : inline;
+    //zoom : 1;
+}
+
+footer .main-menu ul li a {
+	font-size: 13px;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-decoration: none;
+	color:#48c8ff;
+}
+
+
+footer a {
+	color:#888;
+}
+
+/* Список городов */
+
+.list-menu .menu {
+	width: 20%;
+	display: inline-block;
+	vertical-align: top;
+	margin-right: -5px;
+}
+
+.list-menu .menu li {
+	margin-bottom: 5px;
+}

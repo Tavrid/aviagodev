@@ -1,0 +1,14 @@
+.wrapper {
+	min-height: 100%;
+}
+
+.empty {
+	height: 170px;
+}
+
+footer {
+	width: 100%;
+	background: rgba(0, 23, 47, 1) none repeat scroll 0 0;
+	height: 170px;
+	margin-top: -170px;
+}

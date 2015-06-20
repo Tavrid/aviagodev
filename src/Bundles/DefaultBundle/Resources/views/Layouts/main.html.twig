@@ -1,121 +1,94 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-    <head>
-        <title>{% block title "Поиск дешевых авиабилетов" %}</title>
-        <meta name="Description" content="{% block meta_description 'Поиск дешевых авиабилетов' %}">
-        <meta name="Keywords" content="{% block meta_keywords 'Поиск дешевых авиабилетов' %}">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <link href="{{ asset('build/dist/css/bootstrap.css') }}" rel="stylesheet" media="screen" />
-        <link href="{{ asset('bundles/bundlesdefault/lib/ui-theme/css/jquery-ui.css') }}" rel="stylesheet" media="screen" />
-        <link href="{{ asset('build/dist/css/avia.css') }}" rel="stylesheet" media="screen" />
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body class="{{ controller_formatter.formattedName }}">
-        {% javascripts '@jquery' '@jquery_ui_js' combine=true%}
-            <script type="text/javascript" src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-        <header role="contentinfo">
-            <div class="container" style="max-width:970px;">
-                <a href="{{ path('bundles_default_homepage') }}" class="logo"><img src="{{ asset('images/logo-svg.svg') }}" alt=""></a>
-                <div class="lang-phone-wrap">
-                    <div class="phone"><span>+38 (044)</span> <b>392-74-08</b></div>
-                    <div class="group-lang btn-group pull-right row">
-                        <button data-value="ru"  type="button" class="btn btn-default lang {{app.request.locale == 'ru' ? 'active':''}}">ru</button>
-                        <button data-value="en" type="button" class="btn btn-default lang {{app.request.locale == 'en' ? 'active':''}}">en</button>
-                        <button data-value="uk" type="button" class="btn btn-default lang {{app.request.locale == 'uk' ? 'active':''}}">ua</button>
-                    </div>
-                </div>
-                <div class="btn-group" style="margin-left: 253px;">
-                    {% for currency in currency_manager.currencyList %}
-                        <button data-value="{{ currency }}"  type="button" class="btn change_currency btn-default currency {{currency_manager.currency == currency ? 'active':''}}">{{ currency }}</button>
-                    {% endfor %}
-                </div>
-            </div>
-        </header>
-        <div class="wing-aircraft-wrap">
-            <div class="wing-aircraft">
-                <div class="wing"></div>
-            </div>
-        </div>
-        <div class="container" style="max-width:1000px;">
-        {% block body %}{% endblock %}
-    </div>
-    
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Помощь по сайту</h4>
-                </div>
-                <div class="modal-body">
-                    Помощь
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div id="loader" style="display: none; z-index: 10000;">
-        <div class="bg-banners"></div>
-        <div class="banners-reklama">
-            <div class="banner">
-                <a href="#">
-                    <div class="displat-table">
-                        <div class="displat-table-cell">Тут будет ваша реклама 1</div>
-                    </div>
-                </a>
-            </div>
-            <div class="banner">
-                <a href="#">
-                    <div class="displat-table">
-                        <div class="displat-table-cell">Тут будет ваша реклама 2</div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="loader">
-            <img alt="" src="{{ asset('images/progress_bar.gif') }}" />
-        </div>
-    </div>
+<!DOCTYPE html>
+<html xml:lang="ru-ru" lang="ru-ru" dir="ltr">
+<head>
+    <meta http-equiv="content-language" content="ru"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <base href="{{ path('bundles_default_homepage') }}"/>
+    {% block style %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('/bundles/bundlesdefault/css/reset.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('/bundles/bundlesdefault/css/footer-bottom.css') }}">
 
-
-    {% block js %}
-        <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-        <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-        {% javascripts
-            '@front_bootstrap_js'
-            'bundles/bundlesdefault/lib/popup.js'
-            'bundles/bundlesdefault/js/app.js'
-            'bundles/bundlesdefault/lib/jquery_validator/dist/jquery.validate.min.js'
-            'bundles/bundlesdefault/js/default/jquery.selectbox.min.js'
-            'bundles/bundlesdefault/js/default/avia.js'
-            'bundles/bundlesdefault/js/default/jquery.columnhover.js'
-            combine=true%}
-            <script type="text/javascript" src="{{ asset_url }}"></script>
-            {% endjavascripts %}
-            {%if app.request.locale!='en' %}
-             <script type="text/javascript" src="/bundles/bundlesdefault/lib/jquery_validator/dist/localization/messages_{{app.request.locale}}.js"></script>
-            {%endif%}
-            <script type="text/javascript">
-                $(document).ready(function(){
-                    _GlobalAppObject.setLocale("{{app.request.locale}}");
-
-                });
-            </script>
+        <link rel="stylesheet" type="text/css" href="{{ asset('/bundles/bundlesdefault/css/style.css') }}">
     {% endblock %}
-    {#<script type="text/javascript">#}
-        {#$(function(){#}
-            {#$("head").append('<link href="{{ asset('build/dist/css/bootstrap.css') }}" rel="stylesheet" media="screen" />');#}
-            {#$("head").append('<link href="{{ asset('build/dist/css/jquery-ui.css') }}" rel="stylesheet" media="screen" />');#}
-            {#$("head").append('<link href="{{ asset('build/dist/css/avia.css') }}" rel="stylesheet" media="screen" />');#}
-        {#});#}
-    {#</script>#}
+    <title>Шаблон html</title>
+</head>
+<body>
+<div class="wrapper" ng-app="MainApp">
+    <div class="nav-bar">
+        <div class="container"></div>
+    </div>
+    {% include "BundlesDefaultBundle:Layouts:_header.html.twig" %}
+    {% block content %}{% endblock %}
 
-
+</div>
+<footer role="contentinfo">
+    <div class="container">
+        <div class="main-menu">
+            <ul>
+                <li><a href="#">О нас</a></li>
+                <li><a href="#">Скидки</a></li>
+                <li><a href="#">Проверить бронь</a></li>
+                <li><a href="#">Временные зоны</a></li>
+                <li><a href="#">Погода</a></li>
+            </ul>
+        </div>
+        <!-- Список городов -->
+        <div class="list-menu">
+            <div class="menu">
+                <ul>
+                    <li><a href="#">Авиабилеты в Аликанте</a></li>
+                    <li><a href="#">Авиабилеты в Бейрут</a></li>
+                    <li><a href="#">Авиабилеты в Берген</a></li>
+                    <li><a href="#">Авиабилеты в Бирмингем</a></li>
+                    <li><a href="#">Авиабилеты в Бристоль</a></li>
+                </ul>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="#">Авиабилеты в Брюссель</a></li>
+                    <li><a href="#">Авиабилеты в Брюссель</a></li>
+                    <li><a href="#">Авиабилеты в Буэнос-Айрес</a></li>
+                    <li><a href="#">Авиабилеты в Вену</a></li>
+                    <li><a href="#">Авиабилеты в Гётеборг</a></li>
+                </ul>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="#">Авиабилеты в Киев</a></li>
+                    <li><a href="#">Авиабилеты в Киев</a></li>
+                    <li><a href="#">Авиабилеты в Корк</a></li>
+                    <li><a href="#">Авиабилеты в Ливерпуль</a></li>
+                    <li><a href="#">Авиабилеты в Лиссабон</a></li>
+                </ul>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="#">Авиабилеты в Мадрид</a></li>
+                    <li><a href="#">Авиабилеты в Малагу</a></li>
+                    <li><a href="#">Авиабилеты в Мюнхен</a></li>
+                    <li><a href="#">Авиабилеты в Ниццу</a></li>
+                    <li><a href="#">Авиабилеты в Нью-Дели</a></li>
+                </ul>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="#">Авиабилеты в Пекин</a></li>
+                    <li><a href="#">Авиабилеты в Прагу</a></li>
+                    <li><a href="#">Авиабилеты в Рио-де-Жанейр…</a>
+                    <li><a href="#">Авиабилеты в Санкт-Петербу…</a>
+                    <li><a href="#">Авиабилеты в Сидней</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Список городов -->
+    </div>
+</footer>
+{% block js %}
+    <script src="{{ asset('/vendor/jquery/dist/jquery.min.js') }}"></script>
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+{% endblock %}
 </body>
 </html>

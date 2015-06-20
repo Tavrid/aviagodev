@@ -1,0 +1,151 @@
+div(class="act-tab tab")
+    .form-search-wrap
+        fieldset.tab-direction
+            .input-group
+                input#one-direction.radio-button(type='radio', name='direction')
+                label(for='one-direction') В одну сторону
+            .input-group
+                input#one-two-direction.radio-button(checked='checked', type='radio', name='direction')
+                label(for='one-two-direction') В обе стороны
+            .input-group
+                input#multiple-direction.radio-button(type='radio', name='direction')
+                label(for='multiple-direction') Сложный маршрут
+        fieldset.form-group
+            .simple-search
+                .departure-from.input-group
+                    label(for='#from-avia') Вылет из:
+                    .input
+                        input#from-avia(type='text', placeholder='Город или аэропорт')
+                        span.icon
+                            i.icon-metka
+                .input-group.refresh
+                    a(href='#')
+                        i.icon-refresh
+                .arriving-in.input-group
+                    label(for='#down-avia') Прилет в:
+                    .input
+                        input#down-avia(type='text', placeholder='Город или аэропорт')
+                        span.icon
+                            i.icon-metka
+            .complex-search-avia
+                .list-name-field
+                    .departure-from.input-group
+                        label Вылет из:
+                    .arriving-in.input-group
+                        label Прилет в:
+                    .up-date.input-group
+                        label Дата вылета:
+                .group
+                    .departure-from.input-group
+                        .input
+                            input#from-avia-1(type='text', placeholder='Город или аэропорт')
+                            span.icon
+                                i.icon-metka
+                    .arriving-in.input-group
+                        .input
+                            input#down-avia-1(type='text', placeholder='Город или аэропорт')
+                            span.icon
+                                i.icon-metka
+                    .up-date.input-group
+                        .input
+                            input#up-date-1(type='text', placeholder='Выберите дату')
+                            span.icon
+                                i.icon-date
+                .group
+                    .departure-from.input-group
+                        .input
+                            input#from-avia-1(type='text', placeholder='Город или аэропорт')
+                            span.icon
+                                i.icon-metka
+                    .arriving-in.input-group
+                        .input
+                            input#down-avia-1(type='text', placeholder='Город или аэропорт')
+                            span.icon
+                                i.icon-metka
+                    .up-date.input-group
+                        .input
+                            input#up-date-1(type='text', placeholder='Выберите дату')
+                            span.icon
+                                i.icon-date
+                .buttton-add-group
+                    button.button.buttton-add
+                        i.icon-add
+                        span Добавить
+        fieldset.form-group
+            .date-simple.up-date.input-group
+                label(for='#up-date') Дата вылета:
+                .input
+                    input#up-date(type='text', placeholder='Выберите дату')
+                    span.icon
+                        i.icon-date
+            .date-simple.down-date.input-group
+                label(for='#down-date') Дата возврата:
+                .input
+                    input#down-date(type='text', placeholder='Выберите дату')
+                    span.icon
+                        i.icon-date
+            .adults.input-group
+                label(for='#adults') Взрослые (12+)
+                .select
+                    select#adults(name='adults')
+                        option(value='1') 1
+                        option(value='2') 2
+                        option(value='3') 3
+                        option(value='4') 4
+            .children.input-group
+                label(for='#children') Дети (2-11)
+                .select
+                    select#children(name='children')
+                        option(value='0') 0
+                        option(value='1') 1
+                        option(value='2') 2
+                        option(value='3') 3
+                a.age-rule-link(href='#')
+                    | Правила перевозки детей
+                    i.icon-window
+            .infant.input-group
+                label(for='#infant') Младенцы (0-1)
+                .select
+                    select#infant(name='infant')
+                        option(value='0') 0
+                        option(value='1') 1
+                        option(value='2') 2
+                        option(value='3') 3
+        fieldset.form-group
+            .button-buy-wrap
+                button.button.button-buy(type='submit') Купить
+            .additional-options
+                .additional-text
+                    a(href='#', onclick="openBlock('additional-wrap')")
+                        | Дополнительные параметры
+                        i.icon-down
+                .additional-wrap
+                    .form-group
+                        .checkbox-input.input-group
+                            input#only-one-direction.checkbox-button(type='checkbox', name='only-one-direction')
+                            label(for='only-one-direction') Только прямые рейсы
+                        .checkbox-input.input-group
+                            input#best-price-three-day.checkbox-button(type='checkbox', name='best-price-three-day')
+                            label(for='best-price-three-day') Лучшая цена +3 дня
+                        .checkbox-input.input-group
+                            input#refundable.checkbox-button(type='checkbox', name='refundable')
+                            label(for='refundable') Отменяемый тариф
+                    .form-group
+                        .aviacompany.input-group
+                            label(for='#aviacompany') Выбор авиакомпании
+                            .select
+                                select#aviacompany(name='aviacompany')
+                                    option(value='0') Любая
+                                    option(value='1') Любая 1
+                                    option(value='2') Любая 2
+                                    option(value='3') Любая 3
+                        .class-service.input-group
+                            label(for='#class-service') Класс обслуживания
+                            .select
+                                select#class-service(name='class-service')
+                                    option(value='0') Эконом
+                                    option(value='1') Эконом 1
+                                    option(value='2') Эконом 2
+                                    option(value='3') Эконом 3
+#hotels.tab
+#car-rental.tab

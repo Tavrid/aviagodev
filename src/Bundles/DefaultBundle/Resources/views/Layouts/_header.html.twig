@@ -1,0 +1,52 @@
+<header role="contentinfo">
+    <div class="container">
+        <div class="logo"><img src="{{ asset('/bundles/bundlesdefault/svg/logo-svg.svg') }}" alt="Авиаго" title="Авиаго"></div>
+        <div class="tabs-services">
+            <a href="#avia" class="act-link">Авиабилеты</a>
+            <a href="#hotels">Гостиницы</a>
+            <a href="#car-rental">Прокат авто</a>
+        </div>
+        <div class="lang-wrap">
+            <div class="lang-name-block">
+                <i class="icon-flag"><img src="{{ asset('/bundles/bundlesdefault/images/ua.png') }}" alt=""></i>
+
+                <div class="lang-name">Украинский</div>
+                <span>-</span>
+
+                <div class="currency-rate">UAH</div>
+            </div>
+            <div class="select-lang-currency">
+                <div class="current-lang-course">
+                    <i class="icon-flag"><img src="{{ asset('/bundles/bundlesdefault/images/ua.png') }}" alt=""></i>
+
+                    <div class="lang-name">Украинский</div>
+                    <span>-</span>
+
+                    <div class="currency-rate">UAH</div>
+                </div>
+                <div class="lang-select">
+                    <label for="language">Язык</label>
+                    <select name="language" id="language">
+                        <option value="1">Украинский</option>
+                        <option value="2">Русский</option>
+                        <option value="3">АнглийскиЙ</option>
+                    </select>
+                </div>
+                <div class="currency-select">
+                    <label for="currency">Валюта</label>
+                    <select name="currency" id="currency">
+                        <option value="uah">UAH</option>
+                        <option value="rub">RUB</option>
+                        <option value="$">$</option>
+                    </select>
+                </div>
+            </div>
+            <!-- <a href="#">ru</a>
+            <a href="#">ua</a>
+            <a href="#">en</a> -->
+        </div>
+        <div class="phone">
+            <span>+38 (044)</span> 392-74-08
+        </div>
+    </div>
+</header>
