@@ -19,7 +19,10 @@
         <div class="container"></div>
     </div>
     {% include "BundlesDefaultBundle:Layouts:_header.html.twig" %}
-    {% block content %}{% endblock %}
+    <div  ui-view>
+
+        {% block content %}{% endblock %}
+    </div>
 
 </div>
 <footer role="contentinfo">
@@ -85,7 +88,7 @@
     </div>
 </footer>
 {% block js %}
-    <script src="{{ asset('/vendor/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
     <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->

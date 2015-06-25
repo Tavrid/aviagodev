@@ -1,6 +1,6 @@
 {% extends "BundlesDefaultBundle:Layouts:main.html.twig" %}
 {% block content %}
-    <section class="container" role="contentinfo" ui-view>
+    <section class="container" role="contentinfo">
         <div class="wing-image"></div>
         <div class="index-wrap">
             {% include 'BundlesDefaultBundle:Default:search_form.html.twig' %}
@@ -28,5 +28,38 @@
 
 {% block js %}
     {{ parent() }}
-    <script src="{{ asset('/build/dist/js/index/index.js') }}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{{ asset('vendor/jquery-ui/themes/eggplant/jquery-ui.min.css') }}"/>
+    <script src="{{ asset('vendor/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('build/dist/js/index/index.js') }}" type="text/javascript"></script>
+    <script>
+        $(function() {
+            var availableTags = [
+                "ActionScript",
+                "AppleScript",
+                "Asp",
+                "BASIC",
+                "C",
+                "C++",
+                "Clojure",
+                "COBOL",
+                "ColdFusion",
+                "Erlang",
+                "Fortran",
+                "Groovy",
+                "Haskell",
+                "Java",
+                "JavaScript",
+                "Lisp",
+                "Perl",
+                "PHP",
+                "Python",
+                "Ruby",
+                "Scala",
+                "Scheme"
+            ];
+            $( "#from-avia" ).autocomplete({
+                source: availableTags
+            });
+        });
+    </script>
 {% endblock %}

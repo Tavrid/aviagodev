@@ -744,7 +744,10 @@ fieldset.form-group:last-of-type {
 /* Сложный поиск */
 
 .complex-search-avia {
-	/*display: none;*/
+	display: none;
+}
+.complex-search-avia {
+	display: none;
 }
 
 .list-name-field .input-group {
