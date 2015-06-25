@@ -926,6 +926,27 @@ footer a {
 .list-menu .menu li {
 	margin-bottom: 5px;
 }
+
+/*Main styles*/
 .ng-hide{
     display: none;
+}
+
+.autocomplete{
+    position: absolute;
+    z-index: 1000;
+    background: #ffffff;
+    width: 100%;
+    opacity: 0.95;
+}
+.autocomplete .autocomplete__item{
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 12px;
+}
+.autocomplete .autocomplete__item__code{
+    float: right;
+}
+.autocomplete .autocomplete__item:hover{
+    background-color: #ECF0F1;
 }

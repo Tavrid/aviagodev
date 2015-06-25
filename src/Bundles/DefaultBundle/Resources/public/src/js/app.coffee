@@ -1,12 +1,15 @@
 require "angular"
 require "angular-ui-router"
+
+
 IndexController = require('./index/controller/IndexController')
 #$ ->
 App = angular.module "MainApp", ['ui.router']
 
-#  console.log(scope)
+
 
 App.controller 'SearchFormCtrl', IndexController
+App.directive 'autoComplete', require "./lib/ngAutocomplete"
 
 App.config [
   '$stateProvider'

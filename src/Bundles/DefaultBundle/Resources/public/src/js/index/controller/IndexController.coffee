@@ -2,8 +2,10 @@ SearchForm = require "../model/searchForm"
 
 module.exports = [
   '$scope',
-  '$rootScope',
-  (scope,rootScope) ->
-    rootScope.workedController = 'index'
+  '$http',
+  (scope,http) ->
+
+
     scope.searchForm = new SearchForm
+    scope.mathes = []
 ]

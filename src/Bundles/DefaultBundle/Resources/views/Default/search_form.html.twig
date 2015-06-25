@@ -19,15 +19,19 @@
                 <div ng-hide="searchForm.direction==3" class="simple-search">
                     <div class="departure-from input-group">
                         <label for="#from-avia">Вылет из:</label>
+
                         <div class="input">
-                            <input id="from-avia" type="text" placeholder="Город или аэропорт" ng-model="searchFrom.departureAirport"/><span class="icon"><i class="icon-metka"></i></span>
+                            <input id="from-avia" type="text" placeholder="Город или аэропорт" ng-model="searchFrom.departureAirport" autocomplete="off"/>
+                            <span class="icon"><i class="icon-metka"></i></span>
+                            <auto-complete search-from="searchFrom.departureAirport" insert-to="searchForm.departureCode"></auto-complete>
+
                         </div>
                     </div>
                     <div ng-hide="searchForm.direction == 1" class="input-group refresh"><a href="#"><i class="icon-refresh"></i></a></div>
                     <div ng-hide="searchForm.direction == 1" class="arriving-in input-group">
                         <label for="#down-avia">Прилет в:</label>
                         <div class="input">
-                            <input id="down-avia" type="text" placeholder="Город или аэропорт" ng-model="searchFrom.arrivalAirport"/><span class="icon"><i class="icon-metka"></i></span>
+                            <input id="down-avia" type="text" placeholder="Город или аэропорт" ng-model="searchForm.arrivalAirport"/><span class="icon"><i class="icon-metka"></i></span>
                         </div>
                     </div>
                 </div>
@@ -43,7 +47,7 @@
                             <label>Дата вылета:</label>
                         </div>
                     </div>
-                    <div ng-repeat="inputGropu in searchForm.complexFields" class="group">
+                    <div ng-repeat="inputGroup in searchForm.complexFields" class="group">
                         <div class="departure-from input-group">
                             <div class="input">
                                 <input id="from-avia-1" type="text" placeholder="Город или аэропорт"/><span class="icon"><i class="icon-metka"></i></span>
@@ -165,3 +169,15 @@
     <div id="hotels" class="tab"></div>
     <div id="car-rental" class="tab"></div>
 </div>
+
+{% verbatim %}
+    <script type="text/ng-template" id="auto-complete.html">
+        <div class="autocomplete" ng-show="mathes.length > 0">
+            <div class="autocomplete__item"  ng-repeat="math in mathes" ng-click="clickItem">
+                <i class="icon-airlines"></i>
+                <span class="">{{ math.name }}</span>
+                <span class="autocomplete__item__code">{{ math.code }}</span>
+            </div>
+        </div>
+    </script>
+{% endverbatim %}

@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "description": "Symfony Standard Edition ========================",
   "dependencies": {
+    "angucomplete-alt": "^1.0.0",
     "angular": "^1.4.1",
     "angular-route": "^1.4.1",
     "angular-ui-router": "^0.2.15",
-    "bloodhound": "^1.0.0",
-    "knockout": "3.2.0",
+    "install": "^0.1.8",
     "node-notifier": "^4.1.1",
+    "npm": "^2.11.3",
+    "object-path": "^0.9.2",
     "typeahead": "^0.2.0",
-    "typeahead.js": "^0.10.5",
     "underscore": "^1.7.0"
   },
   "devDependencies": {

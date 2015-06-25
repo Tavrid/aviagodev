@@ -19,7 +19,7 @@
         <div class="container"></div>
     </div>
     {% include "BundlesDefaultBundle:Layouts:_header.html.twig" %}
-    <div  ui-view>
+    <div ui-view>
 
         {% block content %}{% endblock %}
     </div>
@@ -92,6 +92,8 @@
     <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 {% endblock %}
 </body>
 </html>
