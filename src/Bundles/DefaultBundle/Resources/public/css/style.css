@@ -741,14 +741,6 @@ fieldset.form-group:last-of-type {
 	
 }
 
-/* Сложный поиск */
-
-.complex-search-avia {
-	display: none;
-}
-.complex-search-avia {
-	display: none;
-}
 
 .list-name-field .input-group {
 	margin-bottom: 0;
@@ -933,4 +925,7 @@ footer a {
 
 .list-menu .menu li {
 	margin-bottom: 5px;
+}
+.ng-hide{
+    display: none;
 }

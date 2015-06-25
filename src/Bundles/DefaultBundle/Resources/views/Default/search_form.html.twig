@@ -31,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-                <div ng-show="searchForm.direction==3" class="complex-search-avia">
+                <div ng-show="searchForm.direction==3" class="complex-search-avia  ng-hide">
                     <div class="list-name-field">
                         <div class="departure-from input-group">
                             <label>Вылет из:</label>
@@ -118,7 +118,7 @@
                 </div>
                 <div class="additional-options">
                     <div class="additional-text"><a href="#" ng-click="searhForm.viewAdditionalFields= !searhForm.viewAdditionalFields">Дополнительные параметры<i class="icon-down"></i></a></div>
-                    <div ng-show="searhForm.viewAdditionalFields" class="additional-wrap">
+                    <div ng-show="searhForm.viewAdditionalFields" class="additional-wrap ng-hide">
                         <div class="form-group">
                             <div class="checkbox-input input-group">
                                 <input id="only-one-direction" type="checkbox" name="only-one-direction" class="checkbox-button"/>
