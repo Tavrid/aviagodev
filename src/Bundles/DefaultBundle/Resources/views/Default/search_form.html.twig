@@ -202,8 +202,8 @@
         <div>
             <input id="{{ attr.id }}" type="text" placeholder="{{ attr.placeholder }}" ng-keyup="search()" ng-model="query" autocomplete="off"/>
             <span class="avia_code" ng-show="code">{{ code }}</span>
-            <div class="autocomplete" ng-show="mathes.length > 0">
-                <div class="autocomplete__item"  ng-repeat="math in mathes" ng-click="$parent.clickItem($index)">
+            <div class="autocomplete" ng-show="matches.length > 0">
+                <div class="autocomplete__item"  ng-repeat="math in matches" ng-click="$parent.clickItem($index)">
                     <i class="icon-airlines"></i>
                     <span ng-class="{'autocomplete__item__child': math.parent==false}">{{ math.formattedName }}</span>
                     <span class="autocomplete__item__code">{{ math.code }}</span>
