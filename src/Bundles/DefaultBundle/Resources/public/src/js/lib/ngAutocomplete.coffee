@@ -9,24 +9,25 @@ module.exports =
     (timeout,http) ->
       fromAttr = null
       replace: true
+      scope: {}
       templateUrl: 'auto-complete.html'
       link: (scope, element, attr)->
         currentTimer = null
-
+        scope.attr = {id: attr.attrId, placeholder: attr.attrPlaceholder}
         scope.clickItem = (index) ->
-#          console.log(scope.mathes[index]);
-          objectPath.set scope, attr.searchFrom, scope.mathes[index].formattedName
+
+          scope.query = scope.mathes[index].formattedName
+          scope.code = scope.mathes[index].code
           objectPath.set scope, attr.insertTo, scope.mathes[index].code
           scope.mathes = []
 
         scope.search = ->
-          newVal = objectPath.get scope, attr.searchFrom, undefined
-          if !newVal || newVal.length < attr.searchLength
+          if !scope.query || scope.query.length < attr.searchLength
             scope.mathes = []
             return
           timeout.cancel currentTimer
           currentTimer = timeout ->
-            http.get(Routing.generate("bundles_default_search_city",{q: newVal})).then((result) ->
+            http.get(Routing.generate("bundles_default_search_city",{q: scope.query })).then((result) ->
               mathes = []
               _.each result.data , (num) ->
                 mathes.push(new MatchItem num.id, "#{num.country}, #{num.name}")

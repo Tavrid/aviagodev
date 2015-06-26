@@ -19,27 +19,32 @@
                 <div ng-hide="searchForm.direction==3" class="simple-search">
                     <div class="departure-from input-group">
                         <label for="#from-avia">Вылет из:</label>
-
                         <div class="input">
-                            <input id="from-avia" type="text" placeholder="Город или аэропорт" ng-keyup="search()" ng-model="searchFrom.departureAirport" autocomplete="off"/>
                             <span class="icon"><i class="icon-metka"></i></span>
-                            <span class="ng-hide" ng-show="searchForm.departureCode" style="color: #919191; font-size: 12px;position: absolute; right: 5px;top: 14px;">
-                                {% verbatim %}{{ searchForm.departureCode }}{% endverbatim %}
-                            </span>
-                            <auto-complete search-length="3" search-from="searchFrom.departureAirport" insert-to="searchForm.departureCode"></auto-complete>
-
+                            <auto-complete
+                                    search-length="3"
+                                    insert-to="searchForm.departureCode"
+                                    attr-id="from-avia"
+                                    attr-placeholder="Город или аэропорт"
+                                    >
+                            </auto-complete>
                         </div>
                     </div>
                     <div ng-hide="searchForm.direction == 1" class="input-group refresh"><a href="#"><i class="icon-refresh"></i></a></div>
                     <div ng-hide="searchForm.direction == 1" class="arriving-in input-group">
                         <label for="#down-avia">Прилет в:</label>
                         <div class="input">
-                            <input id="down-avia" type="text" placeholder="Город или аэропорт" ng-keyup="search()" ng-model="searchFrom.arrivalAirport" autocomplete="off"/>
+                            {#<input id="down-avia" type="text" placeholder="Город или аэропорт" ng-keyup="search()" ng-model="searchFrom.arrivalAirport" autocomplete="off"/>#}
                             <span class="icon"><i class="icon-metka"></i></span>
-                                <span class="ng-hide" ng-show="searchForm.arrivalCode" style="color: #919191; font-size: 12px;position: absolute; right: 5px;top: 14px;">
-                                    {% verbatim %}{{ searchForm.arrivalCode }}{% endverbatim %}
-                                </span>
-                            <auto-complete search-length="3" search-from="searchFrom.arrivalAirport" insert-to="searchForm.arrivalCode"></auto-complete>
+                            <auto-complete
+                                    search-length="3"
+                                    insert-to="searchForm.arrivalCode"
+                                    attr-id="down-avia"
+                                    attr-placeholder="Город или аэропорт"
+                                    >
+
+                            </auto-complete>
+
                         </div>
                     </div>
                 </div>
@@ -58,12 +63,26 @@
                     <div ng-repeat="inputGroup in searchForm.complexFields" class="group">
                         <div class="departure-from input-group">
                             <div class="input">
-                                <input id="from-avia-1" type="text" placeholder="Город или аэропорт"/><span class="icon"><i class="icon-metka"></i></span>
+                                <span class="icon"><i class="icon-metka"></i></span>
+                                <auto-complete
+                                        search-length="3"
+                                        insert-to="searchForm.complexFields[{% verbatim %}{{ $index }}{% endverbatim %}].departureCode"
+                                        attr-id="from-avia-{% verbatim %}{{ $index }}{% endverbatim %}"
+                                        attr-placeholder="Город или аэропорт"
+                                        >
+                                </auto-complete>
                             </div>
                         </div>
                         <div class="arriving-in input-group">
                             <div class="input">
-                                <input id="down-avia-1" type="text" placeholder="Город или аэропорт"/><span class="icon"><i class="icon-metka"></i></span>
+                                <span class="icon"><i class="icon-metka"></i></span>
+                                <auto-complete
+                                        search-length="3"
+                                        insert-to="searchForm.complexFields[{% verbatim %}{{ $index }}{% endverbatim %}].arrivalCode"
+                                        attr-id="down-avia-{% verbatim %}{{ $index }}{% endverbatim %}"
+                                        attr-placeholder="Город или аэропорт"
+                                        >
+                                </auto-complete>
                             </div>
                         </div>
                         <div class="up-date input-group">
@@ -180,11 +199,15 @@
 
 {% verbatim %}
     <script type="text/ng-template" id="auto-complete.html">
-        <div class="autocomplete" ng-show="mathes.length > 0">
-            <div class="autocomplete__item"  ng-repeat="math in mathes" ng-click="$parent.clickItem($index)">
-                <i class="icon-airlines"></i>
-                <span ng-class="{'autocomplete__item__child': math.parent==false}">{{ math.formattedName }}</span>
-                <span class="autocomplete__item__code">{{ math.code }}</span>
+        <div>
+            <input id="{{ attr.id }}" type="text" placeholder="{{ attr.placeholder }}" ng-keyup="search()" ng-model="query" autocomplete="off"/>
+            <span class="avia_code" ng-show="code">{{ code }}</span>
+            <div class="autocomplete" ng-show="mathes.length > 0">
+                <div class="autocomplete__item"  ng-repeat="math in mathes" ng-click="$parent.clickItem($index)">
+                    <i class="icon-airlines"></i>
+                    <span ng-class="{'autocomplete__item__child': math.parent==false}">{{ math.formattedName }}</span>
+                    <span class="autocomplete__item__code">{{ math.code }}</span>
+                </div>
             </div>
         </div>
     </script>

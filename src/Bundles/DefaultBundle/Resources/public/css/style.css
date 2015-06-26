@@ -953,3 +953,10 @@ footer a {
 .autocomplete .autocomplete__item:hover{
     background-color: #ECF0F1;
 }
+
+.avia_code{
+    color: #919191;
+    font-size: 12px;
+    position: absolute;
+    right: 5px;top: 14px;
+}
