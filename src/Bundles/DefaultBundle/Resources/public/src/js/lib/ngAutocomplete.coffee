@@ -3,12 +3,12 @@ _ = require "underscore"
 
 class MatchItem
   constructor: (@code,@formattedName, @parent = true) ->
-
 module.exports =
   [
     '$timeout',
     '$http'
     (timeout,http) ->
+      searchCache = {}
       fromAttr = null
       replace: true
       scope: {}
@@ -35,19 +35,22 @@ module.exports =
             scope.mathes = []
             return
           timeout.cancel currentTimer
-          currentTimer = timeout ->
-            http.get(Routing.generate("bundles_default_search_city",{q: scope.query })).then((result) ->
-              mathes = []
-              _.each result.data , (num) ->
-                mathes.push(new MatchItem num.id, "#{num.country}, #{num.name}")
-                if num.child
-                  _.each num.child, (child) ->
-                    mathes.push(new MatchItem child.code, "#{child.airport}, #{child.name}", false)
+          if searchCache[scope.query] == undefined
+            currentTimer = timeout ->
+              http.get(Routing.generate("bundles_default_search_city",{q: scope.query })).then((result) ->
+                mathes = []
+                _.each result.data , (num) ->
+                  mathes.push(new MatchItem num.id, "#{num.country}, #{num.name}")
+                  if num.child
+                    _.each num.child, (child) ->
+                      mathes.push(new MatchItem child.code, "#{child.airport}, #{child.name}", false)
 
-
-              scope.mathes = mathes.slice(0,10);
-            )
-          , 150
+                searchCache[scope.query] = mathes
+                scope.mathes = searchCache[scope.query];
+              )
+            , 150
+          else
+            scope.mathes = searchCache[scope.query]
         fromAttr =  objectPath.get scope, attr.searchFrom, null
       controller: [
         '$scope'
