@@ -1,7 +1,9 @@
 objectPath = require "object-path"
 _ = require "underscore"
+
 class MatchItem
   constructor: (@code,@formattedName, @parent = true) ->
+
 module.exports =
   [
     '$timeout',
@@ -12,6 +14,13 @@ module.exports =
       scope: {}
       templateUrl: 'auto-complete.html'
       link: (scope, element, attr)->
+
+        $ document
+          .click (e)->
+            if scope.mathes.length
+              scope.$apply ->
+                scope.mathes = []
+
         currentTimer = null
         scope.attr = {id: attr.attrId, placeholder: attr.attrPlaceholder}
         scope.clickItem = (index) ->
