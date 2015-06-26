@@ -947,6 +947,9 @@ footer a {
 .autocomplete .autocomplete__item__code{
     float: right;
 }
+.autocomplete .autocomplete__item__child{
+    margin-left: 15px;
+}
 .autocomplete .autocomplete__item:hover{
     background-color: #ECF0F1;
 }
