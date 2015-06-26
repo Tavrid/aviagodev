@@ -26,21 +26,24 @@
                                     insert-to="searchForm.departureCode"
                                     attr-id="from-avia"
                                     attr-placeholder="Город или аэропорт"
+                                    reverse-component="1"
                                     >
                             </auto-complete>
                         </div>
                     </div>
-                    <div ng-hide="searchForm.direction == 1" class="input-group refresh"><a href="#"><i class="icon-refresh"></i></a></div>
+                    <div ng-click="reverse()" ng-hide="searchForm.direction == 1" class="input-group refresh">
+                        <a href="#"><i class="icon-refresh"></i></a>
+                    </div>
                     <div ng-hide="searchForm.direction == 1" class="arriving-in input-group">
                         <label for="#down-avia">Прилет в:</label>
                         <div class="input">
-                            {#<input id="down-avia" type="text" placeholder="Город или аэропорт" ng-keyup="search()" ng-model="searchFrom.arrivalAirport" autocomplete="off"/>#}
                             <span class="icon"><i class="icon-metka"></i></span>
                             <auto-complete
                                     search-length="3"
                                     insert-to="searchForm.arrivalCode"
                                     attr-id="down-avia"
                                     attr-placeholder="Город или аэропорт"
+                                    reverse-component="1"
                                     >
 
                             </auto-complete>
@@ -200,13 +203,13 @@
 {% verbatim %}
     <script type="text/ng-template" id="auto-complete.html">
         <div>
-            <input id="{{ attr.id }}" type="text" placeholder="{{ attr.placeholder }}" ng-keyup="search()" ng-model="query" autocomplete="off"/>
+            <input onfocus="$(this).select();" id="{{ attr.id }}" type="text" placeholder="{{ attr.placeholder }}" ng-keyup="search()" ng-model="query" autocomplete="off"/>
             <span class="avia_code" ng-show="code">{{ code }}</span>
             <div class="autocomplete" ng-show="matches.length > 0">
                 <div class="autocomplete__item"  ng-repeat="math in matches" ng-click="$parent.clickItem($index)">
+                    <span class="autocomplete__item__code">{{ math.code }}</span>
                     <i class="icon-airlines"></i>
                     <span ng-class="{'autocomplete__item__child': math.parent==false}">{{ math.formattedName }}</span>
-                    <span class="autocomplete__item__code">{{ math.code }}</span>
                 </div>
             </div>
         </div>

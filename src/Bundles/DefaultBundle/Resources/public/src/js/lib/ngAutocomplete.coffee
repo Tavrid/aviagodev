@@ -20,14 +20,17 @@ createListMatches = (data, query) ->
 module.exports =
   [
     '$timeout',
-    '$http'
-    (timeout,http) ->
+    '$http',
+    'AutoCompleteReplacer'
+    (timeout,http, AutoCompleteReplacer) ->
       searchCache = {}
       fromAttr = null
       replace: true
       scope: {}
       templateUrl: 'auto-complete.html'
       link: (scope, element, attr)->
+        if attr.reverseComponent
+          AutoCompleteReplacer.addAutoCompleteScope scope
 
         $ document
           .click (e)->
@@ -38,11 +41,14 @@ module.exports =
 
         currentTimer = null
         scope.attr = {id: attr.attrId, placeholder: attr.attrPlaceholder}
+#        scope.updateModel = ->
+#          bjectPath.set scope, attr.insertTo, scope.matches[index].code
+
         scope.clickItem = (index) ->
 
           scope.query = scope.matches[index].formattedName
           scope.code = scope.matches[index].code
-          objectPath.set scope, attr.insertTo, scope.matches[index].code
+#          objectPath.set scope, attr.insertTo, scope.matches[index].code
           scope.matches = []
 
         scope.search = ->
