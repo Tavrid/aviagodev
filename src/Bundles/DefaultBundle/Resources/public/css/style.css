@@ -1037,55 +1037,22 @@ footer a {
     margin: -6px 9px 0 0;
 }
 
-.ng-datepicker > .ng-datepicker__day-names {
-    width: 250px;
-    border-bottom: 1px solid #c4c4c4;
-    display: inline-block;
-}
+.ng-datepicker__calendar{
+    width: 100%
 
-.ng-datepicker > .ng-datepicker__day-names > span {
-    width: 35.7px;
+}
+.ng-datepicker__calendar__item{
+    padding: 8px;
     text-align: center;
-    color: #82888a;
-    float: left;
-    display: block;
-}
-
-.ng-datepicker > .ng-datepicker__calendar {
-    width: 255px;
-    display: inline-block;
-    margin: -3px 0 -4px -1px;
-    padding: 0;
-}
-
-.ng-datepicker > .ng-datepicker__calendar > span > span.day {
-    width: 35px;
-    height: 35px;
-    border-left: 1px solid #c4c4c4;
-    border-bottom: 1px solid #c4c4c4;
-    float: left;
-    display: block;
-    color: #565a5c;
-    text-align: center;
-    font-weight: bold;
-    line-height: 35px;
-    margin: 0;
-    padding: 0;
-    font-size: 14px;
     cursor: pointer;
 }
-
-.ng-datepicker > .ng-datepicker__calendar > span:last-child > span.day {
-    border-right: 1px solid #c4c4c4;
+.ng-datepicker__calendar__item.current{
+    font-weight: bold;
 }
-
-.ng-datepicker > .ng-datepicker__calendar > span > span.day.disabled {
-    border-left: 1px solid transparent;
-    cursor: default;
-    pointer-events: none;
+.ng-datepicker__calendar__item.selected{
+    background-color: #cccccc;
 }
-
-.ng-datepicker > .ng-datepicker__calendar > span > span.day:hover {
-    background: #ff5c5b;
-    color: #fff;
+.ng-datepicker__calendar__item:hover{
+    background-color: #0065b8 ;
+    color: #ffffff;
 }

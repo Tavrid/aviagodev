@@ -103,14 +103,14 @@
                 <div class="date-simple up-date input-group">
                     <label for="#up-date">Дата вылета:</label>
                     <div class="input">
-                        <ng-datepicker attr-id="up-date" ng-model="searchForm.arrivalDate"></ng-datepicker>
-                        {#<input id="up-date" type="text" placeholder="Выберите дату"/><span class="icon"><i class="icon-date"></i></span>#}
+                        <ng-datepicker attr-id="up-date" placeholder="Выберите дату" ng-model="searchForm.arrivalDate"></ng-datepicker>
+                        <span class="icon"><i class="icon-date"></i></span>
                     </div>
                 </div>
                 <div class="date-simple down-date input-group">
                     <label for="#down-date">Дата возврата:</label>
                     <div class="input">
-                        <input id="down-date" type="text" placeholder="Выберите дату"/><span class="icon"><i class="icon-date"></i></span>
+                        <ng-datepicker attr-id="down-date" placeholder="Выберите дату" ng-model="searchForm.departureDate"></ng-datepicker>
                     </div>
                 </div>
                 <div class="adults input-group">
@@ -233,17 +233,17 @@
                         <i class="fa fa-angle-right next-month-btn" ng-click="nextMonth()"></i>
                     </div>
                 </div>
-                <table style="width: 100%">
+                <table style="width: 100%; border-bottom: 1px solid #ccc;margin: 4px 0;width: 100%;">
                     <tbody>
                         <tr>
-                            <td ng-repeat="dn in dayNames">{{ dn }}</td>
+                            <td ng-repeat="dn in dayNames" style="height: 25px;text-align: center;">{{ dn }}</td>
                         </tr>
                     </tbody>
                 </table>
-                <table style="width: 100%">
+                <table class="ng-datepicker__calendar">
                     <tbody>
                         <tr ng-repeat="week in days" >
-                            <td style="padding: 8px; text-align: center;" ng-repeat="d in week" ng-click="selectDate($event, d)" ng-class="{disabled: !d.enabled}">{{ d.day }}</td>
+                            <td  class="ng-datepicker__calendar__item" ng-repeat="d in week" ng-click="selectDate($event, d)" ng-class="{disabled: !d.enabled, current: d.current, selected: d.selected}">{{ d.day }}</td>
                         </tr>
                     </tbody>
                 </table>
