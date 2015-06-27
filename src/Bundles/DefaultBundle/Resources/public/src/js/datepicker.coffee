@@ -25,12 +25,14 @@ module.exports = [
 
       selectedDate = null
       class Day
-        constructor: (@day = null, @month = null, @year = null, @enabled = false) ->
+        constructor: (@day = null, @month = null, @year = null, minDay, maxDay) ->
           @current = false
           @selected = false
+          @enabled = false
           if @day && @month && @year
             currentDate = moment({y: @year, M: @month, d: @day})
             @current = moment().isSame(currentDate,'days')
+            @enabled = minDay.isBefore(currentDate) || @current
             if selectedDate
               @selected = currentDate.isSame(selectedDate,'days')
 
@@ -44,7 +46,8 @@ module.exports = [
       moment.locale scope.locale, loc
       date = moment()
 
-      generateCalendar = (date) ->
+      generateCalendar = (date,minDate = moment()) ->
+
         lastDayOfMonth = date.endOf('month').date()
         month = date.month()
         year = date.year()
@@ -62,7 +65,7 @@ module.exports = [
         i = n
         while i <= lastDayOfMonth
           if i > 0
-            days.push new Day i, month , year, true
+            days.push new Day i, month , year, minDate
           else
             days.push new Day
           i += 1
@@ -131,6 +134,7 @@ module.exports = [
         return
 
       scope.selectDate = (event, date) ->
+        return if !date.enabled
         event.preventDefault()
         selectedDate = moment({y: date.year, M: date.month, d: date.day})
         ngModel.$setViewValue selectedDate.format(scope.format)
@@ -139,12 +143,12 @@ module.exports = [
         return
 
       # if clicked outside of calendar
-      classList = [
-        'ng-datepicker'
-        'ng-datepicker-input'
-      ]
-      if attrs.id != undefined
-        classList.push attrs.id
+#      classList = [
+#        'ng-datepicker'
+#        'ng-datepicker-input'
+#      ]
+#      if attrs.id != undefined
+#        classList.push attrs.id
       $document.on 'click', (e) ->
         if ! $(e.target).parents('.ng-datepicker').length && !element.is(e.target) && element.has(e.target).length == 0
           scope.closeCalendar()

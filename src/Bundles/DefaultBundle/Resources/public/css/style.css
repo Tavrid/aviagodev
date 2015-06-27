@@ -1052,6 +1052,10 @@ footer a {
 .ng-datepicker__calendar__item.selected{
     background-color: #cccccc;
 }
+.ng-datepicker__calendar__item.disabled{
+    color: #cccccc;
+    cursor: default;
+}
 .ng-datepicker__calendar__item:hover{
     background-color: #0065b8 ;
     color: #ffffff;
