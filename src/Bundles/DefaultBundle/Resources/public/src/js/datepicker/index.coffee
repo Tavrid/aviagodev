@@ -1,20 +1,12 @@
 global.moment = require('moment')
 loc = require('moment/locale/ru')
-
+scopeValuesSetter = require "./scopeCreator"
+datePickers = {}
 
 module.exports = [
   '$document'
   ($document) ->
 
-
-    setScopeValues = (scope, attrs) ->
-      scope.id = attrs.attrId || ''
-      scope.format = attrs.format || 'YYYY-MM-DD'
-      scope.viewFormat = attrs.viewFormat || 'D MMMM, dd'
-      scope.locale = attrs.locale || 'ru'
-      scope.firstWeekDaySunday = scope.$eval(attrs.firstWeekDaySunday) || false
-      scope.placeholder = attrs.placeholder || ''
-      return
 
     {
     restrict: 'EA'
@@ -22,32 +14,16 @@ module.exports = [
     replace: true
     scope: {}
     link: (scope, element, attrs, ngModel) ->
+      Day = require("./dayModel")(scope,attrs,datePickers)
 
-      selectedDate = null
-      class Day
-        constructor: (@day = null, @month = null, @year = null, minDay, maxDay) ->
-          @current = false
-          @selected = false
-          @enabled = false
-          if @day && @month && @year
-            currentDate = moment({y: @year, M: @month, d: @day})
-            @current = moment().isSame(currentDate,'days')
-            @enabled = minDay.isBefore(currentDate) || @current
-            if selectedDate
-              @selected = currentDate.isSame(selectedDate,'days')
+      scopeValuesSetter scope, attrs
 
-
-      setScopeValues scope, attrs
-      scope.calendarOpened = false
-      scope.days = []
-      scope.dayNames = []
-      scope.viewValue = null
-      scope.dateValue = null
       moment.locale scope.locale, loc
-      date = moment()
 
-      generateCalendar = (date,minDate = moment()) ->
+      if attrs.name
+        datePickers[attrs.name] = scope
 
+      generateCalendar = (date = scope.date, minDate = if datePickers[attrs.minFrom] && datePickers[attrs.minFrom].selectedDate then datePickers[attrs.minFrom].selectedDate else moment().subtract(1, 'days')) ->
         lastDayOfMonth = date.endOf('month').date()
         month = date.month()
         year = date.year()
@@ -106,7 +82,7 @@ module.exports = [
 
       scope.showCalendar = ->
         scope.calendarOpened = true
-        generateCalendar date
+        generateCalendar()
         return
 
       scope.closeCalendar = ->
@@ -114,46 +90,44 @@ module.exports = [
         return
 
       scope.prevYear = ->
-        date.subtract 1, 'Y'
-        generateCalendar date
+        scope.date.subtract 1, 'Y'
+        generateCalendar()
         return
 
       scope.prevMonth = ->
-        date.subtract 1, 'M'
-        generateCalendar date
+        scope.date.subtract 1, 'M'
+        generateCalendar()
         return
 
       scope.nextMonth = ->
-        date.add 1, 'M'
-        generateCalendar date
+        scope.date.add 1, 'M'
+        generateCalendar()
         return
 
       scope.nextYear = ->
-        date.add 1, 'Y'
-        generateCalendar date
+        scope.date.add 1, 'Y'
+        generateCalendar()
         return
 
       scope.selectDate = (event, date) ->
         return if !date.enabled
         event.preventDefault()
-        selectedDate = moment({y: date.year, M: date.month, d: date.day})
-        ngModel.$setViewValue selectedDate.format(scope.format)
-        scope.viewValue = selectedDate.format(scope.viewFormat)
+        scope.selectedDate = moment({y: date.year, M: date.month, d: date.day})
+        ngModel.$setViewValue scope.selectedDate.format(scope.format)
+        scope.viewValue = scope.selectedDate.format(scope.viewFormat)
+
+        if attrs.maxFrom && datePickers[attrs.maxFrom] && (!(datePickers[attrs.maxFrom].date) || (datePickers[attrs.maxFrom].date && scope.date.isAfter(datePickers[attrs.maxFrom].date)))
+          datePickers[attrs.maxFrom].date = scope.selectedDate.clone().add(1,'d')
+
+        scope.date = scope.selectedDate.clone()
         scope.closeCalendar()
         return
 
-      # if clicked outside of calendar
-#      classList = [
-#        'ng-datepicker'
-#        'ng-datepicker-input'
-#      ]
-#      if attrs.id != undefined
-#        classList.push attrs.id
       $document.on 'click', (e) ->
         if ! $(e.target).parents('.ng-datepicker').length && !element.is(e.target) && element.has(e.target).length == 0
           scope.closeCalendar()
           scope.$apply()
-#        return
+      #        return
       return
     templateUrl: 'datepicker.html'
     }

@@ -1044,7 +1044,8 @@ footer a {
 .ng-datepicker__calendar__item{
     padding: 8px;
     text-align: center;
-    cursor: pointer;
+    color: #cccccc;
+
 }
 .ng-datepicker__calendar__item.current{
     font-weight: bold;
@@ -1052,11 +1053,15 @@ footer a {
 .ng-datepicker__calendar__item.selected{
     background-color: #cccccc;
 }
-.ng-datepicker__calendar__item.disabled{
-    color: #cccccc;
-    cursor: default;
+.ng-datepicker__calendar__item.between{
+    background-color: #81CFE0;
 }
-.ng-datepicker__calendar__item:hover{
+
+.ng-datepicker__calendar__item.enabled{
+    color: #000000;
+    cursor: pointer;
+}
+.ng-datepicker__calendar__item.enabled:hover{
     background-color: #0065b8 ;
     color: #ffffff;
 }
