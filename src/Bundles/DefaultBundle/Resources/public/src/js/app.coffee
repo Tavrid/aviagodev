@@ -1,6 +1,8 @@
 require "angular"
 require "angular-ui-router"
 
+datepicker = require "./datepicker"
+
 
 IndexController = require('./index/controller/IndexController')
 #$ ->
@@ -24,11 +26,11 @@ class AutoCompleteReplacer
 
 
 
-
 App.service 'AutoCompleteReplacer', AutoCompleteReplacer
 
 App.controller 'SearchFormCtrl', IndexController
 App.directive 'autoComplete', require "./lib/ngAutocomplete"
+App.directive 'ngDatepicker', datepicker
 
 App.config [
   '$stateProvider'

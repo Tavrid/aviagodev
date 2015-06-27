@@ -103,7 +103,8 @@
                 <div class="date-simple up-date input-group">
                     <label for="#up-date">Дата вылета:</label>
                     <div class="input">
-                        <input id="up-date" type="text" placeholder="Выберите дату"/><span class="icon"><i class="icon-date"></i></span>
+                        <ng-datepicker attr-id="up-date" ng-model="searchForm.arrivalDate"></ng-datepicker>
+                        {#<input id="up-date" type="text" placeholder="Выберите дату"/><span class="icon"><i class="icon-date"></i></span>#}
                     </div>
                 </div>
                 <div class="date-simple down-date input-group">
@@ -215,3 +216,39 @@
         </div>
     </script>
 {% endverbatim %}
+{% verbatim %}
+    <script type="text/ng-template" id="datepicker.html">
+        <div>
+            <div>
+                <input id="{{ id }}" type="text" ng-focus="showCalendar($event)" ng-value="viewValue" class="ng-datepicker-input" placeholder="{{ placeholder }}">
+            </div>
+            <div class="ng-datepicker" ng-show="calendarOpened">
+                <div class="ng-datepicker__controls">
+                    <div class="left">
+                        <i class="fa fa-angle-left prev-month-btn" ng-click="prevMonth()"></i>
+                    </div>
+                    <span class="date" ng-bind="dateValue"></span>
+
+                    <div class="right">
+                        <i class="fa fa-angle-right next-month-btn" ng-click="nextMonth()"></i>
+                    </div>
+                </div>
+                <table style="width: 100%">
+                    <tbody>
+                        <tr>
+                            <td ng-repeat="dn in dayNames">{{ dn }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%">
+                    <tbody>
+                        <tr ng-repeat="week in days" >
+                            <td style="padding: 8px; text-align: center;" ng-repeat="d in week" ng-click="selectDate($event, d)" ng-class="{disabled: !d.enabled}">{{ d.day }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </script>
+{% endverbatim %}
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
