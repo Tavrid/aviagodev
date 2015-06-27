@@ -108,16 +108,20 @@ module.exports = [
         scope.date.add 1, 'Y'
         generateCalendar()
         return
-
+      scope.updateInputValue = ->
+        ngModel.$setViewValue scope.selectedDate.format(scope.format)
+        scope.viewValue = scope.selectedDate.format(scope.viewFormat)
+        return
       scope.selectDate = (event, date) ->
         return if !date.enabled
         event.preventDefault()
         scope.selectedDate = moment({y: date.year, M: date.month, d: date.day})
-        ngModel.$setViewValue scope.selectedDate.format(scope.format)
-        scope.viewValue = scope.selectedDate.format(scope.viewFormat)
-
-        if attrs.maxFrom && datePickers[attrs.maxFrom] && (!(datePickers[attrs.maxFrom].date) || (datePickers[attrs.maxFrom].date && scope.date.isAfter(datePickers[attrs.maxFrom].date)))
+        scope.updateInputValue()
+        #todo this need fix
+        if attrs.maxFrom && datePickers[attrs.maxFrom] && (!(datePickers[attrs.maxFrom].selectedDate) || (datePickers[attrs.maxFrom].selectedDate && scope.selectedDate.isAfter(datePickers[attrs.maxFrom].selectedDate)))
           datePickers[attrs.maxFrom].date = scope.selectedDate.clone().add(1,'d')
+          datePickers[attrs.maxFrom].selectedDate = datePickers[attrs.maxFrom].date
+          datePickers[attrs.maxFrom].updateInputValue()
 
         scope.date = scope.selectedDate.clone()
         scope.closeCalendar()
