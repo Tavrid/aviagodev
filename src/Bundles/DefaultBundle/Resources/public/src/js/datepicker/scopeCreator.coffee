@@ -11,4 +11,5 @@ module.exports = (scope,attrs) ->
   scope.dateValue = null
   scope.date = moment()
   scope.selectedDate = null
+  scope.highlightBetween = if attrs.highlightBetween then parseInt attrs.highlightBetween else true
   return

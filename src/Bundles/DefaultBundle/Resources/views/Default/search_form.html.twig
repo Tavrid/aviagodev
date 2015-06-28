@@ -90,7 +90,19 @@
                         </div>
                         <div class="up-date input-group">
                             <div class="input">
-                                <input id="up-date-1" type="text" placeholder="Выберите дату"/><span class="icon"><i class="icon-date"></i></span>
+                                {#<input id="up-date-1" type="text" placeholder="Выберите дату"/>#}
+                                <ng-datepicker
+                                        attr-id="up-date-{% verbatim %}{{ $index }}{% endverbatim %}"
+                                        highlight-between="0"
+                                        placeholder="Выберите дату"
+                                        ng-model="searchForm.arrivalDate"
+                                        name="arrivalDate{% verbatim %}{{ $index }}{% endverbatim %}"
+                                        min-from="arrivalDate{% verbatim %}{{ $index - 1 }}{% endverbatim %}"
+                                        max-from="arrivalDate{% verbatim %}{{ $index + 1 }}{% endverbatim %}"
+                                        >
+
+                                </ng-datepicker>
+                                <span class="icon"><i class="icon-date"></i></span>
                             </div>
                         </div>
                     </div>
