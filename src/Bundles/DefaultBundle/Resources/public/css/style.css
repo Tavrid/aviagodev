@@ -14,7 +14,7 @@ body {
 }
 
 .wrapper {
-	background: url('../images/bg-1.jpg') no-repeat center top;
+	background: url('../images/bg-1.jpg') no-repeat fixed;
 	-webkit-background-size: cover;
 	background-size: cover;
 /* 	-webkit-background-size: cover;
