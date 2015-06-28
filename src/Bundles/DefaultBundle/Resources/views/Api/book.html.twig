@@ -9,14 +9,7 @@
 {% endblock %}
 {% block js %}
     {{ parent() }}
-    {% javascripts
-    'bundles/bundlesdefault/lib/masked.js'
-    'bundles/bundlesdefault/js/default/book.js'
-    'bundles/bundlesdefault/lib/intl-tel-input-master/build/js/intlTelInput.min.js'
-    'bundles/bundlesdefault/lib/moment.js'
-    combine=true %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+
     <script type="text/javascript">
         VALID_DATE = {{ticket.validTime}};
         VALID_MASCS = {{masks|raw}};

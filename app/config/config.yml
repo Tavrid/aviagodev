@@ -1,7 +1,6 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: assets.yml }
     - { resource: @AcmeAdminBundle/Resources/config/admin.yml }
 
 framework:

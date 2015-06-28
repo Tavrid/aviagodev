@@ -5,13 +5,7 @@
 {% block js %}
     {{ parent() }}
     <script type="application/javascript" src="{{ asset('build/dist/js/index/index.js') }}"></script>
-    {% javascripts
-    'bundles/bundlesdefault/js/default/index.js'
-    'bundles/bundlesdefault/js/default/jquery.selectbox.min.js'
-    'bundles/bundlesdefault/js/default/avia.js'
-    combine=true%}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=ru&libraries=geometry"></script>
     <script>
         function initializeGoogleMaps() {

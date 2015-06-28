@@ -11,8 +11,5 @@ class AcmeAdminBundle extends Bundle {
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
-
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/Resources/config'));
-        $loader->load('assets.yml');
     }
 }
