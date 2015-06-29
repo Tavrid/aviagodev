@@ -27,8 +27,10 @@ module.exports =
       fromAttr = null
       replace: true
       scope: {}
+      require: 'ngModel'
       templateUrl: 'auto-complete.html'
-      link: (scope, element, attr)->
+      link: (scope, element, attr,ngModel)->
+
         if attr.reverseComponent
           AutoCompleteReplacer.addAutoCompleteScope scope
 
@@ -48,6 +50,7 @@ module.exports =
 
           scope.query = scope.matches[index].formattedName
           scope.code = scope.matches[index].code
+          ngModel.$setViewValue scope.code
 #          objectPath.set scope, attr.insertTo, scope.matches[index].code
           scope.matches = []
 

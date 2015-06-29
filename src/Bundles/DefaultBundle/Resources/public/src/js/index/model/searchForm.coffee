@@ -10,6 +10,6 @@ class SearchForm
   addComplexField: ->
     @complexFields.push(new ComplexField)
   search: () ->
-    console.log(@direction)
+    console.log(@)
 
 module.exports = SearchForm

@@ -10,7 +10,7 @@ module.exports = [
 
     {
     restrict: 'EA'
-    require: '?ngModel'
+    require: 'ngModel'
     replace: true
     scope: {}
     link: (scope, element, attrs, ngModel) ->

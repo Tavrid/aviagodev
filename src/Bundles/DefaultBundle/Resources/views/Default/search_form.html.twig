@@ -23,7 +23,7 @@
                             <span class="icon"><i class="icon-metka"></i></span>
                             <auto-complete
                                     search-length="3"
-                                    insert-to="searchForm.departureCode"
+                                    ng-model="searchForm.departureCode"
                                     attr-id="from-avia"
                                     attr-placeholder="{{ 'frontend.search_form.placeholders.city'|trans }}"
                                     reverse-component="1"
@@ -40,7 +40,7 @@
                             <span class="icon"><i class="icon-metka"></i></span>
                             <auto-complete
                                     search-length="3"
-                                    insert-to="searchForm.arrivalCode"
+                                    ng-model="searchForm.arrivalCode"
                                     attr-id="down-avia"
                                     attr-placeholder="{{ 'frontend.search_form.placeholders.city'|trans }}"
                                     reverse-component="1"
@@ -69,7 +69,7 @@
                                 <span class="icon"><i class="icon-metka"></i></span>
                                 <auto-complete
                                         search-length="3"
-                                        insert-to="searchForm.complexFields[{% verbatim %}{{ $index }}{% endverbatim %}].departureCode"
+                                        ng-model="inputGroup.departureCode"
                                         attr-id="from-avia-{% verbatim %}{{ $index }}{% endverbatim %}"
                                         attr-placeholder="{{ 'frontend.search_form.placeholders.city'|trans }}"
                                         >
@@ -81,7 +81,7 @@
                                 <span class="icon"><i class="icon-metka"></i></span>
                                 <auto-complete
                                         search-length="3"
-                                        insert-to="searchForm.complexFields[{% verbatim %}{{ $index }}{% endverbatim %}].arrivalCode"
+                                        ng-model="inputGroup.arrivalCode"
                                         attr-id="down-avia-{% verbatim %}{{ $index }}{% endverbatim %}"
                                         attr-placeholder="{{ 'frontend.search_form.placeholders.city'|trans }}"
                                         >
@@ -94,7 +94,7 @@
                                         attr-id="up-date-{% verbatim %}{{ $index }}{% endverbatim %}"
                                         highlight-between="0"
                                         placeholder="{{ 'frontend.search_form.placeholders.date'|trans }}"
-                                        ng-model="searchForm.arrivalDate"
+                                        ng-model="inputGroup.arrivalDate"
                                         name="arrivalDate{% verbatim %}{{ $index }}{% endverbatim %}"
                                         min-from="arrivalDate{% verbatim %}{{ $index - 1 }}{% endverbatim %}"
                                         max-from="arrivalDate{% verbatim %}{{ $index + 1 }}{% endverbatim %}"
