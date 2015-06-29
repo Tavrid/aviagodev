@@ -1,8 +1,6 @@
 require "angular"
 require "angular-ui-router"
-
 datepicker = require "./datepicker"
-
 
 IndexController = require('./index/controller/IndexController')
 #$ ->

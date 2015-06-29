@@ -76,30 +76,12 @@ class SearchForm extends AbstractType
         for ($i = 0; $i < 5; $i++) {
             $infant[$i] = $i;
         }
-        $builder->add('city_from', 'text', [
-                'label' => 'frontend.search_form.city_from',
-//                'mapped' => false,
-                'attr' => ['placeholder' => 'frontend.search_form.placeholders.city']
-            ])
-            ->add('city_from_code', 'hidden')
-            ->add('city_to', 'text', [
-                'label' => 'frontend.search_form.city_to',
-//                'mapped' => false,
-                'attr' => ['placeholder' => 'frontend.search_form.placeholders.city']
-            ])
-            ->add('city_to_code', 'hidden')
-
-            ->add('date_from', 'date', [
-                'label' => 'frontend.search_form.date_from',
-                'attr' => ['placeholder' => 'frontend.search_form.placeholders.date'],
-                'widget' => 'single_text',
-            ])
-            ->add('date_to', 'date', [
-                'label' => 'frontend.search_form.date_to',
-                'attr' => ['placeholder' => 'frontend.search_form.placeholders.date'],
-                'widget' => 'single_text'
-            ])
-            ->add('return_way','choice',[
+        $builder
+            ->add('cityFromCode', 'hidden')
+            ->add('cityToCode', 'hidden')
+            ->add('departureDate', 'date')
+            ->add('arrivalDate', 'date')
+            ->add('returnWay','choice',[
                 'label' => 'frontend.search_form.return_way.label',
                 'choices' => ['frontend.search_form.return_way.one_way','frontend.search_form.return_way.multi_way','frontend.search_form.return_way.complex_search'],
                 'data' => 1,
