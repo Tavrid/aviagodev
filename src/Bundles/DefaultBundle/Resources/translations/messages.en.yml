@@ -62,6 +62,9 @@ frontend:
             passport_valid_until: Valid passport to
             citizen: Citizenship
     search_form:
+        additional_params: Дополнительные параметры
+        add: Добавить
+        refundable: Отменяемый тариф
         city_from: From
         city_to: To
         date_from: Departure date

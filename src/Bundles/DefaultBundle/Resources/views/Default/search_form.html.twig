@@ -4,28 +4,28 @@
             <fieldset class="tab-direction">
                 <div class="input-group">
                     <input id="one-direction" type="radio" ng-model="searchForm.direction" value="1" name="direction" required="required" class="radio-button"/>
-                    <label for="one-direction">В одну сторону</label>
+                    <label for="one-direction">{{ 'frontend.search_form.return_way.one_way'|trans }}</label>
                 </div>
                 <div class="input-group">
                     <input id="one-two-direction" checked="checked" ng-model="searchForm.direction" value="2" type="radio" name="direction" class="radio-button"/>
-                    <label for="one-two-direction">В обе стороны</label>
+                    <label for="one-two-direction">{{ 'frontend.search_form.return_way.multi_way'|trans }}</label>
                 </div>
                 <div class="input-group">
                     <input id="multiple-direction" type="radio" ng-model="searchForm.direction" value="3" name="direction" class="radio-button"/>
-                    <label for="multiple-direction">Сложный маршрут</label>
+                    <label for="multiple-direction">{{ 'frontend.search_form.return_way.complex_search'|trans }}</label>
                 </div>
             </fieldset>
             <fieldset class="form-group">
                 <div ng-hide="searchForm.direction==3" class="simple-search">
                     <div class="departure-from input-group">
-                        <label for="#from-avia">Вылет из:</label>
+                        <label for="#from-avia">{{ 'frontend.search_form.city_from'|trans }}:</label>
                         <div class="input">
                             <span class="icon"><i class="icon-metka"></i></span>
                             <auto-complete
                                     search-length="3"
                                     insert-to="searchForm.departureCode"
                                     attr-id="from-avia"
-                                    attr-placeholder="Город или аэропорт"
+                                    attr-placeholder="{{ 'frontend.search_form.placeholders.city'|trans }}"
                                     reverse-component="1"
                                     >
                             </auto-complete>
@@ -35,14 +35,14 @@
                         <a href="#"><i class="icon-refresh"></i></a>
                     </div>
                     <div ng-hide="searchForm.direction == 1" class="arriving-in input-group">
-                        <label for="#down-avia">Прилет в:</label>
+                        <label for="#down-avia">{{ 'frontend.search_form.city_to'|trans }}:</label>
                         <div class="input">
                             <span class="icon"><i class="icon-metka"></i></span>
                             <auto-complete
                                     search-length="3"
                                     insert-to="searchForm.arrivalCode"
                                     attr-id="down-avia"
-                                    attr-placeholder="Город или аэропорт"
+                                    attr-placeholder="{{ 'frontend.search_form.placeholders.city'|trans }}"
                                     reverse-component="1"
                                     >
 
@@ -54,13 +54,13 @@
                 <div ng-show="searchForm.direction==3" class="complex-search-avia  ng-hide">
                     <div class="list-name-field">
                         <div class="departure-from input-group">
-                            <label>Вылет из:</label>
+                            <label>{{ 'frontend.search_form.city_from'|trans }}:</label>
                         </div>
                         <div class="arriving-in input-group">
-                            <label>Прилет в:</label>
+                            <label>{{ 'frontend.search_form.city_to'|trans }}:</label>
                         </div>
                         <div class="up-date input-group">
-                            <label>Дата вылета:</label>
+                            <label>{{ 'frontend.search_form.date_from'|trans }}:</label>
                         </div>
                     </div>
                     <div ng-repeat="inputGroup in searchForm.complexFields" class="group">
@@ -71,7 +71,7 @@
                                         search-length="3"
                                         insert-to="searchForm.complexFields[{% verbatim %}{{ $index }}{% endverbatim %}].departureCode"
                                         attr-id="from-avia-{% verbatim %}{{ $index }}{% endverbatim %}"
-                                        attr-placeholder="Город или аэропорт"
+                                        attr-placeholder="{{ 'frontend.search_form.placeholders.city'|trans }}"
                                         >
                                 </auto-complete>
                             </div>
@@ -83,18 +83,17 @@
                                         search-length="3"
                                         insert-to="searchForm.complexFields[{% verbatim %}{{ $index }}{% endverbatim %}].arrivalCode"
                                         attr-id="down-avia-{% verbatim %}{{ $index }}{% endverbatim %}"
-                                        attr-placeholder="Город или аэропорт"
+                                        attr-placeholder="{{ 'frontend.search_form.placeholders.city'|trans }}"
                                         >
                                 </auto-complete>
                             </div>
                         </div>
                         <div class="up-date input-group">
                             <div class="input">
-                                {#<input id="up-date-1" type="text" placeholder="Выберите дату"/>#}
                                 <ng-datepicker
                                         attr-id="up-date-{% verbatim %}{{ $index }}{% endverbatim %}"
                                         highlight-between="0"
-                                        placeholder="Выберите дату"
+                                        placeholder="{{ 'frontend.search_form.placeholders.date'|trans }}"
                                         ng-model="searchForm.arrivalDate"
                                         name="arrivalDate{% verbatim %}{{ $index }}{% endverbatim %}"
                                         min-from="arrivalDate{% verbatim %}{{ $index - 1 }}{% endverbatim %}"
@@ -107,17 +106,19 @@
                         </div>
                     </div>
                     <div class="buttton-add-group">
-                        <button ng-click="searchForm.addComplexField()" class="button buttton-add"><i class="icon-add"></i><span>Добавить</span></button>
+                        <button ng-click="searchForm.addComplexField()" class="button buttton-add">
+                            <i class="icon-add"></i><span>{{ 'frontend.search_form.add'|trans }}</span>
+                        </button>
                     </div>
                 </div>
             </fieldset>
             <fieldset class="form-group">
                 <div class="date-simple up-date input-group">
-                    <label for="#up-date">Дата вылета:</label>
+                    <label for="#up-date">{{ 'frontend.search_form.date_from'|trans }}:</label>
                     <div class="input">
                         <ng-datepicker
                                 attr-id="up-date"
-                                placeholder="Выберите дату"
+                                placeholder="{{ 'frontend.search_form.placeholders.date'|trans }}"
                                 ng-model="searchForm.arrivalDate"
                                 name="arrivalDate"
                                 max-from="departureDate"
@@ -128,11 +129,11 @@
                     </div>
                 </div>
                 <div class="date-simple down-date input-group">
-                    <label for="#down-date">Дата возврата:</label>
+                    <label for="#down-date">{{ 'frontend.search_form.date_to'|trans }}:</label>
                     <div class="input">
                         <ng-datepicker
                                 attr-id="down-date"
-                                placeholder="Выберите дату"
+                                placeholder="{{ 'frontend.search_form.placeholders.date'|trans }}"
                                 ng-model="searchForm.departureDate"
                                 name="departureDate"
                                 min-from="arrivalDate"
@@ -143,7 +144,7 @@
                     </div>
                 </div>
                 <div class="adults input-group">
-                    <label for="#adults">Взрослые (12+)</label>
+                    <label for="#adults">{{ 'frontend.search_form.adults'|trans }}</label>
                     <div class="select">
                         <select id="adults" name="adults">
                             <option value="1">1</option>
@@ -154,7 +155,7 @@
                     </div>
                 </div>
                 <div class="children input-group">
-                    <label for="#children">Дети (2-11)</label>
+                    <label for="#children">{{ 'frontend.search_form.child'|trans }}</label>
                     <div class="select">
                         <select id="children" name="children">
                             <option value="0">0</option>
@@ -165,7 +166,7 @@
                     </div><a href="#" class="age-rule-link">Правила перевозки детей<i class="icon-window"></i></a>
                 </div>
                 <div class="infant input-group">
-                    <label for="#infant">Младенцы (0-1)</label>
+                    <label for="#infant">{{ 'frontend.search_form.infant'|trans }}</label>
                     <div class="select">
                         <select id="infant" name="infant">
                             <option value="0">0</option>
@@ -178,28 +179,28 @@
             </fieldset>
             <fieldset class="form-group">
                 <div class="button-buy-wrap">
-                    <button type="submit" ng-click="searchForm.search()" class="button button-buy">Купить</button>
+                    <button type="submit" ng-click="searchForm.search()" class="button button-buy">{{ 'frontend.search_form.submit'|trans }}</button>
                 </div>
                 <div class="additional-options">
-                    <div class="additional-text"><a href="#" ng-click="searhForm.viewAdditionalFields= !searhForm.viewAdditionalFields">Дополнительные параметры<i class="icon-down"></i></a></div>
+                    <div class="additional-text"><a href="#" ng-click="searhForm.viewAdditionalFields= !searhForm.viewAdditionalFields">{{ 'frontend.search_form.additional_params'|trans }}<i class="icon-down"></i></a></div>
                     <div ng-show="searhForm.viewAdditionalFields" class="additional-wrap ng-hide">
                         <div class="form-group">
                             <div class="checkbox-input input-group">
                                 <input id="only-one-direction" type="checkbox" name="only-one-direction" class="checkbox-button"/>
-                                <label for="only-one-direction">Только прямые рейсы</label>
+                                <label for="only-one-direction">{{ 'frontend.search_form.direct_flights'|trans }}</label>
                             </div>
                             <div class="checkbox-input input-group">
                                 <input id="best-price-three-day" type="checkbox" name="best-price-three-day" class="checkbox-button"/>
-                                <label for="best-price-three-day">Лучшая цена +3 дня</label>
+                                <label for="best-price-three-day">{{ 'frontend.search_form.best_price'|trans }}</label>
                             </div>
                             <div class="checkbox-input input-group">
                                 <input id="refundable" type="checkbox" name="refundable" class="checkbox-button"/>
-                                <label for="refundable">Отменяемый тариф</label>
+                                <label for="refundable">{{ 'frontend.search_form.refundable'|trans }}</label>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="aviacompany input-group">
-                                <label for="#aviacompany">Выбор авиакомпании</label>
+                                <label for="#aviacompany">{{ 'frontend.search_form.airline'|trans }}</label>
                                 <div class="select">
                                     <select id="aviacompany" name="aviacompany">
                                         <option value="0">Любая</option>
@@ -210,7 +211,7 @@
                                 </div>
                             </div>
                             <div class="class-service input-group">
-                                <label for="#class-service">Класс обслуживания</label>
+                                <label for="#class-service">{{ 'frontend.search_form.class'|trans }}</label>
                                 <div class="select">
                                     <select id="class-service" name="class-service">
                                         <option value="0">Эконом</option>

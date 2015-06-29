@@ -4,14 +4,16 @@
 <head>
     <meta http-equiv="content-language" content="ru"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{% block title "Поиск дешевых авиабилетов" %}</title>
+    <meta name="Description" content="{% block meta_description 'Поиск дешевых авиабилетов' %}">
+    <meta name="Keywords" content="{% block meta_keywords 'Поиск дешевых авиабилетов' %}">
     <base href="{{ path('bundles_default_homepage') }}"/>
     {% block style %}
-        <link rel="stylesheet" type="text/css" href="{{ asset('/bundles/bundlesdefault/css/reset.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('/bundles/bundlesdefault/css/footer-bottom.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bundlesdefault/css/reset.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bundlesdefault/css/footer-bottom.css') }}">
 
-        <link rel="stylesheet" type="text/css" href="{{ asset('/bundles/bundlesdefault/css/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bundlesdefault/css/style.css') }}">
     {% endblock %}
-    <title>Шаблон html</title>
 </head>
 <body>
 <div class="wrapper" ng-app="MainApp">

@@ -61,20 +61,23 @@ frontend:
             passport_valid_until: Паспорт дейст. до
             citizen: Гражданство
     search_form:
-        city_from: Из
-        city_to: В
+        additional_params: Дополнительные параметры
+        add: Добавить
+        city_from: Вылет из
+        city_to: Прилет в
         date_from: Дата вылета
         date_to: Дата прилета
-        adults: (12+ лет)
-        child: (2...<12 лет)
-        infant: (от 2-х лет)
+        adults: Взрослые (12+)
+        child: Дети (2-11)
+        infant: Младенцы (0-1)
         airline: Авиакомпания
         currency: Валюта
         best_price: Лучшая цена ±3 дня
         direct_flights: Только прямые рейсы
         submit: Искать
-        class: Класс
+        class: Класс обслуживания
         airline_value_any: Любая
+        refundable: Отменяемый тариф
         class_values:
             y: Эконом
             c: Бизнес
@@ -85,8 +88,8 @@ frontend:
             multi_way: В обе стороны
             complex_search: Сложный маршрут
         placeholders:
-            city: Выберите город
-            date: Укажите дату
+            city: Город или аэропорт
+            date: Выберите дату
     filter_form:
         time: Время вылета прилета
         departure_time: Время вылета
