@@ -37,20 +37,19 @@ module.exports =
         $ document
           .click (e)->
             if scope.matches.length
-              scope
-              .$apply ->
+              scope.$apply ->
                 scope.matches = []
 
         currentTimer = null
         scope.attr = {id: attr.attrId, placeholder: attr.attrPlaceholder}
-#        scope.updateModel = ->
-#          bjectPath.set scope, attr.insertTo, scope.matches[index].code
 
+        scope.$watch 'code',(value) ->
+          ngModel.$setViewValue value
         scope.clickItem = (index) ->
 
           scope.query = scope.matches[index].formattedName
           scope.code = scope.matches[index].code
-          ngModel.$setViewValue scope.code
+
 #          objectPath.set scope, attr.insertTo, scope.matches[index].code
           scope.matches = []
 
