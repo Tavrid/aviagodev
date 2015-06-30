@@ -1,0 +1,3 @@
+[submodule "src/Bundles/DefaultBundle/Resources/public/front"]
+	path = src/Bundles/DefaultBundle/Resources/public/front
+	url = git@bitbucket.org:aviagodev/aviagomakets.git
