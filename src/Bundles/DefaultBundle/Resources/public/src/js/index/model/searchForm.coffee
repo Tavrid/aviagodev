@@ -14,7 +14,6 @@ class SearchForm
   complexFields: [new ComplexField, new ComplexField]
   addComplexField: ->
     @complexFields.push(new ComplexField)
-  search: () ->
-    console.log(@, v.hasErrors(@, assertions))
+
 
 module.exports = SearchForm

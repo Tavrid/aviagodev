@@ -35,12 +35,15 @@ services:
         class: Bundles\DefaultBundle\Util\CurrencyManager
         arguments: [@session]
 
-    bundles_default.liqupay_api:
-            class: Bundles\DefaultBundle\Model\LiqPayApi
-            arguments:
-              - "%liqupay.merchant_id%"
-              - "%liqupay.password%"
-              - @router
+    bundles_default.search_form.options:
+        class: Bundles\DefaultBundle\Form\SearchFormOptions
+        arguments: [@translator]
+#    bundles_default.liqupay_api:
+#            class: Bundles\DefaultBundle\Model\LiqPayApi
+#            arguments:
+#              - "%liqupay.merchant_id%"
+#              - "%liqupay.password%"
+#              - @router
 
 
 

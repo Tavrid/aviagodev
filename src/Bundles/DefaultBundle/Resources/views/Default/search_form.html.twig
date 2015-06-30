@@ -179,7 +179,7 @@
             </fieldset>
             <fieldset class="form-group">
                 <div class="button-buy-wrap">
-                    <button type="submit" ng-click="searchForm.search()" class="button button-buy">{{ 'frontend.search_form.submit'|trans }}</button>
+                    <button type="submit" ng-click="search()" class="button button-buy">{{ 'frontend.search_form.submit'|trans }}</button>
                 </div>
                 <div class="additional-options">
                     <div class="additional-text"><a href="#" ng-click="searchForm.viewAdditionalFields= !searchForm.viewAdditionalFields">{{ 'frontend.search_form.additional_params'|trans }}<i class="icon-down"></i></a></div>
@@ -202,7 +202,7 @@
                             <div class="aviacompany input-group">
                                 <label for="#aviacompany">{{ 'frontend.search_form.airline'|trans }}</label>
                                 <div class="select">
-                                    <select id="aviacompany" name="aviacompany" ng-model="searchForm.aviacompany">
+                                    <select id="aviacompany" ng-model="searchForm.airline">
                                         <option value="0">Любая</option>
                                         <option value="1">Любая 1</option>
                                         <option value="2">Любая 2</option>

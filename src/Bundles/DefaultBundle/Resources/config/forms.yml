@@ -3,7 +3,7 @@
 services:
     budnels_default.form.type.search_form:
             class: Bundles\DefaultBundle\Form\SearchForm
-            arguments: [@session,@translator]
+            arguments: [@session,@bundles_default.search_form.options]
             tags:
                 - { name: form.type, alias: search_form }
     budnels_default.form.type.filter:
