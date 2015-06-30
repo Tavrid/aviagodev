@@ -46,9 +46,9 @@ class SearchFormOptions {
         }
         return [
             'returnWay' => [
-                'frontend.search_form.return_way.one_way',
-                'frontend.search_form.return_way.multi_way',
-                'frontend.search_form.return_way.complex_search'
+                $this->translation->trans('frontend.search_form.return_way.one_way'),
+                $this->translation->trans('frontend.search_form.return_way.multi_way'),
+                $this->translation->trans('frontend.search_form.return_way.complex_search')
             ],
             'serviceClass' => [
                 'Y' => $this->translation->trans('frontend.search_form.class_values.y'),

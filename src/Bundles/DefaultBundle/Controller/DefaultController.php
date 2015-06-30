@@ -19,7 +19,7 @@ class DefaultController extends Controller
 //
 //        $flights = $this->get('bundles_default.util.previous_flight')->getFlights();
         return $this->render('BundlesDefaultBundle:Default:index.html.twig', [
-            'formOptions' => $this->get('bundles_default.search_form.options')->getFormOptions()
+            'searchFormOptions' => $this->get('bundles_default.search_form.options')->getFormOptions()
 //            'flights' => $flights,
 //            'form' => $form->createView(),
 //            'form_data' => $this->get('session')->get('formData', [])

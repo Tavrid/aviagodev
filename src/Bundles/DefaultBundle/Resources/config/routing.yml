@@ -17,8 +17,8 @@ bundles_default.order.search:
     defaults: {_controller: BundlesDefaultBundle:Order:searchPnr}
 
 bundles_default_api_list:
-    pattern:  /flights/{city_from_code}/{city_to_code}/{date_from}/{date_to}/{best_price}/{adults}/{return_way}/{children}/{infant}/{class}/{avia_company}/{direct_flights}
-    defaults: { _controller: BundlesDefaultBundle:Default:index,adults: 1,class: Y,date_to: 0 ,children: 0,infant: 0,return_way : 1,direct_flights: 0, best_price: 1,avia_company: all}
+    pattern:  /flights/{arrivalCode}/{departureCode}/{arrivalDate}/{departureDate}/{bestPrice}/{adults}/{direction}/{children}/{infant}/{serviceClass}/{airline}/{directFlights}
+    defaults: { _controller: BundlesDefaultBundle:Default:index,adults: 1,class: Y,departureDate: 0 ,children: 0,infant: 0,direction : 1,directFlights: 0, bestPrice: 1,airline: all}
     requirements:
           date_to: "[\d\-]*"
           date_from: "[\d\-]*"
@@ -35,9 +35,10 @@ bundles_default_search_complex_search:
           direct_flights:  0|1
           return_way:  0|1|2
           adults: \d
+
 bundles_default_search_complex_search_items:
-    pattern:  /complex-search/items/{city}/{date}/{adults}/{return_way}/{children}/{infant}/{class}/{avia_company}/{direct_flights}
-    defaults: { _controller: BundlesDefaultBundle:Search:getFilteredItems,adults: 1,class: Y ,children: 0,infant: 0,return_way : 2,direct_flights: 0,avia_company: all}
+    pattern:  /complex-search/items/{city}/{date}/{adults}/{returnWay}/{children}/{infant}/{class}/{airline}/{directFlights}
+    defaults: { _controller: BundlesDefaultBundle:Search:getFilteredItems,adults: 1,class: Y ,children: 0,infant: 0,returnWay : 2,directFlights: 0,airline: all}
     requirements:
           city: "[\w\-]+"
           date: "[\d\-_]+"

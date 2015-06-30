@@ -12,6 +12,8 @@ module.exports = [
       AutoCompleteReplacer.reverse()
     scope.searchForm = new SearchForm location
     scope.mathes = []
+    scope.searchFormOptions = global.searchFormOptions
     scope.search = ->
-      console.log arguments
+      console.log scope.searchForm.getUrl()
+#      location.path scope.searchForm.getUrl()
 ]
