@@ -8,7 +8,7 @@ assertions =
 class ComplexField
 
 class SearchForm
-  constructor: ->
+  constructor: () ->
   direction: 2
   viewAdditionalFields: false
   complexFields: [new ComplexField, new ComplexField]
