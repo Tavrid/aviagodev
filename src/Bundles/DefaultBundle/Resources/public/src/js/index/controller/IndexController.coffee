@@ -1,4 +1,4 @@
-SearchForm = require "../model/searchForm"
+SearchForm = require "../../model/searchForm"
 
 module.exports = [
   '$scope',

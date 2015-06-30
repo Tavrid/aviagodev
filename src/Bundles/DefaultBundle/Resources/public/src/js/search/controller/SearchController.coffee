@@ -1,4 +1,4 @@
-#SearchForm = require "../model/searchForm"
+SearchForm = require "../../model/searchForm"
 
 module.exports = [
   '$scope',
@@ -7,5 +7,7 @@ module.exports = [
   'AutoCompleteReplacer',
   (scope, http, location, AutoCompleteReplacer) ->
     scope.$root.appCont = 'search'
-    console.log 'search'
+    scope.searchForm = new SearchForm global.formValues
+    scope.reverse = ->
+      AutoCompleteReplacer.reverse()
 ]
