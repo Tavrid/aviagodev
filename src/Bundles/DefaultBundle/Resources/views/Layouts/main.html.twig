@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html xml:lang="ru-ru" lang="ru-ru" dir="ltr">
+<html xml:lang="ru-ru" lang="ru-ru" dir="ltr" ng-app="MainApp">
 <head>
     <meta http-equiv="content-language" content="ru"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -16,14 +16,13 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bundlesdefault/front/css/additional.css') }}">
     {% endblock %}
 </head>
-<body>
-<div class="wrapper" ng-app="MainApp">
+<body ng-class="{'inner-list' : appCont == 'search'}">
+<div class="wrapper" >
     <div class="nav-bar">
         <div class="container"></div>
     </div>
     {% include "BundlesDefaultBundle:Layouts:_header.html.twig" %}
     <div ui-view>
-
         {% block content %}{% endblock %}
     </div>
 

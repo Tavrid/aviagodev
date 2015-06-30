@@ -3,6 +3,7 @@ require "angular-ui-router"
 datepicker = require "./datepicker"
 
 IndexController = require('./index/controller/IndexController')
+SearchController = require './search/controller/SearchController'
 #$ ->
 App = angular.module "MainApp", ['ui.router']
 
@@ -26,7 +27,6 @@ class AutoCompleteReplacer
 
 App.service 'AutoCompleteReplacer', AutoCompleteReplacer
 
-App.controller 'SearchFormCtrl', IndexController
 App.directive 'autoComplete', require "./lib/ngAutocomplete"
 App.directive 'ngDatepicker', datepicker
 
@@ -35,16 +35,14 @@ App.config [
   '$locationProvider'
   ($stateProvider, $locationProvider) ->
     $locationProvider.html5Mode(true)
-    #    $stateProvider.state('searchForm',
-    #      templateUrl: '/build/view/index/index.html'
-    #      controller: IndexController
-    #      url: '/'
-    #    )
-    $stateProvider.state('searchList',
-      templateUrl: '/build/view/index/index.html'
+
+    $stateProvider.state('index',
+      url: '/'
+      controller: IndexController
+    ).state('searchList',
+      templateUrl: '/build/view/search/search.html'
       url: '/flights/*path'
-      controller: ->
-        console.log 'search controller'
+      controller: SearchController
     )
     return
 ]

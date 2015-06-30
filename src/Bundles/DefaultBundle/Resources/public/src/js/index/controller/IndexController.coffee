@@ -6,6 +6,7 @@ module.exports = [
   '$location',
   'AutoCompleteReplacer',
   (scope, http, location, AutoCompleteReplacer) ->
+    scope.$root.appCont = 'index'
     AutoCompleteReplacer.controllerScope = scope;
 
     scope.reverse = ->
@@ -14,6 +15,5 @@ module.exports = [
     scope.mathes = []
     scope.searchFormOptions = global.searchFormOptions
     scope.search = ->
-      console.log scope.searchForm.getUrl()
-#      location.path scope.searchForm.getUrl()
+      location.path scope.searchForm.getUrl().replace '/app_dev.php',''
 ]

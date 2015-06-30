@@ -8,11 +8,12 @@ assertions =
 class ComplexField
 
 class SearchForm
+#  adults: 1,class: Y,departureDate: 0 ,children: 0,infant: 0,direction : 1,directFlights: 0, bestPrice: 1,airline: all
   defaultOpt = {
     arrivalCode: null
     departureCode: null
     arrivalDate: null
-    departureDate: null
+    departureDate: 0
     bestPrice: 1
     direction: 1
     adults: '1'
@@ -20,7 +21,7 @@ class SearchForm
     infant: '0'
     airline: 'all',
     serviceClass: 'Y'
-    directFlights: '0'
+    directFlights: 0
 
   }
   constructor: (attr = {}) ->
@@ -52,12 +53,12 @@ class SearchForm
       arrivalDate: @arrivalDate
       departureDate: @departureDate
       bestPrice: @bestPrice
-      direction: @direction
       adults: @adults
+      direction: @direction
       children: @children
       infant: @infant
-      airline: @airline
       serviceClass: @serviceClass
+      airline: @airline
       directFlights: @directFlights
     }
     Routing.generate 'bundles_default_api_list', formValues

@@ -18,7 +18,7 @@ bundles_default.order.search:
 
 bundles_default_api_list:
     pattern:  /flights/{arrivalCode}/{departureCode}/{arrivalDate}/{departureDate}/{bestPrice}/{adults}/{direction}/{children}/{infant}/{serviceClass}/{airline}/{directFlights}
-    defaults: { _controller: BundlesDefaultBundle:Default:index,adults: 1,class: Y,departureDate: 0 ,children: 0,infant: 0,direction : 1,directFlights: 0, bestPrice: 1,airline: all}
+    defaults: { _controller: BundlesDefaultBundle:Api:list,adults: 1,serviceClass: Y,departureDate: 0 ,children: 0,infant: 0,direction : 1,directFlights: 0, bestPrice: 1,airline: all}
     requirements:
           date_to: "[\d\-]*"
           date_from: "[\d\-]*"

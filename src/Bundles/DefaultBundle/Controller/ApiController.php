@@ -154,25 +154,9 @@ class ApiController extends Controller
     public function listAction(Request $request)
     {
 
-        $form = $this->createForm('search_form', null, ['city_manager' => $this->get('admin.city.manager')]);
-        $formBook = $this->createForm(new BookInfoForm());
-        $data = $request->get('_route_params');
-
-        if (empty($data['best_price'])) {
-            unset($data['best_price']);
-        }
-        if (empty($data['direct_flights'])) {
-            unset($data['direct_flights']);
-        }
-
-        $form->submit($data);
-
-        $this->addSearchData($request->get('_route_params'), $this->get('bundles_default_util_route')->resolveParams($request->get('_route_params')));
-
-        $resp = $this->render('BundlesDefaultBundle:Api:list.html.twig', array(
-            'form' => $form->createView(),
-            'form_info' => $formBook->createView(),
-            'form_data' => $this->get('bundles_default_util_route')->resolveParams($request->get('_route_params'))
+        $resp = $this->render('BundlesDefaultBundle:AngularViews:list.html.twig', array(
+            'params' => $request->get('_route_params'),
+            'searchFormOptions' => $this->get('bundles_default.search_form.options')->getFormOptions()
 
         ));
 
