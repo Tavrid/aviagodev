@@ -9,10 +9,11 @@
     <meta name="Keywords" content="{% block meta_keywords 'Поиск дешевых авиабилетов' %}">
     <base href="{{ path('bundles_default_homepage') }}"/>
     {% block style %}
-        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bundlesdefault/css/reset.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bundlesdefault/css/footer-bottom.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bundlesdefault/front/css/reset.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bundlesdefault/front/css/footer-bottom.css') }}">
 
-        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bundlesdefault/css/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bundlesdefault/front/css/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bundlesdefault/front/css/additional.css') }}">
     {% endblock %}
 </head>
 <body>
