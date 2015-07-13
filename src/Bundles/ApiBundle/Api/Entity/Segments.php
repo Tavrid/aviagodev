@@ -8,42 +8,141 @@
 
 namespace Bundles\ApiBundle\Api\Entity;
 
+use JMS\Serializer\Annotation\Accessor;
 
+class Segments
+{
 
-class Segments {
     /**
      * @var string
+     * @Accessor(getter="getDepartureCountryName",setter="setDepartureCountryName")
      */
     protected $departureCountryName;
+    /**
+     * @var string
+     * @Accessor(getter="getDepartureCityName",setter="setDepartureCityName")
+     */
     protected $departureCityName;
+    /**
+     * @var
+     * @Accessor(getter="getDepartureAirportName",setter="setDepartureAirportName")
+     */
     protected $departureAirportName;
+    /**
+     * @var
+     * @Accessor(getter="getDepartureDate",setter="setDepartureDate")
+     */
     protected $departureDate;
-
+    /**
+     * @var
+     * @Accessor(getter="getArrivalCountryName",setter="setArrivalCountryName")
+     */
     protected $arrivalCountryName;
+    /**
+     * @var
+     * @Accessor(getter="getArrivalCityName",setter="setArrivalCityName")
+     */
     protected $arrivalCityName;
+    /**
+     * @var
+     * @Accessor(getter="getArrivalAirportName",setter="setArrivalAirportName")
+     */
     protected $arrivalAirportName;
+    /**
+     * @var
+     * @Accessor(getter="getArrivalDate",setter="setArrivalDate")
+     */
     protected $arrivalDate;
-
+    /**
+     * @var
+     * @Accessor(getter="getAvailableSeats",setter="setAvailableSeats")
+     */
     protected $availableSeats;
 
-
+    /**
+     * @var
+     * @Accessor(getter="getPrice",setter="setPrice")
+     */
     protected $price;
-
+    /**
+     * @var
+     * @Accessor(getter="getFlightTime",setter="setFlightTime")
+     */
     protected $flightTime;
-
+    /**
+     * @var
+     * @Accessor(getter="getArrivalTimeZone",setter="setArrivalTimeZone")
+     */
     protected $arrivalTimeZone;
+
+    /**
+     * @var
+     * @Accessor(getter="getDepartureTimeZone",setter="setDepartureTimeZone")
+     */
     protected $departureTimeZone;
 
-
+    /**
+     * @var
+     * @Accessor(getter="getIsFirstSegment",setter="setIsFirstSegment")
+     */
     protected $isFirstSegment;
+    /**
+     * @var
+     * @Accessor(getter="getIsLastSegment",setter="setIsLastSegment")
+     */
     protected $isLastSegment;
-
-    protected  $departureTerminal;
+    /**
+     * @var
+     * @Accessor(getter="getDepartureTerminal",setter="setDepartureTerminal")
+     */
+    protected $departureTerminal;
+    /**
+     * @var
+     * @Accessor(getter="getArrivalTerminal",setter="setArrivalTerminal")
+     */
     protected $arrivalTerminal;
-
+    /**
+     * @var
+     * @Accessor(getter="getDepartureCity",setter="setDepartureCity")
+     */
     protected $departureCity;
-
+    /**
+     * @var
+     * @Accessor(getter="getArrivalCity",setter="setArrivalCity")
+     */
     protected $arrivalCity;
+
+    /**
+     * @var
+     * @Accessor(getter="getMarketingAirline",setter="setMarketingAirline")
+     */
+    protected $marketingAirline;
+    /**
+     * @var
+     * @Accessor(getter="getFlightNumber",setter="setFlightNumber")
+     */
+    protected $flightNumber;
+
+    /**
+     * @var
+     * @Accessor(getter="getMarketingAirlineName",setter="setMarketingAirlineName")
+     */
+    protected $marketingAirlineName;
+    /**
+     * @var
+     * @Accessor(getter="getDepartureAirport",setter="setDepartureAirport")
+     */
+    protected $departureAirport;
+    /**
+     * @var
+     * @Accessor(getter="getArrivalAirport",setter="setArrivalAirport")
+     */
+    protected $arrivalAirport;
+    /**
+     * @var
+     * @Accessor(getter="getAircraftName",setter="setAircraftName")
+     */
+    protected $aircraftName;
 
     /**
      * @return mixed
@@ -80,7 +179,6 @@ class Segments {
         $this->departureCity = $departureCity;
         return $this;
     }
-
 
 
     /**
@@ -120,7 +218,6 @@ class Segments {
     }
 
 
-
     /**
      * @return mixed
      */
@@ -158,26 +255,6 @@ class Segments {
     }
 
 
-
-
-
-    /**
-     * @var
-     */
-    protected $marketingAirline;
-    /**
-     * @var
-     */
-    protected $flightNumber;
-
-
-    protected $marketingAirlineName;
-
-    protected $departureAirport;
-    protected $arrivalAirport;
-
-    protected $aircraftName;
-
     /**
      * @return mixed
      */
@@ -213,7 +290,6 @@ class Segments {
         $this->arrivalTerminal = $arrivalTerminal;
         return $this;
     }
-
 
 
     /**
@@ -254,7 +330,6 @@ class Segments {
     }
 
 
-
     /**
      * @return mixed
      */
@@ -272,7 +347,6 @@ class Segments {
         $this->departureAirport = $departureAirport;
         return $this;
     }
-
 
 
     /**
@@ -309,7 +383,7 @@ class Segments {
      */
     public function setFlightTime($flightTime)
     {
-        $this->flightTime = $flightTime*60;
+        $this->flightTime = $flightTime * 60;
         return $this;
     }
 
@@ -441,7 +515,6 @@ class Segments {
     }
 
 
-
     /**
      * @param mixed $departureAirportName
      * @return $this;
@@ -516,8 +589,6 @@ class Segments {
     }
 
 
-
-
     /**
      * @param mixed $price
      * @return $this;
@@ -537,14 +608,15 @@ class Segments {
     }
 
 
-    public function getTransplantTime(Segments $next){
+    public function getTransplantTime(Segments $next)
+    {
         return $next->getDepartureDate() - $this->getArrivalDate();
 
     }
 
-    protected  function date($date, $format = "d MMMM H:mm")
+    protected function date($date, $format = "d MMMM H:mm")
     {
-        if(is_string($date)){
+        if (is_string($date)) {
             $date = new \DateTime($date);
         }
 

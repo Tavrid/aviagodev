@@ -8,7 +8,6 @@
 
 namespace Bundles\ApiBundle\Api\Entity;
 
-use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\Accessor;
 
 class Itineraries {

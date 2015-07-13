@@ -8,7 +8,8 @@
 
 namespace Bundles\ApiBundle\Api\Entity;
 
-
+use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\SerializedName;
 /**
  * Class Variants
  * @package Bundles\ApiBundle\Api\Entity
@@ -18,14 +19,18 @@ class Variants
 
     /**
      * @var Segments[]
+     * @Accessor(getter="getSegments",setter="setSegments")
      */
     protected $segments;
     /**
      * @var int
+     * @Accessor(getter="getDuration",setter="setDuration")
      */
     protected $duration;
     /**
      * @var string
+     * @Accessor(getter="getVariantID",setter="setVariantID")
+     * @SerializedName(value="variant_id")
      */
     protected $variantID;
 

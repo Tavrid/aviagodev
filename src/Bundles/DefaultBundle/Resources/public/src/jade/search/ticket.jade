@@ -1,197 +1,21 @@
-.ticket
+div(class="ticket" ng-repeat="ticket in tickets")
     .logo-alians
         img(src='/bundles/bundlesdefault/front/images/logo-skyteam.png', alt='')
     .ticket-price
-        h2 8 174 RUB
+        h2 {{ticket.total_price}} {{ticket.currency}}
         span.col-passenjers
             | - за
             span.col-user 1 человека
             |  с налогами и сборами
-    form.book-form(action='')
-        .ticket-wrap
-            .date-ticket
-                | туда
-                span 23.06.2015
-            .group-ticket
-                .ticket-body.checked-ticket
-                    .radio-group
-                        .radio-button
-                            input(type='radio', name='info', checked='checked', value='8619FA76-F5E7-4E51-A5D5-BF68620C4EAB')
-                            input(type='hidden', value='5587f13faf632c700200000c', name='info[request_id]')
-                    .company
-                        .image-block
-                            i.city-logo.UN
-                                img(src='/bundles/bundlesdefault/front/images/aeroflot.png', alt='')
-                        .info-block
-                            .name Трансаэро
-                            span.type Боинг 737-500
-                            span.number-reys UN2371
-                    .up-date
-                        p Время вылета:
-                        .time 01:25
-                        .city-block
-                            .city Москва
-                            .aeroport
-                                | Домодедово
-                                span.terminal(title='терминал А') A
-                    .down-date
-                        p Время вылета:
-                        .time
-                            | 01:25
-                            span + 1 день
-                        .city-block
-                            .city Москва
-                            .aeroport
-                                | Домодедово
-                                span.terminal(title='терминал А') A
-                    .duration
-                        p Продолжительность:
-                        .time 1 ч 35 м
-                        .transplant прямой рейс
-                        .luggage Багаж: 1 место (20 кг)
-                .ticket-body
-                    .radio-group
-                        .radio-button
-                            input(type='radio', name='info', value='8619FA76-F5E7-4E51-A5D5-BF68620C4EAB')
-                            input(type='hidden', value='5587f13faf632c700200000c', name='info[request_id]')
-                    .company
-                        .image-block
-                            i.city-logo.UN
-                                img(src='/bundles/bundlesdefault/front/images/aeroflot.png', alt='')
-                        .info-block
-                            .name Трансаэро
-                            span.type Боинг 737-500
-                            span.number-reys UN2371
-                    .up-date
-                        p Время вылета:
-                        .time 01:25
-                        .city-block
-                            .city Москва
-                            .aeroport
-                                | Домодедово
-                                span.terminal(title='терминал А') A
-                    .down-date
-                        p Время вылета:
-                        .time
-                            | 01:25
-                            span + 1 день
-                        .city-block
-                            .city Москва
-                            .aeroport
-                                | Домодедово
-                                span.terminal(title='терминал А') A
-                    .duration
-                        p Продолжительность:
-                        .time 1 ч 35 м
-                        .transplant прямой рейс
-                        .luggage Багаж: 1 место (20 кг)
-        .ticket-wrap
-            .date-ticket
-                | обратно
-                span 23.06.2015
-            .group-ticket
-                // Билет
-                .ticket-body.checked-ticket
-                    .radio-group
-                        .radio-button
-                            input(type='radio', name='info-1', checked='checked', value='8619FA76-F5E7-4E51-A5D5-BF68620C4EAB')
-                            input(type='hidden', value='5587f13faf632c700200000c', name='info[request_id]')
-                    .company
-                        .image-block
-                            i.city-logo.UN
-                                img(src='/bundles/bundlesdefault/front/images/aeroflot.png', alt='')
-                        .info-block
-                            .name Трансаэро
-                            span.type Боинг 737-500
-                            span.number-reys UN2371
-                    .up-date
-                        p Время вылета:
-                        .time 01:25
-                        .city-block
-                            .city Москва
-                            .aeroport
-                                | Домодедово
-                                span.terminal(title='терминал А') A
-                    .down-date
-                        p Время вылета:
-                        .time
-                            | 01:25
-                            span + 1 день
-                        .city-block
-                            .city Москва
-                            .aeroport
-                                | Домодедово
-                                span.terminal(title='терминал А') A
-                    .duration
-                        p Продолжительность:
-                        .time 1 ч 35 м
-                        .transplant
-                            p перелет с 2 пересадками:
-                            p
-                                b Дубай
-                                | : 7 ч 10 м
-                                i.icon-night
-                                i.icon-bed
-                            p
-                                b Сингапур
-                                | : 1 ч 10 м
-                                i.icon-night
-                                i.icon-time-duration
-                        .luggage Багаж: 1 место (20 кг)
-                .ticket-body
-                    .radio-group
-                        .radio-button
-                            input(type='radio', name='info-1', value='8619FA76-F5E7-4E51-A5D5-BF68620C4EAB')
-                            input(type='hidden', value='5587f13faf632c700200000c', name='info[request_id]')
-                    .company
-                        .image-block
-                            i.city-logo.UN
-                                img(src='/bundles/bundlesdefault/front/images/aeroflot.png', alt='')
-                        .info-block
-                            .name Трансаэро
-                            span.type Боинг 737-500
-                            span.number-reys UN2371
-                    .up-date
-                        p Время вылета:
-                        .time 01:25
-                        .city-block
-                            .city Москва
-                            .aeroport
-                                | Домодедово
-                                span.terminal(title='терминал А') A
-                    .down-date
-                        p Время вылета:
-                        .time
-                            | 01:25
-                            span + 1 день
-                        .city-block
-                            .city Москва
-                            .aeroport
-                                | Домодедово
-                                span.terminal(title='терминал А') A
-                    .duration
-                        p Продолжительность:
-                        .time 1 ч 35 м
-                        .transplant
-                            p перелет с 2 пересадками:
-                            p
-                                b Дубай
-                                | : 7 ч 10 м
-                                i.icon-night
-                                i.icon-bed
-                            p
-                                b Сингапур
-                                | : 1 ч 10 м
-                                i.icon-night
-                                i.icon-time-duration
-                        .luggage Багаж: 1 место (20 кг)
-        .button-group
-            .right
-                button.button.button-buy(type='button') Бронировать
-            .group
-                p
-                    | Оплатить до:
-                    b 18:00 часов 23.06.2015 г.
-                p
-                    | Тип тарифа:
-                    b невозвратный
+    include itinerarie
+
+    .button-group
+        .right
+            button.button.button-buy(type='button') Бронировать
+        .group
+            p
+                | Оплатить до:
+                b 18:00 часов 23.06.2015 г.
+            p
+                | Тип тарифа:
+                b невозвратный

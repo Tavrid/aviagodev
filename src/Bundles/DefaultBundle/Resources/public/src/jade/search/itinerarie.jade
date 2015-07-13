@@ -1,0 +1,40 @@
+div(class="ticket-wrap" ng-repeat="itinerarie in ticket.itineraries")
+   .date-ticket
+      | туда
+      span {{departureSegment(itinerarie).departure_date}}
+   div(class="group-ticket" ng-repeat="variant in itinerarie.variants")
+      .ticket-body.checked-ticket
+         .radio-group
+            .radio-button
+               input(type='radio', name='info', checked='checked', value='8619FA76-F5E7-4E51-A5D5-BF68620C4EAB')
+         .company
+            .image-block
+               i.city-logo.UN
+                  img(src='/bundles/bundlesdefault/front/images/aeroflot.png', alt='')
+            .info-block
+               .name Трансаэро
+               span.type Боинг 737-500
+               span.number-reys UN2371
+         .up-date
+            p Время вылета:
+            .time 01:25
+            .city-block
+               .city Москва
+               .aeroport
+                  | Домодедово
+                  span.terminal(title='терминал А') A
+         .down-date
+            p Время вылета:
+            .time
+               | 01:25
+               span + 1 день
+            .city-block
+               .city Москва
+               .aeroport
+                  | Домодедово
+                  span.terminal(title='терминал А') A
+         .duration
+            p Продолжительность:
+            .time 1 ч 35 м
+            .transplant прямой рейс
+            .luggage Багаж: 1 место (20 кг)
