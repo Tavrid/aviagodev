@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Bundles\ApiBundle\Api\Query\SearchByQuery;
 
 class SearchController extends Controller
 {
@@ -53,7 +54,9 @@ class SearchController extends Controller
 
     }
 
-    public function getFilteredItemsAction(Request $request){
+
+
+    public function getComplexFilteredItemsAction(Request $request){
         $page = $request->get('page',1);
         $formBook = $this->createForm(new BookInfoForm());
         $api = $this->get('avia.api.manager');
@@ -92,6 +95,8 @@ class SearchController extends Controller
             throw $this->createNotFoundException();
         }
     }
+
+
 
     public function addSearchData($routeParams,$data)
     {

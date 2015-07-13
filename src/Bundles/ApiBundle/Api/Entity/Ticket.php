@@ -9,23 +9,70 @@
 
 namespace Bundles\ApiBundle\Api\Entity;
 
+use JMS\Serializer\Annotation\Exclude;
+use JMS\Serializer\Annotation\Accessor;
+
 class Ticket {
 
     /**
      * @var Itineraries[]
+     * @Accessor(getter="getItineraries",setter="setItineraries")
      */
     protected $itineraries;
+    /**
+     * @var
+     * @Accessor(getter="getRequestId",setter="setRequestId")
+     */
     protected $requestId;
+    /**
+     * @var
+     * @Accessor(getter="getTotalPrice",setter="setTotalPrice")
+     */
     protected $totalPrice;
+    /**
+     * @var
+     * @Accessor(getter="getPricing",setter="setPricing")
+     */
     protected $pricing;
+    /**
+     * @var
+     * @Accessor(getter="getTravelers",setter="setTravelers")
+     */
     protected $travelers;
+    /**
+     * @var
+     * @Accessor(getter="getValidatingAirline",setter="setValidatingAirline")
+     */
     protected $validatingAirline;
+    /**
+     * @var
+     * @Accessor(getter="getLatinRegistration",setter="setLatinRegistration")
+     */
     protected $latinRegistration;
+    /**
+     * @var
+     * @Accessor(getter="getLastTicketDate",setter="setLastTicketDate")
+     */
     protected $lastTicketDate;
+    /**
+     * @var
+     * @Accessor(getter="getCurrency",setter="setCurrency")
+     */
     protected $currency;
+    /**
+     * @var
+     * @Accessor(getter="getRefundable",setter="setRefundable")
+     */
     protected $refundable;
+    /**
+     * @var
+     * @Accessor(getter="getSurnames",setter="setSurnames")
+     */
     protected $surnames;
-
+    /**
+     * @var
+     * @Accessor(getter="getPNRExpireDate",setter="setPNRExpireDate")
+     */
     protected $PNRExpireDate;
 
 

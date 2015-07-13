@@ -8,7 +8,7 @@ assertions =
 class ComplexField
 
 class SearchForm
-#  adults: 1,class: Y,departureDate: 0 ,children: 0,infant: 0,direction : 1,directFlights: 0, bestPrice: 1,airline: all
+
   defaultOpt = {
     arrivalCode: null
     departureCode: null
@@ -46,7 +46,6 @@ class SearchForm
     @complexFields.push(new ComplexField)
 
   getUrl: () ->
-#    /flights/{arrivalCode}/{departureCode}/{arrivalDate}/{departureDate}/{bestPrice}/{adults}/{direction}/{children}/{infant}/{serviceClass}/{airline}/{directFlights}
     formValues =  {
       arrivalCode: @arrivalCode
       departureCode: @departureCode

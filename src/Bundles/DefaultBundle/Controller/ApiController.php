@@ -163,50 +163,6 @@ class ApiController extends Controller
         return $resp;
     }
 
-    public function getFilteredItemsAction(Request $request, $page)
-    {
-        $form = $this->createForm('search_form');
-        $formBook = $this->createForm(new BookInfoForm());
-
-        $form->submit($request);
-        $resp = null;
-        /** @var \Bundles\ApiBundle\Api\Api $api */
-        $api = $this->get('avia.api.manager');
-        $params = $form->getData();
-
-        $query = new SearchByQuery();
-        $query->setParams($params);
-        $output = $api->getSearchRequestor()->execute($query);
-        if (!$output->getIsError()) {
-            $filterForm = $this->createForm('filter', null, ['searchResponse' => $output]);
-            if ($request->get($filterForm->getName())) {
-                $filterForm->submit($request);
-                $filterParams = $filterForm->getData();
-            } else {
-                $filterParams = array();
-            }
-
-            $f = new SearchResultFilter($output, $this->container->getParameter('bundles_default.count_on_page'));
-            $data = $f->getData($page, SearchFilters::getFiltersByParams($filterForm->getData(), $form->getData()));
-            $d = array(
-                'html' => $this->renderView('BundlesDefaultBundle:Api:_items.html.twig', array(
-                    'data' => $data,
-                    'form' => $form->createView(),
-                    'form_info' => $formBook->createView(),
-                    'numPassenger' => $params['adults'] + $params['infant'] + $params['children']
-                )),
-                'filter_form' => $this->renderView('BundlesDefaultBundle:Api:_filter_form.html.twig', ['filter_form' => $filterForm->createView()]
-                ),
-                'countPages' => $f->getCountPages(),
-                'hasNext' => $page < $f->getCountPages()
-            );
-            $resp = new JsonResponse($d);
-            return $resp;
-        } else {
-            throw $this->createNotFoundException();
-        }
-
-    }
 
     public function calendarAction(Request $request)
     {

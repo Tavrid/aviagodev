@@ -46,6 +46,7 @@ class AppKernel extends Kernel {
             // Then add SonataAdminBundle
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Bundles\YandexAviaBundle\BundlesYandexAviaBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

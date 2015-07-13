@@ -17,7 +17,7 @@ bundles_default.order.search:
     defaults: {_controller: BundlesDefaultBundle:Order:searchPnr}
 
 bundles_default_api_list:
-    pattern:  /flights/{arrivalCode}/{departureCode}/{arrivalDate}/{departureDate}/{bestPrice}/{adults}/{direction}/{children}/{infant}/{serviceClass}/{airline}/{directFlights}
+    pattern:  /flights/{arrivalCode}/{departureCode}/{departureDate}/{arrivalDate}/{bestPrice}/{adults}/{direction}/{children}/{infant}/{serviceClass}/{airline}/{directFlights}
     defaults: { _controller: BundlesDefaultBundle:Api:list,adults: 1,serviceClass: Y,departureDate: 0 ,children: 0,infant: 0,direction : 1,directFlights: 0, bestPrice: 1,airline: all}
     requirements:
           date_to: "[\d\-]*"
@@ -38,7 +38,7 @@ bundles_default_search_complex_search:
 
 bundles_default_search_complex_search_items:
     pattern:  /complex-search/items/{city}/{date}/{adults}/{returnWay}/{children}/{infant}/{class}/{airline}/{directFlights}
-    defaults: { _controller: BundlesDefaultBundle:Search:getFilteredItems,adults: 1,class: Y ,children: 0,infant: 0,returnWay : 2,directFlights: 0,airline: all}
+    defaults: { _controller: BundlesDefaultBundle:Search:getComplexFilteredItems,adults: 1,class: Y ,children: 0,infant: 0,returnWay : 2,directFlights: 0,airline: all}
     requirements:
           city: "[\w\-]+"
           date: "[\d\-_]+"
@@ -51,7 +51,7 @@ bundles_default_api_info:
 
 bundles_default_api_flights_items:
     pattern: /flight/get-flights/{page}
-    defaults: { _controller: BundlesDefaultBundle:Api:getFilteredItems,page: 1}
+    defaults: { _controller: BundlesDefaultBundle:FilteredItems:get,page: 1}
 
 bundles_default_api_calendar:
     pattern: /api/avia-calendar

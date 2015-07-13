@@ -44,5 +44,4 @@ App.config [
       url: '/flights/*path'
       controller: SearchController
     )
-    return
 ]

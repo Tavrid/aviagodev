@@ -8,10 +8,13 @@
 
 namespace Bundles\ApiBundle\Api\Entity;
 
+use JMS\Serializer\Annotation\Exclude;
+use JMS\Serializer\Annotation\Accessor;
 
 class Itineraries {
     /**
      * @var Variants[]
+     * @Accessor(getter="getVariants",setter="setVariants")
      */
     protected $variants;
 

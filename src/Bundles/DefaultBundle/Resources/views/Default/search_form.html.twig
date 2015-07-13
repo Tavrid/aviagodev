@@ -18,7 +18,7 @@
             <fieldset class="form-group">
                 <div ng-hide="searchForm.direction==2" class="simple-search">
                     <div class="departure-from input-group">
-                        <label for="#from-avia">{{ 'frontend.search_form.city_from'|trans }}:</label>
+                        <label for="from-avia">{{ 'frontend.search_form.city_from'|trans }}:</label>
                         <div class="input">
                             <span class="icon"><i class="icon-metka"></i></span>
                             <auto-complete
@@ -32,10 +32,10 @@
                         </div>
                     </div>
                     <div ng-click="reverse()" ng-hide="searchForm.direction == 0" class="input-group refresh">
-                        <a href="#"><i class="icon-refresh"></i></a>
+                        <a href=""><i class="icon-refresh"></i></a>
                     </div>
                     <div ng-hide="searchForm.direction == 0" class="arriving-in input-group">
-                        <label for="#down-avia">{{ 'frontend.search_form.city_to'|trans }}:</label>
+                        <label for="down-avia">{{ 'frontend.search_form.city_to'|trans }}:</label>
                         <div class="input">
                             <span class="icon"><i class="icon-metka"></i></span>
                             <auto-complete
@@ -114,7 +114,7 @@
             </fieldset>
             <fieldset class="form-group">
                 <div class="date-simple up-date input-group">
-                    <label for="#up-date">{{ 'frontend.search_form.date_from'|trans }}:</label>
+                    <label for="up-date">{{ 'frontend.search_form.date_from'|trans }}:</label>
                     <div class="input">
                         <ng-datepicker
                                 attr-id="up-date"
@@ -129,7 +129,7 @@
                     </div>
                 </div>
                 <div class="date-simple down-date input-group">
-                    <label for="#down-date">{{ 'frontend.search_form.date_to'|trans }}:</label>
+                    <label for="down-date">{{ 'frontend.search_form.date_to'|trans }}:</label>
                     <div class="input">
                         <ng-datepicker
                                 attr-id="down-date"
@@ -144,7 +144,7 @@
                     </div>
                 </div>
                 <div class="adults input-group">
-                    <label for="#adults">{{ 'frontend.search_form.adults'|trans }}</label>
+                    <label for="adults">{{ 'frontend.search_form.adults'|trans }}</label>
                     <div class="select">
                         <select id="adults" name="adults" ng-model="searchForm.adults" ng-options="key as value for (key , value) in searchFormOptions.adults">
 
@@ -152,7 +152,7 @@
                     </div>
                 </div>
                 <div class="children input-group">
-                    <label for="#children">{{ 'frontend.search_form.child'|trans }}</label>
+                    <label for="children">{{ 'frontend.search_form.child'|trans }}</label>
                     <div class="select">
                         <select id="children" name="children" ng-model="searchForm.children"  ng-options="key as value for (key , value) in searchFormOptions.children">
 
@@ -160,7 +160,7 @@
                     </div><a href="#" class="age-rule-link">Правила перевозки детей<i class="icon-window"></i></a>
                 </div>
                 <div class="infant input-group">
-                    <label for="#infant">{{ 'frontend.search_form.infant'|trans }}</label>
+                    <label for="infant">{{ 'frontend.search_form.infant'|trans }}</label>
                     <div class="select">
                         <select id="infant" name="infant" ng-model="searchForm.infant" ng-options="key as value for (key , value) in searchFormOptions.infant">
 
@@ -173,7 +173,7 @@
                     <button type="submit" ng-click="search()" class="button button-buy">{{ 'frontend.search_form.submit'|trans }}</button>
                 </div>
                 <div class="additional-options">
-                    <div class="additional-text"><a href="#" ng-click="searchForm.viewAdditionalFields= !searchForm.viewAdditionalFields">{{ 'frontend.search_form.additional_params'|trans }}<i class="icon-down"></i></a></div>
+                    <div class="additional-text"><a href="" ng-click="searchForm.viewAdditionalFields= !searchForm.viewAdditionalFields">{{ 'frontend.search_form.additional_params'|trans }}<i class="icon-down"></i></a></div>
                     <div ng-show="searchForm.viewAdditionalFields" class="additional-wrap ng-hide">
                         <div class="form-group">
                             <div class="checkbox-input input-group">
@@ -191,7 +191,7 @@
                         </div>
                         <div class="form-group">
                             <div class="aviacompany input-group">
-                                <label for="#aviacompany">{{ 'frontend.search_form.airline'|trans }}</label>
+                                <label for="aviacompany">{{ 'frontend.search_form.airline'|trans }}</label>
                                 <div class="select">
                                     <select id="aviacompany" ng-model="searchForm.airline"  ng-options="key as value for (key , value) in searchFormOptions.airline">
 
@@ -199,7 +199,7 @@
                                 </div>
                             </div>
                             <div class="class-service input-group">
-                                <label for="#class-service">{{ 'frontend.search_form.class'|trans }}</label>
+                                <label for="class-service">{{ 'frontend.search_form.class'|trans }}</label>
                                 <div class="select">
                                     <select id="class-service" name="class-service" ng-model="searchForm.serviceClass"  ng-options="key as value for (key , value) in searchFormOptions.serviceClass">
 

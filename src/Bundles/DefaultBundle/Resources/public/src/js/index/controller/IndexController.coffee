@@ -15,5 +15,5 @@ module.exports = [
     scope.mathes = []
     scope.searchFormOptions = global.searchFormOptions
     scope.search = ->
-      location.path scope.searchForm.getUrl().replace '/app_dev.php',''
+      window.location = scope.searchForm.getUrl()
 ]

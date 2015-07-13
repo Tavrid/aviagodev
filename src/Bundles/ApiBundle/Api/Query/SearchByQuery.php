@@ -42,17 +42,17 @@ class SearchByQuery extends QueryAbstract
 
         $routes = [
             [
-                'Departure' => $this->params['city_from_code'],
-                'Arrival' => $this->params['city_to_code'],
-                'Date' => $this->params['date_from'],
+                'Departure' => $this->params['departureCode'],
+                'Arrival' => $this->params['arrivalCode'],
+                'Date' => $this->params['departureDate'],
             ],
         ];
 
-        if ($this->params['return_way']) {
+        if ($this->params['direction'] == 1) {
             $routes[] = [
-                'Departure' => $this->params['city_to_code'],
-                'Arrival' => $this->params['city_from_code'],
-                'Date' => $this->params['date_to'],
+                'Departure' => $this->params['departureCode'],
+                'Arrival' => $this->params['arrivalCode'],
+                'Date' => $this->params['arrivalDate'],
             ];
         }
         $paramsR = [
@@ -70,7 +70,7 @@ class SearchByQuery extends QueryAbstract
                 [
                     'Routes' => $routes,
                     'Logic' => 'Default',
-                    'Class' => AviaClassMapping::getRealClassName($this->params['class']),
+                    'Class' => AviaClassMapping::getRealClassName($this->params['serviceClass']),
                     'Travellers' => [
                         'ADT' => $this->params['adults'],
                         'CHD' => $this->params['children'],
@@ -90,6 +90,7 @@ class SearchByQuery extends QueryAbstract
                 ]
             ]
         ];
+
         return $paramsR;
 
     }
@@ -108,11 +109,11 @@ class SearchByQuery extends QueryAbstract
     public function getKeyByParams()
     {
         $params = array_intersect_key($this->params, [
-            'city_from_code' => '',
-            'city_to_code' => '',
-            'date_from' => '',
-            'date_to' => '',
-            'class' => '',
+            'departureCode' => '',
+            'arrivalCode' => '',
+            'departureDate' => '',
+            'arrivalDate' => '',
+            'serviceClass' => '',
             'adults' => '',
             'children' => '',
             'infant' => '',
