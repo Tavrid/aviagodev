@@ -42,7 +42,6 @@ class FilteredItemsController extends Controller
 
         $output = $api->getSearchRequestor()->execute($query);
         if (!$output->getIsError()) {
-            $filterForm = $this->createForm('filter', null, ['searchResponse' => $output]);
             $data = [];
             foreach($output as $key => $val){
                 $data[] = $val;
@@ -53,7 +52,7 @@ class FilteredItemsController extends Controller
             $serializer = $this->get('jms_serializer');
             $data = $serializer->serialize($data, 'json');
 
-            $resp = new JsonResponse(json_decode($data,true));
+            $resp = new Response($data,Response::HTTP_OK,['Content-Type'=>'application/json']);
             return $resp;
         } else {
             throw $this->createNotFoundException();

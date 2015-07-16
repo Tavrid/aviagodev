@@ -1,6 +1,8 @@
 SearchForm = require "../../model/searchForm"
 propPath = require 'property-path'
-
+moment = require "moment"
+dateFormatter = (timestamp, format = "D.MM.YYYY") ->
+  moment.unix(timestamp).format format
 
 module.exports = [
   '$scope',
@@ -10,18 +12,17 @@ module.exports = [
   (scope, http, location, AutoCompleteReplacer) ->
     scope.$root.appCont = 'search'
     scope.searchForm = new SearchForm global.formValues
-    testObj = {
-      a: 1,
-      b: true,
-      c: {
-        d: {
-          e: 'Hello',
-          f: [ 1, 2, false, 'hi' ]
-        }
-      }
-    }
+    scope.dateFormatt = dateFormatter
 
     scope.departureSegment = (itinerarie) ->
+      if propPath.get itinerarie, "variants.0.segments.0"
+        return propPath.get itinerarie, "variants.0.segments.0"
+      null
+
+    ###
+      TODO need fix!
+    ###
+    scope.arrivalSegment = (itinerarie) ->
       if propPath.get itinerarie, "variants.0.segments.0"
         return propPath.get itinerarie, "variants.0.segments.0"
       null
