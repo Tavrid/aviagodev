@@ -27,22 +27,6 @@ use Bundles\DefaultBundle\Model\PayU;
 class ApiController extends Controller
 {
 
-    // C330CA8C-DCDF-4CA8-A5E0-F5E4E1612440
-    public function searchCityAction(Request $request)
-    {
-        $q = $request->get('q');
-        /** @var \Bundles\ApiBundle\Api\Api $api */
-//        $api = $this->get('avia.api.manager');
-//        $query = new AviaCityByQuery();
-//        $query->setQuery($q);
-//        $output = $api->getCityRequestor()->execute($query);
-//        $resp = $output->getResponseData();
-        $model = $this->get('admin.city.manager');
-        $resp = new Response(json_encode($model->searchByToken($q)));
-        $resp->headers->add(array('Content-Type' => 'application/json'));
-        return $resp;
-    }
-
     public function infoAction(Request $request)
     {
         $form = $this->createForm(new BookInfoForm());

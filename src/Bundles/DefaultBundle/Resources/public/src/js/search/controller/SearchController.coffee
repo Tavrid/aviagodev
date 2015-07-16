@@ -30,8 +30,8 @@ module.exports = [
 #    if itinerarie.variants != undefined && itinerarie.variants[itinerarie.variants.length -1] && itinerarie.variants[itinerarie.variants.length -1].segments && itinerarie.variants[itinerarie.variants.length -1].segments[0]
 #      return itinerarie.variants[0].segments[0]
 #    null
-
-    http.get Routing.generate 'bundles_default_api_flights_items', global.formValues
+    global.formValues.page = 1
+    http.get Routing.generate 'api_get_tickets', global.formValues
       .success (res) ->
         scope.tickets = res
     scope.reverse = ->

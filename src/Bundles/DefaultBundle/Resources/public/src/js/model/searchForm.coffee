@@ -60,5 +60,5 @@ class SearchForm
       airline: @airline
       directFlights: @directFlights
     }
-    Routing.generate 'bundles_default_api_list', formValues
+    Routing.generate 'api_list_flight', formValues
 module.exports = SearchForm

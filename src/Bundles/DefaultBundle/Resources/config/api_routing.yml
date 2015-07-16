@@ -1,0 +1,9 @@
+bundles_default_rest_api_ticket:
+    type:     rest
+    resource: @BundlesDefaultBundle/Controller/Api/TicketController.php
+    name_prefix: api_
+
+bundles_default_rest_api_airport:
+    type:     rest
+    resource: @BundlesDefaultBundle/Controller/Api/AirportController.php
+    name_prefix: api_

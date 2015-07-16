@@ -1,3 +1,10 @@
+Api:
+    type: rest
+    prefix: /api
+    resource: "@BundlesDefaultBundle/Resources/config/api_routing.yml"
+
+
+
 bundles_default_homepage:
     pattern:  /
     defaults: { _controller: BundlesDefaultBundle:Default:index }
@@ -6,9 +13,6 @@ bundles_default.currency.change_currency:
     pattern: /currency/change-currency/{currency}
     defaults: { _controller: BundlesDefaultBundle:Currency:index}
 
-bundles_default_search_city:
-    pattern:  /api/city/search
-    defaults: { _controller: BundlesDefaultBundle:Api:searchCity }
 bundles_default_search:
     pattern:  /api/search
     defaults: { _controller: BundlesDefaultBundle:Api:search }
@@ -16,7 +20,7 @@ bundles_default.order.search:
     pattern: payonline
     defaults: {_controller: BundlesDefaultBundle:Order:searchPnr}
 
-bundles_default_api_list:
+api_list_flight:
     pattern:  /flights/{arrivalCode}/{departureCode}/{departureDate}/{arrivalDate}/{bestPrice}/{adults}/{direction}/{children}/{infant}/{serviceClass}/{airline}/{directFlights}
     defaults: { _controller: BundlesDefaultBundle:Api:list,adults: 1,serviceClass: Y,departureDate: 0 ,children: 0,infant: 0,direction : 1,directFlights: 0, bestPrice: 1,airline: all}
     requirements:
@@ -49,9 +53,6 @@ bundles_default_api_info:
     pattern: /api/flight/info
     defaults: { _controller: BundlesDefaultBundle:Api:info}
 
-bundles_default_api_flights_items:
-    pattern: /flight/get-flights/{page}
-    defaults: { _controller: BundlesDefaultBundle:FilteredItems:get,page: 1}
 
 bundles_default_api_calendar:
     pattern: /api/avia-calendar

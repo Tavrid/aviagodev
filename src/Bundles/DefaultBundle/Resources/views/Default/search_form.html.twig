@@ -94,9 +94,9 @@
                                         attr-id="up-date-{% verbatim %}{{ $index }}{% endverbatim %}"
                                         highlight-between="0"
                                         placeholder="{{ 'frontend.search_form.placeholders.date'|trans }}"
-                                        ng-model="inputGroup.arrivalDate"
-                                        name="arrivalDate{% verbatim %}{{ $index }}{% endverbatim %}"
-                                        min-from="arrivalDate{% verbatim %}{{ $index - 1 }}{% endverbatim %}"
+                                        ng-model="inputGroup.departureDate"
+                                        name="departureDate{% verbatim %}{{ $index }}{% endverbatim %}"
+                                        min-from="departureDate{% verbatim %}{{ $index - 1 }}{% endverbatim %}"
                                         max-from="arrivalDate{% verbatim %}{{ $index + 1 }}{% endverbatim %}"
                                         >
 
@@ -119,9 +119,9 @@
                         <ng-datepicker
                                 attr-id="up-date"
                                 placeholder="{{ 'frontend.search_form.placeholders.date'|trans }}"
-                                ng-model="searchForm.arrivalDate"
-                                name="arrivalDate"
-                                max-from="departureDate"
+                                ng-model="searchForm.departureDate"
+                                name="departureDate"
+                                max-from="arrivalDate"
                                 >
 
                         </ng-datepicker>
@@ -134,9 +134,9 @@
                         <ng-datepicker
                                 attr-id="down-date"
                                 placeholder="{{ 'frontend.search_form.placeholders.date'|trans }}"
-                                ng-model="searchForm.departureDate"
-                                name="departureDate"
-                                min-from="arrivalDate"
+                                ng-model="searchForm.arrivalDate"
+                                name="arrivalDate"
+                                min-from="departureDate"
                                 >
 
                         </ng-datepicker>

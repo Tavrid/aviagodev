@@ -60,7 +60,7 @@ module.exports =
           timeout.cancel currentTimer
           if searchCache[scope.query] == undefined
             currentTimer = timeout ->
-              http.get(Routing.generate("bundles_default_search_city",{q: scope.query })).then((result) ->
+              http.get(Routing.generate("api_get_airports",{q: scope.query })).then((result) ->
 
                 searchCache[scope.query] = createListMatches result.data, scope.query
                 scope.matches = searchCache[scope.query];
