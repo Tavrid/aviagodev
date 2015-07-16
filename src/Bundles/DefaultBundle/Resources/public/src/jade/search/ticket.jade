@@ -13,9 +13,10 @@ div(class="ticket" ng-repeat="ticket in tickets")
         .right
             button.button.button-buy(type='button') Бронировать
         .group
-            p
+
+            p(ng-show="ticket.last_ticket_date")
                 | Оплатить до:
-                b 18:00 часов 23.06.2015 г.
-            p
+                b {{dateFormat(ticket.last_ticket_date,"H:mm D.M.YYYY")}}
+            p(ng-hide="ticket.refundable")
                 | Тип тарифа:
                 b невозвратный

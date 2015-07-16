@@ -12,7 +12,7 @@ module.exports = [
   (scope, http, location, AutoCompleteReplacer) ->
     scope.$root.appCont = 'search'
     scope.searchForm = new SearchForm global.formValues
-    scope.dateFormatt = dateFormatter
+    scope.dateFormat = dateFormatter
 
     scope.departureSegment = (itinerarie) ->
       if propPath.get itinerarie, "variants.0.segments.0"

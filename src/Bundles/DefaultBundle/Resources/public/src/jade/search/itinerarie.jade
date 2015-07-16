@@ -1,7 +1,7 @@
 div(class="ticket-wrap" ng-repeat="itinerarie in ticket.itineraries")
    .date-ticket
-      | туда
-      span {{departureSegment(itinerarie).departure_date}}
+      //| туда
+      span {{dateFormat(departureSegment(itinerarie).departure_date)}}
    div(class="group-ticket" ng-repeat="variant in itinerarie.variants")
       .ticket-body.checked-ticket
          .radio-group
@@ -17,7 +17,7 @@ div(class="ticket-wrap" ng-repeat="itinerarie in ticket.itineraries")
                span.number-reys {{departureSegment(itinerarie).flight_number}}
          .up-date
             p Время вылета:
-            .time {{dateFormatt(departureSegment(itinerarie).departure_date)}}
+            .time {{dateFormat(departureSegment(itinerarie).departure_date)}}
             .city-block
                .city {{departureSegment(itinerarie).departure_city_name}}
                .aeroport
