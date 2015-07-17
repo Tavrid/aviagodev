@@ -2,11 +2,12 @@ div(class="ticket-wrap" ng-repeat="itinerarie in ticket.itineraries")
    .date-ticket
       //| туда
       span {{dateFormat(departureSegment(itinerarie).departure_date)}}
-   div(class="group-ticket" ng-repeat="variant in itinerarie.variants")
-      .ticket-body.checked-ticket
+   div(class="group-ticket" ng-repeat="variant in itinerarie.variants" ng-click="selectVariant(variant,ticket,$parent.$index)")
+      div(class="ticket-body" ng-class="{'checked-ticket' : variant.checked}")
          .radio-group
             .radio-button
-               input(type='radio', name='info', checked='checked', value='8619FA76-F5E7-4E51-A5D5-BF68620C4EAB')
+               i(class="fa" ng-class="{'fa-dot-circle-o' : variant.checked,'fa-circle-o' : !variant.checked}")
+               //input(type='radio', name='info', checked='')
          .company
             .image-block
                i.city-logo.UN

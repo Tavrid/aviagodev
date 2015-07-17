@@ -30,8 +30,6 @@ class FilteredItemsController extends Controller
      */
     public function getAction(Request $request, $page)
     {
-
-        $resp = null;
         /** @var \Bundles\ApiBundle\Api\Api $api */
         $api = $this->get('avia.api.manager');
         $params = $request->query->all();
@@ -52,8 +50,7 @@ class FilteredItemsController extends Controller
             $serializer = $this->get('jms_serializer');
             $data = $serializer->serialize($data, 'json');
 
-            $resp = new Response($data,Response::HTTP_OK,['Content-Type'=>'application/json']);
-            return $resp;
+            return new Response($data,Response::HTTP_OK,['Content-Type'=>'application/json']);
         } else {
             throw $this->createNotFoundException();
         }
