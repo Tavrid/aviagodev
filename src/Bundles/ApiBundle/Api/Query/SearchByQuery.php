@@ -50,8 +50,8 @@ class SearchByQuery extends QueryAbstract
 
         if ($this->params['direction'] == 1) {
             $routes[] = [
-                'Departure' => $this->params['departureCode'],
-                'Arrival' => $this->params['arrivalCode'],
+                'Departure' => $this->params['arrivalCode'],
+                'Arrival' => $this->params['departureCode'],
                 'Date' => $this->params['arrivalDate'],
             ];
         }

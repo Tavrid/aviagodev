@@ -39,22 +39,22 @@ module.exports = [
     ###
       get Departure Segment
     ###
-    scope.departureSegment = (itinerarie) ->
-      if propPath.get itinerarie, "variants.0.segments.0"
-        return propPath.get itinerarie, "variants.0.segments.0"
-      null
+    scope.departureSegment = (variant) ->
+      if propPath.get variant, "segments.0"
+        return propPath.get variant, "segments.0"
+      {}
 
     ###
-      TODO need fix!
+      get Arrival segment
     ###
-    scope.arrivalSegment = (itinerarie) ->
-      if propPath.get itinerarie, "variants.0.segments.0"
-        return propPath.get itinerarie, "variants.0.segments.0"
-      null
-    #    scope.arrivalSegment = (itinerarie)
-    #    if itinerarie.variants != undefined && itinerarie.variants[itinerarie.variants.length -1] && itinerarie.variants[itinerarie.variants.length -1].segments && itinerarie.variants[itinerarie.variants.length -1].segments[0]
-    #      return itinerarie.variants[0].segments[0]
-    #    null
+    scope.arrivalSegment = (variant) ->
+      if variant.segments != undefined
+        return _.last variant.segments
+      {}
+
+    ###
+      find default tickets
+    ###
     global.formValues.page = 1
     http.get Routing.generate 'api_get_tickets', global.formValues
       .success (res) ->

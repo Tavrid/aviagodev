@@ -1,43 +1,42 @@
 div(class="ticket-wrap" ng-repeat="itinerarie in ticket.itineraries")
    .date-ticket
       //| туда
-      span {{dateFormat(departureSegment(itinerarie).departure_date)}}
+      span {{dateFormat(departureSegment(itinerarie.variants[0]).departure_date)}}
    div(class="group-ticket" ng-repeat="variant in itinerarie.variants" ng-click="selectVariant(variant,itinerarie.variants)")
       div(class="ticket-body" ng-class="{'checked-ticket' : variant.checked}")
          .radio-group
             .radio-button
                i(class="fa" ng-class="{'fa-dot-circle-o' : variant.checked,'fa-circle-o' : !variant.checked}")
-               //input(type='radio', name='info', checked='')
          .company
             .image-block
                i.city-logo.UN
                   img(src='/bundles/bundlesdefault/front/images/aeroflot.png', alt='')
             .info-block
-               .name {{ departureSegment(itinerarie).marketing_airline}}
-               span.type {{ departureSegment(itinerarie).marketing_airline_name }} {{ departureSegment(itinerarie).aircraft_name }}
-               span.number-reys {{departureSegment(itinerarie).flight_number}}
+               .name {{ departureSegment(variant).marketing_airline}}
+               span.type {{ departureSegment(variant).marketing_airline_name }} {{ departureSegment(variant).aircraft_name }}
+               span.number-reys {{departureSegment(variant).flight_number}}
          .up-date
             p Время вылета:
-            .time {{dateFormat(departureSegment(itinerarie).departure_date)}}
+            .time {{dateFormat(departureSegment(variant).departure_date)}}
             .city-block
-               .city {{departureSegment(itinerarie).departure_city_name}}
+               .city {{departureSegment(variant).departure_city_name}}
                .aeroport
-                  | {{ departureSegment(itinerarie).departure_airport_name }}
+                  | {{ departureSegment(variant).departure_airport_name }}
                   span.terminal(
-                     ng-show="departureSegment(itinerarie).departure_terminal"
-                     title='терминал {{departureSegment(itinerarie).departure_terminal}}') {{departureSegment(itinerarie).departure_terminal}}
+                     ng-show="departureSegment(variant).departure_terminal"
+                     title='терминал {{departureSegment(variant).departure_terminal}}') {{departureSegment(variant).departure_terminal}}
          .down-date
             p Время прилета:
             .time
-               | {{ arrivalSegment(itinerarie).arrival_airport_name }}
-               span + 1 день
+               | {{ dateFormat(arrivalSegment(variant).arrival_date) }}
+               //span + 1 день
             .city-block
-               .city {{arrivalSegment(itinerarie).arrival_city_name}}
+               .city {{arrivalSegment(variant).arrival_city_name}}
                .aeroport
-                  | {{ arrivalSegment(itinerarie).arrival_airport_name }}
+                  | {{ arrivalSegment(variant).arrival_airport_name }}
                   span.terminal(
-                     ng-show="arrivalSegment(itinerarie).arrival_terminal"
-                     title='терминал {{arrivalSegment(itinerarie).arrival_terminal}}') {{arrivalSegment(itinerarie).arrival_terminal}}
+                     ng-show="arrivalSegment(variant).arrival_terminal"
+                     title='терминал {{arrivalSegment(variant).arrival_terminal}}') {{arrivalSegment(variant).arrival_terminal}}
          .duration
             p Продолжительность:
             .time {{variant.duration}}
