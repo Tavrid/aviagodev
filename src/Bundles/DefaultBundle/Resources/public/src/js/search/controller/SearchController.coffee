@@ -26,17 +26,14 @@ module.exports = [
       and un check others variants
     ###
     scope.selectVariant = (() ->
-      variants = {}
-      (variant,ticket,index) ->
+      (variant,variants) ->
         if variant.checked
           return
 
-        if variants[ticket.request_id] != undefined && variants[ticket.request_id][''+index] != undefined
-          variants[ticket.request_id][''+index].checked = false
-#
+        _.each variants, (num) ->
+          num.checked = false
+
         variant.checked = true
-        variants[ticket.request_id] = {}
-        variants[ticket.request_id][''+index] = variant
     )()
 
     ###

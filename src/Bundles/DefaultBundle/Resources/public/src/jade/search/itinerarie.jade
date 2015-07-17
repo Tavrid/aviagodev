@@ -2,7 +2,7 @@ div(class="ticket-wrap" ng-repeat="itinerarie in ticket.itineraries")
    .date-ticket
       //| туда
       span {{dateFormat(departureSegment(itinerarie).departure_date)}}
-   div(class="group-ticket" ng-repeat="variant in itinerarie.variants" ng-click="selectVariant(variant,ticket,$parent.$index)")
+   div(class="group-ticket" ng-repeat="variant in itinerarie.variants" ng-click="selectVariant(variant,itinerarie.variants)")
       div(class="ticket-body" ng-class="{'checked-ticket' : variant.checked}")
          .radio-group
             .radio-button
