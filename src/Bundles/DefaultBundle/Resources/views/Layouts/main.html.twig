@@ -15,19 +15,14 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bundlesdefault/front/css/style.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bundlesdefault/front/css/additional.css') }}">
 
-        {#
-            -----------------------------------
-            TODO this stylesheet need replace or remove!
-            -----------------------------------
-        #}
-        <link rel="stylesheet" href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}">
-
+    {% endblock %}
+    {% block headerJs %}
     {% endblock %}
 </head>
 <body class="{{ controller_formatter.formattedName }}">
-<div id="loader-container" class="ng-hide"  ng-show="showLoader">
-
-</div>
+{% if controller_formatter.formattedName != 'default-index' %}
+    <div id="loader-container"  ng-show="showLoader"></div>
+{% endif %}
 <div class="wrapper" >
     <div class="nav-bar">
         <div class="container"></div>
@@ -102,6 +97,16 @@
 </footer>
 
 {% block js %}
+    <script type="text/javascript" async>
+        function loadCss(url) {
+            var link = document.createElement("link");
+            link.type = "text/css";
+            link.rel = "stylesheet";
+            link.href = url;
+            document.getElementsByTagName("head")[0].appendChild(link);
+        }
+        loadCss("{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}");
+    </script>
     <script src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
     <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>

@@ -1,8 +1,5 @@
 {% extends "BundlesDefaultBundle:Layouts:main.html.twig" %}
-{% block js %}
-    {{ parent() }}
-    <script type="application/javascript" src="{{ asset('build/dist/js/index/index.js') }}"></script>
-
+{% block headerJs %}
 
     <script type="text/javascript">
         $(function($) {
@@ -11,6 +8,9 @@
             $("#ui-id-2").prependTo(".city-to");
         });
     </script>
+    <script type="application/javascript" src="{{ asset('build/dist/js/app/index.js') }}" async></script>
+
+
 {% endblock %}
 {% block body %}
     <div class="col-md-3 filter-form">

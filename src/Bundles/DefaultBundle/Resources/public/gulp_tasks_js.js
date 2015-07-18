@@ -24,6 +24,12 @@ module.exports = function (gulp, argv) {
             coffee: path.join(__dirname, '/src/js/app.coffee'),
             watch: [path.join(__dirname, '/src/js/**/*.coffee')],
             outputJs: 'index.js',
+            outputDist: './web/build/dist/js/app'
+        },
+        {
+            coffee: path.join(__dirname, '/src/js/index.coffee'),
+            watch: [path.join(__dirname, '/src/js/**/*.coffee')],
+            outputJs: 'index.js',
             outputDist: './web/build/dist/js/index'
         }
         //{
