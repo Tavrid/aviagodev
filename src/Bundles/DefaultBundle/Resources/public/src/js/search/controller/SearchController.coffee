@@ -15,8 +15,14 @@ module.exports = [
   '$scope',
   '$http',
   '$location',
-  'AutoCompleteReplacer',
-  (scope, http, location, AutoCompleteReplacer) ->
+  'AutoCompleteReplacer'
+  '$viewLoader'
+  (scope, http, location, AutoCompleteReplacer,viewLoader) ->
+    ###
+      view loader
+    ###
+    viewLoader.showLoader()
+
     scope.$root.appCont = 'search'
     scope.searchForm = new SearchForm global.formValues
     scope.dateFormat = dateFormatter
@@ -56,10 +62,14 @@ module.exports = [
       find default tickets
     ###
     global.formValues.page = 1
+
     http.get Routing.generate 'api_get_tickets', global.formValues
       .success (res) ->
         prepareTickets res
         scope.tickets = res
+        viewLoader.hideLoader()
+      .error () ->
+        viewLoader.hideLoader()
     scope.reverse = ->
       AutoCompleteReplacer.reverse()
 ]

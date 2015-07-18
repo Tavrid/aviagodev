@@ -27,6 +27,17 @@ class AutoCompleteReplacer
 
 App.service 'AutoCompleteReplacer', AutoCompleteReplacer
 
+App.factory '$viewLoader',["$rootScope",(rootScope)->
+  rootScope.showLoader = false
+  {
+    showLoader: () ->
+      rootScope.showLoader = true
+    hideLoader: () ->
+      rootScope.showLoader = false
+  }
+]
+
+
 App.directive 'autoComplete', require "./lib/ngAutocomplete"
 App.directive 'ngDatepicker', datepicker
 
