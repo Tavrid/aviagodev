@@ -1,6 +1,10 @@
 <header role="contentinfo">
     <div class="container">
-        <div class="logo"><img src="{{ asset('/bundles/bundlesdefault/front/svg/logo-svg.svg') }}" alt="Авиаго" title="Авиаго"></div>
+        <div class="logo">
+            <a href="{{ path('bundles_default_homepage') }}">
+                <img src="{{ asset('bundles/bundlesdefault/front/svg/logo-svg.svg') }}" alt="Авиаго" title="Авиаго">
+            </a>
+        </div>
         <div class="tabs-services">
             <a href="#avia" class="act-link">Авиабилеты</a>
             <a href="#hotels">Гостиницы</a>
@@ -8,7 +12,7 @@
         </div>
         <div class="lang-wrap">
             <div class="lang-name-block">
-                <i class="icon-flag"><img src="{{ asset('/bundles/bundlesdefault/front/images/ua.png') }}" alt=""></i>
+                <i class="icon-flag"><img src="{{ asset('bundles/bundlesdefault/front/images/ua.png') }}" alt=""></i>
 
                 <div class="lang-name">Украинский</div>
                 <span>-</span>
@@ -17,7 +21,7 @@
             </div>
             <div class="select-lang-currency">
                 <div class="current-lang-course">
-                    <i class="icon-flag"><img src="{{ asset('/bundles/bundlesdefault/front/images/ua.png') }}" alt=""></i>
+                    <i class="icon-flag"><img src="{{ asset('bundles/bundlesdefault/front/images/ua.png') }}" alt=""></i>
 
                     <div class="lang-name">Украинский</div>
                     <span>-</span>

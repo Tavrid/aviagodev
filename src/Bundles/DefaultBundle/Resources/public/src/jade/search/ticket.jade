@@ -11,7 +11,7 @@ div(class="ticket" ng-repeat="ticket in tickets")
 
     .button-group
         .right
-            button.button.button-buy(type='button') Бронировать
+            button(class="button button-buy" type='button' ng-click="book(ticket)") Бронировать
         .group
 
             p(ng-show="ticket.last_ticket_date")

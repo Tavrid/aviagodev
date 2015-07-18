@@ -27,29 +27,6 @@ use Bundles\DefaultBundle\Model\PayU;
 class ApiController extends Controller
 {
 
-    public function infoAction(Request $request)
-    {
-        $form = $this->createForm(new BookInfoForm());
-        $form->submit($request);
-        if ($form->isValid()) {
-            /** @var \Bundles\ApiBundle\Api\Api $api */
-            $api = $this->get('avia.api.manager');
-            $query = new BookInfoQuery();
-            $data = $form->getData();
-            $query->setParams($data);
-            $output = $api->getBookInfoRequestor()->execute($query);
-            if (!$output->getIsError()) {
-                $str = implode(':', $data['variants']);
-
-                $key = md5($str);
-                $memcache = $this->get('main.cache');
-                $memcache->set($key, $output->getResponseData(), 3600);
-                $resp = new JsonResponse(['url' => $this->generateUrl('bundles_default_api_book', ['key' => $key])]);
-                return $resp;
-            }
-        }
-        return new Response('', 404);
-    }
 
     public function bookAction(Request $request, $key)
     {
@@ -133,18 +110,6 @@ class ApiController extends Controller
     {
         $this->get('bundles_default.util.previous_flight')->addFlight($params);
         $this->get('session')->set('formData', $data);
-    }
-
-    public function listAction(Request $request)
-    {
-
-        $resp = $this->render('BundlesDefaultBundle:AngularViews:list.html.twig', array(
-            'params' => $request->get('_route_params'),
-            'searchFormOptions' => $this->get('bundles_default.search_form.options')->getFormOptions()
-
-        ));
-
-        return $resp;
     }
 
 

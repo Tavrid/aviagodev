@@ -58,6 +58,26 @@ module.exports = [
         return _.last variant.segments
       {}
 
+    scope.book = (ticket) ->
+      variants = []
+      data =
+        request_id : ticket.request_id
+      _.each ticket.itineraries, (itinerarie) ->
+
+        findVariant = _.find itinerarie.variants , (variant) ->
+          variant.checked
+        variants.push findVariant.variant_id
+
+      data.variants = variants.join ','
+
+      viewLoader.showLoader()
+
+      http.post Routing.generate 'api_post_ticket_info', data
+        .success (res) ->
+          console.log res
+
+    scope.reverse = ->
+      AutoCompleteReplacer.reverse()
     ###
       find default tickets
     ###
@@ -70,6 +90,8 @@ module.exports = [
         viewLoader.hideLoader()
       .error () ->
         viewLoader.hideLoader()
-    scope.reverse = ->
-      AutoCompleteReplacer.reverse()
+
+
+
+
 ]
