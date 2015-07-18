@@ -22,7 +22,9 @@
 <body class="{{ controller_formatter.formattedName }}">
 
 {% if controller_formatter.formattedName != 'default-index' %}
-    <div id="loader-container"  ng-show="showLoader"></div>
+    <div id="loader-container"  ng-show="showLoader">
+        <div id="loader"></div>
+    </div>
 {% endif %}
 <div class="wrapper" >
     <div class="nav-bar">
