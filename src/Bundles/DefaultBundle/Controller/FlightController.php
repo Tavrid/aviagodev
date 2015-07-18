@@ -18,7 +18,7 @@ class FlightController extends Controller
     public function listAction(Request $request)
     {
 
-        $resp = $this->render('BundlesDefaultBundle:AngularViews:list.html.twig', array(
+        $resp = $this->render('BundlesDefaultBundle:AngularViews:flight.html.twig', array(
             'params' => $request->get('_route_params'),
             'searchFormOptions' => $this->get('bundles_default.search_form.options')->getFormOptions()
 

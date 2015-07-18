@@ -68,9 +68,10 @@ bundles_default_api_complex_calendar:
 bundles_default.api.calendar_item_info:
     pattern: /api/avia-calendar/info
     defaults: { _controller: BundlesDefaultBundle:Api:calendarItemInfo}
+
 bundles_default_api_book:
     pattern: /book/{key}
-    defaults: { _controller: BundlesDefaultBundle:Api:book}
+    defaults: { _controller: BundlesDefaultBundle:Book:book}
 
 bundles_default_api_order:
     pattern: /order/{orderID}

@@ -74,8 +74,9 @@ module.exports = [
 
       http.post Routing.generate 'api_post_ticket_info', data
         .success (res) ->
-          console.log res
-
+          location.path res.url.replace /\/app_dev.php/,""
+        .error () ->
+          viewLoader.hideLoader()
     scope.reverse = ->
       AutoCompleteReplacer.reverse()
     ###

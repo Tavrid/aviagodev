@@ -1,0 +1,411 @@
+.container
+    // Сайдбар
+    aside.sidebar(role='sidebar')
+        form(action='#')
+            .group-sidebar
+                .info-order
+                    h3 Информация о заказе
+                    .ticket-group
+                        .title 1 Билет: в две стороны
+                        .ticket 16 июля 2015 г., четверг MOW 02:35 -> JFK 05:30 10 ч. 05 м., прямой рейс
+                        .ticket 26 июля 2015 г., четверг JFK 02:25 -> MOW 15:30+1 22 ч.  25 м. 2 пересадки
+                    .passenjer-group
+                        .title Пассажир: 1 взрослый
+                        table
+                            tbody
+                                tr
+                                    td Тариф
+                                    td(align='right') 1230.00 руб.
+                                tr
+                                    td Таксы и сборы
+                                    td(align='right') 450.00 руб.
+                                tr
+                                    td Агентский сбор
+                                    td(align='right') 50.00 руб.
+                            tfoot
+                                tr
+                                    td ИТОГО
+                                    td(align='right') 1720.00 руб.
+                    p Все цены указаны в рублях РФ.
+                    p Информация об оплате.
+    // Сайдбар
+    .main
+        .steps
+            a(href='#') Поиск
+            span >
+            a.act-step(href='#') Бронирование
+            span >
+            a.disable(href='#') Оплата
+            span >
+            a.disable(href='#') Подтверждение
+        // Табы (детали рейса, правила тарифов)
+        .bookgin-tab.tab-wrap
+            .tab-link
+                a.act-link(href='#detals') Детали рейса
+                a(href='#pravila') Правила тарифа
+            .tab-content
+                #detals.tab.act-tab
+                    // Авиабилет
+                    .ticket
+                        .logo-alians
+                            img(src='images/logo-skyteam.png', alt='')
+                        .ticket-price
+                            h2 8 174 RUB
+                            span.col-passenjers
+                                | - за
+                                span.col-user 1 человека
+                                |  с налогами и сборами
+                        form.book-form(action='')
+                            // Группа билетов в сторону прилета
+                            .ticket-wrap
+                                .date-ticket
+                                    | туда
+                                    span 23.06.2015
+                                .group-ticket
+                                    // Билет
+                                    .ticket-body.checked-ticket
+                                        // Выбор билета (радио кнопка)
+                                        .radio-group
+                                            .radio-button
+                                                input(type='radio', name='info', checked='checked', value='8619FA76-F5E7-4E51-A5D5-BF68620C4EAB')
+                                                input(type='hidden', value='5587f13faf632c700200000c', name='info[request_id]')
+                                        // Выбор билета
+                                        // Имя компании
+                                        .company
+                                            .image-block
+                                                i.city-logo.UN
+                                                    img(src='images/aeroflot.png', alt='')
+                                            .info-block
+                                                .name Трансаэро
+                                                span.type Боинг 737-500
+                                                span.number-reys UN2371
+                                        // Имя компании
+                                        // Время вылета
+                                        .up-date
+                                            p Время вылета:
+                                            .time 01:25
+                                            .city-block
+                                                .city Москва
+                                                .aeroport
+                                                    | Домодедово
+                                                    span.terminal(title='терминал А') A
+                                        // Время вылета
+                                        // Время прилета
+                                        .down-date
+                                            p Время вылета:
+                                            .time
+                                                | 01:25
+                                                span + 1 день
+                                            .city-block
+                                                .city Москва
+                                                .aeroport
+                                                    | Домодедово
+                                                    span.terminal(title='терминал А') A
+                                        // Время вылета
+                                        // Продолжительность
+                                        .duration
+                                            p Продолжительность:
+                                            .time 1 ч 35 м
+                                            .transplant прямой рейс
+                                            .luggage Багаж: 1 место (20 кг)
+                                        // Продолжительность
+                                    // Билет
+                            // Группа билетов в сторону прилета
+                            // Группа билетов в сторону прилета
+                            .ticket-wrap
+                                .date-ticket
+                                    | обратно
+                                    span 23.06.2015
+                                .group-ticket
+                                    // Билет
+                                    .ticket-body.checked-ticket
+                                        // Выбор билета (радио кнопка)
+                                        .radio-group
+                                            .radio-button
+                                                input(type='radio', name='info-1', checked='checked', value='8619FA76-F5E7-4E51-A5D5-BF68620C4EAB')
+                                                input(type='hidden', value='5587f13faf632c700200000c', name='info[request_id]')
+                                        // Выбор билета
+                                        // Имя компании
+                                        .company
+                                            .image-block
+                                                i.city-logo.UN
+                                                    img(src='images/aeroflot.png', alt='')
+                                            .info-block
+                                                .name Трансаэро
+                                                span.type Боинг 737-500
+                                                span.number-reys UN2371
+                                        // Имя компании
+                                        // Время вылета
+                                        .up-date
+                                            p Время вылета:
+                                            .time 01:25
+                                            .city-block
+                                                .city Москва
+                                                .aeroport
+                                                    | Домодедово
+                                                    span.terminal(title='терминал А') A
+                                        // Время вылета
+                                        // Время прилета
+                                        .down-date
+                                            p Время вылета:
+                                            .time
+                                                | 01:25
+                                                span + 1 день
+                                            .city-block
+                                                .city Москва
+                                                .aeroport
+                                                    | Домодедово
+                                                    span.terminal(title='терминал А') A
+                                        // Время вылета
+                                        // Продолжительность
+                                        .duration
+                                            p Продолжительность:
+                                            .time 1 ч 35 м
+                                            .transplant
+                                                p перелет с 2 пересадками:
+                                                p
+                                                    b Дубай
+                                                    | : 7 ч 10 м
+                                                    i.icon-night
+                                                    i.icon-bed
+                                                p
+                                                    b Сингапур
+                                                    | : 1 ч 10 м
+                                                    i.icon-night
+                                                    i.icon-time-duration
+                                            .luggage Багаж: 1 место (20 кг)
+                                        // Продолжительность
+                                    // Билет
+                            // Группа билетов в сторону прилета
+                    // Авиабилет
+                #pravila.tab
+        // Табы
+        // Группа (оплатить до, информация о багаже)
+        .group
+            .luggage-block
+                .title Информация о багаже
+                .info
+                    p
+                        | Багаж:
+                        b 20 кг
+                    p
+                        | Ручная кладь:
+                        b 8 кг
+            .buy-type-tarif
+                p
+                    | Оплатить до:
+                    b 18:00 часов 23.06.2015 г.
+                p
+                    | Тип тарифа:
+                    b невозвратный
+        // Группа
+        // Список пассажиров
+        .passenjers-list
+            .booking-group.passenjer
+                .title Пассажир №1 (взрослый)
+                .form
+                    // Группа формы (фамилия, имя, пол, дата рождения)
+                    .form-group
+                        .last-name-group.input-group
+                            label(for='#') Фамилия
+                            .input
+                                input(type='text', placeholder='Латиницией Sidorenko')
+                        .name-group.input-group
+                            label(for='#') Имя
+                            .input
+                                input(type='text', placeholder='Латиницией Ivan')
+                        .name-group.input-group
+                            label(for='#') Отчество
+                            .input
+                                input(type='text', placeholder='Латиницией Ivan')
+                        .sex-group.input-group
+                            .label Пол
+                            .radio
+                                input#m.radio-button(type='radio', name='sex', checked='checked')
+                                label(for='m') М
+                            .radio
+                                input#j.radio-button(type='radio', name='sex')
+                                label(for='j') Ж
+                    // Группа формы
+                    // Группа формы (Гражданство, тип документа, серия и номер документа, Срок действия документа)
+                    .form-group
+                        .date-group.input-group
+                            .label Дата рождения
+                            .day-input.input
+                                input(type='text', placeholder='дд')
+                            .month-day.input
+                                input(type='text', placeholder='мм')
+                            .year-day.input
+                                input(type='text', placeholder='гггг')
+                        .citizenship-group.input-group
+                            label(for='') Гражданство
+                            .input
+                                input(type='text', placeholder='Украина')
+                        //
+                                                          <div class="type-document-group input-group">
+                                                              <label for="">Тип документа</label>
+                                                              <div class="input">
+                                                                  <input type="text" placeholder="Паспорт">
+                                                              </div>
+                                                          </div>
+                        .num-document-group.input-group
+                            label(for='') Серия и № паспорта
+                            .input
+                                input(type='text', placeholder='латиницей Sidorenko')
+                        .date-document-group.input-group
+                            .label Срок действия документа
+                            .day-input.input
+                                input(maxlength='2', type='text', placeholder='дд')
+                            .month-day.input
+                                input(maxlength='2', type='text', placeholder='мм')
+                            .year-day.input
+                                input(maxlength='4', type='text', placeholder='гггг')
+                    // Группа формы
+                    .additional-text
+                        a(href='#')
+                            | Дополнительные параметры
+                            i.icon-down
+                    // Группа формы (Авиакомпания, номер мильной карты, Особые пожелания)
+                    .form-group.additional-wrap
+                        .aviacompany-group.input-group
+                            label(for='') Авиакомпания
+                            .input
+                                input(type='text', placeholder='паспорт')
+                        .num-mil-group.input-group
+                            label(for='') Номер мильной карты
+                            .input
+                                input(type='text', placeholder='Украина')
+                        .wishes-group.input-group
+                            .label Особые пожелания
+                            .input
+                                input(type='text', placeholder='Место')
+                            .input
+                                input(type='text', placeholder='Питание')
+                    // Группа формы
+            .booking-group.passenjer
+                .title Пассажир №1 (взрослый)
+                .form
+                    // Группа формы (фамилия, имя, пол, дата рождения)
+                    .form-group
+                        .last-name-group.input-group
+                            label(for='#') Фамилия
+                            .input
+                                input(type='text', placeholder='Латиницией Sidorenko')
+                        .name-group.input-group
+                            label(for='#') Имя
+                            .input
+                                input(type='text', placeholder='Латиницией Ivan')
+                        .sex-group.input-group
+                            .label Пол
+                            .radio
+                                input#m.radio-button(type='radio', name='sex', checked='checked')
+                                label(for='m') М
+                            .radio
+                                input#j.radio-button(type='radio', name='sex')
+                                label(for='j') Ж
+                        .date-group.input-group
+                            .label Дата рождения
+                            .day-input.input
+                                input(type='text', placeholder='дд')
+                            .month-day.input
+                                input(type='text', placeholder='мм')
+                            .year-day.input
+                                input(type='text', placeholder='гггг')
+                    // Группа формы
+                    // Группа формы (Гражданство, тип документа, серия и номер документа, Срок действия документа)
+                    .form-group
+                        .citizenship-group.input-group
+                            label(for='') Гражданство
+                            .input
+                                input(type='text', placeholder='Украина')
+                        //
+                                                          <div class="type-document-group input-group">
+                                                              <label for="">Тип документа</label>
+                                                              <div class="input">
+                                                                  <input type="text" placeholder="Паспорт">
+                                                              </div>
+                                                          </div>
+                        .num-document-group.input-group
+                            label(for='') Серия и номер документа
+                            .input
+                                input(type='text', placeholder='латиницей Sidorenko')
+                        .date-document-group.input-group
+                            .label Срок действия документа
+                            .day-input.input
+                                input(maxlength='2', type='text', placeholder='дд')
+                            .month-day.input
+                                input(maxlength='2', type='text', placeholder='мм')
+                            .year-day.input
+                                input(maxlength='4', type='text', placeholder='гггг')
+                    // Группа формы
+                    .additional-text
+                        a(href='#')
+                            | Дополнительные параметры
+                            i.icon-down
+                    // Группа формы (Авиакомпания, номер мильной карты, Особые пожелания)
+                    .form-group.additional-wrap
+                        .aviacompany-group.input-group
+                            label(for='') Авиакомпания
+                            .input
+                                input(type='text', placeholder='паспорт')
+                        .num-mil-group.input-group
+                            label(for='') Номер мильной карты
+                            .input
+                                input(type='text', placeholder='Украина')
+                        .wishes-group.input-group
+                            .label Особые пожелания
+                            .input
+                                input(type='text', placeholder='Место')
+                            .input
+                                input(type='text', placeholder='Питание')
+                    // Группа формы
+        // Список пассажиров
+        // Контактные данные
+        .booking-group.passenjer
+            .title Контактные данные
+            .form
+                // Группа формы (эл почта, телефон, телефон в стране)
+                .form-group
+                    .email-group.input-group
+                        label(for='#') Электронная почта
+                        .input
+                            input(type='text', placeholder='info@aviago.com.ua')
+                    .phone-group.input-group
+                        label(for='#') Телефон
+                        .input
+                            input(type='text', placeholder='+38 050 2171122')
+                    .phone-in-coun-group.input-group
+                        label(for='#') Телефон в стране назначения (TravelSIM)
+                        .input
+                            input(type='text', placeholder='+38 050 2171122')
+                // Группа формы
+                .additional-text
+                    a(href='#')
+                        | Дополнительные параметры для организаций
+                        i.icon-down
+                // Группа формы (название орг, ЕДРПОУ орг, адрес орг)
+                .form-group.additional-wrap
+                    .name-org-group.input-group
+                        label(for='#') Название
+                        .input
+                            input(type='text', placeholder='info@aviago.com.ua')
+                    .edrpou-org-group.input-group
+                        label(for='#') ЕДРПОУ
+                        .input
+                            input(type='text', placeholder='+38 050 2171122')
+                    .adres-org-group.input-group
+                        label(for='#') Адрес
+                        .input
+                            input(type='text', placeholder='')
+                // Группа формы
+        // Контактные данные
+        // Подтверждение данных
+        .booking-group.accept-block
+            .title Подтверждение данных
+            .form
+                .checkbox
+                    input#accept(type='checkbox', name='accept')
+                    label(for='accept') Я принимаю условия авиаперевозки, IATA, услуг бронирования AviaGo
+                button.button.button-buy(type='button') Бронировать
+        // Подтверждение данных
+.empty

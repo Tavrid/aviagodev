@@ -2,7 +2,7 @@ require "angular"
 require "angular-ui-router"
 datepicker = require "./datepicker"
 
-IndexController = require('./index/controller/IndexController')
+BookController = require('./book/controller/BookController')
 SearchController = require './search/controller/SearchController'
 #$ ->
 App = angular.module "MainApp", ['ui.router']
@@ -51,5 +51,10 @@ App.config [
       templateUrl: '/build/view/search/search.html'
       url: '/flights/*path'
       controller: SearchController
+    )
+    .state('book',
+      templateUrl: '/build/view/book/book.html'
+      url: '/book/:requestId'
+      controller: BookController
     )
 ]
