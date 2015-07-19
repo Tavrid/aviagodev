@@ -21,14 +21,24 @@ class TicketController extends Controller
     /**
      * @param Request $request
      * @param $page
-     * @return null|Response
+     * @return null|JsonResponse
      */
     public function getTicketsAction(Request $request,$page)
     {
+        $path = preg_replace('/\__+/','/',$request->get('path'));
+        $params = $this->get('router')->match($path);
+        if(isset($params['_controller'])){
+            unset($params['_controller']);
+        }
+        if(isset($params['_route'])){
+            unset($params['_route']);
+        }
+        $data = [
+            'formParams' => $params
+        ];
         $resp = null;
         /** @var \Bundles\ApiBundle\Api\Api $api */
         $api = $this->get('avia.api.manager');
-        $params = $request->query->all();
 
 
         $query = new SearchByQuery();
@@ -36,17 +46,17 @@ class TicketController extends Controller
 
         $output = $api->getSearchRequestor()->execute($query);
         if (!$output->getIsError()) {
-            $data = [];
+            $outputItems = [];
             foreach($output as $key => $val){
-                $data[] = $val;
+                $outputItems[] = $val;
                 if($key > 10){
                     break;
                 }
             }
             $serializer = $this->get('jms_serializer');
-            $data = $serializer->serialize($data, 'json');
+            $data['tickets'] = json_decode($serializer->serialize($outputItems, 'json'),true);
 
-            $resp = new Response($data,Response::HTTP_OK,['Content-Type'=>'application/json']);
+            $resp = new JsonResponse($data);
             return $resp;
         } else {
             throw $this->createNotFoundException();

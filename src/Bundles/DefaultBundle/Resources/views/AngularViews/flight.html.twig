@@ -8,7 +8,6 @@
     {{ parent() }}
     <script>
         window.searchFormOptions = {{ searchFormOptions|json_encode|raw }};
-        window.formValues = {{ params|json_encode|raw }};
     </script>
     <script src="{{ asset('build/dist/js/app/index.js') }}" type="text/javascript"></script>
 {% endblock %}

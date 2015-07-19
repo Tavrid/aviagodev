@@ -17,8 +17,10 @@ class BookController extends Controller
 
     public function bookAction(Request $request, $key)
     {
+        return $this->render('BundlesDefaultBundle:AngularViews:flight.html.twig',[
+            'searchFormOptions' => $this->get('bundles_default.search_form.options')->getFormOptions()
 
-        return $this->render('BundlesDefaultBundle:AngularViews:book.html.twig');
+        ]);
     }
 
 //    public function bookAction(Request $request, $key)

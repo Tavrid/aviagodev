@@ -18,15 +18,25 @@ module.exports = [
   'AutoCompleteReplacer'
   '$viewLoader'
   (scope, http, location, AutoCompleteReplacer,viewLoader) ->
+
     ###
       view loader
     ###
     viewLoader.showLoader()
 
-    scope.$root.appCont = 'search'
-    scope.searchForm = new SearchForm global.formValues
-    scope.dateFormat = dateFormatter
+    http.get Routing.generate 'api_get_tickets', {page: 1,path: location.path().replace(/\/+/g,'__')}
+    .success (res) ->
+      scope.searchForm = new SearchForm res.formParams
+      prepareTickets res.tickets
+      scope.tickets = res.tickets
+      viewLoader.hideLoader()
+    .error () ->
+      viewLoader.hideLoader()
 
+
+    scope.$root.appCont = 'search'
+    scope.dateFormat = dateFormatter
+    scope.searchForm = {}
     ###
       select current variant
       and un check others variants
@@ -80,18 +90,9 @@ module.exports = [
           viewLoader.hideLoader()
     scope.reverse = ->
       AutoCompleteReplacer.reverse()
-    ###
-      find default tickets
-    ###
-    global.formValues.page = 1
 
-    http.get Routing.generate 'api_get_tickets', global.formValues
-      .success (res) ->
-        prepareTickets res
-        scope.tickets = res
-        viewLoader.hideLoader()
-      .error () ->
-        viewLoader.hideLoader()
+
+
 
 
 

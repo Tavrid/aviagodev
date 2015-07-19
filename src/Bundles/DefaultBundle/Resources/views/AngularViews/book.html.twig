@@ -4,5 +4,6 @@
     {#{% include 'BundlesDefaultBundle:Default:_seoContent.html.twig' %}#}
 {% endblock %}
 {% block js %}
+    {{ parent() }}
     <script src="{{ asset('build/dist/js/app/index.js') }}" type="text/javascript"></script>
 {% endblock %}
