@@ -1,5 +1,9 @@
 require "angular"
 datepicker = require "./datepicker"
+###
+  @deprecated
+###
+global.$ = require "jquery"
 
 IndexController = require('./index/controller/IndexController')
 #$ ->

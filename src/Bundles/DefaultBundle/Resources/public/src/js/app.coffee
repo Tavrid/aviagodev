@@ -1,6 +1,10 @@
 require "angular"
 require "angular-ui-router"
 datepicker = require "./datepicker"
+###
+  @deprecated
+###
+global.$ = require "jquery"
 
 BookController = require('./book/controller/BookController')
 SearchController = require './search/controller/SearchController'

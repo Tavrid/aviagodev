@@ -74,6 +74,7 @@ module.exports = [
 
       http.post Routing.generate 'api_post_ticket_info', data
         .success (res) ->
+          location.state {foo:'bar'}
           location.path res.url.replace /\/app_dev.php/,""
         .error () ->
           viewLoader.hideLoader()
