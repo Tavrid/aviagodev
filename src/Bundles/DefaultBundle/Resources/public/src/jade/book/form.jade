@@ -7,8 +7,8 @@ include ../form/layout
     .title Контактные данные
     .form
         .form-group
-            +input()(wrapClass='email-group input-group' placeholder="Email" label="{{form.email.label}}" id="{{form.email.id}}" ng-model="form.email.data")
-            +input()(wrapClass='phone-group input-group' placeholder='+38 050 2171122' label="{{form.phone.label}}" id="{{form.phone.id}}" ng-model="form.phone.data")
+            +input()(wrapClass='email-group input-group' placeholder="Email" ang-prefix="form.email")
+            +input()(wrapClass='phone-group input-group' placeholder='+38 050 2171122' ang-prefix="form.phone")
         .additional-text
             a(href='#')
                 | Дополнительные параметры для организаций

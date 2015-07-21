@@ -83,7 +83,7 @@ class TicketController extends Controller
 
             $key = md5($str);
             $memcache = $this->get('main.cache');
-            $memcache->set($key, $output->getResponseData(), 3600);
+            $memcache->set($key, $output->getResponseData(), 36000);
             $resp = new JsonResponse(['url' => $this->generateUrl('bundles_default_api_book', ['key' => $key])]);
             return $resp;
         }
