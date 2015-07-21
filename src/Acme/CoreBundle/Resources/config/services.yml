@@ -62,3 +62,8 @@ services:
 
     main.cache.service:
         class: Acme\CoreBundle\Model\Cache
+
+    acme_core.form_serializer:
+        class: Acme\CoreBundle\Util\FormSerializer
+        arguments:
+          - @translator

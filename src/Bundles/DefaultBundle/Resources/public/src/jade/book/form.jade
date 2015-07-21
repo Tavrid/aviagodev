@@ -1,0 +1,40 @@
+include ../form/layout
+.passenjers-list
+    include partial/passenger
+// Список пассажиров
+// Контактные данные
+.booking-group.passenjer
+    .title Контактные данные
+    .form
+        .form-group
+            +input()(wrapClass='email-group input-group' placeholder="Email" label="{{form.email.label}}" id="{{form.email.id}}" ng-model="form.email.data")
+            +input()(wrapClass='phone-group input-group' placeholder='+38 050 2171122' label="{{form.phone.label}}" id="{{form.phone.id}}" ng-model="form.phone.data")
+        .additional-text
+            a(href='#')
+                | Дополнительные параметры для организаций
+                i.icon-down
+        // Группа формы (название орг, ЕДРПОУ орг, адрес орг)
+        .form-group.additional-wrap
+            .name-org-group.input-group
+                label(for='#') Название
+                .input
+                    input(type='text', placeholder='info@aviago.com.ua')
+            .edrpou-org-group.input-group
+                label(for='#') ЕДРПОУ
+                .input
+                    input(type='text', placeholder='+38 050 2171122')
+            .adres-org-group.input-group
+                label(for='#') Адрес
+                .input
+                    input(type='text', placeholder='')
+        // Группа формы
+// Контактные данные
+// Подтверждение данных
+.booking-group.accept-block
+    .title Подтверждение данных
+    .form
+        .checkbox
+            input#accept(type='checkbox', name='accept')
+            label(for='accept') Я принимаю условия авиаперевозки, IATA, услуг бронирования AviaGo
+        button.button.button-buy(type='button' ng-click="book()") Бронировать
+// Подтверждение данных

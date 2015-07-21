@@ -1,0 +1,5 @@
+mixin input()
+    div(class!=attributes.wrapClass)
+        label(for!=attributes.id)!=attributes.label
+        .input
+            input(id!=attributes.id type!=attributes.type || 'text', placeholder!=attributes.placeholder, ng-model=attributes['ng-model'])

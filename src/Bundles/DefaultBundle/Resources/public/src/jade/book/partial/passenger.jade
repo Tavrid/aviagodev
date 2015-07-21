@@ -1,0 +1,71 @@
+div(ng-repeat="(key, value) in form.passengers.children")
+    div(class="booking-group passenjer" ng-repeat="passenger in value.children")
+        .title Пассажир №{{$index+1}} ({{key}})
+        .form
+            .form-group
+                .last-name-group.input-group
+                    label(for='#') Фамилия
+                    .input
+                        input(type='text', placeholder='Латиницией Sidorenko' ng-model="passenger.children.Surname")
+                .name-group.input-group
+                    label(for='#') Имя
+                    .input
+                        input(type='text', placeholder='Латиницией Ivan' ng-model="passenger.children.Name")
+                //.name-group.input-group
+                //    label(for='#') Отчество
+                //    .input
+                //        input(type='text', placeholder='Латиницией Ivan')
+                .sex-group.input-group
+                    .label Пол
+                    .radio
+                        input#m.radio-button(type='radio', name='sex', checked='checked')
+                        label(for='m') М
+                    .radio
+                        input#j.radio-button(type='radio', name='sex')
+                        label(for='j') Ж
+            // Группа формы
+            // Группа формы (Гражданство, тип документа, серия и номер документа, Срок действия документа)
+            .form-group
+                .date-group.input-group
+                    .label Дата рождения
+                    .day-input.input
+                        input(type='text', placeholder='дд')
+                    .month-day.input
+                        input(type='text', placeholder='мм')
+                    .year-day.input
+                        input(type='text', placeholder='гггг')
+                .citizenship-group.input-group
+                    label(for='') Гражданство
+                    .input
+                        input(type='text', placeholder='Украина')
+                .num-document-group.input-group
+                    label(for='') Серия и № паспорта
+                    .input
+                        input(type='text', placeholder='латиницей Sidorenko')
+                .date-document-group.input-group
+                    .label Срок действия документа
+                    .day-input.input
+                        input(maxlength='2', type='text', placeholder='дд')
+                    .month-day.input
+                        input(maxlength='2', type='text', placeholder='мм')
+                    .year-day.input
+                        input(maxlength='4', type='text', placeholder='гггг')
+            .additional-text
+                a(href='#')
+                    | Дополнительные параметры
+                    i.icon-down
+            .form-group.additional-wrap
+                .aviacompany-group.input-group
+                    label(for='') Авиакомпания
+                    .input
+                        input(type='text', placeholder='паспорт')
+                .num-mil-group.input-group
+                    label(for='') Номер мильной карты
+                    .input
+                        input(type='text', placeholder='Украина')
+                .wishes-group.input-group
+                    .label Особые пожелания
+                    .input
+                        input(type='text', placeholder='Место')
+                    .input
+                        input(type='text', placeholder='Питание')
