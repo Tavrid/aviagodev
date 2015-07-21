@@ -1,5 +1,6 @@
-div(ng-repeat="(key, value) in form.passengers.children")
-    div(class="booking-group passenjer" ng-repeat="passenger in value.children")
+include ../../form/layout
+div(ng-repeat="(key, value) in form.passengers")
+    div(class="booking-group passenjer" )
         .title Пассажир №{{$index+1}} ({{key}})
         .form
             .form-group
