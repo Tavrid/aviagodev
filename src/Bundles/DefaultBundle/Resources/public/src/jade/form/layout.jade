@@ -1,6 +1,6 @@
 mixin input()
     div(class!=attributes.wrapClass)
-        label(for!=attributes.id)!=attributes.label||"{{"+attributes['ang-prefix']+".label}}"
+        label(for!=attributes.id||"{{"+attributes['ang-prefix']+".id}}")!=attributes.label||"{{"+attributes['ang-prefix']+".label}}"
         .input
             input(
                 id!=attributes.id || "{{"+attributes['ang-prefix']+".id}}"
