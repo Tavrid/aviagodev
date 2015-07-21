@@ -18,8 +18,6 @@ use Symfony\Component\HttpFoundation\Request;
 class BookController extends FOSRestController
 {
     /**
-     * @View()
-     *
      * @param $key
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -35,7 +33,7 @@ class BookController extends FOSRestController
 
         $serializer = $this->get('jms_serializer');
         $res = $serializer->toArray($bookInfoResponse->getEntity());
-        $form = $this->createForm('order',null,['bookInfoResponse' => $bookInfoResponse]);
+        $form = $this->createForm('order', null, ['bookInfoResponse' => $bookInfoResponse]);
         return new JsonResponse(
             [
                 'data' => $res,
@@ -45,7 +43,6 @@ class BookController extends FOSRestController
     }
 
     /**
-     * @View()
      * @param Request $request
      * @param $key
      * @return \Symfony\Component\Form\Form
@@ -59,9 +56,14 @@ class BookController extends FOSRestController
             throw $this->createNotFoundException();
         }
         $bookInfoResponse->setResponseData($d);
-        $form = $this->createForm('order',null,['bookInfoResponse' => $bookInfoResponse]);
+        $form = $this->createForm('order', null, ['bookInfoResponse' => $bookInfoResponse]);
         $form->handleRequest($request);
-        return $form;
+        $form->isValid();
+        return new JsonResponse(
+            [
+                'form' => $this->get('acme_core.form_serializer')->serializeForm($form)
+            ]
+        );
     }
 
 }

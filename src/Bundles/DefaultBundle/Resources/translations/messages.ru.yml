@@ -55,8 +55,8 @@ frontend:
             patronymic: Отчество
             birthday: Дата рождения
             number_passport: Номер паспорта
-            male: Мужской
-            female: Женский
+            male: М
+            female: Ж
             gender: Пол
             passport_valid_until: Паспорт дейст. до
             citizen: Гражданство

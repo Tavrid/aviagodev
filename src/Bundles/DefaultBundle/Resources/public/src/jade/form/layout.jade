@@ -4,6 +4,23 @@ mixin input()
         .input
             input(
                 id!=attributes.id || "{{"+attributes['ang-prefix']+".id}}"
-                type!=attributes.type || 'text', placeholder!=attributes.placeholder
+                type!=attributes.type || 'text',
+                placeholder!=attributes.placeholder||"{{"+attributes['ang-prefix']+".label}}"
                 ng-model=attributes['ng-model'] || attributes['ang-prefix']+".data"
+                ng-class="{error: "+attributes['ang-prefix']+".errors.length > 0}"
                 )
+
+mixin choice()
+    div(class!=attributes.wrapClass)
+        label(for!=attributes.id||"{{"+attributes['ang-prefix']+".id}}")!=attributes.label||"{{"+attributes['ang-prefix']+".label}}"
+        .select
+            select(
+                id!=attributes.id || "{{"+attributes['ang-prefix']+".id}}"
+                type!=attributes.type || 'text',
+                placeholder!=attributes.placeholder||"{{"+attributes['ang-prefix']+".label}}"
+                ng-model!=attributes['ng-model'] || attributes['ang-prefix']+".data"
+                ng-options!=attributes['ng-model'] ||"item.data as item.label for item in {{"+attributes['ang-prefix']+".choices}}"
+                ng-class="{error: "+attributes['ang-prefix']+".errors.length > 0}"
+            )
+
+

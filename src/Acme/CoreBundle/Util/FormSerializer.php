@@ -55,8 +55,14 @@ class FormSerializer
             }
             return $result;
         }
+        $view = $form->createView();
+        $errors = [];
+
+        foreach($form->getErrors() as $error){
+            $errors[] = $error->getMessage();
+        }
         $data = array_intersect_key(
-            $form->createView()->vars,
+            $view->vars,
             [
                 'id' => '',
                 'name' => '',
@@ -70,6 +76,7 @@ class FormSerializer
 
             ]);
         $data['label'] = $this->translator->trans($data['label']);
+        $data['errors'] = $errors;
 
         return $data;
     }

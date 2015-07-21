@@ -1,31 +1,17 @@
 include ../../form/layout
 div(ng-repeat="(key, value) in form.passengers")
-    div(class="booking-group passenjer" )
+    div(class="booking-group passenjer" ng-repeat="passenger in value")
         .title Пассажир №{{$index+1}} ({{key}})
         .form
             .form-group
-                .last-name-group.input-group
-                    label(for='#') Фамилия
-                    .input
-                        input(type='text', placeholder='Латиницией Sidorenko' ng-model="passenger.children.Surname")
-                .name-group.input-group
-                    label(for='#') Имя
-                    .input
-                        input(type='text', placeholder='Латиницией Ivan' ng-model="passenger.children.Name")
-                //.name-group.input-group
-                //    label(for='#') Отчество
-                //    .input
-                //        input(type='text', placeholder='Латиницией Ivan')
-                .sex-group.input-group
-                    .label Пол
-                    .radio
-                        input#m.radio-button(type='radio', name='sex', checked='checked')
-                        label(for='m') М
-                    .radio
-                        input#j.radio-button(type='radio', name='sex')
-                        label(for='j') Ж
-            // Группа формы
-            // Группа формы (Гражданство, тип документа, серия и номер документа, Срок действия документа)
+                +input()(wrapClass='last-name-group input-group' ang-prefix="passenger.Name")
+                +input()(wrapClass='name-group input-group' ang-prefix="passenger.Surname")
+                div(class="sex-group input-group")
+                    div(class="label") Пол
+                    div(class="radio" ng-repeat="sex in passenger.Sex")
+                        input(class="radio-button" id="{{sex.id}}" type='radio', name='sex' ng-model="sex.data")
+                        label(for='{{sex.id}}') {{sex.label}}
+
             .form-group
                 .date-group.input-group
                     .label Дата рождения
@@ -35,10 +21,8 @@ div(ng-repeat="(key, value) in form.passengers")
                         input(type='text', placeholder='мм')
                     .year-day.input
                         input(type='text', placeholder='гггг')
-                .citizenship-group.input-group
-                    label(for='') Гражданство
-                    .input
-                        input(type='text', placeholder='Украина')
+                +choice()(wrapClass='citizenship-group input-group' ang-prefix="passenger.Citizen")
+
                 .num-document-group.input-group
                     label(for='') Серия и № паспорта
                     .input

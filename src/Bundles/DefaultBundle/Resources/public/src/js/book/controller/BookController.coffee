@@ -16,9 +16,11 @@ module.exports = [
     scope.tickets = []
     scope.form = {}
     scope.book = () ->
-      http.post Routing.generate 'api_book_post_create', {key: stateParams.requestId}
+      viewLoader.showLoader()
+      http.post Routing.generate('api_book_post_create', {key: stateParams.requestId}), {}
       .success (res) ->
-        console.log res
+        scope.form = res.form
+        viewLoader.hideLoader()
     http.get Routing.generate 'api_book_get_data', {key: stateParams.requestId}
       .success (res) ->
         viewLoader.hideLoader()
