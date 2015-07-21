@@ -13,44 +13,26 @@ div(ng-repeat="(key, value) in form.passengers")
                         label(for='{{sex.id}}') {{sex.label}}
 
             .form-group
-                .date-group.input-group
-                    .label Дата рождения
-                    .day-input.input
-                        input(type='text', placeholder='дд')
-                    .month-day.input
-                        input(type='text', placeholder='мм')
-                    .year-day.input
-                        input(type='text', placeholder='гггг')
+                +input()(wrapClass='name-group input-group' ang-prefix="passenger.Birthday")
                 +choice()(wrapClass='citizenship-group input-group' ang-prefix="passenger.Citizen")
-
-                .num-document-group.input-group
-                    label(for='') Серия и № паспорта
-                    .input
-                        input(type='text', placeholder='латиницей Sidorenko')
-                .date-document-group.input-group
-                    .label Срок действия документа
-                    .day-input.input
-                        input(maxlength='2', type='text', placeholder='дд')
-                    .month-day.input
-                        input(maxlength='2', type='text', placeholder='мм')
-                    .year-day.input
-                        input(maxlength='4', type='text', placeholder='гггг')
-            .additional-text
-                a(href='#')
-                    | Дополнительные параметры
-                    i.icon-down
-            .form-group.additional-wrap
-                .aviacompany-group.input-group
-                    label(for='') Авиакомпания
-                    .input
-                        input(type='text', placeholder='паспорт')
-                .num-mil-group.input-group
-                    label(for='') Номер мильной карты
-                    .input
-                        input(type='text', placeholder='Украина')
-                .wishes-group.input-group
-                    .label Особые пожелания
-                    .input
-                        input(type='text', placeholder='Место')
-                    .input
-                        input(type='text', placeholder='Питание')
+                +input()(wrapClass='name-group input-group' ang-prefix="passenger.Document.Number")
+                +input()(wrapClass='name-group input-group' ang-prefix="passenger.Document.ExpireDate")
+            //.additional-text
+            //    a(href='#')
+            //        | Дополнительные параметры
+            //        i.icon-down
+            //.form-group.additional-wrap
+            //    .aviacompany-group.input-group
+            //        label(for='') Авиакомпания
+            //        .input
+            //            input(type='text', placeholder='паспорт')
+            //    .num-mil-group.input-group
+            //        label(for='') Номер мильной карты
+            //        .input
+            //            input(type='text', placeholder='Украина')
+            //    .wishes-group.input-group
+            //        .label Особые пожелания
+            //        .input
+            //            input(type='text', placeholder='Место')
+            //        .input
+            //            input(type='text', placeholder='Питание')

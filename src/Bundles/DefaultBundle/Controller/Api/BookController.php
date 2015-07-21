@@ -58,9 +58,10 @@ class BookController extends FOSRestController
         $bookInfoResponse->setResponseData($d);
         $form = $this->createForm('order', null, ['bookInfoResponse' => $bookInfoResponse]);
         $form->handleRequest($request);
-        $form->isValid();
+
         return new JsonResponse(
             [
+                'is_valid' => $form->isValid(),
                 'form' => $this->get('acme_core.form_serializer')->serializeForm($form)
             ]
         );
