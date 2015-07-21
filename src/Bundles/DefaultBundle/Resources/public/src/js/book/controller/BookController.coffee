@@ -9,11 +9,14 @@ module.exports = [
   '$location',
   'AutoCompleteReplacer'
   '$viewLoader'
-  (scope, http, location, AutoCompleteReplacer,viewLoader) ->
-    viewLoader.hideLoader()
+  '$stateParams'
+  (scope, http, location, AutoCompleteReplacer,viewLoader,stateParams) ->
+    console.log stateParams
+#    viewLoader.showLoader()
     scope.tickets = []
-    http.get Routing.generate 'api_book_get_data', {key: 'db3bfe2e67f026fe28ce4f4ea79236af'}
+    http.get Routing.generate 'api_book_get_data', {key: stateParams.requestId}
       .success (res) ->
+        viewLoader.hideLoader()
         scope.tickets.push res.ticket
 
 
