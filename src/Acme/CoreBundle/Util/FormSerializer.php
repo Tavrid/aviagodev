@@ -34,24 +34,26 @@ class FormSerializer
 
     /**
      * @param FormInterface $form
+     * @param array $formVars
      * @return array
      */
-    public function serializeForm(FormInterface $form)
+    public function serializeForm(FormInterface $form,$formVars = ['id','full_name','label','data','choices'])
     {
-        return $this->extractClientData($form);
+        return $this->extractClientData($form,$formVars);
     }
 
     /**
      * @param FormInterface $form
+     * @param array $formVars
      * @return array
      */
-    private function extractClientData(FormInterface $form)
+    private function extractClientData(FormInterface $form,$formVars)
     {
 
         if ($form->count() > 0) {
             $result = array();
             foreach ($form as $name => $child) {
-                $result[$name] = $this->extractClientData($child);
+                $result[$name] = $this->extractClientData($child,$formVars);
             }
             return $result;
         }
@@ -61,21 +63,15 @@ class FormSerializer
         foreach($form->getErrors() as $error){
             $errors[] = $error->getMessage();
         }
+
+
         $data = array_intersect_key(
             $view->vars,
-            [
-                'id' => '',
-                'name' => '',
-                'full_name' => '',
-                'label' => '',
-                'valid' => '',
-                'data' => '',
-                'value' => '',
-                'attr' => '',
-                'choices' => []
-
-            ]);
-        $data['label'] = $this->translator->trans($data['label']);
+            array_flip($formVars)
+        );
+        if(isset($data['label'])){
+            $data['label'] = $this->translator->trans($data['label']);
+        }
         $data['errors'] = $errors;
 
         return $data;
