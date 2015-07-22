@@ -25,15 +25,15 @@ module.exports = [
     ###
     getFormParams = ->
       formPar = []
-      getRecur = (data) ->
-        if data.full_name != undefined
+      getFullNameRecursive = (data) ->
+        if data instanceof Object && data.hasOwnProperty 'full_name'
           if data.data
             formPar.push {name: data.full_name, value: data.data}
-        else
+        else if data instanceof Object
           _.each data, (num) ->
-            getRecur num
+            getFullNameRecursive num
 
-      getRecur scope.form
+      getFullNameRecursive scope.form
       $.param formPar
 
     scope.tickets = []
