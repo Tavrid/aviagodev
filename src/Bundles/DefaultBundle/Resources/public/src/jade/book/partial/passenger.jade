@@ -9,7 +9,7 @@ div(ng-repeat="(key, value) in form.passengers")
                 div(class="sex-group input-group")
                     div(class="label") Пол
                     div(class="radio" ng-repeat="sex in passenger.Sex")
-                        input(class="radio-button" id="{{sex.id}}" type='radio', name='sex' ng-model="sex.data")
+                        input(class="radio-button" id="{{sex.id}}" type='radio', name='{{sex.full_name}}' ng-model="sex.data")
                         label(for='{{sex.id}}') {{sex.label}}
 
             .form-group
