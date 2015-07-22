@@ -48,6 +48,21 @@ class FormSerializer
         return $data;
     }
 
+    public function serializeFormError(FormInterface $form)
+    {
+        $result = array();
+        foreach ($form->getErrors() as $error) {
+            $result['errors'][] = $error->getMessage();
+        }
+        foreach ($form->all() as $child) {
+            $errors = $this->serializeFormError($child);
+            if ($errors) {
+                $result[$child->getName()] = $errors;
+            }
+        }
+        return $result;
+    }
+
     /**
      * @param FormInterface $form
      * @param array $formVars

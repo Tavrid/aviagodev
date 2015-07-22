@@ -62,7 +62,7 @@ class BookController extends FOSRestController
         return new JsonResponse(
             [
                 'is_valid' => $form->isValid(),
-                'form' => $this->get('acme_core.form_serializer')->serializeForm($form,['errors'])
+                'form' => $this->get('acme_core.form_serializer')->serializeFormError($form)
             ]
         );
     }

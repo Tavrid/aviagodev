@@ -6,7 +6,7 @@ div(ng-repeat="(key, value) in form.passengers")
             .form-group
                 +input()(wrapClass='last-name-group input-group' ang-prefix="passenger.Name")
                 +input()(wrapClass='name-group input-group' ang-prefix="passenger.Surname")
-                div(class="sex-group input-group")
+                div(class="sex-group input-group" ng-class="{error: passenger.Sex.errors.length > 0}")
                     div(class="label") Пол
                     div(class="radio" ng-repeat="sex in passenger.Sex")
                         input(class="radio-button" id="{{sex.id}}" type='radio', name='{{sex.full_name}}' ng-model="sex.data")
