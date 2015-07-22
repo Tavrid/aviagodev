@@ -2,6 +2,7 @@
 
 namespace Acme\CoreBundle\Model;
 
+use Acme\AdminBundle\Entity\Order;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -75,6 +76,9 @@ abstract class AbstractModel
         return $this;
     }
 
+    /**
+     * @return Order
+     */
     public function getEntity()
     {
         if (!$this->entity) {

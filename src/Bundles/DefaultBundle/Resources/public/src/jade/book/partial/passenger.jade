@@ -6,9 +6,9 @@ div(ng-repeat="(key, value) in form.passengers")
             .form-group
                 +input()(wrapClass='last-name-group input-group' ang-prefix="passenger.Name")
                 +input()(wrapClass='name-group input-group' ang-prefix="passenger.Surname")
-                div(class="sex-group input-group" ng-class="{error: passenger.Sex.errors.length > 0}")
+                div(class="sex-group input-group")
                     div(class="label") Пол
-                    div(class="radio" ng-repeat="sex in passenger.Sex")
+                    div(class="radio" ng-repeat="sex in passenger.Sex" ng-class="{error: passenger.Sex.errors.length > 0}")
                         input(class="radio-button" id="{{sex.id}}" type='radio', name='{{sex.full_name}}' ng-model="sex.data")
                         label(for='{{sex.id}}') {{sex.label}}
 
@@ -17,22 +17,3 @@ div(ng-repeat="(key, value) in form.passengers")
                 +choice()(wrapClass='citizenship-group input-group' ang-prefix="passenger.Citizen")
                 +input()(wrapClass='name-group input-group' ang-prefix="passenger.Document.Number")
                 +input()(wrapClass='name-group input-group' ang-prefix="passenger.Document.ExpireDate")
-            //.additional-text
-            //    a(href='#')
-            //        | Дополнительные параметры
-            //        i.icon-down
-            //.form-group.additional-wrap
-            //    .aviacompany-group.input-group
-            //        label(for='') Авиакомпания
-            //        .input
-            //            input(type='text', placeholder='паспорт')
-            //    .num-mil-group.input-group
-            //        label(for='') Номер мильной карты
-            //        .input
-            //            input(type='text', placeholder='Украина')
-            //    .wishes-group.input-group
-            //        .label Особые пожелания
-            //        .input
-            //            input(type='text', placeholder='Место')
-            //        .input
-            //            input(type='text', placeholder='Питание')

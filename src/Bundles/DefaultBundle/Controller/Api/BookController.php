@@ -9,8 +9,10 @@
 namespace Bundles\DefaultBundle\Controller\Api;
 
 
+use Bundles\ApiBundle\Api\Query\BookQuery;
 use Bundles\ApiBundle\Api\Response\BookInfoResponse;
 use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use FOS\RestBundle\Controller\Annotations\View;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,9 +58,37 @@ class BookController extends FOSRestController
             throw $this->createNotFoundException();
         }
         $bookInfoResponse->setResponseData($d);
-        $form = $this->createForm('order', null, ['bookInfoResponse' => $bookInfoResponse]);
-        $form->submit($request);
-        $form->isValid();
+        $orderManager = $this->get('admin.order.manager');
+        $entity = $orderManager->getEntity();
+        $form = $this->createForm('order', $entity, ['bookInfoResponse' => $bookInfoResponse]);
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+
+            $query = new BookQuery();
+            $travelers = $entity->getPassengers();
+
+            $query->setParams([
+                'bookID' => $bookInfoResponse->getEntity()->getBookId(),
+                'travellers' => $travelers,
+                'contacts' => array(
+                    'Email' => $entity->getEmail(),
+                    'PhoneMobile' => $entity->getPhone(),
+                    'PhoneHome' => ''
+                ),
+            ]);
+
+            $api = $this->get('avia.api.manager');
+            $output = $api->getBookRequestor()->execute($query);
+            if (!$output->getIsError() && $output->getPnr()) {
+                $d = $output->getResponseData();
+                $entity->setPnr($output->getPnr())
+                    ->setOrderInfo($d);
+                $orderManager->save($entity);
+                return new JsonResponse(['is_valid' => true,'order_id' => $entity->getOrderId()]);
+            } else {
+                $form->addError(new FormError($this->get('translator')->trans('frontend.book.error_book')));
+            }
+        }
         return new JsonResponse(
             [
                 'is_valid' => $form->isValid(),
