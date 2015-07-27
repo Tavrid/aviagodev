@@ -37,7 +37,7 @@ class FormSerializer
      * @param array $formVars
      * @return array
      */
-    public function serializeForm(FormInterface $form,$formVars = ['id','full_name','label','data','choices'])
+    public function serializeForm(FormInterface $form,$formVars = ['id','full_name','label','data','value','choices'])
     {
         $_token = $form->createView()->children['_token'];
         $data = $this->extractClientData($form,$formVars);
@@ -71,6 +71,7 @@ class FormSerializer
     private function extractClientData(FormInterface $form,$formVars)
     {
 
+
         if ($form->count() > 0) {
             $result = array();
             foreach ($form as $name => $child) {
@@ -85,9 +86,13 @@ class FormSerializer
             $errors[] = $error->getMessage();
         }
 
+        $vars = $view->vars;
+        if(isset($vars['full_name']) && $form->getParent() && $form->getParent()->getConfig()->getType()->getName() == 'choice'){
+            $vars['full_name'] = $form->getParent()->createView()->vars['full_name'];
+        }
 
         $data = array_intersect_key(
-            $view->vars,
+            $vars,
             array_flip($formVars)
         );
         if(isset($data['label'])){

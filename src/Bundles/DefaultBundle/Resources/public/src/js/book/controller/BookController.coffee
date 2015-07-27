@@ -37,7 +37,7 @@ module.exports = [
       getFullNameRecursive = (data) ->
         if data instanceof Object && data.hasOwnProperty 'full_name'
           if data.data
-            formPar.push {name: data.full_name, value: data.data}
+            formPar.push {name: data.full_name, value: data.value}
         else if data instanceof Object
           _.each data, (num) ->
             getFullNameRecursive num
@@ -47,6 +47,13 @@ module.exports = [
 
     scope.tickets = []
     scope.form = {}
+
+    scope.toggleCheckbox= (parent,child) ->
+      newChildVal = !child.data
+      _.each parent, (ch) ->
+        ch.data = false
+      child.data = newChildVal
+
     scope.book = () ->
       viewLoader.showLoader()
       http
@@ -55,6 +62,7 @@ module.exports = [
         data: getFormParams(),
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       .success (res) ->
+        console.log scope.form
         prepareFormData scope.form
         Object.deepExtend scope.form, res.form
         viewLoader.hideLoader()
