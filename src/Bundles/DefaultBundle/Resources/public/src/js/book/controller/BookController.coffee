@@ -11,6 +11,15 @@ Object.deepExtend = (destination, source) ->
     else
       destination[property] = source[property]
   destination
+###
+###
+prepareFormData = (data) ->
+  _.each data, (property) ->
+    if property && property.errors != undefined
+      property.errors = []
+    else if property && typeof property != 'string' && typeof property != 'number' && typeof property != 'boolean'
+      prepareFormData property
+  return
 
 module.exports = [
   '$scope',
@@ -46,6 +55,7 @@ module.exports = [
         data: getFormParams(),
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       .success (res) ->
+        prepareFormData scope.form
         Object.deepExtend scope.form, res.form
         viewLoader.hideLoader()
 

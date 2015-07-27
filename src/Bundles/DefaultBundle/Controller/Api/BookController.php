@@ -84,7 +84,11 @@ class BookController extends FOSRestController
                 $entity->setPnr($output->getPnr())
                     ->setOrderInfo($d);
                 $orderManager->save($entity);
-                return new JsonResponse(['is_valid' => true,'order_id' => $entity->getOrderId()]);
+                return new JsonResponse([
+                    'is_valid' => true,
+                    'order_id' => $entity->getOrderId(),
+                    'url' => $this->generateUrl('bundles_default_api_order', ['orderID' => $entity->getOrderId()])
+                ]);
             } else {
                 $form->addError(new FormError($this->get('translator')->trans('frontend.book.error_book')));
             }
