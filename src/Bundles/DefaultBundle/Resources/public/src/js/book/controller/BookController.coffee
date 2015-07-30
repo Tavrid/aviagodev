@@ -44,10 +44,14 @@ module.exports = [
       viewLoader.showLoader()
       formHelper
         .post(Routing.generate('api_book_post_create', {key: stateParams.requestId}),scope.form)
-        .success (res) ->
-          prepareFormData scope.form
-          Object.deepExtend scope.form, res.form
-          viewLoader.hideLoader()
+          .success (res) ->
+            prepareFormData scope.form
+            Object.deepExtend scope.form, res.form
+            viewLoader.hideLoader()
+            if res.is_valid
+              location.path url
+          .error  ->
+            viewLoader.hidelLoader()
 
     http.get Routing.generate 'api_book_get_data', {key: stateParams.requestId}
       .success (res) ->

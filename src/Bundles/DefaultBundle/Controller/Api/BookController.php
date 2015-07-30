@@ -61,6 +61,7 @@ class BookController extends FOSRestController
         $orderManager = $this->get('admin.order.manager');
         $entity = $orderManager->getEntity();
         $form = $this->createForm('order', $entity, ['bookInfoResponse' => $bookInfoResponse]);
+        $entity->setPrice($bookInfoResponse->getEntity()->getTicket()->getTotalPrice());
         $form->handleRequest($request);
         if ($form->isValid()) {
 
@@ -93,10 +94,12 @@ class BookController extends FOSRestController
                 $form->addError(new FormError($this->get('translator')->trans('frontend.book.error_book')));
             }
         }
+
         return new JsonResponse(
             [
                 'is_valid' => $form->isValid(),
-                'form' => $this->get('acme_core.form_serializer')->serializeFormError($form)
+                'form' => $this->get('acme_core.form_serializer')->serializeFormError($form),
+                'form_data' => $form->getData()
             ]
         );
     }
