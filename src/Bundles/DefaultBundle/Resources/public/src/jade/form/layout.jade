@@ -30,9 +30,9 @@ mixin radio()
         div(
             class="radio"
             ng-repeat!="r in "+attributes['ang-prefix']
-            ng-class="{error: "+attributes['ang-prefix']+".errors.length > 0, active: r.data}"
+            ng-class="{error: "+attributes['ang-prefix']+".errors.length > 0}"
             ng-click="toggleCheckbox("+attributes['ang-prefix']+",r)"
 
         )
             //input(class="radio-button" id="{{sex.id}}" type='radio', name='{{sex.full_name}}' ng-model="sex.data")
-            label(for="{{r.id}}") {{r.label}}
+            label(for="{{r.id}}" ng-class="{active: r.data}") {{r.label}}

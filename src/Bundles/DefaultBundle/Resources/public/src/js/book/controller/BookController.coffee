@@ -28,22 +28,8 @@ module.exports = [
   'AutoCompleteReplacer'
   '$viewLoader'
   '$stateParams'
-  (scope, http, location, AutoCompleteReplacer,viewLoader,stateParams) ->
-    ###
-      Create a serialized representation of an array, a plain object
-    ###
-    getFormParams = ->
-      formPar = []
-      getFullNameRecursive = (data) ->
-        if data instanceof Object && data.hasOwnProperty 'full_name'
-          if data.data
-            formPar.push {name: data.full_name, value: data.value}
-        else if data instanceof Object
-          _.each data, (num) ->
-            getFullNameRecursive num
-
-      getFullNameRecursive scope.form
-      $.param formPar
+  '$formHelper'
+  (scope, http, location, AutoCompleteReplacer,viewLoader,stateParams,formHelper) ->
 
     scope.tickets = []
     scope.form = {}
@@ -56,16 +42,12 @@ module.exports = [
 
     scope.book = () ->
       viewLoader.showLoader()
-      http
-        method: 'POST',
-        url: Routing.generate('api_book_post_create', {key: stateParams.requestId}),
-        data: getFormParams(),
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-      .success (res) ->
-        console.log scope.form
-        prepareFormData scope.form
-        Object.deepExtend scope.form, res.form
-        viewLoader.hideLoader()
+      formHelper
+        .post(Routing.generate('api_book_post_create', {key: stateParams.requestId}),scope.form)
+        .success (res) ->
+          prepareFormData scope.form
+          Object.deepExtend scope.form, res.form
+          viewLoader.hideLoader()
 
     http.get Routing.generate 'api_book_get_data', {key: stateParams.requestId}
       .success (res) ->

@@ -1,16 +1,17 @@
 include ../form/layout
-.passenjers-list
-    include partial/passenger
-.booking-group.passenjer
-    .title Контактные данные
-    .form
-        .form-group
-            +input()(wrapClass='email-group input-group' placeholder="Email" ang-prefix="form.email")
-            +input()(wrapClass='phone-group input-group' placeholder='+38 050 2171122' ang-prefix="form.phone")
-.booking-group.accept-block
-    .title Подтверждение данных
-    .form
-        div(class="checkbox" ng-class="{error: form.info.i_agree.errors.length > 0}")
-            input(type='checkbox' name='accept' id="accept" ng-model="form.info.i_agree.data")
-            label(for='accept') {{form.info.i_agree.label}}
-        button.button.button-buy(type='button' ng-click="book()") Бронировать
+form(ng-submit="book()")
+    .passenjers-list
+        include partial/passenger
+    .booking-group.passenjer
+        .title Контактные данные
+        .form
+            .form-group
+                +input()(wrapClass='email-group input-group' placeholder="Email" ang-prefix="form.email")
+                +input()(wrapClass='phone-group input-group' placeholder='+38 050 2171122' ang-prefix="form.phone")
+    .booking-group.accept-block
+        .title Подтверждение данных
+        .form
+            div(class="checkbox" ng-class="{error: form.info.i_agree.errors.length > 0}")
+                input(type='checkbox' name='accept' id="accept" ng-model="form.info.i_agree.data")
+                label(for='accept') {{form.info.i_agree.label}}
+            button.button.button-buy(type='submit') Бронировать

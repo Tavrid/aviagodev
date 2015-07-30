@@ -1,6 +1,8 @@
 require "angular"
 require "angular-ui-router"
 datepicker = require "./datepicker"
+formUtil = require "./util/postForm"
+
 ###
   @deprecated
 ###
@@ -40,7 +42,7 @@ App.factory '$viewLoader',["$rootScope",(rootScope)->
       rootScope.showLoader = false
   }
 ]
-
+App.factory '$formHelper', formUtil
 
 App.directive 'autoComplete', require "./lib/ngAutocomplete"
 App.directive 'ngDatepicker', datepicker
