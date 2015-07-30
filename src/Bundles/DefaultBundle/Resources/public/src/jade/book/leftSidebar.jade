@@ -1,0 +1,26 @@
+aside.sidebar(role='sidebar')
+    div(class="group-sidebar" ng-repeat="ticket in tickets")
+        .info-order
+            h3 Информация о заказе
+            .ticket-group
+                div(class="title") {{$index+1}} Билет: в две стороны
+                div(class="ticket" ng-repeat="itener in ticket.itineraries") {{dateFormat(departureSegment(itinerarie.variants[0]).departure_date)}} MOW 02:35 -> JFK 05:30 10 ч. 05 м., прямой рейс
+            .passenjer-group
+                .title Пассажир: 1 взрослый
+                table
+                    tbody
+                        tr
+                            td Тариф
+                            td(align='right') 1230.00 руб.
+                        tr
+                            td Таксы и сборы
+                            td(align='right') 450.00 руб.
+                        tr
+                            td Агентский сбор
+                            td(align='right') 50.00 руб.
+                    tfoot
+                        tr
+                            td ИТОГО
+                            td(align='right') {{ticket.total_price}} {{ticket.currency}}
+            p Все цены указаны в рублях РФ.
+            p Информация об оплате.

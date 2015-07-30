@@ -2,6 +2,8 @@
 moment = require "moment"
 _ = require "underscore"
 
+scopePrepare = require "../../util/scopeUtils"
+
 Object.deepExtend = (destination, source) ->
   for property of source
 
@@ -30,15 +32,9 @@ module.exports = [
   '$stateParams'
   '$formHelper'
   (scope, http, location, AutoCompleteReplacer,viewLoader,stateParams,formHelper) ->
-
+    scopePrepare scope
     scope.tickets = []
     scope.form = {}
-
-    scope.toggleCheckbox= (parent,child) ->
-      newChildVal = !child.data
-      _.each parent, (ch) ->
-        ch.data = false
-      child.data = newChildVal
 
     scope.book = () ->
       viewLoader.showLoader()

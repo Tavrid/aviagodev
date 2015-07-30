@@ -1,34 +1,5 @@
 .container
-    // Сайдбар
-    aside.sidebar(role='sidebar')
-        form(action='#')
-            .group-sidebar
-                .info-order
-                    h3 Информация о заказе
-                    .ticket-group
-                        .title 1 Билет: в две стороны
-                        .ticket 16 июля 2015 г., четверг MOW 02:35 -> JFK 05:30 10 ч. 05 м., прямой рейс
-                        .ticket 26 июля 2015 г., четверг JFK 02:25 -> MOW 15:30+1 22 ч.  25 м. 2 пересадки
-                    .passenjer-group
-                        .title Пассажир: 1 взрослый
-                        table
-                            tbody
-                                tr
-                                    td Тариф
-                                    td(align='right') 1230.00 руб.
-                                tr
-                                    td Таксы и сборы
-                                    td(align='right') 450.00 руб.
-                                tr
-                                    td Агентский сбор
-                                    td(align='right') 50.00 руб.
-                            tfoot
-                                tr
-                                    td ИТОГО
-                                    td(align='right') 1720.00 руб.
-                    p Все цены указаны в рублях РФ.
-                    p Информация об оплате.
-    // Сайдбар
+    include leftSidebar
     .main
         .steps
             a(href='#') Поиск

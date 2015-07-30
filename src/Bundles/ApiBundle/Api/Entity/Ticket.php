@@ -10,6 +10,8 @@
 namespace Bundles\ApiBundle\Api\Entity;
 
 use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\VirtualProperty;
 
 class Ticket {
 
@@ -228,6 +230,11 @@ class Ticket {
         return $this;
     }
 
+    /**
+     *
+     * @param bool|true $withAirportName
+     * @return array
+     */
     public function getRoutes($withAirportName = true) {
         $routes = array();
         foreach ($this->getItineraries() as $it) {

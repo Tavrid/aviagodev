@@ -1,10 +1,9 @@
 SearchForm = require "../../model/searchForm"
 propPath = require 'property-path'
-moment = require "moment"
 _ = require "underscore"
 
-dateFormatter = (timestamp, format = "D.MM.YYYY") ->
-  moment.unix(timestamp).format format
+scopePrepare = require "../../util/scopeUtils"
+
 
 prepareTickets = (tickets) ->
   _.each tickets, (ticket) ->
@@ -18,7 +17,7 @@ module.exports = [
   'AutoCompleteReplacer'
   '$viewLoader'
   (scope, http, location, AutoCompleteReplacer,viewLoader) ->
-
+    scopePrepare scope
     ###
       view loader
     ###
@@ -35,38 +34,9 @@ module.exports = [
 
 
     scope.$root.appCont = 'search'
-    scope.dateFormat = dateFormatter
     scope.searchForm = {}
-    ###
-      select current variant
-      and un check others variants
-    ###
-    scope.selectVariant = (() ->
-      (variant,variants) ->
-        if variant.checked
-          return
 
-        _.each variants, (num) ->
-          num.checked = false
 
-        variant.checked = true
-    )()
-
-    ###
-      get Departure Segment
-    ###
-    scope.departureSegment = (variant) ->
-      if propPath.get variant, "segments.0"
-        return propPath.get variant, "segments.0"
-      {}
-
-    ###
-      get Arrival segment
-    ###
-    scope.arrivalSegment = (variant) ->
-      if variant.segments != undefined
-        return _.last variant.segments
-      {}
 
     scope.book = (ticket) ->
       variants = []
