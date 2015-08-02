@@ -2,9 +2,8 @@ Api:
     type: rest
     prefix: /api
     resource: "@BundlesDefaultBundle/Resources/config/api_routing.yml"
-
-
-
+SPA:
+  resource: "@BundlesDefaultBundle/Resources/config/spa_routing.yml"
 bundles_default_homepage:
     pattern:  /
     defaults: { _controller: BundlesDefaultBundle:Default:index }
@@ -20,15 +19,6 @@ bundles_default.order.search:
     pattern: payonline
     defaults: {_controller: BundlesDefaultBundle:Order:searchPnr}
 
-api_list_flight:
-    pattern:  /flights/{arrivalCode}/{departureCode}/{departureDate}/{arrivalDate}/{bestPrice}/{adults}/{direction}/{children}/{infant}/{serviceClass}/{airline}/{directFlights}
-    defaults: { _controller: BundlesDefaultBundle:Flight:list,adults: 1,serviceClass: Y,departureDate: 0 ,children: 0,infant: 0,direction : 1,directFlights: 0, bestPrice: 1,airline: all}
-    requirements:
-          date_to: "[\d\-]*"
-          date_from: "[\d\-]*"
-          direct_flights:  0|1
-          return_way:  0|1
-          best_price:  0|1
 
 bundles_default_search_complex_search:
     pattern:  /complex-search/{city}/{date}/{adults}/{return_way}/{children}/{infant}/{class}/{avia_company}/{direct_flights}
@@ -68,10 +58,6 @@ bundles_default_api_complex_calendar:
 bundles_default.api.calendar_item_info:
     pattern: /api/avia-calendar/info
     defaults: { _controller: BundlesDefaultBundle:Api:calendarItemInfo}
-
-bundles_default_api_book:
-    pattern: /book/{key}
-    defaults: { _controller: BundlesDefaultBundle:Book:book}
 
 bundles_default_api_order:
     pattern: /order/{orderID}

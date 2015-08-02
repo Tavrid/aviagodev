@@ -1,9 +1,0 @@
-{% extends "BundlesDefaultBundle:Layouts:main.html.twig" %}
-{% block content %}
-    {% include 'BundlesDefaultBundle:AngularViews:angViews.html.twig' %}
-    {#{% include 'BundlesDefaultBundle:Default:_seoContent.html.twig' %}#}
-{% endblock %}
-{% block js %}
-    {{ parent() }}
-    <script src="{{ asset('build/dist/js/app/index.js') }}" type="text/javascript"></script>
-{% endblock %}

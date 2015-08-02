@@ -18,7 +18,7 @@ class DefaultController extends Controller
 //        $form = $this->createForm('search_form');
 //
 //        $flights = $this->get('bundles_default.util.previous_flight')->getFlights();
-        return $this->render('BundlesDefaultBundle:AngularViews:index.html.twig', [
+        return $this->render('BundlesDefaultBundle:Default:index.html.twig', [
             'searchFormOptions' => $this->get('bundles_default.search_form.options')->getFormOptions()
 //            'flights' => $flights,
 //            'form' => $form->createView(),

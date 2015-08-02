@@ -1,0 +1,14 @@
+
+api_list_flight:
+    pattern:  /flights/{arrivalCode}/{departureCode}/{departureDate}/{arrivalDate}/{bestPrice}/{adults}/{direction}/{children}/{infant}/{serviceClass}/{airline}/{directFlights}
+    defaults: { _controller: BundlesDefaultBundle:Frontend:default,adults: 1,serviceClass: Y,departureDate: 0 ,children: 0,infant: 0,direction : 1,directFlights: 0, bestPrice: 1,airline: all}
+    requirements:
+          date_to: "[\d\-]*"
+          date_from: "[\d\-]*"
+          direct_flights:  0|1
+          return_way:  0|1
+          best_price:  0|1
+
+bundles_default_api_book:
+    pattern: /book/{key}
+    defaults: { _controller: BundlesDefaultBundle:Frontend:default}
