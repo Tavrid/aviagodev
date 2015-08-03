@@ -36,6 +36,7 @@ module.exports = [
     scope.tickets = []
     scope.form = {}
 
+
     scope.book = () ->
       viewLoader.showLoader()
       formHelper
@@ -47,8 +48,21 @@ module.exports = [
             if res.is_valid
               location.path url
           .error  ->
-            viewLoader.hidelLoader()
+            viewLoader.hideLoader()
 
+    ## current travelers
+
+    scope.getCurrentTravelers = (ticket) ->
+      travelers = []
+      _.each ticket.travelers, (key,num) ->
+        travelers.push num if key > 0
+      return travelers
+
+    ## pricing by name
+    scope.getPricingByName = (ticket,traveler) ->
+      _.find ticket.pricing, (num) ->
+        num.Type == traveler
+    ## get initialize data
     http.get Routing.generate 'api_book_get_data', {key: stateParams.requestId}
       .success (res) ->
         viewLoader.hideLoader()

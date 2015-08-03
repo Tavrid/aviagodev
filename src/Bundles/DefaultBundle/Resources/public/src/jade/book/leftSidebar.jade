@@ -5,19 +5,19 @@ aside.sidebar(role='sidebar')
             .ticket-group
                 div(class="title") {{$index+1}} Билет: в две стороны
                 div(class="ticket" ng-repeat="itener in ticket.itineraries") {{dateFormat(departureSegment(itinerarie.variants[0]).departure_date)}} MOW 02:35 -> JFK 05:30 10 ч. 05 м., прямой рейс
-            .passenjer-group
+            div(class="passenjer-group" ng-repeat="traveler in getCurrentTravelers(ticket)")
                 .title Пассажир: 1 взрослый
                 table
                     tbody
                         tr
                             td Тариф
-                            td(align='right') 1230.00 руб.
+                            td(align='right') {{getPricingByName(ticket,traveler).Base}} {{getPricingByName(ticket,traveler).Currency}}
                         tr
                             td Таксы и сборы
-                            td(align='right') 450.00 руб.
+                            td(align='right') {{getPricingByName(ticket,traveler).Tax}} {{getPricingByName(ticket,traveler).Currency}}
                         tr
                             td Агентский сбор
-                            td(align='right') 50.00 руб.
+                            td(align='right') {{getPricingByName(ticket,traveler).Fee}} {{getPricingByName(ticket,traveler).Currency}}
                     tfoot
                         tr
                             td ИТОГО

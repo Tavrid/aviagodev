@@ -54,7 +54,7 @@ class TicketController extends Controller
                 }
             }
             $serializer = $this->get('jms_serializer');
-            $data['tickets'] = json_decode($serializer->serialize($outputItems, 'json'),true);
+            $data['tickets'] = $serializer->toArray($outputItems);
 
             $resp = new JsonResponse($data);
             return $resp;
