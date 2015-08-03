@@ -54,7 +54,7 @@ div(class="container ng-hide"  ng-show="book_info")
                     div(class="span h3 status-buy" ng-show="book_info.is_paid") не оплачен / ожидает оплаты
                 p.large-text
                     | Билет необходимо оплатить до:
-                    span.h3.data-buy {{dateFormat(book_info.pnr_expire_date,"H:mm D.M.YYYY")}}
+                    span.h3.data-buy {{dateFormat(book_info.pnr_expire_date,"HH:mm DD.MM.YYYY")}}
                 .variable-buy
                     h3 Варианты оплаты:
                     .variable-item
@@ -100,7 +100,7 @@ div(class="container ng-hide"  ng-show="book_info")
                                     | Райффайзен банк Аваль
                                     span.desc-pay комиссия банка 0.5%
                                 p
-                                    img(src='/bundles/bundlesdefault/front/images/images/rayfayzen.jpg', alt='')
+                                    img(src='/bundles/bundlesdefault/front/images/rayfayzen.jpg', alt='')
                                     a.desc-pay(href='#') карта отделений банка
                             button.button.button-buy(type='button') Получить счет для оплаты в банке
                         .pay-text

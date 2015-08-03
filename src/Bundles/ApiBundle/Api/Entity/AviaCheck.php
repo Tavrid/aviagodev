@@ -10,15 +10,13 @@ namespace Bundles\ApiBundle\Api\Entity;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
 use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\Type;
 class AviaCheck {
 
     private $bookId;
 
     private $pnr;
-    /**
-     * @var
-     *
-     */
+
     private $pnrExpireDate;
 
     private $totalPrice;
