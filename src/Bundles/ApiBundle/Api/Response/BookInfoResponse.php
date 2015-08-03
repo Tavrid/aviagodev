@@ -44,7 +44,9 @@ class BookInfoResponse extends Response {
         }
         $data = $this->response['result'];
         $entity = new BookInfo();
-        $entity->setTravelers($data['Travellers']);
+        if(isset($data['Travellers'])){
+            $entity->setTravelers($data['Travellers']);
+        }
 
         $ticket = $this->ticketCreator->createTicket($data,$this->query);
         $entity->setTicket($ticket)

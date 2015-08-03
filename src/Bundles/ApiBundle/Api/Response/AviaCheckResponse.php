@@ -58,6 +58,7 @@ class AviaCheckResponse extends Response {
         $entity->setTicket($ticket)
             ->setBookId($data['BookID']);
         $this->entity = $entity;
+
     }
 
     /**

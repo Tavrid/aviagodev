@@ -10,6 +10,7 @@ global.$ = require "jquery"
 
 BookController = require('./book/controller/BookController')
 SearchController = require './search/controller/SearchController'
+OrderController = require './order/controller/OrderController'
 #$ ->
 App = angular.module "MainApp", ['ui.router']
 
@@ -62,5 +63,10 @@ App.config [
       templateUrl: '/build/view/book/book.html'
       url: '/book/:requestId'
       controller: BookController
+    )
+    .state('order',
+      templateUrl: '/build/view/order/order.html'
+      url: '/order/:orderId'
+      controller: OrderController
     )
 ]

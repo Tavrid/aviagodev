@@ -7,13 +7,18 @@
  */
 
 namespace Bundles\ApiBundle\Api\Entity;
-
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\Accessor;
 class AviaCheck {
 
     private $bookId;
 
     private $pnr;
-
+    /**
+     * @var
+     *
+     */
     private $pnrExpireDate;
 
     private $totalPrice;
@@ -24,6 +29,12 @@ class AviaCheck {
 
     private $statusPay;
 
+    /**
+     *
+     * @VirtualProperty()
+     * @SerializedName("is_paid")
+     * @return bool
+     */
     public function getIsPaid(){
         return $this->getStatusPay() == 'Paid';
     }

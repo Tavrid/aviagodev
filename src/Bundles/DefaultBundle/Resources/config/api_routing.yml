@@ -2,13 +2,22 @@ bundles_default_rest_api_ticket:
     type:     rest
     resource: @BundlesDefaultBundle/Controller/Api/TicketController.php
     name_prefix: api_
+    prefix: ticket
 
 bundles_default_rest_api_airport:
     type:     rest
     resource: @BundlesDefaultBundle/Controller/Api/AirportController.php
     name_prefix: api_
+    prefix: airport
 
 bundles_default_rest_api_book:
     type:     rest
     resource: @BundlesDefaultBundle/Controller/Api/BookController.php
     name_prefix: api_book_
+    prefix: book
+
+bundles_default_rest_api_order:
+    type:     rest
+    resource: @BundlesDefaultBundle/Controller/Api/OrderController.php
+    name_prefix: api_order_
+    prefix: order

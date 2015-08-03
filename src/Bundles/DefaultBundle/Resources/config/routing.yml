@@ -59,9 +59,7 @@ bundles_default.api.calendar_item_info:
     pattern: /api/avia-calendar/info
     defaults: { _controller: BundlesDefaultBundle:Api:calendarItemInfo}
 
-bundles_default_api_order:
-    pattern: /order/{orderID}
-    defaults: { _controller: BundlesDefaultBundle:Order:order}
+
 bundles_default_api_create_pay:
     pattern: /pay-order/{orderID}
     defaults: { _controller: BundlesDefaultBundle:Pay:createPay}

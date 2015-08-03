@@ -81,7 +81,7 @@ class BookController extends FOSRestController
             $api = $this->get('avia.api.manager');
             $output = $api->getBookRequestor()->execute($query);
             if ($output->isBooked()) {
-                $d = $output->getResponseData();
+//                $d = $output->getResponseData();
                 $entity->setPnr($output->getPnr())
                     ->setOrderInfo($d);
                 $orderManager->save($entity);

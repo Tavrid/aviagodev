@@ -1,0 +1,164 @@
+div(class="container ng-hide"  ng-show="book_info")
+    aside.sidebar(role='sidebar')
+        div(class="group-sidebar")
+            .info-order
+                h3 Информация о заказе
+                .ticket-group
+                    div(class="title") {{$index+1}} Билет: в две стороны
+                    div(class="ticket" ng-repeat="itener in ticket.itineraries") {{dateFormat(departureSegment(itinerarie.variants[0]).departure_date)}} MOW 02:35 -> JFK 05:30 10 ч. 05 м., прямой рейс
+                div(class="passenjer-group" ng-repeat="traveler in getCurrentTravelers(ticket)")
+                    .title Пассажир: 1 взрослый
+                    table
+                        tbody
+                            tr
+                                td Тариф
+                                td(align='right') {{getPricingByName(ticket,traveler).Base}} {{getPricingByName(ticket,traveler).Currency}}
+                            tr
+                                td Таксы и сборы
+                                td(align='right') {{getPricingByName(ticket,traveler).Tax}} {{getPricingByName(ticket,traveler).Currency}}
+                            tr
+                                td Агентский сбор
+                                td(align='right') {{getPricingByName(ticket,traveler).Fee}} {{getPricingByName(ticket,traveler).Currency}}
+                        tfoot
+                            tr
+                                td ИТОГО
+                                td(align='right') {{ticket.total_price}} {{ticket.currency}}
+                p Все цены указаны в рублях РФ.
+                p Информация об оплате.
+    div(class="main")
+        .steps
+            a(href='#') Поиск
+            span >
+            a(href='#') Бронирование
+            span >
+            a.act-step(href='#') Оплата
+            span >
+            a.disable(href='#') Подтверждение
+        div(class="pay-block sms-block" ng-hide="book_info.is_paid")
+            .title
+                i.icon-sms
+                span Сообщение
+            .text
+                p(ng-hide="book_info.is_paid") Ваш билет успешно забронирован.
+                p(ng-show="book_info.is_paid") Ваш билет успешно оплачен.
+        div(class="pay-block")
+            .title
+                span Оплата
+            .text
+                p.large-text
+                    | Код брони:
+                    span.h3.code-booking {{book_info.pnr}}
+                    br
+                    | 						Состояние билета:
+                    div(class="span h3 status-buy" ng-hide="book_info.is_paid") не оплачен / ожидает оплаты
+                    div(class="span h3 status-buy" ng-show="book_info.is_paid") не оплачен / ожидает оплаты
+                p.large-text
+                    | Билет необходимо оплатить до:
+                    span.h3.data-buy {{dateFormat(book_info.pnr_expire_date,"H:mm D.M.YYYY")}}
+                .variable-buy
+                    h3 Варианты оплаты:
+                    .variable-item
+                        h3
+                            | Оплата картой:
+                            span
+                                img(src='/bundles/bundlesdefault/front/images/card_visa(2).png', height='23', width='93', alt='')
+                        .pay-group
+                            .radio
+                                input#credit-cart-1(type='radio', name='credit-cart')
+                                label(for='credit-cart-1') Кредитной картой напрямую в авиакомпанию
+                                span.desc-pay комиссия за быстрый платеж составит 0%
+                            .radio
+                                input#credit-cart-2(type='radio', name='credit-cart')
+                                label(for='credit-cart-2') Кредитной картой (для карт Приватбанка)
+                                span.desc-pay комиссия за быстрый платеж составит 1%
+                            .radio
+                                input#credit-cart-3(type='radio', name='credit-cart')
+                                label(for='credit-cart-3') Кредитной картой в авиакомпанию (другие карты, оператор PAYU.ua)
+                                span.desc-pay комиссия за быстрый платеж составит 1.8%
+                        button.button.button-buy.buy-card(type='button') Оплатить картой
+                    .variable-item
+                        h3
+                            | Банковским переводом:
+                            span
+                                i.icon-info
+                        .pay-group
+                            .radio-input
+                                input(type='radio', name='', id='')
+                            .bank-name
+                                p
+                                    | Приватбанк
+                                    span.desc-pay комиссия банка 10 грн за перевод
+                                p
+                                    img(src='/bundles/bundlesdefault/front/images/privat.jpg', alt='')
+                                    a.desc-pay(href='#') карта отделений банка
+                            button.button.button-buy(type='button') Получить счет для оплаты в банке
+                        .pay-group
+                            .radio-input
+                                input(type='radio', name='', id='')
+                            .bank-name
+                                p
+                                    | Райффайзен банк Аваль
+                                    span.desc-pay комиссия банка 0.5%
+                                p
+                                    img(src='/bundles/bundlesdefault/front/images/images/rayfayzen.jpg', alt='')
+                                    a.desc-pay(href='#') карта отделений банка
+                            button.button.button-buy(type='button') Получить счет для оплаты в банке
+                        .pay-text
+                            p
+                                | Также вы можете оплатить авиабилет в любом банке, комиссия банка в среднем составит 1%
+                            p Оплата через другие банки принимаются только в банковские дни до 16:00 часов.
+                            p
+                                | Убедительная просьба не оплачивать счета через Ощадбанк и Укрпочту из-за задержек зачисления средств.
+                    .variable-item
+                        h3
+                            | Наличными в нашем офисе:
+                            span
+                                i.icon-info
+                        .pay-text
+                            p
+                                | ООО "Акватур" г.Симферополь, ул. Горького, 30 - режим работы с 9 до 18 часов карта проезда
+                            p
+                                | ООО "Акватур" г.Киев, ул. Горького, 30 - режим работы с 9 до 18 часов карта проезда
+                .alert-buy После оплаты электронный билет будет отправлен вам на электронную почту.
+        //
+          <div class="pay-block">
+          <p>Код брони: <span class="code-booking">77WUKI</span></p>
+          <h3>Варианты оплаты:</h3>
+          <div class="country">Украина</div>
+          <div class="pay-group">
+          <div class="radio">
+          <input type="radio" id="credit-cart-1" name="credit-cart">
+          <label for="credit-cart-1">Кредитной картой VISA/Mastercard ПриватБанк</label>
+          </div>
+          <div class="radio">
+          <input type="radio" id="credit-cart-2" name="credit-cart">
+          <label for="credit-cart-2">Кредитной картой PAYU</label>
+          </div>
+          <div class="radio">
+          <input type="radio" id="credit-cart-3" name="credit-cart">
+          <label for="credit-cart-3">Кредитной картой VISA/Mastercard в авиакомпанию (PaymentAction: CreditCard, CreditCard BSP)</label>
+          </div>
+          </div>
+          <div class="pay-variable">
+          <div class="variable">
+          <div class="name">Банковским переводом через банк</div>
+          <div class="group">
+          <p>Приватбанк <a href="#">Счет для оплаты</a></p>
+          <p>Ощадбанк <a href="#">Счет для оплаты</a></p>
+          <p>Райффайзен банк Аваль <a href="#">Счет для оплаты</a></p>
+          </div>
+          </div>
+          <div class="variable">
+          <div class="name">
+          <a href="#">Наличными в нашем офисе (ссылка/развертка на страницу карты и инструкцию)</a>
+          </div>
+          </div>
+          <div class="variable">
+          <div class="name">
+          <a href="#">Через терминалы оплаты (ссылка/развертка на страницу карты и инструкцию)</a>
+          </div>
+          </div>
+          </div>
+          <h3>После оплаты электронный билет будет отправлен вам на e-mail</h3>
+          <button type="button" class="button button-buy">Оплатить</button>
+          </div>
