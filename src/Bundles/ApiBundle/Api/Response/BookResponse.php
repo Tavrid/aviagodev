@@ -22,4 +22,9 @@ class BookResponse extends Response {
     public function getPnr() {
         return $this->response['result']['PNR'];
     }
+
+    public function isBooked()
+    {
+        return $this->response['result']['Status'] == 'Booked' && $this->getPnr();
+    }
 }

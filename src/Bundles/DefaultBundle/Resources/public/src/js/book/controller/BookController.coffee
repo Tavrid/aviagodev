@@ -46,7 +46,7 @@ module.exports = [
             Object.deepExtend scope.form, res.form
             viewLoader.hideLoader()
             if res.is_valid
-              location.path url
+              location.path res.url.replace /\/app_dev.php/,""
           .error  ->
             viewLoader.hideLoader()
 

@@ -1,6 +1,6 @@
 .container
     include partial/leftSidebar
-    .main
+    div(class="main ng-hide" ng-show="tickets.length > 0")
         .steps
             a(href='#') Поиск
             span >
@@ -20,26 +20,23 @@
                     include ticket/ticket
                     // Авиабилет
                 #pravila.tab
-        // Табы
-        // Группа (оплатить до, информация о багаже)
         .group
-            .luggage-block
-                .title Информация о багаже
-                .info
-                    p
-                        | Багаж:
-                        b 20 кг
-                    p
-                        | Ручная кладь:
-                        b 8 кг
+            //.luggage-block
+            //    .title Информация о багаже
+            //    .info
+            //        p
+            //            | Багаж:
+            //            b 20 кг
+            //        p
+            //            | Ручная кладь:
+            //            b 8 кг
             .buy-type-tarif
-                p
+                p(ng-show="tickets[0].last_ticket_date")
                     | Оплатить до:
-                    b 18:00 часов 23.06.2015 г.
-                p
+                    b {{dateFormat(tickets[0].last_ticket_date,"H:mm D.M.YYYY")}}
+                p(ng-hide="tickets[0].refundable")
                     | Тип тарифа:
                     b невозвратный
-        // Группа
-        // Список пассажиров
+
         include form
 .empty

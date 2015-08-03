@@ -4,7 +4,7 @@ _ = require "underscore"
 
 
 module.exports = (scope) ->
-  scope.dateFormat = (timestamp, format = "D.MM.YYYY") ->
+  scope.dateFormat = (timestamp, format = "DD.MM.YYYY") ->
     moment.unix(timestamp).format format
   ###
       get Departure Segment
