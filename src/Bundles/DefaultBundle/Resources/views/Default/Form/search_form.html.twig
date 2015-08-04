@@ -1,0 +1,118 @@
+<div class="tab-content-services" >
+    <div class="act-tab tab">
+        <div class="form-search-wrap">
+            <fieldset class="tab-direction">
+                <div class="input-group">
+                    <input id="one-direction" type="radio" ng-model="searchForm.direction" value="0" name="direction" required="required" class="radio-button"/>
+                    <label for="one-direction">{{ 'frontend.search_form.return_way.one_way'|trans }}</label>
+                </div>
+                <div class="input-group">
+                    <input id="one-two-direction" checked="checked" ng-model="searchForm.direction" value="1" type="radio" name="direction" class="radio-button"/>
+                    <label for="one-two-direction">{{ 'frontend.search_form.return_way.multi_way'|trans }}</label>
+                </div>
+                <div class="input-group">
+                    <input id="multiple-direction" type="radio" ng-model="searchForm.direction" value="2" name="direction" class="radio-button"/>
+                    <label for="multiple-direction">{{ 'frontend.search_form.return_way.complex_search'|trans }}</label>
+                </div>
+            </fieldset>
+            <fieldset class="form-group">
+                <div ng-hide="searchForm.direction==2" class="simple-search">
+                    <div class="departure-from input-group">
+                        <label for="from-avia">{{ 'frontend.search_form.city_from'|trans }}:</label>
+                        <div class="input">
+                            <span class="icon"><i class="icon-metka"></i></span>
+                            <auto-complete
+                                    search-length="3"
+                                    ng-model="searchForm.departureCode"
+                                    attr-id="from-avia"
+                                    attr-placeholder="{{ 'frontend.search_form.placeholders.city'|trans }}"
+                                    reverse-component="1"
+                                    >
+                            </auto-complete>
+                        </div>
+                    </div>
+                    <div ng-click="reverse()" ng-hide="searchForm.direction == 0" class="input-group refresh">
+                        <a href=""><i class="icon-refresh"></i></a>
+                    </div>
+                    <div ng-hide="searchForm.direction == 0" class="arriving-in input-group">
+                        <label for="down-avia">{{ 'frontend.search_form.city_to'|trans }}:</label>
+                        <div class="input">
+                            <span class="icon"><i class="icon-metka"></i></span>
+                            <auto-complete
+                                    search-length="3"
+                                    ng-model="searchForm.arrivalCode"
+                                    attr-id="down-avia"
+                                    attr-placeholder="{{ 'frontend.search_form.placeholders.city'|trans }}"
+                                    reverse-component="1"
+                                    >
+
+                            </auto-complete>
+
+                        </div>
+                    </div>
+                </div>
+                {% include "BundlesDefaultBundle:Default/Form:complex_search_fields.html.twig" %}
+            </fieldset>
+            <fieldset class="form-group">
+                <div class="date-simple up-date input-group" ng-hide="searchForm.direction==2">
+                    <label for="up-date">{{ 'frontend.search_form.date_from'|trans }}:</label>
+                    <div class="input">
+                        <ng-datepicker
+                                attr-id="up-date"
+                                placeholder="{{ 'frontend.search_form.placeholders.date'|trans }}"
+                                ng-model="searchForm.departureDate"
+                                name="departureDate"
+                                max-from="arrivalDate"
+                                >
+
+                        </ng-datepicker>
+                        <span class="icon"><i class="icon-date"></i></span>
+                    </div>
+                </div>
+                <div class="date-simple down-date input-group" ng-hide="searchForm.direction==2">
+                    <label for="down-date">{{ 'frontend.search_form.date_to'|trans }}:</label>
+                    <div class="input">
+                        <ng-datepicker
+                                attr-id="down-date"
+                                placeholder="{{ 'frontend.search_form.placeholders.date'|trans }}"
+                                ng-model="searchForm.arrivalDate"
+                                name="arrivalDate"
+                                min-from="departureDate"
+                                >
+
+                        </ng-datepicker>
+                        <span class="icon"><i class="icon-date"></i></span>
+                    </div>
+                </div>
+                <div class="adults input-group">
+                    <label for="adults">{{ 'frontend.search_form.adults'|trans }}</label>
+                    <div class="select">
+                        <select id="adults" name="adults" ng-model="searchForm.adults" ng-options="key as value for (key , value) in searchFormOptions.adults">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="children input-group">
+                    <label for="children">{{ 'frontend.search_form.child'|trans }}</label>
+                    <div class="select">
+                        <select id="children" name="children" ng-model="searchForm.children"  ng-options="key as value for (key , value) in searchFormOptions.children">
+
+                        </select>
+                    </div><a href="#" class="age-rule-link">Правила перевозки детей<i class="icon-window"></i></a>
+                </div>
+                <div class="infant input-group">
+                    <label for="infant">{{ 'frontend.search_form.infant'|trans }}</label>
+                    <div class="select">
+                        <select id="infant" name="infant" ng-model="searchForm.infant" ng-options="key as value for (key , value) in searchFormOptions.infant">
+
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+            {% include 'BundlesDefaultBundle:Default/Form:additional_fields.html.twig' %}
+        </div>
+    </div>
+    <div id="hotels" class="tab"></div>
+    <div id="car-rental" class="tab"></div>
+</div>
+

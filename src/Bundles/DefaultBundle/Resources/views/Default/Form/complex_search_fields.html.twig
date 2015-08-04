@@ -1,0 +1,60 @@
+<div ng-show="searchForm.direction==2" class="complex-search-avia  ng-hide">
+    <div class="list-name-field">
+        <div class="departure-from input-group">
+            <label>{{ 'frontend.search_form.city_from'|trans }}:</label>
+        </div>
+        <div class="arriving-in input-group">
+            <label>{{ 'frontend.search_form.city_to'|trans }}:</label>
+        </div>
+        <div class="up-date input-group">
+            <label>{{ 'frontend.search_form.date_from'|trans }}:</label>
+        </div>
+    </div>
+    <div ng-repeat="inputGroup in searchForm.complexFields" class="group">
+        <div class="departure-from input-group">
+            <div class="input">
+                <span class="icon"><i class="icon-metka"></i></span>
+                <auto-complete
+                        search-length="3"
+                        ng-model="inputGroup.departureCode"
+                        attr-id="from-avia-{% verbatim %}{{ $index }}{% endverbatim %}"
+                        attr-placeholder="{{ 'frontend.search_form.placeholders.city'|trans }}"
+                        >
+                </auto-complete>
+            </div>
+        </div>
+        <div class="arriving-in input-group">
+            <div class="input">
+                <span class="icon"><i class="icon-metka"></i></span>
+                <auto-complete
+                        search-length="3"
+                        ng-model="inputGroup.arrivalCode"
+                        attr-id="down-avia-{% verbatim %}{{ $index }}{% endverbatim %}"
+                        attr-placeholder="{{ 'frontend.search_form.placeholders.city'|trans }}"
+                        >
+                </auto-complete>
+            </div>
+        </div>
+        <div class="up-date input-group">
+            <div class="input">
+                <ng-datepicker
+                        attr-id="up-date-{% verbatim %}{{ $index }}{% endverbatim %}"
+                        highlight-between="0"
+                        placeholder="{{ 'frontend.search_form.placeholders.date'|trans }}"
+                        ng-model="inputGroup.departureDate"
+                        name="departureDate{% verbatim %}{{ $index }}{% endverbatim %}"
+                        min-from="departureDate{% verbatim %}{{ $index - 1 }}{% endverbatim %}"
+                        max-from="arrivalDate{% verbatim %}{{ $index + 1 }}{% endverbatim %}"
+                        >
+
+                </ng-datepicker>
+                <span class="icon"><i class="icon-date"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="buttton-add-group">
+        <button ng-click="searchForm.addComplexField()" class="button buttton-add">
+            <i class="icon-add"></i><span>{{ 'frontend.search_form.add'|trans }}</span>
+        </button>
+    </div>
+</div>
