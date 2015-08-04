@@ -22,7 +22,8 @@ module.exports =
     '$timeout',
     '$http',
     'AutoCompleteReplacer'
-    (timeout,http, AutoCompleteReplacer) ->
+    '$document'
+    (timeout,http, AutoCompleteReplacer,document) ->
       searchCache = {}
       fromAttr = null
       replace: true
@@ -34,11 +35,10 @@ module.exports =
         if attr.reverseComponent
           AutoCompleteReplacer.addAutoCompleteScope scope
 
-        $ document
-          .click (e)->
-            if scope.matches.length
-              scope.$apply ->
-                scope.matches = []
+        document.on 'click', (e) ->
+          if scope.matches.length
+            scope.$apply ->
+              scope.matches = []
 
         currentTimer = null
         scope.attr = {id: attr.attrId, placeholder: attr.attrPlaceholder}

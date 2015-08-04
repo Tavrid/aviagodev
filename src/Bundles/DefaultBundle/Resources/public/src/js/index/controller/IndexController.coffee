@@ -14,7 +14,6 @@ module.exports = [
     scope.searchForm = new SearchForm location
     scope.mathes = []
     scope.searchFormOptions = global.searchFormOptions
-    console.log scope.searchFormOptions
     scope.search = ->
       window.location = scope.searchForm.getUrl()
 ]

@@ -17,18 +17,18 @@
 <script type="text/ng-template" id="datepicker.html">
     <div>
         <div>
-            <input required="" id="{{ id }}" type="text" ng-focus="showCalendar($event)" ng-value="viewValue" class="ng-datepicker-input" placeholder="{{ placeholder }}">
+            <input required="" id="{{ id }}" type="text" ng-focus="showCalendar($event)" ng-value="viewValue" class="ng-datepicker-input ng-datepicker_x_{{ id }}" placeholder="{{ placeholder }}">
 
         </div>
         <div class="ng-datepicker" ng-show="calendarOpened">
             <div class="ng-datepicker__controls">
                 <div class="left">
-                    <i class="fa fa-angle-left prev-month-btn" ng-click="prevMonth()"></i>
+                    <i class="fa fa-angle-left prev-month-btn ng-datepicker_x_{{ id }}" ng-click="prevMonth()"></i>
                 </div>
                 <span class="date" ng-bind="dateValue"></span>
 
                 <div class="right">
-                    <i class="fa fa-angle-right next-month-btn" ng-click="nextMonth()"></i>
+                    <i class="fa fa-angle-right next-month-btn ng-datepicker_x_{{ id }}" ng-click="nextMonth()"></i>
                 </div>
             </div>
             <table style="width: 100%; border-bottom: 1px solid #ccc;margin: 4px 0;">

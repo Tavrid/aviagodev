@@ -1,10 +1,11 @@
-v = require "validate-obj"
-assertions =
-  arrivalDate: [v.required, v.isDate]
-  departureDate: [v.required, v.isDate]
-  direction: [v.required]
-  complexFields: {arrivalDate: [[v.required, v.isDate]]}
-
+#
+#v = require "validate-obj"
+#assertions =
+#  arrivalDate: [v.required, v.isDate]
+#  departureDate: [v.required, v.isDate]
+#  direction: [v.required]
+#  complexFields: {arrivalDate: [[v.required, v.isDate]]}
+_ = require "underscore"
 class ComplexField
 
 class SearchForm
@@ -38,7 +39,7 @@ class SearchForm
     @airline
     @serviceClass
     @directFlights
-    } = $.extend defaultOpt, attr
+    } = _.extend defaultOpt, attr
 
   viewAdditionalFields: false
   complexFields: [new ComplexField, new ComplexField]

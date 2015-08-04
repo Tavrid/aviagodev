@@ -128,7 +128,7 @@ module.exports = [
         return
 
       $document.on 'click', (e) ->
-        if ! $(e.target).parents('.ng-datepicker').length && !element.is(e.target) && element.has(e.target).length == 0
+        if e.target.className.indexOf("ng-datepicker_x_#{ scope.id }") == -1
           scope.closeCalendar()
           scope.$apply()
       #        return

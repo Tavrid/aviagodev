@@ -3,7 +3,7 @@ datepicker = require "./datepicker"
 ###
   @deprecated
 ###
-global.$ = require "jquery"
+#global.$ = require "jquery"
 
 IndexController = require('./index/controller/IndexController')
 #$ ->
