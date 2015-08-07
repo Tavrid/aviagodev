@@ -73,18 +73,36 @@ class SearchForm extends AbstractType
             ->add('direction', 'choice', [
                 'label' => 'frontend.search_form.return_way.label',
                 'choices' => $formOpt['direction'],
-                'data' => 1,
+                'data' => SearchFormOptions::DIRECTION_TOW_WAY,
                 'multiple' => false,
                 'expanded' => true,
                 'required' => true,
             ])
-            ->add('adults', 'choice', ['choices' => $formOpt['adults'],'label' => 'frontend.search_form.adults'])
-            ->add('children', 'choice', ['choices' => $formOpt['children'],'label' => 'frontend.search_form.child'])
-            ->add('infant', 'choice', ['choices' => $formOpt['infant'],'label' => 'frontend.search_form.infant'])
-            ->add('serviceClass', 'choice', ['choices' => $formOpt['serviceClass'],'label' => 'frontend.search_form.class'])
+            ->add('adults', 'choice', [
+                'choices' => $formOpt['adults'],
+                'label' => 'frontend.search_form.adults',
+                'data' => key($formOpt['adults'])
+            ])
+            ->add('children', 'choice', [
+                'choices' => $formOpt['children'],
+                'label' => 'frontend.search_form.child',
+                'data' => key($formOpt['children'])
+            ])
+            ->add('infant', 'choice', [
+                'choices' => $formOpt['infant'],
+                'label' => 'frontend.search_form.infant',
+                'data' => key($formOpt['infant'])
+            ])
+            ->add('serviceClass', 'choice', [
+                'choices' => $formOpt['serviceClass'],
+                'label' => 'frontend.search_form.class',
+                'data' => key($formOpt['serviceClass'])
+            ])
             ->add('airline', 'choice', [
                 'label' => 'frontend.search_form.airline',
-                'choices' => $formOpt['airline']
+                'choices' => $formOpt['airline'],
+                'data' => key($formOpt['airline']),
+                'required' => true
             ])
             ->add('bestPrice', 'checkbox', [
                 'label' => 'frontend.search_form.best_price',

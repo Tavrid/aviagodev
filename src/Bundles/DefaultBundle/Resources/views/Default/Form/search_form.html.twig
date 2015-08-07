@@ -2,28 +2,22 @@
     <div class="act-tab tab">
         <div class="form-search-wrap">
             <fieldset class="tab-direction">
-                <div class="input-group">
-                    <input id="one-direction" type="radio" ng-model="searchForm.direction" value="0" name="direction" required="required" class="radio-button"/>
-                    <label for="one-direction">{{ 'frontend.search_form.return_way.one_way'|trans }}</label>
-                </div>
-                <div class="input-group">
-                    <input id="one-two-direction" checked="checked" ng-model="searchForm.direction" value="1" type="radio" name="direction" class="radio-button"/>
-                    <label for="one-two-direction">{{ 'frontend.search_form.return_way.multi_way'|trans }}</label>
-                </div>
-                <div class="input-group">
-                    <input id="multiple-direction" type="radio" ng-model="searchForm.direction" value="2" name="direction" class="radio-button"/>
-                    <label for="multiple-direction">{{ 'frontend.search_form.return_way.complex_search'|trans }}</label>
-                </div>
+                {% verbatim %}
+                    <div class="input-group" ng-repeat="direction in searchForm.formValue.direction">
+                        <div ng-click="toggleCheckbox(searchForm.formValue.direction,direction)"  ng-class="{active: direction.data,error: direction.errors.length > 0}">{{ direction.label }}</div>
+                    </div>
+                {% endverbatim %}
+
             </fieldset>
             <fieldset class="form-group">
-                <div ng-hide="searchForm.direction==2" class="simple-search">
+                <div ng-hide="searchForm.isComplexSearch()" class="simple-search">
                     <div class="departure-from input-group">
                         <label for="from-avia">{{ 'frontend.search_form.city_from'|trans }}:</label>
                         <div class="input">
                             <span class="icon"><i class="icon-metka"></i></span>
                             <auto-complete
                                     search-length="3"
-                                    ng-model="searchForm.departureCode"
+                                    ng-model="searchForm.formValue.departureCode"
                                     attr-id="from-avia"
                                     attr-placeholder="{{ 'frontend.search_form.placeholders.city'|trans }}"
                                     reverse-component="1"
@@ -31,16 +25,16 @@
                             </auto-complete>
                         </div>
                     </div>
-                    <div ng-click="reverse()" ng-hide="searchForm.direction == 0" class="input-group refresh">
+                    <div ng-click="reverse()" ng-hide="searchForm.isSearchOneWay()" class="input-group refresh">
                         <a href=""><i class="icon-refresh"></i></a>
                     </div>
-                    <div ng-hide="searchForm.direction == 0" class="arriving-in input-group">
+                    <div ng-hide="searchForm.isSearchOneWay()" class="arriving-in input-group">
                         <label for="down-avia">{{ 'frontend.search_form.city_to'|trans }}:</label>
                         <div class="input">
                             <span class="icon"><i class="icon-metka"></i></span>
                             <auto-complete
                                     search-length="3"
-                                    ng-model="searchForm.arrivalCode"
+                                    ng-model="searchForm.formValue.arrivalCode"
                                     attr-id="down-avia"
                                     attr-placeholder="{{ 'frontend.search_form.placeholders.city'|trans }}"
                                     reverse-component="1"
@@ -54,13 +48,13 @@
                 {% include "BundlesDefaultBundle:Default/Form:complex_search_fields.html.twig" %}
             </fieldset>
             <fieldset class="form-group">
-                <div class="date-simple up-date input-group" ng-hide="searchForm.direction==2">
+                <div class="date-simple up-date input-group" ng-hide="searchForm.isComplexSearch()">
                     <label for="up-date">{{ 'frontend.search_form.date_from'|trans }}:</label>
                     <div class="input">
                         <ng-datepicker
                                 attr-id="up-date"
                                 placeholder="{{ 'frontend.search_form.placeholders.date'|trans }}"
-                                ng-model="searchForm.departureDate"
+                                ng-model="searchForm.formValue.departureDate"
                                 name="departureDate"
                                 max-from="arrivalDate"
                                 >
@@ -69,13 +63,13 @@
                         <span class="icon"><i class="icon-date"></i></span>
                     </div>
                 </div>
-                <div class="date-simple down-date input-group" ng-hide="searchForm.direction==2">
+                <div class="date-simple down-date input-group" ng-hide="searchForm.isComplexSeatch()">
                     <label for="down-date">{{ 'frontend.search_form.date_to'|trans }}:</label>
                     <div class="input">
                         <ng-datepicker
                                 attr-id="down-date"
                                 placeholder="{{ 'frontend.search_form.placeholders.date'|trans }}"
-                                ng-model="searchForm.arrivalDate"
+                                ng-model="searchForm.formValue.arrivalDate"
                                 name="arrivalDate"
                                 min-from="departureDate"
                                 >
@@ -87,7 +81,7 @@
                 <div class="adults input-group">
                     <label for="adults">{{ 'frontend.search_form.adults'|trans }}</label>
                     <div class="select">
-                        <select id="adults" name="adults" ng-model="searchForm.adults" ng-options="key as value for (key , value) in searchFormOptions.adults">
+                        <select id="adults" name="adults" ng-model="searchForm.formValue.adults.data" ng-options="item.data as item.label for item in searchForm.formValue.adults.choices">
 
                         </select>
                     </div>
@@ -95,7 +89,7 @@
                 <div class="children input-group">
                     <label for="children">{{ 'frontend.search_form.child'|trans }}</label>
                     <div class="select">
-                        <select id="children" name="children" ng-model="searchForm.children"  ng-options="key as value for (key , value) in searchFormOptions.children">
+                        <select id="children" name="children" ng-model="searchForm.formValue.children.data"  ng-options="item.data as item.label for item in searchForm.formValue.children.choices">
 
                         </select>
                     </div><a href="#" class="age-rule-link">Правила перевозки детей<i class="icon-window"></i></a>
@@ -103,7 +97,7 @@
                 <div class="infant input-group">
                     <label for="infant">{{ 'frontend.search_form.infant'|trans }}</label>
                     <div class="select">
-                        <select id="infant" name="infant" ng-model="searchForm.infant" ng-options="key as value for (key , value) in searchFormOptions.infant">
+                        <select id="infant" name="infant" ng-model="searchForm.formValue.infant.data" ng-options="item.data as item.label for item in searchForm.formValue.infant.choices">
 
                         </select>
                     </div>

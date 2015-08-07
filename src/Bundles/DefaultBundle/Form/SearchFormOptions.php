@@ -14,6 +14,9 @@ use Symfony\Component\Translation\TranslatorInterface;
 class SearchFormOptions
 {
 
+    const DIRECTION_ONE_WAY = 1;
+    const DIRECTION_TOW_WAY = 2;
+    const DIRECTION_COMPLEX = 3;
 
     /**
      *
@@ -47,9 +50,9 @@ class SearchFormOptions
         }
         return [
             'direction' => [
-                1 => $this->translation->trans('frontend.search_form.return_way.one_way'),
-                2 => $this->translation->trans('frontend.search_form.return_way.multi_way'),
-                3 => $this->translation->trans('frontend.search_form.return_way.complex_search')
+                self::DIRECTION_ONE_WAY => $this->translation->trans('frontend.search_form.return_way.one_way'),
+                self::DIRECTION_TOW_WAY => $this->translation->trans('frontend.search_form.return_way.multi_way'),
+//                self::DIRECTION_COMPLEX => $this->translation->trans('frontend.search_form.return_way.complex_search') //temporary disable
             ],
             'serviceClass' => [
                 'Y' => $this->translation->trans('frontend.search_form.class_values.y'),

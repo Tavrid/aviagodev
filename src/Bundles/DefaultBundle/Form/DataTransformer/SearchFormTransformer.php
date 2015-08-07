@@ -61,11 +61,13 @@ class SearchFormTransformer implements DataTransformerInterface{
 
     private function transformBooleanFields(&$value)
     {
-        $booleanFields = ['bestPrice','directFlights'];
+        $booleanFields = ['bestPrice' => true,'directFlights'=> false];
 
-        foreach($booleanFields as $field){
+        foreach($booleanFields as $field =>$defaultValue){
             if(isset($value[$field])){
                 $value[$field] = boolval($value[$field]);
+            } else {
+                $value[$field] = $defaultValue;
             }
         }
     }

@@ -7,23 +7,23 @@
         <div ng-show="searchForm.viewAdditionalFields" class="additional-wrap ng-hide">
             <div class="form-group">
                 <div class="checkbox-input input-group">
-                    <input ng-model="searchForm.directFlight" ng-true-value="1" ng-false-value="0" id="only-one-direction" type="checkbox" name="only-one-direction" class="checkbox-button"/>
+                    <input ng-model="searchForm.formValue.directFlight.data" id="only-one-direction" type="checkbox" name="only-one-direction" class="checkbox-button"/>
                     <label for="only-one-direction">{{ 'frontend.search_form.direct_flights'|trans }}</label>
                 </div>
                 <div class="checkbox-input input-group">
-                    <input ng-model="searchForm.bestPrice" ng-true-value="1" ng-false-value="0" id="best-price-three-day" type="checkbox" name="best-price-three-day" class="checkbox-button"/>
+                    <input  ng-model="searchForm.formValue.bestPrice.data" id="best-price-three-day" type="checkbox" name="best-price-three-day" class="checkbox-button"/>
                     <label for="best-price-three-day">{{ 'frontend.search_form.best_price'|trans }}</label>
                 </div>
-                <div class="checkbox-input input-group">
-                    <input ng-model="searchForm.refundable" ng-true-value="1" ng-false-value="0" id="refundable" type="checkbox" name="refundable" class="checkbox-button"/>
-                    <label for="refundable">{{ 'frontend.search_form.refundable'|trans }}</label>
-                </div>
+                {#<div class="checkbox-input input-group">#}
+                    {#<input  ng-model="searchForm.formValue.directFlight.data" ng-true-value="1" ng-false-value="0" id="refundable" type="checkbox" name="refundable" class="checkbox-button"/>#}
+                    {#<label for="refundable">{{ 'frontend.search_form.refundable'|trans }}</label>#}
+                {#</div>#}
             </div>
             <div class="form-group">
                 <div class="aviacompany input-group">
                     <label for="aviacompany">{{ 'frontend.search_form.airline'|trans }}</label>
                     <div class="select">
-                        <select id="aviacompany" ng-model="searchForm.airline"  ng-options="key as value for (key , value) in searchFormOptions.airline">
+                        <select id="aviacompany" ng-model="searchForm.formValue.airline.data"  ng-options="item.data as item.label for item in searchForm.formValue.airline.choices">
 
                         </select>
                     </div>
@@ -31,7 +31,7 @@
                 <div class="class-service input-group">
                     <label for="class-service">{{ 'frontend.search_form.class'|trans }}</label>
                     <div class="select">
-                        <select id="class-service" name="class-service" ng-model="searchForm.serviceClass"  ng-options="key as value for (key , value) in searchFormOptions.serviceClass">
+                        <select id="class-service" ng-model="searchForm.formValue.serviceClass.data"  ng-options="item.data as item.label for item in searchForm.formValue.serviceClass.choices">
 
                         </select>
                     </div>

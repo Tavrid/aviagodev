@@ -1,4 +1,4 @@
-<div ng-show="searchForm.direction==2" class="complex-search-avia  ng-hide">
+<div ng-show="searchForm.isComlexSearch()" class="complex-search-avia  ng-hide">
     <div class="list-name-field">
         <div class="departure-from input-group">
             <label>{{ 'frontend.search_form.city_from'|trans }}:</label>
@@ -10,7 +10,7 @@
             <label>{{ 'frontend.search_form.date_from'|trans }}:</label>
         </div>
     </div>
-    <div ng-repeat="inputGroup in searchForm.complexFields" class="group">
+    <div ng-repeat="inputGroup in searchForm.formValue.complexFields" class="group">
         <div class="departure-from input-group">
             <div class="input">
                 <span class="icon"><i class="icon-metka"></i></span>

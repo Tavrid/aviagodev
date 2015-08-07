@@ -10,19 +10,11 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends Controller
 {
 
-    // C330CA8C-DCDF-4CA8-A5E0-F5E4E1612440
     public function indexAction(Request $request)
     {
-
-
-//        $form = $this->createForm('search_form');
-//
-//        $flights = $this->get('bundles_default.util.previous_flight')->getFlights();
+        $form = $this->createForm('search_form', null, ['city_manager' => $this->get('admin.city.manager')]);
         return $this->render('BundlesDefaultBundle:Default:index.html.twig', [
-            'searchFormOptions' => $this->get('bundles_default.search_form.options')->getFormOptions()
-//            'flights' => $flights,
-//            'form' => $form->createView(),
-//            'form_data' => $this->get('session')->get('formData', [])
+            'form' => $this->get('acme_core.form_serializer')->serializeForm($form)
         ]);
     }
 
