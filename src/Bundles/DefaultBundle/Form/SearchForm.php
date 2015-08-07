@@ -78,9 +78,9 @@ class SearchForm extends AbstractType
                 'expanded' => true,
                 'required' => true,
             ])
-            ->add('adults', 'choice', ['choices' => $formOpt['adults']])
-            ->add('children', 'choice', ['choices' => $formOpt['children']])
-            ->add('infant', 'choice', ['choices' => $formOpt['infant']])
+            ->add('adults', 'choice', ['choices' => $formOpt['adults'],'label' => 'frontend.search_form.adults'])
+            ->add('children', 'choice', ['choices' => $formOpt['children'],'label' => 'frontend.search_form.child'])
+            ->add('infant', 'choice', ['choices' => $formOpt['infant'],'label' => 'frontend.search_form.infant'])
             ->add('serviceClass', 'choice', [
                 'choices' => $formOpt['serviceClass']])
             ->add('airline', 'choice', [
