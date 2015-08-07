@@ -81,8 +81,7 @@ class SearchForm extends AbstractType
             ->add('adults', 'choice', ['choices' => $formOpt['adults'],'label' => 'frontend.search_form.adults'])
             ->add('children', 'choice', ['choices' => $formOpt['children'],'label' => 'frontend.search_form.child'])
             ->add('infant', 'choice', ['choices' => $formOpt['infant'],'label' => 'frontend.search_form.infant'])
-            ->add('serviceClass', 'choice', [
-                'choices' => $formOpt['serviceClass']])
+            ->add('serviceClass', 'choice', ['choices' => $formOpt['serviceClass'],'label' => 'frontend.search_form.class'])
             ->add('airline', 'choice', [
                 'label' => 'frontend.search_form.airline',
                 'choices' => $formOpt['airline']
@@ -95,6 +94,7 @@ class SearchForm extends AbstractType
                 'label' => 'frontend.search_form.direct_flights',
                 'required' => false,
             ]);
+
         if($options['city_manager']){
             /** @var Airports $model */
             $model = $options['city_manager'];

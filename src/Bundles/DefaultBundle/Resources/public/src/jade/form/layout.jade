@@ -40,7 +40,16 @@ mixin datepicker()
             span.icon
                 i.icon-date
 
-
+mixin checkbox()
+    div(class!=attributes.wrapClass)
+        input(
+            id!=attributes.id || "{{"+attributes['ang-prefix']+".id}}"
+            type='checkbox',
+            placeholder!=attributes.placeholder||"{{"+attributes['ang-prefix']+".label}}"
+            ng-model=attributes['ng-model'] || attributes['ang-prefix']+".data"
+            ng-class="{error: "+attributes['ang-prefix']+".errors.length > 0}"
+        )
+        label(for!=attributes.id||"{{"+attributes['ang-prefix']+".id}}" ng-class="{error: "+attributes['ang-prefix']+".errors.length > 0}")!=attributes.label||"{{"+attributes['ang-prefix']+".label}}"
 
 mixin choice()
     div(class!=attributes.wrapClass)

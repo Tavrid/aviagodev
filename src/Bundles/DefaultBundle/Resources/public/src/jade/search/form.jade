@@ -1,5 +1,5 @@
 include ../form/layout
-form(action='#')
+form(action='#' ng-submit="book()")
     .group-sidebar
         fieldset.tab-direction
             .input-group
@@ -21,9 +21,7 @@ form(action='#')
             +datepicker()(attr-id="up-date" wrapClass='date-simple up-date input-group' ang-prefix="searchForm.formValue.departureDate" name="arrivalDate"  max-from="departureDate")
             +datepicker()(attr-id="up-date" wrapClass='date-simple down-date input-group' ang-prefix="searchForm.formValue.arrivalDate" name="departureDate"  max-from="arrivalDate")
 
-        // Группа формы
         fieldset.form-group
-            // Дополнительные параметры (Прямые рейсы, лучшая цена, выбор авиакомпании, класс обслуживания, взрослые, дети, младенцы)
             .additional-options
                 .additional-text
                     a(href='#' ng-click="searchForm.viewAdditionalFields= !searchForm.viewAdditionalFields")
@@ -34,33 +32,14 @@ form(action='#')
                         +choice()(wrapClass='adults input-group' ang-prefix="searchForm.formValue.adults")
                         +choice()(wrapClass='children input-group' ang-prefix="searchForm.formValue.children")
                         +choice()(wrapClass='infant input-group' ang-prefix="searchForm.formValue.infant")
+
                     .form-group
-                        .checkbox-input.input-group
-                            input#only-one-direction.checkbox-button(type='checkbox', name='only-one-direction')
-                            label(for='only-one-direction') Только прямые рейсы
-                        .checkbox-input.input-group
-                            input#best-price-three-day.checkbox-button(type='checkbox', name='best-price-three-day')
-                            label(for='best-price-three-day') Лучшая цена +3 дня
-                        .checkbox-input.input-group
-                            input#refundable.checkbox-button(type='checkbox', name='refundable')
-                            label(for='refundable') Отменяемый тариф
+                        +checkbox()(wrapClass='checkbox-input input-group' ang-prefix="searchForm.formValue.directFlights")
+                        +checkbox()(wrapClass='checkbox-input input-group' ang-prefix="searchForm.formValue.bestPrice")
+
                     .form-group
-                        .aviacompany.input-group
-                            label(for='#aviacompany') Выбор авиакомпании
-                            .select
-                                select#aviacompany(name='aviacompany')
-                                    option(value='0') Любая
-                                    option(value='1') Любая 1
-                                    option(value='2') Любая 2
-                                    option(value='3') Любая 3
-                        .class-service.input-group
-                            label(for='#class-service') Класс обслуживания
-                            .select
-                                select#class-service(name='class-service')
-                                    option(value='0') Эконом
-                                    option(value='1') Эконом 1
-                                    option(value='2') Эконом 2
-                                    option(value='3') Эконом 3
+                        +choice()(wrapClass='aviacompany input-group' ang-prefix="searchForm.formValue.airline")
+                        +choice()(wrapClass='class-service input-group' ang-prefix="searchForm.formValue.serviceClass")
         .button-buy-wrap
             button.button.button-buy(type='submit') Обновить поиск
     .group-sidebar.fast-filter

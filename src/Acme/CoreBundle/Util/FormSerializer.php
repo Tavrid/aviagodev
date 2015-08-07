@@ -37,7 +37,7 @@ class FormSerializer
      * @param array $formVars
      * @return array
      */
-    public function serializeForm(FormInterface $form,$formVars = ['id','full_name','label','data','value','choices'])
+    public function serializeForm(FormInterface $form,$formVars = ['id','full_name','label','data','value','choices','attr'])
     {
         $data = $this->extractClientData($form,$formVars);
         $viewChildren = $form->createView()->children;
