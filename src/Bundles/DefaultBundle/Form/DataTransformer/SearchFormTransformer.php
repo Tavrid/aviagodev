@@ -21,6 +21,14 @@ class SearchFormTransformer implements DataTransformerInterface{
      */
     public function transform($value)
     {
+        if(isset($value['_controller'])){
+            unset($value['_controller']);
+        }
+        if(isset($value['_route'])){
+            unset($value['_route']);
+        }
+        $this->transformBooleanFields($value);
+
         if(!empty($value['arrivalDate'])){
             $value['arrivalDate'] = new \DateTime($value['arrivalDate']);
         } else {
@@ -49,6 +57,17 @@ class SearchFormTransformer implements DataTransformerInterface{
             $value['departureDate'] = null;
         }
         return $value;
+    }
+
+    private function transformBooleanFields(&$value)
+    {
+        $booleanFields = ['bestPrice','directFlights'];
+
+        foreach($booleanFields as $field){
+            if(isset($value[$field])){
+                $value[$field] = boolval($value[$field]);
+            }
+        }
     }
 
 } 

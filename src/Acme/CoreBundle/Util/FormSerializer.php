@@ -40,8 +40,10 @@ class FormSerializer
     public function serializeForm(FormInterface $form,$formVars = ['id','full_name','label','data','value','choices'])
     {
         $data = $this->extractClientData($form,$formVars);
-        if($form->has('_token')){
+        $viewChildren = $form->createView()->children;
+        if(isset($viewChildren['_token'])){
             $_token = $form->createView()->children['_token'];
+
             $data['_token'] = array_intersect_key(
                 $_token->vars,
                 array_flip($formVars)

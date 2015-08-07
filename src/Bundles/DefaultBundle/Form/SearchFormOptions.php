@@ -11,7 +11,8 @@ namespace Bundles\DefaultBundle\Form;
 
 use Symfony\Component\Translation\TranslatorInterface;
 
-class SearchFormOptions {
+class SearchFormOptions
+{
 
 
     /**
@@ -45,10 +46,10 @@ class SearchFormOptions {
             $infant[$i] = $i;
         }
         return [
-            'returnWay' => [
-                $this->translation->trans('frontend.search_form.return_way.one_way'),
-                $this->translation->trans('frontend.search_form.return_way.multi_way'),
-                $this->translation->trans('frontend.search_form.return_way.complex_search')
+            'direction' => [
+                1 => $this->translation->trans('frontend.search_form.return_way.one_way'),
+                2 => $this->translation->trans('frontend.search_form.return_way.multi_way'),
+                3 => $this->translation->trans('frontend.search_form.return_way.complex_search')
             ],
             'serviceClass' => [
                 'Y' => $this->translation->trans('frontend.search_form.class_values.y'),

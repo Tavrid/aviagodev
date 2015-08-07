@@ -8,6 +8,7 @@
 
 namespace Bundles\DefaultBundle\Form;
 
+use Acme\AdminBundle\Model\Airports;
 use Bundles\DefaultBundle\Form\DataTransformer\SearchFormTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -63,13 +64,15 @@ class SearchForm extends AbstractType
         $formOpt = $this->searchFormOptions
             ->getFormOptions();
         $builder
-            ->add('cityFromCode', 'hidden')
-            ->add('cityToCode', 'hidden')
-            ->add('departureDate', 'date')
+            ->add('arrivalCity','hidden')
+            ->add('departureCity','hidden')
+            ->add('arrivalCode', 'hidden')
+            ->add('departureCode', 'hidden')
             ->add('arrivalDate', 'date')
-            ->add('returnWay', 'choice', [
+            ->add('departureDate', 'date')
+            ->add('direction', 'choice', [
                 'label' => 'frontend.search_form.return_way.label',
-                'choices' => $formOpt['returnWay'],
+                'choices' => $formOpt['direction'],
                 'data' => 1,
                 'multiple' => false,
                 'expanded' => true,
@@ -92,7 +95,20 @@ class SearchForm extends AbstractType
                 'label' => 'frontend.search_form.direct_flights',
                 'required' => false,
             ]);
-
+        if($options['city_manager']){
+            /** @var Airports $model */
+            $model = $options['city_manager'];
+            $builder->addEventListener(FormEvents::PRE_SET_DATA,function(FormEvent $formEvent)use($model){
+                $data = $formEvent->getData();
+                if(isset($data['arrivalCode'])){
+                    $data['arrivalCity'] = $model->getFormattedNameByIata($data['arrivalCode']);
+                }
+                if(isset($data['departureCode'])){
+                    $data['departureCity'] = $model->getFormattedNameByIata($data['departureCode']);
+                }
+                $formEvent->setData($data);
+            });
+        }
 
         $transformer = new SearchFormTransformer();
         $builder->addModelTransformer($transformer);

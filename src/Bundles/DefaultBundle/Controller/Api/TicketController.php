@@ -25,17 +25,17 @@ class TicketController extends Controller
      */
     public function getTicketsAction(Request $request,$page)
     {
+
+
         $path = preg_replace('/\__+/','/',$request->get('path'));
         $params = $this->get('router')->match($path);
-        if(isset($params['_controller'])){
-            unset($params['_controller']);
-        }
-        if(isset($params['_route'])){
-            unset($params['_route']);
-        }
+        $form = $this->createForm('search_form', $params, ['city_manager' => $this->get('admin.city.manager')]);
+
         $data = [
+            'form' => $this->get('acme_core.form_serializer')->serializeForm($form),
             'formParams' => $params
         ];
+
         $resp = null;
         /** @var \Bundles\ApiBundle\Api\Api $api */
         $api = $this->get('avia.api.manager');
@@ -89,6 +89,19 @@ class TicketController extends Controller
         }
 
         return new JsonResponse([$requestId,$variants]);
+    }
+
+    /**
+     * @param $params
+     */
+    protected function prepareRouteParams(&$params)
+    {
+        if(isset($params['_controller'])){
+            unset($params['_controller']);
+        }
+        if(isset($params['_route'])){
+            unset($params['_route']);
+        }
     }
 
 }
