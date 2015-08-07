@@ -1,25 +1,22 @@
 include ../form/layout
-form(action='#' ng-submit="book()")
+form(action='#' class="ng-hide" ng-submit="book()" ng-show="searchForm")
     .group-sidebar
         fieldset.tab-direction
-            .input-group
-                input#one-direction.radio-button(type='radio', name='direction' ng-model="searchForm.direction[0].data")
-                label(for='one-direction') В одну сторону
-            .input-group
-                input#one-two-direction.radio-button(type='radio', name='direction' ng-model="searchForm.direction[1].data")
-                label(for='one-two-direction') В обе стороны
+            div(class="input-group" ng-repeat="direction in searchForm.formValue.direction")
+                div(class="list-radio-button" ng-click="toggleCheckbox(searchForm.formValue.direction,direction)"  ng-class="{active: direction.data,error: direction.errors.length > 0}") {{ direction.label }}
         fieldset.form-group
-            // Простой поиск
             .simple-search
                 +autocamplete()(wrapClass='departure-from input-group' ang-prefix="searchForm.formValue.departureCode" search-length="3" reverse-component="1")
-                .input-group.refresh
+                div(class="input-group refresh ng-hide" ng-show="searchForm.isSearchTwoWay()")
                     a(ng-click="reverse()" href='#', title='Поменять местами')
                         i.icon-refresh
-                +autocamplete()(wrapClass='arriving-in input-group' ang-prefix="searchForm.formValue.arrivalCode" search-length="3" reverse-component="1")
+                div(class="ng-hide" ng-show="searchForm.isSearchTwoWay()")
+                    +autocamplete()(wrapClass='arriving-in input-group' ang-prefix="searchForm.formValue.arrivalCode" search-length="3" reverse-component="1")
 
         fieldset.form-group
             +datepicker()(attr-id="up-date" wrapClass='date-simple up-date input-group' ang-prefix="searchForm.formValue.departureDate" name="arrivalDate"  max-from="departureDate")
-            +datepicker()(attr-id="up-date" wrapClass='date-simple down-date input-group' ang-prefix="searchForm.formValue.arrivalDate" name="departureDate"  max-from="arrivalDate")
+            div(class="ng-hide" ng-show="searchForm.isSearchTwoWay()")
+                +datepicker()(attr-id="up-date" wrapClass='date-simple down-date input-group' ang-prefix="searchForm.formValue.arrivalDate" name="departureDate"  max-from="arrivalDate")
 
         fieldset.form-group
             .additional-options

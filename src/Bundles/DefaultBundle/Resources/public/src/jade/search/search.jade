@@ -1,7 +1,7 @@
 .container
     aside.sidebar(role='sidebar')
         include form
-    .main
+    div(class="main ng-hide" ng-show="tickets.length > 0")
         include calendar
         .list-of-flights
             include ticket

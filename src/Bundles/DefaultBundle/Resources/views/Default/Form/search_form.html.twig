@@ -4,7 +4,7 @@
             <fieldset class="tab-direction">
                 {% verbatim %}
                     <div class="input-group" ng-repeat="direction in searchForm.formValue.direction">
-                        <div ng-click="toggleCheckbox(searchForm.formValue.direction,direction)"  ng-class="{active: direction.data,error: direction.errors.length > 0}">{{ direction.label }}</div>
+                        <div class="index-radio-button" ng-click="toggleCheckbox(searchForm.formValue.direction,direction)"  ng-class="{active: direction.data,error: direction.errors.length > 0}">{{ direction.label }}</div>
                     </div>
                 {% endverbatim %}
 
