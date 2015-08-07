@@ -17,7 +17,7 @@
                             <span class="icon"><i class="icon-metka"></i></span>
                             <auto-complete
                                     search-length="3"
-                                    ng-model="searchForm.formValue.departureCode"
+                                    ng-model="searchForm.formValue.departureCode.data"
                                     attr-id="from-avia"
                                     attr-placeholder="{{ 'frontend.search_form.placeholders.city'|trans }}"
                                     reverse-component="1"
@@ -34,7 +34,7 @@
                             <span class="icon"><i class="icon-metka"></i></span>
                             <auto-complete
                                     search-length="3"
-                                    ng-model="searchForm.formValue.arrivalCode"
+                                    ng-model="searchForm.formValue.arrivalCode.data"
                                     attr-id="down-avia"
                                     attr-placeholder="{{ 'frontend.search_form.placeholders.city'|trans }}"
                                     reverse-component="1"
@@ -54,7 +54,7 @@
                         <ng-datepicker
                                 attr-id="up-date"
                                 placeholder="{{ 'frontend.search_form.placeholders.date'|trans }}"
-                                ng-model="searchForm.formValue.departureDate"
+                                ng-model="searchForm.formValue.departureDate.data"
                                 name="departureDate"
                                 max-from="arrivalDate"
                                 >
@@ -69,7 +69,7 @@
                         <ng-datepicker
                                 attr-id="down-date"
                                 placeholder="{{ 'frontend.search_form.placeholders.date'|trans }}"
-                                ng-model="searchForm.formValue.arrivalDate"
+                                ng-model="searchForm.formValue.arrivalDate.data"
                                 name="arrivalDate"
                                 min-from="departureDate"
                                 >

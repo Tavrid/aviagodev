@@ -28,6 +28,13 @@ class SearchForm
     @complexFields.push(new ComplexField)
 
   getUrl: () ->
-    Routing.generate 'api_list_flight', @formValue
+    if !@isComplexSearch()
+      routeParams = {}
+      _.each @formValue, (num,key) ->
+        if num
+          routeParams[key] = num.data
+
+      routeParams.direction = @getSearchDirection()
+      return Routing.generate 'api_list_flight', routeParams
 
 module.exports = SearchForm
