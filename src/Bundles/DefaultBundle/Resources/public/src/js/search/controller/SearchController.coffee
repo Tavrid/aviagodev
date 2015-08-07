@@ -25,7 +25,7 @@ module.exports = [
 
     http.get Routing.generate 'api_get_tickets', {page: 1,path: location.path().replace(/\/+/g,'__')}
     .success (res) ->
-      scope.searchForm = new SearchForm res.formParams
+      scope.searchForm = new SearchForm res.form
       prepareTickets res.tickets
       scope.tickets = res.tickets
       viewLoader.hideLoader()

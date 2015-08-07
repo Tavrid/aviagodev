@@ -10,6 +10,38 @@ mixin input()
                 ng-class="{error: "+attributes['ang-prefix']+".errors.length > 0}"
                 )
 
+mixin autocamplete()
+    div(class!=attributes.wrapClass ng-class="{error: "+attributes['ang-prefix']+".errors.length > 0}")
+        label(for!=attributes.id||"{{"+attributes['ang-prefix']+".id}}")!=attributes.label||"{{"+attributes['ang-prefix']+".label}}"
+        .input
+            auto-complete(
+                search-length=attributes['search-length']
+                ng-model=attributes['ng-model'] || attributes['ang-prefix']+".data"
+                attr-id=attributes.id || "{{"+attributes['ang-prefix']+".id}}"
+                attr-placeholder=attributes.placeholder||"{{"+attributes['ang-prefix']+".label}}"
+                reverse-component=attributes['reverse-component']
+            )
+            span.icon
+                i.icon-metka
+
+
+mixin datepicker()
+    div(class!=attributes.wrapClass ng-class="{error: "+attributes['ang-prefix']+".errors.length > 0}")
+        label(for!=attributes.id||"{{"+attributes['ang-prefix']+".id}}")!=attributes.label||"{{"+attributes['ang-prefix']+".label}}"
+        .input
+            ng-datepicker(
+                attr-id!=attributes["attr-id"] || "{{"+attributes['ang-prefix']+".id}}"
+                placeholder!=attributes.placeholder||"{{"+attributes['ang-prefix']+".label}}"
+                ng-model=attributes['ng-model'] || attributes['ang-prefix']+".data.date"
+                ng-class="{error: "+attributes['ang-prefix']+".errors.length > 0}"
+                name=attributes.name
+                max-from=attributes["max-from"]
+            )
+            span.icon
+                i.icon-date
+
+
+
 mixin choice()
     div(class!=attributes.wrapClass)
         label(for!=attributes.id||"{{"+attributes['ang-prefix']+".id}}" ng-class="{error: "+attributes['ang-prefix']+".errors.length > 0}")!=attributes.label||"{{"+attributes['ang-prefix']+".label}}"

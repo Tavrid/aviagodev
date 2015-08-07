@@ -32,17 +32,15 @@ class TicketController extends Controller
         $form = $this->createForm('search_form', $params, ['city_manager' => $this->get('admin.city.manager')]);
 
         $data = [
-            'form' => $this->get('acme_core.form_serializer')->serializeForm($form),
-            'formParams' => $params
+            'form' => $this->get('acme_core.form_serializer')->serializeForm($form)
         ];
 
         $resp = null;
-        /** @var \Bundles\ApiBundle\Api\Api $api */
         $api = $this->get('avia.api.manager');
 
 
         $query = new SearchByQuery();
-        $query->setParams($params);
+        $query->setParams($form->getData());
 
         $output = $api->getSearchRequestor()->execute($query);
         if (!$output->getIsError()) {

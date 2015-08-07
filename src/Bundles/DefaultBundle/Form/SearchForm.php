@@ -64,12 +64,12 @@ class SearchForm extends AbstractType
         $formOpt = $this->searchFormOptions
             ->getFormOptions();
         $builder
-            ->add('arrivalCity','hidden')
-            ->add('departureCity','hidden')
-            ->add('arrivalCode', 'hidden')
-            ->add('departureCode', 'hidden')
-            ->add('arrivalDate', 'date')
-            ->add('departureDate', 'date')
+            ->add('departureCity','hidden',['label' =>'frontend.search_form.city_from'])
+            ->add('arrivalCity','hidden',['label' =>'frontend.search_form.city_t'])
+            ->add('departureCode', 'hidden',['label' =>'frontend.search_form.city_from'])
+            ->add('arrivalCode', 'hidden',['label' =>'frontend.search_form.city_to'])
+            ->add('departureDate', 'date',['widget' => 'single_text','label' => 'frontend.search_form.date_from'])
+            ->add('arrivalDate', 'date',['widget' => 'single_text','label' => 'frontend.search_form.date_to'])
             ->add('direction', 'choice', [
                 'label' => 'frontend.search_form.return_way.label',
                 'choices' => $formOpt['direction'],

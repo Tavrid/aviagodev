@@ -1,85 +1,37 @@
+include ../form/layout
 form(action='#')
     .group-sidebar
         fieldset.tab-direction
             .input-group
-                input#one-direction.radio-button(type='radio', name='direction' ng-model="searchForm.direction" value="0")
+                input#one-direction.radio-button(type='radio', name='direction' ng-model="searchForm.direction[0].data")
                 label(for='one-direction') В одну сторону
             .input-group
-                input#one-two-direction.radio-button(checked='checked', type='radio', name='direction' ng-model="searchForm.direction" value="1")
+                input#one-two-direction.radio-button(type='radio', name='direction' ng-model="searchForm.direction[1].data")
                 label(for='one-two-direction') В обе стороны
         fieldset.form-group
             // Простой поиск
             .simple-search
-                .departure-from.input-group
-                    label(for='#from-avia') Вылет из:
-                    .input
-                        auto-complete(
-                            search-length="3"
-                            ng-model="searchForm.departureCode"
-                            attr-id="from-avia"
-                            attr-placeholder="Город или аэропорт"
-                            reverse-component="1"
-                        )
-                        span.icon
-                            i.icon-metka
+                +autocamplete()(wrapClass='departure-from input-group' ang-prefix="searchForm.formValue.departureCode" search-length="3" reverse-component="1")
                 .input-group.refresh
                     a(ng-click="reverse()" href='#', title='Поменять местами')
                         i.icon-refresh
-                .arriving-in.input-group
-                    label(for='#down-avia') Прилет в:
-                    .input
-                        auto-complete(
-                        search-length="3"
-                        ng-model="searchForm.arrivalCode"
-                        attr-id="to-avia"
-                        attr-placeholder="Город или аэропорт"
-                        reverse-component="1"
-                        )
-                        span.icon
-                            i.icon-metka
+                +autocamplete()(wrapClass='arriving-in input-group' ang-prefix="searchForm.formValue.arrivalCode" search-length="3" reverse-component="1")
+
         fieldset.form-group
-            .date-simple.up-date.input-group
-                label(for='#up-date') Дата вылета:
-                button.button-prev-date.controls-date(type='button')
-                    i.icon-prev-date
-                .input
-                    ng-datepicker(
-                        attr-id="up-date"
-                        placeholder="Выберите дату"
-                        ng-model="searchForm.arrivalDate"
-                        name="arrivalDate"
-                        max-from="departureDate"
-                    )
-                    span.icon
-                        i.icon-date
-                button.button-next-date.controls-date(type='button')
-                    i.icon-next-date
-            .date-simple.down-date.input-group
-                label(for='#down-date') Дата возврата:
-                button.button-prev-date.controls-date(type='button')
-                    i.icon-prev-date
-                .input
-                    ng-datepicker(
-                        attr-id="down-date"
-                        placeholder="Выберите дату"
-                        ng-model="searchForm.departureDate"
-                        name="departureDate"
-                        min-from="arrivalDate"
-                    )
-                    span.icon
-                        i.icon-date
-                button.button-next-date.controls-date(type='button')
-                    i.icon-next-date
+            +datepicker()(attr-id="up-date" wrapClass='date-simple up-date input-group' ang-prefix="searchForm.formValue.departureDate" name="arrivalDate"  max-from="departureDate")
+            +datepicker()(attr-id="up-date" wrapClass='date-simple down-date input-group' ang-prefix="searchForm.formValue.arrivalDate" name="departureDate"  max-from="arrivalDate")
+
         // Группа формы
         fieldset.form-group
             // Дополнительные параметры (Прямые рейсы, лучшая цена, выбор авиакомпании, класс обслуживания, взрослые, дети, младенцы)
             .additional-options
                 .additional-text
-                    a(href='#', onclick="openBlock('additional-wrap')")
+                    a(href='#' ng-click="searchForm.viewAdditionalFields= !searchForm.viewAdditionalFields")
                         | Дополнительные параметры
                         i.icon-down
-                .additional-wrap
+                div(class="additional-wrap ng-hide" ng-show="searchForm.viewAdditionalFields")
                     .form-group.passenjers-select
+                        //+choice()(wrapClass='adults input-group' ang-prefix="searchForm.formValue.infant")
                         .adults.input-group
                             label(for='#adults') Взрослые (12+)
                             .select
@@ -88,9 +40,6 @@ form(action='#')
                                     option(value='2') 2
                                     option(value='3') 3
                                     option(value='4') 4
-                            .button-group
-                                button.button.add(type='button') +
-                                button.button.minus(type='button') -
                         .children.input-group
                             label(for='#children') Дети (2-11)
                             .select
@@ -99,9 +48,6 @@ form(action='#')
                                     option(value='1') 1
                                     option(value='2') 2
                                     option(value='3') 3
-                            .button-group
-                                button.button.add(type='button') +
-                                button.button.minus(type='button') -
                             a.age-rule-link(href='#')
                                 | Правила перевозки детей
                                 i.icon-window
@@ -113,9 +59,6 @@ form(action='#')
                                     option(value='1') 1
                                     option(value='2') 2
                                     option(value='3') 3
-                            .button-group
-                                button.button.add(type='button') +
-                                button.button.minus(type='button') -
                     .form-group
                         .checkbox-input.input-group
                             input#only-one-direction.checkbox-button(type='checkbox', name='only-one-direction')
