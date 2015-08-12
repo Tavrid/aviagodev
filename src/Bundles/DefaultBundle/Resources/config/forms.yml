@@ -18,6 +18,6 @@ services:
             - { name: form.type, alias: pay_form }
     budnels_default.form.type.order:
         class: Bundles\DefaultBundle\Form\OrderForm
-        arguments: [@country.model.manager]
+        arguments: [@country.model.manager,@translator]
         tags:
             - { name: form.type, alias: order }

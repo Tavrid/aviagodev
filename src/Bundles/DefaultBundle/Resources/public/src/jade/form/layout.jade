@@ -6,7 +6,7 @@ mixin input()
                 id!=attributes.id || "{{"+attributes['ang-prefix']+".id}}"
                 type!=attributes.type || 'text',
                 placeholder!=attributes.placeholder||"{{"+attributes['ang-prefix']+".label}}"
-                ng-model=attributes['ng-model'] || attributes['ang-prefix']
+                ng-model=attributes['ng-model'] || attributes['ang-prefix']+".data"
                 ng-class="{error: "+attributes['ang-prefix']+".errors.length > 0}"
                 )
 
@@ -69,10 +69,9 @@ mixin radio()
         div(class="label")=attributes.label
         div(
             class="radio"
-            ng-repeat!="r in "+attributes['ang-prefix']
+            ng-repeat!="r in "+attributes['ang-prefix']+".choices"
             ng-class="{error: "+attributes['ang-prefix']+".errors.length > 0}"
             ng-click="toggleCheckbox("+attributes['ang-prefix']+",r)"
 
         )
-            //input(class="radio-button" id="{{sex.id}}" type='radio', name='{{sex.full_name}}' ng-model="sex.data")
-            label(for="{{r.id}}" ng-class="{active: r.data}") {{r.label}}
+            label(for="{{"+attributes['ang-prefix']+".id}}" ng-class="{active: "+attributes['ang-prefix']+".data == r.data}") {{r.label}}

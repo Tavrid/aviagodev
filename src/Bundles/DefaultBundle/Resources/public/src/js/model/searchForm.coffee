@@ -17,14 +17,12 @@ class SearchForm
     @formValue.direction.data
 
   constructor: (@formValue = {},@formHelper) ->
-    console.log @formValue
 
   viewAdditionalFields: false
   addComplexField: ->
     @complexFields.push(new ComplexField)
 
   getUrl: (fn) ->
-    console.log @formValue
     @formHelper
       .post(Routing.generate('api_post_flight_url'),@formValue)
       .success (res) ->

@@ -9,6 +9,7 @@
 
 namespace Bundles\DefaultBundle\Form;
 
+use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -23,12 +24,25 @@ class OrderForm extends AbstractType {
      */
     protected $bookInfoResponse;
     /**
+     * @var TranslatorInterface
+     */
+    protected $translator;
+    /**
      * @var \Acme\AdminBundle\Model\Country
      */
     protected $countryModel;
 
-    public function __construct(AbstractModel $countryModel) {
+    public function __construct(AbstractModel $countryModel, TranslatorInterface $translator) {
         $this->countryModel = $countryModel;
+        $this->translator = $translator;
+    }
+
+    protected function getSexChoices()
+    {
+        return [
+            'Male' => $this->translator->trans('frontend.order_form.passenger.male'),
+            'Female' => $this->translator->trans('frontend.order_form.passenger.female')
+        ];
     }
 
     private function createTime($diffYear, $diffMonth = 0) {
@@ -127,9 +141,9 @@ class OrderForm extends AbstractType {
                 'options' => ['need_value' => $param['INF']],
                 'Sex' => ['type' => 'choice', 'options' => [
                     'label' => 'frontend.order_form.passenger.gender',
-                    'choices' => ['Male' => 'frontend.order_form.passenger.male', 'Female' => 'frontend.order_form.passenger.female'],
+                    'choices' => $this->getSexChoices(),
                     'multiple' => false,
-                    'expanded' => true,
+                    'constraints' => [new Assert\NotBlank(), new Assert\Length(['max' => 1])]
                     //                    'required' => true,
                 ]],
                 'Name' => ['options' => ['label' => 'frontend.order_form.passenger.name']],
@@ -223,9 +237,9 @@ class OrderForm extends AbstractType {
                 'options' => ['need_value' => $param['CHD']],
                 'Sex' => ['type' => 'choice', 'options' => [
                     'label' => 'frontend.order_form.passenger.gender',
-                    'choices' => ['Male' => 'frontend.order_form.passenger.male', 'Female' => 'frontend.order_form.passenger.female'],
+                    'choices' => $this->getSexChoices(),
                     'multiple' => false,
-                    'expanded' => true,
+                    'constraints' => [new Assert\NotBlank(), new Assert\Length(['max' => 1])]
                     //                    'required' => true,
                 ]],
                 'Name' => ['options' => ['label' => 'frontend.order_form.passenger.name']],
@@ -315,9 +329,9 @@ class OrderForm extends AbstractType {
                 'options' => ['need_value' => $param['ADT']],
                 'Sex' => ['type' => 'choice', 'options' => [
                     'label' => 'frontend.order_form.passenger.gender',
-                    'choices' => ['Male' => 'frontend.order_form.passenger.male', 'Female' => 'frontend.order_form.passenger.female'],
+                    'choices' => $this->getSexChoices(),
                     'multiple' => false,
-                    'expanded' => true,
+                    'constraints' => [new Assert\NotBlank(), new Assert\Length(['max' => 1])]
                 ]],
                 'Name' => ['options' => [
                     'label' => 'frontend.order_form.passenger.name',
