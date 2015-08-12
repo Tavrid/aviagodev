@@ -6,20 +6,21 @@ mixin input()
                 id!=attributes.id || "{{"+attributes['ang-prefix']+".id}}"
                 type!=attributes.type || 'text',
                 placeholder!=attributes.placeholder||"{{"+attributes['ang-prefix']+".label}}"
-                ng-model=attributes['ng-model'] || attributes['ang-prefix']+".data"
+                ng-model=attributes['ng-model'] || attributes['ang-prefix']
                 ng-class="{error: "+attributes['ang-prefix']+".errors.length > 0}"
                 )
 
 mixin autocamplete()
     div(class!=attributes.wrapClass ng-class="{error: "+attributes['ang-prefix']+".errors.length > 0}")
-        label(for!=attributes.id||"{{"+attributes['ang-prefix']+".id}}")!=attributes.label||"{{"+attributes['ang-prefix']+".label}}"
+        label(for!=attributes.id||"{{"+attributes['ang-prefix']+".id}}")=attributes.label||"{{"+attributes['ang-prefix']+".label}}"
         .input
             auto-complete(
                 search-length=attributes['search-length']
-                ng-model=attributes['ng-model'] || attributes['ang-prefix']+".data"
+                ng-model=attributes['ng-model'] || attributes['ang-prefix']
                 attr-id=attributes.id || "{{"+attributes['ang-prefix']+".id}}"
                 attr-placeholder=attributes.placeholder||"{{"+attributes['ang-prefix']+".label}}"
                 reverse-component=attributes['reverse-component']
+                view-value="{{"+attributes['view-value']+".data}}"
             )
             span.icon
                 i.icon-metka

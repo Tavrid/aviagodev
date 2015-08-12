@@ -118,6 +118,11 @@ class SearchRequest implements Request{
                 ->get($query->getKeyByParams());
         }
         if(!$data){
+//            //////////////////FAKE////////////
+//            $res = $this->serviceContainer->get('doctrine')->getRepository('AcmeAdminBundle:Log')->find(253);
+//            $data = $res->getInfo()['result'];
+//            ///////////////ENDFAKE////////////
+
             $data = $this->apiCaller->call(new ApiCall($query->getApiUrl(),json_encode($query->buildParams($this->apiKey))));
 
             $logParams = [

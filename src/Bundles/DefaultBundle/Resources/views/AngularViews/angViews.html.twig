@@ -1,7 +1,7 @@
 {% verbatim %}
 <script type="text/ng-template" id="auto-complete.html">
     <div>
-        <input onfocus="$(this).select();" id="{{ attr.id }}" type="text" placeholder="{{ attr.placeholder }}" ng-keyup="search()" ng-model="query" autocomplete="off"/>
+        <input id="{{ attr.id }}" type="text" placeholder="{{ attr.placeholder }}" ng-keyup="search()" ng-model="query" autocomplete="off"/>
         <span class="avia_code" ng-show="code">{{ code }}</span>
         <div class="autocomplete" ng-show="matches.length > 0">
             <div class="autocomplete__item"  ng-repeat="math in matches" ng-click="$parent.clickItem($index)">

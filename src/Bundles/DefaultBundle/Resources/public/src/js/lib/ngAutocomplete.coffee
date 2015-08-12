@@ -1,4 +1,3 @@
-objectPath = require "object-path"
 _ = require "underscore"
 
 class MatchItem
@@ -25,16 +24,13 @@ module.exports =
     '$document'
     (timeout,http, AutoCompleteReplacer,document) ->
       searchCache = {}
-      fromAttr = null
       replace: true
       scope: {}
-      require: 'ngModel'
+      require: '^ngModel'
       templateUrl: 'auto-complete.html'
       link: (scope, element, attr,ngModel)->
-
         if attr.reverseComponent
           AutoCompleteReplacer.addAutoCompleteScope scope
-
         document.on 'click', (e) ->
           if scope.matches.length
             scope.$apply ->
@@ -45,12 +41,11 @@ module.exports =
 
         scope.$watch 'code',(value) ->
           ngModel.$setViewValue value
+
         scope.clickItem = (index) ->
 
           scope.query = scope.matches[index].formattedName
           scope.code = scope.matches[index].code
-
-#          objectPath.set scope, attr.insertTo, scope.matches[index].code
           scope.matches = []
 
         scope.search = ->
@@ -68,11 +63,10 @@ module.exports =
             , 150
           else
             scope.matches = searchCache[scope.query]
-        fromAttr =  objectPath.get scope, attr.searchFrom, null
+
       controller: [
         '$scope'
         (scope) ->
           scope.matches = []
-
       ]
   ]

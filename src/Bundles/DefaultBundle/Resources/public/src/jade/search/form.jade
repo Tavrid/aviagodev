@@ -6,12 +6,12 @@ form(action='#' class="ng-hide" ng-submit="book()" ng-show="searchForm")
                 div(class="list-radio-button" ng-click="toggleCheckbox(searchForm.formValue.direction,direction)"  ng-class="{active: direction.data,error: direction.errors.length > 0}") {{ direction.label }}
         fieldset.form-group
             .simple-search
-                +autocamplete()(wrapClass='departure-from input-group' ang-prefix="searchForm.formValue.departureCode" search-length="3" reverse-component="1")
+                +autocamplete()(wrapClass='departure-from input-group' ang-prefix="searchForm.formValue.departureCode" view-value="searchForm.formValue.departureCity" search-length="3" reverse-component="1")
                 div(class="input-group refresh ng-hide" ng-show="searchForm.isSearchTwoWay()")
                     a(ng-click="reverse()" href='#', title='Поменять местами')
                         i.icon-refresh
                 div(class="ng-hide" ng-show="searchForm.isSearchTwoWay()")
-                    +autocamplete()(wrapClass='arriving-in input-group' ang-prefix="searchForm.formValue.arrivalCode" search-length="3" reverse-component="1")
+                    +autocamplete()(wrapClass='arriving-in input-group' ang-prefix="searchForm.formValue.arrivalCode" view-value="searchForm.formValue.arrivalCity" search-length="3" reverse-component="1")
 
         fieldset.form-group
             +datepicker()(attr-id="up-date" wrapClass='date-simple up-date input-group' ang-prefix="searchForm.formValue.departureDate" name="arrivalDate"  max-from="departureDate")
