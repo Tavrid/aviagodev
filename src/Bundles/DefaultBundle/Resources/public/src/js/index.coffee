@@ -1,5 +1,7 @@
 require "angular"
 datepicker = require "./datepicker"
+SearchForm = require "./model/searchForm"
+formUtil = require "./util/postForm"
 
 IndexController = require('./index/controller/IndexController')
 
@@ -24,6 +26,8 @@ class AutoCompleteReplacer
 
 
 App.service 'AutoCompleteReplacer', AutoCompleteReplacer
+App.factory 'SearchForm', SearchForm
+App.factory '$formHelper', formUtil
 
 
 

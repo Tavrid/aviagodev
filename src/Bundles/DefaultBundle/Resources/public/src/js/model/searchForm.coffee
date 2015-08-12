@@ -20,21 +20,25 @@ class SearchForm
       return parseInt res.value
     return 0
 
-  constructor: (attr = {}) ->
-    @formValue = attr
+  constructor: (@formValue = {},@formHelper) ->
+    console.log @formValue
 
   viewAdditionalFields: false
   addComplexField: ->
     @complexFields.push(new ComplexField)
 
-  getUrl: () ->
-    if !@isComplexSearch()
-      routeParams = {}
-      _.each @formValue, (num,key) ->
-        if num
-          routeParams[key] = num.data
+  getUrl: (fn) ->
+    @formHelper
+      .post(Routing.generate('api_post_flight_url'),@formValue)
+      .success (res) ->
+        if res.is_valid
+          fn res
 
-      routeParams.direction = @getSearchDirection()
-      return Routing.generate 'api_list_flight', routeParams
-
-module.exports = SearchForm
+module.exports = [
+  '$formHelper'
+  (formHelper) ->
+    {
+      createForm: (attr = {}) ->
+        new SearchForm attr, formHelper
+    }
+]

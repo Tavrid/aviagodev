@@ -1,20 +1,21 @@
-SearchForm = require "../../model/searchForm"
 scopePrepare = require "../../util/scopeUtils"
 module.exports = [
   '$scope',
   '$http',
   '$location',
   'AutoCompleteReplacer',
-  (scope, http, location, AutoCompleteReplacer) ->
+  'SearchForm'
+  (scope, http, location, AutoCompleteReplacer,searchForm) ->
     scopePrepare scope
     scope.$root.appCont = 'index'
     AutoCompleteReplacer.controllerScope = scope;
 
     scope.reverse = ->
       AutoCompleteReplacer.reverse()
-    scope.searchForm = new SearchForm global.searchForm
+    scope.searchForm = searchForm.createForm global.searchForm
     scope.mathes = []
     scope.searchFormOptions = global.searchFormOptions
     scope.search = ->
-      window.location = scope.searchForm.getUrl()
+      scope.searchForm.getUrl (url) ->
+        window.location = url
 ]

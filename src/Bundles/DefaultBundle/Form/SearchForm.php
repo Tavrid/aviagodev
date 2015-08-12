@@ -33,9 +33,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  */
 class SearchForm extends AbstractType
 {
-    /**
-     * @var \Acme\AdminBundle\Model\City
-     */
+
     protected $model;
     /**
      * @var SessionInterface
@@ -66,9 +64,16 @@ class SearchForm extends AbstractType
         $builder
             ->add('departureCity','hidden',['label' =>'frontend.search_form.city_from'])
             ->add('arrivalCity','hidden',['label' =>'frontend.search_form.city_t'])
-            ->add('departureCode', 'hidden',['label' =>'frontend.search_form.city_from'])
+            ->add('departureCode', 'hidden',[
+                'label' =>'frontend.search_form.city_from',
+                'constraints' => [new Assert\NotBlank()]
+            ])
             ->add('arrivalCode', 'hidden',['label' =>'frontend.search_form.city_to'])
-            ->add('departureDate', 'date',['widget' => 'single_text','label' => 'frontend.search_form.date_from'])
+            ->add('departureDate', 'date',[
+                'widget' => 'single_text',
+                'label' => 'frontend.search_form.date_from',
+                'constraints' => [new Assert\NotBlank()]
+            ])
             ->add('arrivalDate', 'date',['widget' => 'single_text','label' => 'frontend.search_form.date_to'])
             ->add('direction', 'choice', [
                 'label' => 'frontend.search_form.return_way.label',
@@ -81,7 +86,8 @@ class SearchForm extends AbstractType
             ->add('adults', 'choice', [
                 'choices' => $formOpt['adults'],
                 'label' => 'frontend.search_form.adults',
-                'data' => key($formOpt['adults'])
+                'data' => key($formOpt['adults']),
+                'constraints' => [new Assert\NotBlank()]
             ])
             ->add('children', 'choice', [
                 'choices' => $formOpt['children'],
@@ -96,13 +102,14 @@ class SearchForm extends AbstractType
             ->add('serviceClass', 'choice', [
                 'choices' => $formOpt['serviceClass'],
                 'label' => 'frontend.search_form.class',
-                'data' => key($formOpt['serviceClass'])
+                'data' => key($formOpt['serviceClass']),
+                'constraints' => [new Assert\NotBlank()]
             ])
             ->add('airline', 'choice', [
                 'label' => 'frontend.search_form.airline',
                 'choices' => $formOpt['airline'],
                 'data' => key($formOpt['airline']),
-                'required' => true
+                'constraints' => [new Assert\NotBlank()]
             ])
             ->add('bestPrice', 'checkbox', [
                 'label' => 'frontend.search_form.best_price',
@@ -142,10 +149,6 @@ class SearchForm extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'csrf_protection' => false,
-            'city_manager' => null
-        ));
         $resolver->setRequired(['city_manager']);
     }
 

@@ -20,6 +20,21 @@ class TicketController extends Controller
 
     /**
      * @param Request $request
+     * @return JsonResponse
+     */
+    public function postFlightUrlAction(Request $request)
+    {
+        $form = $this->createForm('search_form', null, ['city_manager' => $this->get('admin.city.manager')]);
+        $form->handleRequest($request);
+        $data = [
+            'is_valid' =>$form->isValid(),
+            'data' => $this->get('acme_core.form_serializer')->serializeFormError($form)
+        ];
+        return new JsonResponse($data);
+    }
+
+    /**
+     * @param Request $request
      * @param $page
      * @return null|JsonResponse
      */
