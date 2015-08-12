@@ -16,24 +16,29 @@ class SearchForm
   getSearchDirection: () ->
     @formValue.direction.data
 
-  constructor: (@formValue = {},@formHelper) ->
+  constructor: (@formValue = {},@formHelper,@viewLoader) ->
 
   viewAdditionalFields: false
   addComplexField: ->
     @complexFields.push(new ComplexField)
 
   getUrl: (fn) ->
+    viewLoader = @viewLoader
+    viewLoader.showLoader()
     @formHelper
       .post(Routing.generate('api_post_flight_url'),@formValue)
       .success (res) ->
+        viewLoader.hideLoader()
         if res.is_valid
           fn res.url
-
+      .error () ->
+        viewLoader.hideLoader()
 module.exports = [
   '$formHelper'
-  (formHelper) ->
+  '$viewLoader'
+  (formHelper,viewLoader) ->
     {
       createForm: (attr = {}) ->
-        new SearchForm attr, formHelper
+        new SearchForm attr, formHelper,viewLoader
     }
 ]

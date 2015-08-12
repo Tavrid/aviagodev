@@ -28,7 +28,15 @@ class AutoCompleteReplacer
 App.service 'AutoCompleteReplacer', AutoCompleteReplacer
 App.factory 'SearchForm', SearchForm
 App.factory '$formHelper', formUtil
-
+App.factory '$viewLoader',["$rootScope",(rootScope)->
+  rootScope.showLoader = true
+  {
+  showLoader: () ->
+    rootScope.showLoader = true
+  hideLoader: () ->
+    rootScope.showLoader = false
+  }
+]
 
 
 App.directive 'autoComplete', require "./lib/ngAutocomplete"
