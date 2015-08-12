@@ -80,8 +80,8 @@ class SearchForm extends AbstractType
                 'choices' => $formOpt['direction'],
                 'data' => SearchFormOptions::DIRECTION_TOW_WAY,
                 'multiple' => false,
-                'expanded' => true,
-                'required' => true,
+//                'expanded' => true,
+                'constraints' => [new Assert\NotBlank(), new Assert\Length(['max' => 1])]
             ])
             ->add('adults', 'choice', [
                 'choices' => $formOpt['adults'],
@@ -92,12 +92,14 @@ class SearchForm extends AbstractType
             ->add('children', 'choice', [
                 'choices' => $formOpt['children'],
                 'label' => 'frontend.search_form.child',
-                'data' => key($formOpt['children'])
+                'data' => key($formOpt['children']),
+                'empty_data' => key($formOpt['children'])
             ])
             ->add('infant', 'choice', [
                 'choices' => $formOpt['infant'],
                 'label' => 'frontend.search_form.infant',
-                'data' => key($formOpt['infant'])
+                'data' => key($formOpt['infant']),
+                'empty_data' => key($formOpt['infant'])
             ])
             ->add('serviceClass', 'choice', [
                 'choices' => $formOpt['serviceClass'],
@@ -149,6 +151,9 @@ class SearchForm extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        $resolver->setDefaults(array(
+            'csrf_protection'   => false,
+        ));
         $resolver->setRequired(['city_manager']);
     }
 

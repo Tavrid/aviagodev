@@ -1,4 +1,3 @@
-SearchForm = require "../../model/searchForm"
 propPath = require 'property-path'
 _ = require "underscore"
 
@@ -16,16 +15,18 @@ module.exports = [
   '$location',
   'AutoCompleteReplacer'
   '$viewLoader'
-  (scope, http, location, AutoCompleteReplacer,viewLoader) ->
+  '$stateParams',
+  'SearchForm'
+  (scope, http, location, AutoCompleteReplacer,viewLoader,stateParams,searchForm) ->
     scopePrepare scope
     ###
       view loader
     ###
     viewLoader.showLoader()
 
-    http.get Routing.generate 'api_get_tickets', {page: 1,path: location.path().replace(/\/+/g,'__')}
+    http.get Routing.generate 'api_get_tickets', {page: 1,key: stateParams.key}
     .success (res) ->
-      scope.searchForm = new SearchForm res.form
+      scope.searchForm = searchForm.createForm res.form
       prepareTickets res.tickets
       scope.tickets = res.tickets
       viewLoader.hideLoader()

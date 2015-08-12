@@ -14,11 +14,7 @@ class SearchForm
     @getSearchDirection() == 3
 
   getSearchDirection: () ->
-    res = _.find @formValue.direction, (num)->
-      num.data
-    if res
-      return parseInt res.value
-    return 0
+    @formValue.direction.data
 
   constructor: (@formValue = {},@formHelper) ->
     console.log @formValue
@@ -28,6 +24,7 @@ class SearchForm
     @complexFields.push(new ComplexField)
 
   getUrl: (fn) ->
+    console.log @formValue
     @formHelper
       .post(Routing.generate('api_post_flight_url'),@formValue)
       .success (res) ->

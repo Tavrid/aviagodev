@@ -2,15 +2,15 @@ include ../form/layout
 form(action='#' class="ng-hide" ng-submit="book()" ng-show="searchForm")
     .group-sidebar
         fieldset.tab-direction
-            div(class="input-group" ng-repeat="direction in searchForm.formValue.direction")
-                div(class="list-radio-button" ng-click="toggleCheckbox(searchForm.formValue.direction,direction)"  ng-class="{active: direction.data,error: direction.errors.length > 0}") {{ direction.label }}
+            div(class="input-group" ng-repeat="direction in searchForm.formValue.direction.choices")
+                div(class="list-radio-button" ng-click="toggleCheckbox(searchForm.formValue.direction,direction)"  ng-class="{active: direction.data==searchForm.formValue.direction.data ,error: direction.errors.length > 0}") {{ direction.label }}
         fieldset.form-group
             .simple-search
                 +autocamplete()(wrapClass='departure-from input-group' ang-prefix="searchForm.formValue.departureCode" view-value="searchForm.formValue.departureCity" search-length="3" reverse-component="1")
-                div(class="input-group refresh ng-hide" ng-show="searchForm.isSearchTwoWay()")
+                div(class="input-group refresh ng-hide" ng-hide="searchForm.isComplexSearch()")
                     a(ng-click="reverse()" href='#', title='Поменять местами')
                         i.icon-refresh
-                div(class="ng-hide" ng-show="searchForm.isSearchTwoWay()")
+                div(class="ng-hide" ng-hide="searchForm.isComplexSearch()")
                     +autocamplete()(wrapClass='arriving-in input-group' ang-prefix="searchForm.formValue.arrivalCode" view-value="searchForm.formValue.arrivalCity" search-length="3" reverse-component="1")
 
         fieldset.form-group

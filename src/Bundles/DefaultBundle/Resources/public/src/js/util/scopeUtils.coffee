@@ -42,7 +42,4 @@ module.exports = (scope) ->
   )()
 
   scope.toggleCheckbox= (parent,child) ->
-    newChildVal = !child.data
-    _.each parent, (ch) ->
-      ch.data = false
-    child.data = newChildVal
+    parent.data = child.data

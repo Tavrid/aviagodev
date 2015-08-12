@@ -25,7 +25,7 @@ class TicketController extends Controller
     public function postFlightUrlAction(Request $request)
     {
         $form = $this->createForm('search_form', null, ['city_manager' => $this->get('admin.city.manager')]);
-        $form->handleRequest($request);
+        $form->submit($request);
         $data = [
             'is_valid' =>$form->isValid()
         ];
@@ -46,11 +46,15 @@ class TicketController extends Controller
     public function getTicketsAction(Request $request,$page)
     {
 
+        $params = $this->get('bundles_default.flight_data')->getData($request->get('key'));
+        if(empty($params)){
+            throw $this->createNotFoundException();
+        }
 
-        $path = preg_replace('/\__+/','/',$request->get('path'));
-        $params = $this->get('router')->match($path);
-        $form = $this->createForm('search_form', $params, ['city_manager' => $this->get('admin.city.manager')]);
-
+        $form = $this->createForm('search_form', null, [
+            'city_manager' => $this->get('admin.city.manager')
+        ]);
+        $form->submit($params);
         $data = [
             'form' => $this->get('acme_core.form_serializer')->serializeForm($form)
         ];

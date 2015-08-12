@@ -29,8 +29,8 @@ class FLightData
      * @return string
      */
     public function setData($formData){
-        $key = uniqid();
-        $this->cache->set($key,$formData);
+        $key = md5(microtime().uniqid());
+        $this->cache->set($key,$formData,60*60);
         return $key;
     }
 

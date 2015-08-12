@@ -2,7 +2,7 @@ require "angular"
 require "angular-ui-router"
 datepicker = require "./datepicker"
 formUtil = require "./util/postForm"
-
+SearchForm = require "./model/searchForm"
 
 BookController = require('./book/controller/BookController')
 SearchController = require './search/controller/SearchController'
@@ -29,6 +29,7 @@ class AutoCompleteReplacer
 
 
 App.service 'AutoCompleteReplacer', AutoCompleteReplacer
+App.factory 'SearchForm', SearchForm
 
 App.factory '$viewLoader',["$rootScope",(rootScope)->
   rootScope.showLoader = true
@@ -52,7 +53,7 @@ App.config [
 
     $stateProvider.state('searchList',
       templateUrl: '/build/view/search/search.html'
-      url: '/flights/*path'
+      url: '/flights/*key'
       controller: SearchController
     )
     .state('book',

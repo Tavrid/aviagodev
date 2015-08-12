@@ -3,8 +3,9 @@
         <div class="form-search-wrap">
             <fieldset class="tab-direction">
                 {% verbatim %}
-                    <div class="input-group" ng-repeat="direction in searchForm.formValue.direction">
-                        <div class="index-radio-button" ng-click="toggleCheckbox(searchForm.formValue.direction,direction)"  ng-class="{active: direction.data,error: direction.errors.length > 0}">{{ direction.label }}</div>
+                    <div class="input-group" ng-repeat="direction in searchForm.formValue.direction.choices">
+                    <!--<input type="checkbox" class="index-radio-button">-->
+                        <div class="index-radio-button" ng-click="toggleCheckbox(searchForm.formValue.direction,direction)"  ng-class="{active: direction.data == searchForm.formValue.direction.data,error: direction.errors.length > 0}">{{ direction.label }}</div>
                     </div>
                 {% endverbatim %}
 
@@ -25,10 +26,10 @@
                             </auto-complete>
                         </div>
                     </div>
-                    <div ng-click="reverse()" ng-hide="searchForm.isSearchOneWay()" class="input-group refresh">
+                    <div ng-click="reverse()" ng-hide="searchForm.isComplexSearch()" class="input-group refresh">
                         <a href=""><i class="icon-refresh"></i></a>
                     </div>
-                    <div ng-hide="searchForm.isSearchOneWay()" class="arriving-in input-group">
+                    <div ng-hide="searchForm.isComplexSearch()" class="arriving-in input-group">
                         <label for="down-avia">{{ 'frontend.search_form.city_to'|trans }}:</label>
                         <div class="input">
                             <span class="icon"><i class="icon-metka"></i></span>
@@ -63,7 +64,7 @@
                         <span class="icon"><i class="icon-date"></i></span>
                     </div>
                 </div>
-                <div class="date-simple down-date input-group" ng-hide="searchForm.isComplexSeatch()">
+                <div class="date-simple down-date input-group ng-hide" ng-show="searchForm.isSearchTwoWay()">
                     <label for="down-date">{{ 'frontend.search_form.date_to'|trans }}:</label>
                     <div class="input">
                         <ng-datepicker
