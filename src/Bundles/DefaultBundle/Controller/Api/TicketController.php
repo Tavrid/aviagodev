@@ -27,9 +27,14 @@ class TicketController extends Controller
         $form = $this->createForm('search_form', null, ['city_manager' => $this->get('admin.city.manager')]);
         $form->handleRequest($request);
         $data = [
-            'is_valid' =>$form->isValid(),
-            'data' => $this->get('acme_core.form_serializer')->serializeFormError($form)
+            'is_valid' =>$form->isValid()
         ];
+        if($data['is_valid']){
+            $key = $this->get('bundles_default.flight_data')->setData($form->getData());
+            $data['url'] = $this->generateUrl('api_list_flight',['key' => $key]);
+        } else {
+            $data['form_errors'] = $this->get('acme_core.form_serializer')->serializeFormError($form);
+        }
         return new JsonResponse($data);
     }
 

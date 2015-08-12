@@ -4,6 +4,11 @@ parameters:
 #    bundles_default.example.class: Bundles\DefaultBundle\Example
 
 services:
+
+    bundles_default.flight_data:
+      class: Bundles\DefaultBundle\Model\FLightData
+      arguments: [@main.cache]
+
     bundle_default.controller_formatter:
         class: Bundles\DefaultBundle\Util\ControllerFormatter
         arguments: [@request_stack]

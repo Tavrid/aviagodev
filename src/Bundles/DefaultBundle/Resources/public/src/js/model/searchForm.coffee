@@ -32,7 +32,7 @@ class SearchForm
       .post(Routing.generate('api_post_flight_url'),@formValue)
       .success (res) ->
         if res.is_valid
-          fn res
+          fn res.url
 
 module.exports = [
   '$formHelper'
