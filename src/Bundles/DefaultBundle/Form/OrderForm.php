@@ -239,7 +239,7 @@ class OrderForm extends AbstractType {
                     'label' => 'frontend.order_form.passenger.gender',
                     'choices' => $this->getSexChoices(),
                     'multiple' => false,
-                    'constraints' => [new Assert\NotBlank(), new Assert\Length(['max' => 1])]
+                    'constraints' => [new Assert\NotBlank()]
                     //                    'required' => true,
                 ]],
                 'Name' => ['options' => ['label' => 'frontend.order_form.passenger.name']],
@@ -331,7 +331,7 @@ class OrderForm extends AbstractType {
                     'label' => 'frontend.order_form.passenger.gender',
                     'choices' => $this->getSexChoices(),
                     'multiple' => false,
-                    'constraints' => [new Assert\NotBlank(), new Assert\Length(['max' => 1])]
+                    'constraints' => [new Assert\NotBlank()]
                 ]],
                 'Name' => ['options' => [
                     'label' => 'frontend.order_form.passenger.name',
