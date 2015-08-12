@@ -3,7 +3,7 @@ require "angular-ui-router"
 datepicker = require "./datepicker"
 formUtil = require "./util/postForm"
 SearchForm = require "./model/searchForm"
-
+_ = require "underscore"
 BookController = require('./book/controller/BookController')
 SearchController = require './search/controller/SearchController'
 OrderController = require './order/controller/OrderController'
@@ -16,6 +16,10 @@ class AutoCompleteReplacer
   @controllerScope = null
   addAutoCompleteScope: (scope) ->
     autoCompleteScopes.push scope
+  initScopes: ->
+    _.each autoCompleteScopes, (scope) ->
+      if typeof scope.init == 'function'
+        scope.init()
   reverse: ->
 
     tempScopeCode = autoCompleteScopes[1].code

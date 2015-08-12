@@ -30,9 +30,11 @@ module.exports = [
       prepareTickets res.tickets
       scope.tickets = res.tickets
       viewLoader.hideLoader()
+
+      AutoCompleteReplacer.initScopes()
     .error () ->
       viewLoader.hideLoader()
-
+      AutoCompleteReplacer.initScopes()
 
     scope.$root.appCont = 'search'
     scope.searchForm = {}

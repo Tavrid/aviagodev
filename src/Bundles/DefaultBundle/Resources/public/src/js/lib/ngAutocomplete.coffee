@@ -29,6 +29,12 @@ module.exports =
       require: '^ngModel'
       templateUrl: 'auto-complete.html'
       link: (scope, element, attr,ngModel)->
+
+        scope.init = ->
+          timeout ->
+            scope.query = attr.viewValue
+            scope.code = ngModel.$viewValue
+
         if attr.reverseComponent
           AutoCompleteReplacer.addAutoCompleteScope scope
         document.on 'click', (e) ->
@@ -38,7 +44,6 @@ module.exports =
 
         currentTimer = null
         scope.attr = {id: attr.attrId, placeholder: attr.attrPlaceholder}
-
         scope.$watch 'code',(value) ->
           ngModel.$setViewValue value
 
@@ -63,7 +68,6 @@ module.exports =
             , 150
           else
             scope.matches = searchCache[scope.query]
-
       controller: [
         '$scope'
         (scope) ->

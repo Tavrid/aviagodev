@@ -16,7 +16,7 @@ mixin autocamplete()
         .input
             auto-complete(
                 search-length=attributes['search-length']
-                ng-model=attributes['ng-model'] || attributes['ang-prefix']
+                ng-model=attributes['ng-model'] || attributes['ang-prefix']+".data"
                 attr-id=attributes.id || "{{"+attributes['ang-prefix']+".id}}"
                 attr-placeholder=attributes.placeholder||"{{"+attributes['ang-prefix']+".label}}"
                 reverse-component=attributes['reverse-component']

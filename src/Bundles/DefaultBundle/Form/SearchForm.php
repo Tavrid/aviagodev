@@ -125,7 +125,7 @@ class SearchForm extends AbstractType
         if($options['city_manager']){
             /** @var Airports $model */
             $model = $options['city_manager'];
-            $builder->addEventListener(FormEvents::PRE_SET_DATA,function(FormEvent $formEvent)use($model){
+            $builder->addEventListener(FormEvents::PRE_SUBMIT,function(FormEvent $formEvent)use($model){
                 $data = $formEvent->getData();
                 if(isset($data['arrivalCode'])){
                     $data['arrivalCity'] = $model->getFormattedNameByIata($data['arrivalCode']);
