@@ -1,5 +1,5 @@
 include ../form/layout
-form(action='#' class="ng-hide" ng-submit="book()" ng-show="searchForm")
+form(action='#' class="ng-hide" ng-submit="book()" ng-show="viewSearchForm")
     .group-sidebar
         fieldset.tab-direction
             div(class="input-group" ng-repeat="direction in searchForm.formValue.direction.choices")

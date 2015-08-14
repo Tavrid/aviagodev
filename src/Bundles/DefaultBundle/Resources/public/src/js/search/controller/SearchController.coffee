@@ -19,6 +19,8 @@ module.exports = [
   'SearchForm'
   (scope, http, location, AutoCompleteReplacer,viewLoader,stateParams,searchForm) ->
     scopePrepare scope
+
+    scope.viewSearchForm = false
     ###
       view loader
     ###
@@ -30,7 +32,7 @@ module.exports = [
       prepareTickets res.tickets
       scope.tickets = res.tickets
       viewLoader.hideLoader()
-
+      scope.viewSearchForm = true
       AutoCompleteReplacer.initScopes()
     .error () ->
       viewLoader.hideLoader()

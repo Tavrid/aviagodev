@@ -17,7 +17,13 @@
 <script type="text/ng-template" id="datepicker.html">
     <div>
         <div>
-            <input required="" id="{{ id }}" type="text" ng-focus="showCalendar($event)" ng-value="viewValue" class="ng-datepicker-input ng-datepicker_x_{{ id }}" placeholder="{{ placeholder }}">
+            <input
+                id="{{ id }}"
+                type="text"
+                ng-focus="showCalendar($event)"
+                ng-value="viewValue"
+                class="ng-datepicker-input ng-datepicker_x_{{ id }}"
+                placeholder="{{ placeholder }}">
 
         </div>
         <div class="ng-datepicker" ng-show="calendarOpened">
