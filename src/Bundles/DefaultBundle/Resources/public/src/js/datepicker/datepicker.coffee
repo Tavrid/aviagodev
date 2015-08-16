@@ -6,6 +6,15 @@ module.exports = class
     @_startDate = @selectedDate.clone().startOf('month')
     @_endDate = @selectedDate.clone().endOf('month')
 
+    dayNames = []
+    now = moment("2014-12-01")
+    i = 0
+    while i < 7
+      dayNames.push now.format('ddd')
+      now.add '1', 'd'
+      i++
+    @scope.dayNames = dayNames
+
   ###
   * generate calendar from {startDate} and {endDate}
   ###

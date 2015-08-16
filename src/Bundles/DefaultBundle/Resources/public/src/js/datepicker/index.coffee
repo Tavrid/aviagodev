@@ -13,6 +13,8 @@ module.exports = [
     scope: {}
     link: (scope, element, attr, ngModel) ->
       datePicker = new DatePicker moment(), scope
+
+      scope.id = attr.attrId || ''
       ###
       * list of weeks
       ###
@@ -46,6 +48,11 @@ module.exports = [
       ###
       scope.closeCalendar = ->
         scope.calendarIsVisible = false
+
+      $document.on 'click', (e) ->
+        if e.target.className.indexOf("ng-datepicker_x_#{ scope.id }") == -1
+          scope.closeCalendar()
+          scope.$apply()
 
     templateUrl: 'datepicker.html'
 
