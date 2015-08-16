@@ -12,7 +12,7 @@ module.exports = [
     replace: true
     scope: {}
     link: (scope, element, attr, ngModel) ->
-      datePicker = new DatePicker "2015-03-08", scope
+      datePicker = new DatePicker moment(), scope
       ###
       * list of weeks
       ###
@@ -38,12 +38,12 @@ module.exports = [
       ###
       scope.showCalendar = ->
         datePicker.generate()
-        scope.calednarIsVisible = true
+        scope.calendarIsVisible = true
       ###
       * close calendar
       ###
       scope.closeCalendar = ->
-        scope.calednarIsVisible = false
+        scope.calendarIsVisible = false
 
     templateUrl: 'datepicker.html'
 

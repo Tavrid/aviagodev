@@ -12,15 +12,16 @@ module.exports = () ->
     n -= firstWeekDay - 1
   days = []
   i = n
+  d = @_startDate.clone()
   while i <= lastDayOfMonth
     if i > 0
-      days.push new Day i
+      d.set('date', i)
+      days.push new Day d
     else
       days.push new Day
-    i += 1
+    i++
   week = []
-  console.log days
-  @scope.weeks = []
+  weeks = []
   d = 0
 
   lastWeekDay = @_endDate.day()
@@ -33,10 +34,12 @@ module.exports = () ->
     end += firstWeekDay
   while d < end
     if week.length >= 7 || d == (end - 1)
-      @scope.weeks.push week
+      weeks.push week
       week = []
     if days[d] != undefined
       week.push days[d]
     else
       week.push new Day
     d++
+  console.log weeks
+  @scope.weeks = weeks

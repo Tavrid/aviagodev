@@ -4,7 +4,9 @@ module.exports = class
     @selected = false
     @enabled = true
     @between = false
-    @day = 1
+    @day = ''
+    if @date
+      @day = @date.format "D"
 
   ###
   * Set selected

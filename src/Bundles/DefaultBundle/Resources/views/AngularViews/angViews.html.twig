@@ -29,12 +29,12 @@
         <div class="ng-datepicker" ng-show="calendarIsVisible">
             <div class="ng-datepicker__controls">
                 <div class="left">
-                    <i class="fa fa-angle-left prev-month-btn ng-datepicker_x_{{ id }}" ng-click="prevMonth()"></i>
+                    <i class="fa fa-angle-left prev-month-btn ng-datepicker_x_{{ id }}" ng-click="prevDate()"></i>
                 </div>
                 <span class="date" ng-bind="dateValue"></span>
 
                 <div class="right">
-                    <i class="fa fa-angle-right next-month-btn ng-datepicker_x_{{ id }}" ng-click="nextMonth()"></i>
+                    <i class="fa fa-angle-right next-month-btn ng-datepicker_x_{{ id }}" ng-click="nextDate()"></i>
                 </div>
             </div>
             <table style="width: 100%; border-bottom: 1px solid #ccc;margin: 4px 0;">
@@ -46,7 +46,7 @@
             </table>
             <table class="ng-datepicker__calendar">
                 <tbody>
-                <tr ng-repeat="week in days" >
+                <tr ng-repeat="week in weeks" >
                     <td  class="ng-datepicker__calendar__item"
                          ng-repeat="d in week"
                          ng-click="selectDate($event, d)"
