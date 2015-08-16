@@ -20,6 +20,7 @@ module.exports = [
 
       updateDate = ->
         scope.viewValue = datePicker.selectedDate.format viewDateFormat
+        ngModel.$setViewValue datePicker.selectedDate.format modelDateFormat
 
       scope.id = attr.attrId || ''
       ###

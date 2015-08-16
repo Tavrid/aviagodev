@@ -52,5 +52,4 @@ module.exports = class
         _.each week, (d) =>
           d.selected = d == date
           if d.selected
-            console.log date
             @selectedDate = date.date
