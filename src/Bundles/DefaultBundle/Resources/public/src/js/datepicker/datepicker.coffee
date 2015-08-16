@@ -15,7 +15,10 @@ module.exports = class
       now.add '1', 'd'
       i++
     @scope.dayNames = dayNames
-
+  setSelectedDate: (date) ->
+    @selectedDate = date
+    @_startDate = @selectedDate.clone().startOf('month')
+    @_endDate = @selectedDate.clone().endOf('month')
   ###
   * generate calendar from {startDate} and {endDate}
   ###

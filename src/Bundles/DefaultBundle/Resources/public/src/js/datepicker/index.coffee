@@ -19,7 +19,7 @@ module.exports = [
         if newValue
           selectedDate =  moment(newValue)
           scope.viewValue =selectedDate.format viewDateFormat
-          datePicker.selectedDate = selectedDate
+          datePicker.setSelectedDate selectedDate
 
       datePicker = new DatePicker null, scope, ngModel
 
