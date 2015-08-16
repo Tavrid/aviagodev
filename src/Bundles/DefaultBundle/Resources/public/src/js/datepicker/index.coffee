@@ -16,7 +16,7 @@ module.exports = [
       modelDateFormat = attr.format || 'YYYY-MM-DD'
 
 
-      datePicker = new DatePicker moment(), scope, ngModel
+      datePicker = new DatePicker moment(), scope, ngModel # <----- TODO this need real ng model value now set moment()
 
       updateDate = ->
         scope.viewValue = datePicker.selectedDate.format viewDateFormat
