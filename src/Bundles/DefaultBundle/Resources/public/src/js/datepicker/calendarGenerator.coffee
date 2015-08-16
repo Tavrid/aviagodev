@@ -1,5 +1,8 @@
 Day = require "./day"
 module.exports = () ->
+  createDate = (date) ->
+    new Day d
+
   lastDayOfMonth = @_endDate.date()
   n = 1
   firstWeekDay = @_startDate.day()
@@ -16,9 +19,11 @@ module.exports = () ->
   while i <= lastDayOfMonth
     if i > 0
       d.set('date', i)
-      days.push new Day d
+      day = new Day d
     else
-      days.push new Day
+      day = new Day
+    day.setSelectedDate(@selectedDate)
+    days.push day
     i++
   week = []
   weeks = []
