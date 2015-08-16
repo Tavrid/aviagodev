@@ -1,7 +1,8 @@
-global.moment = require('moment')
+global.moment = global.moment || require('moment')
 loc = require('moment/locale/ru')
 scopeValuesSetter = require "./scopeCreator"
 datePickers = {}
+DatePicker = require "./datepicker"
 
 module.exports = [
   '$document'
@@ -11,6 +12,7 @@ module.exports = [
     replace: true
     scope: {}
     link: (scope, element, attr, ngModel) ->
+      datePicker = new DatePicker "2015-03-08", scope
       ###
       * list of weeks
       ###
@@ -35,10 +37,14 @@ module.exports = [
       * show calendar
       ###
       scope.showCalendar = ->
-
+        datePicker.generate()
+        scope.calednarIsVisible = true
       ###
       * close calendar
       ###
       scope.closeCalendar = ->
+        scope.calednarIsVisible = false
+
+    templateUrl: 'datepicker.html'
 
 ]
