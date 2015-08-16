@@ -21,6 +21,7 @@ module.exports = [
     scopePrepare scope
 
     scope.viewSearchForm = false
+    scope.viewFilterForm = false
     ###
       view loader
     ###
@@ -34,6 +35,11 @@ module.exports = [
       viewLoader.hideLoader()
       scope.viewSearchForm = true
       AutoCompleteReplacer.initScopes()
+
+      if(res.filter_form)
+        scope.viewFilterForm = true
+        scope.filterForm = res.filter_form
+
     .error () ->
       viewLoader.hideLoader()
       AutoCompleteReplacer.initScopes()

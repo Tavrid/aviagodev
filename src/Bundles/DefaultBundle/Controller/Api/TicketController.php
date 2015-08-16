@@ -7,6 +7,8 @@
  */
 
 namespace Bundles\DefaultBundle\Controller\Api;
+use Bundles\ApiBundle\Api\Model\SearchFilters;
+use Bundles\ApiBundle\Api\Model\SearchResultFilter;
 use Bundles\ApiBundle\Api\Query\BookInfoQuery;
 use Bundles\ApiBundle\Api\Query\SearchByQuery;
 use FOS\RestBundle\Routing\ClassResourceInterface;
@@ -44,7 +46,7 @@ class TicketController extends Controller
      * @param $page
      * @return null|JsonResponse
      */
-    public function getTicketsAction(Request $request,$page)
+    public function getTicketsAction(Request $request,$page=1)
     {
 
         $params = $this->get('bundles_default.flight_data')->getData($request->get('key'));
@@ -69,16 +71,14 @@ class TicketController extends Controller
 
         $output = $api->getSearchRequestor()->execute($query);
         if (!$output->getIsError()) {
-            $outputItems = [];
-            foreach($output as $key => $val){
-                $outputItems[] = $val;
-                if($key > 10){
-                    break;
-                }
-            }
+            $filterForm = $this->createForm('filter', null, ['searchResponse' => $output]);
+            $filterForm->submit($request);
+
+            $f = new SearchResultFilter($output, $this->container->getParameter('bundles_default.count_on_page'));
+            $outputItems = $f->getData($page, SearchFilters::getFiltersByParams($filterForm->getData(), $params));
             $serializer = $this->get('jms_serializer');
             $data['tickets'] = $serializer->toArray($outputItems);
-
+            $data['filter_form'] = $this->get('acme_core.form_serializer')->serializeForm($filterForm);
             $resp = new JsonResponse($data);
             return $resp;
         } else {
@@ -114,17 +114,5 @@ class TicketController extends Controller
         return new JsonResponse([$requestId,$variants]);
     }
 
-    /**
-     * @param $params
-     */
-    protected function prepareRouteParams(&$params)
-    {
-        if(isset($params['_controller'])){
-            unset($params['_controller']);
-        }
-        if(isset($params['_route'])){
-            unset($params['_route']);
-        }
-    }
 
 }

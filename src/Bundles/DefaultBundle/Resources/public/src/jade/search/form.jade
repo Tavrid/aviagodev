@@ -1,73 +1,58 @@
 include ../form/layout
-div(class="ng-hide" ng-show="viewSearchForm")
-    .group-sidebar
-        fieldset.tab-direction
-            div(class="input-group" ng-repeat="direction in searchForm.formValue.direction.choices")
-                div(class="list-radio-button" ng-click="toggleCheckbox(searchForm.formValue.direction,direction)"  ng-class="{active: direction.data==searchForm.formValue.direction.data ,error: direction.errors.length > 0}") {{ direction.label }}
-        fieldset.form-group
-            .simple-search
-                +autocamplete()(wrapClass='departure-from input-group' ang-prefix="searchForm.formValue.departureCode" view-value="searchForm.formValue.departureCity" search-length="3" reverse-component="1")
-                div(class="input-group refresh ng-hide" ng-hide="searchForm.isComplexSearch()")
-                    a(ng-click="reverse()" href='#', title='Поменять местами')
-                        i.icon-refresh
-                div(class="ng-hide" ng-hide="searchForm.isComplexSearch()")
-                    +autocamplete()(wrapClass='arriving-in input-group' ang-prefix="searchForm.formValue.arrivalCode" view-value="searchForm.formValue.arrivalCity" search-length="3" reverse-component="1")
+div(class="ng-hide group-sidebar" ng-show="viewSearchForm")
+    fieldset.tab-direction
+        div(class="input-group" ng-repeat="direction in searchForm.formValue.direction.choices")
+            div(class="list-radio-button" ng-click="toggleCheckbox(searchForm.formValue.direction,direction)"  ng-class="{active: direction.data==searchForm.formValue.direction.data ,error: direction.errors.length > 0}") {{ direction.label }}
+    fieldset.form-group
+        .simple-search
+            +autocamplete()(wrapClass='departure-from input-group' ang-prefix="searchForm.formValue.departureCode" view-value="searchForm.formValue.departureCity" search-length="3" reverse-component="1")
+            div(class="input-group refresh ng-hide" ng-hide="searchForm.isComplexSearch()")
+                a(ng-click="reverse()" href='#', title='Поменять местами')
+                    i.icon-refresh
+            div(class="ng-hide" ng-hide="searchForm.isComplexSearch()")
+                +autocamplete()(wrapClass='arriving-in input-group' ang-prefix="searchForm.formValue.arrivalCode" view-value="searchForm.formValue.arrivalCity" search-length="3" reverse-component="1")
 
-        fieldset.form-group
-            +datepicker()(attr-id="up-date" wrapClass='date-simple up-date input-group' ang-prefix="searchForm.formValue.departureDate" name="arrivalDate"  max-from="departureDate")
-            div(class="ng-hide" ng-show="searchForm.isSearchTwoWay()")
-                +datepicker()(attr-id="up-date" wrapClass='date-simple down-date input-group' ang-prefix="searchForm.formValue.arrivalDate" name="departureDate"  max-from="arrivalDate")
+    fieldset.form-group
+        +datepicker()(attr-id="up-date" wrapClass='date-simple up-date input-group' ang-prefix="searchForm.formValue.departureDate" name="arrivalDate"  max-from="departureDate")
+        div(class="ng-hide" ng-show="searchForm.isSearchTwoWay()")
+            +datepicker()(attr-id="up-date" wrapClass='date-simple down-date input-group' ang-prefix="searchForm.formValue.arrivalDate" name="departureDate"  max-from="arrivalDate")
 
-        fieldset.form-group
-            .additional-options
-                .additional-text
-                    a(href='#' ng-click="searchForm.viewAdditionalFields= !searchForm.viewAdditionalFields")
-                        | Дополнительные параметры
-                        i.icon-down
-                div(class="additional-wrap ng-hide" ng-show="searchForm.viewAdditionalFields")
-                    .form-group.passenjers-select
-                        +choice()(wrapClass='adults input-group' ang-prefix="searchForm.formValue.adults")
-                        +choice()(wrapClass='children input-group' ang-prefix="searchForm.formValue.children")
-                        +choice()(wrapClass='infant input-group' ang-prefix="searchForm.formValue.infant")
+    fieldset.form-group
+        .additional-options
+            .additional-text
+                a(href='#' ng-click="searchForm.viewAdditionalFields= !searchForm.viewAdditionalFields")
+                    | Дополнительные параметры
+                    i.icon-down
+            div(class="additional-wrap ng-hide" ng-show="searchForm.viewAdditionalFields")
+                .form-group.passenjers-select
+                    +choice()(wrapClass='adults input-group' ang-prefix="searchForm.formValue.adults")
+                    +choice()(wrapClass='children input-group' ang-prefix="searchForm.formValue.children")
+                    +choice()(wrapClass='infant input-group' ang-prefix="searchForm.formValue.infant")
 
-                    .form-group
-                        +checkbox()(wrapClass='checkbox-input input-group' ang-prefix="searchForm.formValue.directFlights")
-                        +checkbox()(wrapClass='checkbox-input input-group' ang-prefix="searchForm.formValue.bestPrice")
+                .form-group
+                    +checkbox()(wrapClass='checkbox-input input-group' ang-prefix="searchForm.formValue.directFlights")
+                    +checkbox()(wrapClass='checkbox-input input-group' ang-prefix="searchForm.formValue.bestPrice")
 
-                    .form-group
-                        +choice()(wrapClass='aviacompany input-group' ang-prefix="searchForm.formValue.airline")
-                        +choice()(wrapClass='class-service input-group' ang-prefix="searchForm.formValue.serviceClass")
-        .button-buy-wrap
-            button.button.button-buy(type='submit' ng-click="search()") Обновить поиск
-    .group-sidebar.fast-filter
-        h3 Быстрые фильтры
-        // Группа формы (аэропорт вылета)
-        fieldset.form-group
-            p Аэропорт вылета
-            .checkbox-input.input-group
-                input#vnukovo.checkbox-button(type='checkbox', name='aeroport')
-                label(for='vnukovo') Москва, Внуково
-            .checkbox-input.input-group
-                input#sheremetevo.checkbox-button(type='checkbox', name='aeroport')
-                label(for='sheremetevo') Москва, Шереметьево
-            .checkbox-input.input-group
-                input#domodedovo.checkbox-button(type='checkbox', name='aeroport')
-                label(for='domodedovo') Москва, Домодедово
-        // Группа формы (Аэропорт прилета)
-        fieldset.form-group
-            p Аэропорт прилета
-            .checkbox-input.input-group
-                input#amethan.checkbox-button(type='checkbox', name='aeroport')
-                label(for='amethan') Симферополь, Амет-хана Султана
-            .checkbox-input.input-group
-                input#zavodskoe.checkbox-button(type='checkbox', name='aeroport')
-                label(for='zavodskoe') Симферополь, Заводское
-        // Группа формы (Авиакомпании)
-        fieldset.form-group
-            p Авиакомпания
-            .checkbox-input.input-group
-                input#aeroflot.checkbox-button(type='checkbox', name='aviacompany')
-                label(for='aeroflot') Аэрофлот
-            .checkbox-input.input-group
-                input#mau.checkbox-button(type='checkbox', name='aviacompany')
-                label(for='mau') МАУ
+                .form-group
+                    +choice()(wrapClass='aviacompany input-group' ang-prefix="searchForm.formValue.airline")
+                    +choice()(wrapClass='class-service input-group' ang-prefix="searchForm.formValue.serviceClass")
+    .button-buy-wrap
+        button.button.button-buy(type='submit' ng-click="search()") Обновить поиск
+div(class="ng-hide group-sidebar fast-filter" ng-show="viewFilterForm")
+    h3 Быстрые фильтры
+    // Группа формы (аэропорт вылета)
+    fieldset.form-group
+        p {{filterForm.departure_airport.label}}
+        div(class="checkbox-input input-group" ng-repeat="airport in filterForm.departure_airport.choices")
+            input(id="{{filterForm.departure_airport.id+airport.value}}" class="checkbox-button" type='checkbox' ng-model="airport.data")
+            label(for='{{filterForm.departure_airport.id+airport.value}}') {{airport.label}}
+    fieldset.form-group
+        p {{filterForm.arrival_airport.label}}
+            div(class="checkbox-input input-group" ng-repeat="airport in filterForm.arrival_airport.choices")
+                input(id="{{filterForm.arrival_airport.id+airport.value}}" class="checkbox-button" type='checkbox' ng-model="airport.data")
+                label(for='{{filterForm.arrival_airport.id+airport.value}}') {{airport.label}}
+    fieldset.form-group
+        p {{filterForm.airline.label}}
+            div(class="checkbox-input input-group" ng-repeat="airline in filterForm.airline.choices")
+                input(id="{{filterForm.airline.id+airline.value}}" class="checkbox-button" type='checkbox' ng-model="airline.data")
+                label(for='{{filterForm.airline.id+airline.value}}') {{airline.label}}
