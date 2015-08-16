@@ -7,7 +7,7 @@ scopePrepare = require "../../util/scopeUtils"
 prepareTickets = (tickets) ->
   _.each tickets, (ticket) ->
     _.each ticket.itineraries, (itinerarie) ->
-      propPath.set itinerarie,'variants.0.checked', true
+      propPath.set itinerarie, 'variants.0.checked', true
 
 module.exports = [
   '$scope',
@@ -17,7 +17,7 @@ module.exports = [
   '$viewLoader'
   '$stateParams',
   'SearchForm'
-  (scope, http, location, AutoCompleteReplacer,viewLoader,stateParams,searchForm) ->
+  (scope, http, location, AutoCompleteReplacer, viewLoader, stateParams, searchForm) ->
     scopePrepare scope
 
     scope.viewSearchForm = false
@@ -26,7 +26,7 @@ module.exports = [
     ###
     viewLoader.showLoader()
 
-    http.get Routing.generate 'api_get_tickets', {page: 1,key: stateParams.key}
+    http.get Routing.generate 'api_get_tickets', {page: 1, key: stateParams.key}
     .success (res) ->
       scope.searchForm = searchForm.createForm res.form
       prepareTickets res.tickets
@@ -40,16 +40,18 @@ module.exports = [
 
     scope.$root.appCont = 'search'
     scope.searchForm = {}
-
-
+    scope.search = ->
+      scope.searchForm.getUrl (url) ->
+        console.log url
+#        window.location = url
+      return false
 
     scope.book = (ticket) ->
       variants = []
       data =
-        request_id : ticket.request_id
+        request_id: ticket.request_id
       _.each ticket.itineraries, (itinerarie) ->
-
-        findVariant = _.find itinerarie.variants , (variant) ->
+        findVariant = _.find itinerarie.variants, (variant) ->
           variant.checked
         variants.push findVariant.variant_id
 
@@ -58,18 +60,13 @@ module.exports = [
       viewLoader.showLoader()
 
       http.post Routing.generate 'api_post_ticket_info', data
-        .success (res) ->
-          location.state {foo:'bar'}
-          location.path res.url.replace /\/app_dev.php/,""
-        .error () ->
-          viewLoader.hideLoader()
+      .success (res) ->
+        location.state {foo: 'bar'}
+        location.path res.url.replace /\/app_dev.php/, ""
+      .error () ->
+        viewLoader.hideLoader()
     scope.reverse = ->
       AutoCompleteReplacer.reverse()
-
-
-
-
-
 
 
 ]

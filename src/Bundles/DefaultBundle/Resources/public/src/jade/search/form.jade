@@ -1,5 +1,5 @@
 include ../form/layout
-form(action='#' class="ng-hide" ng-submit="book()" ng-show="viewSearchForm")
+div(class="ng-hide" ng-show="viewSearchForm")
     .group-sidebar
         fieldset.tab-direction
             div(class="input-group" ng-repeat="direction in searchForm.formValue.direction.choices")
@@ -38,7 +38,7 @@ form(action='#' class="ng-hide" ng-submit="book()" ng-show="viewSearchForm")
                         +choice()(wrapClass='aviacompany input-group' ang-prefix="searchForm.formValue.airline")
                         +choice()(wrapClass='class-service input-group' ang-prefix="searchForm.formValue.serviceClass")
         .button-buy-wrap
-            button.button.button-buy(type='submit') Обновить поиск
+            button.button.button-buy(type='submit' ng-click="search()") Обновить поиск
     .group-sidebar.fast-filter
         h3 Быстрые фильтры
         // Группа формы (аэропорт вылета)

@@ -25,9 +25,10 @@ class TicketController extends Controller
     public function postFlightUrlAction(Request $request)
     {
         $form = $this->createForm('search_form', null, ['city_manager' => $this->get('admin.city.manager')]);
-        $form->submit($request);
+        $form->handleRequest($request);
         $data = [
-            'is_valid' =>$form->isValid()
+            'is_valid' =>$form->isValid(),
+            'form' => $this->get('acme_core.form_serializer')->serializeForm($form)
         ];
         if($data['is_valid']){
             $key = $this->get('bundles_default.flight_data')->setData($form->getData());

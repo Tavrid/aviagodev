@@ -14,7 +14,7 @@ module.exports = [
     }
     link: (scope, element, attr, ngModel) ->
       viewDateFormat = attr.viewFormat || 'D MMMM, dd'
-      modelDateFormat = attr.format || 'YYYY-MM-DD'
+      modelDateFormat = attr.format || 'YYYY-MM-DD 00:00:00'
       scope.$watch 'ngModel', (newValue) ->
         if newValue
           selectedDate =  moment(newValue)
