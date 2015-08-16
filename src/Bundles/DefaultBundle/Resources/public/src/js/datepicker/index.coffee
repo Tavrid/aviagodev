@@ -12,7 +12,14 @@ module.exports = [
     replace: true
     scope: {}
     link: (scope, element, attr, ngModel) ->
-      datePicker = new DatePicker moment(), scope
+      viewDateFormat = attr.viewFormat || 'D MMMM, dd'
+      modelDateFormat = attr.format || 'YYYY-MM-DD'
+
+
+      datePicker = new DatePicker moment(), scope, ngModel
+
+      updateDate = ->
+        scope.viewValue = datePicker.selectedDate.format viewDateFormat
 
       scope.id = attr.attrId || ''
       ###
@@ -48,12 +55,19 @@ module.exports = [
       ###
       scope.closeCalendar = ->
         scope.calendarIsVisible = false
+      ###
+      * select date
+      ###
+      scope.selectDate = (day) ->
+        datePicker.selectDate(day)
+        updateDate()
 
       $document.on 'click', (e) ->
         if e.target.className.indexOf("ng-datepicker_x_#{ scope.id }") == -1
           scope.closeCalendar()
           scope.$apply()
 
+      updateDate()
     templateUrl: 'datepicker.html'
 
 ]

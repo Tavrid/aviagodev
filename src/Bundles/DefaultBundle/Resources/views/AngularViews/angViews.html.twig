@@ -49,7 +49,7 @@
                 <tr ng-repeat="week in weeks" >
                     <td  class="ng-datepicker__calendar__item"
                          ng-repeat="d in week"
-                         ng-click="selectDate($event, d)"
+                         ng-click="selectDate(d)"
                          ng-class="{enabled: d.enabled, current: d.current, selected: d.selected, between: d.between}">
                         {{ d.day }}
                     </td>

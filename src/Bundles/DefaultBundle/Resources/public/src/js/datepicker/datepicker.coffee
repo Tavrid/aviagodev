@@ -1,7 +1,8 @@
 moment = require "moment"
 calendarGenerator = require "./calendarGenerator"
+_ = require "underscore"
 module.exports = class
-  constructor: (selectedDateString,@scope,@minDate = moment(), @maxDate = null) ->
+  constructor: (selectedDateString,@scope,@ngModel,@minDate = moment(), @maxDate = null) ->
     @selectedDate = moment selectedDateString
     @_startDate = @selectedDate.clone().startOf('month')
     @_endDate = @selectedDate.clone().endOf('month')
@@ -46,3 +47,10 @@ module.exports = class
   * select date
   ###
   selectDate: (date) ->
+    if date.enabled
+      _.each @scope.weeks, (week) =>
+        _.each week, (d) =>
+          d.selected = d == date
+          if d.selected
+            console.log date
+            @selectedDate = date.date

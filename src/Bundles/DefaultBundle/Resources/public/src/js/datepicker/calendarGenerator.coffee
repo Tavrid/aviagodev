@@ -1,8 +1,5 @@
 Day = require "./day"
 module.exports = () ->
-  createDate = (date) ->
-    new Day d
-
   lastDayOfMonth = @_endDate.date()
   n = 1
   firstWeekDay = @_startDate.day()
@@ -15,8 +12,8 @@ module.exports = () ->
     n -= firstWeekDay - 1
   days = []
   i = n
-  d = @_startDate.clone()
   while i <= lastDayOfMonth
+    d = @_startDate.clone()
     if i > 0
       d.set('date', i)
       day = new Day d
