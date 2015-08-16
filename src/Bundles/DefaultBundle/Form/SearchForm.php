@@ -69,12 +69,11 @@ class SearchForm extends AbstractType
                 'constraints' => [new Assert\NotBlank()]
             ])
             ->add('arrivalCode', 'hidden',['label' =>'frontend.search_form.city_to'])
-            ->add('departureDate', 'date',[
-                'widget' => 'single_text',
+            ->add('departureDate', 'text',[
                 'label' => 'frontend.search_form.date_from',
                 'constraints' => [new Assert\NotBlank()]
             ])
-            ->add('arrivalDate', 'date',['widget' => 'single_text','label' => 'frontend.search_form.date_to'])
+            ->add('arrivalDate', 'text',['label' => 'frontend.search_form.date_to'])
             ->add('direction', 'choice', [
                 'label' => 'frontend.search_form.return_way.label',
                 'choices' => $formOpt['direction'],

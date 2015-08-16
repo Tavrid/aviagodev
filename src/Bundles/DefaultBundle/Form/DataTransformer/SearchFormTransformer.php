@@ -29,11 +29,11 @@ class SearchFormTransformer implements DataTransformerInterface{
         }
         $this->transformBooleanFields($value);
 
-        if(!empty($value['arrivalDate'])){
-            $value['arrivalDate'] = new \DateTime($value['arrivalDate']);
-        } else {
-            $value['arrivalDate'] = null;
-        }
+//        if(!empty($value['arrivalDate'])){
+//            $value['arrivalDate'] = new \DateTime($value['arrivalDate']);
+//        } else {
+//            $value['arrivalDate'] = null;
+//        }
 
         if(!empty($value['departureDate'])){
             $value['departureDate'] = new \DateTime($value['departureDate']);
@@ -48,14 +48,14 @@ class SearchFormTransformer implements DataTransformerInterface{
      */
     public function reverseTransform($value)
     {
-        if($value['arrivalDate'] instanceof \DateTime){
-            $value['arrivalDate'] = $value['arrivalDate']->format('Y-m-d');
-        }
-        if(isset($value['departureDate']) && $value['departureDate'] instanceof \DateTime){
-            $value['departureDate'] = $value['departureDate']->format('Y-m-d');
-        }else {
-            $value['departureDate'] = null;
-        }
+//        if($value['arrivalDate'] instanceof \DateTime){
+//            $value['arrivalDate'] = $value['arrivalDate']->format('Y-m-d');
+//        }
+//        if(isset($value['departureDate']) && $value['departureDate'] instanceof \DateTime){
+//            $value['departureDate'] = $value['departureDate']->format('Y-m-d');
+//        }else {
+//            $value['departureDate'] = null;
+//        }
         return $value;
     }
 

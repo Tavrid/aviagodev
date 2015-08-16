@@ -33,7 +33,7 @@ mixin datepicker()
             ng-datepicker(
                 attr-id!=attributes["attr-id"] || "{{"+attributes['ang-prefix']+".id}}"
                 placeholder!=attributes.placeholder||"{{"+attributes['ang-prefix']+".label}}"
-                ng-model=attributes['ng-model'] || attributes['ang-prefix']+".data.date"
+                ng-model=attributes['ng-model'] || attributes['ang-prefix']+".data"
                 ng-class="{error: "+attributes['ang-prefix']+".errors.length > 0}"
                 name=attributes.name
                 max-from=attributes["max-from"]
