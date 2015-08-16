@@ -16,13 +16,13 @@ module.exports = class
   ###
   nextDate: (duration = 'M')->
     @_startDate.add(1, duration).startOf('month')
-    @_endDate = startDate.clone().endOf('month')
+    @_endDate = @_startDate.clone().endOf('month')
   ###
   * prev date
   ###
   prevDate: (duration = 'M')->
-    @_startDate.substract(1, duration).startOf('month')
-    @_endDate = startDate.clone().endOf('month')
+    @_startDate.subtract(1, duration).startOf('month')
+    @_endDate = @_startDate.clone().endOf('month')
   ###
   * set min date
   ###

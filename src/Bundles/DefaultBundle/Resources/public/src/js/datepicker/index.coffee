@@ -27,12 +27,14 @@ module.exports = [
       * next date
       ###
       scope.nextDate = (duration = 'M')->
-
+        datePicker.nextDate duration
+        scope.showCalendar()
       ###
       * prev date
       ###
       scope.prevDate = (duration = 'M')->
-
+        datePicker.prevDate duration
+        scope.showCalendar()
       ###
       * show calendar
       ###

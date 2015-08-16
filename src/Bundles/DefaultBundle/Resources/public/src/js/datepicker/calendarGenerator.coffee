@@ -41,5 +41,6 @@ module.exports = () ->
     else
       week.push new Day
     d++
-  console.log weeks
+
   @scope.weeks = weeks
+  @scope.monthName = @_startDate.format 'MMMM YYYY'
