@@ -42,8 +42,7 @@ module.exports = [
     scope.searchForm = {}
     scope.search = ->
       scope.searchForm.getUrl (url) ->
-        console.log url
-#        window.location = url
+        location.path url.replace /\/app_dev.php/, ""
       return false
 
     scope.book = (ticket) ->
