@@ -1,6 +1,5 @@
 global.moment = global.moment || require('moment')
 loc = require('moment/locale/ru')
-scopeValuesSetter = require "./scopeCreator"
 datePickers = {}
 DatePicker = require "./datepicker"
 
@@ -10,16 +9,21 @@ module.exports = [
     restrict: 'EA'
     require: 'ngModel'
     replace: true
-    scope: {}
+    scope: {
+      ngModel: '='
+    }
     link: (scope, element, attr, ngModel) ->
       viewDateFormat = attr.viewFormat || 'D MMMM, dd'
       modelDateFormat = attr.format || 'YYYY-MM-DD'
+      scope.$watch 'ngModel', (newValue) ->
+        if newValue
+          selectedDate =  moment(newValue)
+          scope.viewValue =selectedDate.format viewDateFormat
+          datePicker.selectedDate = selectedDate
 
-
-      datePicker = new DatePicker moment(), scope, ngModel # <----- TODO this need real ng model value now set moment()
+      datePicker = new DatePicker null, scope, ngModel
 
       updateDate = ->
-        scope.viewValue = datePicker.selectedDate.format viewDateFormat
         ngModel.$setViewValue datePicker.selectedDate.format modelDateFormat
 
       scope.id = attr.attrId || ''
@@ -68,7 +72,6 @@ module.exports = [
           scope.closeCalendar()
           scope.$apply()
 
-      updateDate()
     templateUrl: 'datepicker.html'
 
 ]
