@@ -34,7 +34,6 @@ module.exports = [
       scope.tickets = res.tickets
       viewLoader.hideLoader()
       scope.viewSearchForm = true
-      AutoCompleteReplacer.initScopes()
 
       if(res.filter_form)
         scope.viewFilterForm = true
@@ -42,7 +41,6 @@ module.exports = [
 
     .error () ->
       viewLoader.hideLoader()
-      AutoCompleteReplacer.initScopes()
 
     scope.$root.appCont = 'search'
     scope.searchForm = {}

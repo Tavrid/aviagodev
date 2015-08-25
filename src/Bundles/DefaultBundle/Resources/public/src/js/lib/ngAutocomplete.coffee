@@ -25,15 +25,16 @@ module.exports =
     (timeout,http, AutoCompleteReplacer,document) ->
       searchCache = {}
       replace: true
-      scope: {}
+      scope: {
+        ngModel: '='
+      }
       require: '^ngModel'
       templateUrl: 'auto-complete.html'
       link: (scope, element, attr,ngModel)->
-
-        scope.init = ->
-          timeout ->
+        scope.$watch 'ngModel', (newValue) ->
+          if !scope.query && !scope.code && newValue && attr.viewValue
             scope.query = attr.viewValue
-            scope.code = ngModel.$viewValue
+            scope.code = newValue
 
         if attr.reverseComponent
           AutoCompleteReplacer.addAutoCompleteScope scope

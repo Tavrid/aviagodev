@@ -5,7 +5,8 @@ module.exports = [
   '$location',
   'AutoCompleteReplacer',
   'SearchForm'
-  (scope, http, location, AutoCompleteReplacer,searchForm) ->
+  '$viewLoader'
+  (scope, http, location, AutoCompleteReplacer,searchForm,viewLoader) ->
     scopePrepare scope
     scope.$root.appCont = 'index'
     AutoCompleteReplacer.controllerScope = scope;
@@ -15,6 +16,7 @@ module.exports = [
     scope.searchForm = searchForm.createForm global.searchForm
     scope.mathes = []
     scope.searchFormOptions = global.searchFormOptions
+    viewLoader.hideLoader()
     scope.search = ->
       scope.searchForm.getUrl (url) ->
         window.location = url

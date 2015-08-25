@@ -101,16 +101,17 @@
 
 {% block js %}
     <script type="text/javascript" async>
-        function loadCss(url) {
-            var link = document.createElement("link");
-            link.type = "text/css";
-            link.rel = "stylesheet";
-            link.href = url;
-            document.getElementsByTagName("head")[0].appendChild(link);
-        }
-        loadCss("{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}");
+        (function(){
+            function loadCss(url) {
+                var link = document.createElement("link");
+                link.type = "text/css";
+                link.rel = "stylesheet";
+                link.href = url;
+                document.getElementsByTagName("head")[0].appendChild(link);
+            }
+            loadCss("{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}");
+        })();
     </script>
-    {#<script src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>#}
     <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->

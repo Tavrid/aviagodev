@@ -16,6 +16,7 @@
     "jquery": "1.11.*",
     "jquery-ui": "1.11.*",
     "moment": "~2.10.3",
-    "font-awesome": "~4.3.0"
+    "font-awesome": "~4.3.0",
+    "ace-builds-bower-patched": "~1.2.2"
   }
 }

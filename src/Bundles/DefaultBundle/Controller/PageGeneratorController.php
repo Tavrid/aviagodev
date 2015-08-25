@@ -44,11 +44,11 @@ class PageGeneratorController extends Controller
             array("data" => $data)
         );
         $formData = $this->buildFormData($request, $data);
-
+        $form = $this->createForm('search_form', null, ['city_manager' => $this->get('admin.city.manager')]);
+        $form->submit($formData);
         return $this->render('BundlesDefaultBundle:PageGenerator:show.html.twig', [
             'data' => $data,
-            'form_data' => $formData,
-            'form' => $form = $this->createForm('search_form')->createView(),
+            'form' => $this->get('acme_core.form_serializer')->serializeForm($form),
             'content' => $rendered,
             'h1' => $h1,
             'metaTags' => $metaTags
@@ -58,13 +58,11 @@ class PageGeneratorController extends Controller
     protected function buildFormData(Request $request, Seo $seo)
     {
         $formData = [
-            'city_from_code' => $seo->getCityFrom()->getCityCodeEng(),
-            'city_from' => $seo->getCityFrom()->getFormattedNameCity($request->getLocale()),
-            'city_to_code' => $seo->getCityTo()->getCityCodeEng(),
-            'city_to' => $seo->getCityTo()->getFormattedNameCity($request->getLocale()),
-            'date_from' => date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 7, date('Y'))),
-            'date_to' => date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 14, date('Y'))),
-            'return_way' => 1
+            'adults' => 1,
+            'departureCode' => $seo->getCityFrom()->getCityCodeEng(),
+            'arrivalCode' => $seo->getCityTo()->getCityCodeEng(),
+            'departureDate' => date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 7, date('Y'))),
+            'arrivalDate' => date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 14, date('Y'))),
         ];
 
         return $formData;

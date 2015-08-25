@@ -13,6 +13,7 @@ class AutoCompleteReplacer
   @controllerScope = null
   addAutoCompleteScope: (scope) ->
     autoCompleteScopes.push scope
+
   reverse: ->
 
     tempScopeCode = autoCompleteScopes[1].code
