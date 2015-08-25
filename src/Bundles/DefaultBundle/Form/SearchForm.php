@@ -78,6 +78,7 @@ class SearchForm extends AbstractType
                 'label' => 'frontend.search_form.return_way.label',
                 'choices' => $formOpt['direction'],
                 'data' => SearchFormOptions::DIRECTION_TOW_WAY,
+                'empty_data' => SearchFormOptions::DIRECTION_TOW_WAY,
                 'multiple' => false,
 //                'expanded' => true,
                 'constraints' => [new Assert\NotBlank(), new Assert\Length(['max' => 1])]
@@ -104,12 +105,14 @@ class SearchForm extends AbstractType
                 'choices' => $formOpt['serviceClass'],
                 'label' => 'frontend.search_form.class',
                 'data' => key($formOpt['serviceClass']),
+                'empty_data' => key($formOpt['serviceClass']),
                 'constraints' => [new Assert\NotBlank()]
             ])
             ->add('airline', 'choice', [
                 'label' => 'frontend.search_form.airline',
                 'choices' => $formOpt['airline'],
                 'data' => key($formOpt['airline']),
+                'empty_data' => key($formOpt['airline']),
                 'constraints' => [new Assert\NotBlank()]
             ])
             ->add('bestPrice', 'checkbox', [
