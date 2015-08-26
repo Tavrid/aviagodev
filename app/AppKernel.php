@@ -48,6 +48,7 @@ class AppKernel extends Kernel {
             new Bundles\YandexAviaBundle\BundlesYandexAviaBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\RestBundle\FOSRestBundle(),
+            new Aviago\FrontendBundle\AviagoFrontendBundle()
 //            new Bundles\FrontedBundle\BundlesFrontedBundle(),
         );
 

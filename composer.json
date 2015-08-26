@@ -6,6 +6,12 @@
   "autoload": {
     "psr-0": { "": "src/", "SymfonyStandard": "app/" }
   },
+  "repositories": {
+    "avia-frontend-bundle": {
+      "type": "vcs",
+      "url": "https://Ablyakim@bitbucket.org/aviagodev/aviafrontedbundle.git"
+    }
+  },
   "require": {
     "php": ">=5.3.3",
     "symfony/symfony": "2.6.*",
@@ -20,7 +26,7 @@
     "incenteev/composer-parameter-handler": "~2.0",
     "avalanche123/imagine-bundle": "v2.1",
     "leafo/lessphp": "0.4.*",
-    "friendsofsymfony/user-bundle": "~2.0@dev",
+    "friendsofsymfony/user-bundle": "dev-master",
     "white-october/pagerfanta-bundle": "dev-master",
     "knplabs/knp-menu": "2.0.*@dev",
     "knplabs/knp-menu-bundle": "dev-master",
@@ -35,7 +41,7 @@
     "codeception/codeception": "^2.1",
     "jms/serializer-bundle": "^1.0",
     "friendsofsymfony/rest-bundle": "^1.7",
-    "simplethings/form-serializer-bundle": "^0.2.0"
+    "aviago/frontend-bundle": "dev-master"
   },
   "require-dev": {
     "sensio/generator-bundle": "~2.3"
