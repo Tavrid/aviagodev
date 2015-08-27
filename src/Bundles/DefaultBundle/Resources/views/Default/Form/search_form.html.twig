@@ -57,7 +57,7 @@
                                 placeholder="{{ 'frontend.search_form.placeholders.date'|trans }}"
                                 ng-model="searchForm.formValue.departureDate.data"
                                 name="departureDate"
-                                max-from="arrivalDate"
+                                min-to="arrivalDate"
                                 >
 
                         </ng-datepicker>
@@ -72,7 +72,6 @@
                                 placeholder="{{ 'frontend.search_form.placeholders.date'|trans }}"
                                 ng-model="searchForm.formValue.arrivalDate.data"
                                 name="arrivalDate"
-                                min-from="departureDate"
                                 >
 
                         </ng-datepicker>

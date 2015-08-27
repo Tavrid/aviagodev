@@ -101,7 +101,7 @@
             "source": {
                 "type": "git",
                 "url": "https://Ablyakim@bitbucket.org/aviagodev/aviafrontedbundle.git",
-                "reference": "9dc988e305fddd88d2b5795faa94af4e28c9bc5b"
+                "reference": "3293e2da7bf8fbd0bfca0891d8eb19716d23b82a"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -110,7 +110,7 @@
                 }
             },
             "description": "Aviago frontend bundle",
-            "time": "2015-08-26 18:12:28"
+            "time": "2015-08-26 18:27:49"
         },
         {
             "name": "cocur/slugify",

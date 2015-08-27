@@ -16,9 +16,9 @@ module.exports = () ->
     d = @_startDate.clone()
     if i > 0
       d.set('date', i)
-      day = new Day d
+      day = new Day d, @minDate, @maxDate
     else
-      day = new Day
+      day = new Day null, @minDate, @maxDate
     day.setSelectedDate(@selectedDate)
     days.push day
     i++
@@ -41,7 +41,7 @@ module.exports = () ->
     if days[d] != undefined
       week.push days[d]
     else
-      week.push new Day
+      week.push new Day null, @minDate, @maxDate
     d++
 
   @scope.weeks = weeks

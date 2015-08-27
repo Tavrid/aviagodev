@@ -1,13 +1,29 @@
 global.moment = global.moment || require('moment')
 loc = require('moment/locale/ru')
-datePickers = {}
+
 DatePicker = require "./datepicker"
 
+class DatePickerInterval
+  datePickers = []
+  add: (name,datePicker,minTo,maxTo) ->
+    if typeof datePickers[name] != 'undefined'
+      throw new Error "Datepicker with #{name} already exist!"
+    datePickers[name] = datePicker
+    selectDate = datePicker.selectDate
+    datePicker.selectDate = (day) ->
+      selectDate.apply datePicker, arguments
+      console.log minTo
+      if minTo && typeof  datePickers[minTo] != 'undefined'
+        datePickers[minTo].setMinDate day
+      if maxTo && typeof  datePickers[maxTo] != 'undefined'
+        datePickers[maxTo].setMaxDate day
+
+dPickerInterval = new DatePickerInterval
 module.exports = [
   '$document'
   ($document) ->
     restrict: 'EA'
-    require: 'ngModel'
+    require: '^ngModel'
     replace: true
     scope: {
       ngModel: '='
@@ -22,6 +38,8 @@ module.exports = [
           datePicker.setSelectedDate selectedDate
 
       datePicker = new DatePicker null, scope, ngModel
+
+      dPickerInterval.add attr.name, datePicker, attr.minTo, attr.maxTo
 
       updateDate = ->
         ngModel.$setViewValue datePicker.selectedDate.format modelDateFormat

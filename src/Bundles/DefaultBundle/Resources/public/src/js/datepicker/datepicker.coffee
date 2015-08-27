@@ -40,12 +40,21 @@ module.exports = class
   * set min date
   ###
   setMinDate: (date) ->
+    @minDate = date.date
+    if @minDate.isAfter @selectedDate, 'day'
+      @selectedDate = @minDate.clone()
+    @_startDate = @minDate.clone().startOf('month')
+    @_endDate = @selectedDate.clone().endOf('month')
 
   ###
   * set max date
   ###
   setMaxDate: (date) ->
-
+    @maxDate = date.date
+    if @maxDate.isBefore @selectedDate, 'day'
+      @selectedDate = @maxDate.clone()
+    @_startDate = @maxDate.clone().startOf('month')
+    @_endDate = @selectedDate.clone().endOf('month')
   ###
   * select date
   ###
