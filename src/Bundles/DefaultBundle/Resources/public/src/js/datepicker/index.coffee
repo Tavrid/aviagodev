@@ -12,7 +12,6 @@ class DatePickerInterval
     selectDate = datePicker.selectDate
     datePicker.selectDate = (day) ->
       selectDate.apply datePicker, arguments
-      console.log minTo
       if minTo && typeof  datePickers[minTo] != 'undefined'
         datePickers[minTo].setMinDate day
       if maxTo && typeof  datePickers[maxTo] != 'undefined'

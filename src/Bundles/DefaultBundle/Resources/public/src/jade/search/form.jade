@@ -13,9 +13,9 @@ div(class="ng-hide group-sidebar" ng-show="viewSearchForm")
                 +autocamplete()(wrapClass='arriving-in input-group' ang-prefix="searchForm.formValue.arrivalCode" view-value="searchForm.formValue.arrivalCity" search-length="3" reverse-component="1")
 
     fieldset.form-group
-        +datepicker()(attr-id="up-date" wrapClass='date-simple up-date input-group' ang-prefix="searchForm.formValue.departureDate" name="arrivalDate"  max-from="departureDate")
+        +datepicker()(attr-id="up-date" wrapClass='date-simple up-date input-group' ang-prefix="searchForm.formValue.departureDate" name="arrivalDate"  min-to="departureDate")
         div(class="ng-hide" ng-show="searchForm.isSearchTwoWay()")
-            +datepicker()(attr-id="up-date" wrapClass='date-simple down-date input-group' ang-prefix="searchForm.formValue.arrivalDate" name="departureDate"  max-from="arrivalDate")
+            +datepicker()(attr-id="up-date" wrapClass='date-simple down-date input-group' ang-prefix="searchForm.formValue.arrivalDate" name="departureDate" )
 
     fieldset.form-group
         .additional-options

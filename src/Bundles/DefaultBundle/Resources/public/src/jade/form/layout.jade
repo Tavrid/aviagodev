@@ -36,7 +36,8 @@ mixin datepicker()
                 ng-model=attributes['ng-model'] || attributes['ang-prefix']+".data"
                 ng-class="{error: "+attributes['ang-prefix']+".errors.length > 0}"
                 name=attributes.name
-                max-from=attributes["max-from"]
+                max-to=attributes["max-to"]
+                min-to=attributes["min-to"]
             )
             span.icon
                 i.icon-date
