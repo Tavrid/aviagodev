@@ -7,7 +7,8 @@ class DatePickerInterval
   datePickers = []
   add: (name,datePicker,minTo,maxTo) ->
     if typeof datePickers[name] != 'undefined'
-      throw new Error "Datepicker with #{name} already exist!"
+      return
+#      throw new Error "Datepicker with #{name} already exist!"
     datePickers[name] = datePicker
     selectDate = datePicker.selectDate
     datePicker.selectDate = (day) ->

@@ -39,6 +39,6 @@ div(class="ticket-wrap" ng-repeat="itinerarie in ticket.itineraries")
                      title='терминал {{arrivalSegment(variant).arrival_terminal}}') {{arrivalSegment(variant).arrival_terminal}}
          .duration
             p Продолжительность:
-            .time {{variant.duration}}
+            .time {{secondsToTime(variant.duration)}}
             //.transplant прямой рейс
             //.luggage Багаж: 1 место (20 кг)

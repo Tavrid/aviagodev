@@ -1,9 +1,22 @@
 moment = require "moment"
 propPath = require 'property-path'
 _ = require "underscore"
+secondsToTime = require "./secondToTime"
 
 
 module.exports = (scope) ->
+
+  scope.secondsToTime = (seconds) ->
+    time = secondsToTime seconds
+    returnStr = ""
+    if time.h
+      returnStr+="#{time.h} h"
+    if time.m
+      returnStr+=" #{time.m} m"
+    if time.s
+      returnStr+=" #{time.s} s"
+    return returnStr
+
   scope.dateFormat = (date, format = "DD.MM.YYYY") ->
     if typeof date == "number"
       moment.unix(date).format format
