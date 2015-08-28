@@ -16,7 +16,7 @@ div(class="ticket" ng-repeat="ticket in tickets")
 
             p(ng-show="ticket.last_ticket_date")
                 | Оплатить до:
-                b {{dateFormat(ticket.last_ticket_date,"H:mm D.M.YYYY")}}
+                b {{dateFormat(ticket.last_ticket_date,"HH:mm DD.MM.YYYY")}}
             p(ng-hide="ticket.refundable")
                 | Тип тарифа:
                 b невозвратный
