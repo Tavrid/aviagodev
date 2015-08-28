@@ -19,7 +19,8 @@ module.exports = [
   'SearchForm'
   (scope, http, location, AutoCompleteReplacer, viewLoader, stateParams, searchForm) ->
     scopePrepare scope
-
+    page = 1
+    searchUrlName = 'api_get_tickets'
     scope.viewSearchForm = false
     scope.viewFilterForm = false
     ###
@@ -27,7 +28,7 @@ module.exports = [
     ###
     viewLoader.showLoader()
 
-    http.get Routing.generate 'api_get_tickets', {page: 1, key: stateParams.key}
+    http.get Routing.generate searchUrlName, {page: page, key: stateParams.key}
     .success (res) ->
       scope.searchForm = searchForm.createForm res.form
       prepareTickets res.tickets
@@ -44,6 +45,21 @@ module.exports = [
 
     scope.$root.appCont = 'search'
     scope.searchForm = {}
+
+    scope.more = ->
+      page++
+      viewLoader.showLoader()
+      http.get Routing.generate searchUrlName, {page: page, key: stateParams.key}
+      .success (res) ->
+        if res.tickets.length
+          prepareTickets res.tickets
+          scope.tickets = scope.tickets.concat res.tickets
+        else
+          scope.hideLoadMoreButton = true
+        viewLoader.hideLoader()
+
+      .error () ->
+        viewLoader.hideLoader()
     scope.search = ->
       scope.searchForm.getUrl (url) ->
         location.path url.replace /\/app_dev.php/, ""

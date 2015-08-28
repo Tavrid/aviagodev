@@ -20,3 +20,4 @@ div(class="ticket" ng-repeat="ticket in tickets")
             p(ng-hide="ticket.refundable")
                 | Тип тарифа:
                 b невозвратный
+div(class="button button-buy" ng-click="more()" ng-hide="hideLoadMoreButton") load more
