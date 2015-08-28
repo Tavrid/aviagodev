@@ -2,6 +2,7 @@ propPath = require 'property-path'
 _ = require "underscore"
 
 scopePrepare = require "../../util/scopeUtils"
+getFormParams = require "../../util/formParams"
 
 
 prepareTickets = (tickets) ->
@@ -45,6 +46,9 @@ module.exports = [
 
     scope.$root.appCont = 'search'
     scope.searchForm = {}
+
+    scope.loadItems = ()->
+      console.log getFormParams scope.filterForm
 
     scope.more = ->
       page++
