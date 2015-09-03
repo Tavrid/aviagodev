@@ -63,7 +63,7 @@ module.exports = [
       .success (res) ->
         if res.tickets.length
           prepareTickets res.tickets
-          scope.tickets = scope.tickets.concat res.tickets
+          scope.tickets = res.tickets
         else
           scope.tickets = []
           scope.hideLoadMoreButton = true

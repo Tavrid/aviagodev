@@ -28,8 +28,6 @@ class SearchFilters {
         }
         if(isset($params['airline'])){
             $filters[] = new AirlineFilter($params['airline']);
-        } else if(!empty($additionalParams['avia_company']) && $additionalParams['avia_company'] != 'all'){
-            $filters[] = new AirlineFilter($additionalParams['avia_company']);
         }
         if(isset($params['departure_time'])){
             $filters[] = new DepartureTimeFilter($params['departure_time']);
