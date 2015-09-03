@@ -40,7 +40,7 @@ class SearchFilters {
         if(isset($additionalParams['direct_flights'])){
             $filters[] =  new DirectFlightsFilter($additionalParams['direct_flights']);
         }
-        
+
         return $filters;
     }
 

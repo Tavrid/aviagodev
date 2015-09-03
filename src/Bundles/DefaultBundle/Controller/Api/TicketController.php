@@ -70,10 +70,11 @@ class TicketController extends Controller
         $query->setParams($form->getData());
 
         $output = $api->getSearchRequestor()->execute($query);
+
         if (!$output->getIsError()) {
+
             $filterForm = $this->createForm('filter', null, ['searchResponse' => $output]);
             $filterForm->submit($request);
-
             $f = new SearchResultFilter($output, $this->container->getParameter('bundles_default.count_on_page'));
             $outputItems = $f->getData($page, SearchFilters::getFiltersByParams($filterForm->getData(), $params));
             $serializer = $this->get('jms_serializer');

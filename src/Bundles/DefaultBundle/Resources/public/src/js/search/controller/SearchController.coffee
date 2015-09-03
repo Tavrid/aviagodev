@@ -1,3 +1,4 @@
+#TODO this controller need refactoring!!!
 propPath = require 'property-path'
 _ = require "underscore"
 
@@ -53,7 +54,7 @@ module.exports = [
       _.each scope.filterForm, (num) ->
         _.each num.choices, (choice) ->
           if choice.selected
-            tmVal = "#{encodeURIComponent num.full_name}[]=#{encodeURIComponent choice.value}"
+            tmVal = "#{encodeURIComponent num.full_name}=#{encodeURIComponent choice.value}"
             params.push tmVal
       viewLoader.showLoader()
       http
@@ -64,6 +65,7 @@ module.exports = [
           prepareTickets res.tickets
           scope.tickets = scope.tickets.concat res.tickets
         else
+          scope.tickets = []
           scope.hideLoadMoreButton = true
         viewLoader.hideLoader()
       .error ->

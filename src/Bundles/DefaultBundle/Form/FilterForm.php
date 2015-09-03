@@ -77,6 +77,7 @@ class FilterForm extends AbstractType {
 
     //утро день вечер и ночь
     public function buildForm(FormBuilderInterface $builder, array $options) {
+
         $this->createValues($options['searchResponse']);
         $filterValues = Time::getFilterValues();
         foreach ($filterValues as &$val){
@@ -97,7 +98,7 @@ class FilterForm extends AbstractType {
                     'choices' => $filterValues,
                     "expanded" => true,
                 ])
-                ->add('airline', 'choice', ['label' => 'frontend.filter_form.airline', 'choices' => $this->airlineCh]);
+                ->add('airline', 'choice', ['label' => 'frontend.filter_form.airline', 'choices' => $this->airlineCh,'multiple' => true]);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
@@ -110,7 +111,6 @@ class FilterForm extends AbstractType {
      * @return string The name of this type
      */
     public function getName() {
-        // TODO: Implement getName() method.
         return 'filter';
     }
 
