@@ -5,8 +5,6 @@ scopePrepare = require "../../util/scopeUtils"
 getFormParams = require "../../util/formParams"
 
 
-console.log getFormParams {foo:{full_name : 'full_name', data: [1,2], value: 1}}
-
 prepareTickets = (tickets) ->
   _.each tickets, (ticket) ->
     _.each ticket.itineraries, (itinerarie) ->
@@ -50,7 +48,26 @@ module.exports = [
     scope.searchForm = {}
 
     scope.loadItems = ()->
-      console.log getFormParams scope.filterForm
+      page = 1
+      params = ["key=#{stateParams.key}"]
+      _.each scope.filterForm, (num) ->
+        _.each num.choices, (choice) ->
+          if choice.selected
+            tmVal = "#{encodeURIComponent num.full_name}[]=#{encodeURIComponent choice.value}"
+            params.push tmVal
+      viewLoader.showLoader()
+      http
+        method: 'GET',
+        url:  Routing.generate(searchUrlName, {page: page})+"?"+params.join('&'),
+      .success (res) ->
+        if res.tickets.length
+          prepareTickets res.tickets
+          scope.tickets = scope.tickets.concat res.tickets
+        else
+          scope.hideLoadMoreButton = true
+        viewLoader.hideLoader()
+      .error ->
+        viewLoader.hideLoader()
 
     scope.more = ->
       page++

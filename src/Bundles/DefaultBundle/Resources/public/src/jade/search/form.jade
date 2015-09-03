@@ -44,15 +44,15 @@ div(class="ng-hide group-sidebar fast-filter" ng-show="viewFilterForm")
     fieldset.form-group
         p {{filterForm.departure_airport.label}}
         div(class="checkbox-input input-group" ng-repeat="airport in filterForm.departure_airport.choices")
-            input(ng-change="loadItems()" id="{{filterForm.departure_airport.id+airport.value}}" class="checkbox-button" type='checkbox' ng-model="airport.data")
+            input(ng-change="loadItems()" id="{{filterForm.departure_airport.id+airport.value}}" class="checkbox-button" type='checkbox' ng-model="airport.selected")
             label(for='{{filterForm.departure_airport.id+airport.value}}') {{airport.label}}
     fieldset.form-group
         p {{filterForm.arrival_airport.label}}
             div(class="checkbox-input input-group" ng-repeat="airport in filterForm.arrival_airport.choices")
-                input(ng-change="loadItems()" id="{{filterForm.arrival_airport.id+airport.value}}" class="checkbox-button" type='checkbox' ng-model="airport.data")
+                input(ng-change="loadItems()" id="{{filterForm.arrival_airport.id+airport.value}}" class="checkbox-button" type='checkbox' ng-model="airport.selected")
                 label(for='{{filterForm.arrival_airport.id+airport.value}}') {{airport.label}}
     fieldset.form-group
         p {{filterForm.airline.label}}
             div(class="checkbox-input input-group" ng-repeat="airline in filterForm.airline.choices")
-                input(ng-change="loadItems()" id="{{filterForm.airline.id+airline.value}}" class="checkbox-button" type='checkbox' ng-model="airline.data")
+                input(ng-change="loadItems()" id="{{filterForm.airline.id+airline.value}}" class="checkbox-button" type='checkbox' ng-model="airline.selected")
                 label(for='{{filterForm.airline.id+airline.value}}') {{airline.label}}
