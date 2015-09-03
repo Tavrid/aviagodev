@@ -5,6 +5,8 @@ scopePrepare = require "../../util/scopeUtils"
 getFormParams = require "../../util/formParams"
 
 
+console.log getFormParams {foo:{full_name : 'full_name', data: [1,2], value: 1}}
+
 prepareTickets = (tickets) ->
   _.each tickets, (ticket) ->
     _.each ticket.itineraries, (itinerarie) ->
