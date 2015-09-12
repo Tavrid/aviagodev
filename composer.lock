@@ -101,7 +101,7 @@
             "source": {
                 "type": "git",
                 "url": "https://Ablyakim@bitbucket.org/aviagodev/aviafrontedbundle.git",
-                "reference": "3293e2da7bf8fbd0bfca0891d8eb19716d23b82a"
+                "reference": "8e3bada98142357582f6fdce4dc8e5401ba5fd45"
             },
             "type": "symfony-bundle",
             "autoload": {
