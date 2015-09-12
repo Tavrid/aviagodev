@@ -74,7 +74,13 @@ module.exports = [
     scope.more = ->
       page++
       viewLoader.showLoader()
-      http.get Routing.generate searchUrlName, {page: page, key: stateParams.key}
+      params = ["key=#{stateParams.key}"]
+      _.each scope.filterForm, (num) ->
+        _.each num.choices, (choice) ->
+          if choice.selected
+            tmVal = "#{encodeURIComponent num.full_name}=#{encodeURIComponent choice.value}"
+            params.push tmVal
+      http.get Routing.generate(searchUrlName, {page: page})+"?"+params.join('&')
       .success (res) ->
         if res.tickets.length
           prepareTickets res.tickets
