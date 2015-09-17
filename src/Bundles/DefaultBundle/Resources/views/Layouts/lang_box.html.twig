@@ -1,0 +1,35 @@
+<div class="lang-wrap" ng-controller="languageCtrl">
+    <div class="lang-name-block" ng-click="showLanguageBox()">
+        <i class="icon-flag">
+            <img ng-src="/bundles/aviagofrontend/images/{% verbatim %}{{currentLanguage()}}{%endverbatim%}.png" alt="">
+        </i>
+        <div class="lang-name">{% verbatim %}{{currentLanguageName()}}{%endverbatim%}</div>
+        <span>-</span>
+        <div class="currency-rate">{% verbatim %}{{currentLanguage()}}{%endverbatim%}</div>
+    </div>
+    <div class="select-lang-currency ng-hide" ng-show="isShowLanguageBox">
+        <div class="current-lang-course">
+            <i class="icon-flag"><img ng-src="/bundles/aviagofrontend/images/{% verbatim %}{{currentLanguage()}}{%endverbatim%}.png" alt=""></i>
+
+            <div class="lang-name">{% verbatim %}{{currentLanguageName()}}{%endverbatim%}</div>
+            <span>-</span>
+
+            <div class="currency-rate">{% verbatim %}{{currentLanguage()}}{%endverbatim%}</div>
+        </div>
+        <div class="lang-select">
+            <label for="language">Язык</label>
+            <select ng-change="changeLang()" ng-model="language" ng-options="name as value for (name, value) in languages" name="language">
+
+            </select>
+
+        </div>
+        <div class="currency-select">
+            <label for="currency">Валюта</label>
+            <select name="currency" id="currency">
+                <option value="uah">UAH</option>
+                <option value="rub">RUB</option>
+                <option value="$">$</option>
+            </select>
+        </div>
+    </div>
+</div>

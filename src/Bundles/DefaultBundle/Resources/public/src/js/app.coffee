@@ -7,8 +7,13 @@ _ = require "underscore"
 BookController = require('./book/controller/BookController')
 SearchController = require './search/controller/SearchController'
 OrderController = require './order/controller/OrderController'
-#$ ->
+
+language = require "./model/language"
 App = angular.module "MainApp", ['ui.router']
+###
+  change locale language and currency services
+###
+language App
 
 class AutoCompleteReplacer
   autoCompleteScopes = []

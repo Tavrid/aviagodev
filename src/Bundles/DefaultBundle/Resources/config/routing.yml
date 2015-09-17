@@ -70,8 +70,6 @@ bundles_default_api_return_liqpay:
 bundles_default.liqpay.get_status:
     pattern: /pay/liqpay/status/{orderID}
     defaults: {_controller: BundlesDefaultBundle:LiqPay:getStatus}
-bundles_default_change_locale:
-    pattern: /locale/{_locale}
-    defaults: {_controller: BundlesDefaultBundle:Default:changeLocale}
+
 
 

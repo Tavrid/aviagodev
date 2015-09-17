@@ -21,3 +21,9 @@ bundles_default_rest_api_order:
     resource: @BundlesDefaultBundle/Controller/Api/OrderController.php
     name_prefix: api_order_
     prefix: order
+
+bundles_default_rest_api_settings:
+    type:     rest
+    resource: @BundlesDefaultBundle/Controller/Api/SettingsController.php
+    name_prefix: api_settings_
+    prefix: settings

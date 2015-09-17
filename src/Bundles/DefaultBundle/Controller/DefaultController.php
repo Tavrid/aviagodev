@@ -18,14 +18,6 @@ class DefaultController extends Controller
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @return Response
-     */
-    public function changeLocaleAction(Request $request)
-    {
-        return new Response();
-    }
 
 
 }

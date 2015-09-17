@@ -2,11 +2,18 @@ require "angular"
 datepicker = require "./datepicker"
 SearchForm = require "./model/searchForm"
 formUtil = require "./util/postForm"
+language = require "./model/language"
 
 IndexController = require('./index/controller/IndexController')
 
 App = angular.module "MainApp", []
+###
+  change locale language and currency services
+###
+language App
+###
 
+###
 class AutoCompleteReplacer
   autoCompleteScopes = []
 

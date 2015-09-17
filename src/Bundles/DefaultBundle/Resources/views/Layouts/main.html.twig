@@ -19,6 +19,16 @@
     {% block headerJs %}
     {% endblock %}
 </head>
+<script>
+    window.appConfig = {
+        lang: "{{ app.request.locale }}",
+        languages: {
+            "ru" : "руский",
+            "ua": "украинский",
+            "en": "english"
+        }
+    };
+</script>
 <body class="{{ controller_formatter.formattedName }}">
 
 {% if controller_formatter.formattedName != 'default-index' %}
