@@ -26,7 +26,9 @@
             "ru" : "руский",
             "ua": "украинский",
             "en": "english"
-        }
+        },
+        currencies: {{ currency_manager.currencyList|json_encode|raw }},
+        currency: "{{ currency_manager.currency }}"
     };
 </script>
 <body class="{{ controller_formatter.formattedName }}">

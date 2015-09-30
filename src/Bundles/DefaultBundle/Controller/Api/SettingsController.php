@@ -20,7 +20,13 @@ class SettingsController extends Controller
     public function getChangeLocaleAction($locale)
     {
         $this->get('session')->set('_locale', $locale);
-        return new JsonResponse();
+        return new JsonResponse(['status' => 'success']);
+    }
+
+    public function getChangeCurrencyAction($currency)
+    {
+        $this->get('bundle_default.currency_manager')->setCurrency($currency);
+        return new JsonResponse(['status' => 'success']);
     }
 
 

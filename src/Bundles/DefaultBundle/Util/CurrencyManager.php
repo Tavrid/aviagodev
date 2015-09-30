@@ -47,7 +47,7 @@ class CurrencyManager {
         return [
             'RUB' => 'RUB',
             'USD' => 'USD',
-            'UAH' =>'UAH',
+//            'UAH' =>'UAH',
             'EUR' => 'EUR'
         ];
     }
