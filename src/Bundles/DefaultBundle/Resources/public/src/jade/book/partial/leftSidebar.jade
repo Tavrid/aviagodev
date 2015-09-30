@@ -3,24 +3,24 @@ aside.sidebar(role='sidebar')
         .info-order
             h3 Информация о заказе
             .ticket-group
-                div(class="title") {{$index+1}} Билет: в две стороны
+                div(class="title") {{$index+1}} Билет: в две стороны {{ticket.itineraries.length}}
                 div(class="ticket" ng-repeat="itener in ticket.itineraries") {{dateFormat(departureSegment(itinerarie.variants[0]).departure_date)}} MOW 02:35 -> JFK 05:30 10 ч. 05 м., прямой рейс
             div(class="passenjer-group" ng-repeat="traveler in getCurrentTravelers(ticket)")
-                .title Пассажир: 1 взрослый
+                .title Пассажир: {{$index+1}} взрослый {{traveler}}
                 table
                     tbody
                         tr
                             td Тариф
-                            td(align='right') {{getPricingByName(ticket,traveler).Base}} {{getPricingByName(ticket,traveler).Currency}}
+                            td(align='right') {{formatPrice(getPricingByName(ticket,traveler).Base)}} {{getPricingByName(ticket,traveler).Currency}}
                         tr
                             td Таксы и сборы
-                            td(align='right') {{getPricingByName(ticket,traveler).Tax}} {{getPricingByName(ticket,traveler).Currency}}
+                            td(align='right') {{formatPrice(getPricingByName(ticket,traveler).Tax)}} {{getPricingByName(ticket,traveler).Currency}}
                         tr
                             td Агентский сбор
-                            td(align='right') {{getPricingByName(ticket,traveler).Fee}} {{getPricingByName(ticket,traveler).Currency}}
+                            td(align='right') {{formatPrice(getPricingByName(ticket,traveler).Fee)}} {{getPricingByName(ticket,traveler).Currency}}
                     tfoot
                         tr
                             td ИТОГО
-                            td(align='right') {{ticket.total_price}} {{ticket.currency}}
-            p Все цены указаны в рублях РФ.
+                            td(align='right') {{formatPrice(ticket.total_price)}} {{ticket.currency}}
+            //p Все цены указаны в рублях РФ.
             p Информация об оплате.

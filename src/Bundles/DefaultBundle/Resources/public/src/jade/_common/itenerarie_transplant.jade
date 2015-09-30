@@ -1,6 +1,6 @@
 div(class="transplant")
-    div(class="ng-hide" ng-show="variant.count_transplant == 1") Прямой рейс
-    div(class="ng-hide" ng-show="variant.count_transplant > 1")
+    div(class="ng-hide" ng-show="variant.count_transplant == 0") Прямой рейс
+    div(class="ng-hide" ng-show="variant.count_transplant > 0")
         p {{variant.count_transplant}} пересадки
         p(ng-repeat="airport in variant.transplant_airports")
             b {{airport.name}}

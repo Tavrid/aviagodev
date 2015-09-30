@@ -74,6 +74,9 @@ module.exports = (scope) ->
 
       variant.checked = true
   )()
-
+  ## pricing by name
+  scope.getPricingByName = (ticket,traveler) ->
+    _.find ticket.pricing, (num) ->
+      num.Type == traveler
   scope.toggleCheckbox= (parent,child) ->
     parent.data = child.data
