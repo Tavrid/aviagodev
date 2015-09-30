@@ -2,7 +2,6 @@ moment = require "moment"
 propPath = require 'property-path'
 _ = require "underscore"
 secondsToTime = require "./secondToTime"
-numeral = require "numeral"
 
 
 module.exports = (scope) ->
