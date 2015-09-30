@@ -186,7 +186,7 @@ class Variants
         if ($count > 1) {
             for ($i = 0; $i < ($count - 1); $i++) {
                 $ret[] = [
-                    'name' => $segments[$i]->getArrivalCityName(),
+                    'name' => $segments[$i]->getArrivalCityName()." (".$segments[$i]->getArrivalAirportName().")",
                     'time' => $segments[$i]->getTransplantTime($segments[$i + 1])
                 ];
             }
