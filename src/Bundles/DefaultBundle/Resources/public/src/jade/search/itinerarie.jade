@@ -40,5 +40,5 @@ div(class="ticket-wrap" ng-repeat="itinerarie in ticket.itineraries")
          .duration
             p Продолжительность:
             .time {{secondsToTime(variant.duration)}}
-            //.transplant прямой рейс
+            include ./../_common/itenerarie_transplant
             //.luggage Багаж: 1 место (20 кг)

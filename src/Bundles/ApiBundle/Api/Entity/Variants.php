@@ -9,6 +9,7 @@
 namespace Bundles\ApiBundle\Api\Entity;
 
 use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\VirtualProperty;
 use JMS\Serializer\Annotation\SerializedName;
 /**
  * Class Variants
@@ -126,6 +127,10 @@ class Variants
         return $this;
     }
 
+    /**
+     * @VirtualProperty
+     * @return int
+     */
     public function getCountTransplant()
     {
         return count($this->getSegments()) - 1;
@@ -168,6 +173,10 @@ class Variants
         }
     }
 
+    /**
+     * @VirtualProperty
+     * @return array
+     */
     public function getTransplantAirports()
     {
         $ret = array();
