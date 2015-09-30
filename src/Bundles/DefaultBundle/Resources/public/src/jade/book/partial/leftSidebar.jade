@@ -1,7 +1,7 @@
 aside.sidebar(role='sidebar')
     div(class="group-sidebar" ng-repeat="ticket in tickets")
         .info-order
-            h3 Информация о заказе
+            h3 {{translator.trans("frontend.default.order.order_info")}}
             .ticket-group
                 div(class="title") {{$index+1}} Билет: в две стороны {{ticket.itineraries.length}}
                 div(class="ticket" ng-repeat="itener in ticket.itineraries") {{dateFormat(departureSegment(itinerarie.variants[0]).departure_date)}} MOW 02:35 -> JFK 05:30 10 ч. 05 м., прямой рейс
