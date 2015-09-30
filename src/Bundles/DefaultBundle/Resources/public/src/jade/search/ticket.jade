@@ -2,7 +2,7 @@ div(class="ticket" ng-repeat="ticket in tickets")
     .logo-alians
         img(src='/bundles/aviagofrontend/images/logo-skyteam.png', alt='')
     .ticket-price
-        h2 {{ticket.total_price}} {{ticket.currency}}
+        h2 {{formatPrice(ticket.total_price)}} {{ticket.currency}}
         span.col-passenjers
             | - за
             span.col-user 1 человека

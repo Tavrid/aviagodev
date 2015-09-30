@@ -2,9 +2,30 @@ moment = require "moment"
 propPath = require 'property-path'
 _ = require "underscore"
 secondsToTime = require "./secondToTime"
+numeral = require "numeral"
 
 
 module.exports = (scope) ->
+  scope.formatPrice = (number, decimals = 0, dec_point=" ", thousands_sep=" ") ->
+
+    number = (number + "").replace(/[^0-9+\-Ee.]/g, "")
+    n = (if not isFinite(+number) then 0 else +number)
+    prec = (if not isFinite(+decimals) then 0 else Math.abs(decimals))
+    sep = (if (typeof thousands_sep is "undefined") then "," else thousands_sep)
+    dec = (if (typeof dec_point is "undefined") then "." else dec_point)
+    s = ""
+    toFixedFix = (n, prec) ->
+      k = Math.pow(10, prec)
+      "" + (Math.round(n * k) / k).toFixed(prec)
+
+
+    # Fix for IE parseFloat(0.55).toFixed(0) = 0;
+    s = ((if prec then toFixedFix(n, prec) else "" + Math.round(n))).split(".")
+    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep)  if s[0].length > 3
+    if (s[1] or "").length < prec
+      s[1] = s[1] or ""
+      s[1] += new Array(prec - s[1].length + 1).join("0")
+    s.join dec
 
   scope.secondsToTime = (seconds) ->
     time = secondsToTime seconds
