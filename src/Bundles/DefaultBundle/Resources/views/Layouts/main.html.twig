@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html xml:lang="ru-ru" lang="ru-ru" dir="ltr" ng-app="MainApp">
+<html xml:lang="{{ app.request.locale|split('_')[0] }}"  lang="{{ app.request.locale|split('_')[0] }}" dir="ltr" ng-app="MainApp">
 <head>
     <meta http-equiv="content-language" content="ru"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -127,6 +127,8 @@
     <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+    <script src="{{ url('bazinga_jstranslation_js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 {% endblock %}

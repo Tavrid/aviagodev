@@ -6,6 +6,8 @@ numeral = require "numeral"
 
 
 module.exports = (scope) ->
+
+  scope.translator = global.Translator
   scope.formatPrice = (number, decimals = 0, dec_point=" ", thousands_sep=" ") ->
 
     number = (number + "").replace(/[^0-9+\-Ee.]/g, "")

@@ -33,7 +33,8 @@ bundles_defaul.page_generator:
     requirements:
         uri: ".+\/{1}$"
     methods: [GET]
-
+_bazinga_jstranslation:
+    resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"
 #
 #_imagine:
 #    resource: .

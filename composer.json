@@ -41,7 +41,8 @@
     "codeception/codeception": "^2.1",
     "jms/serializer-bundle": "^1.0",
     "friendsofsymfony/rest-bundle": "^1.7",
-    "aviago/frontend-bundle": "dev-master"
+    "aviago/frontend-bundle": "dev-master",
+    "willdurand/js-translation-bundle": "^2.3"
   },
   "require-dev": {
     "sensio/generator-bundle": "~2.3"
