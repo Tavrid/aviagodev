@@ -3,7 +3,7 @@ aside.sidebar(role='sidebar')
         .info-order
             h3 {{translator.trans("frontend.default.order.order_info")}}
             .ticket-group
-                div(class="title") {{$index+1}} Билет: в две стороны {{ticket.itineraries.length}}
+                div(class="title") {{$index+1}} {{getTicketTypeName(ticket)}}
                 div(class="ticket" ng-repeat="itener in ticket.itineraries") {{dateFormat(departureSegment(itinerarie.variants[0]).departure_date)}} MOW 02:35 -> JFK 05:30 10 ч. 05 м., прямой рейс
             div(class="passenjer-group" ng-repeat="traveler in getCurrentTravelers(ticket)")
                 .title Пассажир: {{$index+1}} взрослый {{traveler}}

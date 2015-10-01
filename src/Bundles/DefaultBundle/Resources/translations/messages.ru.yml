@@ -123,6 +123,9 @@ frontend:
                 transplant: %count% пересадка|%count% пересадки|%count% пересадок
                 submit: Забронировать
         order:
+            one_way: Билет в одну сторону
+            two_way: Билет в две стороны
+            multi: Составной маршрут
             order_info: Информация о заказе
             total: Всего
             fare_rules: Правила тарифа

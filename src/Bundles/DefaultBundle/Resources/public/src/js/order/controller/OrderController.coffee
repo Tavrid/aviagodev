@@ -2,6 +2,8 @@ _ = require "underscore"
 
 scopePrepare = require "../../util/scopeUtils"
 
+ticketUtils = require "../../util/ticketUtils"
+
 
 module.exports = [
   '$scope',
@@ -12,6 +14,8 @@ module.exports = [
   '$stateParams'
   (scope, http, location, AutoCompleteReplacer, viewLoader, stateParams) ->
     scopePrepare scope
+    ticketUtils scope
+
     viewLoader.showLoader()
     scope.book_info = null;
     scope.tickets = []
