@@ -3,7 +3,7 @@ moment = require "moment"
 _ = require "underscore"
 
 scopePrepare = require "../../util/scopeUtils"
-
+ticketUtils = require "../../util/ticketUtils"
 Object.deepExtend = (destination, source) ->
   for property of source
 
@@ -33,6 +33,8 @@ module.exports = [
   '$formHelper'
   (scope, http, location, AutoCompleteReplacer,viewLoader,stateParams,formHelper) ->
     scopePrepare scope
+    ticketUtils scope
+
     scope.tickets = []
     scope.form = {}
 

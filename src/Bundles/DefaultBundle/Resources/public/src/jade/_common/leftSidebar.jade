@@ -4,23 +4,26 @@ aside.sidebar(role='sidebar')
             h3 {{translator.trans("frontend.default.order.order_info")}}
             .ticket-group
                 div(class="title") {{$index+1}} {{getTicketTypeName(ticket)}}
-                div(class="ticket" ng-repeat="itener in ticket.itineraries") {{dateFormat(departureSegment(itinerarie.variants[0]).departure_date)}} MOW 02:35 -> JFK 05:30 10 ч. 05 м., прямой рейс
+                div(class="ticket" ng-repeat="itener in ticket.itineraries")
+                    |{{dateFormat(departureSegment(itener.variants[0]).departure_date,"DD.MM.YYYY HH:mm")}}
+                    |{{departureSegment(itener.variants[0]).departure_city}} -> {{arrivalSegment(itener.variants[0]).arrival_city}},
+                    |{{secondsToTime(itener.variants[0].duration)}}, {{getVariantTypeName(itener.variants[0])}}
             div(class="passenjer-group" ng-repeat="traveler in getCurrentTravelers(ticket)")
-                .title Пассажир: {{$index+1}} взрослый {{traveler}}
+                .title {{translator.trans("frontend.default.order.pass."+traveler.toLowerCase(),{"count": $index+1})}}
                 table
                     tbody
                         tr
-                            td Тариф
+                            td {{translator.trans("frontend.default.order.rate")}}
                             td(align='right') {{formatPrice(getPricingByName(ticket,traveler).Base)}} {{getPricingByName(ticket,traveler).Currency}}
                         tr
-                            td Таксы и сборы
+                            td {{translator.trans("frontend.default.order.tax_fees")}}
                             td(align='right') {{formatPrice(getPricingByName(ticket,traveler).Tax)}} {{getPricingByName(ticket,traveler).Currency}}
                         tr
-                            td Агентский сбор
+                            td {{translator.trans("frontend.default.order.ag_fees")}}
                             td(align='right') {{formatPrice(getPricingByName(ticket,traveler).Fee)}} {{getPricingByName(ticket,traveler).Currency}}
                     tfoot
                         tr
-                            td ИТОГО
+                            td {{translator.trans("frontend.default.order.in_total")}}
                             td(align='right') {{formatPrice(ticket.total_price)}} {{ticket.currency}}
             //p Все цены указаны в рублях РФ.
-            p Информация об оплате.
+            p {{translator.trans("frontend.default.order.order_info")}}

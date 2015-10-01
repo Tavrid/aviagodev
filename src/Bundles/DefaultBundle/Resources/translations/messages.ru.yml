@@ -125,6 +125,7 @@ frontend:
         order:
             one_way: Билет в одну сторону
             two_way: Билет в две стороны
+            direct_flight: прямой рейс
             multi: Составной маршрут
             order_info: Информация о заказе
             total: Всего
@@ -139,7 +140,9 @@ frontend:
                 adt: Пасажир №%count% (Взрослый)
                 chd: Пасажир №%count% (Ребенок)
                 inf: Пасажир №%count% (Младенец)
-            rate_taxes: Тариф + Таксы
+            rate: Тариф
+            tax_fees: Таксы и сборы
+            ag_fees: Агентский сбор
             number_off: Количество
             in_total: Итого
             tariff_collection: Сервисный сбор
