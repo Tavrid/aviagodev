@@ -31,12 +31,15 @@ module.exports = [
   '$viewLoader'
   '$stateParams'
   '$formHelper'
-  (scope, http, location, AutoCompleteReplacer,viewLoader,stateParams,formHelper) ->
+  '$sce'
+  'ngDialog'
+  (scope, http, location, AutoCompleteReplacer,viewLoader,stateParams,formHelper,sce,ngDialog) ->
     scopePrepare scope
     ticketUtils scope
 
     scope.tickets = []
     scope.form = {}
+    scope.fareRules = ''
 
 
     scope.book = () ->
@@ -60,7 +63,28 @@ module.exports = [
         travelers.push num if key > 0
       return travelers
 
-    ## pricing by name
+    ###
+      get avia fare rules
+    ###
+    scope.getFareRules = () ->
+      viewLoader.showLoader()
+      http.get Routing.generate 'api_book_get_fare_rules', {key: stateParams.requestId}
+      .success (res) ->
+        viewLoader.hideLoader()
+#        sce.trustAsHtml(val)
+        fareRules = ''
+        _.each res.avia_fare_rules,(rules) ->
+          _.each rules, (rule) ->
+            fareRules+=rule
+
+        scope.fareRules = sce.trustAsHtml fareRules
+        ngDialog.open({ template: '<pre>'+fareRules+'</pre>', plain: true })
+      .error ->
+        viewLoader.hideLoader()
+
+    ###
+    pricing by name
+    ###
     scope.getPricingByName = (ticket,traveler) ->
       _.find ticket.pricing, (num) ->
         num.Type == traveler

@@ -12,6 +12,7 @@
     "install": "^0.1.8",
     "jquery": "^2.1.4",
     "moment": "^2.10.3",
+    "ng-dialog": "^0.5.5",
     "node-notifier": "^4.1.1",
     "npm": "^2.11.3",
     "numeral": "^1.5.3",

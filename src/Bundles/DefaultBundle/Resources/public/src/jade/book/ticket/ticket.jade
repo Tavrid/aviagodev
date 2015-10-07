@@ -45,4 +45,4 @@ div(class="ticket" ng-repeat="ticket in tickets")
                                 title='терминал {{segment.arrival_terminal}}') {{segment.arrival_terminal}}
                     .duration
                         p Продолжительность:
-                        .time {{variant.duration}}
+                        .time {{secondsToTime(variant.duration)}}

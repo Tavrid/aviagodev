@@ -1,3 +1,7 @@
+link(rel="stylesheet" type="text/css" href="/bundles/bundlesdefault/css/ngDialog.min.css")
+link(rel="stylesheet" type="text/css" href="/bundles/bundlesdefault/css/ngDialog-custom-width.css")
+link(rel="stylesheet" type="text/css" href="/bundles/bundlesdefault/css/ngDialog-theme-default.min.css")
+link(rel="stylesheet" type="text/css" href="/bundles/bundlesdefault/css/ngDialog-theme-plain.min.css")
 .container
     include ../_common/leftSidebar
     div(class="main ng-hide" ng-show="tickets.length > 0")
@@ -9,18 +13,24 @@
             a.disable(href='#') Оплата
             span >
             a.disable(href='#') Подтверждение
-        // Табы (детали рейса, правила тарифов)
         .bookgin-tab.tab-wrap
             .tab-link
                 a.act-link(href='#detals') Детали рейса
-                a(href='#pravila') Правила тарифа
+                a(href='#fare-rules') Правила тарифа
             .tab-content
                 #detals.tab.act-tab
                     // Авиабилет
                     include ticket/ticket
                     // Авиабилет
-                #pravila.tab
+                div(id="fare-rules" class="ticket tab act-tab")
+                    div(class="ng-hide" ng-show="tickets[0].refundable")
+                        div {{translator.trans("frontend.book.return_ticket")}}
+                        div {{translator.trans("frontend.non_return")}}
+                    div(class="button button-buy" ng-click="getFareRules()") {{translator.trans("frontend.avia_fare.modal_link")}}
+
+
         .group
+
             //.luggage-block
             //    .title Информация о багаже
             //    .info

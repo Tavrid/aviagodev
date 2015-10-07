@@ -9,6 +9,8 @@
 namespace Bundles\DefaultBundle\Controller\Api;
 
 
+use Bundles\ApiBundle\Api\Entity\Ticket;
+use Bundles\ApiBundle\Api\Query\AviaFareRulesQuery;
 use Bundles\ApiBundle\Api\Query\BookQuery;
 use Bundles\ApiBundle\Api\Response\BookInfoResponse;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -40,6 +42,26 @@ class BookController extends FOSRestController
             [
                 'data' => $res,
                 'form' => $this->get('acme_core.form_serializer')->serializeForm($form)
+            ]
+        );
+    }
+
+    /**
+     * @param $key
+     * @return JsonResponse
+     */
+    public function getFareRulesAction($key)
+    {
+        $memcache = $this->get('main.cache');
+        $bookInfoResponse = new BookInfoResponse($this->get('avia.api.ticket_entity_creator'));
+        $d = $memcache->get($key);
+        if (empty($d)) {
+            throw $this->createNotFoundException();
+        }
+        $bookInfoResponse->setResponseData($d);
+        return new JsonResponse(
+            [
+                'avia_fare_rules' => json_decode($this->getAviaFareRules($bookInfoResponse->getEntity()->getTicket())->getFareRules(),true)
             ]
         );
     }
@@ -102,6 +124,23 @@ class BookController extends FOSRestController
                 'form_data' => $form->getData()
             ]
         );
+    }
+
+
+    private function getAviaFareRules(Ticket $ticket){
+        $query = new AviaFareRulesQuery();
+        $params = array(
+            'request_id' => $ticket->getRequestId()
+        );
+        $variants = array();
+        foreach($ticket->getItineraries() as $t){
+            foreach($t->getVariants() as $variant){
+                $variants[] = $variant->getVariantID();
+            }
+        }
+        $params['variants'] = $variants;
+        $query->setParams($params);
+        return $this->get('avia.api.manager')->getAviaFareRulesRequestor()->execute($query);
     }
 
 }

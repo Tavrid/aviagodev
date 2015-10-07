@@ -1,5 +1,7 @@
 require "angular"
 require "angular-ui-router"
+require "ng-dialog"
+
 datepicker = require "./datepicker"
 formUtil = require "./util/postForm"
 SearchForm = require "./model/searchForm"
@@ -9,7 +11,7 @@ SearchController = require './search/controller/SearchController'
 OrderController = require './order/controller/OrderController'
 
 settings = require "./model/settings"
-App = angular.module "MainApp", ['ui.router']
+App = angular.module "MainApp", ['ui.router','ngDialog']
 ###
   change locale language and currency services
 ###
