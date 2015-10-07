@@ -39,7 +39,7 @@ module.exports = [
 
     scope.tickets = []
     scope.form = {}
-    scope.fareRules = ''
+    scope.fareRules = null
 
 
     scope.book = () ->
@@ -67,6 +67,9 @@ module.exports = [
       get avia fare rules
     ###
     scope.getFareRules = () ->
+      if scope.fareRules
+        ngDialog.open({ template: '<pre>'+scope.fareRules+'</pre>', plain: true })
+        return
       viewLoader.showLoader()
       http.get Routing.generate 'api_book_get_fare_rules', {key: stateParams.requestId}
       .success (res) ->
