@@ -13,7 +13,36 @@ div(class="ticket" ng-repeat="ticket in tickets")
                 span {{dateFormat(departureSegment(variant).departure_date)}}
             div(class="group-ticket" ng-repeat="segment in variant.segments")
                 .ticket-body
-                    include  ./../../_common/ticket_partial
+                    .company
+                        .image-block
+                            i.city-logo.UN
+                                img(class="{{departureSegment(variant).marketing_airline}}" src='/bundles/aviagofrontend/images/aeroflot.png', alt='')
+                        .info-block
+                            .name {{ segment.marketing_airline}}
+                            span.type {{ segment.marketing_airline_name }} {{ segment.aircraft_name }}
+                            span.number-reys {{segment.flight_number}}
+                    .up-date
+                        p Время вылета:
+                        .time {{dateFormat(segment.departure_date,"HH:mm")}}
+                        .city-block
+                            .city {{segment.departure_city_name}}
+                            .aeroport
+                                | {{ segment.departure_airport_name }}
+                                span.terminal(
+                                ng-show="segment.departure_terminal"
+                                title='терминал {{segment.departure_terminal}}') {{segment.departure_terminal}}
+                    .down-date
+                        p Время прилета:
+                        .time
+                            | {{ dateFormat(segment.arrival_date,"HH:mm") }}
+                            span(class="ng-hide" ng-init="diff_days = dateDiff(segment.arrival_date,segment.departure_date)" ng-show="diff_days > 0") {{translator.transChoice('frontend.default.list.diff_day',diff_days, {'num':diff_days})}}
+                        .city-block
+                            .city {{segment.arrival_city_name}}
+                            .aeroport
+                                | {{ segment.arrival_airport_name }}
+                                span.terminal(
+                                ng-show="segment.arrival_terminal"
+                                title='терминал {{segment.arrival_terminal}}') {{segment.arrival_terminal}}
                     .duration
-                        p Продолжительность:
-                        .time {{secondsToTime(variant.duration)}}
+                        p {{translator.trans("frontend.default.list.item.duration")}}:
+                        .time {{secondsToTime(segment.arrival_date-segment.departure_date)}}
