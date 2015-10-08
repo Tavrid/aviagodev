@@ -38,7 +38,16 @@ module.exports = (scope) ->
     if time.s
       returnStr+=" #{time.s} s"
     return returnStr
-
+  ###
+    return all flight numbers in array
+    from variant
+  ###
+  scope.getFlightNumbers = (variant) ->
+    res = []
+    if variant.segments
+     _.each variant.segments,(segment) ->
+       res.push segment.flight_number
+    return res
   getMoment = (date) ->
     if typeof date == "number"
       return moment.unix(date)

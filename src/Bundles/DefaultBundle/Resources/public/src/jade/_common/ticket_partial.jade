@@ -6,7 +6,7 @@
       .name {{ departureSegment(variant).marketing_airline}}
       span.type {{ departureSegment(variant).marketing_airline_name }}
       br
-      span.number-reys {{ departureSegment(variant).aircraft_name }} {{departureSegment(variant).flight_number}}
+      span.number-reys {{ departureSegment(variant).aircraft_name }} {{getFlightNumbers(variant).join(', ')}}
 .up-date
    p {{translator.trans("frontend.default.list.item.departure_time")}}:
    .time {{dateFormat(departureSegment(variant).departure_date,"HH:mm")}}
