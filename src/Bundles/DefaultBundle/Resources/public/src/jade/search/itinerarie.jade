@@ -10,6 +10,6 @@ div(class="ticket-wrap" ng-repeat="itinerarie in ticket.itineraries")
          include  ./../_common/ticket_partial
          .duration
             p {{translator.trans("frontend.default.list.item.duration")}}:
-            .time {{secondsToTime(variant.duration)}}
+            div(class="time" ng-init="depSeg = departureSegment(variant);arrSeg=arrivalSegment(variant);flightNumbers=getFlightNumbers(variant).join(', ')") {{secondsToTime(variant.duration)}}
             include ./../_common/itenerarie_transplant
             //.luggage Багаж: 1 место (20 кг)
