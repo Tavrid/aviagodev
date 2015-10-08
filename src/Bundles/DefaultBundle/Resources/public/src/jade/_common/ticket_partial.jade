@@ -1,0 +1,31 @@
+.company
+   .image-block
+      div(class="i city-logo UN")
+         img(class="{{departureSegment(variant).marketing_airline}}" src='/bundles/aviagofrontend/images/aeroflot.png', alt='')
+   .info-block
+      .name {{ departureSegment(variant).marketing_airline}}
+      span.type {{ departureSegment(variant).marketing_airline_name }}
+      br
+      span.number-reys {{ departureSegment(variant).aircraft_name }} {{departureSegment(variant).flight_number}}
+.up-date
+   p {{translator.trans("frontend.default.list.item.departure_time")}}:
+   .time {{dateFormat(departureSegment(variant).departure_date,"HH:mm")}}
+   .city-block
+      .city {{departureSegment(variant).departure_city_name}}
+      .aeroport
+         | {{ departureSegment(variant).departure_airport_name }}
+         span.terminal(
+         ng-show="departureSegment(variant).departure_terminal"
+         title='терминал {{departureSegment(variant).departure_terminal}}') {{departureSegment(variant).departure_terminal}}
+.down-date
+   p {{translator.trans("frontend.default.list.item.arrival_time")}}:
+   .time
+      | {{ dateFormat(arrivalSegment(variant).arrival_date,"HH:mm") }}
+      span(class="ng-hide" ng-init="diff_days = dateDiff(arrivalSegment(variant).arrival_date,departureSegment(variant).departure_date)" ng-show="diff_days > 0") {{translator.transChoice('frontend.default.list.diff_day',diff_days, {'num':diff_days})}}
+   .city-block
+      .city {{arrivalSegment(variant).arrival_city_name}}
+      .aeroport
+         | {{ arrivalSegment(variant).arrival_airport_name }}
+         span.terminal(
+         ng-show="arrivalSegment(variant).arrival_terminal"
+         title='терминал {{arrivalSegment(variant).arrival_terminal}}') {{arrivalSegment(variant).arrival_terminal}}

@@ -39,11 +39,21 @@ module.exports = (scope) ->
       returnStr+=" #{time.s} s"
     return returnStr
 
-  scope.dateFormat = (date, format = "DD.MM.YYYY") ->
+  getMoment = (date) ->
     if typeof date == "number"
-      moment.unix(date).format format
+      return moment.unix(date)
     else
-      moment(date).format format
+      return moment(date)
+  ###
+  date format
+  ###
+  scope.dateFormat = (date, format = "DD.MM.YYYY") ->
+    getMoment(date).format format
+  ###
+  dif dates
+  ###
+  scope.dateDiff = (d1,d2, diffOf = 'days') ->
+    getMoment(d1).diff(getMoment(d2),diffOf)
   ###
       get Departure Segment
     ###

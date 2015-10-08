@@ -7,38 +7,9 @@ div(class="ticket-wrap" ng-repeat="itinerarie in ticket.itineraries")
          .radio-group
             .radio-button
                i(class="fa" ng-class="{'fa-dot-circle-o' : variant.checked,'fa-circle-o' : !variant.checked}")
-         .company
-            .image-block
-               div(class="i city-logo UN")
-                  img(class="{{departureSegment(variant).marketing_airline}}" src='/bundles/aviagofrontend/images/aeroflot.png', alt='')
-            .info-block
-               .name {{ departureSegment(variant).marketing_airline}}
-               span.type {{ departureSegment(variant).marketing_airline_name }} {{ departureSegment(variant).aircraft_name }}
-               span.number-reys {{departureSegment(variant).flight_number}}
-         .up-date
-            p Время вылета:
-            .time {{dateFormat(departureSegment(variant).departure_date)}}
-            .city-block
-               .city {{departureSegment(variant).departure_city_name}}
-               .aeroport
-                  | {{ departureSegment(variant).departure_airport_name }}
-                  span.terminal(
-                     ng-show="departureSegment(variant).departure_terminal"
-                     title='терминал {{departureSegment(variant).departure_terminal}}') {{departureSegment(variant).departure_terminal}}
-         .down-date
-            p Время прилета:
-            .time
-               | {{ dateFormat(arrivalSegment(variant).arrival_date) }}
-               //span + 1 день
-            .city-block
-               .city {{arrivalSegment(variant).arrival_city_name}}
-               .aeroport
-                  | {{ arrivalSegment(variant).arrival_airport_name }}
-                  span.terminal(
-                     ng-show="arrivalSegment(variant).arrival_terminal"
-                     title='терминал {{arrivalSegment(variant).arrival_terminal}}') {{arrivalSegment(variant).arrival_terminal}}
+         include  ./../_common/ticket_partial
          .duration
-            p Продолжительность:
+            p {{translator.trans("frontend.default.list.item.duration")}}:
             .time {{secondsToTime(variant.duration)}}
             include ./../_common/itenerarie_transplant
             //.luggage Багаж: 1 место (20 кг)
