@@ -1,4 +1,4 @@
-#TODO this controller need refactoring!!!
+#FIXME this controller need refactoring!!!
 propPath = require 'property-path'
 _ = require "underscore"
 
@@ -32,6 +32,7 @@ module.exports = [
 
     http.get Routing.generate searchUrlName, {page: page, key: stateParams.key}
     .success (res) ->
+      console.log res
       scope.searchForm = searchForm.createForm res.form
       prepareTickets res.tickets
       scope.tickets = res.tickets

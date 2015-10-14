@@ -35,11 +35,11 @@ class SearchFormTransformer implements DataTransformerInterface{
 //            $value['arrivalDate'] = null;
 //        }
 
-        if(!empty($value['departureDate'])){
-            $value['departureDate'] = new \DateTime($value['departureDate']);
-        } else {
-            $value['departureDate'] = null;
-        }
+//        if(!empty($value['departureDate'])){
+//            $value['departureDate'] = new \DateTime($value['departureDate']);
+//        } else {
+//            $value['departureDate'] = null;
+//        }
         return $value;
     }
 

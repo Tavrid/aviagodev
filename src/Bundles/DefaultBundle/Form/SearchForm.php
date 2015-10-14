@@ -77,11 +77,11 @@ class SearchForm extends AbstractType
             ->add('direction', 'choice', [
                 'label' => 'frontend.search_form.return_way.label',
                 'choices' => $formOpt['direction'],
-                'data' => SearchFormOptions::DIRECTION_TOW_WAY,
+//                'data' => SearchFormOptions::DIRECTION_TOW_WAY,
                 'empty_data' => SearchFormOptions::DIRECTION_TOW_WAY,
                 'multiple' => false,
 //                'expanded' => true,
-                'constraints' => [new Assert\NotBlank(), new Assert\Length(['max' => 1])]
+                'constraints' => [new Assert\NotBlank(), new Assert\Choice(['choices'=>array_keys($formOpt['direction'])]),new Assert\Length(['max' => 1])]
             ])
             ->add('adults', 'choice', [
                 'choices' => $formOpt['adults'],
@@ -124,18 +124,34 @@ class SearchForm extends AbstractType
                 'required' => false,
             ]);
 
-        if($options['city_manager']){
-            /** @var Airports $model */
+
+
+        if($this->session){
+            $session = $this->session;
             $model = $options['city_manager'];
-            $builder->addEventListener(FormEvents::PRE_SUBMIT,function(FormEvent $formEvent)use($model){
+            $builder->addEventListener(FormEvents::PRE_SET_DATA,function(FormEvent $formEvent)use($session,$model){
                 $data = $formEvent->getData();
+                if(!$data){
+                    $data = $session->get('beforeFormData');
+                }
+
+
                 if(isset($data['arrivalCode'])){
                     $data['arrivalCity'] = $model->getFormattedNameByIata($data['arrivalCode']);
                 }
                 if(isset($data['departureCode'])){
                     $data['departureCity'] = $model->getFormattedNameByIata($data['departureCode']);
                 }
-                $formEvent->setData($data);
+
+                if($data){
+                    $formEvent->setData($data);
+                }
+
+            });
+
+            $builder->addEventListener(FormEvents::POST_SUBMIT,function(FormEvent $formEvent)use($session){
+                $data = $formEvent->getData();
+                $session->set('beforeFormData',$data);
             });
         }
 

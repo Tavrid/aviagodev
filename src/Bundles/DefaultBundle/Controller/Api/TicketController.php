@@ -54,10 +54,10 @@ class TicketController extends Controller
             throw $this->createNotFoundException();
         }
 
-        $form = $this->createForm('search_form', null, [
+        $form = $this->createForm('search_form', $params, [
             'city_manager' => $this->get('admin.city.manager')
         ]);
-        $form->submit($params);
+//        $form->submit($params);
         $data = [
             'form' => $this->get('acme_core.form_serializer')->serializeForm($form)
         ];

@@ -22,6 +22,7 @@
                                     attr-id="from-avia"
                                     attr-placeholder="{{ 'frontend.search_form.placeholders.city'|trans }}"
                                     reverse-component="1"
+                                    view-value="{% verbatim %}{{searchForm.formValue.departureCity.data}}{% endverbatim %}"
                                     >
                             </auto-complete>
                         </div>
@@ -39,6 +40,7 @@
                                     attr-id="down-avia"
                                     attr-placeholder="{{ 'frontend.search_form.placeholders.city'|trans }}"
                                     reverse-component="1"
+                                    view-value="{% verbatim %}{{searchForm.formValue.arrivalCity.data}}{% endverbatim %}"
                                     >
 
                             </auto-complete>

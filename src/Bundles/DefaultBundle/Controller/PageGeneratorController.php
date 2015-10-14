@@ -44,8 +44,8 @@ class PageGeneratorController extends Controller
             array("data" => $data)
         );
         $formData = $this->buildFormData($request, $data);
-        $form = $this->createForm('search_form', null, ['city_manager' => $this->get('admin.city.manager')]);
-        $form->submit($formData);
+        $form = $this->createForm('search_form', $formData, ['city_manager' => $this->get('admin.city.manager')]);
+//        $form->submit($formData);
         return $this->render('BundlesDefaultBundle:PageGenerator:show.html.twig', [
             'data' => $data,
             'form' => $this->get('acme_core.form_serializer')->serializeForm($form),
