@@ -1,0 +1,27 @@
+Acme\AdminBundle\Entity\Tickets:
+    type: entity
+    table: tickets
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        type:
+            type: integer
+            length: 3
+            nullable: false
+        isEnabled:
+            type: boolean
+            nullable: false
+
+    manyToOne:
+        cityFrom:
+            targetEntity: Acme\AdminBundle\Entity\AviaAirports
+            joinColumn:
+                name: city_from_id
+                referencedColumnName: id
+        cityTo:
+            targetEntity: Acme\AdminBundle\Entity\AviaAirports
+            joinColumn:
+                name: city_to_id
+                referencedColumnName: id
