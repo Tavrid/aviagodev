@@ -6,6 +6,9 @@ namespace Acme\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+
 
 class Tickets
 {
@@ -33,6 +36,19 @@ class Tickets
      * @ORM\Column(type="boolean", nullable=false)
      */
     protected $isEnabled = true;
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+
+        $metadata->addPropertyConstraint('type', new Assert\NotBlank())
+            ->addPropertyConstraint('isEnabled', new Assert\NotNull())
+            ->addPropertyConstraint('cityFrom', new Assert\NotBlank())
+            ->addPropertyConstraint('cityTo', new Assert\NotBlank())
+//            ->addPropertyConstraint('pnr', new Assert\NotBlank())
+        ;
+
+
+    }
 
     /**
      * @return mixed
