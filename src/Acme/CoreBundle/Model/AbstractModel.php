@@ -54,10 +54,7 @@ abstract class AbstractModel
 //            $this->setEntity(new $entity);
         }
         $this->container = $container;
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository($entity);
 
-        $this->setRepository($repository);
     }
 
 
@@ -122,6 +119,12 @@ abstract class AbstractModel
      */
     public function getRepository()
     {
+        if(!$this->repository){
+            $em = $this->getDoctrine()->getManager();
+            $repository = $em->getRepository($this->entityClass);
+
+            $this->setRepository($repository);
+        }
         return $this->repository;
     }
 

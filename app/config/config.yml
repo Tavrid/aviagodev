@@ -32,6 +32,7 @@ twig:
     globals:
         controller_formatter: @bundle_default.controller_formatter
         currency_manager: @bundle_default.currency_manager
+        tickets_manager: @tickets.model.manager
 
 # Assetic Configuration
 assetic:

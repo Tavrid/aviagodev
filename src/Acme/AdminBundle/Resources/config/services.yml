@@ -37,3 +37,8 @@ services:
           arguments:
               - "@service_container"
               - Acme\AdminBundle\Entity\Seo
+    tickets.model.manager:
+              class: Acme\AdminBundle\Model\Tickets
+              arguments:
+                  - "@service_container"
+                  - Acme\AdminBundle\Entity\Tickets

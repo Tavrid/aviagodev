@@ -1,0 +1,32 @@
+{% macro renderTickets(tickets) %}
+    <div class="menu">
+        <ul>
+            {% for ticket in tickets %}
+                <li>
+                    <a href="{{ path('bundles_defaul.page_generator',{uri: 'дешевые-авиабилеты-'~ticket.cityFrom~"–"~ticket.cityTo~"/"}) }}">{{ ticket.cityFrom }} - {{ ticket.cityTo }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endmacro %}
+<footer role="contentinfo">
+    <div class="container">
+        <div class="main-menu">
+            <ul>
+                <li><a href="#">О нас</a></li>
+                <li><a href="#">Скидки</a></li>
+                <li><a href="#">Проверить бронь</a></li>
+                <li><a href="#">Временные зоны</a></li>
+                <li><a href="#">Погода</a></li>
+            </ul>
+        </div>
+        {% set ticketsGroup = tickets_manager.getTickets() %}
+        <div class="list-menu">
+            {% if ticketsGroup %}
+                {% for ticket in ticketsGroup %}
+                    {{ _self.renderTickets(ticket) }}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</footer>
