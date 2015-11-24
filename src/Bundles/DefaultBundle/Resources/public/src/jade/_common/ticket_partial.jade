@@ -3,10 +3,10 @@
       div(class="i city-logo UN")
          img(class="{{depSeg.marketing_airline}}" src='/bundles/aviagofrontend/images/aeroflot.png', alt='')
    .info-block
-      .name {{ depSeg.marketing_airline}}
+      .name {{ depSeg.marketing_airline}} {{flightNumbers}}
       span.type {{ depSeg.marketing_airline_name }}
       br
-      span.number-reys {{ depSeg.aircraft_name }} {{flightNumbers}}
+      span.number-reys {{ depSeg.aircraft_name }} 
 .up-date
    p {{translator.trans("frontend.default.list.item.departure_time")}}:
    .time {{dateFormat(depSeg.departure_date,"HH:mm")}}
