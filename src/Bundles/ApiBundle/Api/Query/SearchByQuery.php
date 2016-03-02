@@ -40,55 +40,20 @@ class SearchByQuery extends QueryAbstract
     {
         //return_way
 
-        $routes = [
-            [
-                'Departure' => $this->params['departureCode'],
-                'Arrival' => $this->params['arrivalCode'],
-                'Date' => $this->params['departureDate'],
-            ],
-        ];
-
-        if ($this->params['direction'] == 2) {
-            $routes[] = [
-                'Departure' => $this->params['arrivalCode'],
-                'Arrival' => $this->params['departureCode'],
-                'Date' => $this->params['arrivalDate'],
-            ];
-        }
         $paramsR = [
-            'jsonrpc' => '2.0',
-            'id' => 1,
-            'method' => 'AviaSearch',
-            'params' => [
-                [
-                    'Type' => 'Site',
-                    'System' => 'Agent',
-                    'Key' => $key,
-                    'UserIP' => '127.0.0.1',
-                    'UserUUID' => ''
-                ],
-                [
-                    'Routes' => $routes,
-                    'Logic' => 'Default',
-                    'Class' => AviaClassMapping::getRealClassName($this->params['serviceClass']),
-                    'Travellers' => [
-                        'ADT' => $this->params['adults'],
-                        'CHD' => $this->params['children'],
-                        'INF' => $this->params['infant'],
-                    ],
-
-
-                ],
-                [
-                    'Compress' => null,
-                    'Format' => 'Combined',
-                    'Timelimit' => 180,
-//                    'Return' => '',
-                    'Return' => 'ByTimelimit',
-                    'Currency' => array('RUB', 'USD', 'EUR','UAH'),
-                    'Language' => 'RU'
-                ]
-            ]
+            'key' => $key,
+                'destinations[0][departure]' => $this->params['departureCode'],
+                'destinations[0][arrival]' => $this->params['arrivalCode'],
+                'destinations[0][date]' => $this->params['departureDate'],
+        if ($this->params['direction'] == 2) {
+                'destinations[1][departure]' => $this->params['arrivalCode'],
+                'destinations[1][arrival]' => $this->params['departureCode'],
+                'destinations[1][date]' => $this->params['arrivalDate'],
+        }
+            'adt' => $this->params['adults'],
+            'chd' => $this->params['children'],
+            'inf' => $this->params['infant'],
+            'service_class' => AviaClassMapping::getRealClassName($this->params['serviceClass']),
         ];
 
         return $paramsR;
@@ -100,7 +65,7 @@ class SearchByQuery extends QueryAbstract
      */
     public function getApiUrl()
     {
-        return 'http://ws.demo.webservices.aero/';
+        return 'https://v2.api.tickets.ua/avia/search.json';
     }
 
     /**
@@ -119,7 +84,7 @@ class SearchByQuery extends QueryAbstract
             'infant' => '',
             ]);
         $params[] = 'AviaSearch';
-        return preg_replace('/[ ]+/i', '', implode(':', $params));
+        return preg_replace('/[ ]+/i', '', implode('=', $params));
     }
 
 
