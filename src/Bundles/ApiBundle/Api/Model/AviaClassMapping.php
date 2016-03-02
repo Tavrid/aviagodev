@@ -13,9 +13,9 @@ class AviaClassMapping {
     public static function getRealClassName($cla){
         //Y  C  F
         $names = array(
-            'Y' => 'Econom',
-            'C' => 'Business',
-            'F' => 'First'
+            'A' => 'Any',
+            'E' => 'Econom',
+            'B' => 'Business'
         );
         return $names[$cla];
 
