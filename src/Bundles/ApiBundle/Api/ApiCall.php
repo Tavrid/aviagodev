@@ -7,9 +7,9 @@
  */
 
 namespace Bundles\ApiBundle\Api;
-use Lsw\ApiCallerBundle\Call\HttpPostJson;
+use Lsw\ApiCallerBundle\Call\HttpGetJson;
 
-class ApiCall  extends HttpPostJson{
+class ApiCall  extends HttpGetJson{
 //    protected $asAssociativeArray = true;
 
     /**
