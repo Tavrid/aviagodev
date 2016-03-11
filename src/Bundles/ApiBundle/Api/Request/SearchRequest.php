@@ -123,7 +123,7 @@ class SearchRequest implements Request{
 //            $data = $res->getInfo()['result'];
 //            ///////////////ENDFAKE////////////
 
-            $data = $this->apiCaller->call(new ApiCall($query->getApiUrl(),json_encode($query->buildParams($this->apiKey))));
+            $data = $this->apiCaller->call(new ApiCall($query->getApiUrl(),xml_encode($query->buildParams($this->apiKey))));
 
             $logParams = [
                 'query' => $query->buildParams($this->apiKey),
