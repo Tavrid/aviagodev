@@ -4,7 +4,7 @@ parameters:
 services:
     avia.api.manager:
         class: Bundles\ApiBundle\Api\Api
-        arguments: ["C330CA8C-DCDF-4CA8-A5E0-F5E4E1612440", @service_container]
+        arguments: ["73449398-4018-4c8a-ab93-473d37c457a5", @service_container]
 
     main.cache:
         class: Bundles\ApiBundle\Api\Model\Cache
